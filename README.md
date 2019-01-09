@@ -1,0 +1,1 @@
+# Notatnik_mechanika
