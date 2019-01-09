@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="NotatnikMechanika.Views.AddOrder.AddOrderInfoView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <Grid>
+        <DatePicker SelectedDate="{Binding Order.StartOrderDate}" HorizontalAlignment="Left" Margin="109,37,0,0" VerticalAlignment="Top" Height="24" Width="156"/>
+        <DatePicker SelectedDate="{Binding Order.FinishOrderDate}" HorizontalAlignment="Left" Margin="516,37,0,0" VerticalAlignment="Top" Height="24" Width="156"/>
+        <TextBox Text="{Binding Order.Details}" HorizontalAlignment="Left" Margin="124,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="155" Width="522"/>
+        <Button Command="{Binding AddOrderCommand}" Content="Dodaj" HorizontalAlignment="Left" Margin="277,346,0,0" VerticalAlignment="Top" Width="183" Height="68"/>
+    </Grid>
+</UserControl>

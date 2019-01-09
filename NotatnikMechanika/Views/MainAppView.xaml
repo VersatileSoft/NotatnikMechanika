@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="NotatnikMechanika.Views.MainAppView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <UserControl.Resources>
+        <Style x:Key="CommonButton" TargetType="Button">
+            <Setter Property="Margin" Value="5,5,5,0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="35"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Button Content="Dodaj zlecenie" Command="{Binding AddOrderCommand}" CommandParameter="OrdersView" Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource CommonButton}" Margin="0,5,5,0"/>
+
+        <StackPanel Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="130">
+            <Button Content="Zlecenia" Command="{Binding NavigationCommand}" CommandParameter="OrdersView" Style="{StaticResource CommonButton}"/>
+            <Button Content="Stali klienci" Command="{Binding NavigationCommand}" CommandParameter="CustomersView" Style="{StaticResource CommonButton}"/>
+            <Button Content="Usługi" Command="{Binding NavigationCommand}" CommandParameter="ServicesView" Style="{StaticResource CommonButton}"/>
+            <Button Content="Archiwum" Command="{Binding NavigationCommand}" CommandParameter="OrdersView" Style="{StaticResource CommonButton}"/>
+            <Button Content="Faktury/Paragony" Command="{Binding NavigationCommand}" CommandParameter="OrdersView" Style="{StaticResource CommonButton}"/>
+            <Button Content="Magazyn" Command="{Binding NavigationCommand}" CommandParameter="OrdersView" Style="{StaticResource CommonButton}"/>
+            <Button Content="Ustawienia" Command="{Binding NavigationCommand}" CommandParameter="OrdersView" Style="{StaticResource CommonButton}"/>
+        </StackPanel>
+
+        <ContentControl Grid.Column="1" Grid.Row="1" Margin="0,0,5,5" prism:RegionManager.RegionName="DetailPage" />
+    </Grid>
+</UserControl>

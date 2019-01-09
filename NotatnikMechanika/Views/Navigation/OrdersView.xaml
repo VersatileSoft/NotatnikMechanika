@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="NotatnikMechanika.Views.Navigation.OrdersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="Auto"/>
+
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+
+        <ListBox Grid.Row="1" ItemsSource="{Binding Orders}" Margin="0,0,0,0">
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel Margin="3">
+                        <TextBlock Text="{Binding Customer.FirstName}" VerticalAlignment="Center" Margin="3"/>
+                        <TextBlock Text="{Binding Customer.LastName}" VerticalAlignment="Center" Margin="3"/>
+                        <TextBlock Text="{Binding Customer.CompanyName}" VerticalAlignment="Center" Margin="3"/>
+                        <TextBlock Text="{Binding Customer.Nip}" VerticalAlignment="Center" Margin="3"/>
+                        <TextBlock Text="{Binding Customer.PhoneNumber}" VerticalAlignment="Center" Margin="3"/>
+                        <TextBlock Text="{Binding Customer.Address}" VerticalAlignment="Center" Margin="3"/>
+                        <TextBlock Text="{Binding Car.Brand}" VerticalAlignment="Center" Margin="3"/>
+                        <TextBlock Text="{Binding Car.Model}" VerticalAlignment="Center" Margin="3"/>
+                        <TextBlock Text="{Binding Car.RegistrationNumber}" VerticalAlignment="Center" Margin="3"/>
+                        <TextBlock Text="{Binding Car.Engine}" VerticalAlignment="Center" Margin="3"/>
+                        <TextBlock Text="{Binding Car.Power}" VerticalAlignment="Center" Margin="3"/>
+                        <TextBlock Text="{Binding Car.Course}" VerticalAlignment="Center" Margin="3"/>
+                        <TextBlock Text="{Binding Car.ProductionYear}" VerticalAlignment="Center" Margin="3"/>
+                        <TextBlock Text="{Binding Details}" VerticalAlignment="Center" Margin="3"/>
+                        <TextBlock Text="{Binding StartOrderDate}" VerticalAlignment="Center" Margin="3"/>
+                        <TextBlock Text="{Binding FinishOrderDate}" VerticalAlignment="Center" Margin="3"/>
+                    </DockPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,10 @@
+.vs/
+Navigation/obj/Debug/
+Navigation/bin/Debug/
+Navigation/obj/Navigation.csproj.nuget.g.props
+Navigation/obj/
+NotatnikMechanika/bin/
+NotatnikMechanika/obj/
+Database/obj/
+NotatnikMechanikaUWP/obj/
+NotatnikMechanikaUWP/bin/
