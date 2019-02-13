@@ -1,16 +1,10 @@
 ﻿using NotatnikMechanika.Model.Dao;
 using NotatnikMechanika.Model.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Model
 {
     public class DatabaseManager : IDatabaseManager
     {
-
         public CarsDao CarsDao
         {
             get

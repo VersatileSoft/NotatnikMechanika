@@ -5,8 +5,7 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <Grid >
-        
+    <Grid>
         <GroupBox Header="Dane Samochodu" HorizontalAlignment="Left" Height="120" Margin="10,10,0,0" VerticalAlignment="Top" Width="780" AutomationProperties.Name="Dane klienta">
             <Grid>
                 <TextBox Text="{Binding Car.Brand}" HorizontalAlignment="Left" Height="23" Margin="10,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156"/>
@@ -21,7 +20,6 @@
         </GroupBox>
 
         <ListBox x:Name="CarList" ItemsSource="{Binding Cars}" Margin="10,135,11,59">
-
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction  Command="{Binding SelectCarCommand}" CommandParameter="{Binding ElementName=CarList, Path=SelectedItem.Id}"/>

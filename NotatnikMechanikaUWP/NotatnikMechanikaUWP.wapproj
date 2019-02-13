@@ -36,7 +36,7 @@
   <PropertyGroup>
     <ProjectGuid>6bf30d51-0676-4e9f-9161-28eaed95a66b</ProjectGuid>
     <TargetPlatformVersion>10.0.17763.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <PackageCertificateKeyFile>NotatnikMechanikaUWP_TemporaryKey.pfx</PackageCertificateKeyFile>
     <EntryPointProjectUniqueName>..\NotatnikMechanika\NotatnikMechanika.csproj</EntryPointProjectUniqueName>

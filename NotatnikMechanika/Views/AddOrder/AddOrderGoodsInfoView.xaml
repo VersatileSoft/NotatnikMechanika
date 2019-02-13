@@ -4,7 +4,7 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <Grid >
+    <Grid>
         <GroupBox Header="Dane Klienta" HorizontalAlignment="Left" Height="123" Margin="10,10,0,0" VerticalAlignment="Top" Width="780" AutomationProperties.Name="Dane klienta">
             <Grid>
                 <TextBox Text="{Binding Good.Name}" HorizontalAlignment="Left" Height="23" Margin="10,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156"/>

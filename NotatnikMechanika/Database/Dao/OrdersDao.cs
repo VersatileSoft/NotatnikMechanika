@@ -71,7 +71,7 @@ namespace NotatnikMechanika.Model.Interfaces
 
             using (var db = new MainEntities())
             {
-                
+
                 orderPresenters = (from tOrders in db.Orders
                                    join tCars in db.Cars on tOrders.CarId equals tCars.Id
                                    join tCustomers in db.Customers on tOrders.CustomerId equals tCustomers.Id
@@ -85,7 +85,7 @@ namespace NotatnikMechanika.Model.Interfaces
                                    }).ToList();
                 db.Dispose();
 
-            }     
+            }
             return orderPresenters;
         }
     }

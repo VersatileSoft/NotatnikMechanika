@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Model.Dao
 {
     public class CarsDao
     {
-
         public void AddCar(Car car)
         {
             using (var db = new MainEntities())

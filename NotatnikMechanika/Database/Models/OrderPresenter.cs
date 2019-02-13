@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Database.Models
 {
@@ -10,7 +6,7 @@ namespace NotatnikMechanika.Database.Models
     {
         public Customer Customer { get; set; }
         public Car Car { get; set; }
-        public string Details { get; set;}
+        public string Details { get; set; }
         public DateTime StartOrderDate { get; set; }
         public DateTime FinishOrderDate { get; set; }
     }

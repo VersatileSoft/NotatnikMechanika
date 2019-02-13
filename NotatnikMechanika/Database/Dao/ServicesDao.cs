@@ -6,8 +6,6 @@ namespace NotatnikMechanika.Model.Dao
 {
     public class ServicesDao
     {
-
-
         public void AddService(Service service)
         {
             using (var db = new MainEntities())
@@ -41,6 +39,5 @@ namespace NotatnikMechanika.Model.Dao
 
             return services;
         }
-
     }
 }

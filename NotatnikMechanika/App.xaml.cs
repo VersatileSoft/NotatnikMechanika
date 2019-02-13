@@ -6,7 +6,6 @@ using NotatnikMechanika.Views;
 using NotatnikMechanika.Views.AddOrder;
 using NotatnikMechanika.Views.Navigation;
 using Prism.Ioc;
-using Prism.Modularity;
 using System.Windows;
 
 namespace NotatnikMechanika
@@ -18,7 +17,7 @@ namespace NotatnikMechanika
     {
         protected override Window CreateShell()
         {
-            return Container.Resolve<MainWindow>();           
+            return Container.Resolve<MainWindow>();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

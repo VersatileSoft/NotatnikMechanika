@@ -1,24 +1,15 @@
-﻿using NotatnikMechanika;
-using NotatnikMechanika.Database.Models;
+﻿using NotatnikMechanika.Database.Models;
 using NotatnikMechanika.Model.Interfaces;
-using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Regions;
 using PropertyChanged;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace NotatnikMechanika.ViewModels.Navigation
 {
     [AddINotifyPropertyChangedInterface]
     public class OrdersViewModel : INavigationAware
     {
-
-        public string Title { get; set; } 
+        public string Title { get; set; }
         public List<OrderPresenter> Orders { get; set; }
 
         private IDatabaseManager _databaseMenager;
@@ -42,7 +33,7 @@ namespace NotatnikMechanika.ViewModels.Navigation
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            
+
         }
     }
 }

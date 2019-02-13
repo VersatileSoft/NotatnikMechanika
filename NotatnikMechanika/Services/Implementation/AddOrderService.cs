@@ -1,11 +1,8 @@
 ﻿using NotatnikMechanika.Database.Models;
 using NotatnikMechanika.Model.Interfaces;
 using NotatnikMechanika.Services.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Services.Implementation
 {
@@ -118,7 +115,7 @@ namespace NotatnikMechanika.Services.Implementation
             {
                 Description = serviceDTO.Description,
                 Name = serviceDTO.Name,
-                Price = serviceDTO.Price,              
+                Price = serviceDTO.Price,
             };
 
             _databaseManager.ServicesDao.AddService(service);
@@ -131,7 +128,7 @@ namespace NotatnikMechanika.Services.Implementation
         public void AddServices(List<ServiceDTO> servicesDTO)
         {
             List<int> servicesIds = new List<int>();
-            
+
             servicesDTO.ForEach((service) =>
             {
                 if (service.Selected)

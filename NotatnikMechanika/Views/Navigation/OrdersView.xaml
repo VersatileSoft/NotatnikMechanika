@@ -5,15 +5,11 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
         <Grid.RowDefinitions>
-
             <RowDefinition Height="Auto"/>
-
             <RowDefinition Height="*"/>
-
         </Grid.RowDefinitions>
 
         <ListBox Grid.Row="1" ItemsSource="{Binding Orders}" Margin="0,0,0,0">
-
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Margin="3">
@@ -36,8 +32,6 @@
                     </DockPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-
         </ListBox>
-
     </Grid>
 </UserControl>

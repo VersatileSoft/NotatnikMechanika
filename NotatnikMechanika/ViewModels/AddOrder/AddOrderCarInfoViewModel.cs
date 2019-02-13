@@ -1,5 +1,4 @@
 ﻿using NotatnikMechanika.Database.Models;
-using NotatnikMechanika.Model.Interfaces;
 using NotatnikMechanika.Services.Interfaces;
 using Prism.Commands;
 using Prism.Regions;
@@ -12,7 +11,6 @@ namespace NotatnikMechanika.ViewModels.AddOrder
     [AddINotifyPropertyChangedInterface]
     public class AddOrderCarInfoViewModel : INavigationAware
     {
-        
         public ICommand AddCarCommand { get; set; }
         public ICommand SelectCarCommand { get; set; }
         public CarDTO Car { get; set; }
@@ -39,7 +37,7 @@ namespace NotatnikMechanika.ViewModels.AddOrder
         }
 
         public void SelectCar(object id)
-        {                              
+        {
             _addOrderService.SetCar((int)id);
             _regionManager.RequestNavigate("ContentRegion", "AddOrderCustomerInfoView");
         }
@@ -54,6 +52,6 @@ namespace NotatnikMechanika.ViewModels.AddOrder
             return false;
         }
 
-        public void OnNavigatedFrom(NavigationContext navigationContext){ }
+        public void OnNavigatedFrom(NavigationContext navigationContext) { }
     }
 }

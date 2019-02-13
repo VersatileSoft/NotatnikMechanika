@@ -3,11 +3,6 @@ using NotatnikMechanika.Views.Navigation;
 using Prism.Commands;
 using Prism.Regions;
 using PropertyChanged;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace NotatnikMechanika.ViewModels
@@ -15,7 +10,6 @@ namespace NotatnikMechanika.ViewModels
     [AddINotifyPropertyChangedInterface]
     public class MainAppViewModel : INavigationAware
     {
-
         public string Title { get; set; }
 
         public ICommand NavigationCommand { get; set; }
@@ -57,6 +51,6 @@ namespace NotatnikMechanika.ViewModels
             return true;
         }
 
-        public void OnNavigatedFrom(NavigationContext navigationContext){ }
+        public void OnNavigatedFrom(NavigationContext navigationContext) { }
     }
 }

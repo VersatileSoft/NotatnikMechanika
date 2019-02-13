@@ -1,13 +1,8 @@
-﻿using NotatnikMechanika.Database.Models;
-using NotatnikMechanika.Model.Interfaces;
+﻿using NotatnikMechanika.Model.Interfaces;
 using Prism.Commands;
 using Prism.Regions;
 using PropertyChanged;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace NotatnikMechanika.ViewModels.Navigation
@@ -34,7 +29,7 @@ namespace NotatnikMechanika.ViewModels.Navigation
 
             AddServiceCommand = new DelegateCommand(AddService);
         }
-        
+
         public void AddService()
         {
             _databaseManager.ServicesDao.AddService(
@@ -51,7 +46,7 @@ namespace NotatnikMechanika.ViewModels.Navigation
 
             Services = _databaseManager.ServicesDao.GetServices();
         }
-        
+
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             Services = _databaseManager.ServicesDao.GetServices();
@@ -62,6 +57,6 @@ namespace NotatnikMechanika.ViewModels.Navigation
             return true;
         }
 
-        public void OnNavigatedFrom(NavigationContext navigationContext){ }
+        public void OnNavigatedFrom(NavigationContext navigationContext) { }
     }
 }

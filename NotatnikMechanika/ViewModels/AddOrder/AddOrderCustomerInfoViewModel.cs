@@ -1,5 +1,4 @@
 ﻿using NotatnikMechanika.Database.Models;
-using NotatnikMechanika.Model.Interfaces;
 using NotatnikMechanika.Services.Interfaces;
 using Prism.Commands;
 using Prism.Regions;
@@ -12,7 +11,6 @@ namespace NotatnikMechanika.ViewModels.AddOrder
     [AddINotifyPropertyChangedInterface]
     public class AddOrderCustomerInfoViewModel : INavigationAware
     {
-        
         public ICommand AddCustomerCommand { get; set; }
         public ICommand SelectCustomerCommand { get; set; }
         public List<Customer> Customers { get; set; }
@@ -20,7 +18,7 @@ namespace NotatnikMechanika.ViewModels.AddOrder
 
         private IAddOrderService _addOrderService;
         private IRegionManager _regionManager;
-        
+
         public AddOrderCustomerInfoViewModel(IAddOrderService addOrderService, IRegionManager regionManager)
         {
             _addOrderService = addOrderService;
@@ -57,6 +55,6 @@ namespace NotatnikMechanika.ViewModels.AddOrder
             return true;
         }
 
-        public void OnNavigatedFrom(NavigationContext navigationContext){ }
+        public void OnNavigatedFrom(NavigationContext navigationContext) { }
     }
 }

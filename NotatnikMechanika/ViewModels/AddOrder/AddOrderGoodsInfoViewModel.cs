@@ -1,14 +1,9 @@
 ﻿using NotatnikMechanika.Database.Models;
-using NotatnikMechanika.Model.Interfaces;
 using NotatnikMechanika.Services.Interfaces;
 using Prism.Commands;
 using Prism.Regions;
 using PropertyChanged;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace NotatnikMechanika.ViewModels.AddOrder
@@ -16,16 +11,15 @@ namespace NotatnikMechanika.ViewModels.AddOrder
     [AddINotifyPropertyChangedInterface]
     public class AddOrderGoodsInfoViewModel : INavigationAware
     {
-
         public ICommand AddGoodCommand { get; set; }
         public ICommand NextPageCommand { get; set; }
         public GoodDTO Good { get; set; }
-        
+
         public List<GoodDTO> Goods { get; set; }
 
         private IAddOrderService _addOrderService;
         private IRegionManager _regionManager;
-        
+
 
         public AddOrderGoodsInfoViewModel(IAddOrderService addOrderService, IRegionManager regionManager)
         {
@@ -63,6 +57,5 @@ namespace NotatnikMechanika.ViewModels.AddOrder
         {
             _addOrderService.AddGoods(Goods);
         }
-
     }
 }
