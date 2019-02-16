@@ -9,9 +9,6 @@
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
     <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.14393.0" MaxVersionTested="10.0.14393.0" />
-    <!--<PackageDependency Name="System.Data.SQLite"
-      Publisher="CN=SQLite Development Team"
-      MinVersion="1.0.109.2"/>-->
   </Dependencies>
   <Resources>
     <Resource Language="x-generate" />
@@ -21,12 +18,12 @@
       <uap:VisualElements DisplayName="Notatnik Mechanika" Description="NotatnikMechanikaUWP" BackgroundColor="transparent" Square150x150Logo="Images\Square150x150Logo.png" Square44x44Logo="Images\Square44x44Logo.png">
         <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png" Square310x310Logo="Images\LargeTile.png" Square71x71Logo="Images\SmallTile.png" ShortName="Notatnik Mechanika">
           <uap:ShowNameOnTiles>
-            <uap:ShowOn Tile="square150x150Logo" />
             <uap:ShowOn Tile="wide310x150Logo" />
             <uap:ShowOn Tile="square310x310Logo" />
+            <uap:ShowOn Tile="square150x150Logo"/>
           </uap:ShowNameOnTiles>
         </uap:DefaultTile>
-        <uap:SplashScreen Image="Images\SplashScreen.png"  BackgroundColor="black"/>
+        <uap:SplashScreen Image="Images\SplashScreen.png"  BackgroundColor="white"/>
       </uap:VisualElements>
     </Application>
   </Applications>
