@@ -5,11 +5,95 @@
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 				  xmlns:views="using:NotatnikMechanika.UWP.Views"
                   xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+                  xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
                   x:Class="NotatnikMechanika.UWP.Views.MainPageView"
                   mc:Ignorable="d"                 
                   Background="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}">
 
     <Grid>
-        <TextBlock Text="Which site would you choose to read?" FontSize="14"/>
+        <Grid x:Name="DragArea" 
+              Canvas.ZIndex="5" 
+              Height="34" 
+              VerticalAlignment="Top" 
+              HorizontalAlignment="Stretch" 
+              Background="Transparent">
+
+            <TextBlock Text="Notatnik Mechanika UWP" 
+                       VerticalAlignment="Center" 
+                       Margin="12,0,0,0"/>
+        </Grid>
+
+        <muxc:NavigationView x:Name="NavView" 
+                             IsBackButtonVisible="Collapsed" 
+                             PaneDisplayMode="Left"
+                             IsPaneOpen="True"
+                             OpenPaneLength="200" 
+                             CompactModeThresholdWidth="0" 
+                             ExpandedModeThresholdWidth="1200">
+            <muxc:NavigationView.Header>
+                <Grid>
+                    <CommandBar x:Name="CommandBar"
+                                Background="Transparent" 
+                                OverflowButtonVisibility="Collapsed"
+                                VerticalAlignment="Bottom"
+                                Margin="12,24,24,0">
+                        <CommandBar.PrimaryCommands>
+                            <AppBarButton Icon="Admin"/>
+                            <AppBarButton Icon="AddFriend"/>
+                            <AppBarButton Icon="Accept"/>
+                        </CommandBar.PrimaryCommands>
+
+                        <CommandBar.Content>
+                            <TextBlock Text="Zlecenia"/>
+                        </CommandBar.Content>
+                    </CommandBar>
+                </Grid>
+            </muxc:NavigationView.Header>
+
+            <muxc:NavigationView.MenuItems>
+                <muxc:NavigationViewItem Icon="Home" Content="Zlecenia"/>
+
+                <muxc:NavigationViewItemSeparator/>
+
+                <muxc:NavigationViewItem Content="Stali klienci">
+                    <muxc:NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB3C;"/>
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+
+                <muxc:NavigationViewItem Content="Usługi">
+                    <muxc:NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7FC;"/>
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+
+                <muxc:NavigationViewItem Icon="Library" Content="Archiwum"/>
+                <muxc:NavigationViewItem Icon="Library" Content="Faktury/Paragony"/>
+                <muxc:NavigationViewItem Icon="Library" Content="Magazyn"/>
+            </muxc:NavigationView.MenuItems>
+
+            <muxc:NavigationView.Content>
+                <Frame x:Name="ContentFrame" 
+                           Margin="12,0,12,24" 
+                           IsTabStop="True">
+                    <Image Source="/Assets/Square44x44Logo.altform-unplated_targetsize-256.png" Height="200" Width="200"/>
+                </Frame>
+            </muxc:NavigationView.Content>
+        </muxc:NavigationView>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{x:Bind NavView.ExpandedModeThresholdWidth}" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="NavView.PaneDisplayMode" Value="Top"/>
+                        <Setter Target="CommandBar.Margin" Value="0,12,24,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </m:MvxWindowsPage>

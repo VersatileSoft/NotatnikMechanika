@@ -1,17 +1,25 @@
 ﻿using MvvmCross.Platforms.Uap.Views;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+using Windows.ApplicationModel.Core;
+using Windows.UI;
+using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 
 namespace NotatnikMechanika.UWP.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPageView : MvxWindowsPage
     {
         public MainPageView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+
+            CoreApplicationViewTitleBar CoreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            CoreTitleBar.ExtendViewIntoTitleBar = true;
+
+            Window.Current.SetTitleBar(DragArea);
+
+            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
         }
     }
 }
