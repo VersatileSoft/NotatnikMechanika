@@ -1,1 +1,1 @@
-# Notatnik_mechanika
+# NotatnikMechanika
