@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Source>D:\Notatniki\Square44x44Logo.altform-unplated_targetsize-256.png</Source>
-    <SmallTileSource>D:\Notatniki\Square44x44Logo.altform-unplated_targetsize-256.png</SmallTileSource>
-    <MediumTileSource>D:\Notatniki\Square44x44Logo.altform-unplated_targetsize-256.png</MediumTileSource>
-    <WideTileSource>D:\Notatniki\Square44x44Logo.altform-unplated_targetsize-256.png</WideTileSource>
-    <LargeTileSource>D:\Notatniki\Square44x44Logo.altform-unplated_targetsize-256.png</LargeTileSource>
-    <AppIconSource>D:\Notatniki\Square44x44Logo.altform-unplated_targetsize-256.png</AppIconSource>
-    <SplashScreenSource>D:\Notatniki\Square44x44Logo.altform-unplated_targetsize-256.png</SplashScreenSource>
-    <PackageLogoSource>D:\Notatniki\Square44x44Logo.altform-unplated_targetsize-256.png</PackageLogoSource>
+    <Source>E:\Notatniki\Square44x44Logo.altform-unplated_targetsize-256.png</Source>
+    <SmallTileSource>E:\Notatniki\Square44x44Logo.altform-unplated_targetsize-256.png</SmallTileSource>
+    <MediumTileSource>E:\Notatniki\Square44x44Logo.altform-unplated_targetsize-256.png</MediumTileSource>
+    <WideTileSource>E:\Notatniki\Square44x44Logo.altform-unplated_targetsize-256.png</WideTileSource>
+    <LargeTileSource>E:\Notatniki\Square44x44Logo.altform-unplated_targetsize-256.png</LargeTileSource>
+    <AppIconSource>E:\Notatniki\Square44x44Logo.altform-unplated_targetsize-256.png</AppIconSource>
+    <SplashScreenSource>E:\Notatniki\Square44x44Logo.altform-unplated_targetsize-256.png</SplashScreenSource>
+    <PackageLogoSource>E:\Notatniki\Square44x44Logo.altform-unplated_targetsize-256.png</PackageLogoSource>
   </PropertyGroup>
 </Project>
