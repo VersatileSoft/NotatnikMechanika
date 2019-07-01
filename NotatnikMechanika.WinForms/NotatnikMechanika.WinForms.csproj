@@ -5,9 +5,13 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <ApplicationIcon>klucze1.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
     <RootNamespace>NotatnikMechanika.WinForms</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="SKGL.dll" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Properties\Settings.Designer.cs">

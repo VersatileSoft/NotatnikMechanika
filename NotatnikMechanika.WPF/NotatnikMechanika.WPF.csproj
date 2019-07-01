@@ -5,10 +5,12 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MvvmCross.Platforms.Wpf" Version="6.3.0" />
+    <PackageReference Include="MvvmCross" Version="6.3.1" />
+    <PackageReference Include="MvvmCross.Platforms.Wpf" Version="6.3.1" />
   </ItemGroup>
 
   <ItemGroup>
