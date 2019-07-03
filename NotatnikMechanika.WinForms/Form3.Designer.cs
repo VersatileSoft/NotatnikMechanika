@@ -75,7 +75,7 @@
             // 
             // BTedytuj
             // 
-            this.BTedytuj.Location = new System.Drawing.Point(52, 16);
+            this.BTedytuj.Location = new System.Drawing.Point(18, 12);
             this.BTedytuj.Name = "BTedytuj";
             this.BTedytuj.Size = new System.Drawing.Size(125, 35);
             this.BTedytuj.TabIndex = 3;
@@ -130,7 +130,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label2.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label2.Location = new System.Drawing.Point(318, 9);
+            this.label2.Location = new System.Drawing.Point(623, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(246, 31);
             this.label2.TabIndex = 27;

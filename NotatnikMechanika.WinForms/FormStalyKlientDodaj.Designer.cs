@@ -68,7 +68,7 @@
             // 
             // TBNip
             // 
-            this.TBNip.Location = new System.Drawing.Point(382, 89);
+            this.TBNip.Location = new System.Drawing.Point(382, 90);
             this.TBNip.Name = "TBNip";
             this.TBNip.Size = new System.Drawing.Size(100, 20);
             this.TBNip.TabIndex = 59;
@@ -102,7 +102,7 @@
             // 
             // TBstaliKlienciRokProdukcji
             // 
-            this.TBstaliKlienciRokProdukcji.Location = new System.Drawing.Point(382, 89);
+            this.TBstaliKlienciRokProdukcji.Location = new System.Drawing.Point(382, 90);
             this.TBstaliKlienciRokProdukcji.Name = "TBstaliKlienciRokProdukcji";
             this.TBstaliKlienciRokProdukcji.Size = new System.Drawing.Size(100, 20);
             this.TBstaliKlienciRokProdukcji.TabIndex = 55;
@@ -118,7 +118,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label8.Location = new System.Drawing.Point(379, 69);
+            this.label8.Location = new System.Drawing.Point(379, 70);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(94, 17);
             this.label8.TabIndex = 53;
@@ -128,7 +128,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label9.Location = new System.Drawing.Point(201, 70);
+            this.label9.Location = new System.Drawing.Point(200, 69);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(45, 17);
             this.label9.TabIndex = 52;
@@ -170,28 +170,28 @@
             // 
             // TBstaliKlienciVin
             // 
-            this.TBstaliKlienciVin.Location = new System.Drawing.Point(272, 90);
+            this.TBstaliKlienciVin.Location = new System.Drawing.Point(261, 90);
             this.TBstaliKlienciVin.Name = "TBstaliKlienciVin";
             this.TBstaliKlienciVin.Size = new System.Drawing.Size(100, 20);
             this.TBstaliKlienciVin.TabIndex = 47;
             // 
             // TBstaliKlienciMoc
             // 
-            this.TBstaliKlienciMoc.Location = new System.Drawing.Point(147, 90);
+            this.TBstaliKlienciMoc.Location = new System.Drawing.Point(136, 90);
             this.TBstaliKlienciMoc.Name = "TBstaliKlienciMoc";
             this.TBstaliKlienciMoc.Size = new System.Drawing.Size(100, 20);
             this.TBstaliKlienciMoc.TabIndex = 46;
             // 
             // TBstaliKlienciSilnik
             // 
-            this.TBstaliKlienciSilnik.Location = new System.Drawing.Point(148, 40);
+            this.TBstaliKlienciSilnik.Location = new System.Drawing.Point(136, 40);
             this.TBstaliKlienciSilnik.Name = "TBstaliKlienciSilnik";
             this.TBstaliKlienciSilnik.Size = new System.Drawing.Size(100, 20);
             this.TBstaliKlienciSilnik.TabIndex = 45;
             // 
             // TBstaliKlienciRejestracja
             // 
-            this.TBstaliKlienciRejestracja.Location = new System.Drawing.Point(272, 36);
+            this.TBstaliKlienciRejestracja.Location = new System.Drawing.Point(261, 40);
             this.TBstaliKlienciRejestracja.Name = "TBstaliKlienciRejestracja";
             this.TBstaliKlienciRejestracja.Size = new System.Drawing.Size(100, 20);
             this.TBstaliKlienciRejestracja.TabIndex = 44;
@@ -200,41 +200,41 @@
             // 
             this.Ldane4.AutoSize = true;
             this.Ldane4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.Ldane4.Location = new System.Drawing.Point(269, 70);
+            this.Ldane4.Location = new System.Drawing.Point(258, 70);
             this.Ldane4.Name = "Ldane4";
-            this.Ldane4.Size = new System.Drawing.Size(34, 17);
+            this.Ldane4.Size = new System.Drawing.Size(30, 17);
             this.Ldane4.TabIndex = 43;
-            this.Ldane4.Text = "VIN:";
+            this.Ldane4.Text = "VIN";
             // 
             // Ldane3
             // 
             this.Ldane3.AutoSize = true;
             this.Ldane3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.Ldane3.Location = new System.Drawing.Point(144, 70);
+            this.Ldane3.Location = new System.Drawing.Point(137, 70);
             this.Ldane3.Name = "Ldane3";
-            this.Ldane3.Size = new System.Drawing.Size(38, 17);
+            this.Ldane3.Size = new System.Drawing.Size(34, 17);
             this.Ldane3.TabIndex = 42;
-            this.Ldane3.Text = "Moc:";
+            this.Ldane3.Text = "Moc";
             // 
             // Ldane2
             // 
             this.Ldane2.AutoSize = true;
             this.Ldane2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.Ldane2.Location = new System.Drawing.Point(145, 20);
+            this.Ldane2.Location = new System.Drawing.Point(137, 20);
             this.Ldane2.Name = "Ldane2";
-            this.Ldane2.Size = new System.Drawing.Size(45, 17);
+            this.Ldane2.Size = new System.Drawing.Size(41, 17);
             this.Ldane2.TabIndex = 41;
-            this.Ldane2.Text = "Silnik:";
+            this.Ldane2.Text = "Silnik";
             // 
             // Ldane1
             // 
             this.Ldane1.AutoSize = true;
             this.Ldane1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.Ldane1.Location = new System.Drawing.Point(269, 16);
+            this.Ldane1.Location = new System.Drawing.Point(258, 20);
             this.Ldane1.Name = "Ldane1";
-            this.Ldane1.Size = new System.Drawing.Size(83, 17);
+            this.Ldane1.Size = new System.Drawing.Size(79, 17);
             this.Ldane1.TabIndex = 40;
-            this.Ldane1.Text = "Rejestracja:";
+            this.Ldane1.Text = "Rejestracja";
             // 
             // BTstaliKlienciZapisz
             // 
@@ -262,7 +262,7 @@
             // 
             // TBstaliKlienciNazwisko
             // 
-            this.TBstaliKlienciNazwisko.Location = new System.Drawing.Point(16, 89);
+            this.TBstaliKlienciNazwisko.Location = new System.Drawing.Point(16, 90);
             this.TBstaliKlienciNazwisko.Name = "TBstaliKlienciNazwisko";
             this.TBstaliKlienciNazwisko.Size = new System.Drawing.Size(100, 20);
             this.TBstaliKlienciNazwisko.TabIndex = 36;

@@ -20,15 +20,15 @@ namespace NotatnikMechanika.WinForms
         public Update update = new Update();
         public DaneFirmy daneFirmy = new DaneFirmy();
         public FirstOpenSettings firstOpenSettings = new FirstOpenSettings();
-        private readonly string klienciSciezka = @"klienci.binary";
-        private readonly string staliKlienciSciezka = @"stali_klienci.binary";
-        private readonly string uslugiSciezka = @"uslugi.binary";
-        private readonly string towarySciezka = @"towary.binary";
-        private readonly string archiwumSciezka = @"archiwum.binary";
-        private readonly string updateSciezka = @"update.binary";
-        private readonly string daneFirmySciezka = @"dane_firmy.binary";
-        private readonly string firstOpenSettingsSciezka = @"first_Open_Settings.binary";
-        private readonly string fakturySciezka = @"faktury.binary";
+        private readonly string klienciSciezka = @"Dane/klienci.binary";
+        private readonly string staliKlienciSciezka = @"Dane/stali_klienci.binary";
+        private readonly string uslugiSciezka = @"Dane/uslugi.binary";
+        private readonly string towarySciezka = @"Dane/towary.binary";
+        private readonly string archiwumSciezka = @"Dane/archiwum.binary";
+        private readonly string updateSciezka = @"Dane/update.binary";
+        private readonly string daneFirmySciezka = @"Dane/dane_firmy.binary";
+        private readonly string firstOpenSettingsSciezka = @"Dane/first_Open_Settings.binary";
+        private readonly string fakturySciezka = @"Dane/faktury.binary";
 
         public DataMenager()
         {
@@ -55,6 +55,11 @@ namespace NotatnikMechanika.WinForms
 
         public void ZapiszDane()
         {
+            if (!Directory.Exists(@"Dane"))
+            {
+                _ = Directory.CreateDirectory(@"Dane");
+            }
+
             binaryFormatter.Serialize(File.Open(klienciSciezka, FileMode.OpenOrCreate), klienci);
             binaryFormatter.Serialize(File.Open(staliKlienciSciezka, FileMode.OpenOrCreate), staliKlienci);
             binaryFormatter.Serialize(File.Open(uslugiSciezka, FileMode.OpenOrCreate), uslugi);

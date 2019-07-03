@@ -7,11 +7,9 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
     <RootNamespace>NotatnikMechanika.WinForms</RootNamespace>
+    <AssemblyName>Notatnik Mechanika</AssemblyName>
+    <StartupObject>NotatnikMechanika.WinForms.Program</StartupObject>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="SKGL.dll" />
-  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Properties\Settings.Designer.cs">

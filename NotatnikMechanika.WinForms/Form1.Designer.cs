@@ -116,6 +116,7 @@
             this.BTnowaFaktura = new System.Windows.Forms.Button();
             this.LVfaktury = new System.Windows.Forms.ListView();
             this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader46 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -148,7 +149,6 @@
             this.columnHeader41 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.columnHeader46 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.GBzlecenia.SuspendLayout();
             this.MSzlecenia.SuspendLayout();
             this.GBstaliKlienci.SuspendLayout();
@@ -163,7 +163,7 @@
             // 
             // BTnoweZlecenie
             // 
-            this.BTnoweZlecenie.Location = new System.Drawing.Point(381, 12);
+            this.BTnoweZlecenie.Location = new System.Drawing.Point(397, 12);
             this.BTnoweZlecenie.Name = "BTnoweZlecenie";
             this.BTnoweZlecenie.Size = new System.Drawing.Size(150, 44);
             this.BTnoweZlecenie.TabIndex = 0;
@@ -224,6 +224,7 @@
             this.Cwykonanie});
             this.LVzlecenia.FullRowSelect = true;
             this.LVzlecenia.GridLines = true;
+            this.LVzlecenia.HideSelection = false;
             this.LVzlecenia.Location = new System.Drawing.Point(6, 19);
             this.LVzlecenia.Name = "LVzlecenia";
             this.LVzlecenia.Size = new System.Drawing.Size(734, 357);
@@ -389,6 +390,7 @@
             this.columnHeader30});
             this.LVstaliKlienci.FullRowSelect = true;
             this.LVstaliKlienci.GridLines = true;
+            this.LVstaliKlienci.HideSelection = false;
             this.LVstaliKlienci.Location = new System.Drawing.Point(8, 53);
             this.LVstaliKlienci.Name = "LVstaliKlienci";
             this.LVstaliKlienci.Size = new System.Drawing.Size(729, 320);
@@ -499,6 +501,7 @@
             this.columnHeader2});
             this.LVuslugi.FullRowSelect = true;
             this.LVuslugi.GridLines = true;
+            this.LVuslugi.HideSelection = false;
             this.LVuslugi.Location = new System.Drawing.Point(6, 16);
             this.LVuslugi.Name = "LVuslugi";
             this.LVuslugi.Size = new System.Drawing.Size(622, 360);
@@ -616,10 +619,10 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(537, 16);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(63, 20);
+            this.label7.Size = new System.Drawing.Size(57, 20);
             this.label7.TabIndex = 5;
             this.label7.Text = "Szukaj";
             // 
@@ -642,6 +645,7 @@
             this.columnHeader14});
             this.LVarchiwum.FullRowSelect = true;
             this.LVarchiwum.GridLines = true;
+            this.LVarchiwum.HideSelection = false;
             this.LVarchiwum.Location = new System.Drawing.Point(6, 43);
             this.LVarchiwum.Name = "LVarchiwum";
             this.LVarchiwum.Size = new System.Drawing.Size(734, 327);
@@ -783,7 +787,7 @@
             // 
             // BTNowyParagon
             // 
-            this.BTNowyParagon.Location = new System.Drawing.Point(122, 21);
+            this.BTNowyParagon.Location = new System.Drawing.Point(122, 19);
             this.BTNowyParagon.Name = "BTNowyParagon";
             this.BTNowyParagon.Size = new System.Drawing.Size(108, 29);
             this.BTNowyParagon.TabIndex = 15;
@@ -793,7 +797,7 @@
             // 
             // BTnowaFaktura
             // 
-            this.BTnowaFaktura.Location = new System.Drawing.Point(6, 21);
+            this.BTnowaFaktura.Location = new System.Drawing.Point(8, 19);
             this.BTnowaFaktura.Name = "BTnowaFaktura";
             this.BTnowaFaktura.Size = new System.Drawing.Size(108, 29);
             this.BTnowaFaktura.TabIndex = 14;
@@ -815,6 +819,7 @@
             this.columnHeader26});
             this.LVfaktury.FullRowSelect = true;
             this.LVfaktury.GridLines = true;
+            this.LVfaktury.HideSelection = false;
             this.LVfaktury.Location = new System.Drawing.Point(6, 56);
             this.LVfaktury.Name = "LVfaktury";
             this.LVfaktury.Size = new System.Drawing.Size(734, 320);
@@ -829,6 +834,11 @@
             // 
             this.columnHeader19.Text = "Numer faktury/paragonu";
             this.columnHeader19.Width = 129;
+            // 
+            // columnHeader46
+            // 
+            this.columnHeader46.Text = "Faktura/Paragon";
+            this.columnHeader46.Width = 94;
             // 
             // columnHeader20
             // 
@@ -905,10 +915,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(12, 24);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 20);
+            this.label2.Size = new System.Drawing.Size(57, 20);
             this.label2.TabIndex = 28;
             this.label2.Text = "Nazwa";
             // 
@@ -923,10 +933,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(215, 24);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 20);
+            this.label3.Size = new System.Drawing.Size(61, 20);
             this.label3.TabIndex = 30;
             this.label3.Text = "Symbol";
             // 
@@ -1046,6 +1056,7 @@
             this.columnHeader41});
             this.LVTowary.FullRowSelect = true;
             this.LVTowary.GridLines = true;
+            this.LVTowary.HideSelection = false;
             this.LVTowary.Location = new System.Drawing.Point(8, 56);
             this.LVTowary.Name = "LVTowary";
             this.LVTowary.Size = new System.Drawing.Size(622, 320);
@@ -1097,11 +1108,6 @@
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(0, 20);
             this.label13.TabIndex = 1;
-            // 
-            // columnHeader46
-            // 
-            this.columnHeader46.Text = "Faktura/Paragon";
-            this.columnHeader46.Width = 94;
             // 
             // Form1
             // 

@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotatnikMechanika.Forms", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotatnikMechanika.WinForms", "NotatnikMechanika.WinForms\NotatnikMechanika.WinForms.csproj", "{83C39425-C5B8-4BC9-8729-360C4E5E94BB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Old Code", "Old Code", "{FA7C4C3F-D7AA-435B-A8FC-F99497AE5D91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -168,6 +170,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{83C39425-C5B8-4BC9-8729-360C4E5E94BB} = {FA7C4C3F-D7AA-435B-A8FC-F99497AE5D91}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35ADDACE-DEBD-48A6-B568-1133D10EA5F5}

@@ -64,7 +64,7 @@
             // 
             // DTprzyjecie
             // 
-            this.DTprzyjecie.Location = new System.Drawing.Point(12, 48);
+            this.DTprzyjecie.Location = new System.Drawing.Point(14, 28);
             this.DTprzyjecie.Name = "DTprzyjecie";
             this.DTprzyjecie.Size = new System.Drawing.Size(207, 20);
             this.DTprzyjecie.TabIndex = 0;
@@ -73,7 +73,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.label1.Location = new System.Drawing.Point(13, 20);
+            this.label1.Location = new System.Drawing.Point(11, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(150, 16);
             this.label1.TabIndex = 2;
@@ -81,7 +81,7 @@
             // 
             // BTdodajZlecenie
             // 
-            this.BTdodajZlecenie.Location = new System.Drawing.Point(214, 522);
+            this.BTdodajZlecenie.Location = new System.Drawing.Point(214, 499);
             this.BTdodajZlecenie.Name = "BTdodajZlecenie";
             this.BTdodajZlecenie.Size = new System.Drawing.Size(105, 40);
             this.BTdodajZlecenie.TabIndex = 4;
@@ -93,7 +93,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.label2.Location = new System.Drawing.Point(311, 20);
+            this.label2.Location = new System.Drawing.Point(313, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(160, 16);
             this.label2.TabIndex = 6;
@@ -101,7 +101,7 @@
             // 
             // DTwykonanie
             // 
-            this.DTwykonanie.Location = new System.Drawing.Point(310, 48);
+            this.DTwykonanie.Location = new System.Drawing.Point(316, 28);
             this.DTwykonanie.Name = "DTwykonanie";
             this.DTwykonanie.Size = new System.Drawing.Size(207, 20);
             this.DTwykonanie.TabIndex = 5;
@@ -110,7 +110,7 @@
             // 
             this.groupBox1.Controls.Add(this.BTstaliKlienciZapisz);
             this.groupBox1.Controls.Add(this.LdaneKlienta);
-            this.groupBox1.Location = new System.Drawing.Point(14, 74);
+            this.groupBox1.Location = new System.Drawing.Point(14, 54);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(509, 106);
             this.groupBox1.TabIndex = 14;
@@ -119,9 +119,9 @@
             // 
             // BTstaliKlienciZapisz
             // 
-            this.BTstaliKlienciZapisz.Location = new System.Drawing.Point(196, 63);
+            this.BTstaliKlienciZapisz.Location = new System.Drawing.Point(200, 64);
             this.BTstaliKlienciZapisz.Name = "BTstaliKlienciZapisz";
-            this.BTstaliKlienciZapisz.Size = new System.Drawing.Size(100, 36);
+            this.BTstaliKlienciZapisz.Size = new System.Drawing.Size(105, 36);
             this.BTstaliKlienciZapisz.TabIndex = 40;
             this.BTstaliKlienciZapisz.Text = "Edytuj";
             this.BTstaliKlienciZapisz.UseVisualStyleBackColor = true;
@@ -130,9 +130,9 @@
             // LdaneKlienta
             // 
             this.LdaneKlienta.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.LdaneKlienta.Location = new System.Drawing.Point(6, 29);
+            this.LdaneKlienta.Location = new System.Drawing.Point(2, 16);
             this.LdaneKlienta.Name = "LdaneKlienta";
-            this.LdaneKlienta.Size = new System.Drawing.Size(499, 31);
+            this.LdaneKlienta.Size = new System.Drawing.Size(507, 44);
             this.LdaneKlienta.TabIndex = 24;
             this.LdaneKlienta.Text = "Kliknij edytuj aby dodać dane klienta";
             this.LdaneKlienta.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -147,7 +147,7 @@
             this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Location = new System.Drawing.Point(14, 186);
+            this.groupBox2.Location = new System.Drawing.Point(14, 166);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(252, 246);
             this.groupBox2.TabIndex = 15;
@@ -156,9 +156,9 @@
             // 
             // BTdodajDoUslug
             // 
-            this.BTdodajDoUslug.Location = new System.Drawing.Point(105, 217);
+            this.BTdodajDoUslug.Location = new System.Drawing.Point(131, 217);
             this.BTdodajDoUslug.Name = "BTdodajDoUslug";
-            this.BTdodajDoUslug.Size = new System.Drawing.Size(106, 23);
+            this.BTdodajDoUslug.Size = new System.Drawing.Size(115, 23);
             this.BTdodajDoUslug.TabIndex = 27;
             this.BTdodajDoUslug.Text = "Dodaj do usług";
             this.BTdodajDoUslug.UseVisualStyleBackColor = true;
@@ -168,7 +168,7 @@
             // 
             this.BTusun.Location = new System.Drawing.Point(6, 217);
             this.BTusun.Name = "BTusun";
-            this.BTusun.Size = new System.Drawing.Size(93, 23);
+            this.BTusun.Size = new System.Drawing.Size(115, 23);
             this.BTusun.TabIndex = 26;
             this.BTusun.Text = "Usuń";
             this.BTusun.UseVisualStyleBackColor = true;
@@ -176,9 +176,9 @@
             // 
             // BTuslugi
             // 
-            this.BTuslugi.Location = new System.Drawing.Point(105, 188);
+            this.BTuslugi.Location = new System.Drawing.Point(131, 188);
             this.BTuslugi.Name = "BTuslugi";
-            this.BTuslugi.Size = new System.Drawing.Size(106, 23);
+            this.BTuslugi.Size = new System.Drawing.Size(115, 23);
             this.BTuslugi.TabIndex = 25;
             this.BTuslugi.Text = "Usługi";
             this.BTuslugi.UseVisualStyleBackColor = true;
@@ -188,7 +188,7 @@
             // 
             this.BTdodajUsluga.Location = new System.Drawing.Point(6, 188);
             this.BTdodajUsluga.Name = "BTdodajUsluga";
-            this.BTdodajUsluga.Size = new System.Drawing.Size(93, 23);
+            this.BTdodajUsluga.Size = new System.Drawing.Size(115, 23);
             this.BTdodajUsluga.TabIndex = 24;
             this.BTdodajUsluga.Text = "Dodaj ";
             this.BTdodajUsluga.UseVisualStyleBackColor = true;
@@ -242,7 +242,7 @@
             this.groupBox3.Controls.Add(this.panel2);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Location = new System.Drawing.Point(271, 186);
+            this.groupBox3.Location = new System.Drawing.Point(272, 166);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(252, 246);
             this.groupBox3.TabIndex = 16;
@@ -251,9 +251,9 @@
             // 
             // BTdodajDoTowarow
             // 
-            this.BTdodajDoTowarow.Location = new System.Drawing.Point(105, 217);
+            this.BTdodajDoTowarow.Location = new System.Drawing.Point(131, 217);
             this.BTdodajDoTowarow.Name = "BTdodajDoTowarow";
-            this.BTdodajDoTowarow.Size = new System.Drawing.Size(108, 23);
+            this.BTdodajDoTowarow.Size = new System.Drawing.Size(115, 23);
             this.BTdodajDoTowarow.TabIndex = 41;
             this.BTdodajDoTowarow.Text = "Dodaj do towarów";
             this.BTdodajDoTowarow.UseVisualStyleBackColor = true;
@@ -263,7 +263,7 @@
             // 
             this.BTusunTowary.Location = new System.Drawing.Point(9, 217);
             this.BTusunTowary.Name = "BTusunTowary";
-            this.BTusunTowary.Size = new System.Drawing.Size(93, 23);
+            this.BTusunTowary.Size = new System.Drawing.Size(115, 23);
             this.BTusunTowary.TabIndex = 40;
             this.BTusunTowary.Text = "Usuń";
             this.BTusunTowary.UseVisualStyleBackColor = true;
@@ -271,9 +271,9 @@
             // 
             // BTtowary
             // 
-            this.BTtowary.Location = new System.Drawing.Point(105, 188);
+            this.BTtowary.Location = new System.Drawing.Point(131, 188);
             this.BTtowary.Name = "BTtowary";
-            this.BTtowary.Size = new System.Drawing.Size(108, 23);
+            this.BTtowary.Size = new System.Drawing.Size(115, 23);
             this.BTtowary.TabIndex = 37;
             this.BTtowary.Text = "Towary";
             this.BTtowary.UseVisualStyleBackColor = true;
@@ -293,7 +293,7 @@
             // 
             this.BTdodajTowar.Location = new System.Drawing.Point(9, 188);
             this.BTdodajTowar.Name = "BTdodajTowar";
-            this.BTdodajTowar.Size = new System.Drawing.Size(93, 23);
+            this.BTdodajTowar.Size = new System.Drawing.Size(115, 23);
             this.BTdodajTowar.TabIndex = 36;
             this.BTdodajTowar.Text = "Dodaj ";
             this.BTdodajTowar.UseVisualStyleBackColor = true;
@@ -329,9 +329,9 @@
             // 
             // TBdodatkowe
             // 
-            this.TBdodatkowe.Location = new System.Drawing.Point(14, 458);
+            this.TBdodatkowe.Location = new System.Drawing.Point(14, 434);
             this.TBdodatkowe.Name = "TBdodatkowe";
-            this.TBdodatkowe.Size = new System.Drawing.Size(505, 59);
+            this.TBdodatkowe.Size = new System.Drawing.Size(509, 59);
             this.TBdodatkowe.TabIndex = 17;
             this.TBdodatkowe.Text = "";
             // 
@@ -339,7 +339,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.label11.Location = new System.Drawing.Point(14, 434);
+            this.label11.Location = new System.Drawing.Point(11, 415);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(118, 16);
             this.label11.TabIndex = 18;
@@ -349,7 +349,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(529, 567);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(535, 548);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.TBdodatkowe);
             this.Controls.Add(this.groupBox3);

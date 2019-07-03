@@ -231,7 +231,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(236, 62);
+            this.label6.Location = new System.Drawing.Point(236, 63);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(34, 13);
             this.label6.TabIndex = 7;
@@ -239,7 +239,7 @@
             // 
             // TBnipNabywca
             // 
-            this.TBnipNabywca.Location = new System.Drawing.Point(239, 35);
+            this.TBnipNabywca.Location = new System.Drawing.Point(239, 34);
             this.TBnipNabywca.Name = "TBnipNabywca";
             this.TBnipNabywca.Size = new System.Drawing.Size(187, 20);
             this.TBnipNabywca.TabIndex = 6;
@@ -255,7 +255,7 @@
             // 
             // TBnazwaNabywca
             // 
-            this.TBnazwaNabywca.Location = new System.Drawing.Point(27, 35);
+            this.TBnazwaNabywca.Location = new System.Drawing.Point(15, 34);
             this.TBnazwaNabywca.Name = "TBnazwaNabywca";
             this.TBnazwaNabywca.Size = new System.Drawing.Size(197, 108);
             this.TBnazwaNabywca.TabIndex = 4;
@@ -264,7 +264,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 19);
+            this.label4.Location = new System.Drawing.Point(12, 19);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 13);
             this.label4.TabIndex = 2;
@@ -283,6 +283,7 @@
             this.columnHeader8,
             this.columnHeader9});
             this.LVuslugiTowary.FullRowSelect = true;
+            this.LVuslugiTowary.HideSelection = false;
             this.LVuslugiTowary.Location = new System.Drawing.Point(84, 222);
             this.LVuslugiTowary.MultiSelect = false;
             this.LVuslugiTowary.Name = "LVuslugiTowary";
@@ -500,7 +501,7 @@
             // 
             // BTdodaj
             // 
-            this.BTdodaj.Location = new System.Drawing.Point(12, 258);
+            this.BTdodaj.Location = new System.Drawing.Point(12, 222);
             this.BTdodaj.Name = "BTdodaj";
             this.BTdodaj.Size = new System.Drawing.Size(65, 23);
             this.BTdodaj.TabIndex = 13;
@@ -510,7 +511,7 @@
             // 
             // BTusun
             // 
-            this.BTusun.Location = new System.Drawing.Point(12, 316);
+            this.BTusun.Location = new System.Drawing.Point(12, 280);
             this.BTusun.Name = "BTusun";
             this.BTusun.Size = new System.Drawing.Size(65, 23);
             this.BTusun.TabIndex = 14;
@@ -520,7 +521,7 @@
             // 
             // BTedytuj
             // 
-            this.BTedytuj.Location = new System.Drawing.Point(12, 287);
+            this.BTedytuj.Location = new System.Drawing.Point(12, 251);
             this.BTedytuj.Name = "BTedytuj";
             this.BTedytuj.Size = new System.Drawing.Size(65, 23);
             this.BTedytuj.TabIndex = 15;
@@ -549,14 +550,14 @@
             "Gotówka",
             "Przelew",
             "Karta"});
-            this.CBformaPlatnosci.Location = new System.Drawing.Point(17, 54);
+            this.CBformaPlatnosci.Location = new System.Drawing.Point(17, 35);
             this.CBformaPlatnosci.Name = "CBformaPlatnosci";
             this.CBformaPlatnosci.Size = new System.Drawing.Size(113, 21);
             this.CBformaPlatnosci.TabIndex = 9;
             // 
             // DTPterminPlatnosci
             // 
-            this.DTPterminPlatnosci.Location = new System.Drawing.Point(17, 99);
+            this.DTPterminPlatnosci.Location = new System.Drawing.Point(17, 78);
             this.DTPterminPlatnosci.Name = "DTPterminPlatnosci";
             this.DTPterminPlatnosci.Size = new System.Drawing.Size(219, 20);
             this.DTPterminPlatnosci.TabIndex = 8;
@@ -564,7 +565,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(14, 82);
+            this.label17.Location = new System.Drawing.Point(14, 62);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(86, 13);
             this.label17.TabIndex = 7;
@@ -573,7 +574,7 @@
             // CBzaplacono
             // 
             this.CBzaplacono.AutoSize = true;
-            this.CBzaplacono.Location = new System.Drawing.Point(136, 56);
+            this.CBzaplacono.Location = new System.Drawing.Point(136, 37);
             this.CBzaplacono.Name = "CBzaplacono";
             this.CBzaplacono.Size = new System.Drawing.Size(79, 17);
             this.CBzaplacono.TabIndex = 6;
@@ -584,7 +585,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(14, 38);
+            this.label16.Location = new System.Drawing.Point(14, 19);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(83, 13);
             this.label16.TabIndex = 4;
