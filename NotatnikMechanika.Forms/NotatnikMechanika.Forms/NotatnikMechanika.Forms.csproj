@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="MvvmCross" Version="6.3.1" />
     <PackageReference Include="MvvmCross.Forms" Version="6.3.1" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.0.1" />
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
   </ItemGroup>
 
