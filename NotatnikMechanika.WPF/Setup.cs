@@ -1,11 +1,5 @@
-﻿using MvvmCross;
-using MvvmCross.IoC;
-using MvvmCross.Platforms.Wpf.Core;
-using MvvmCross.ViewModels;
+﻿using MvvmCross.Platforms.Wpf.Core;
 using NotatnikMechanika.Core;
-using NotatnikMechanika.Core.ViewModels;
-using System.Collections.Generic;
-using System.Reflection;
 
 namespace NotatnikMechanika.WPF
 {

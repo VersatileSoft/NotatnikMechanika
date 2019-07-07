@@ -1,7 +1,5 @@
 ﻿using MvvmCross.Core;
-using MvvmCross.Platforms.Wpf.Core;
 using MvvmCross.Platforms.Wpf.Views;
-using NotatnikMechanika.Core;
 
 namespace NotatnikMechanika.WPF
 {

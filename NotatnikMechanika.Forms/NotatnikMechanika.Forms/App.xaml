@@ -1,13 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<m:MvxFormsApplication xmlns:m="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
-                       xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-                       xmlns:controls="clr-namespace:Plugin.CrossPlatformTintedImage.Abstractions;assembly=Plugin.CrossPlatformTintedImage.Abstractions"
-                       xmlns="http://xamarin.com/schemas/2014/forms"
-                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                       x:Class="NotatnikMechanika.Forms.App">
-    <m:MvxFormsApplication.Resources>
-        <ResourceDictionary>
-
-        </ResourceDictionary>
-    </m:MvxFormsApplication.Resources>
-</m:MvxFormsApplication>
+﻿<Application
+    x:Class="NotatnikMechanika.Forms.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Application.Resources/>
+</Application>

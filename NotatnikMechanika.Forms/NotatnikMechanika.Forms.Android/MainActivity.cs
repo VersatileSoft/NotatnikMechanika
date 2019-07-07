@@ -1,19 +1,26 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using MvvmCross.Forms.Platforms.Android.Views;
-using NotatnikMechanika.Core;
+using Android.Runtime;
 
 namespace NotatnikMechanika.Forms.Droid
 {
-    [Activity(Label = "NotatnikMechanika", Icon = "@mipmap/icon", MainLauncher = true, Theme = "@style/MainTheme", NoHistory = false, ScreenOrientation = ScreenOrientation.Portrait)]
-    public class MainActivity : MvxFormsAppCompatActivity<Setup, CoreApp, App>
+    [Activity(Label = "NotatnikMechanika.Forms", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    public class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        protected override void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-            base.OnCreate(bundle);
+
+            base.OnCreate(savedInstanceState);
+
+            Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            LoadApplication(new App());
+        }
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }
