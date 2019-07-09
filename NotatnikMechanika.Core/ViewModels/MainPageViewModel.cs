@@ -1,4 +1,5 @@
 ﻿using MvvmCross.Commands;
+using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using PropertyChanged;
 using System.Windows.Input;
@@ -8,18 +9,24 @@ namespace NotatnikMechanika.Core.ViewModels
     [AddINotifyPropertyChangedInterface]
     public class MainPageViewModel : MvxViewModel
     {
-        public string Text { get; set; } = "elo";
 
-        public ICommand Click { get; set; }
+        private IMvxNavigationService _navigationService;
 
-        public MainPageViewModel()
+        public MainPageViewModel(IMvxNavigationService navigationService)
         {
-            Click = new MvxCommand(ClickEvent);
+            _navigationService = navigationService;
         }
 
-        public void ClickEvent()
+        public override void ViewAppeared()
         {
-            Text = "Dupa";
+            base.ViewAppeared();
+            ShowMenu();
+        }
+
+        public void ShowMenu()
+        {
+            _navigationService.Navigate<MenuViewModel>();
+            _navigationService.Navigate<ContentViewModel>();
         }
     }
 }

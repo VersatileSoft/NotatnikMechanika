@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\ContentView.xaml" />
+    <None Remove="Views\MenuView.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MvvmCross" Version="6.3.1" />
     <PackageReference Include="MvvmCross.Platforms.Wpf" Version="6.3.1" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.0.1" />
