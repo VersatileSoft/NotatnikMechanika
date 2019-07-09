@@ -7,9 +7,9 @@ using System.Text;
 namespace NotatnikMechanika.Core.ViewModels
 {
     [AddINotifyPropertyChangedInterface]
-    public class ContentViewModel : MvxViewModel
+    public class ClientsViewModel : MvxViewModel
     {
-        public ContentViewModel()
+        public ClientsViewModel()
         {
 
         }

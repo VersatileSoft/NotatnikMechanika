@@ -9,8 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Views\ContentView.xaml" />
+    <None Remove="Views\ClientsView.xaml" />
     <None Remove="Views\MenuView.xaml" />
+    <None Remove="Views\OrdersView.xaml" />
   </ItemGroup>
 
   <ItemGroup>

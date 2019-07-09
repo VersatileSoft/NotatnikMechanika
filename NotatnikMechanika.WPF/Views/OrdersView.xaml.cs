@@ -21,9 +21,9 @@ namespace NotatnikMechanika.WPF.Views
     /// </summary>
     /// 
     [MasterDetailPage(Position = MasterDetailPageAttribute.MasterDetailPosition.Detail)]
-    public partial class ContentView : MvxWpfView
+    public partial class OrdersView : MvxWpfView
     {
-        public ContentView()
+        public OrdersView()
         {
             InitializeComponent();
         }

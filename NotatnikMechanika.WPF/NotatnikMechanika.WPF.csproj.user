@@ -2,7 +2,10 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="Views\ContentView.xaml.cs">
+    <Compile Update="Views\ClientsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\OrdersView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\MenuView.xaml.cs">
@@ -10,7 +13,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\ContentView.xaml">
+    <Page Update="Views\ClientsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\OrdersView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MenuView.xaml">

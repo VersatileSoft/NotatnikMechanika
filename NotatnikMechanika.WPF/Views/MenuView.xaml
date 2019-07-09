@@ -1,5 +1,4 @@
 ﻿<views:MvxWpfView
-    
     x:Class="NotatnikMechanika.WPF.Views.MenuView"
     xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -8,37 +7,40 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-
-
-    <Grid Background="#FF515151">
-        <Grid x:Name="GridMenu" HorizontalAlignment="Left" Width="70" Background="#FF116FA4">
+    <Grid>
+        <Grid x:Name="GridMenu" HorizontalAlignment="Left" Background="#FF116FA4" Width="200">
             <StackPanel>
-                <Grid Height="150" Background="White"/>
+                <Grid Height="130" Background="White"/>
             </StackPanel>
-            <Button x:Name="ButtonMenu" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Width="70" Height="70">
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Rectangle x:Name="rectangle" Width="30" Height="5" Margin="0 0 0 0" Fill="#FF515151" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="-0,0.5">
-                        <Rectangle.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Rectangle.RenderTransform>
-                    </Rectangle>
-                    <Rectangle x:Name="rectangle1" Width="30" Height="5" Margin="0 20 0 0 " Fill="#FF515151" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="-0,0.5">
-                        <Rectangle.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Rectangle.RenderTransform>
-                    </Rectangle>
-                    <Rectangle x:Name="rectangle2" Width="30" Height="5" Margin="0 10 0 0" Fill="#FF515151" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                </Grid>
+            <Button Content="Zlecenia" Command="{Binding NavigateCommand}" CommandParameter="Orders" HorizontalAlignment="Center" Margin="0,140,0,0" VerticalAlignment="Top" Height="30" Width="170" FontSize="20" BorderThickness="0,0,0,0" Background="#FF0074FF">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
+                </Button.Effect>
+            </Button>
+            <Button Content="Stali klienci" Command="{Binding NavigateCommand}" CommandParameter="Clients" HorizontalAlignment="Center" Margin="0,180,0,0" VerticalAlignment="Top" Height="30" Width="170" FontSize="20" BorderThickness="0,0,0,0" Background="#FF0074FF">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
+                </Button.Effect>
+            </Button>
+            <Button Content="Usługi" Command="{Binding NavigateCommand}" CommandParameter="Services" HorizontalAlignment="Center" Margin="0,220,0,0" VerticalAlignment="Top" Height="30" Width="170" FontSize="20" BorderThickness="0,0,0,0" Background="#FF0074FF">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
+                </Button.Effect>
+            </Button>
+            <Button Content="Archiwum" Command="{Binding NavigateCommand}" CommandParameter="Archives" HorizontalAlignment="Center" Margin="0,260,0,0" VerticalAlignment="Top" Height="30" Width="170" FontSize="20" BorderThickness="0,0,0,0" Background="#FF0074FF">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
+                </Button.Effect>
+            </Button>
+            <Button Content="Faktury/Paragony" Command="{Binding NavigateCommand}" CommandParameter="Invoices" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Height="30" Width="170" FontSize="20" BorderThickness="0,0,0,0" Background="#FF0074FF">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
+                </Button.Effect>
+            </Button>
+            <Button Content="Magazyn" Command="{Binding NavigateCommand}" CommandParameter="Magazine" HorizontalAlignment="Center" Margin="0,340,0,0" VerticalAlignment="Top" Height="30" Width="170" FontSize="20" BorderThickness="0,0,0,0" Background="#FF0074FF">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
+                </Button.Effect>
             </Button>
         </Grid>
     </Grid>
