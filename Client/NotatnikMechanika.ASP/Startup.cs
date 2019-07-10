@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MvvmCross;
+using MvvmCross.Navigation;
+using NotatnikMechanika.Core.ViewModels;
+using Xamarin.Forms;
 
 namespace NotatnikMechanika.ASP
 {
@@ -16,6 +20,7 @@ namespace NotatnikMechanika.ASP
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            new App();
         }
 
         public IConfiguration Configuration { get; }
@@ -50,6 +55,8 @@ namespace NotatnikMechanika.ASP
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseOoui();
 
             app.UseCookiePolicy();
 

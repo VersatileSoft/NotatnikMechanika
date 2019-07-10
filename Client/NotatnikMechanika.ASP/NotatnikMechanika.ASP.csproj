@@ -1,11 +1,24 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MvvmCross" Version="6.3.1" />
+    <PackageReference Include="Ooui.AspNetCore" Version="0.10.222" />
+    <PackageReference Include="Ooui.Forms" Version="0.10.222" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.581479" />
+  </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NotatnikMechanika.Core\NotatnikMechanika.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="WindowsBase">
+      <HintPath>C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\3.0.0-preview6-27804-01\ref\netcoreapp3.0\WindowsBase.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
