@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotatnikMechanika.WinForms"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Old Code", "Old Code", "{FA7C4C3F-D7AA-435B-A8FC-F99497AE5D91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotatnikMechanika.ASP", "NotatnikMechanika.ASP\NotatnikMechanika.ASP.csproj", "{26579B94-4127-4724-A5D8-84723809F62E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -167,6 +169,26 @@ Global
 		{83C39425-C5B8-4BC9-8729-360C4E5E94BB}.Release|x64.Build.0 = Release|Any CPU
 		{83C39425-C5B8-4BC9-8729-360C4E5E94BB}.Release|x86.ActiveCfg = Release|Any CPU
 		{83C39425-C5B8-4BC9-8729-360C4E5E94BB}.Release|x86.Build.0 = Release|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Debug|ARM.Build.0 = Debug|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Debug|x64.Build.0 = Debug|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Debug|x86.Build.0 = Debug|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Release|ARM.ActiveCfg = Release|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Release|ARM.Build.0 = Release|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Release|ARM64.Build.0 = Release|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Release|x64.ActiveCfg = Release|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Release|x64.Build.0 = Release|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Release|x86.ActiveCfg = Release|Any CPU
+		{26579B94-4127-4724-A5D8-84723809F62E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
