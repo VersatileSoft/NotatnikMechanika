@@ -2,9 +2,6 @@
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using PropertyChanged;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NotatnikMechanika.Core.ViewModels
 {
@@ -12,7 +9,7 @@ namespace NotatnikMechanika.Core.ViewModels
     public class MenuViewModel : MvxViewModel
     {
         public IMvxCommand NavigateCommand { get; set; }
-        private IMvxNavigationService _navigationService;
+        private readonly IMvxNavigationService _navigationService;
         public MenuViewModel(IMvxNavigationService navigationService)
         {
             _navigationService = navigationService;

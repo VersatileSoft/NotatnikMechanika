@@ -16,7 +16,7 @@
         </Grid.ColumnDefinitions>
 
         <ContentControl x:Name="Master" Grid.Column="0"/>
-        <ContentControl x:Name="Detail" Grid.Column="1" />
 
+        <ContentControl x:Name="Detail" Grid.Column="1"/>
     </Grid>
 </views:MvxWpfView>

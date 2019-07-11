@@ -1,5 +1,3 @@
-using System;
-
 namespace NotatnikMechanika.ASP.Models
 {
     public class ErrorViewModel

@@ -8,4 +8,5 @@
     Title="MainWindow"
     Width="800"
     Height="450"
-    mc:Ignorable="d" WindowStyle="ThreeDBorderWindow"/>
+    WindowStyle="ThreeDBorderWindow"
+    mc:Ignorable="d"/>

@@ -1,5 +1,4 @@
 ﻿using MvvmCross.Platforms.Wpf.Views;
-using NotatnikMechanika.Core.ViewModels;
 using NotatnikMechanika.WPF.Presenters.Attributes;
 using System.Windows;
 using System.Windows.Media.Animation;
@@ -15,18 +14,18 @@ namespace NotatnikMechanika.WPF.Views
             InitializeComponent();
         }
 
-        bool StateClosed = true;
-       
+        private bool StateClosed = true;
+
         private void ButtonMenu_Click(object sender, RoutedEventArgs e)
         {
             if (StateClosed)
             {
-                Storyboard sb = this.FindResource("OpenMenu") as Storyboard;
+                Storyboard sb = FindResource("OpenMenu") as Storyboard;
                 sb.Begin();
             }
             else
             {
-                Storyboard sb = this.FindResource("CloseMenu") as Storyboard;
+                Storyboard sb = FindResource("CloseMenu") as Storyboard;
                 sb.Begin();
             }
 

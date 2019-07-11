@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <StartupObject>NotatnikMechanika.ASP.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

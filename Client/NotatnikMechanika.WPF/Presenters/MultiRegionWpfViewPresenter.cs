@@ -1,23 +1,19 @@
-﻿using System;
+﻿using MvvmCross;
+using MvvmCross.Platforms.Wpf.Presenters;
+using MvvmCross.Platforms.Wpf.Views;
+using MvvmCross.Presenters;
+using NotatnikMechanika.WPF.Presenters.Attributes;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using MvvmCross;
-using MvvmCross.Platforms.Wpf.Presenters;
-using MvvmCross.Platforms.Wpf.Views;
-using MvvmCross.Presenters;
-using MvvmCross.ViewModels;
-using MvvmCross.Views;
-using NotatnikMechanika.WPF.Presenters.Attributes;
-using NotatnikMechanika.WPF.Views;
 
 namespace NotatnikMechanika.WPF.Presenters
 {
     public class MultiRegionWpfViewPresenter : MvxWpfViewPresenter
     {
         private readonly ContentControl _contentControl;
-        private Dispatcher _uiThreadDispatcher;
+        private readonly Dispatcher _uiThreadDispatcher;
 
         public MultiRegionWpfViewPresenter(ContentControl contentControl, Dispatcher uiThreadDispatcher)
             : base(contentControl)
@@ -58,19 +54,23 @@ namespace NotatnikMechanika.WPF.Presenters
                     {
                         MasterDetailPageAttribute masterDetailPageAttribute = (MasterDetailPageAttribute)attribute;
 
-                        var loader = Mvx.IoCProvider.Resolve<IMvxWpfViewLoader>();
-                        var view = loader.CreateView(request);
+                        IMvxWpfViewLoader loader = Mvx.IoCProvider.Resolve<IMvxWpfViewLoader>();
+                        FrameworkElement view = loader.CreateView(request);
                         ContentControl containerView = null;
                         if (masterDetailPageAttribute.Position == MasterDetailPageAttribute.MasterDetailPosition.Master)
+                        {
                             containerView = GetChild<ContentControl>(_contentControl, "Master");
+                        }
                         else
+                        {
                             containerView = GetChild<ContentControl>(_contentControl, "Detail");
+                        }
 
                         if (containerView != null)
                         {
                             _uiThreadDispatcher.Invoke(() =>
                             {
-                               containerView.Content = view;
+                                containerView.Content = view;
                             });
                             return Task.FromResult(true);
                         }

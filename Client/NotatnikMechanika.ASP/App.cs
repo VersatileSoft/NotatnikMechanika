@@ -4,8 +4,6 @@ using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using NotatnikMechanika.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NotatnikMechanika.ASP
@@ -34,7 +32,7 @@ namespace NotatnikMechanika.ASP
     {
         public static SetupSingleton EnsureSingletonAvailable()
         {
-            var instance = EnsureSingletonAvailable<SetupSingleton>();
+            SetupSingleton instance = EnsureSingletonAvailable<SetupSingleton>();
             return instance;
         }
     }
@@ -43,7 +41,7 @@ namespace NotatnikMechanika.ASP
     {
         protected override IMvxApplication CreateApp()
         {
-             return Mvx.IoCProvider.IoCConstruct<CoreApp>();
+            return Mvx.IoCProvider.IoCConstruct<CoreApp>();
         }
 
         protected override IMvxViewDispatcher CreateViewDispatcher()

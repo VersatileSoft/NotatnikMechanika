@@ -1,9 +1,8 @@
 ﻿using MvvmCross.Presenters.Attributes;
-using System;
 
 namespace NotatnikMechanika.WPF.Presenters.Attributes
 {
-	public class MasterDetailPageAttribute : MvxBasePresentationAttribute
+    public class MasterDetailPageAttribute : MvxBasePresentationAttribute
     {
         public enum MasterDetailPosition
         {
@@ -11,5 +10,5 @@ namespace NotatnikMechanika.WPF.Presenters.Attributes
             Detail
         }
         public MasterDetailPosition Position { get; set; }
-	}  
+    }
 }

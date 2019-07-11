@@ -1,8 +1,6 @@
-﻿using MvvmCross.Commands;
-using MvvmCross.Navigation;
+﻿using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using PropertyChanged;
-using System.Windows.Input;
 
 namespace NotatnikMechanika.Core.ViewModels
 {
@@ -10,7 +8,7 @@ namespace NotatnikMechanika.Core.ViewModels
     public class MainPageViewModel : MvxViewModel
     {
 
-        private IMvxNavigationService _navigationService;
+        private readonly IMvxNavigationService _navigationService;
 
         public MainPageViewModel(IMvxNavigationService navigationService)
         {
