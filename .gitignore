@@ -3,3 +3,17 @@ Api/NotatnikMechanikaApi/obj/project.assets.json
 Api/NotatnikMechanikaApi/obj/
 Client/NotatnikMechanika.ASP/bin/
 Client/NotatnikMechanika.ASP/obj/
+Api/NotatnikMechanikaApi/bin/Debug/netcoreapp3.0/runtimes/win-x64/native/sni.dll
+Api/NotatnikMechanikaApi/bin/
+Api/NotatnikMechanikaApi.Service/obj/
+Api/NotatnikMechanikaApi.Service/bin/Debug/netcoreapp2.2/NotatnikMechanikaApi.Service.runtimeconfig.dev.json
+Api/NotatnikMechanikaApi.Service/bin/
+Api/NotatnikMechanikaApi.Repository/obj/
+Api/NotatnikMechanikaApi.Repository/bin/
+Api/NotatnikMechanikaApi.Model/obj/
+Api/NotatnikMechanikaApi.Model/bin/
+Api/NotatnikMechanikaApi.Data/obj/Debug/netcoreapp3.0/NotatnikMechanikaApi.Data.pdb
+Api/NotatnikMechanikaApi.Data/obj/
+Api/NotatnikMechanikaApi.Data/bin/
+Api/NotatnikMechanikaApi.Component/obj/
+Api/NotatnikMechanikaApi.Component/bin/
