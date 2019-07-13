@@ -1,0 +1,13 @@
+{
+  "solution": {
+    "path": "NotatnikMechanika.sln",
+    "projects": [
+      "Api\\NotatnikMechanika.Component\\NotatnikMechanika.Component.csproj",
+      "Api\\NotatnikMechanika.Data\\NotatnikMechanika.Data.csproj",
+      "Api\\NotatnikMechanika.Repository\\NotatnikMechanika.Repository.csproj",
+      "Api\\NotatnikMechanika.Server\\NotatnikMechanika.Server.csproj",
+      "Api\\NotatnikMechanika.Service\\NotatnikMechanika.Service.csproj",
+      "Api\\NotatnikMechanika.Shared\\NotatnikMechanika.Shared.csproj"
+    ]
+  }
+}
