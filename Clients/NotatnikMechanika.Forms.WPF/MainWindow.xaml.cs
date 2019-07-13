@@ -1,5 +1,4 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Platform.WPF;
+﻿using Xamarin.Forms.Platform.WPF;
 
 namespace NotatnikMechanika.Forms.WPF
 {
@@ -10,7 +9,7 @@ namespace NotatnikMechanika.Forms.WPF
             InitializeComponent();
 
             Xamarin.Forms.Forms.Init();
-            //LoadApplication(new Xamarin.Forms.App());
+            LoadApplication(new Forms.App());
         }
     }
 }

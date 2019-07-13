@@ -6,6 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpf="clr-namespace:Xamarin.Forms.Platform.WPF;assembly=Xamarin.Forms.Platform.WPF"
     Title="Notatnik Mechanika"
+    Width="800"
+    Height="450"
     mc:Ignorable="d">
     <Grid/>
 </wpf:FormsApplicationPage>

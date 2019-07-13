@@ -9,7 +9,15 @@ namespace NotatnikMechanika.Forms
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            switch (Device.RuntimePlatform)
+            {
+                case Device.WPF:
+                    MainPage = new DashboardView();
+                    break;
+                default:
+                    MainPage = new AppShell();
+                    break;
+            }
         }
 
         protected override void OnStart()
