@@ -16,51 +16,37 @@
 
     <FlyoutItem Title="Dashboard" Icon="DashboardIcon.xml">
         <Tab>
-            <ShellContent>
-                <views:DashboardView/>
-            </ShellContent>
+            <ShellContent ContentTemplate="{DataTemplate views:DashboardView}"/>
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="Zlecenia" Icon="OrdersIcon.xml">
         <Tab>
-            <ShellContent>
-                <views:OrdersView/>
-            </ShellContent>
+            <ShellContent ContentTemplate="{DataTemplate views:OrdersView}"/>
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="Stali klienci" Icon="RegularClientsIcon.xml">
         <Tab>
-            <ShellContent>
-                <views:RegularClientsView/>
-            </ShellContent>
+            <ShellContent ContentTemplate="{DataTemplate views:RegularClientsView}"/>
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="Usługi" Icon="ServicesIcon.xml">
         <Tab>
-            <ShellContent>
-                <views:ServicesView/>
-            </ShellContent>
+            <ShellContent ContentTemplate="{DataTemplate views:ServicesView}"/>
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="Archiwum" Icon="ArchivesIcon.xml">
         <Tab>
-            <ShellContent>
-                <views:ArchivesView/>
-            </ShellContent>
+            <ShellContent ContentTemplate="{DataTemplate views:ServicesView}"/>
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="Faktury i paragony" Icon="ReceiptsIcon.xml">
         <Tab>
-            <ShellContent>
-                <views:ReceiptsView/>
-            </ShellContent>
+            <ShellContent ContentTemplate="{DataTemplate views:ServicesView}"/>
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="Magazyn" Icon="WarehouseIcon.xml">
         <Tab>
-            <ShellContent>
-                <views:WarehouseView/>
-            </ShellContent>
+            <ShellContent ContentTemplate="{DataTemplate views:ServicesView}"/>
         </Tab>
     </FlyoutItem>
 </Shell>

@@ -88,7 +88,7 @@
                 Background="#FF0074FF"
                 BorderThickness="0,0,0,0"
                 Command="{Binding NavigateCommand}"
-                CommandParameter="Invoices"
+                CommandParameter="Receipts"
                 Content="Faktury/Paragony"
                 FontSize="20">
                 <Button.Effect>
@@ -104,7 +104,7 @@
                 Background="#FF0074FF"
                 BorderThickness="0,0,0,0"
                 Command="{Binding NavigateCommand}"
-                CommandParameter="Magazine"
+                CommandParameter="Warehouse"
                 Content="Magazyn"
                 FontSize="20">
                 <Button.Effect>

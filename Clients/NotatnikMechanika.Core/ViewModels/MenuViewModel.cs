@@ -32,10 +32,10 @@ namespace NotatnikMechanika.Core.ViewModels
                 case "Archives":
 
                     break;
-                case "Invoices":
+                case "Receipts":
 
                     break;
-                case "Magazine":
+                case "Warehouse":
 
                     break;
             }
