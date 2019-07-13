@@ -1,0 +1,64 @@
+﻿<Shell
+    x:Class="NotatnikMechanika.Forms.Views.AppShell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:NotatnikMechanika.Forms.Views"
+    FlyoutHeaderBehavior="CollapseOnScroll"
+    Shell.BackgroundColor="White"
+    Shell.ForegroundColor="Black"
+    Shell.TitleColor="Black">
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="200">
+            <Image IsOpaque="False" Source="icon_background.xml"/>
+            <Image IsOpaque="True" Source="icon_foreground.xml"/>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem Title="Zlecenia" Icon="OrdersIcon.png">
+        <Tab>
+            <ShellContent>
+                <views:OrdersView/>
+            </ShellContent>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Stali klienci" Icon="RegularClientsIcon.png">
+        <Tab>
+            <ShellContent>
+                <views:RegularClientsView/>
+            </ShellContent>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Usługi" Icon="RegularClientsIcon.png">
+        <Tab>
+            <ShellContent>
+                <views:ServicesView/>
+            </ShellContent>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Archiwum" Icon="RegularClientsIcon.png">
+        <Tab>
+            <ShellContent>
+                <views:ArchivesView/>
+            </ShellContent>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Faktury i paragony" Icon="RegularClientsIcon.png">
+        <Tab>
+            <ShellContent>
+                <views:ReceiptsView/>
+            </ShellContent>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Magazyn" Icon="RegularClientsIcon.png">
+        <Tab>
+            <ShellContent>
+                <views:WarehouseView/>
+            </ShellContent>
+        </Tab>
+    </FlyoutItem>
+</Shell>

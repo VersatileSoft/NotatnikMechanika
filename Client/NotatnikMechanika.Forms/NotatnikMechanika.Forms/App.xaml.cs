@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using NotatnikMechanika.Forms.Views;
+using Xamarin.Forms;
 
 namespace NotatnikMechanika.Forms
 {
@@ -8,7 +9,7 @@ namespace NotatnikMechanika.Forms
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new AppShell();
         }
 
         protected override void OnStart()
