@@ -14,47 +14,49 @@
         </Grid>
     </Shell.FlyoutHeader>
 
-    <FlyoutItem Title="Zlecenia" Icon="OrdersIcon.png">
+    <FlyoutItem Title="Dashboard" Icon="DashboardIcon.xml">
+        <Tab>
+            <ShellContent>
+                <views:DashboardView/>
+            </ShellContent>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Zlecenia" Icon="OrdersIcon.xml">
         <Tab>
             <ShellContent>
                 <views:OrdersView/>
             </ShellContent>
         </Tab>
     </FlyoutItem>
-
-    <FlyoutItem Title="Stali klienci" Icon="RegularClientsIcon.png">
+    <FlyoutItem Title="Stali klienci" Icon="RegularClientsIcon.xml">
         <Tab>
             <ShellContent>
                 <views:RegularClientsView/>
             </ShellContent>
         </Tab>
     </FlyoutItem>
-
-    <FlyoutItem Title="Usługi" Icon="RegularClientsIcon.png">
+    <FlyoutItem Title="Usługi" Icon="ServicesIcon.xml">
         <Tab>
             <ShellContent>
                 <views:ServicesView/>
             </ShellContent>
         </Tab>
     </FlyoutItem>
-
-    <FlyoutItem Title="Archiwum" Icon="RegularClientsIcon.png">
+    <FlyoutItem Title="Archiwum" Icon="ArchivesIcon.xml">
         <Tab>
             <ShellContent>
                 <views:ArchivesView/>
             </ShellContent>
         </Tab>
     </FlyoutItem>
-
-    <FlyoutItem Title="Faktury i paragony" Icon="RegularClientsIcon.png">
+    <FlyoutItem Title="Faktury i paragony" Icon="ReceiptsIcon.xml">
         <Tab>
             <ShellContent>
                 <views:ReceiptsView/>
             </ShellContent>
         </Tab>
     </FlyoutItem>
-
-    <FlyoutItem Title="Magazyn" Icon="RegularClientsIcon.png">
+    <FlyoutItem Title="Magazyn" Icon="WarehouseIcon.xml">
         <Tab>
             <ShellContent>
                 <views:WarehouseView/>

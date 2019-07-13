@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,5 +24,11 @@
     <ProjectReference Include="..\NotatnikMechanika.Service\NotatnikMechanika.Service.csproj" />
     <ProjectReference Include="..\NotatnikMechanika.Shared\NotatnikMechanika.Shared.csproj" />
   </ItemGroup>
+
+  <Target Name="WorkaroundNetStandard" AfterTargets="ResolvePackageAssets">
+    <ItemGroup>
+      <TransitiveFrameworkReference Remove="NETStandard.Library" />
+    </ItemGroup>
+  </Target>
 
 </Project>
