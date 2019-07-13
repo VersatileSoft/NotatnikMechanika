@@ -24,7 +24,7 @@ namespace NotatnikMechanika.Core.ViewModels
         public void ShowMenu()
         {
             //_navigationService.Navigate<MenuViewModel>();
-            _navigationService.Navigate<OrdersViewModel>();
+            //_navigationService.Navigate<OrdersViewModel>();
         }
     }
 }

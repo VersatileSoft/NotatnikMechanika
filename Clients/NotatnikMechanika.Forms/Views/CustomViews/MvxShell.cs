@@ -1,5 +1,6 @@
 ﻿using MvvmCross.Binding.BindingContext;
 using MvvmCross.Forms.Views;
+using MvvmCross.Forms.Views.Base;
 using MvvmCross.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,9 @@ using Xamarin.Forms;
 
 namespace NotatnikMechanika.Forms.Views.CustomViews
 {
-    public class MvxShell : Shell, IMvxPage
+    public class MvxShell : Shell, IMvxElement
     {
+
         public object DataContext
         {
             get
