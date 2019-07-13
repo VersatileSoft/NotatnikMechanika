@@ -1,15 +1,14 @@
-﻿using NotatnikMechanika.Forms.Views;
+﻿using MvvmCross.Forms.Core;
+using NotatnikMechanika.Forms.Views;
 using Xamarin.Forms;
 
 namespace NotatnikMechanika.Forms
 {
-    public partial class App : Application
+    public partial class App : MvxFormsApplication
     {
         public App()
         {
             InitializeComponent();
-
-            MainPage = new AppShell();
         }
 
         protected override void OnStart()
