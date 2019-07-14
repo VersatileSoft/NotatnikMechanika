@@ -7,10 +7,10 @@ using Xamarin.Forms.Xaml;
 namespace NotatnikMechanika.Forms.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [MvxMasterDetailPagePresentation(MasterDetailPosition.Root, WrapInNavigationPage = false, NoHistory = true)]
-    public partial class MainPageView : MvxMasterDetailPage<MainPageViewModel>
-    {     
-        public MainPageView()
+    [MvxMasterDetailPagePresentation(MasterDetailPosition.Detail, NoHistory = true)]
+    public partial class RegularClientsView : MvxContentPage<RegularClientsViewModel>
+    {
+        public RegularClientsView()
         {
             InitializeComponent();
         }

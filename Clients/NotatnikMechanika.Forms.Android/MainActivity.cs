@@ -19,9 +19,5 @@ namespace NotatnikMechanika.Forms.Android
 
             base.OnCreate(savedInstanceState);
         }
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
-        {
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
     }
 }

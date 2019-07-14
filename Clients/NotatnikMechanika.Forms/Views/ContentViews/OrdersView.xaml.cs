@@ -1,4 +1,5 @@
-﻿using MvvmCross.Forms.Views;
+﻿using MvvmCross.Forms.Presenters.Attributes;
+using MvvmCross.Forms.Views;
 using NotatnikMechanika.Core.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -6,7 +7,7 @@ using Xamarin.Forms.Xaml;
 namespace NotatnikMechanika.Forms.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [ShellContentPage(Title = "Zamówienia", Icon = "OrdersIcon.xml", ViewModelType = typeof(OrdersViewModel), ViewType = typeof(OrdersView))]
+    [MvxMasterDetailPagePresentation(MasterDetailPosition.Detail, NoHistory = true)]
     public partial class OrdersView : MvxContentPage<OrdersViewModel>
     {
         public OrdersView()

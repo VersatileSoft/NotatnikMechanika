@@ -1,27 +1,9 @@
-﻿<viewss:MvxShell
+﻿<views:MvxMasterDetailPage
     x:Class="NotatnikMechanika.Forms.Views.MainPageView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:views="clr-namespace:NotatnikMechanika.Forms.Views;assembly=NotatnikMechanika.Forms"
-    xmlns:viewss="clr-namespace:NotatnikMechanika.Forms.Views.CustomViews;assembly=NotatnikMechanika.Forms"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
     xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.ViewModels;assembly=NotatnikMechanika.Core"
-    x:TypeArguments="viewModels:MainPageViewModel"
-    FlyoutHeaderBehavior="CollapseOnScroll"
-    Shell.BackgroundColor="White"
-    Shell.ForegroundColor="Black"
-    Shell.TitleColor="Black">
-    <Shell.FlyoutHeader>
-        <Grid HeightRequest="200">
-            <Image IsOpaque="False" Source="icon_background.xml"/>
-            <Image IsOpaque="True" Source="icon_foreground.xml"/>
-        </Grid>
-    </Shell.FlyoutHeader>
+    x:TypeArguments="viewModels:MainPageViewModel">
 
-    <FlyoutItem Title="Cats">
-        <Tab>
-            <ShellContent>
-                <views:ServicesView />
-            </ShellContent>
-        </Tab>
-    </FlyoutItem>
-</viewss:MvxShell>
+</views:MvxMasterDetailPage>

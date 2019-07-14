@@ -4,9 +4,9 @@ using PropertyChanged;
 namespace NotatnikMechanika.Core.ViewModels
 {
     [AddINotifyPropertyChangedInterface]
-    public class ClientsViewModel : MvxViewModel
+    public class RegularClientsViewModel : MvxViewModel
     {
-        public ClientsViewModel()
+        public RegularClientsViewModel()
         {
 
         }

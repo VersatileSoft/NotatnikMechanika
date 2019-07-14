@@ -1,9 +1,12 @@
-﻿<ContentPage
+﻿<views:MvxContentPage
     x:Class="NotatnikMechanika.Forms.Views.RegularClientsView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+     xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.ViewModels;assembly=NotatnikMechanika.Core"  
+    x:TypeArguments="viewModels:RegularClientsViewModel"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
     Title="Stali klienci"
     mc:Ignorable="d">
     <ContentPage.Content>
@@ -14,4 +17,4 @@
                 VerticalOptions="CenterAndExpand"/>
         </StackLayout>
     </ContentPage.Content>
-</ContentPage>
+</views:MvxContentPage>

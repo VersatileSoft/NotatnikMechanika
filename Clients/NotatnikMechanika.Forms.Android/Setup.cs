@@ -22,16 +22,6 @@ namespace NotatnikMechanika.Forms.Android
 {
     public sealed class Setup : MvxFormsAndroidSetup<CoreApp, App>
     {
-        protected override IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
-        {
-            return new CustomPresenter(viewPresenter);
-        }
 
-        protected override void InitializeViewLookup()
-        { 
-            var container = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
-            container.Add(typeof(MainPageViewModel), typeof(MainPageView));
-            container.Add(typeof(OrdersViewModel), typeof(OrdersView));
-        }
     }
 }

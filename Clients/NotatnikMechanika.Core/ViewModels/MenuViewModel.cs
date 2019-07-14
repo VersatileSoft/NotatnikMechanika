@@ -2,6 +2,7 @@
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using PropertyChanged;
+using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Core.ViewModels
 {
@@ -13,18 +14,18 @@ namespace NotatnikMechanika.Core.ViewModels
         public MenuViewModel(IMvxNavigationService navigationService)
         {
             _navigationService = navigationService;
-            NavigateCommand = new MvxCommand<string>(NavigateTo);
+            NavigateCommand = new MvxAsyncCommand<string>(NavigateTo);
         }
 
-        public void NavigateTo(string viewName)
+        public async Task NavigateTo(string viewName)
         {
             switch (viewName)
             {
                 case "Orders":
-                    _navigationService.Navigate<OrdersViewModel>();
+                    await _navigationService.Navigate<OrdersViewModel>();
                     break;
                 case "Clients":
-                    _navigationService.Navigate<ClientsViewModel>();
+                    await _navigationService.Navigate<RegularClientsViewModel>();
                     break;
                 case "Services":
 
@@ -40,7 +41,5 @@ namespace NotatnikMechanika.Core.ViewModels
                     break;
             }
         }
-
-
     }
 }

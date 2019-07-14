@@ -1,6 +1,7 @@
 ﻿using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using PropertyChanged;
+using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Core.ViewModels
 {
@@ -15,16 +16,16 @@ namespace NotatnikMechanika.Core.ViewModels
             _navigationService = navigationService;
         }
 
-        public override void ViewAppeared()
+        public override void ViewAppearing()
         {
-            base.ViewAppeared();
-            ShowMenu();
+            base.ViewAppearing();
+
+            Task.Run(async () =>
+            {
+                await _navigationService.Navigate<MenuViewModel>();
+                await _navigationService.Navigate<OrdersViewModel>();
+            });
         }
 
-        public void ShowMenu()
-        {
-            //_navigationService.Navigate<MenuViewModel>();
-            _navigationService.Navigate<OrdersViewModel>();
-        }
     }
 }
