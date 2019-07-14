@@ -9,4 +9,10 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NotatnikMechanika.Component\NotatnikMechanika.Component.csproj" />
+    <ProjectReference Include="..\NotatnikMechanika.Data\NotatnikMechanika.Data.csproj" />
+    <ProjectReference Include="..\NotatnikMechanika.Shared\NotatnikMechanika.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

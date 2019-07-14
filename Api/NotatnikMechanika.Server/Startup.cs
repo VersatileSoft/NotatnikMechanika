@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,6 +15,7 @@ using NotatnikMechanika.Data;
 using NotatnikMechanika.Repository;
 using NotatnikMechanika.Service;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -158,6 +160,21 @@ namespace NotatnikMechanika.Server
                     ValidateAudience = false
                 };
             });
+        }
+    }
+
+    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<NotatnikMechanikaDbContext>
+    {
+        public NotatnikMechanikaDbContext CreateDbContext(string[] args)
+        {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+            var builder = new DbContextOptionsBuilder<NotatnikMechanikaDbContext>();
+            var connectionString = configuration.GetConnectionString("DebugConnection");
+            builder.UseSqlServer(connectionString);
+            return new NotatnikMechanikaDbContext(builder.Options);
         }
     }
 }
