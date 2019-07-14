@@ -31,6 +31,7 @@ namespace NotatnikMechanika.Forms
         public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Add(typeof(ShellContentPageAttribute), new ShellContentPageAttributeAction(_platformPresenter));
+            AttributeTypesToActionsDictionary.Add(typeof(ShellPageAttribute), new ShellPageAttributeAction(_platformPresenter));
             base.RegisterAttributeTypes();
         }
     }

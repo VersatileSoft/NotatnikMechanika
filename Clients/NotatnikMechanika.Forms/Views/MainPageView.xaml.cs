@@ -8,7 +8,7 @@ using Xamarin.Forms.Xaml;
 namespace NotatnikMechanika.Forms.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [MvxContentPagePresentation(ViewModelType = typeof(MainPageViewModel), ViewType = typeof(MainPageView))]
+    [ShellPage(ViewModelType = typeof(MainPageViewModel), ViewType = typeof(MainPageView))]
     public partial class MainPageView : MvxShell<MainPageViewModel>
     {
         
