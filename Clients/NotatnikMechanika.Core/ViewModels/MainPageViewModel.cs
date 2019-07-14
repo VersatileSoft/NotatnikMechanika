@@ -26,6 +26,5 @@ namespace NotatnikMechanika.Core.ViewModels
                 await _navigationService.Navigate<OrdersViewModel>();
             });
         }
-
     }
 }
