@@ -3,6 +3,7 @@ using Android.Content.PM;
 using Android.OS;
 using MvvmCross.Forms.Platforms.Android.Views;
 using NotatnikMechanika.Core;
+using Xamarin.Forms;
 
 namespace NotatnikMechanika.Forms.Android
 {
@@ -12,6 +13,9 @@ namespace NotatnikMechanika.Forms.Android
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.SetTheme(Resource.Style.MainTheme);
+
+            Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
+            FormsMaterial.Init(this, savedInstanceState);
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;

@@ -1,0 +1,26 @@
+﻿<ContentPage
+    x:Class="NotatnikMechanika.Forms.Views.LoginView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    BackgroundImageSource="icon_background.xml"
+    Visual="Material"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <StackLayout Padding="20" VerticalOptions="Center">
+            <Image Source="icon_foreground.xml"/>
+            <Label Text="Zaloguj się do Notatnika Mechanika aby uzyskać dostęp do konta."/>
+
+            <Entry Placeholder="E-mail"/>
+            <Entry Placeholder="Hasło"/>
+
+            <StackLayout Orientation="Horizontal">
+                <CheckBox/>
+                <Label Text="Zapamiętaj mnie."/>
+            </StackLayout>
+
+            <Button Text="Zaloguj"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

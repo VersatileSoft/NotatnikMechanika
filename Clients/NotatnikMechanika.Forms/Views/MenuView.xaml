@@ -8,25 +8,73 @@
     xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
     Title="Placeholder"
     x:TypeArguments="viewModels:MenuViewModel"
+    Visual="Material"
     mc:Ignorable="d">
     <views:MvxContentPage.Content>
         <StackLayout>
             <Grid HeightRequest="200">
                 <Image IsOpaque="False" Source="icon_background.xml"/>
-                <Image IsOpaque="False" Source="icon_foreground.xml"/>
+                <Image IsOpaque="True" Source="icon_foreground.xml"/>
+
+                <StackLayout
+                    Margin="5,0,0,5"
+                    HorizontalOptions="Fill"
+                    Orientation="Horizontal"
+                    VerticalOptions="EndAndExpand">
+                    <Image
+                        HeightRequest="20"
+                        IsOpaque="True"
+                        Source="RegularClientsIcon.xml"
+                        VerticalOptions="Center"
+                        WidthRequest="20"/>
+
+                    <Label
+                        FontSize="Medium"
+                        Text="Michał 'Grubas' Woźniak"
+                        TextColor="White"
+                        VerticalOptions="Center"/>
+                </StackLayout>
             </Grid>
 
-            <StackLayout Padding="10">
+            <!--<CollectionView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="7*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image
+                                HeightRequest="30"
+                                HorizontalOptions="Center"
+                                Source="OrdersIcon.xml"
+                                VerticalOptions="Center"
+                                WidthRequest="30"/>
+                            <Label
+                                Grid.Column="1"
+                                FontAttributes="Bold"
+                                Text="Zlecenia"
+                                VerticalOptions="CenterAndExpand"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
 
+            <StackLayout Padding="15">
                 <Button
                     Command="{Binding NavigateCommand}"
                     CommandParameter="Orders"
                     Text="Zlecenia"/>
+
                 <Button
                     Command="{Binding NavigateCommand}"
                     CommandParameter="Clients"
                     Text="Klienci"/>
+            </StackLayout>
 
+            <StackLayout Padding="15" VerticalOptions="EndAndExpand">
+                <Button Text="Ustawienia"/>
+                <Button Text="Wyloguj"/>
             </StackLayout>
         </StackLayout>
     </views:MvxContentPage.Content>
