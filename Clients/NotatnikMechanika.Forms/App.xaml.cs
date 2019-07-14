@@ -1,6 +1,4 @@
 ﻿using MvvmCross.Forms.Core;
-using NotatnikMechanika.Forms.Views;
-using Xamarin.Forms;
 
 namespace NotatnikMechanika.Forms
 {

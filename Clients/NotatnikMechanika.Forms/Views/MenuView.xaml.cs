@@ -2,12 +2,7 @@
 using MvvmCross.Forms.Presenters.Attributes;
 using MvvmCross.Forms.Views;
 using NotatnikMechanika.Core.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,7 +14,7 @@ namespace NotatnikMechanika.Forms.Views
     {
         public MenuView()
         {
-            InitializeComponent();  
+            InitializeComponent();
         }
 
         protected override void OnViewModelSet()
@@ -29,7 +24,7 @@ namespace NotatnikMechanika.Forms.Views
 
         private async Task NavigateTo(string param)
         {
-            //Nothing bad in this code, the fastes way ;P
+            //Nothing bad in this code, the fastest way ;P
 
             if (Application.Current.MainPage is MasterDetailPage masterDetailPage)
             {

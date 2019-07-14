@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.5.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.5.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,5 +22,11 @@
       <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\system.identitymodel.tokens.jwt\5.3.0\lib\netstandard2.0\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
   </ItemGroup>
+
+  <Target Name="WorkaroundNetStandard" AfterTargets="ResolvePackageAssets">
+    <ItemGroup>
+      <TransitiveFrameworkReference Remove="NETStandard.Library" />
+    </ItemGroup>
+  </Target>
 
 </Project>

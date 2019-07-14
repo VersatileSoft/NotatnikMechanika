@@ -15,4 +15,10 @@
     <ProjectReference Include="..\NotatnikMechanika.Shared\NotatnikMechanika.Shared.csproj" />
   </ItemGroup>
 
+  <Target Name="WorkaroundNetStandard" AfterTargets="ResolvePackageAssets">
+    <ItemGroup>
+      <TransitiveFrameworkReference Remove="NETStandard.Library" />
+    </ItemGroup>
+  </Target>
+  
 </Project>

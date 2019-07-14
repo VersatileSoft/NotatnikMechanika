@@ -1,28 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<views:MvxContentPage 
-            xmlns="http://xamarin.com/schemas/2014/forms"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-            mc:Ignorable="d"
-            xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.ViewModels;assembly=NotatnikMechanika.Core"
-            xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-            Title="Placeholder"
-            x:TypeArguments="viewModels:MenuViewModel"
-            x:Class="NotatnikMechanika.Forms.Views.MenuView">
+﻿<views:MvxContentPage
+    x:Class="NotatnikMechanika.Forms.Views.MenuView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.ViewModels;assembly=NotatnikMechanika.Core"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    Title="Placeholder"
+    x:TypeArguments="viewModels:MenuViewModel"
+    mc:Ignorable="d">
     <views:MvxContentPage.Content>
         <StackLayout>
-            <Frame
-                Padding="0"
-                BackgroundColor="#002132"
-                CornerRadius="0">
-                <Image Aspect="AspectFill" Source="HamburgerPicture.png"/>
-            </Frame>
+            <Grid HeightRequest="200">
+                <Image IsOpaque="False" Source="icon_background.xml"/>
+                <Image IsOpaque="False" Source="icon_foreground.xml"/>
+            </Grid>
 
             <StackLayout Padding="10">
 
-                <Button Text="Zlecenia" Command = "{Binding NavigateCommand}" CommandParameter = "Orders" />
-                <Button Text="Klienci" Command = "{Binding NavigateCommand}" CommandParameter = "Clients" />
+                <Button
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="Orders"
+                    Text="Zlecenia"/>
+                <Button
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="Clients"
+                    Text="Klienci"/>
 
             </StackLayout>
         </StackLayout>

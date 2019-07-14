@@ -1,7 +1,6 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Android.Runtime;
 using MvvmCross.Forms.Platforms.Android.Views;
 using NotatnikMechanika.Core;
 

@@ -1,5 +1,4 @@
-﻿using MvvmCross.Forms.Views;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace NotatnikMechanika.Forms.Views
