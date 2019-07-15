@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\LoginView.xaml" />
     <None Remove="Views\MenuView.xaml" />
     <None Remove="Views\OrdersView.xaml" />
     <None Remove="Views\RegularClientsView.xaml" />
@@ -24,5 +25,20 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NotatnikMechanika.Core\NotatnikMechanika.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 </Project>

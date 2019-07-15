@@ -15,7 +15,7 @@ namespace NotatnikMechanika.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<MainPageViewModel>();
+            RegisterCustomAppStart<AppStart>();
         }
     }
 }

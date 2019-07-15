@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NotatnikMechanika.Service.Interfaces;
+using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.User;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route(AccountPaths.Name)]
     public class AccountController : ControllerBase
     {
 
@@ -18,7 +19,7 @@ namespace NotatnikMechanika.Server.Controllers
             _accountService = accountService;
         }
 
-        [HttpPost("login")]
+        [HttpPost(AccountPaths.LoginPath)]
         public async Task<ActionResult<TokenModel>> LoginAsync([FromBody]AuthenticateUserModel userParam)
         {
             return Ok(await _accountService.AuthenticateAsync(userParam.UserName, userParam.Password));

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            mc:Ignorable="d"
+            xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.ViewModels;assembly=NotatnikMechanika.Core"
+            xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+            Title="Zaloguj"
+            x:TypeArguments="viewModels:LoginViewModel"
+            x:Class="NotatnikMechanika.Forms.Views.LoginView">
+    <views:MvxContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="Login" Text="{Binding Login}" />
+            <Entry Placeholder="Hasło" Text="{Binding Password}" />
+            <Button Command ="{Binding LoginCommand}" Text="Zaloguj"/>
+        </StackLayout>
+    </views:MvxContentPage.Content>
+</views:MvxContentPage>

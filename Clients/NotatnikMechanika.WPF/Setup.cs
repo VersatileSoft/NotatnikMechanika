@@ -1,7 +1,10 @@
-﻿using MvvmCross.Platforms.Wpf.Core;
+﻿using MvvmCross;
+using MvvmCross.Platforms.Wpf.Core;
 using MvvmCross.Platforms.Wpf.Presenters;
 using NotatnikMechanika.Core;
+using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.WPF.Presenters;
+using NotatnikMechanika.WPF.Services;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
@@ -14,7 +17,7 @@ namespace NotatnikMechanika.WPF
         protected override void InitializeFirstChance()
         {
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
-            //   Mvx.IoCProvider.RegisterSingleton(typeof(ISettingsService), new SettingsService());
+            Mvx.IoCProvider.RegisterSingleton(typeof(ISettingsService), new SettingsService());
             base.InitializeFirstChance();
         }
 
