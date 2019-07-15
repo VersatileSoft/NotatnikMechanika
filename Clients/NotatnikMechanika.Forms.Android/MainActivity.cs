@@ -12,7 +12,7 @@ namespace NotatnikMechanika.Forms.Android
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.SetTheme(Resource.Style.MainTheme);
+            base.SetTheme(Resource.Style.LoginTheme);
 
             Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             FormsMaterial.Init(this, savedInstanceState);

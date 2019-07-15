@@ -3,16 +3,19 @@
   <style name="MainTheme.Splash" parent ="MainTheme.Base">
     <item name="android:windowBackground">@drawable/launch_screen</item>
     <item name="android:windowNoTitle">true</item>
-    <item name="android:windowFullscreen">true</item>
-    <item name="android:windowLightStatusBar">true</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:windowLightStatusBar">false</item>
   </style>
 
-  <style name="MainTheme" parent="MainTheme.Base">
+  <style name="LoginTheme" parent="MainTheme.Base">
+    <item name="android:windowBackground">@drawable/icon_background</item>
     <item name="android:windowNoTitle">true</item>
-    <item name="android:windowIsTranslucent">false</item>
-    <item name="android:windowIsFloating">false</item>
-    <item name="android:windowFullscreen">false</item>
-    <item name="android:backgroundDimEnabled">true</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:windowLightStatusBar">false</item>
+  </style>
+
+  <style name="mainTheme" parent="MainTheme.Base">
+    <item name="android:windowNoTitle">true</item>
     <item name="android:windowLightStatusBar">true</item>
   </style>
 

@@ -1,29 +1,66 @@
 <views:MvxContentPage
+    x:Class="NotatnikMechanika.Forms.Views.LoginView"
     xmlns="http://xamarin.com/schemas/2014/forms"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-            mc:Ignorable="d"
-            xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.ViewModels;assembly=NotatnikMechanika.Core"
-            xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-            Title="Zaloguj"
-            x:TypeArguments="viewModels:LoginViewModel"
-            x:Class="NotatnikMechanika.Forms.Views.LoginView">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.ViewModels;assembly=NotatnikMechanika.Core"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    x:TypeArguments="viewModels:LoginViewModel"
+    NavigationPage.HasNavigationBar="False"
+    Visual="Material"
+    mc:Ignorable="d">
     <views:MvxContentPage.Content>
-        <StackLayout Padding="20" VerticalOptions="Center">
-            <Image Source="icon_foreground.xml"/>
-            <Label Text="Zaloguj się do Notatnika Mechanika aby uzyskać dostęp do konta."/>
+        <Grid>
+            <Image x:Name="appIcon"
+                Margin="0,0,0,25"
+                HeightRequest="256"
+                HorizontalOptions="Center"
+                Source="icon_foreground.xml"
+                VerticalOptions="Center"
+                WidthRequest="256"/>
 
-            <Entry Placeholder="E-mail" Text="{Binding Login}"/>
-            <Entry Placeholder="Hasło" Text="{Binding Password}"/>
+            <StackLayout x:Name="loginPanel"
+                Margin="0,330,0,0"
+                Padding="20"
+                Opacity="0">
+                <Label
+                    Margin="0,0,0,12"
+                    FontFamily="Lato-Semibold.ttf#Lato-Semibold"
+                    FontSize="Subtitle"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="Zaloguj się do Notatnika Mechanika aby uzyskać dostęp do konta."
+                    TextColor="White"/>
 
-            <StackLayout Orientation="Horizontal">
-                <CheckBox/>
-                <Label Text="Zapamiętaj mnie."/>
+                <Entry
+                    FontFamily="Lato-Regular.ttf#Lato-Regular"
+                    Placeholder="E-mail"
+                    Text="{Binding Login}"
+                    TextColor="White"/>
+                <Entry
+                    FontFamily="Lato-Regular.ttf#Lato-Regular"
+                    Placeholder="Hasło"
+                    Text="{Binding Password}"
+                    TextColor="White"/>
+
+                <StackLayout Orientation="Horizontal" Spacing="-12">
+                    <CheckBox Color="White"/>
+                    <Label
+                        FontFamily="Lato-Regular.ttf#Lato-Regular"
+                        FontSize="Medium"
+                        Text="Zapamiętaj mnie."
+                        TextColor="White"
+                        VerticalOptions="Center"/>
+                </StackLayout>
+
+                <Button
+                    BackgroundColor="White"
+                    Command="{Binding LoginCommand}"
+                    FontFamily="Lato-Semibold.ttf#Lato-Semibold"
+                    Text="Zaloguj"
+                    TextColor="Black"/>
             </StackLayout>
-
-            <Button Text="Zaloguj" Command="{Binding LoginCommand}"/>
-        </StackLayout>
+        </Grid>
     </views:MvxContentPage.Content>
 </views:MvxContentPage>
-

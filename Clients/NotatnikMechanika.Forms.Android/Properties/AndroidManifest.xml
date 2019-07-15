@@ -4,7 +4,7 @@
 	<application android:label="Notatnik Mechanika" 
                android:icon="@mipmap/icon" 
                android:roundIcon="@mipmap/icon_round" 
-               android:theme="@style/MainTheme.Splash" 
+               android:theme="@style/MainTheme.Splash" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 </manifest>
