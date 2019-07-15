@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
 <views:MvxContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -11,20 +10,20 @@
             x:TypeArguments="viewModels:LoginViewModel"
             x:Class="NotatnikMechanika.Forms.Views.LoginView">
     <views:MvxContentPage.Content>
-            <StackLayout Padding="20" VerticalOptions="Center">
-                <Image Source="icon_foreground.xml"/>
-                <Label Text="Zaloguj się do Notatnika Mechanika aby uzyskać dostęp do konta."/>
+        <StackLayout Padding="20" VerticalOptions="Center">
+            <Image Source="icon_foreground.xml"/>
+            <Label Text="Zaloguj się do Notatnika Mechanika aby uzyskać dostęp do konta."/>
 
-                <Entry Placeholder="E-mail"/>
-                <Entry Placeholder="Hasło"/>
+            <Entry Placeholder="E-mail" Text="{Binding Login}"/>
+            <Entry Placeholder="Hasło" Text="{Binding Password}"/>
 
-                <StackLayout Orientation="Horizontal">
-                    <CheckBox/>
-                    <Label Text="Zapamiętaj mnie."/>
-                </StackLayout>
-
-                <Button Text="Zaloguj"/>
+            <StackLayout Orientation="Horizontal">
+                <CheckBox/>
+                <Label Text="Zapamiętaj mnie."/>
             </StackLayout>
-        </views:MvxContentPage.Content>
+
+            <Button Text="Zaloguj" Command="{Binding LoginCommand}"/>
+        </StackLayout>
+    </views:MvxContentPage.Content>
 </views:MvxContentPage>
 
