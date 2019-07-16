@@ -16,15 +16,11 @@ namespace NotatnikMechanika.Core.ViewModels
             _navigationService = navigationService;
         }
 
-        public override void ViewAppearing()
+        public async override void ViewAppearing()
         {
             base.ViewAppearing();
-
-            Task.Run(async () =>
-            {
-                await _navigationService.Navigate<MenuViewModel>();
-                await _navigationService.Navigate<OrdersViewModel>();
-            });
+            await _navigationService.Navigate<MenuViewModel>();
+            await _navigationService.Navigate<OrdersViewModel>();
         }
     }
 }

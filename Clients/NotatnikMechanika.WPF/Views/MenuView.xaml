@@ -111,6 +111,22 @@
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </Button.Effect>
             </Button>
+
+            <Button
+                Width="170"
+                Height="30"
+                Margin="0,380,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Background="#FF0074FF"
+                BorderThickness="0,0,0,0"
+                Command="{Binding LogoutCommand}"
+                Content="Wyloguj"
+                FontSize="20">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
+                </Button.Effect>
+            </Button>
         </Grid>
     </Grid>
 </views:MvxWpfView>

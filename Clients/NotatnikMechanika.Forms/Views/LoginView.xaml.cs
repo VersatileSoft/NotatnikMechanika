@@ -1,3 +1,4 @@
+using MvvmCross.Forms.Presenters.Attributes;
 using MvvmCross.Forms.Views;
 using NotatnikMechanika.Core.ViewModels;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using Xamarin.Forms.Xaml;
 namespace NotatnikMechanika.Forms.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    [MvxContentPagePresentation(Animated = false, NoHistory = true, WrapInNavigationPage = false)]
     public partial class LoginView : MvxContentPage<LoginViewModel>
     {
         public LoginView()

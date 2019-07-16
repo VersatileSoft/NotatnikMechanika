@@ -47,7 +47,7 @@ namespace NotatnikMechanika.Server
             services.AddMvc();
 
             services.AddDbContext<NotatnikMechanikaDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DebugConnection")) // ReleaseConnection, DebugConnection           
+                options.UseSqlServer(Configuration.GetConnectionString("RemoteConnection")) // ReleaseConnection, DebugConnection           
             );
 
             ConfigureSwagger(services);
@@ -172,7 +172,7 @@ namespace NotatnikMechanika.Server
                 .AddJsonFile("appsettings.json")
                 .Build();
             var builder = new DbContextOptionsBuilder<NotatnikMechanikaDbContext>();
-            var connectionString = configuration.GetConnectionString("DebugConnection");
+            var connectionString = configuration.GetConnectionString("RemoteConnection");
             builder.UseSqlServer(connectionString);
             return new NotatnikMechanikaDbContext(builder.Options);
         }

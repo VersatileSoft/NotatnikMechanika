@@ -22,7 +22,7 @@ namespace NotatnikMechanika.Core.Services
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            HttpResponseMessage response = await client.PostAsync("http://192.168.100.17:2137/" + path, byteContent);
+            HttpResponseMessage response = await client.PostAsync("https://notatnikmechanika.ml/" + path, byteContent);
 
             var responseString = await response.Content.ReadAsStringAsync();
 
