@@ -12,13 +12,12 @@ namespace NotatnikMechanika.Forms.Views
         public LoginView()
         {
             InitializeComponent();
-
-            IconAnimation();
         }
 
         private async void IconAnimation()
         {
-            await appIcon.TranslateTo(0, 0, 230);
+            // await appIcon.TranslateTo(0, 0, 230);
+            await Task.Delay(230);
 
             await Task.WhenAll(
                 appIcon.TranslateTo(0, -250, 1100, Easing.CubicOut),
@@ -26,6 +25,10 @@ namespace NotatnikMechanika.Forms.Views
                 );
             //await appIcon.TranslateTo(0, -250, 1150, Easing.CubicOut);
             //await loginPanel.FadeTo(100, 500, Easing.CubicIn);
+        }
+        protected override void OnAppearing()
+        {
+            IconAnimation();
         }
     }
 }
