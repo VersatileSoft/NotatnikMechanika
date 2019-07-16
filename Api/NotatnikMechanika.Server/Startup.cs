@@ -47,7 +47,7 @@ namespace NotatnikMechanika.Server
             services.AddMvc();
 
             services.AddDbContext<NotatnikMechanikaDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("RemoteConnection")) // ReleaseConnection, DebugConnection           
+                options.UseSqlServer(Configuration.GetConnectionString("RemoteConnection")) // RemoteConnection, LocalConnection           
             );
 
             ConfigureSwagger(services);
@@ -79,8 +79,9 @@ namespace NotatnikMechanika.Server
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
-            //app.UseMiddleware<CustomExceptionMiddleware>();
+           // app.UseMiddleware<CustomExceptionMiddleware>();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             if (env.IsDevelopment())
             {

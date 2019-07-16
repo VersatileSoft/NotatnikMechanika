@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NotatnikMechanika.Service.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.User;
@@ -25,23 +26,23 @@ namespace NotatnikMechanika.Server.Controllers
             return Ok(await _accountService.AuthenticateAsync(userParam.UserName, userParam.Password));
         }
 
-        [HttpPost("create")]
+        [HttpPost(AccountPaths.CreatePath)]
         public async Task<ActionResult> CreateUserAsync([FromBody] CreateUserModel value)
         {
             await _accountService.CreateAsync(value);
             return Ok();
         }
 
-        // [Authorize(Roles = "Administrator")]
-        [HttpPut("update/{id}")]
+        [Authorize]
+        [HttpPut(AccountPaths.UpdatePath)]
         public async Task<ActionResult> UpdateUserAsync(int id, [FromBody] EditUserModel value)
         {
             await _accountService.UpdateAsync(id, value);
             return Ok();
         }
 
-        // [Authorize(Roles = "Administrator")]
-        [HttpDelete("delete/{id}")]
+        [Authorize]
+        [HttpDelete(AccountPaths.DeletePath)]
         public async Task<ActionResult> DeleteAsync(int id)
         {
             await _accountService.DeleteAsync(id);

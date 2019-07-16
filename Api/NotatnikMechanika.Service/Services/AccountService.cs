@@ -7,7 +7,6 @@ using NotatnikMechanika.Service.Exception;
 using NotatnikMechanika.Service.Interfaces;
 using NotatnikMechanika.Shared.Models.User;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
@@ -44,7 +43,9 @@ namespace NotatnikMechanika.Service.Services
         public async Task CreateAsync(CreateUserModel value)
         {
             if (await _accountRepository.CheckIfAccountExistAsync(value.Email))
+            {
                 throw new HttpStatusCodeException(HttpStatusCode.BadRequest, "User already exsist");
+            }
 
             await _accountRepository.CreateUserAccountAsync(value);
         }
