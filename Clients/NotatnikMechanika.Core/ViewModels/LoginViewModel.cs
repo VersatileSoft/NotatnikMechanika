@@ -45,7 +45,7 @@ namespace NotatnikMechanika.Core.ViewModels
                 Password = Password
             };
 
-            Response<TokenModel> token = await _httpRequestService.SendRequest<AuthenticateUserModel, TokenModel>(model, AccountPaths.GetFullPath(AccountPaths.LoginPath));
+            Response<TokenModel> token = await _httpRequestService.SendPost<AuthenticateUserModel, TokenModel>(model, AccountPaths.GetFullPath(AccountPaths.LoginPath), false);
 
             if(token.StatusCode == HttpStatusCode.OK)
             {

@@ -48,7 +48,6 @@ namespace NotatnikMechanika.Repository.Repositories
             return await _dbContext.Customers.Where(a => a.Id == customerId).Select(value => new CustomerModel
             {
                 Address = value.Address,
-                UserId = value.UserId,
                 SureName = value.SureName,
                 Phone = value.Phone,
                 CompanyIdentyficator = value.CompanyIdentyficator,
@@ -62,7 +61,6 @@ namespace NotatnikMechanika.Repository.Repositories
             return await _dbContext.Customers.Where(a => a.UserId == userId).Select(value => new CustomerModel
             {
                 Address = value.Address,
-                UserId = userId,
                 SureName = value.SureName,
                 Phone = value.Phone,
                 CompanyIdentyficator = value.CompanyIdentyficator,
@@ -75,7 +73,6 @@ namespace NotatnikMechanika.Repository.Repositories
         {
             Customer customer = await _dbContext.Customers.Where(a => a.Id == customerId).FirstOrDefaultAsync();
             customer.Address = value.Address;
-            customer.UserId = value.UserId;
             customer.SureName = value.SureName;
             customer.Phone = value.Phone;
             customer.CompanyIdentyficator = value.CompanyIdentyficator;

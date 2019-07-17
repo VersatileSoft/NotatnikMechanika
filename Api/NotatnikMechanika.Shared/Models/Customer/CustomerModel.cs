@@ -15,6 +15,5 @@ namespace NotatnikMechanika.Shared.Models.Customer
         public string CompanyIdentyficator { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
-        public int UserId { get; set; }
     }
 }

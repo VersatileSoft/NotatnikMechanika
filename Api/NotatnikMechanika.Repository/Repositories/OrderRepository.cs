@@ -45,7 +45,6 @@ namespace NotatnikMechanika.Repository.Repositories
         {
             return await _dbContext.Orders.Where(a => a.Id == orderId).Select(value => new OrderModel
             {
-                UserId = value.UserId,
                 AcceptDate = value.AcceptDate,
                 CarId = value.CarId,
                 CustomerId = value.CustomerId,
@@ -57,7 +56,6 @@ namespace NotatnikMechanika.Repository.Repositories
         {
             return await _dbContext.Orders.Where(a => a.UserId == userId).Select(value => new OrderModel
             {
-                UserId = userId,
                 AcceptDate = value.AcceptDate,
                 CarId = value.CarId,
                 CustomerId = value.CustomerId,
@@ -69,7 +67,6 @@ namespace NotatnikMechanika.Repository.Repositories
         {
             Order order = await _dbContext.Orders.Where(a => a.Id == orderId).FirstOrDefaultAsync();
 
-            order.UserId = value.UserId;
             order.AcceptDate = value.AcceptDate;
             order.CarId = value.CarId;
             order.CustomerId = value.CustomerId;

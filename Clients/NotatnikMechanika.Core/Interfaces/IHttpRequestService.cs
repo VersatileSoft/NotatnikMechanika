@@ -16,6 +16,7 @@ namespace NotatnikMechanika.Core.Interfaces
         /// <param name="model">Model to send</param>
         /// <param name="path">Path to api</param>
         /// <returns>Response Model</returns>
-        Task<Response<ResponseModel>> SendRequest<SendModel, ResponseModel>(SendModel model, string path) where ResponseModel : new();
+        Task<Response<ResponseModel>> SendPost<SendModel, ResponseModel>(SendModel model, string path, bool withAutorization) where ResponseModel : new();
+        Task<Response<ResponseModel>> SendGet<ResponseModel>(string path, bool withAutorization) where ResponseModel : new();
     }
 }

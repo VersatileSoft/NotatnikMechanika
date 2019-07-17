@@ -14,12 +14,11 @@ namespace NotatnikMechanika.Server
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
             return Host.CreateDefaultBuilder(args)
-.ConfigureWebHostDefaults(webBuilder =>
-{
-    webBuilder.UseStartup<Startup>();
-})
-// Wire up autofac
-.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                })
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory());
         }
     }
 }

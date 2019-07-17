@@ -14,7 +14,6 @@ using Microsoft.OpenApi.Models;
 using NotatnikMechanika.Data;
 using NotatnikMechanika.Repository;
 using NotatnikMechanika.Service;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -41,9 +40,6 @@ namespace NotatnikMechanika.Server
 
         public void ConfigureServices(IServiceCollection services)
         {
-            ConfigureCors(services);
-            ConfigureJwtAuthentication(services, Configuration);
-
             services.AddMvc();
 
             services.AddDbContext<NotatnikMechanikaDbContext>(options =>
@@ -58,40 +54,33 @@ namespace NotatnikMechanika.Server
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
                     new[] { "application/octet-stream" });
             });
+            ConfigureJwtAuthentication(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             app.UseResponseCompression();
-
-            //app.UseCors(b =>
-            //{
-            //    b.AllowAnyHeader()
-            //    .AllowAnyMethod()
-            //    .AllowAnyOrigin()
-            //    .AllowCredentials();
-            //});
-
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
-           // app.UseMiddleware<CustomExceptionMiddleware>();
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseBlazorDebugging();
-            }
+            app.UseMiddleware<CustomExceptionMiddleware>();
+            //if (env.IsDevelopment())
+            //{
+            app.UseDeveloperExceptionPage();
+            app.UseBlazorDebugging();
+            // }
 
             app.UseClientSideBlazorFiles<Client.Startup>();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -106,37 +95,34 @@ namespace NotatnikMechanika.Server
             containerBuilder.RegisterModule<ServiceModule>();
         }
 
-        private void ConfigureCors(IServiceCollection services)
-        {
-            //services.AddCors(options =>
-            //{
-            //    options.AddDefaultPolicy(
-            //        builder =>
-            //        {
-            //            builder.AllowAnyHeader()
-            //            .AllowAnyMethod()
-            //            .AllowAnyOrigin()
-            //            .AllowCredentials();
-            //        });
-            //});
-        }
-
         private void ConfigureSwagger(IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme { In = ParameterLocation.Header, Description = "Please enter JWT with Bearer into field", Name = "Authorization", Type = SecuritySchemeType.ApiKey });
-                //    c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>> {
-                //    { "Bearer", Enumerable.Empty<string>() },
-                //});
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                    { new OpenApiSecurityScheme{ Description = "Beare + Token", Type = SecuritySchemeType.ApiKey, Name = "Bearer" }, new List<string>() }
+                c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "bearer",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    BearerFormat = "JWT",
+                    Description = "JWT Authorization header using the Bearer scheme."
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "bearerAuth" }
+                        },
+                        new string[] {}
+                    }
                 });
             });
         }
 
-        private void ConfigureJwtAuthentication(IServiceCollection services, IConfiguration Configuration)
+        private void ConfigureJwtAuthentication(IServiceCollection services)
         {
             IConfigurationSection appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
@@ -144,10 +130,12 @@ namespace NotatnikMechanika.Server
 
             AppSettings appSettings = appSettingsSection.Get<AppSettings>();
             byte[] key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(x =>
             {
@@ -172,8 +160,8 @@ namespace NotatnikMechanika.Server
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
-            var builder = new DbContextOptionsBuilder<NotatnikMechanikaDbContext>();
-            var connectionString = configuration.GetConnectionString("RemoteConnection");
+            DbContextOptionsBuilder<NotatnikMechanikaDbContext> builder = new DbContextOptionsBuilder<NotatnikMechanikaDbContext>();
+            string connectionString = configuration.GetConnectionString("RemoteConnection");
             builder.UseSqlServer(connectionString);
             return new NotatnikMechanikaDbContext(builder.Options);
         }
