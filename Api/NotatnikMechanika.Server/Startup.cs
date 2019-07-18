@@ -68,12 +68,14 @@ namespace NotatnikMechanika.Server
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
-            app.UseMiddleware<CustomExceptionMiddleware>();
             //if (env.IsDevelopment())
             //{
             app.UseDeveloperExceptionPage();
             app.UseBlazorDebugging();
+
             // }
+
+            app.UseMiddleware<CustomExceptionMiddleware>();
 
             app.UseClientSideBlazorFiles<Client.Startup>();
 

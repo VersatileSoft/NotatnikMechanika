@@ -45,11 +45,11 @@ namespace NotatnikMechanika.Core.ViewModels
                 Password = Password
             };
 
-            Response<TokenModel> token = await _httpRequestService.SendPost<AuthenticateUserModel, TokenModel>(model, AccountPaths.GetFullPath(AccountPaths.LoginPath), false);
+            Response<TokenModel> response = await _httpRequestService.SendPost<AuthenticateUserModel, TokenModel>(model, AccountPaths.GetFullPath(AccountPaths.LoginPath), false);
 
-            if(token.StatusCode == HttpStatusCode.OK)
+            if(response.StatusCode == HttpStatusCode.OK)
             {
-                _settingsService.Token = token.Content.Token;
+                _settingsService.Token = response.Content.Token;
                 await _navigationService.Navigate<MainPageViewModel>();
             }
         }
