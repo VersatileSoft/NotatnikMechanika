@@ -44,7 +44,7 @@ namespace NotatnikMechanika.Repository.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<CarModel> GetCarAsync(int carId)
+        public async Task<CarModel> GetAsync(int carId)
         {
             return await _dbContext.Cars.Where(a => a.Id == carId).Select(value => new CarModel
             {
@@ -58,7 +58,7 @@ namespace NotatnikMechanika.Repository.Repositories
             }).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<CarModel>> GetCarsAsync(int userId)
+        public async Task<IEnumerable<CarModel>> GetAllAsync(int userId)
         {
             return await _dbContext.Cars.Where(a => a.UserId == userId).Select(value => new CarModel
             {

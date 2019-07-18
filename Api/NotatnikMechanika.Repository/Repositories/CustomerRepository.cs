@@ -43,7 +43,7 @@ namespace NotatnikMechanika.Repository.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<CustomerModel> GetCustomerAsync(int customerId)
+        public async Task<CustomerModel> GetAsync(int customerId)
         {
             return await _dbContext.Customers.Where(a => a.Id == customerId).Select(value => new CustomerModel
             {
@@ -56,7 +56,7 @@ namespace NotatnikMechanika.Repository.Repositories
             }).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<CustomerModel>> GetCustomersAsync(int userId)
+        public async Task<IEnumerable<CustomerModel>> GetAllAsync(int userId)
         {
             return await _dbContext.Customers.Where(a => a.UserId == userId).Select(value => new CustomerModel
             {

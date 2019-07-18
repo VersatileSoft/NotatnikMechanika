@@ -1,11 +1,12 @@
 ﻿using NotatnikMechanika.Service.Interfaces.Base;
-using NotatnikMechanika.Shared.Models.Customer;
+using NotatnikMechanika.Shared.Models.Service;
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace NotatnikMechanika.Service.Interfaces
 {
-    public interface ICustomerService : IServiceBase<CustomerModel>
+    public interface IServiceService : IServiceBase<ServiceModel>
     {
     }
 }

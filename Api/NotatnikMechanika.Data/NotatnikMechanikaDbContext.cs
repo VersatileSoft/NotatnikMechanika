@@ -9,6 +9,8 @@ namespace NotatnikMechanika.Data
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Service> Services { get; set; }
+        public virtual DbSet<Commodity> Commodities { get; set; }
 
         public NotatnikMechanikaDbContext(DbContextOptions<NotatnikMechanikaDbContext> options) : base(options) { }
 
@@ -43,6 +45,38 @@ namespace NotatnikMechanika.Data
               .HasMany(i => i.Customers)
               .WithOne(c => c.User)
               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<User>()
+              .HasMany(i => i.Commodities)
+              .WithOne(c => c.User)
+              .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<User>()
+              .HasMany(i => i.Services)
+              .WithOne(c => c.User)
+              .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<OrderToCommodity>()
+                .HasKey(bc => new { bc.CommodityId, bc.OrderId });
+            modelBuilder.Entity<OrderToCommodity>()
+                .HasOne(bc => bc.Order)
+                .WithMany(b => b.OrderToCommodities)
+                .HasForeignKey(bc => bc.OrderId);
+            modelBuilder.Entity<OrderToCommodity>()
+                .HasOne(bc => bc.Commodity)
+                .WithMany(c => c.OrderToCommodities)
+                .HasForeignKey(bc => bc.CommodityId);
+
+            modelBuilder.Entity<OrderToService>()
+              .HasKey(bc => new { bc.ServiceId, bc.OrderId });
+            modelBuilder.Entity<OrderToService>()
+                .HasOne(bc => bc.Order)
+                .WithMany(b => b.OrderToServices)
+                .HasForeignKey(bc => bc.OrderId);
+            modelBuilder.Entity<OrderToService>()
+                .HasOne(bc => bc.Service)
+                .WithMany(c => c.OrderToServices)
+                .HasForeignKey(bc => bc.ServiceId);
         }
     }
 }
