@@ -32,7 +32,7 @@ namespace NotatnikMechanika.Service.Services.Base
             }
             else
             {
-                throw new HttpStatusCodeException(HttpStatusCode.Unauthorized, errorMessage);
+                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, errorMessage);
             }
         }
 
@@ -44,7 +44,7 @@ namespace NotatnikMechanika.Service.Services.Base
             }
             else
             {
-                throw new HttpStatusCodeException(HttpStatusCode.Unauthorized, errorMessage);
+                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, errorMessage);
             }
         }
 
@@ -60,8 +60,8 @@ namespace NotatnikMechanika.Service.Services.Base
                 await _repositoryBase.UpdateAsync(Id, value);
             }
             else
-            {
-                throw new HttpStatusCodeException(HttpStatusCode.Unauthorized, errorMessage);
+            { 
+                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, errorMessage);
             }
         }
     }

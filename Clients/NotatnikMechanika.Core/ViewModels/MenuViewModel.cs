@@ -38,7 +38,7 @@ namespace NotatnikMechanika.Core.ViewModels
                     await _navigationService.Navigate<OrdersViewModel>();
                     break;
                 case "Clients":
-                    await _navigationService.Navigate<RegularClientsViewModel>();
+                    await _navigationService.Navigate<CustomersViewModel>();
                     break;
                 case "Services":
 

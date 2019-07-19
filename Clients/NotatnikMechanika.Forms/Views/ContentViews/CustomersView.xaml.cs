@@ -7,9 +7,9 @@ namespace NotatnikMechanika.Forms.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     [MvxMasterDetailPagePresentation(MasterDetailPosition.Detail, NoHistory = true)]
-    public partial class RegularClientsView : MvxContentPage<RegularClientsViewModel>
+    public partial class CustomersView : MvxContentPage<CustomersViewModel>
     {
-        public RegularClientsView()
+        public CustomersView()
         {
             InitializeComponent();
         }

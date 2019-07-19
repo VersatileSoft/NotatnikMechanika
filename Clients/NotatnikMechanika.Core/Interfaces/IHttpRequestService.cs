@@ -1,6 +1,7 @@
 ﻿using NotatnikMechanika.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +18,7 @@ namespace NotatnikMechanika.Core.Interfaces
         /// <param name="path">Path to api</param>
         /// <returns>Response Model</returns>
         Task<Response<ResponseModel>> SendPost<SendModel, ResponseModel>(SendModel model, string path, bool withAutorization) where ResponseModel : new();
+        Task<Response> SendPost<SendModel>(SendModel model, string path, bool withAutorization);
         Task<Response<ResponseModel>> SendGet<ResponseModel>(string path, bool withAutorization) where ResponseModel : new();
     }
 }

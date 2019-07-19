@@ -35,16 +35,16 @@ namespace NotatnikMechanika.Server
 
         private Task HandleExceptionAsync(HttpContext context, HttpStatusCodeException exception)
         {
-            string result = null;
             context.Response.ContentType = "application/json";
+            string result;
             if (exception is HttpStatusCodeException)
             {
-                result = new { exception.Message, StatusCode = (int)exception.StatusCode }.ToString();
+                result = exception.Message;
                 context.Response.StatusCode = (int)exception.StatusCode;
             }
             else
             {
-                result = new { Message = "Runtime Error", StatusCode = (int)HttpStatusCode.BadRequest }.ToString();
+                result = "Runtime Error";
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             }
             return context.Response.WriteAsync(result);

@@ -16,7 +16,6 @@ namespace NotatnikMechanika.Service.Exception
         {
             StatusCode = statusCode;
         }
-
         public HttpStatusCodeException(HttpStatusCode statusCode, WebException inner) : this(statusCode, inner.ToString()) { }
     }
 }

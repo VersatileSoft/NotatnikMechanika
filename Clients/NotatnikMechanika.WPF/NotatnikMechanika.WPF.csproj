@@ -11,10 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\CustomersView.xaml" />
     <None Remove="Views\LoginView.xaml" />
     <None Remove="Views\MenuView.xaml" />
     <None Remove="Views\OrdersView.xaml" />
-    <None Remove="Views\RegularClientsView.xaml" />
   </ItemGroup>
 
   <ItemGroup>
