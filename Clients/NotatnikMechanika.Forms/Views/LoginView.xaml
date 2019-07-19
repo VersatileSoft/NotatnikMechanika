@@ -60,6 +60,12 @@
                     FontFamily="Lato-Semibold.ttf#Lato-Semibold"
                     Text="Zaloguj"
                     TextColor="Black"/>
+                <Button
+                    BackgroundColor="White"
+                    Command="{Binding RegisterCommand}"
+                    FontFamily="Lato-Semibold.ttf#Lato-Semibold"
+                    Text="Zarejestruj się"
+                    TextColor="Black"/>
             </StackLayout>
         </Grid>
     </views:MvxContentPage.Content>

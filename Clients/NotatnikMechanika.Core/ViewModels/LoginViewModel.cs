@@ -22,6 +22,7 @@ namespace NotatnikMechanika.Core.ViewModels
         public string Password { get; set; } = "123";
 
         public ICommand LoginCommand { get; set; }
+        public ICommand RegisterCommand { get; set; }
 
         private readonly IMvxNavigationService _navigationService;
         private readonly IHttpRequestService _httpRequestService;
@@ -34,7 +35,7 @@ namespace NotatnikMechanika.Core.ViewModels
             _settingsService = settingsService;
 
             LoginCommand = new MvxAsyncCommand(LoginAction);
-
+            RegisterCommand = new MvxAsyncCommand(async () => await navigationService.Navigate<RegistrationViewModel>());
         }
 
         private async Task LoginAction()
