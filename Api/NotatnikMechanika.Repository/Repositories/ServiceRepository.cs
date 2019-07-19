@@ -41,9 +41,13 @@ namespace NotatnikMechanika.Repository.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<ServiceModel>> GetAllAsync(int userId)
+        public async Task<IEnumerable<ServiceModel>> GetAllAsync(int userId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Services.Where(a => a.UserId == userId).Select(value => new ServiceModel
+            {
+                Name = value.Name,
+                Price = value.Price
+            }).ToListAsync();
         }
 
         public async Task<ServiceModel> GetAsync(int Id)

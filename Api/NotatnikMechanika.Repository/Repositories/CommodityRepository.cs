@@ -41,9 +41,13 @@ namespace NotatnikMechanika.Repository.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<CommodityModel>> GetAllAsync(int userId)
+        public async Task<IEnumerable<CommodityModel>> GetAllAsync(int userId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Commodities.Where(a => a.UserId == userId).Select(value => new CommodityModel
+            {
+                Name = value.Name,
+                Price = value.Price
+            }).ToListAsync();
         }
 
         public async Task<CommodityModel> GetAsync(int Id)
