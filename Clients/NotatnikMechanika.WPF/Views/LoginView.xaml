@@ -10,8 +10,8 @@
     mc:Ignorable="d">
 
     <Grid>
-        <TextBox Text="{Binding Login}" Margin="237,34,237,353" Background="#FFCD4747" />
-        <TextBox Text="{Binding Password}" Margin="237,129,237,252" Background="#FFC92020"/>
+        <TextBox Text="{Binding UserModel.UserName}" Margin="237,34,237,353" Background="#FFCD4747"/>
+        <TextBox Text="{Binding UserModel.Password}" Margin="237,129,237,252" Background="#FFC92020"/>
         <Button Command="{Binding LoginCommand}" Margin="226,225,226,113" Content="Login"/>
 
     </Grid>

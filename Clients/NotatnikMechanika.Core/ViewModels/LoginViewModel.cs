@@ -4,6 +4,7 @@ using MvvmCross.ViewModels;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Core.Services;
 using NotatnikMechanika.Shared;
+using NotatnikMechanika.Shared.Models;
 using NotatnikMechanika.Shared.Models.User;
 using PropertyChanged;
 using System;
@@ -18,10 +19,10 @@ namespace NotatnikMechanika.Core.ViewModels
     [AddINotifyPropertyChangedInterface]
     public class LoginViewModel : MvxViewModel
     {
-        public string Login { get; set; } = "Michal";
-        public string Password { get; set; } = "123";
+        public AuthenticateUserModel UserModel { get; set; }
+        public string ErrorMessage { get; set; }
 
-        public ICommand LoginCommand { get; set; }
+        public IMvxCommand LoginCommand { get; set; }
         public ICommand RegisterCommand { get; set; }
 
         private readonly IMvxNavigationService _navigationService;
@@ -33,6 +34,7 @@ namespace NotatnikMechanika.Core.ViewModels
             _navigationService = navigationService;
             _httpRequestService = httpRequestService;
             _settingsService = settingsService;
+            UserModel = new AuthenticateUserModel();
 
             LoginCommand = new MvxAsyncCommand(LoginAction);
             RegisterCommand = new MvxAsyncCommand(async () => await navigationService.Navigate<RegistrationViewModel>());
@@ -40,18 +42,21 @@ namespace NotatnikMechanika.Core.ViewModels
 
         private async Task LoginAction()
         {
-            var model = new AuthenticateUserModel
+            if (!UserModel.IsModelValid(out string errorMessage))
             {
-                UserName = Login,
-                Password = Password
-            };
-
-            Response<TokenModel> response = await _httpRequestService.SendPost<AuthenticateUserModel, TokenModel>(model, AccountPaths.GetFullPath(AccountPaths.LoginPath), false);
-
-            if(response.StatusCode == HttpStatusCode.OK)
+                ErrorMessage = errorMessage;
+                return;
+            }
+                
+            Response<TokenModel> response = await _httpRequestService.SendPost<AuthenticateUserModel, TokenModel>(UserModel, AccountPaths.GetFullPath(AccountPaths.LoginPath), false);
+            if (response.StatusCode == HttpStatusCode.OK)
             {
                 _settingsService.Token = response.Content.Token;
                 await _navigationService.Navigate<MainPageViewModel>();
+            }
+            else
+            {
+                ErrorMessage = "Nieprawidłowy E-mail lub hasło";
             }
         }
     }

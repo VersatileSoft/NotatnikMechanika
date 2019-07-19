@@ -4,6 +4,7 @@ using MvvmCross.ViewModels;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Core.Services;
 using NotatnikMechanika.Shared;
+using NotatnikMechanika.Shared.Models;
 using NotatnikMechanika.Shared.Models.User;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace NotatnikMechanika.Core.ViewModels
     {
         public CreateUserModel CreateUserModel { get; set; }
         public ICommand RegisterCommand { get; set; }
+        public string ErrorMessage { get; set; }
+
 
         private IMvxNavigationService _navigationService;
         private IHttpRequestService _httpRequestService;
@@ -28,11 +31,18 @@ namespace NotatnikMechanika.Core.ViewModels
             _navigationService = navigationService;
             _httpRequestService = httpRequestService;
             _messageDialogService = messageDialogService;
+            CreateUserModel = new CreateUserModel();
             RegisterCommand = new MvxAsyncCommand(RegisterAction);
         }
 
         private async Task RegisterAction()
         {
+            if (!CreateUserModel.IsModelValid(out string errorMessage))
+            {
+                ErrorMessage = errorMessage;
+                return;
+            }
+
             Response response = await _httpRequestService.SendPost(CreateUserModel, AccountPaths.GetFullPath(AccountPaths.CreatePath), false);
 
             if (response.StatusCode == HttpStatusCode.OK)

@@ -36,13 +36,19 @@
                 <Entry
                     FontFamily="Lato-Regular.ttf#Lato-Regular"
                     Placeholder="E-mail"
-                    Text="{Binding Login}"
+                    Text="{Binding UserModel.UserName}"
                     TextColor="White"/>
                 <Entry
                     FontFamily="Lato-Regular.ttf#Lato-Regular"
                     Placeholder="Hasło"
-                    Text="{Binding Password}"
+                    Text="{Binding UserModel.Password}"
                     TextColor="White"/>
+                <Label
+                        FontFamily="Lato-Regular.ttf#Lato-Regular"
+                        FontSize="Medium"
+                        Text="{Binding ErrorMessage}"
+                        TextColor="Red"
+                        VerticalOptions="Center"/>
 
                 <StackLayout Orientation="Horizontal" Spacing="-12">
                     <CheckBox Color="White"/>
