@@ -1,7 +1,11 @@
-﻿using NotatnikMechanika.Repository.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using NotatnikMechanika.Data;
+using NotatnikMechanika.Data.Models;
+using NotatnikMechanika.Repository.Interfaces;
 using NotatnikMechanika.Shared.Models.Commodity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,19 +13,32 @@ namespace NotatnikMechanika.Repository.Repositories
 {
     public class CommodityRepository : ICommodityRepository
     {
-        public Task<bool> CheckIfUserMatch(int userId, int Id)
+        private readonly NotatnikMechanikaDbContext _dbContext;
+        public CommodityRepository(NotatnikMechanikaDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task CreateAsync(int userId, CommodityModel value)
+        public async Task<bool> CheckIfUserMatch(int userId, int Id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Commodities.Where(a => a.UserId == userId).Where(a => a.Id == Id).AnyAsync();
         }
 
-        public Task DeleteAsync(int Id)
+        public async Task CreateAsync(int userId, CommodityModel value)
         {
-            throw new NotImplementedException();
+            await _dbContext.Commodities.AddAsync(new Commodity
+            {
+                UserId = userId,
+                Name = value.Name,
+                Price = value.Price
+            });
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int Id)
+        {
+            _dbContext.Commodities.Remove(await _dbContext.Commodities.Where(a => a.Id == Id).FirstOrDefaultAsync());
+            await _dbContext.SaveChangesAsync();
         }
 
         public Task<IEnumerable<CommodityModel>> GetAllAsync(int userId)
@@ -29,14 +46,24 @@ namespace NotatnikMechanika.Repository.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<CommodityModel> GetAsync(int Id)
+        public async Task<CommodityModel> GetAsync(int Id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Commodities.Where(a => a.Id == Id).Select(value => new CommodityModel
+            {
+                Name = value.Name,
+                Price = value.Price
+            }).FirstOrDefaultAsync();
         }
 
-        public Task UpdateAsync(int Id, CommodityModel value)
+        public async Task UpdateAsync(int Id, CommodityModel value)
         {
-            throw new NotImplementedException();
+            Commodity commodity = await _dbContext.Commodities.Where(a => a.Id == Id).FirstOrDefaultAsync();
+
+            commodity.Name = value.Name;
+            commodity.Price = value.Price;
+
+            _dbContext.Commodities.Update(commodity);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

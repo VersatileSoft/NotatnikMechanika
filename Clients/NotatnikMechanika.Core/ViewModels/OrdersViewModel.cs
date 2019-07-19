@@ -22,7 +22,7 @@ namespace NotatnikMechanika.Core.ViewModels
 
         public override async Task Initialize()
         {
-            Response<List<OrderModel>> response = await _httpRequestService.SendGet<List<OrderModel>>(OrderPaths.GetFullPath(OrderPaths.GetOrdersPath), true);
+            Response<List<OrderModel>> response = await _httpRequestService.SendGet<List<OrderModel>>(OrderPaths.GetFullPath(CRUDPaths.GetAllPath), true);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 Orders = response.Content;
