@@ -40,9 +40,9 @@ namespace NotatnikMechanika.Repository.Repositories
             await DbContext.SaveChangesAsync();
         }
 
-        public async Task<User> FindByUserNameAsync(string userName)
+        public async Task<User> FindByEmailAsync(string email)
         {
-            return await DbContext.Users.Where(a => a.UserName == userName).FirstOrDefaultAsync();
+            return await DbContext.Users.Where(a => a.Email == email).FirstOrDefaultAsync();
         }
     }
 }

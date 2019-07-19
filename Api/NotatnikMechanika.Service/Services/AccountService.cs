@@ -25,13 +25,13 @@ namespace NotatnikMechanika.Service.Services
             _appSettings = appSettings.Value;
         }
 
-        public async Task<TokenModel> AuthenticateAsync(string userName, string password)
+        public async Task<TokenModel> AuthenticateAsync(string email, string password)
         {
-            User user = await _accountRepository.FindByUserNameAsync(userName);
+            User user = await _accountRepository.FindByEmailAsync(email);
 
             if (user == null || user.HashedPassword != Helpers.HashPassword(password, user.Salt))
             {
-                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, "Incorrect email or password");
+                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, "Nieprawidłowy login lub hasło");
             }
 
             return new TokenModel
@@ -44,7 +44,7 @@ namespace NotatnikMechanika.Service.Services
         {
             if (await _accountRepository.CheckIfAccountExistAsync(value.Email))
             {
-                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, "User already exsist");
+                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, "Użytkownik z tym adresem już istnieje.");
             }
 
             await _accountRepository.CreateUserAccountAsync(value);

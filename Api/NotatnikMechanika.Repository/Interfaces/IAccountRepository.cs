@@ -6,7 +6,7 @@ namespace NotatnikMechanika.Repository.Interfaces
 {
     public interface IAccountRepository
     {
-        Task<User> FindByUserNameAsync(string userName);
+        Task<User> FindByEmailAsync(string email);
         Task<bool> CheckIfAccountExistAsync(string email);
         Task CreateUserAccountAsync(CreateUserModel value);
     }

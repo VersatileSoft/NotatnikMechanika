@@ -56,7 +56,7 @@ namespace NotatnikMechanika.Core.ViewModels
             }
             else
             {
-                ErrorMessage = "Nieprawidłowy E-mail lub hasło";
+                ErrorMessage = response.ErrorMessage;
             }
         }
     }
