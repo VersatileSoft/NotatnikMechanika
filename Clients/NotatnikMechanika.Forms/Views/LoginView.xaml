@@ -12,6 +12,7 @@
     mc:Ignorable="d">
     <views:MvxContentPage.Content>
         <Grid>
+
             <Image x:Name="appIcon"
                 Margin="0,0,0,25"
                 HeightRequest="256"
@@ -19,12 +20,23 @@
                 Source="icon_foreground.xml"
                 VerticalOptions="Center"
                 WidthRequest="256"/>
+            <Label x:Name="appName"
+                Margin="0,250,0,0"
+                FontFamily="Lato-Bold.ttf#Lato-Bold"
+                FontSize="30"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Opacity="0"
+                Text="Notatnik Mechanika"
+                TextColor="White"
+                VerticalOptions="Start"/>
 
             <ScrollView>
                 <StackLayout x:Name="loginPanel"
-                    Margin="0,330,0,0"
+                    Margin="0,0,0,150"
                     Padding="20"
-                    Opacity="0">
+                    Opacity="0"
+                    VerticalOptions="End">
                     <Label
                         Margin="0,0,0,12"
                         FontFamily="Lato-Semibold.ttf#Lato-Semibold"
@@ -34,7 +46,7 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="{Binding ErrorMessage}" TextColor="#FF7A7A"/>
-                                <Span Text="Zaloguj się do Notatnika Mechanika aby uzyskać dostęp do konta." TextColor="White"/>
+                                <Span Text="Zaloguj się, aby uzyskać dostęp do konta." TextColor="White"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>

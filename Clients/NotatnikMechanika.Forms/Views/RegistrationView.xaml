@@ -12,18 +12,28 @@
     mc:Ignorable="d">
     <views:MvxContentPage.Content>
         <Grid>
-            <Image x:Name="appIcon"
-                Margin="0,40,0,0"
-                HeightRequest="192"
+            <Image
+                Margin="0,30,0,0"
+                HeightRequest="256"
                 HorizontalOptions="Center"
                 Source="icon_foreground.xml"
                 VerticalOptions="Start"
-                WidthRequest="192"/>
+                WidthRequest="256"/>
+            <Label
+                Margin="0,220,0,0"
+                FontFamily="Lato-Bold.ttf#Lato-Bold"
+                FontSize="30"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Text="Notatnik Mechanika"
+                TextColor="White"
+                VerticalOptions="Start"/>
 
             <ScrollView>
-                <StackLayout x:Name="loginPanel"
-                    Margin="0,250,0,0"
-                    Padding="20">
+                <StackLayout
+                    Margin="0,0,0,150"
+                    Padding="20"
+                    VerticalOptions="End">
                     <Label
                         Margin="0,0,0,12"
                         FontFamily="Lato-Semibold.ttf#Lato-Semibold"
@@ -33,7 +43,7 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="{Binding ErrorMessage}" TextColor="#FF7A7A"/>
-                                <Span Text="Zarejestruj się aby uzyskać dostęp do aplikacji." TextColor="White"/>
+                                <Span Text="Zarejestruj się, aby uzyskać dostęp do aplikacji." TextColor="White"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -60,11 +70,6 @@
                             TextColor="White"/>
                     </Grid>
 
-                    <Entry
-                        FontFamily="Lato-Regular.ttf#Lato-Regular"
-                        Placeholder="Nazwa użytkownika"
-                        Text="{Binding CreateUserModel.UserName}"
-                        TextColor="White"/>
                     <Entry
                         FontFamily="Lato-Regular.ttf#Lato-Regular"
                         Placeholder="E-mail"
