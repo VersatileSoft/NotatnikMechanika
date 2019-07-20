@@ -1,17 +1,15 @@
 ﻿using NotatnikMechanika.Repository.Interfaces.Base;
 using NotatnikMechanika.Service.Exception;
 using NotatnikMechanika.Service.Interfaces.Base;
-using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Service.Services.Base
 {
     public abstract class ServiceBase<T> : IServiceBase<T>
     {
-        private IRepositoryBase<T> _repositoryBase;
+        private readonly IRepositoryBase<T> _repositoryBase;
 
         protected string errorMessage = "This item is not yours or not exsists";
         public ServiceBase(IRepositoryBase<T> repositoryBase)
@@ -60,7 +58,7 @@ namespace NotatnikMechanika.Service.Services.Base
                 await _repositoryBase.UpdateAsync(Id, value);
             }
             else
-            { 
+            {
                 throw new HttpStatusCodeException(HttpStatusCode.BadRequest, errorMessage);
             }
         }

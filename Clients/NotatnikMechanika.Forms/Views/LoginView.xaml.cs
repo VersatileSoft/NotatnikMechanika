@@ -8,7 +8,7 @@ using Xamarin.Forms.Xaml;
 namespace NotatnikMechanika.Forms.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [MvxContentPagePresentation(Animated = false, NoHistory = true, WrapInNavigationPage = false)]
+    [MvxContentPagePresentation(Animated = true, NoHistory = true, WrapInNavigationPage = false)]
     public partial class LoginView : MvxContentPage<LoginViewModel>
     {
         public LoginView()
@@ -16,21 +16,19 @@ namespace NotatnikMechanika.Forms.Views
             InitializeComponent();
         }
 
-        private async void IconAnimation()
+        private async void SplashAnimation()
         {
-            // await appIcon.TranslateTo(0, 0, 230);
             await Task.Delay(230);
 
             await Task.WhenAll(
                 appIcon.TranslateTo(0, -250, 1100, Easing.CubicOut),
+                appIcon.ScaleTo(0.75, 1100, Easing.CubicOut),
                 loginPanel.FadeTo(100, 1300, Easing.CubicIn)
                 );
-            //await appIcon.TranslateTo(0, -250, 1150, Easing.CubicOut);
-            //await loginPanel.FadeTo(100, 500, Easing.CubicIn);
         }
         protected override void OnAppearing()
         {
-            IconAnimation();
+            SplashAnimation();
         }
     }
 }

@@ -4,8 +4,6 @@ using NotatnikMechanika.Server.Controllers.Base;
 using NotatnikMechanika.Service.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Customer;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Server.Controllers
 {

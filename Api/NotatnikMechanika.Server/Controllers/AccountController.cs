@@ -3,9 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using NotatnikMechanika.Service.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Server.Controllers

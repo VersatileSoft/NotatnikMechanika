@@ -1,7 +1,5 @@
-﻿using NotatnikMechanika.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Acr.UserDialogs;
+using NotatnikMechanika.Core.Interfaces;
 using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Forms.Services
@@ -10,7 +8,7 @@ namespace NotatnikMechanika.Forms.Services
     {
         public Task ShowMessageDialog(string message)
         {
-            throw new NotImplementedException();
+            return UserDialogs.Instance.AlertAsync(message, "Notatnik Mechanika");
         }
     }
 }

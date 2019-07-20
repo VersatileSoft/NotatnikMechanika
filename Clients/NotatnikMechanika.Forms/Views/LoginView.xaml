@@ -20,59 +20,66 @@
                 VerticalOptions="Center"
                 WidthRequest="256"/>
 
-            <StackLayout x:Name="loginPanel"
-                Margin="0,330,0,0"
-                Padding="20"
-                Opacity="0">
-                <Label
-                    Margin="0,0,0,12"
-                    FontFamily="Lato-Semibold.ttf#Lato-Semibold"
-                    FontSize="Subtitle"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    Text="Zaloguj się do Notatnika Mechanika aby uzyskać dostęp do konta."
-                    TextColor="White"/>
-
-                <Entry
-                    FontFamily="Lato-Regular.ttf#Lato-Regular"
-                    Placeholder="E-mail"
-                    Text="{Binding UserModel.UserName}"
-                    TextColor="White"/>
-                <Entry
-                    FontFamily="Lato-Regular.ttf#Lato-Regular"
-                    Placeholder="Hasło"
-                    Text="{Binding UserModel.Password}"
-                    TextColor="White"/>
-                <Label
-                        FontFamily="Lato-Regular.ttf#Lato-Regular"
-                        FontSize="Medium"
-                        Text="{Binding ErrorMessage}"
-                        TextColor="Red"
-                        VerticalOptions="Center"/>
-
-                <StackLayout Orientation="Horizontal" Spacing="-12">
-                    <CheckBox Color="White"/>
+            <ScrollView>
+                <StackLayout x:Name="loginPanel"
+                    Margin="0,330,0,0"
+                    Padding="20"
+                    Opacity="0">
                     <Label
-                        FontFamily="Lato-Regular.ttf#Lato-Regular"
-                        FontSize="Medium"
-                        Text="Zapamiętaj mnie."
-                        TextColor="White"
-                        VerticalOptions="Center"/>
-                </StackLayout>
+                        Margin="0,0,0,12"
+                        FontFamily="Lato-Semibold.ttf#Lato-Semibold"
+                        FontSize="Subtitle"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding ErrorMessage}" TextColor="#FF7A7A"/>
+                                <Span Text="Zaloguj się do Notatnika Mechanika aby uzyskać dostęp do konta." TextColor="White"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
-                <Button
-                    BackgroundColor="White"
-                    Command="{Binding LoginCommand}"
-                    FontFamily="Lato-Semibold.ttf#Lato-Semibold"
-                    Text="Zaloguj"
-                    TextColor="Black"/>
-                <Button
-                    BackgroundColor="White"
-                    Command="{Binding RegisterCommand}"
-                    FontFamily="Lato-Semibold.ttf#Lato-Semibold"
-                    Text="Zarejestruj się"
-                    TextColor="Black"/>
-            </StackLayout>
+                    <Entry
+                        FontFamily="Lato-Regular.ttf#Lato-Regular"
+                        Placeholder="E-mail"
+                        Text="{Binding UserModel.UserName}"
+                        TextColor="White"/>
+                    <Entry
+                        FontFamily="Lato-Regular.ttf#Lato-Regular"
+                        Placeholder="Hasło"
+                        Text="{Binding UserModel.Password}"
+                        TextColor="White"/>
+
+                    <StackLayout Orientation="Horizontal" Spacing="-12">
+                        <CheckBox Color="White"/>
+                        <Label
+                            FontFamily="Lato-Regular.ttf#Lato-Regular"
+                            FontSize="Medium"
+                            Text="Zapamiętaj mnie."
+                            TextColor="White"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Button
+                            BackgroundColor="White"
+                            Command="{Binding RegisterCommand}"
+                            FontFamily="Lato-Semibold.ttf#Lato-Semibold"
+                            Text="Nie mam konta"
+                            TextColor="Black"
+                            WidthRequest="150"/>
+
+                        <Button
+                            BackgroundColor="White"
+                            Command="{Binding LoginCommand}"
+                            FontFamily="Lato-Semibold.ttf#Lato-Semibold"
+                            HorizontalOptions="EndAndExpand"
+                            Text="Zaloguj"
+                            TextColor="Black"
+                            WidthRequest="150"/>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
         </Grid>
     </views:MvxContentPage.Content>
 </views:MvxContentPage>

@@ -1,18 +1,106 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<views:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.ViewModels;assembly=NotatnikMechanika.Core"
-             xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-             x:TypeArguments="viewModels:RegistrationViewModel"
-             x:Class="NotatnikMechanika.Forms.Views.RegistrationView">
+﻿<views:MvxContentPage
+    x:Class="NotatnikMechanika.Forms.Views.RegistrationView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.ViewModels;assembly=NotatnikMechanika.Core"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    x:TypeArguments="viewModels:RegistrationViewModel"
+    NavigationPage.HasNavigationBar="False"
+    Visual="Material"
+    mc:Ignorable="d">
     <views:MvxContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Image x:Name="appIcon"
+                Margin="0,40,0,0"
+                HeightRequest="192"
+                HorizontalOptions="Center"
+                Source="icon_foreground.xml"
+                VerticalOptions="Start"
+                WidthRequest="192"/>
+
+            <ScrollView>
+                <StackLayout x:Name="loginPanel"
+                    Margin="0,250,0,0"
+                    Padding="20">
+                    <Label
+                        Margin="0,0,0,12"
+                        FontFamily="Lato-Semibold.ttf#Lato-Semibold"
+                        FontSize="Subtitle"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding ErrorMessage}" TextColor="#FF7A7A"/>
+                                <Span Text="Zarejestruj się aby uzyskać dostęp do aplikacji." TextColor="White"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Entry
+                            Grid.Column="0"
+                            FontFamily="Lato-Regular.ttf#Lato-Regular"
+                            HorizontalOptions="Fill"
+                            Placeholder="Imię"
+                            Text="{Binding CreateUserModel.Name}"
+                            TextColor="White"/>
+                        <Entry
+                            Grid.Column="1"
+                            FontFamily="Lato-Regular.ttf#Lato-Regular"
+                            HorizontalOptions="Fill"
+                            Placeholder="Nazwisko"
+                            Text="{Binding CreateUserModel.Surname}"
+                            TextColor="White"/>
+                    </Grid>
+
+                    <Entry
+                        FontFamily="Lato-Regular.ttf#Lato-Regular"
+                        Placeholder="Nazwa użytkownika"
+                        Text="{Binding CreateUserModel.UserName}"
+                        TextColor="White"/>
+                    <Entry
+                        FontFamily="Lato-Regular.ttf#Lato-Regular"
+                        Placeholder="E-mail"
+                        Text="{Binding CreateUserModel.Email}"
+                        TextColor="White"/>
+                    <Entry
+                        FontFamily="Lato-Regular.ttf#Lato-Regular"
+                        Placeholder="Hasło"
+                        Text="{Binding CreateUserModel.Password}"
+                        TextColor="White"/>
+                    <Entry
+                        FontFamily="Lato-Regular.ttf#Lato-Regular"
+                        Placeholder="Powtórz hasło"
+                        Text="{Binding CreateUserModel.ConfirmPassword}"
+                        TextColor="White"/>
+
+                    <StackLayout Margin="0,10,0,0" Orientation="Horizontal">
+                        <Button
+                            BackgroundColor="White"
+                            Command="{Binding LoginCommand}"
+                            FontFamily="Lato-Semibold.ttf#Lato-Semibold"
+                            Text="Mam konto"
+                            TextColor="Black"
+                            WidthRequest="150"/>
+
+                        <Button
+                            BackgroundColor="White"
+                            Command="{Binding RegisterCommand}"
+                            FontFamily="Lato-Semibold.ttf#Lato-Semibold"
+                            HorizontalOptions="EndAndExpand"
+                            Text="Stwórz konto"
+                            TextColor="Black"
+                            WidthRequest="150"/>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
     </views:MvxContentPage.Content>
 </views:MvxContentPage>

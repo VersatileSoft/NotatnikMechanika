@@ -3,10 +3,8 @@ using NotatnikMechanika.Data;
 using NotatnikMechanika.Data.Models;
 using NotatnikMechanika.Repository.Interfaces;
 using NotatnikMechanika.Shared.Models.Service;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Repository.Repositories
@@ -64,7 +62,7 @@ namespace NotatnikMechanika.Repository.Repositories
             Service service = await _dbContext.Services.Where(a => a.Id == Id).FirstOrDefaultAsync();
 
             service.Name = value.Name;
-                service.Price = value.Price;
+            service.Price = value.Price;
 
             _dbContext.Services.Update(service);
             await _dbContext.SaveChangesAsync();

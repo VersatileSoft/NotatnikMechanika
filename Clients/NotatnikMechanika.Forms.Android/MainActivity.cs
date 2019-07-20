@@ -1,7 +1,10 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using MvvmCross;
 using MvvmCross.Forms.Platforms.Android.Views;
+using MvvmCross.Platforms.Android;
 using NotatnikMechanika.Core;
 using Xamarin.Forms;
 
@@ -14,7 +17,8 @@ namespace NotatnikMechanika.Forms.Android
         {
             base.SetTheme(Resource.Style.LoginTheme);
 
-            Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
+            UserDialogs.Init(() => Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity);
+            //Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             FormsMaterial.Init(this, savedInstanceState);
 
             TabLayoutResource = Resource.Layout.Tabbar;

@@ -20,7 +20,7 @@ namespace NotatnikMechanika.Core.ViewModels
         public DateTime FinishDate { get; set; }
         public ICommand AddOrder { get; set; }
 
-        private IHttpRequestService _httpRequestService;
+        private readonly IHttpRequestService _httpRequestService;
 
         public AddOrderViewModel(IHttpRequestService httpRequestService)
         {

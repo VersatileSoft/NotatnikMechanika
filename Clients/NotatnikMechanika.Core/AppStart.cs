@@ -1,11 +1,7 @@
-﻿using MvvmCross.Exceptions;
-using MvvmCross.Navigation;
+﻿using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Core.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Core

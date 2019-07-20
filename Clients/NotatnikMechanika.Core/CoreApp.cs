@@ -1,6 +1,5 @@
 ﻿using MvvmCross.IoC;
 using MvvmCross.ViewModels;
-using NotatnikMechanika.Core.ViewModels;
 
 namespace NotatnikMechanika.Core
 {

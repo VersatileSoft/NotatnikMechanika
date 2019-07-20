@@ -3,10 +3,8 @@ using NotatnikMechanika.Data;
 using NotatnikMechanika.Data.Models;
 using NotatnikMechanika.Repository.Interfaces;
 using NotatnikMechanika.Shared.Models.Commodity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Repository.Repositories

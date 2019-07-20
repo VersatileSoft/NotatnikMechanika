@@ -6,10 +6,7 @@ using NotatnikMechanika.Core.Services;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models;
 using NotatnikMechanika.Shared.Models.User;
-using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -19,12 +16,13 @@ namespace NotatnikMechanika.Core.ViewModels
     {
         public CreateUserModel CreateUserModel { get; set; }
         public ICommand RegisterCommand { get; set; }
+        public ICommand LoginCommand { get; set; }
         public string ErrorMessage { get; set; }
 
 
-        private IMvxNavigationService _navigationService;
-        private IHttpRequestService _httpRequestService;
-        private IMessageDialogService _messageDialogService;
+        private readonly IMvxNavigationService _navigationService;
+        private readonly IHttpRequestService _httpRequestService;
+        private readonly IMessageDialogService _messageDialogService;
 
         public RegistrationViewModel(IMvxNavigationService navigationService, IHttpRequestService httpRequestService, IMessageDialogService messageDialogService)
         {
@@ -33,6 +31,7 @@ namespace NotatnikMechanika.Core.ViewModels
             _messageDialogService = messageDialogService;
             CreateUserModel = new CreateUserModel();
             RegisterCommand = new MvxAsyncCommand(RegisterAction);
+            LoginCommand = new MvxAsyncCommand(async () => await navigationService.Navigate<LoginViewModel>());
         }
 
         private async Task RegisterAction()
@@ -47,7 +46,7 @@ namespace NotatnikMechanika.Core.ViewModels
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                await _messageDialogService.ShowMessageDialog("Konto zostało utworzone. Zaloguj się.");
+                await _messageDialogService.ShowMessageDialog("Konto zostało utworzone. Teraz możesz się zalogować.");
                 await _navigationService.Navigate<LoginViewModel>();
             }
             else

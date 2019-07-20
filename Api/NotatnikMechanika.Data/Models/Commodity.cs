@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace NotatnikMechanika.Data.Models
 {
@@ -12,6 +10,6 @@ namespace NotatnikMechanika.Data.Models
         public int UserId { get; set; }
 
         public virtual User User { get; set; }
-        public virtual IEnumerable<OrderToCommodity> OrderToCommodities { get; set; } 
+        public virtual IEnumerable<OrderToCommodity> OrderToCommodities { get; set; }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NotatnikMechanika.Shared.Models.Customer
+﻿namespace NotatnikMechanika.Shared.Models.Customer
 {
     public class CustomerModel
     {

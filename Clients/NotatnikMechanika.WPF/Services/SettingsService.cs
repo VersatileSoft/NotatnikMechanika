@@ -1,8 +1,5 @@
 ﻿using NotatnikMechanika.Core.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Text;
 
 namespace NotatnikMechanika.WPF.Services
 {
@@ -10,7 +7,8 @@ namespace NotatnikMechanika.WPF.Services
     {
         public string Token
         {
-            get {
+            get
+            {
                 try
                 {
                     return Settings.Default.Token as string;
@@ -20,7 +18,8 @@ namespace NotatnikMechanika.WPF.Services
                     return null;
                 }
             }
-            set {
+            set
+            {
                 Settings.Default.Token = value;
                 Settings.Default.Save();
             }

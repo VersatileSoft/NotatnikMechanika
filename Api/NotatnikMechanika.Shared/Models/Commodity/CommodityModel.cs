@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NotatnikMechanika.Shared.Models.Commodity
+﻿namespace NotatnikMechanika.Shared.Models.Commodity
 {
     public class CommodityModel
     {

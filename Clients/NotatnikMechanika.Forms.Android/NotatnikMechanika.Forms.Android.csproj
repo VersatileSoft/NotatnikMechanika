@@ -62,6 +62,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs">
+      <Version>7.0.4</Version>
+    </PackageReference>
     <PackageReference Include="MvvmCross">
       <Version>6.3.1</Version>
     </PackageReference>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NotatnikMechanika.Shared.Models.Service
+﻿namespace NotatnikMechanika.Shared.Models.Service
 {
     public class ServiceModel
     {
