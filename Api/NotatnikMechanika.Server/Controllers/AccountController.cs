@@ -20,7 +20,7 @@ namespace NotatnikMechanika.Server.Controllers
         [HttpPost(AccountPaths.LoginPath)]
         public async Task<ActionResult<TokenModel>> LoginAsync([FromBody]AuthenticateUserModel userParam)
         {
-            return Ok(await _accountService.AuthenticateAsync(userParam.UserName, userParam.Password));
+            return Ok(await _accountService.AuthenticateAsync(userParam.Email, userParam.Password));
         }
 
         [HttpPost(AccountPaths.CreatePath)]

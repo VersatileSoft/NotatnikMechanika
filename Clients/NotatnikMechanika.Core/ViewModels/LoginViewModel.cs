@@ -42,12 +42,6 @@ namespace NotatnikMechanika.Core.ViewModels
 
         private async Task LoginAction()
         {
-            if (!UserModel.IsModelValid(out string errorMessage))
-            {
-                ErrorMessage = errorMessage;
-                return;
-            }
-                
             Response<TokenModel> response = await _httpRequestService.SendPost<AuthenticateUserModel, TokenModel>(UserModel, AccountPaths.GetFullPath(AccountPaths.LoginPath), false);
             if (response.StatusCode == HttpStatusCode.OK)
             {

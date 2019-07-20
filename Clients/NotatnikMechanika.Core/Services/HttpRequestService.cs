@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using NotatnikMechanika.Core.Interfaces;
+using NotatnikMechanika.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -23,7 +24,6 @@ namespace NotatnikMechanika.Core.Services
 
         public async Task<Response<ResponseModel>> SendGet<ResponseModel>(string path, bool withAutorization) where ResponseModel : new()
         {
-
             if (withAutorization)
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _settingsService.Token);
             else
@@ -40,6 +40,11 @@ namespace NotatnikMechanika.Core.Services
 
         public async Task<Response<ResponseModel>> SendPost<SendModel, ResponseModel>(SendModel model, string path, bool withAutorization) where ResponseModel : new()
         {
+
+            if (!model.IsModelValid(out string errorMessage))
+            {             
+                return new Response<ResponseModel> { StatusCode = HttpStatusCode.BadRequest, ErrorMessage = errorMessage }; ;
+            }
 
             if (withAutorization)
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _settingsService.Token);
@@ -64,6 +69,11 @@ namespace NotatnikMechanika.Core.Services
 
         public async Task<Response> SendPost<SendModel>(SendModel model, string path, bool withAutorization)
         {
+            if (!model.IsModelValid(out string errorMessage))
+            {
+                return new Response { StatusCode = HttpStatusCode.BadRequest, ErrorMessage = errorMessage }; ;
+            }
+
             if (withAutorization)
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _settingsService.Token);
             else

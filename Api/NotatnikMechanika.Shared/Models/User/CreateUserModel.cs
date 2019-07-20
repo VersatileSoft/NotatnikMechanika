@@ -8,8 +8,6 @@ namespace NotatnikMechanika.Shared.Models.User
         public string UserName { get; set; }
         [Required]
         public string Password { get; set; }
-        [Required]
-        public string ConfirmPassword { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         [EmailAddress]

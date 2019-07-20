@@ -15,6 +15,7 @@ namespace NotatnikMechanika.Core.ViewModels
     public class RegistrationViewModel : MvxViewModel
     {
         public CreateUserModel CreateUserModel { get; set; }
+        public string ConfirmPassword { get; set; }
         public ICommand RegisterCommand { get; set; }
         public ICommand LoginCommand { get; set; }
         public string ErrorMessage { get; set; }
@@ -36,9 +37,9 @@ namespace NotatnikMechanika.Core.ViewModels
 
         private async Task RegisterAction()
         {
-            if (!CreateUserModel.IsModelValid(out string errorMessage))
+            if(CreateUserModel.Password != ConfirmPassword)
             {
-                ErrorMessage = errorMessage;
+                ErrorMessage = "Hasła są różne";
                 return;
             }
 
@@ -51,7 +52,7 @@ namespace NotatnikMechanika.Core.ViewModels
             }
             else
             {
-                await _messageDialogService.ShowMessageDialog("Błąd podczas tworzenia konta" + response.ErrorMessage);
+                ErrorMessage = response.ErrorMessage;
             }
         }
     }

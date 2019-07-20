@@ -42,7 +42,7 @@
                     <Entry
                         FontFamily="Lato-Regular.ttf#Lato-Regular"
                         Placeholder="E-mail"
-                        Text="{Binding UserModel.UserName}"
+                        Text="{Binding UserModel.Email}"
                         TextColor="White"/>
                     <Entry
                         FontFamily="Lato-Regular.ttf#Lato-Regular"

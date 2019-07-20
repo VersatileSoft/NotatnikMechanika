@@ -78,7 +78,7 @@
                     <Entry
                         FontFamily="Lato-Regular.ttf#Lato-Regular"
                         Placeholder="Powtórz hasło"
-                        Text="{Binding CreateUserModel.ConfirmPassword}"
+                        Text="{Binding ConfirmPassword}"
                         TextColor="White"/>
 
                     <StackLayout Margin="0,10,0,0" Orientation="Horizontal">
