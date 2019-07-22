@@ -38,7 +38,7 @@ namespace NotatnikMechanika.Core.ViewModels
 
         private async Task LoginAction()
         {
-            Response<TokenModel> response = await _httpRequestService.SendPost<AuthenticateUserModel, TokenModel>(UserModel, AccountPaths.GetFullPath(AccountPaths.LoginPath), false);
+            Response<TokenModel> response = await _httpRequestService.SendPost<AuthenticateUserModel, TokenModel>(UserModel, new AccountPaths().GetFullPath(AccountPaths.LoginPath), false);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 _settingsService.Token = response.Content.Token;

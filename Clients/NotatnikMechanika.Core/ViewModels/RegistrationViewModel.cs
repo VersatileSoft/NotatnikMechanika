@@ -42,7 +42,7 @@ namespace NotatnikMechanika.Core.ViewModels
                 return;
             }
 
-            Response response = await _httpRequestService.SendPost(CreateUserModel, AccountPaths.GetFullPath(AccountPaths.CreatePath), false);
+            Response response = await _httpRequestService.SendPost(CreateUserModel, new AccountPaths().GetFullPath(AccountPaths.CreatePath), false);
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
