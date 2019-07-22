@@ -16,7 +16,7 @@ namespace NotatnikMechanika.Forms.Views
             InitializeComponent();
         }
 
-        private async void SplashAnimation()
+        private async void StartAnimation()
         {
             await Task.Delay(230);
 
@@ -27,13 +27,13 @@ namespace NotatnikMechanika.Forms.Views
                 );
 
             _ = await Task.WhenAll(
-                appName.TranslateTo(0, -35, 400, Easing.CubicOut),
-                appName.FadeTo(100, 400, Easing.CubicOut)
+                appTitle.TranslateTo(0, -35, 400, Easing.SinOut),
+                appTitle.FadeTo(100, 400, Easing.CubicOut)
                 );
         }
         protected override void OnAppearing()
         {
-            SplashAnimation();
+            StartAnimation();
         }
     }
 }

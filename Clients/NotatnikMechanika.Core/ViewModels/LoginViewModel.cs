@@ -4,13 +4,9 @@ using MvvmCross.ViewModels;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Core.Services;
 using NotatnikMechanika.Shared;
-using NotatnikMechanika.Shared.Models;
 using NotatnikMechanika.Shared.Models.User;
 using PropertyChanged;
-using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 

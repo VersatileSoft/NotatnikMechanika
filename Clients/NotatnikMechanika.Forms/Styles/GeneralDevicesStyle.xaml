@@ -1,0 +1,55 @@
+﻿<ResourceDictionary
+    x:Class="NotatnikMechanika.Forms.Styles.GeneralDevicesStyle"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!--  LoginView/RegisterView  -->
+    <Style x:Key="LoginAppIconImage" TargetType="Image">
+        <Setter Property="Margin" Value="0,0,0,25"/>
+        <Setter Property="HeightRequest" Value="256"/>
+        <Setter Property="WidthRequest" Value="256"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="Source" Value="icon_foreground.xml"/>
+    </Style>
+    <Style x:Key="LoginAppTitleLabel" TargetType="Label">
+        <Setter Property="Margin" Value="0,250,0,0"/>
+        <Setter Property="FontFamily" Value="Lato-Bold.ttf#Lato-Bold"/>
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="Text" Value="Notatnik Mechanika"/>
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Start"/>
+        <Setter Property="Opacity" Value="0"/>
+    </Style>
+
+    <Style x:Key="LoginMessageLabel" TargetType="Label">
+        <Setter Property="Margin" Value="0,0,0,12"/>
+        <Setter Property="FontFamily" Value="Lato-Semibold.ttf#Lato-Semibold"/>
+        <Setter Property="FontSize" Value="Subtitle"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+    <Style x:Key="LoginEntry" TargetType="Entry">
+        <Setter Property="FontFamily" Value="Lato-Regular.ttf#Lato-Regular"/>
+        <Setter Property="TextColor" Value="White"/>
+    </Style>
+    <Style x:Key="LoginCheckBox" TargetType="CheckBox">
+        <Setter Property="Color" Value="White"/>
+    </Style>
+    <Style x:Key="LoginCheckBoxLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="Lato-Regular.ttf#Lato-Regular"/>
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="Text" Value="Zapamiętaj mnie."/>
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+    <Style x:Key="LoginButton" TargetType="Button">
+        <Setter Property="FontFamily" Value="Lato-Bold.ttf#Lato-Bold"/>
+        <Setter Property="BackgroundColor" Value="White"/>
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="CornerRadius" Value="25"/>
+        <Setter Property="WidthRequest" Value="150"/>
+    </Style>
+
+</ResourceDictionary>

@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared.Models;
-using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -25,46 +23,63 @@ namespace NotatnikMechanika.Core.Services
         public async Task<Response<ResponseModel>> SendGet<ResponseModel>(string path, bool withAutorization) where ResponseModel : new()
         {
             if (withAutorization)
+            {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _settingsService.Token);
+            }
             else
+            {
                 client.DefaultRequestHeaders.Authorization = null;
-            
+            }
+
             HttpResponseMessage response = await client.GetAsync("https://notatnikmechanika.ml/" + path);
 
-            var responseString = await response.Content.ReadAsStringAsync();
+            string responseString = await response.Content.ReadAsStringAsync();
 
             if (response.StatusCode == HttpStatusCode.OK)
+            {
                 return new Response<ResponseModel> { StatusCode = HttpStatusCode.OK, Content = JsonConvert.DeserializeObject<ResponseModel>(responseString) };
-            else return new Response<ResponseModel> { StatusCode = response.StatusCode, ErrorMessage = responseString };
+            }
+            else
+            {
+                return new Response<ResponseModel> { StatusCode = response.StatusCode, ErrorMessage = responseString };
+            }
         }
 
         public async Task<Response<ResponseModel>> SendPost<SendModel, ResponseModel>(SendModel model, string path, bool withAutorization) where ResponseModel : new()
         {
 
             if (!model.IsModelValid(out string errorMessage))
-            {             
+            {
                 return new Response<ResponseModel> { StatusCode = HttpStatusCode.BadRequest, ErrorMessage = errorMessage }; ;
             }
 
             if (withAutorization)
+            {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _settingsService.Token);
+            }
             else
+            {
                 client.DefaultRequestHeaders.Authorization = null;
+            }
 
-            var myContent = JsonConvert.SerializeObject(model);
+            string myContent = JsonConvert.SerializeObject(model);
 
-            var buffer = Encoding.UTF8.GetBytes(myContent);
-            var byteContent = new ByteArrayContent(buffer);
+            byte[] buffer = Encoding.UTF8.GetBytes(myContent);
+            ByteArrayContent byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             HttpResponseMessage response = await client.PostAsync("https://notatnikmechanika.ml/" + path, byteContent);
 
-            var responseString = await response.Content.ReadAsStringAsync();
+            string responseString = await response.Content.ReadAsStringAsync();
 
             if (response.StatusCode == HttpStatusCode.OK)
+            {
                 return new Response<ResponseModel> { StatusCode = HttpStatusCode.OK, Content = JsonConvert.DeserializeObject<ResponseModel>(responseString) };
+            }
             else
+            {
                 return new Response<ResponseModel> { StatusCode = response.StatusCode, ErrorMessage = responseString };
+            }
         }
 
         public async Task<Response> SendPost<SendModel>(SendModel model, string path, bool withAutorization)
@@ -75,14 +90,18 @@ namespace NotatnikMechanika.Core.Services
             }
 
             if (withAutorization)
+            {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _settingsService.Token);
+            }
             else
+            {
                 client.DefaultRequestHeaders.Authorization = null;
+            }
 
-            var myContent = JsonConvert.SerializeObject(model);
+            string myContent = JsonConvert.SerializeObject(model);
 
-            var buffer = Encoding.UTF8.GetBytes(myContent);
-            var byteContent = new ByteArrayContent(buffer);
+            byte[] buffer = Encoding.UTF8.GetBytes(myContent);
+            ByteArrayContent byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             HttpResponseMessage response = await client.PostAsync("https://notatnikmechanika.ml/" + path, byteContent);

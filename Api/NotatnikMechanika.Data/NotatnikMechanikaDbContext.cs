@@ -16,7 +16,7 @@ namespace NotatnikMechanika.Data
 
         public DbSet<EntityType> GetDbSet<EntityType>() where EntityType : class
         {
-            if(typeof(EntityType) == typeof(User))
+            if (typeof(EntityType) == typeof(User))
             {
                 return Users as DbSet<EntityType>;
             }

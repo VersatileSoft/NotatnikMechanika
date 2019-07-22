@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Runtime;
 using MvvmCross;
 using MvvmCross.Forms.Platforms.Android.Views;
 using MvvmCross.Platforms.Android;
@@ -17,6 +18,7 @@ namespace NotatnikMechanika.Forms.Android
         {
             base.SetTheme(Resource.Style.LoginTheme);
 
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             UserDialogs.Init(() => Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity);
             //Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             FormsMaterial.Init(this, savedInstanceState);
@@ -25,6 +27,13 @@ namespace NotatnikMechanika.Forms.Android
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }
