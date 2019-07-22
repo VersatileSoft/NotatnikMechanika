@@ -19,7 +19,7 @@ namespace NotatnikMechanika.Forms.Views
         private async void StartAnimation()
         {
             await Task.Delay(230);
-            _ = pageGrid.FadeTo(100, 1500, Easing.SinIn);
+            await pageGrid.FadeTo(100, 1500, Easing.SinIn);
         }
 
         protected override void OnAppearing()
