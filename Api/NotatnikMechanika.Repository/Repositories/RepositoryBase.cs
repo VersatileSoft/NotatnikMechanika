@@ -20,7 +20,7 @@ namespace NotatnikMechanika.Repository.Repositories
 
         public async Task<bool> CheckIfUserMatch(int userId, int Id)
         {
-            return await _dbContext.GetDbSet<EntityType>().Where(a => a.UserId == userId).Where(a => a.Id == Id).AnyAsync();
+            return await _dbContext.Set<EntityType>().Where(a => a.UserId == userId).Where(a => a.Id == Id).AnyAsync();
         }
 
         public async Task CreateAsync(int userId, ModelType value)
@@ -36,13 +36,13 @@ namespace NotatnikMechanika.Repository.Repositories
                 entity.GetType().GetProperty(prop.Name).SetValue(entity, prop.GetValue(value));
             }
 
-            await _dbContext.GetDbSet<EntityType>().AddAsync(entity);
+            await _dbContext.Set<EntityType>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int Id)
         {
-            _dbContext.GetDbSet<EntityType>().Remove(await _dbContext.GetDbSet<EntityType>().Where(a => a.Id == Id).FirstOrDefaultAsync());
+            _dbContext.Set<EntityType>().Remove(await _dbContext.Set<EntityType>().Where(a => a.Id == Id).FirstOrDefaultAsync());
             await _dbContext.SaveChangesAsync();
         }
 
@@ -50,7 +50,7 @@ namespace NotatnikMechanika.Repository.Repositories
         {
             ModelType model = new ModelType();
 
-            EntityType entity = await _dbContext.GetDbSet<EntityType>().Where(a => a.Id == Id).FirstOrDefaultAsync();
+            EntityType entity = await _dbContext.Set<EntityType>().Where(a => a.Id == Id).FirstOrDefaultAsync();
 
             foreach (PropertyInfo prop in model.GetType().GetProperties())
             {
@@ -64,7 +64,7 @@ namespace NotatnikMechanika.Repository.Repositories
         {
             List<ModelType> list = new List<ModelType>();
 
-            foreach (EntityType entity in await _dbContext.GetDbSet<EntityType>().Where(a => a.UserId == userId).ToListAsync())
+            foreach (EntityType entity in await _dbContext.Set<EntityType>().Where(a => a.UserId == userId).ToListAsync())
             {
                 ModelType model = new ModelType();
 
@@ -79,13 +79,13 @@ namespace NotatnikMechanika.Repository.Repositories
 
         public async Task UpdateAsync(int Id, ModelType value)
         {
-            EntityType entity = await _dbContext.GetDbSet<EntityType>().Where(a => a.Id == Id).FirstOrDefaultAsync();
+            EntityType entity = await _dbContext.Set<EntityType>().Where(a => a.Id == Id).FirstOrDefaultAsync();
 
             foreach (PropertyInfo prop in value.GetType().GetProperties())
             {
                 entity.GetType().GetProperty(prop.Name).SetValue(entity, prop.GetValue(value));
             }
-            _dbContext.GetDbSet<EntityType>().Update(entity);
+            _dbContext.Set<EntityType>().Update(entity);
             await _dbContext.SaveChangesAsync();
         }
     }

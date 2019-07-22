@@ -14,41 +14,6 @@ namespace NotatnikMechanika.Data
 
         public NotatnikMechanikaDbContext(DbContextOptions<NotatnikMechanikaDbContext> options) : base(options) { }
 
-        public DbSet<EntityType> GetDbSet<EntityType>() where EntityType : class
-        {
-            if (typeof(EntityType) == typeof(User))
-            {
-                return Users as DbSet<EntityType>;
-            }
-
-            if (typeof(EntityType) == typeof(Customer))
-            {
-                return Customers as DbSet<EntityType>;
-            }
-
-            if (typeof(EntityType) == typeof(Car))
-            {
-                return Cars as DbSet<EntityType>;
-            }
-
-            if (typeof(EntityType) == typeof(Order))
-            {
-                return Orders as DbSet<EntityType>;
-            }
-
-            if (typeof(EntityType) == typeof(Service))
-            {
-                return Services as DbSet<EntityType>;
-            }
-
-            if (typeof(EntityType) == typeof(Commodity))
-            {
-                return Commodities as DbSet<EntityType>;
-            }
-
-            return null;
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Car>()
