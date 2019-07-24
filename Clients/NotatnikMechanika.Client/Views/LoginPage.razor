@@ -1,0 +1,15 @@
+﻿@page "/"
+
+@inject NotatnikMechanika.Core.ViewModels.LoginViewModel ViewModel
+
+<div>
+	<label for="email">Email: </label>
+	<input name="email" type="text" @bind-value="ViewModel.UserModel.Email" @bind-value:event="oninput" />
+
+	<label for="password">Password: </label>
+	<input name="text" type="text" @bind-value="ViewModel.UserModel.Password" @bind-value:event="oninput" />
+
+	<button onclick="@(() => ViewModel.LoginCommand.Execute())">Wyślij</button>
+
+	<p>@ViewModel.ErrorMessage</p>
+</div>

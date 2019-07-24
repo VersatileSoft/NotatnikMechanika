@@ -20,6 +20,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotatnikMechanika.Server", "Api\NotatnikMechanika.Server\NotatnikMechanika.Server.csproj", "{7AE8A3BA-71C6-4415-BD8F-CA1C3FACD72D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotatnikMechanika.Client", "Clients\NotatnikMechanika.Client\NotatnikMechanika.Client.csproj", "{F8887AC4-DA74-4A30-8F78-BB71F9528677}"
+	ProjectSection(ProjectDependencies) = postProject
+		{30A55818-FF4D-4B72-BB64-4B91B0C9A491} = {30A55818-FF4D-4B72-BB64-4B91B0C9A491}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotatnikMechanika.Shared", "Api\NotatnikMechanika.Shared\NotatnikMechanika.Shared.csproj", "{0304A324-E877-4FDC-AC19-6C2D2EA91106}"
 EndProject
