@@ -18,6 +18,8 @@ namespace NotatnikMechanika.Core.ViewModels
         public AuthenticateUserModel UserModel { get; set; }
         public string ErrorMessage { get; set; }
 
+        public bool IsWaiting { get; set; }
+
         public IMvxCommand LoginCommand { get; set; }
         public ICommand RegisterCommand { get; set; }
 
@@ -38,6 +40,7 @@ namespace NotatnikMechanika.Core.ViewModels
 
         private async Task LoginAction()
         {
+            IsWaiting = true;
             Response<TokenModel> response = await _httpRequestService.SendPost<AuthenticateUserModel, TokenModel>(UserModel, new AccountPaths().GetFullPath(AccountPaths.LoginPath), false);
             if (response.StatusCode == HttpStatusCode.OK)
             {
@@ -48,6 +51,7 @@ namespace NotatnikMechanika.Core.ViewModels
             {
                 ErrorMessage = response.ErrorMessage;
             }
+            IsWaiting = false;
         }
     }
 }

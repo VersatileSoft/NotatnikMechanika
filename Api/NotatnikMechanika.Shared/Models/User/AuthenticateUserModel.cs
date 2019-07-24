@@ -4,10 +4,10 @@ namespace NotatnikMechanika.Shared.Models.User
 {
     public class AuthenticateUserModel
     {
-        [Required(ErrorMessage = "Pole nazwa użytkownika nie może być puste. \r\n")]
+        [Required(ErrorMessage = "Pole email nie może być puste.")]
         [EmailAddress(ErrorMessage = "Nieprawidłowy format adresu E-mail.")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "Pole hasło nie może być puste &#10;")]
+        [Required(ErrorMessage = "Pole hasło nie może być puste.")]
         public string Password { get; set; }
     }
 }

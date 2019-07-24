@@ -1,18 +1,64 @@
 ﻿<views:MvxWpfView
     x:Class="NotatnikMechanika.WPF.Views.LoginView"
+    x:TypeArguments ="viewModels:LoginViewModel"
+    xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.ViewModels;assembly=NotatnikMechanika.Core"
+    xmlns:utils="clr-namespace:NotatnikMechanika.WPF.Views.Utils;assembly="
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
-    d:DesignHeight="450"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    d:DesignHeight="550"
     d:DesignWidth="800"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="Transparent"
+     FontFamily="{DynamicResource MaterialDesignFont}">
 
-    <Grid>
-        <TextBox Text="{Binding UserModel.UserName}" Margin="237,34,237,353" Background="#FFCD4747"/>
-        <TextBox Text="{Binding UserModel.Password}" Margin="237,129,237,252" Background="#FFC92020"/>
-        <Button Command="{Binding LoginCommand}" Margin="226,225,226,113" Content="Login"/>
+    <Border
+       CornerRadius="10">
+        <Border.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#36dad2"/>
+                <GradientStop Color="#5877e6" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+            <StackPanel>
+                <Image Source="/NotatnikMechanika.WPF;component/Assets/AppIcon_Light.png" Height="153" Width="155" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-    </Grid>
+                <Label Content="Notatnik Mechanika" HorizontalAlignment="Center" Margin="0,20,0,0" FontSize="30" Foreground="#DDFFFFFF"/>
+                <TextBox
+                    Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    Text="{Binding UserModel.Email}"
+                    Margin="0,30,0,20"
+                    AcceptsReturn="True"
+                    VerticalScrollBarVisibility="Disabled"
+                    materialDesign:HintAssist.Hint="E-mail" Width="400" />
+
+                <PasswordBox
+                    Style="{StaticResource MaterialDesignFilledPasswordFieldPasswordBox}"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Hasło" 
+                    PasswordChanged="PasswordBox_PasswordChanged"
+                    Width="400" />
+
+                <Label Content="{Binding ErrorMessage}" HorizontalAlignment="Center" Margin="0,20,0,0" Height="30" FontSize="15" Foreground="#DDFF0000" VerticalAlignment="Center"/>
+
+                <utils:ButtonIndicator                   
+                    Width="130"
+                    Height="40"
+                    Margin="0,20,0,0"                 
+                    Command="{Binding LoginCommand}"
+                    IsWaiting="{Binding IsWaiting}">
+                </utils:ButtonIndicator>
+            </StackPanel>
+        </Grid>
+    </Border>
+
 </views:MvxWpfView>
