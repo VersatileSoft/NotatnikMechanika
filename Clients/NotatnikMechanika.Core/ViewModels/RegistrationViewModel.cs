@@ -4,7 +4,6 @@ using MvvmCross.ViewModels;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Core.Services;
 using NotatnikMechanika.Shared;
-using NotatnikMechanika.Shared.Models;
 using NotatnikMechanika.Shared.Models.User;
 using System.Net;
 using System.Threading.Tasks;
@@ -37,13 +36,13 @@ namespace NotatnikMechanika.Core.ViewModels
 
         private async Task RegisterAction()
         {
-            if(CreateUserModel.Password != ConfirmPassword)
+            if (CreateUserModel.Password != ConfirmPassword)
             {
                 ErrorMessage = "Hasła są różne";
                 return;
             }
 
-            Response response = await _httpRequestService.SendPost(CreateUserModel, AccountPaths.GetFullPath(AccountPaths.CreatePath), false);
+            Response response = await _httpRequestService.SendPost(CreateUserModel, new AccountPaths().GetFullPath(AccountPaths.CreatePath), false);
 
             if (response.StatusCode == HttpStatusCode.OK)
             {

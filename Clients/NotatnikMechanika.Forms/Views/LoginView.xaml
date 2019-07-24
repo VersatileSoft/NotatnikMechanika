@@ -12,71 +12,46 @@
     mc:Ignorable="d">
     <views:MvxContentPage.Content>
         <Grid>
-            <Image x:Name="appIcon"
-                Margin="0,0,0,25"
-                HeightRequest="256"
-                HorizontalOptions="Center"
-                Source="icon_foreground.xml"
-                VerticalOptions="Center"
-                WidthRequest="256"/>
+            <Image x:Name="appIcon" Style="{StaticResource LoginAppIconImage}"/>
+            <Label x:Name="appTitle" Style="{StaticResource LoginAppTitleLabel}"/>
 
             <ScrollView>
                 <StackLayout x:Name="loginPanel"
-                    Margin="0,330,0,0"
+                    Margin="0,0,0,150"
                     Padding="20"
-                    Opacity="0">
-                    <Label
-                        Margin="0,0,0,12"
-                        FontFamily="Lato-Semibold.ttf#Lato-Semibold"
-                        FontSize="Subtitle"
-                        HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center">
+                    Opacity="0"
+                    VerticalOptions="End">
+                    <Label Style="{StaticResource LoginMessageLabel}">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="{Binding ErrorMessage}" TextColor="#FF7A7A"/>
-                                <Span Text="Zaloguj się do Notatnika Mechanika aby uzyskać dostęp do konta." TextColor="White"/>
+                                <Span Text="Zaloguj się, aby uzyskać dostęp do konta." TextColor="White"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
 
-                    <Entry
-                        FontFamily="Lato-Regular.ttf#Lato-Regular"
+                    <Entry Style="{StaticResource LoginEntry}"
                         Placeholder="E-mail"
-                        Text="{Binding UserModel.Email}"
-                        TextColor="White"/>
-                    <Entry
-                        FontFamily="Lato-Regular.ttf#Lato-Regular"
+                        Text="{Binding UserModel.Email}"/>
+                    <Entry Style="{StaticResource LoginEntry}"
+                        IsPassword="True"
                         Placeholder="Hasło"
-                        Text="{Binding UserModel.Password}"
-                        TextColor="White"/>
+                        Text="{Binding UserModel.Password}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="-12">
-                        <CheckBox Color="White"/>
-                        <Label
-                            FontFamily="Lato-Regular.ttf#Lato-Regular"
-                            FontSize="Medium"
-                            Text="Zapamiętaj mnie."
-                            TextColor="White"
-                            VerticalOptions="Center"/>
+                        <CheckBox Style="{StaticResource LoginCheckBox}"/>
+                        <Label Style="{StaticResource LoginCheckBoxLabel}"/>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
-                        <Button
-                            BackgroundColor="White"
+                        <Button Style="{StaticResource LoginButton}"
                             Command="{Binding RegisterCommand}"
-                            FontFamily="Lato-Semibold.ttf#Lato-Semibold"
-                            Text="Nie mam konta"
-                            TextColor="Black"
-                            WidthRequest="150"/>
+                            Text="Nie mam konta"/>
 
-                        <Button
-                            BackgroundColor="White"
+                        <Button Style="{StaticResource LoginButton}"
                             Command="{Binding LoginCommand}"
-                            FontFamily="Lato-Semibold.ttf#Lato-Semibold"
                             HorizontalOptions="EndAndExpand"
-                            Text="Zaloguj"
-                            TextColor="Black"
-                            WidthRequest="150"/>
+                            Text="Zaloguj"/>
                     </StackLayout>
                 </StackLayout>
             </ScrollView>

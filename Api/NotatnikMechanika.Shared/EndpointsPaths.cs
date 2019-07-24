@@ -1,5 +1,11 @@
-﻿namespace NotatnikMechanika.Shared
+﻿using System;
+
+namespace NotatnikMechanika.Shared
 {
+    public interface IPaths
+    {
+        string GetFullPath(string path);
+    }
     public static class CRUDPaths
     {
         public const string GetPath = "{id}";
@@ -9,7 +15,7 @@
         public const string DeletePath = "{id}";
     }
 
-    public static class AccountPaths
+    public class AccountPaths : IPaths
     {
         public const string Name = "api/account";
         public const string LoginPath = "login";
@@ -17,58 +23,67 @@
         public const string UpdatePath = "{id}";
         public const string DeletePath = "{id}";
 
-        public static string GetFullPath(string path)
+        public string GetFullPath(string path)
         {
             return Name + "/" + path;
         }
     }
-    public static class CarPaths
+    public class CarPaths : IPaths
     {
         public const string Name = "api/car";
 
-        public static string GetFullPath(string path)
+        public string GetFullPath(string path)
         {
             return Name + "/" + path;
         }
     }
 
-    public static class CustomerPaths
+    public class CustomerPaths : IPaths
     {
         public const string Name = "api/customer";
 
-        public static string GetFullPath(string path)
+        public string GetFullPath(string path)
         {
             return Name + "/" + path;
         }
     }
 
-    public static class OrderPaths
+    public class OrderPaths : IPaths
     {
         public const string Name = "api/order";
 
-        public static string GetFullPath(string path)
+        public string GetFullPath(string path)
         {
             return Name + "/" + path;
         }
     }
 
-    public static class ServicePaths
+    public class ServicePaths : IPaths
     {
         public const string Name = "api/service";
 
-        public static string GetFullPath(string path)
+        public string GetFullPath(string path)
         {
             return Name + "/" + path;
         }
     }
 
-    public static class CommodityPaths
+    public class CommodityPaths : IPaths
     {
         public const string Name = "api/commodity";
 
-        public static string GetFullPath(string path)
+        public string GetFullPath(string path)
         {
             return Name + "/" + path;
+        }
+    }
+
+    public static class PathsHelper
+    {
+        public static IPaths GetPathsByModel<TModel>()
+        {
+            string name = typeof(TModel).Name.Replace("Model", "Paths");
+            return Activator.CreateInstance(Type.GetType(name)) as IPaths;
         }
     }
 }

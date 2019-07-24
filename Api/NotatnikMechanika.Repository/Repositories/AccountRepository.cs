@@ -32,8 +32,7 @@ namespace NotatnikMechanika.Repository.Repositories
                 Email = value.Email,
                 HashedPassword = Helpers.HashPassword(value.Password, salt),
                 Salt = salt,
-                Surname = value.Surname,
-                UserName = value.UserName
+                Surname = value.Surname
             };
 
             await DbContext.Users.AddAsync(user);

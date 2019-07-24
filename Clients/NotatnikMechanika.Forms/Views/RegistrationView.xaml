@@ -11,29 +11,22 @@
     Visual="Material"
     mc:Ignorable="d">
     <views:MvxContentPage.Content>
-        <Grid>
-            <Image x:Name="appIcon"
-                Margin="0,40,0,0"
-                HeightRequest="192"
-                HorizontalOptions="Center"
-                Source="icon_foreground.xml"
-                VerticalOptions="Start"
-                WidthRequest="192"/>
+        <Grid x:Name="pageGrid" Opacity="0">
+            <Image Style="{StaticResource LoginAppIconImage}"
+                Margin="0,30,0,0"
+                VerticalOptions="Start"/>
+            <Label Opacity="100" Style="{StaticResource LoginAppTitleLabel}"/>
 
             <ScrollView>
-                <StackLayout x:Name="loginPanel"
-                    Margin="0,250,0,0"
-                    Padding="20">
-                    <Label
-                        Margin="0,0,0,12"
-                        FontFamily="Lato-Semibold.ttf#Lato-Semibold"
-                        FontSize="Subtitle"
-                        HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center">
+                <StackLayout
+                    Margin="0,0,0,150"
+                    Padding="20"
+                    VerticalOptions="End">
+                    <Label Style="{StaticResource LoginMessageLabel}">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="{Binding ErrorMessage}" TextColor="#FF7A7A"/>
-                                <Span Text="Zarejestruj się aby uzyskać dostęp do aplikacji." TextColor="White"/>
+                                <Span Text="Zarejestruj się, aby uzyskać dostęp do aplikacji." TextColor="White"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -44,60 +37,37 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Entry
+                        <Entry Style="{StaticResource LoginEntry}"
                             Grid.Column="0"
-                            FontFamily="Lato-Regular.ttf#Lato-Regular"
-                            HorizontalOptions="Fill"
                             Placeholder="Imię"
-                            Text="{Binding CreateUserModel.Name}"
-                            TextColor="White"/>
-                        <Entry
+                            Text="{Binding CreateUserModel.Name}"/>
+                        <Entry Style="{StaticResource LoginEntry}"
                             Grid.Column="1"
-                            FontFamily="Lato-Regular.ttf#Lato-Regular"
-                            HorizontalOptions="Fill"
                             Placeholder="Nazwisko"
-                            Text="{Binding CreateUserModel.Surname}"
-                            TextColor="White"/>
+                            Text="{Binding CreateUserModel.Surname}"/>
                     </Grid>
 
-                    <Entry
-                        FontFamily="Lato-Regular.ttf#Lato-Regular"
-                        Placeholder="Nazwa użytkownika"
-                        Text="{Binding CreateUserModel.UserName}"
-                        TextColor="White"/>
-                    <Entry
-                        FontFamily="Lato-Regular.ttf#Lato-Regular"
+                    <Entry Style="{StaticResource LoginEntry}"
                         Placeholder="E-mail"
-                        Text="{Binding CreateUserModel.Email}"
-                        TextColor="White"/>
-                    <Entry
-                        FontFamily="Lato-Regular.ttf#Lato-Regular"
+                        Text="{Binding CreateUserModel.Email}"/>
+                    <Entry Style="{StaticResource LoginEntry}"
+                        IsPassword="True"
                         Placeholder="Hasło"
-                        Text="{Binding CreateUserModel.Password}"
-                        TextColor="White"/>
-                    <Entry
-                        FontFamily="Lato-Regular.ttf#Lato-Regular"
+                        Text="{Binding CreateUserModel.Password}"/>
+                    <Entry Style="{StaticResource LoginEntry}"
+                        IsPassword="True"
                         Placeholder="Powtórz hasło"
-                        Text="{Binding ConfirmPassword}"
-                        TextColor="White"/>
+                        Text="{Binding ConfirmPassword}"/>
 
                     <StackLayout Margin="0,10,0,0" Orientation="Horizontal">
-                        <Button
-                            BackgroundColor="White"
+                        <Button Style="{StaticResource LoginButton}"
                             Command="{Binding LoginCommand}"
-                            FontFamily="Lato-Semibold.ttf#Lato-Semibold"
-                            Text="Mam konto"
-                            TextColor="Black"
-                            WidthRequest="150"/>
+                            Text="Mam konto"/>
 
-                        <Button
-                            BackgroundColor="White"
+                        <Button Style="{StaticResource LoginButton}"
                             Command="{Binding RegisterCommand}"
-                            FontFamily="Lato-Semibold.ttf#Lato-Semibold"
                             HorizontalOptions="EndAndExpand"
-                            Text="Stwórz konto"
-                            TextColor="Black"
-                            WidthRequest="150"/>
+                            Text="Stwórz konto"/>
                     </StackLayout>
                 </StackLayout>
             </ScrollView>

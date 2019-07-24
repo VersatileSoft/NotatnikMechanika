@@ -4,13 +4,9 @@ using MvvmCross.ViewModels;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Core.Services;
 using NotatnikMechanika.Shared;
-using NotatnikMechanika.Shared.Models;
 using NotatnikMechanika.Shared.Models.User;
 using PropertyChanged;
-using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -42,7 +38,7 @@ namespace NotatnikMechanika.Core.ViewModels
 
         private async Task LoginAction()
         {
-            Response<TokenModel> response = await _httpRequestService.SendPost<AuthenticateUserModel, TokenModel>(UserModel, AccountPaths.GetFullPath(AccountPaths.LoginPath), false);
+            Response<TokenModel> response = await _httpRequestService.SendPost<AuthenticateUserModel, TokenModel>(UserModel, new AccountPaths().GetFullPath(AccountPaths.LoginPath), false);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 _settingsService.Token = response.Content.Token;
