@@ -14,6 +14,9 @@ namespace NotatnikMechanika.Core.Services
         private readonly HttpClient client;
         private readonly ISettingsService _settingsService;
 
+        //TODO put to config file
+        private const string ServerAddress = "https://notatnikmechanika.ml/"; // "http://localhost:2137/" - for blazor tests
+
         public HttpRequestService(ISettingsService settingsService)
         {
             _settingsService = settingsService;
@@ -31,7 +34,7 @@ namespace NotatnikMechanika.Core.Services
                 client.DefaultRequestHeaders.Authorization = null;
             }
 
-            HttpResponseMessage response = await client.GetAsync("https://notatnikmechanika.ml/" + path);
+            HttpResponseMessage response = await client.GetAsync(ServerAddres + path);
 
             string responseString = await response.Content.ReadAsStringAsync();
 
@@ -68,7 +71,7 @@ namespace NotatnikMechanika.Core.Services
             ByteArrayContent byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            HttpResponseMessage response = await client.PostAsync("https://notatnikmechanika.ml/" + path, byteContent);
+            HttpResponseMessage response = await client.PostAsync(ServerAddres + path, byteContent);
 
             string responseString = await response.Content.ReadAsStringAsync();
 
@@ -104,7 +107,7 @@ namespace NotatnikMechanika.Core.Services
             ByteArrayContent byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            HttpResponseMessage response = await client.PostAsync("https://notatnikmechanika.ml/" + path, byteContent);
+            HttpResponseMessage response = await client.PostAsync(ServerAddres + path, byteContent);
 
             return new Response { StatusCode = response.StatusCode, ErrorMessage = await response.Content.ReadAsStringAsync() };
         }
