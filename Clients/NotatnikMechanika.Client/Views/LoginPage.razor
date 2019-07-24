@@ -1,25 +1,15 @@
-﻿@page "/login"
-@layout LoginLayout
+﻿@page "/"
 
-@inject IUriHelper uriHelper
+@inject NotatnikMechanika.Core.ViewModels.LoginViewModel ViewModel
 
-@functions {
-	string Email = "";
-	string Password = "";
+<div>
+	<label for="email">Email: </label>
+	<input name="email" type="text" @bind-value="ViewModel.UserModel.Email" @bind-value:event="oninput" />
 
-	/// <summary>
-	/// Login function
-	/// </summary>
-	/// <param name="OnLogin">Action containing a Token</param>
-	/// <param name="OnError">Action containing an error message</param>
-	public Task Login(Action<string> OnLogin, Action<string> OnError)
-	{
-		OnLogin("FakeToken");
-		return Task.CompletedTask;
-	}
+	<label for="password">Password: </label>
+	<input name="text" type="text" @bind-value="ViewModel.UserModel.Password" @bind-value:event="oninput" />
 
-	public void Register()
-	{
-		uriHelper.NavigateTo("/register");
-	}
-}
+	<button onclick="@(() => ViewModel.LoginCommand.Execute())">Wyślij</button>
+
+	<p>@ViewModel.ErrorMessage</p>
+</div>

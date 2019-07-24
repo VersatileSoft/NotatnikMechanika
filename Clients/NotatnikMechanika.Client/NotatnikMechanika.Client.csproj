@@ -10,10 +10,12 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview6.19307.2" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview6.19307.2" PrivateAssets="all" />
+    <PackageReference Include="MvvmCross" Version="6.3.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Api\NotatnikMechanika.Shared\NotatnikMechanika.Shared.csproj" />
+    <ProjectReference Include="..\NotatnikMechanika.Core\NotatnikMechanika.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NotatnikMechanika.Client.Util
+namespace NotatnikMechanika.Client.Services
 {
     public class NavigationService : IMvxNavigationService
     {
@@ -121,7 +121,11 @@ namespace NotatnikMechanika.Client.Util
 
         public Task<bool> Navigate<TViewModel>(IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default) where TViewModel : IMvxViewModel
         {
-            throw new NotImplementedException();
+            var vmName = typeof(TViewModel).Name;
+            _uriHelper.NavigateTo("/" + (vmName.EndsWith("ViewModel")
+                ? vmName.Substring(0, vmName.Length - 9)
+                : vmName));
+            return Task.FromResult(true);
         }
 
         public Task<bool> Navigate<TViewModel, TParameter>(TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default) where TViewModel : IMvxViewModel<TParameter>
