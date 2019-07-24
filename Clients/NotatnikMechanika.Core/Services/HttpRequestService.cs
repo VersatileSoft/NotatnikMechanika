@@ -34,7 +34,7 @@ namespace NotatnikMechanika.Core.Services
                 client.DefaultRequestHeaders.Authorization = null;
             }
 
-            HttpResponseMessage response = await client.GetAsync(ServerAddres + path);
+            HttpResponseMessage response = await client.GetAsync(ServerAddress + path);
 
             string responseString = await response.Content.ReadAsStringAsync();
 
@@ -71,7 +71,7 @@ namespace NotatnikMechanika.Core.Services
             ByteArrayContent byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            HttpResponseMessage response = await client.PostAsync(ServerAddres + path, byteContent);
+            HttpResponseMessage response = await client.PostAsync(ServerAddress + path, byteContent);
 
             string responseString = await response.Content.ReadAsStringAsync();
 
@@ -107,7 +107,7 @@ namespace NotatnikMechanika.Core.Services
             ByteArrayContent byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            HttpResponseMessage response = await client.PostAsync(ServerAddres + path, byteContent);
+            HttpResponseMessage response = await client.PostAsync(ServerAddress + path, byteContent);
 
             return new Response { StatusCode = response.StatusCode, ErrorMessage = await response.Content.ReadAsStringAsync() };
         }
