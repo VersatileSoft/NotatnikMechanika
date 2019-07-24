@@ -34,6 +34,7 @@
                         Placeholder="E-mail"
                         Text="{Binding UserModel.Email}"/>
                     <Entry Style="{StaticResource LoginEntry}"
+                        IsPassword="True"
                         Placeholder="Hasło"
                         Text="{Binding UserModel.Password}"/>
 

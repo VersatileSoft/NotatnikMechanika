@@ -51,9 +51,11 @@
                         Placeholder="E-mail"
                         Text="{Binding CreateUserModel.Email}"/>
                     <Entry Style="{StaticResource LoginEntry}"
+                        IsPassword="True"
                         Placeholder="Hasło"
                         Text="{Binding CreateUserModel.Password}"/>
                     <Entry Style="{StaticResource LoginEntry}"
+                        IsPassword="True"
                         Placeholder="Powtórz hasło"
                         Text="{Binding ConfirmPassword}"/>
 
