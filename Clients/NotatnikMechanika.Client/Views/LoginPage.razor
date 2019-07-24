@@ -1,0 +1,25 @@
+﻿@page "/login"
+@layout LoginLayout
+
+@inject IUriHelper uriHelper
+
+@functions {
+	string Email = "";
+	string Password = "";
+
+	/// <summary>
+	/// Login function
+	/// </summary>
+	/// <param name="OnLogin">Action containing a Token</param>
+	/// <param name="OnError">Action containing an error message</param>
+	public Task Login(Action<string> OnLogin, Action<string> OnError)
+	{
+		OnLogin("FakeToken");
+		return Task.CompletedTask;
+	}
+
+	public void Register()
+	{
+		uriHelper.NavigateTo("/register");
+	}
+}
