@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.AspNetCore.Components.Layouts;
 using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using NotatnikMechanika.Client.Services;
 using NotatnikMechanika.Core.Interfaces;
@@ -13,6 +14,7 @@ namespace NotatnikMechanika.Client
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IMvxLog, LogService>();
             services.AddSingleton<IMvxNavigationService, NavigationService>();
             services.AddSingleton<ISettingsService, SettingsService>();
             services.AddSingleton<IHttpRequestService, HttpRequestService>();

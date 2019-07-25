@@ -2,14 +2,17 @@
 
 @inject NotatnikMechanika.Core.ViewModels.LoginViewModel ViewModel
 
-<div>
-	<label for="email">Email: </label>
-	<input name="email" type="text" @bind-value="ViewModel.UserModel.Email" @bind-value:event="oninput" />
+<div class="login-container">
+	<img class="login-icon" src="/assets/AppIcon_Light.png"/>
+	<p class="login-message">Zaloguj się, aby uzyskać dostęp</p>
 
-	<label for="password">Password: </label>
-	<input name="text" type="text" @bind-value="ViewModel.UserModel.Password" @bind-value:event="oninput" />
+	<MatTextField Class="login-email" @bind-Value="ViewModel.UserModel.Email" @bind-Value:event="oninput" Label="Email" Icon="email" Required="true"/>
+	<MatTextField Class="login-password" @bind-Value="ViewModel.UserModel.Password" @bind-Value:event="oninput" Label="Hasło" Icon="lock_outline" Type="password" Required="true"/>
+	<MatCheckbox Class="login-checkbox">Zapamiętaj mnie.</MatCheckbox>
 
-	<button onclick="@(() => ViewModel.LoginCommand.Execute())">Wyślij</button>
-
-	<p>@ViewModel.ErrorMessage</p>
+	<MatButton Class="login-register" OnClick="@(() => ViewModel.RegisterCommand.Execute(null))">Rejestracja</MatButton>
+	<MatButton Class="login-sign-in" OnClick="@(() => ViewModel.LoginCommand.Execute())">Logowanie</MatButton>
+	<!-- TODO add waiting icon inside Login button where IsEnabled = ViewModel.IsWaiting -->
+	
+	<p class="login-error">@ViewModel.ErrorMessage</p>
 </div>
