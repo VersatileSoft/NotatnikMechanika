@@ -30,33 +30,47 @@
         </Border.Background>
         <Grid>
             <StackPanel>
-                <Image Source="/NotatnikMechanika.WPF;component/Assets/AppIcon_Light.png" Height="153" Width="155" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Image x:Name="Logo" Source="/NotatnikMechanika.WPF;component/Assets/AppIcon_Light.png" Height="80" Width="80" Margin="0,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                 <Label Content="Notatnik Mechanika" HorizontalAlignment="Center" Margin="0,20,0,0" FontSize="30" Foreground="#DDFFFFFF"/>
-                <TextBox
+                <StackPanel x:Name="LoginControls">
+                    <TextBox
                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                     Text="{Binding UserModel.Email}"
-                    Margin="0,30,0,20"
+                    Margin="0,10,0,10"
                     AcceptsReturn="True"
                     VerticalScrollBarVisibility="Disabled"
                     materialDesign:HintAssist.Hint="E-mail" Width="400" />
 
-                <PasswordBox
+                    <PasswordBox
                     Style="{StaticResource MaterialDesignFilledPasswordFieldPasswordBox}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Hasło" 
                     PasswordChanged="PasswordBox_PasswordChanged"
                     Width="400" />
 
-                <Label Content="{Binding ErrorMessage}" HorizontalAlignment="Center" Margin="0,20,0,0" Height="30" FontSize="15" Foreground="#DDFF0000" VerticalAlignment="Center"/>
+                    <Label Content="{Binding ErrorMessage}" HorizontalAlignment="Center" Margin="0,20,0,0" Height="30" FontSize="15" Foreground="#DDFF0000" VerticalAlignment="Center"/>
 
-                <utils:ButtonIndicator                   
-                    Width="130"
-                    Height="40"
-                    Margin="0,20,0,0"                 
-                    Command="{Binding LoginCommand}"
-                    IsWaiting="{Binding IsWaiting}">
-                </utils:ButtonIndicator>
+                    <StackPanel
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                        <Button 
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        Width="130"
+                        Height="40"
+                        Margin="0,20,0,0" 
+                        Content="Nie mam konta" 
+                        Command="{Binding RegisterCommand}"/>
+
+                        <utils:ButtonIndicator                   
+                        Width="130"
+                        Height="40"
+                        Text="Zaloguj się"
+                        Margin="130,20,0,0"                 
+                        Command="{Binding LoginCommand}"
+                        IsWaiting="{Binding IsWaiting}"/>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Border>

@@ -18,6 +18,7 @@ namespace NotatnikMechanika.Core.ViewModels
         public ICommand RegisterCommand { get; set; }
         public ICommand LoginCommand { get; set; }
         public string ErrorMessage { get; set; }
+        public bool IsWaiting { get; set; }
 
 
         private readonly IMvxNavigationService _navigationService;
@@ -36,6 +37,7 @@ namespace NotatnikMechanika.Core.ViewModels
 
         private async Task RegisterAction()
         {
+            IsWaiting = true;
             if (CreateUserModel.Password != ConfirmPassword)
             {
                 ErrorMessage = "Hasła są różne";
@@ -53,6 +55,7 @@ namespace NotatnikMechanika.Core.ViewModels
             {
                 ErrorMessage = response.ErrorMessage;
             }
+            IsWaiting = false;
         }
     }
 }
