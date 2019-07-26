@@ -18,6 +18,7 @@ namespace NotatnikMechanika.WPF
         {
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
             Mvx.IoCProvider.RegisterSingleton(typeof(ISettingsService), new SettingsService());
+            Mvx.IoCProvider.RegisterSingleton(typeof(IMessageDialogService), new MessageDialogService());
             base.InitializeFirstChance();
         }
 

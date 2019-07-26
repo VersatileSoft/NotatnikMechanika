@@ -5,128 +5,134 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="White"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+    >
+    <views:MvxWpfView.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#36dad2"/>
+            <GradientStop Color="#5877e6" Offset="1"/>
+        </LinearGradientBrush>
+    </views:MvxWpfView.Background>
 
-    <Grid>
-        <Grid x:Name="GridMenu"
-            Width="200"
-            HorizontalAlignment="Left"
-            Background="#FF116FA4">
-            <StackPanel>
-                <Grid Height="130" Background="White"/>
-            </StackPanel>
-            <Button
-                Width="170"
-                Height="30"
-                Margin="0,140,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Background="#FF0074FF"
-                BorderThickness="0,0,0,0"
+    <StackPanel>
+        <Grid Height="130" Background="White"/>
+        <Button
+                HorizontalAlignment="Left"
+            Margin="0 20 0 0"
+         Foreground="White"
+                Background="Transparent"
+            Height="40"
+            BorderThickness="0"
                 Command="{Binding NavigateCommand}"
                 CommandParameter="Orders"
-                Content="Zlecenia"
-                FontSize="20">
-                <Button.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
-                </Button.Effect>
-            </Button>
-            <Button
-                Width="170"
-                Height="30"
-                Margin="0,180,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Background="#FF0074FF"
-                BorderThickness="0,0,0,0"
+                >
+            <StackPanel Orientation="Horizontal" Height="30">
+                <materialDesign:PackIcon Kind="Toolbox" VerticalAlignment="Center" Width="30" Height="30"/>
+                <Grid Width="10"/>
+                <Label Content="Zlecenia" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
+            </StackPanel>
+        </Button>
+        <Button
+            Margin="0 20 0 0"
+            
+         Foreground="White"
+                 BorderThickness="0"
+                HorizontalAlignment="Left"
+                Background="Transparent"
                 Command="{Binding NavigateCommand}"
                 CommandParameter="Clients"
-                Content="Stali klienci"
                 FontSize="20">
-                <Button.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
-                </Button.Effect>
-            </Button>
-            <Button
-                Width="170"
-                Height="30"
-                Margin="0,220,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Background="#FF0074FF"
-                BorderThickness="0,0,0,0"
+            <StackPanel Orientation="Horizontal" Height="30">
+                <materialDesign:PackIcon Kind="CustomerService" VerticalAlignment="Center" Width="30" Height="30"/>
+                <Grid Width="10"/>
+                <Label Content="Stali klienci" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
+            </StackPanel>
+        </Button>
+        <Button
+            Margin="0 20 0 0"
+            Height="40"
+         Foreground="White"
+                 BorderThickness="0"
+                HorizontalAlignment="Left"
+                Background="Transparent"
                 Command="{Binding NavigateCommand}"
                 CommandParameter="Services"
-                Content="Usługi"
                 FontSize="20">
-                <Button.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
-                </Button.Effect>
-            </Button>
-            <Button
-                Width="170"
-                Height="30"
-                Margin="0,260,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Background="#FF0074FF"
-                BorderThickness="0,0,0,0"
+            <StackPanel Orientation="Horizontal" Height="40">
+                <materialDesign:PackIcon Kind="Server" VerticalAlignment="Center" Width="30" Height="30"/>
+                <Grid Width="10"/>
+                <Label Content="Usługi" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
+            </StackPanel>
+        </Button>
+        <Button
+            Margin="0 20 0 0"
+         Foreground="White"
+        Height="40"
+                 BorderThickness="0"
+                HorizontalAlignment="Left"
+                Background="Transparent"
                 Command="{Binding NavigateCommand}"
                 CommandParameter="Archives"
-                Content="Archiwum"
                 FontSize="20">
-                <Button.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
-                </Button.Effect>
-            </Button>
-            <Button
-                Width="170"
-                Height="30"
-                Margin="0,300,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Background="#FF0074FF"
-                BorderThickness="0,0,0,0"
+            <StackPanel Orientation="Horizontal" Height="40">
+                <materialDesign:PackIcon Kind="Archive" VerticalAlignment="Center" Width="30" Height="30"/>
+                <Grid Width="10"/>
+                <Label Content="Archiwum" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
+            </StackPanel>
+        </Button>
+        <Button
+            Margin="0 20 0 0"
+         Foreground="White"
+                BorderThickness="0"
+            Height="40"
+                HorizontalAlignment="Left"
+                Background="Transparent"
                 Command="{Binding NavigateCommand}"
                 CommandParameter="Receipts"
-                Content="Faktury/Paragony"
                 FontSize="20">
-                <Button.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
-                </Button.Effect>
-            </Button>
-            <Button
-                Width="170"
-                Height="30"
-                Margin="0,340,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Background="#FF0074FF"
-                BorderThickness="0,0,0,0"
+            <StackPanel Orientation="Horizontal" Height="40">
+                <materialDesign:PackIcon Kind="Receipt" VerticalAlignment="Center" Width="30" Height="30"/>
+                <Grid Width="10"/>
+                <Label Content="Faktury/Paragony" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
+            </StackPanel>
+        </Button>
+        <Button
+            Margin="0 20 0 0"
+         Foreground="White"
+            Height="40"
+                 BorderThickness="0"
+                HorizontalAlignment="Left"
+                Background="Transparent"
                 Command="{Binding NavigateCommand}"
                 CommandParameter="Warehouse"
-                Content="Magazyn"
                 FontSize="20">
-                <Button.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
-                </Button.Effect>
-            </Button>
-
-            <Button
-                Width="170"
-                Height="30"
-                Margin="0,380,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Background="#FF0074FF"
-                BorderThickness="0,0,0,0"
+            <StackPanel Orientation="Horizontal" Height="40">
+                <materialDesign:PackIcon Kind="House" VerticalAlignment="Center" Width="30" Height="30"/>
+                <Grid Width="10"/>
+                <Label Content="Magazyn" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
+            </StackPanel>
+        </Button>
+        <Button
+            Margin="0 20 0 0"
+         Foreground="White"
+            Height="40"
+                 BorderThickness="0"
+                HorizontalAlignment="Left"
+                Background="Transparent"
                 Command="{Binding LogoutCommand}"
-                Content="Wyloguj"
                 FontSize="20">
-                <Button.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
-                </Button.Effect>
-            </Button>
-        </Grid>
-    </Grid>
+            <StackPanel Orientation="Horizontal" Height="40">
+                <materialDesign:PackIcon Kind="Logout" VerticalAlignment="Center" Width="30" Height="30"/>
+                <Grid Width="10"/>
+                <Label Content="Wyloguj" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
+            </StackPanel>
+        </Button>
+    </StackPanel>
 </views:MvxWpfView>

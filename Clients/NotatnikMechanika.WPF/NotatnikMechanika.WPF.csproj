@@ -16,6 +16,7 @@
     <None Remove="Views\LoginView.xaml" />
     <None Remove="Views\MenuView.xaml" />
     <None Remove="Views\OrdersView.xaml" />
+    <None Remove="Views\RegistrationView.xaml" />
     <None Remove="Views\Utils\ButtonIndicator.xaml" />
   </ItemGroup>
 

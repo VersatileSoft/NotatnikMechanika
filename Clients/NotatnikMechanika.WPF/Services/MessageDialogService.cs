@@ -8,7 +8,7 @@ namespace NotatnikMechanika.WPF.Services
     {
         public Task ShowMessageDialog(string message)
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }

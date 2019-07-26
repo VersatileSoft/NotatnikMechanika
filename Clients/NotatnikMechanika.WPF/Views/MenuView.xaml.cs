@@ -12,24 +12,6 @@ namespace NotatnikMechanika.WPF.Views
         public MenuView()
         {
             InitializeComponent();
-        }
-
-        private bool StateClosed = true;
-
-        private void ButtonMenu_Click(object sender, RoutedEventArgs e)
-        {
-            if (StateClosed)
-            {
-                Storyboard sb = FindResource("OpenMenu") as Storyboard;
-                sb.Begin();
-            }
-            else
-            {
-                Storyboard sb = FindResource("CloseMenu") as Storyboard;
-                sb.Begin();
-            }
-
-            StateClosed = !StateClosed;
-        }
+        }   
     }
 }

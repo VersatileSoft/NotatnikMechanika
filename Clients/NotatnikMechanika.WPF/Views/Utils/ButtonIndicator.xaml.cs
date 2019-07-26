@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace NotatnikMechanika.WPF.Views.Utils
 {
@@ -29,8 +19,14 @@ namespace NotatnikMechanika.WPF.Views.Utils
 
         public bool IsWaiting
         {
-            get { return (bool)GetValue(IsWaitingProperty); }
-            set { SetValue(IsWaitingProperty, value); }
+            get => (bool)GetValue(IsWaitingProperty);
+            set => SetValue(IsWaitingProperty, value);
+        }
+
+        public string Text
+        {
+            get => Label.Content as string;
+            set => Label.Content = value;
         }
 
         private static void OnIsWaitingChanged(DependencyObject d,

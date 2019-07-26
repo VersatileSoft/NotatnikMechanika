@@ -9,7 +9,7 @@
     <Grid>
         <Label
             x:Name="Label"
-            Content="Zaloguj się" Visibility="Visible"/>
+            Visibility="Visible"/>
         <ProgressBar
             x:Name="Progress"
             Style="{StaticResource MaterialDesignCircularProgressBar}"
