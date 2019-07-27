@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using NotatnikMechanika.Data.Models;
 
 namespace NotatnikMechanika.Data
 {
-    public class NotatnikMechanikaDbContext : DbContext
+    public class NotatnikMechanikaDbContext : IdentityDbContext<User>
     {
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
@@ -16,6 +16,7 @@ namespace NotatnikMechanika.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Car>()
                 .HasOne(i => i.Customer)
                 .WithMany(c => c.Cars)

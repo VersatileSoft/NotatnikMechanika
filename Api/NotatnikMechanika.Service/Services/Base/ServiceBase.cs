@@ -17,12 +17,12 @@ namespace NotatnikMechanika.Service.Services.Base
             _repositoryBase = repositoryBase;
         }
 
-        public async Task CreateAsync(int userId, T value)
+        public async Task CreateAsync(string userId, T value)
         {
             await _repositoryBase.CreateAsync(userId, value);
         }
 
-        public async Task DeleteAsync(int userId, int Id)
+        public async Task DeleteAsync(string userId, int Id)
         {
             if (await _repositoryBase.CheckIfUserMatch(userId, Id))
             {
@@ -34,7 +34,7 @@ namespace NotatnikMechanika.Service.Services.Base
             }
         }
 
-        public async Task<T> GetAsync(int userId, int Id)
+        public async Task<T> GetAsync(string userId, int Id)
         {
             if (await _repositoryBase.CheckIfUserMatch(userId, Id))
             {
@@ -46,12 +46,12 @@ namespace NotatnikMechanika.Service.Services.Base
             }
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(int userId)
+        public async Task<IEnumerable<T>> GetAllAsync(string userId)
         {
             return await _repositoryBase.GetAllAsync(userId);
         }
 
-        public async Task UpdateAsync(int userId, int Id, T value)
+        public async Task UpdateAsync(string userId, int Id, T value)
         {
             if (await _repositoryBase.CheckIfUserMatch(userId, Id))
             {

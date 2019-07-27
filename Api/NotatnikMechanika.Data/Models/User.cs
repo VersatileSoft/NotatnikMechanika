@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace NotatnikMechanika.Data.Models
 {
-    public class User
+    public class User : IdentityUser
     {
-        public int Id { get; set; }
-        public string HashedPassword { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Email { get; set; }
-        public byte[] Salt { get; set; }
 
         public virtual IEnumerable<Car> Cars { get; set; }
         public virtual IEnumerable<Customer> Customers { get; set; }

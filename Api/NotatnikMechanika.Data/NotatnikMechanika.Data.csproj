@@ -6,17 +6,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190714135834_InitialMigration.cs" />
+    <Compile Remove="Migrations\20190714135834_InitialMigration.Designer.cs" />
     <Compile Remove="Migrations\20190714140316_A.cs" />
     <Compile Remove="Migrations\20190714140316_A.Designer.cs" />
     <Compile Remove="Migrations\20190716212731_A.cs" />
     <Compile Remove="Migrations\20190716212731_A.Designer.cs" />
     <Compile Remove="Migrations\20190716213825_A.cs" />
     <Compile Remove="Migrations\20190716213825_A.Designer.cs" />
+    <Compile Remove="Migrations\20190716213939_A.cs" />
+    <Compile Remove="Migrations\20190716213939_A.Designer.cs" />
+    <Compile Remove="Migrations\20190719091026_B.cs" />
+    <Compile Remove="Migrations\20190719091026_B.Designer.cs" />
     <Compile Remove="Migrations\20190721173130_C.cs" />
     <Compile Remove="Migrations\20190721173130_C.Designer.cs" />
+    <Compile Remove="Migrations\20190722083323_C.cs" />
+    <Compile Remove="Migrations\20190722083323_C.Designer.cs" />
+    <Compile Remove="Migrations\20190726130425_D.cs" />
+    <Compile Remove="Migrations\20190726130425_D.Designer.cs" />
+    <Compile Remove="Migrations\20190726131005_A.cs" />
+    <Compile Remove="Migrations\20190726131005_A.Designer.cs" />
+    <Compile Remove="Migrations\20190726131207_A.cs" />
+    <Compile Remove="Migrations\20190726131207_A.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
@@ -24,6 +39,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.Identity.Stores">
+      <HintPath>C:\Program Files\dotnet\packs\Microsoft.AspNetCore.App.Ref\3.0.0-preview6.19307.2\ref\netcoreapp3.0\Microsoft.Extensions.Identity.Stores.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

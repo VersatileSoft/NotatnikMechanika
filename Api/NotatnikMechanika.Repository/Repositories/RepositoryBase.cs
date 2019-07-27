@@ -18,12 +18,12 @@ namespace NotatnikMechanika.Repository.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<bool> CheckIfUserMatch(int userId, int Id)
+        public async Task<bool> CheckIfUserMatch(string userId, int Id)
         {
             return await _dbContext.Set<EntityType>().Where(a => a.UserId == userId).Where(a => a.Id == Id).AnyAsync();
         }
 
-        public async Task CreateAsync(int userId, ModelType value)
+        public async Task CreateAsync(string userId, ModelType value)
         {
 
             EntityType entity = new EntityType
@@ -60,7 +60,7 @@ namespace NotatnikMechanika.Repository.Repositories
             return model;
         }
 
-        public async Task<IEnumerable<ModelType>> GetAllAsync(int userId)
+        public async Task<IEnumerable<ModelType>> GetAllAsync(string userId)
         {
             List<ModelType> list = new List<ModelType>();
 

@@ -23,6 +23,13 @@ namespace NotatnikMechanika.Server.Controllers
             return Ok(await _accountService.AuthenticateAsync(userParam.Email, userParam.Password));
         }
 
+        [HttpGet("verify/email")]
+        public async Task<RedirectResult> ConfirmEmail(string userId, string emailToken)
+        {
+            await _accountService.ConfirmEmail(userId, emailToken);
+            return Redirect($"{Request.Scheme}://{Request.Host.Value}");
+        }
+
         [HttpPost(AccountPaths.CreatePath)]
         public async Task<ActionResult> CreateUserAsync([FromBody] CreateUserModel value)
         {

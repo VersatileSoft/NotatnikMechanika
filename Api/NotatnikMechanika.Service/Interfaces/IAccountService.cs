@@ -9,5 +9,6 @@ namespace NotatnikMechanika.Service.Interfaces
         Task CreateAsync(CreateUserModel value);
         Task UpdateAsync(int id, EditUserModel value);
         Task DeleteAsync(int id);
+        Task ConfirmEmail(string userId, string emailToken);
     }
 }

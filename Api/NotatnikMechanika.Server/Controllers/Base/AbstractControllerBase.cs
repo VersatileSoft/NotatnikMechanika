@@ -17,33 +17,33 @@ namespace NotatnikMechanika.Server.Controllers.Base
         [HttpGet(CRUDPaths.GetAllPath)]
         public async Task<ActionResult<IEnumerable<T>>> GetCarsAsync()
         {
-            return Ok(await _serviceBase.GetAllAsync(int.Parse(User.Identity.Name)));
+            return Ok(await _serviceBase.GetAllAsync(User.Identity.Name));
         }
 
         [HttpGet(CRUDPaths.GetPath)]
         public async Task<ActionResult<T>> GetCarAsync(int id)
         {
-            return Ok(await _serviceBase.GetAsync(int.Parse(User.Identity.Name), id));
+            return Ok(await _serviceBase.GetAsync(User.Identity.Name, id));
         }
 
         [HttpPost(CRUDPaths.CreatePath)]
         public async Task<ActionResult> CreateCarAsync([FromBody] T value)
         {
-            await _serviceBase.CreateAsync(int.Parse(User.Identity.Name), value);
+            await _serviceBase.CreateAsync(User.Identity.Name, value);
             return Ok();
         }
 
         [HttpPut(CRUDPaths.UpdatePath)]
         public async Task<ActionResult> UpdateCarAsync(int id, [FromBody] T value)
         {
-            await _serviceBase.UpdateAsync(int.Parse(User.Identity.Name), id, value);
+            await _serviceBase.UpdateAsync(User.Identity.Name, id, value);
             return Ok();
         }
 
         [HttpDelete(CRUDPaths.DeletePath)]
         public async Task<ActionResult> DeleteCarAsync(int id)
         {
-            await _serviceBase.DeleteAsync(int.Parse(User.Identity.Name), id);
+            await _serviceBase.DeleteAsync(User.Identity.Name, id);
             return Ok();
         }
     }

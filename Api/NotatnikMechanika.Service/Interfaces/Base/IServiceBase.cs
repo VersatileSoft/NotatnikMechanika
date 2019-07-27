@@ -5,10 +5,10 @@ namespace NotatnikMechanika.Service.Interfaces.Base
 {
     public interface IServiceBase<T>
     {
-        Task<IEnumerable<T>> GetAllAsync(int userId);
-        Task<T> GetAsync(int userId, int Id);
-        Task CreateAsync(int userId, T value);
-        Task UpdateAsync(int userId, int Id, T value);
-        Task DeleteAsync(int userId, int Id);
+        Task<IEnumerable<T>> GetAllAsync(string userId);
+        Task<T> GetAsync(string userId, int Id);
+        Task CreateAsync(string userId, T value);
+        Task UpdateAsync(string userId, int Id, T value);
+        Task DeleteAsync(string userId, int Id);
     }
 }

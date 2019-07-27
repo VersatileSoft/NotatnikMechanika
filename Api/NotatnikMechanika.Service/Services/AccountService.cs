@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using NotatnikMechanika.Component;
 using NotatnikMechanika.Data.Models;
-using NotatnikMechanika.Repository.Interfaces;
 using NotatnikMechanika.Service.Exception;
 using NotatnikMechanika.Service.Interfaces;
 using NotatnikMechanika.Shared.Models.User;
@@ -11,43 +12,103 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace NotatnikMechanika.Service.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly IAccountRepository _accountRepository;
         private readonly AppSettings _appSettings;
-        public AccountService(IOptions<AppSettings> appSettings, IAccountRepository accountRepository)
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly IEmailSenderService _emailSenderService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public AccountService(
+            IOptions<AppSettings> appSettings,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            IEmailSenderService emailSenderService,
+            IHttpContextAccessor httpContextAccessor)
         {
-            _accountRepository = accountRepository;
             _appSettings = appSettings.Value;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _emailSenderService = emailSenderService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<TokenModel> AuthenticateAsync(string email, string password)
         {
-            User user = await _accountRepository.FindByEmailAsync(email);
+            SignInResult result = await _signInManager.PasswordSignInAsync(email, password, false, false);
 
-            if (user == null || user.HashedPassword != Helpers.HashPassword(password, user.Salt))
+            if (result.Succeeded)
             {
-                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, "Nieprawidłowy login lub hasło");
+                User user = await _userManager.Users.SingleOrDefaultAsync(r => r.Email == email);
+                return new TokenModel
+                {
+                    Token = GenerateToken(user)
+                };
             }
 
-            return new TokenModel
+            if (result.IsNotAllowed)
             {
-                Token = GenerateToken(user)
-            };
+                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, "Potwierdź adres email aby się zalogować.");
+            }
+
+            throw new HttpStatusCodeException(HttpStatusCode.BadRequest, "Nieprawidłowy login lub hasło");
+        }
+
+        public async Task ConfirmEmail(string userId, string emailToken)
+        {
+            User user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                throw new HttpStatusCodeException(HttpStatusCode.NotFound, "Nie znaleziono użytkownika");
+            }
+
+            IdentityResult result = await _userManager.ConfirmEmailAsync(user, emailToken);
+
+            if (!result.Succeeded)
+            {
+                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, "Link nieprawidłowy.");
+            }
         }
 
         public async Task CreateAsync(CreateUserModel value)
         {
-            if (await _accountRepository.CheckIfAccountExistAsync(value.Email))
+            User user = new User
             {
-                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, "Użytkownik z tym adresem już istnieje.");
-            }
+                UserName = value.Email,
+                Email = value.Email,
+                Name = value.Name,
+                Surname = value.Surname
+            };
 
-            await _accountRepository.CreateUserAccountAsync(value);
+            IdentityResult result = await _userManager.CreateAsync(user, value.Password);
+
+            if (result.Succeeded)
+            {
+                User newUser = await _userManager.FindByEmailAsync(user.Email);
+                string code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                string callbackUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host.Value}/api/Account/verify/email?userId={WebUtility.UrlEncode(newUser.Id)}&emailToken={HttpUtility.UrlEncode(code)}";
+
+                var message =  $"Please confirm your account by <a clicktracking=off href='{callbackUrl}'>clicking here</a>.";
+
+                await _emailSenderService.SendEmailAsync(user.Email, "Confirm your email", message);
+            }
+            else
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (IdentityError err in result.Errors)
+                {
+                    sb.AppendLine(err.Description);
+                }
+
+                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, sb.ToString());
+            }
         }
 
         public Task DeleteAsync(int id)

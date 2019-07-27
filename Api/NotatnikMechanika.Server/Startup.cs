@@ -2,6 +2,7 @@ using Autofac;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
@@ -12,8 +13,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NotatnikMechanika.Data;
+using NotatnikMechanika.Data.Models;
 using NotatnikMechanika.Repository;
 using NotatnikMechanika.Service;
+using NotatnikMechanika.Service.Interfaces;
+using NotatnikMechanika.Service.Services;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -46,6 +50,18 @@ namespace NotatnikMechanika.Server
                 options.UseSqlServer(Configuration.GetConnectionString("RemoteConnection")) // RemoteConnection, LocalConnection           
             );
 
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 1;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.SignIn.RequireConfirmedEmail = true;
+            }).AddDefaultTokenProviders()
+              .AddEntityFrameworkStores<NotatnikMechanikaDbContext>();
+
             ConfigureSwagger(services);
 
             services.AddMvc().AddNewtonsoftJson().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
@@ -74,6 +90,7 @@ namespace NotatnikMechanika.Server
             app.UseBlazorDebugging();
 
             // }
+
 
             app.UseMiddleware<CustomExceptionMiddleware>();
 

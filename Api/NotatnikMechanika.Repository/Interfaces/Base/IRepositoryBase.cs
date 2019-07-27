@@ -5,11 +5,11 @@ namespace NotatnikMechanika.Repository.Interfaces.Base
 {
     public interface IRepositoryBase<T>
     {
-        Task CreateAsync(int userId, T value);
-        Task<bool> CheckIfUserMatch(int userId, int Id);
+        Task CreateAsync(string userId, T value);
+        Task<bool> CheckIfUserMatch(string userId, int Id);
         Task DeleteAsync(int Id);
         Task<T> GetAsync(int Id);
-        Task<IEnumerable<T>> GetAllAsync(int userId);
+        Task<IEnumerable<T>> GetAllAsync(string userId);
         Task UpdateAsync(int Id, T value);
     }
 }
