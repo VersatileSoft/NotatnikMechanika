@@ -3,9 +3,6 @@ using System.Windows.Controls;
 
 namespace NotatnikMechanika.WPF.Views.Utils
 {
-    /// <summary>
-    /// Interaction logic for ButtonIndicator.xaml
-    /// </summary>
     public partial class ButtonIndicator : Button
     {
         public ButtonIndicator()

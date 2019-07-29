@@ -8,10 +8,7 @@
     Title="MainWindow"
     Width="800"
     Height="580"
-    mc:Ignorable="d"
     AllowsTransparency="True"
-    WindowStyle="None"
     Background="Transparent"
-    >
-
-</views:MvxWindow>
+    WindowStyle="None"
+    mc:Ignorable="d"/>

@@ -3,135 +3,189 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
-    mc:Ignorable="d"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-     TextElement.Foreground="White"
-     TextElement.FontWeight="Regular"
-     TextElement.FontSize="13"
-     TextOptions.TextFormattingMode="Ideal"
-     TextOptions.TextRenderingMode="Auto"
-     FontFamily="{DynamicResource MaterialDesignFont}"
-    >
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="White"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    mc:Ignorable="d">
     <views:MvxWpfView.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
             <GradientStop Color="#36dad2"/>
-            <GradientStop Color="#5877e6" Offset="1"/>
+            <GradientStop Offset="1" Color="#5877e6"/>
         </LinearGradientBrush>
     </views:MvxWpfView.Background>
 
     <StackPanel>
         <Grid Height="130" Background="White"/>
         <Button
-                HorizontalAlignment="Left"
-            Margin="0 20 0 0"
-         Foreground="White"
-                Background="Transparent"
             Height="40"
+            Margin="0,20,0,0"
+            HorizontalAlignment="Left"
+            Background="Transparent"
             BorderThickness="0"
-                Command="{Binding NavigateCommand}"
-                CommandParameter="Orders"
-                >
-            <StackPanel Orientation="Horizontal" Height="30">
-                <materialDesign:PackIcon Kind="Toolbox" VerticalAlignment="Center" Width="30" Height="30"/>
+            Command="{Binding NavigateCommand}"
+            CommandParameter="Orders"
+            Foreground="White">
+            <StackPanel Height="30" Orientation="Horizontal">
+                <materialDesign:PackIcon
+                    Width="30"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    Kind="Toolbox"/>
                 <Grid Width="10"/>
-                <Label Content="Zlecenia" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
+                <Label
+                    VerticalAlignment="Center"
+                    Content="Zlecenia"
+                    FontSize="20"
+                    Foreground="White"/>
             </StackPanel>
         </Button>
         <Button
-            Margin="0 20 0 0"
-            
-         Foreground="White"
-                 BorderThickness="0"
-                HorizontalAlignment="Left"
-                Background="Transparent"
-                Command="{Binding NavigateCommand}"
-                CommandParameter="Clients"
-                FontSize="20">
-            <StackPanel Orientation="Horizontal" Height="30">
-                <materialDesign:PackIcon Kind="CustomerService" VerticalAlignment="Center" Width="30" Height="30"/>
+            Margin="0,20,0,0"
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderThickness="0"
+            Command="{Binding NavigateCommand}"
+            CommandParameter="Clients"
+            FontSize="20"
+            Foreground="White">
+            <StackPanel Height="30" Orientation="Horizontal">
+                <materialDesign:PackIcon
+                    Width="30"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    Kind="CustomerService"/>
                 <Grid Width="10"/>
-                <Label Content="Stali klienci" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
+                <Label
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Content="Stali klienci"
+                    FontSize="20"
+                    Foreground="White"/>
             </StackPanel>
         </Button>
         <Button
-            Margin="0 20 0 0"
             Height="40"
-         Foreground="White"
-                 BorderThickness="0"
-                HorizontalAlignment="Left"
-                Background="Transparent"
-                Command="{Binding NavigateCommand}"
-                CommandParameter="Services"
-                FontSize="20">
-            <StackPanel Orientation="Horizontal" Height="40">
-                <materialDesign:PackIcon Kind="Server" VerticalAlignment="Center" Width="30" Height="30"/>
+            Margin="0,20,0,0"
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderThickness="0"
+            Command="{Binding NavigateCommand}"
+            CommandParameter="Services"
+            FontSize="20"
+            Foreground="White">
+            <StackPanel Height="40" Orientation="Horizontal">
+                <materialDesign:PackIcon
+                    Width="30"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    Kind="Server"/>
                 <Grid Width="10"/>
-                <Label Content="Usługi" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
+                <Label
+                    VerticalAlignment="Center"
+                    Content="Usługi"
+                    FontSize="20"
+                    Foreground="White"/>
             </StackPanel>
         </Button>
         <Button
-            Margin="0 20 0 0"
-         Foreground="White"
-        Height="40"
-                 BorderThickness="0"
-                HorizontalAlignment="Left"
-                Background="Transparent"
-                Command="{Binding NavigateCommand}"
-                CommandParameter="Archives"
-                FontSize="20">
-            <StackPanel Orientation="Horizontal" Height="40">
-                <materialDesign:PackIcon Kind="Archive" VerticalAlignment="Center" Width="30" Height="30"/>
-                <Grid Width="10"/>
-                <Label Content="Archiwum" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
-            </StackPanel>
-        </Button>
-        <Button
-            Margin="0 20 0 0"
-         Foreground="White"
-                BorderThickness="0"
             Height="40"
-                HorizontalAlignment="Left"
-                Background="Transparent"
-                Command="{Binding NavigateCommand}"
-                CommandParameter="Receipts"
-                FontSize="20">
-            <StackPanel Orientation="Horizontal" Height="40">
-                <materialDesign:PackIcon Kind="Receipt" VerticalAlignment="Center" Width="30" Height="30"/>
+            Margin="0,20,0,0"
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderThickness="0"
+            Command="{Binding NavigateCommand}"
+            CommandParameter="Archives"
+            FontSize="20"
+            Foreground="White">
+            <StackPanel Height="40" Orientation="Horizontal">
+                <materialDesign:PackIcon
+                    Width="30"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    Kind="Archive"/>
                 <Grid Width="10"/>
-                <Label Content="Faktury/Paragony" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
+                <Label
+                    VerticalAlignment="Center"
+                    Content="Archiwum"
+                    FontSize="20"
+                    Foreground="White"/>
             </StackPanel>
         </Button>
         <Button
-            Margin="0 20 0 0"
-         Foreground="White"
             Height="40"
-                 BorderThickness="0"
-                HorizontalAlignment="Left"
-                Background="Transparent"
-                Command="{Binding NavigateCommand}"
-                CommandParameter="Warehouse"
-                FontSize="20">
-            <StackPanel Orientation="Horizontal" Height="40">
-                <materialDesign:PackIcon Kind="House" VerticalAlignment="Center" Width="30" Height="30"/>
+            Margin="0,20,0,0"
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderThickness="0"
+            Command="{Binding NavigateCommand}"
+            CommandParameter="Receipts"
+            FontSize="20"
+            Foreground="White">
+            <StackPanel Height="40" Orientation="Horizontal">
+                <materialDesign:PackIcon
+                    Width="30"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    Kind="Receipt"/>
                 <Grid Width="10"/>
-                <Label Content="Magazyn" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
+                <Label
+                    VerticalAlignment="Center"
+                    Content="Faktury/Paragony"
+                    FontSize="20"
+                    Foreground="White"/>
             </StackPanel>
         </Button>
         <Button
-            Margin="0 20 0 0"
-         Foreground="White"
             Height="40"
-                 BorderThickness="0"
-                HorizontalAlignment="Left"
-                Background="Transparent"
-                Command="{Binding LogoutCommand}"
-                FontSize="20">
-            <StackPanel Orientation="Horizontal" Height="40">
-                <materialDesign:PackIcon Kind="Logout" VerticalAlignment="Center" Width="30" Height="30"/>
+            Margin="0,20,0,0"
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderThickness="0"
+            Command="{Binding NavigateCommand}"
+            CommandParameter="Warehouse"
+            FontSize="20"
+            Foreground="White">
+            <StackPanel Height="40" Orientation="Horizontal">
+                <materialDesign:PackIcon
+                    Width="30"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    Kind="House"/>
                 <Grid Width="10"/>
-                <Label Content="Wyloguj" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
+                <Label
+                    VerticalAlignment="Center"
+                    Content="Magazyn"
+                    FontSize="20"
+                    Foreground="White"/>
+            </StackPanel>
+        </Button>
+        <Button
+            Height="40"
+            Margin="0,20,0,0"
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderThickness="0"
+            Command="{Binding LogoutCommand}"
+            FontSize="20"
+            Foreground="White">
+            <StackPanel Height="40" Orientation="Horizontal">
+                <materialDesign:PackIcon
+                    Width="30"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    Kind="Logout"/>
+                <Grid Width="10"/>
+                <Label
+                    VerticalAlignment="Center"
+                    Content="Wyloguj"
+                    FontSize="20"
+                    Foreground="White"/>
             </StackPanel>
         </Button>
     </StackPanel>

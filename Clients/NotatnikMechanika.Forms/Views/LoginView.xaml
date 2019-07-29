@@ -31,6 +31,7 @@
                     </Label>
 
                     <Entry Style="{StaticResource LoginEntry}"
+                        Keyboard="Email"
                         Placeholder="E-mail"
                         Text="{Binding UserModel.Email}"/>
                     <Entry Style="{StaticResource LoginEntry}"

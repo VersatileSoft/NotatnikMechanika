@@ -21,7 +21,7 @@ namespace NotatnikMechanika.WPF.Views
 
         private void PasswordBox_PasswordChanged(object sender, System.Windows.RoutedEventArgs e)
         {
-           ViewModel.UserModel.Password = ((PasswordBox)sender).Password; 
+            ViewModel.UserModel.Password = ((PasswordBox)sender).Password;
         }
 
         private void InitAnimations()
@@ -47,7 +47,7 @@ namespace NotatnikMechanika.WPF.Views
                 Duration = new Duration(TimeSpan.FromMilliseconds(300))
             };
 
-         
+
 
             // Configure the animation to target the button's Width property.
             Storyboard.SetTargetName(WithAnimation, Logo.Name);

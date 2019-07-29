@@ -48,6 +48,7 @@
                     </Grid>
 
                     <Entry Style="{StaticResource LoginEntry}"
+                        Keyboard="Email"
                         Placeholder="E-mail"
                         Text="{Binding CreateUserModel.Email}"/>
                     <Entry Style="{StaticResource LoginEntry}"
