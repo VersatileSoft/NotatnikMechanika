@@ -15,10 +15,11 @@ using System.Windows.Input;
 namespace NotatnikMechanika.Core.ViewModels
 {
     [AddINotifyPropertyChangedInterface]
-    public abstract class AddingViewModelBase<TModel> : MvxViewModel
+    public abstract class AddingViewModelBase<TModel> : MvxViewModel where TModel : new()
     {
         public TModel Model { get; set; }
         public ICommand AddCommand { get; set; }
+        public bool IsWaiting { get; set; }
 
         protected readonly IHttpRequestService _httpRequestService;
         protected readonly IMvxNavigationService _navigationService;
@@ -32,13 +33,16 @@ namespace NotatnikMechanika.Core.ViewModels
             _httpRequestService = httpRequestService;
             _navigationService = navigationService;
             _messageDialogService = messageDialogService;
+            Model = new TModel();
             AddCommand = new MvxAsyncCommand(AddAction);
         }
 
         private async Task AddAction()
         {
-            Response respone = await _httpRequestService.SendPost(Model, PathsHelper.GetPathsByModel<TModel>().GetFullPath(CRUDPaths.CreatePath), true);
-
+            IsWaiting = true;
+            string a = PathsHelper.GetPathsByModel<TModel>().GetFullPath(CRUDPaths.CreatePath);
+            Response respone = await _httpRequestService.SendPost(Model, a, true);
+            IsWaiting = false;
             if (respone.StatusCode == HttpStatusCode.OK)
             {
                 await _messageDialogService.ShowMessageDialog(succesMessage);

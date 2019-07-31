@@ -1,9 +1,14 @@
-﻿namespace NotatnikMechanika.Shared.Models.Customer
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace NotatnikMechanika.Shared.Models.Customer
 {
     public class CustomerModel
     {
+        [Required(ErrorMessage = "Pole imię jest wymagane")]
         public string Name { get; set; }
-        public string SureName { get; set; }
+
+        [Required(ErrorMessage = "Pole nazwisko jest wymagane")]
+        public string Surname { get; set; }
         public string CompanyName { get; set; }
         /// <summary>
         /// np NIP

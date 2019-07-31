@@ -15,13 +15,13 @@
     mc:Ignorable="d">
     <views:MvxWpfView.Background>
         <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-            <GradientStop Color="#36dad2"/>
-            <GradientStop Offset="1" Color="#5877e6"/>
+            <GradientStop Color="#36dad2" />
+            <GradientStop Offset="1" Color="#5877e6" />
         </LinearGradientBrush>
     </views:MvxWpfView.Background>
 
     <StackPanel>
-        <Grid Height="130" Background="White"/>
+        <Grid Height="130" Background="White" />
         <Button
             Height="40"
             Margin="0,20,0,0"
@@ -36,13 +36,13 @@
                     Width="30"
                     Height="30"
                     VerticalAlignment="Center"
-                    Kind="Toolbox"/>
-                <Grid Width="10"/>
+                    Kind="Toolbox" />
+                <Grid Width="10" />
                 <Label
                     VerticalAlignment="Center"
                     Content="Zlecenia"
                     FontSize="20"
-                    Foreground="White"/>
+                    Foreground="White" />
             </StackPanel>
         </Button>
         <Button
@@ -59,14 +59,14 @@
                     Width="30"
                     Height="30"
                     VerticalAlignment="Center"
-                    Kind="CustomerService"/>
-                <Grid Width="10"/>
+                    Kind="CustomerService" />
+                <Grid Width="10" />
                 <Label
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
                     Content="Stali klienci"
                     FontSize="20"
-                    Foreground="White"/>
+                    Foreground="White" />
             </StackPanel>
         </Button>
         <Button
@@ -84,13 +84,13 @@
                     Width="30"
                     Height="30"
                     VerticalAlignment="Center"
-                    Kind="Server"/>
-                <Grid Width="10"/>
+                    Kind="Server" />
+                <Grid Width="10" />
                 <Label
                     VerticalAlignment="Center"
                     Content="Usługi"
                     FontSize="20"
-                    Foreground="White"/>
+                    Foreground="White" />
             </StackPanel>
         </Button>
         <Button
@@ -108,13 +108,13 @@
                     Width="30"
                     Height="30"
                     VerticalAlignment="Center"
-                    Kind="Archive"/>
-                <Grid Width="10"/>
+                    Kind="Archive" />
+                <Grid Width="10" />
                 <Label
                     VerticalAlignment="Center"
                     Content="Archiwum"
                     FontSize="20"
-                    Foreground="White"/>
+                    Foreground="White" />
             </StackPanel>
         </Button>
         <Button
@@ -132,13 +132,13 @@
                     Width="30"
                     Height="30"
                     VerticalAlignment="Center"
-                    Kind="Receipt"/>
-                <Grid Width="10"/>
+                    Kind="Receipt" />
+                <Grid Width="10" />
                 <Label
                     VerticalAlignment="Center"
                     Content="Faktury/Paragony"
                     FontSize="20"
-                    Foreground="White"/>
+                    Foreground="White" />
             </StackPanel>
         </Button>
         <Button
@@ -156,13 +156,13 @@
                     Width="30"
                     Height="30"
                     VerticalAlignment="Center"
-                    Kind="House"/>
-                <Grid Width="10"/>
+                    Kind="House" />
+                <Grid Width="10" />
                 <Label
                     VerticalAlignment="Center"
                     Content="Magazyn"
                     FontSize="20"
-                    Foreground="White"/>
+                    Foreground="White" />
             </StackPanel>
         </Button>
         <Button
@@ -179,13 +179,13 @@
                     Width="30"
                     Height="30"
                     VerticalAlignment="Center"
-                    Kind="Logout"/>
-                <Grid Width="10"/>
+                    Kind="Logout" />
+                <Grid Width="10" />
                 <Label
                     VerticalAlignment="Center"
                     Content="Wyloguj"
                     FontSize="20"
-                    Foreground="White"/>
+                    Foreground="White" />
             </StackPanel>
         </Button>
     </StackPanel>

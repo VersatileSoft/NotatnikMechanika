@@ -23,44 +23,47 @@
     <Border CornerRadius="10">
         <Border.Background>
             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                <GradientStop Color="#36dad2"/>
-                <GradientStop Offset="1" Color="#5877e6"/>
+                <GradientStop Color="#36dad2" />
+                <GradientStop Offset="1" Color="#5877e6" />
             </LinearGradientBrush>
         </Border.Background>
         <Grid>
             <StackPanel>
-                <Image x:Name="Logo"
+                <Image
+                    x:Name="Logo"
                     Width="80"
                     Height="80"
                     Margin="0,40,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Source="/NotatnikMechanika.WPF;component/Assets/AppIcon_Light.png"/>
+                    Source="/NotatnikMechanika.WPF;component/Assets/AppIcon_Light.png" />
 
                 <Label
                     Margin="0,20,0,0"
                     HorizontalAlignment="Center"
                     Content="Notatnik Mechanika"
                     FontSize="30"
-                    Foreground="#DDFFFFFF"/>
+                    Foreground="#DDFFFFFF" />
                 <StackPanel x:Name="LoginControls">
-                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    <TextBox
                         Width="400"
                         Margin="0,10,0,10"
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="E-mail"
                         AcceptsReturn="True"
                         Foreground="White"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Text="{Binding UserModel.Email}"
-                        VerticalScrollBarVisibility="Disabled"/>
+                        VerticalScrollBarVisibility="Disabled" />
 
-                    <PasswordBox Style="{StaticResource MaterialDesignFilledPasswordFieldPasswordBox}"
+                    <PasswordBox
                         Width="400"
                         VerticalAlignment="Top"
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Hasło"
                         Foreground="White"
-                        PasswordChanged="PasswordBox_PasswordChanged"/>
+                        PasswordChanged="PasswordBox_PasswordChanged"
+                        Style="{StaticResource MaterialDesignFilledPasswordFieldPasswordBox}" />
 
                     <Label
                         Height="30"
@@ -69,15 +72,16 @@
                         VerticalAlignment="Center"
                         Content="{Binding ErrorMessage}"
                         FontSize="15"
-                        Foreground="#DDFF0000"/>
+                        Foreground="#DDFF0000" />
 
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        <Button
                             Width="130"
                             Height="40"
                             Margin="0,20,0,0"
                             Command="{Binding RegisterCommand}"
-                            Content="Nie mam konta"/>
+                            Content="Nie mam konta"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}" />
 
                         <utils:ButtonIndicator
                             Width="130"
@@ -85,7 +89,7 @@
                             Margin="130,20,0,0"
                             Command="{Binding LoginCommand}"
                             IsWaiting="{Binding IsWaiting}"
-                            Text="Zaloguj się"/>
+                            Text="Zaloguj się" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>

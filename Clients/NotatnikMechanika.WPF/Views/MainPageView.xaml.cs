@@ -23,11 +23,10 @@ namespace NotatnikMechanika.WPF.Views
 
         private void MvxWpfView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (ActualWidth < 600)
+            if (ActualWidth < 800)
             {
                 if (!_isHide)
                 {
-
                     Master.BeginAnimation(WidthProperty, _hideMenuAnimation);
                     _isHide = true;
                 }

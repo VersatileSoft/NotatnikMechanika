@@ -83,7 +83,8 @@ namespace NotatnikMechanika.Shared
         public static IPaths GetPathsByModel<TModel>()
         {
             string name = typeof(TModel).Name.Replace("Model", "Paths");
-            return Activator.CreateInstance(Type.GetType(name)) as IPaths;
+            var a = Type.GetType("NotatnikMechanika.Shared." + name);
+            return Activator.CreateInstance(a) as IPaths;
         }
     }
 }

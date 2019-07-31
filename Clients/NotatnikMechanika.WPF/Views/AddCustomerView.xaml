@@ -1,0 +1,96 @@
+﻿<views:MvxWpfView
+    x:Class="NotatnikMechanika.WPF.Views.AddCustomerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utils="clr-namespace:NotatnikMechanika.WPF.Views.Utils"
+    xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
+    Background="Gray"
+    mc:Ignorable="d">
+
+    <StackPanel>
+
+
+        <Label
+            Margin="0,20,0,0"
+            HorizontalAlignment="Center"
+            Content="Notatnik Mechanika"
+            FontSize="30"
+            Foreground="#DDFFFFFF" />
+        <StackPanel>
+            <TextBox
+                Width="400"
+                Margin="0,10,0,10"
+                materialDesign:HintAssist.Foreground="White"
+                materialDesign:HintAssist.Hint="Imię"
+                AcceptsReturn="True"
+                Foreground="White"
+                Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                Text="{Binding Model.Name}"
+                VerticalScrollBarVisibility="Disabled" />
+
+            <TextBox
+                Width="400"
+                Margin="0,10,0,10"
+                materialDesign:HintAssist.Foreground="White"
+                materialDesign:HintAssist.Hint="Nazwisko"
+                AcceptsReturn="True"
+                Foreground="White"
+                Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                Text="{Binding Model.Surname}"
+                VerticalScrollBarVisibility="Disabled" />
+
+            <TextBox
+                Width="400"
+                Margin="0,10,0,10"
+                materialDesign:HintAssist.Foreground="White"
+                materialDesign:HintAssist.Hint="Nazwa firmy"
+                AcceptsReturn="True"
+                Foreground="White"
+                Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                Text="{Binding Model.CompanyName}"
+                VerticalScrollBarVisibility="Disabled" />
+
+            <TextBox
+                Width="400"
+                Margin="0,10,0,10"
+                materialDesign:HintAssist.Foreground="White"
+                materialDesign:HintAssist.Hint="Nip"
+                AcceptsReturn="True"
+                Foreground="White"
+                Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                Text="{Binding Model.CompanyIdentyficator}"
+                VerticalScrollBarVisibility="Disabled" />
+
+            <TextBox
+                Width="400"
+                Margin="0,10,0,10"
+                materialDesign:HintAssist.Foreground="White"
+                materialDesign:HintAssist.Hint="Telefon"
+                AcceptsReturn="True"
+                Foreground="White"
+                Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                Text="{Binding Model.Phone}"
+                VerticalScrollBarVisibility="Disabled" />
+
+            <Label
+                Height="30"
+                Margin="0,20,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="{Binding ErrorMessage}"
+                FontSize="15"
+                Foreground="#DDFF0000" />
+
+            <utils:ButtonIndicator
+                Width="130"
+                Height="40"
+                Margin="0,0,40,0"
+                Command="{Binding AddCommand}"
+                IsWaiting="{Binding IsWaiting}"
+                Text="Dodaj klienta" />
+        </StackPanel>
+    </StackPanel>
+</views:MvxWpfView>
