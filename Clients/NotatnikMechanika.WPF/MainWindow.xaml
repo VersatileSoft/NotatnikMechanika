@@ -9,6 +9,16 @@
     Width="800"
     Height="580"
     AllowsTransparency="True"
-    Background="Transparent"
     WindowStyle="None"
-    mc:Ignorable="d"/>
+    
+    Background="Transparent"
+    mc:Ignorable="d" Topmost="True">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+        CaptionHeight="0"
+        ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+
+
+</views:MvxWindow>

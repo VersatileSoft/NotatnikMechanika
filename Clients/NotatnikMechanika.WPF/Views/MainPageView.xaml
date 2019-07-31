@@ -7,15 +7,15 @@
     xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    mc:Ignorable="d">
+    mc:Ignorable="d" SizeChanged="MvxWpfView_SizeChanged">
 
-    <Grid>
+    <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ContentControl x:Name="Master" Grid.Column="0"/>
+        <ContentControl x:Name="Master" Width="250" Grid.Column="0"/>
 
         <ContentControl x:Name="Detail" Grid.Column="1"/>
     </Grid>
