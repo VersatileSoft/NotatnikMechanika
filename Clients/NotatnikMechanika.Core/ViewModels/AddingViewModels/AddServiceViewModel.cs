@@ -9,8 +9,8 @@ namespace NotatnikMechanika.Core.ViewModels
 {
     class AddServiceViewModel : AddingViewModelBase<ServiceModel>
     {
-        protected override string errorMessage { get; set; } = "Błąd podczas dodawania usługi.";
-        protected override string succesMessage { get; set; } = "Usługa została dodana pomyślnie.";
+        public override string ErrorMessage { get; set; } = "Błąd podczas dodawania usługi.";
+        public override string SuccesMessage { get; set; } = "Usługa została dodana pomyślnie.";
 
         public AddServiceViewModel(IHttpRequestService httpRequestService, IMvxNavigationService navigationService, IMessageDialogService messageDialogService)
             : base(httpRequestService, navigationService, messageDialogService)

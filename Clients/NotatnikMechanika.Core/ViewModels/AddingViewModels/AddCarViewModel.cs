@@ -9,8 +9,8 @@ namespace NotatnikMechanika.Core.ViewModels
 {
     class AddCarViewModel : AddingViewModelBase<CarModel>
     {
-        protected override string errorMessage { get; set; } = "Błąd podczas dodawania samochodu.";
-        protected override string succesMessage { get; set; } = "Samochód został dodany pomyślnie.";
+        public override string ErrorMessage { get; set; } = "Błąd podczas dodawania samochodu.";
+        public override string SuccesMessage { get; set; } = "Samochód został dodany pomyślnie.";
 
         public AddCarViewModel(IHttpRequestService httpRequestService, IMvxNavigationService navigationService, IMessageDialogService messageDialogService)
             : base(httpRequestService, navigationService, messageDialogService)

@@ -16,8 +16,8 @@ namespace NotatnikMechanika.Core.ViewModels
     public class AddOrderViewModel : AddingViewModelBase<OrderModel>
     {
 
-        protected override string errorMessage { get; set; } = "Błąd podczas dodawania zlecenia. ";
-        protected override string succesMessage { get; set; } = "Zlecenie zostało dodane pomyślnie.";
+        public override string ErrorMessage { get; set; } = "Błąd podczas dodawania zlecenia. ";
+        public override string SuccesMessage { get; set; } = "Zlecenie zostało dodane pomyślnie.";
         public AddOrderViewModel(IHttpRequestService httpRequestService, IMvxNavigationService navigationService, IMessageDialogService messageDialogService)
             : base(httpRequestService, navigationService, messageDialogService)
         {

@@ -21,7 +21,15 @@
     </views:MvxWpfView.Background>
 
     <StackPanel>
-        <Grid Height="130" Background="White" />
+        <Grid Height="130" Background="Transparent">
+            <Image
+                x:Name="Logo"
+                Width="80"
+                Height="80"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Source="/NotatnikMechanika.WPF;component/Assets/AppIcon_Light.png" />
+        </Grid>
         <Button
             Height="40"
             Margin="0,20,0,0"

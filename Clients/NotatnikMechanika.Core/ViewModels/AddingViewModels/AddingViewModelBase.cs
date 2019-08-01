@@ -19,14 +19,15 @@ namespace NotatnikMechanika.Core.ViewModels
     {
         public TModel Model { get; set; }
         public ICommand AddCommand { get; set; }
+        public ICommand GoBackCommand { get; set; }
         public bool IsWaiting { get; set; }
 
         protected readonly IHttpRequestService _httpRequestService;
         protected readonly IMvxNavigationService _navigationService;
         protected readonly IMessageDialogService _messageDialogService;
 
-        protected abstract string errorMessage { get; set; }
-        protected abstract string succesMessage { get; set; }
+        public virtual string ErrorMessage { get; set; }
+        public abstract string SuccesMessage { get; set; }
 
         public AddingViewModelBase(IHttpRequestService httpRequestService, IMvxNavigationService navigationService, IMessageDialogService messageDialogService)
         {
@@ -35,6 +36,7 @@ namespace NotatnikMechanika.Core.ViewModels
             _messageDialogService = messageDialogService;
             Model = new TModel();
             AddCommand = new MvxAsyncCommand(AddAction);
+            GoBackCommand = new MvxAsyncCommand(() => _navigationService.Navigate<MainPageViewModel>());
         }
 
         private async Task AddAction()
@@ -45,12 +47,13 @@ namespace NotatnikMechanika.Core.ViewModels
             IsWaiting = false;
             if (respone.StatusCode == HttpStatusCode.OK)
             {
-                await _messageDialogService.ShowMessageDialog(succesMessage);
+                await _messageDialogService.ShowMessageDialog(SuccesMessage);
                 await _navigationService.Navigate<MainPageViewModel>();
             }
             else
             {
-                await _messageDialogService.ShowMessageDialog(errorMessage + " " + respone.ErrorMessage);
+                ErrorMessage = respone.ErrorMessage;
+                await _messageDialogService.ShowMessageDialog(ErrorMessage);
             }
         }
     }

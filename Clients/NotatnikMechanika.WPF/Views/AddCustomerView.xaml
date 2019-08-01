@@ -12,85 +12,102 @@
 
     <StackPanel>
 
-
-        <Label
-            Margin="0,20,0,0"
-            HorizontalAlignment="Center"
-            Content="Notatnik Mechanika"
-            FontSize="30"
-            Foreground="#DDFFFFFF" />
-        <StackPanel>
-            <TextBox
-                Width="400"
-                Margin="0,10,0,10"
-                materialDesign:HintAssist.Foreground="White"
-                materialDesign:HintAssist.Hint="Imię"
-                AcceptsReturn="True"
-                Foreground="White"
-                Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-                Text="{Binding Model.Name}"
-                VerticalScrollBarVisibility="Disabled" />
-
-            <TextBox
-                Width="400"
-                Margin="0,10,0,10"
-                materialDesign:HintAssist.Foreground="White"
-                materialDesign:HintAssist.Hint="Nazwisko"
-                AcceptsReturn="True"
-                Foreground="White"
-                Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-                Text="{Binding Model.Surname}"
-                VerticalScrollBarVisibility="Disabled" />
-
-            <TextBox
-                Width="400"
-                Margin="0,10,0,10"
-                materialDesign:HintAssist.Foreground="White"
-                materialDesign:HintAssist.Hint="Nazwa firmy"
-                AcceptsReturn="True"
-                Foreground="White"
-                Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-                Text="{Binding Model.CompanyName}"
-                VerticalScrollBarVisibility="Disabled" />
-
-            <TextBox
-                Width="400"
-                Margin="0,10,0,10"
-                materialDesign:HintAssist.Foreground="White"
-                materialDesign:HintAssist.Hint="Nip"
-                AcceptsReturn="True"
-                Foreground="White"
-                Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-                Text="{Binding Model.CompanyIdentyficator}"
-                VerticalScrollBarVisibility="Disabled" />
-
-            <TextBox
-                Width="400"
-                Margin="0,10,0,10"
-                materialDesign:HintAssist.Foreground="White"
-                materialDesign:HintAssist.Hint="Telefon"
-                AcceptsReturn="True"
-                Foreground="White"
-                Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-                Text="{Binding Model.Phone}"
-                VerticalScrollBarVisibility="Disabled" />
+        <Grid>
+            <Button
+                Width="50"
+                Height="50"
+                Margin="10,5,0,0"
+                Padding="0"
+                HorizontalAlignment="Left"
+                Background="Transparent"
+                BorderThickness="0"
+                Command="{Binding GoBackCommand}">
+                <materialDesign:PackIcon
+                    Width="50"
+                    Height="50"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    Kind="ArrowLeftBoldCircle" />
+            </Button>
 
             <Label
-                Height="30"
                 Margin="0,20,0,0"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Content="{Binding ErrorMessage}"
-                FontSize="15"
-                Foreground="#DDFF0000" />
+                Content="Dodaj klienta"
+                FontSize="30"
+                Foreground="#DDFFFFFF" />
 
-            <utils:ButtonIndicator
-                Width="130"
-                Height="40"
-                Margin="0,0,40,0"
-                Command="{Binding AddCommand}"
-                IsWaiting="{Binding IsWaiting}"
-                Text="Dodaj klienta" />
-        </StackPanel>
+        </Grid>
+
+        <TextBox
+            Width="400"
+            Margin="0,10,0,10"
+            materialDesign:HintAssist.Foreground="White"
+            materialDesign:HintAssist.Hint="Imię"
+            AcceptsReturn="True"
+            Foreground="White"
+            Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+            Text="{Binding Model.Name}"
+            VerticalScrollBarVisibility="Disabled" />
+
+        <TextBox
+            Width="400"
+            Margin="0,10,0,10"
+            materialDesign:HintAssist.Foreground="White"
+            materialDesign:HintAssist.Hint="Nazwisko"
+            AcceptsReturn="True"
+            Foreground="White"
+            Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+            Text="{Binding Model.Surname}"
+            VerticalScrollBarVisibility="Disabled" />
+
+        <TextBox
+            Width="400"
+            Margin="0,10,0,10"
+            materialDesign:HintAssist.Foreground="White"
+            materialDesign:HintAssist.Hint="Nazwa firmy"
+            AcceptsReturn="True"
+            Foreground="White"
+            Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+            Text="{Binding Model.CompanyName}"
+            VerticalScrollBarVisibility="Disabled" />
+
+        <TextBox
+            Width="400"
+            Margin="0,10,0,10"
+            materialDesign:HintAssist.Foreground="White"
+            materialDesign:HintAssist.Hint="Nip"
+            AcceptsReturn="True"
+            Foreground="White"
+            Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+            Text="{Binding Model.CompanyIdentyficator}"
+            VerticalScrollBarVisibility="Disabled" />
+
+        <TextBox
+            Width="400"
+            Margin="0,10,0,0"
+            materialDesign:HintAssist.Foreground="White"
+            materialDesign:HintAssist.Hint="Telefon"
+            AcceptsReturn="True"
+            Foreground="White"
+            Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+            Text="{Binding Model.Phone}"
+            VerticalScrollBarVisibility="Disabled" />
+
+        <Label
+            Margin="0,10,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Content="{Binding ErrorMessage}"
+            FontSize="15"
+            Foreground="#DDFF0000" />
+
+        <utils:ButtonIndicator
+            Width="130"
+            Height="40"
+            Command="{Binding AddCommand}"
+            IsWaiting="{Binding IsWaiting}"
+            Text="Dodaj klienta" />
     </StackPanel>
 </views:MvxWpfView>
