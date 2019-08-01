@@ -1,0 +1,96 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace NotatnikMechanika.WPF.Views.Utils
+{
+    /// <summary>
+    /// Interaction logic for TopBar.xaml
+    /// </summary>
+    public partial class TopBar : UserControl
+    {
+        private bool _restoreForDragMove;
+        private Window _mainWindow = Application.Current.MainWindow;
+
+        public TopBar()
+        {
+            InitializeComponent();
+        }
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+
+            _mainWindow.MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
+            _mainWindow.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+
+            if (e.ClickCount == 2)
+            {
+                if (_mainWindow.ResizeMode != ResizeMode.CanResize &&
+                    _mainWindow.ResizeMode != ResizeMode.CanResizeWithGrip)
+                {
+                    return;
+                }
+
+                _mainWindow.WindowState = _mainWindow.WindowState == WindowState.Maximized
+                    ? WindowState.Normal
+                    : WindowState.Maximized;
+            }
+            else
+            {
+                _restoreForDragMove = _mainWindow.WindowState == WindowState.Maximized;
+                _mainWindow.DragMove();
+            }
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+
+            if (_restoreForDragMove)
+            {
+                _restoreForDragMove = false;
+
+                var point = PointToScreen(e.MouseDevice.GetPosition(this));
+
+                _mainWindow.Left = point.X - (_mainWindow.RestoreBounds.Width * 0.5);
+                _mainWindow.Top = point.Y;
+
+                _mainWindow.WindowState = WindowState.Normal;
+
+                _mainWindow.DragMove();
+            }
+        }
+
+        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonUp(e);
+            _restoreForDragMove = false;
+        }
+
+        private void Minimize_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        }
+        private void Maximize_Click(object sender, RoutedEventArgs e)
+        {
+            if (Application.Current.MainWindow.WindowState == WindowState.Normal)
+                Application.Current.MainWindow.WindowState = WindowState.Maximized;
+            else
+                Application.Current.MainWindow.WindowState = WindowState.Normal;
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Close();
+        }
+    }
+}

@@ -11,7 +11,7 @@
     mc:Ignorable="d">
 
     <StackPanel>
-
+        <utils:TopBar />
         <Grid>
             <Button
                 Width="50"

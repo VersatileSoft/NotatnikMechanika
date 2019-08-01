@@ -28,7 +28,7 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Imię" />
-                        <GridViewColumn DisplayMemberBinding="{Binding SureName}" Header="Nazwisko" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Surname}" Header="Nazwisko" />
                         <GridViewColumn DisplayMemberBinding="{Binding CompanyName}" Header="Firma" />
                         <GridViewColumn DisplayMemberBinding="{Binding CompanyIdentyficator}" Header="Nip" />
                         <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Telefon" />

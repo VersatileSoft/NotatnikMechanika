@@ -19,6 +19,9 @@
     <None Remove="Views\RegistrationView.xaml" />
     <None Remove="Views\Utils\AddCustomerView.xaml" />
     <None Remove="Views\Utils\ButtonIndicator.xaml" />
+    <None Remove="Views\Utils\MenuButton.xaml" />
+    <None Remove="Views\Utils\NotificationsSnackbar.xaml" />
+    <None Remove="Views\Utils\TopBar.xaml" />
   </ItemGroup>
 
   <ItemGroup>

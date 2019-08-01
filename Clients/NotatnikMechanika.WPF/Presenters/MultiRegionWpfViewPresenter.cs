@@ -46,41 +46,7 @@ namespace NotatnikMechanika.WPF.Presenters
 
         public override void RegisterAttributeTypes()
         {
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MasterDetailPageAttribute), new MvxPresentationAttributeAction
-                {
-                    //Type, IMvxPresentationAttribute, MvxViewModelRequest, Task<bool>
-                    ShowAction = (type, attribute, request) =>
-                    {
-                        MasterDetailPageAttribute masterDetailPageAttribute = (MasterDetailPageAttribute)attribute;
-
-                        IMvxWpfViewLoader loader = Mvx.IoCProvider.Resolve<IMvxWpfViewLoader>();
-                        FrameworkElement view = loader.CreateView(request);
-                        ContentControl containerView = null;
-                        if (masterDetailPageAttribute.Position == MasterDetailPageAttribute.MasterDetailPosition.Master)
-                        {
-                            containerView = GetChild<ContentControl>(_contentControl, "Master");
-                        }
-                        else
-                        {
-                            containerView = GetChild<ContentControl>(_contentControl, "Detail");
-                        }
-
-                        if (containerView != null)
-                        {
-                            _uiThreadDispatcher.Invoke(() =>
-                            {
-                                containerView.Content = view;
-                            });
-                            return Task.FromResult(true);
-                        }
-                        return Task.FromResult(false);
-                    },
-
-                    CloseAction = (a, b) => { return Task.Run(() => true); }
-
-
-                });
+            AttributeTypesToActionsDictionary.Add(typeof(MasterDetailPageAttribute), new MasterDetailPageAction(_contentControl, _uiThreadDispatcher));
             base.RegisterAttributeTypes();
         }
 
@@ -89,10 +55,5 @@ namespace NotatnikMechanika.WPF.Presenters
         //    var viewFinder = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
         //    return viewFinder.GetViewType(request.ViewModelType);
         //}
-
-        private static T GetChild<T>(DependencyObject parent, string childName) where T : DependencyObject
-        {
-            return LogicalTreeHelper.FindLogicalNode(parent, childName) as T;
-        }
     }
 }

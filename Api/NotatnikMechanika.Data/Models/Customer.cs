@@ -5,7 +5,7 @@ namespace NotatnikMechanika.Data.Models
     public class Customer : EntityBase
     {
         public string Name { get; set; }
-        public string SureName { get; set; }
+        public string Surname { get; set; }
         public string CompanyName { get; set; }
         /// <summary>
         /// np NIP
