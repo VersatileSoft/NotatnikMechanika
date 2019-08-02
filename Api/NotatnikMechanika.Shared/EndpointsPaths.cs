@@ -32,6 +32,8 @@ namespace NotatnikMechanika.Shared
     {
         public const string Name = "api/car";
 
+        public const string GetByCustomerPath = "byCustomer/{customerId}";
+
         public string GetFullPath(string path)
         {
             return Name + "/" + path;

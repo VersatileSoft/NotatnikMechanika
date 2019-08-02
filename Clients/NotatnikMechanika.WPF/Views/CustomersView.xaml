@@ -6,7 +6,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
-    Background="White"
+    Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
     TextElement.FontSize="13"
     TextElement.FontWeight="Regular"
@@ -24,9 +24,9 @@
                 Style="{StaticResource MaterialDesignDisplay2TextBlock}"
                 Text="Klienci" />
 
-            <ListView ItemsSource="{Binding Customers}">
+            <ListView ItemsSource="{Binding Customers}" SelectionChanged="ListView_Selected">
                 <ListView.View>
-                    <GridView>
+                    <GridView >
                         <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Imię" />
                         <GridViewColumn DisplayMemberBinding="{Binding Surname}" Header="Nazwisko" />
                         <GridViewColumn DisplayMemberBinding="{Binding CompanyName}" Header="Firma" />

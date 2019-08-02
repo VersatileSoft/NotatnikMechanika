@@ -13,12 +13,14 @@
   <ItemGroup>
     <None Remove="Assets\AppIcon_Light.png" />
     <None Remove="Views\CustomersView.xaml" />
+    <None Remove="Views\CustomerView.xaml" />
     <None Remove="Views\LoginView.xaml" />
     <None Remove="Views\MenuView.xaml" />
     <None Remove="Views\OrdersView.xaml" />
     <None Remove="Views\RegistrationView.xaml" />
     <None Remove="Views\Utils\AddCustomerView.xaml" />
     <None Remove="Views\Utils\ButtonIndicator.xaml" />
+    <None Remove="Views\Utils\IconButton.xaml" />
     <None Remove="Views\Utils\MenuButton.xaml" />
     <None Remove="Views\Utils\NotificationsSnackbar.xaml" />
     <None Remove="Views\Utils\TopBar.xaml" />

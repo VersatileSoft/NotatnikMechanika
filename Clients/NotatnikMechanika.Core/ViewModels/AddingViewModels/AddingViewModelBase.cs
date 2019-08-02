@@ -15,7 +15,7 @@ using System.Windows.Input;
 namespace NotatnikMechanika.Core.ViewModels
 {
     [AddINotifyPropertyChangedInterface]
-    public abstract class AddingViewModelBase<TModel> : MvxViewModel where TModel : new()
+    public abstract class AddingViewModelBase<TModel> : MvxViewModel<int> where TModel : new()
     {
         public TModel Model { get; set; }
         public ICommand AddCommand { get; set; }
@@ -38,7 +38,7 @@ namespace NotatnikMechanika.Core.ViewModels
             AddCommand = new MvxAsyncCommand(AddAction);
             GoBackCommand = new MvxAsyncCommand(() => _navigationService.Navigate<MainPageViewModel>());
         }
-
+        public override void Prepare(int parameter) { }
         private async Task AddAction()
         {
             IsWaiting = true;

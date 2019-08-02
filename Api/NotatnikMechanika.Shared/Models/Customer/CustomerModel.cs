@@ -4,6 +4,8 @@ namespace NotatnikMechanika.Shared.Models.Customer
 {
     public class CustomerModel
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Pole imię jest wymagane")]
         public string Name { get; set; }
 

@@ -4,6 +4,8 @@ using NotatnikMechanika.Server.Controllers.Base;
 using NotatnikMechanika.Service.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Car;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Server.Controllers
 {
@@ -16,6 +18,12 @@ namespace NotatnikMechanika.Server.Controllers
         public CarsController(ICarService carService) : base(carService)
         {
             _carService = carService;
+        }
+
+        [HttpGet(CarPaths.GetByCustomerPath)]
+        public async Task<ActionResult<IEnumerable<CarModel>>> GetCarsByCustomerAsync(int customerId)
+        {
+            return Ok(await _carService.GetCarsByCustomerAsync(User.Identity.Name, customerId));
         }
     }
 }

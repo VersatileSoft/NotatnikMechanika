@@ -7,93 +7,162 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utils="clr-namespace:NotatnikMechanika.WPF.Views.Utils"
     xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
-    Background="Gray"
+    Background="{DynamicResource MaterialDesignPaper}"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
     mc:Ignorable="d">
 
     <StackPanel>
         <utils:TopBar />
         <Grid>
-            <Button
+            <utils:IconButton
                 Width="50"
                 Height="50"
-                Margin="10,5,0,0"
-                Padding="0"
+                Margin="20,5,0,0"
                 HorizontalAlignment="Left"
-                Background="Transparent"
-                BorderThickness="0"
-                Command="{Binding GoBackCommand}">
-                <materialDesign:PackIcon
-                    Width="50"
-                    Height="50"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Foreground="White"
-                    Kind="ArrowLeftBoldCircle" />
-            </Button>
+                Command="{Binding GoBackCommand}"
+                Foreground="{StaticResource SecondaryAccentBrush}"
+                IconKind="ArrowLeftBoldCircle" />
 
             <Label
                 Margin="0,20,0,0"
                 HorizontalAlignment="Center"
                 Content="Dodaj klienta"
-                FontSize="30"
-                Foreground="#DDFFFFFF" />
+                FontSize="30" />
 
         </Grid>
 
-        <TextBox
-            Width="400"
-            Margin="0,10,0,10"
-            materialDesign:HintAssist.Foreground="White"
-            materialDesign:HintAssist.Hint="Imię"
-            AcceptsReturn="True"
-            Foreground="White"
-            Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-            Text="{Binding Model.Name}"
-            VerticalScrollBarVisibility="Disabled" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <TextBox
-            Width="400"
-            Margin="0,10,0,10"
-            materialDesign:HintAssist.Foreground="White"
-            materialDesign:HintAssist.Hint="Nazwisko"
-            AcceptsReturn="True"
-            Foreground="White"
-            Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-            Text="{Binding Model.Surname}"
-            VerticalScrollBarVisibility="Disabled" />
+            <GroupBox
+                Grid.Column="0"
+                Margin="16"
+                Header="Dane Klienta"
+                Style="{DynamicResource MaterialDesignCardGroupBox}">
+                <GroupBox.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="32"
+                                Height="32"
+                                VerticalAlignment="Center"
+                                Kind="User" />
+                            <TextBlock
+                                Margin="8,0,0,0"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource MaterialDesignSubheadingTextBlock}"
+                                Text="{Binding}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </GroupBox.HeaderTemplate>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-        <TextBox
-            Width="400"
-            Margin="0,10,0,10"
-            materialDesign:HintAssist.Foreground="White"
-            materialDesign:HintAssist.Hint="Nazwa firmy"
-            AcceptsReturn="True"
-            Foreground="White"
-            Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-            Text="{Binding Model.CompanyName}"
-            VerticalScrollBarVisibility="Disabled" />
+                    <TextBox
+                        Grid.Row="0"
+                        Margin="10,10,10,10"
+                        materialDesign:HintAssist.Foreground="White"
+                        materialDesign:HintAssist.Hint="Imię"
+                        AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        Text="{Binding Model.Name}"
+                        VerticalScrollBarVisibility="Disabled" />
 
-        <TextBox
-            Width="400"
-            Margin="0,10,0,10"
-            materialDesign:HintAssist.Foreground="White"
-            materialDesign:HintAssist.Hint="Nip"
-            AcceptsReturn="True"
-            Foreground="White"
-            Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-            Text="{Binding Model.CompanyIdentyficator}"
-            VerticalScrollBarVisibility="Disabled" />
+                    <TextBox
+                        Grid.Row="1"
+                        Margin="10,10,10,10"
+                        materialDesign:HintAssist.Foreground="White"
+                        materialDesign:HintAssist.Hint="Nazwisko"
+                        AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        Text="{Binding Model.Surname}"
+                        VerticalScrollBarVisibility="Disabled" />
 
-        <TextBox
-            Width="400"
-            Margin="0,10,0,0"
-            materialDesign:HintAssist.Foreground="White"
-            materialDesign:HintAssist.Hint="Telefon"
-            AcceptsReturn="True"
-            Foreground="White"
-            Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-            Text="{Binding Model.Phone}"
-            VerticalScrollBarVisibility="Disabled" />
+                    <TextBox
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Margin="10,10,10,10"
+                        materialDesign:HintAssist.Foreground="White"
+                        materialDesign:HintAssist.Hint="Telefon"
+                        AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        Text="{Binding Model.Phone}"
+                        VerticalScrollBarVisibility="Disabled" />
+
+                    <TextBox
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Margin="10,10,10,10"
+                        materialDesign:HintAssist.Foreground="White"
+                        materialDesign:HintAssist.Hint="Adres"
+                        AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        Text="{Binding Model.Address}"
+                        VerticalScrollBarVisibility="Disabled" />
+                </Grid>
+            </GroupBox>
+
+            <GroupBox
+                Grid.Column="1"
+                Margin="16"
+                Header="Dane Firmy"
+                Style="{DynamicResource MaterialDesignCardGroupBox}">
+                <GroupBox.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Width="32"
+                                Height="32"
+                                VerticalAlignment="Center"
+                                Kind="Company" />
+                            <TextBlock
+                                Margin="8,0,0,0"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource MaterialDesignSubheadingTextBlock}"
+                                Text="{Binding}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </GroupBox.HeaderTemplate>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBox
+                        Grid.Row="0"
+                        Margin="10,10,10,10"
+                        materialDesign:HintAssist.Foreground="White"
+                        materialDesign:HintAssist.Hint="Nazwa firmy"
+                        AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        Text="{Binding Model.CompanyName}"
+                        VerticalScrollBarVisibility="Disabled" />
+
+                    <TextBox
+                        Grid.Row="1"
+                        Margin="10,10,10,10"
+                        materialDesign:HintAssist.Foreground="White"
+                        materialDesign:HintAssist.Hint="Nip"
+                        AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        Text="{Binding Model.CompanyIdentyficator}"
+                        VerticalScrollBarVisibility="Disabled" />
+                </Grid>
+            </GroupBox>
+        </Grid>
 
         <Label
             Margin="0,10,0,10"
@@ -108,6 +177,13 @@
             Height="40"
             Command="{Binding AddCommand}"
             IsWaiting="{Binding IsWaiting}"
-            Text="Dodaj klienta" />
+            Text="Dodaj klienta">
+            <Button.Effect>
+                <DropShadowEffect
+                    BlurRadius="10"
+                    Opacity=".5"
+                    Color="Black" />
+            </Button.Effect>
+        </utils:ButtonIndicator>
     </StackPanel>
 </views:MvxWpfView>
