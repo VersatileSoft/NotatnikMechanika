@@ -17,13 +17,12 @@
         <DropShadowEffect
             BlurRadius="15"
             Opacity=".3"
-            Color="Black" />
+            Color="Black"/>
     </Button.Effect>
 
-    <materialDesign:PackIcon
-        x:Name="Icon"
+    <materialDesign:PackIcon x:Name="Icon"
         Width="{Binding Width}"
         Height="{Binding Height}"
         HorizontalAlignment="Center"
-        VerticalAlignment="Center" />
+        VerticalAlignment="Center"/>
 </Button>

@@ -18,18 +18,16 @@
     mc:Ignorable="d">
 
     <StackPanel Width="250" Orientation="Horizontal">
-        <materialDesign:PackIcon
-            x:Name="Icon"
+        <materialDesign:PackIcon x:Name="Icon"
             Width="30"
             Height="30"
             Margin="15,0,15,0"
             HorizontalAlignment="Left"
-            VerticalAlignment="Center" />
-        <Label
-            x:Name="TextLabel"
+            VerticalAlignment="Center"/>
+        <Label x:Name="TextLabel"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             FontSize="20"
-            Foreground="White" />
+            Foreground="White"/>
     </StackPanel>
 </Button>

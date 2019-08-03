@@ -1,15 +1,6 @@
-﻿using MvvmCross.Commands;
-using MvvmCross.Navigation;
-using MvvmCross.ViewModels;
+﻿using MvvmCross.Navigation;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Core.Services;
-using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Order;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace NotatnikMechanika.Core.ViewModels
 {

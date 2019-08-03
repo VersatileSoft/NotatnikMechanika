@@ -1,5 +1,4 @@
 ﻿using NotatnikMechanika.Core.Interfaces;
-using System;
 using System.Threading.Tasks;
 
 namespace NotatnikMechanika.WPF.Services

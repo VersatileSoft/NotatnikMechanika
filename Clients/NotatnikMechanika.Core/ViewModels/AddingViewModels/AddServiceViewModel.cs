@@ -1,13 +1,10 @@
 ﻿using MvvmCross.Navigation;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared.Models.Service;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NotatnikMechanika.Core.ViewModels
 {
-    class AddServiceViewModel : AddingViewModelBase<ServiceModel>
+    internal class AddServiceViewModel : AddingViewModelBase<ServiceModel>
     {
         public override string ErrorMessage { get; set; } = "Błąd podczas dodawania usługi.";
         public override string SuccesMessage { get; set; } = "Usługa została dodana pomyślnie.";

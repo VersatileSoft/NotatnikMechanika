@@ -12,10 +12,7 @@
     Background="Transparent"
     WindowStyle="None"
     mc:Ignorable="d">
-
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5"/>
     </WindowChrome.WindowChrome>
-
-
 </views:MvxWindow>

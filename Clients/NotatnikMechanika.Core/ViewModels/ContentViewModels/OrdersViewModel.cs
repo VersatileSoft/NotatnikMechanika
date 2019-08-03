@@ -26,7 +26,7 @@ namespace NotatnikMechanika.Core.ViewModels
             _navigationService = navigationService;
             AddOrderCommand = new MvxAsyncCommand(AddOrderAction);
         }
-        
+
         private async Task AddOrderAction()
         {
             await _navigationService.Navigate<AddOrderViewModel>();

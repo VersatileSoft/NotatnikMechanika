@@ -14,8 +14,8 @@
     mc:Ignorable="d">
     <views:MvxWpfView.BorderBrush>
         <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-            <GradientStop Color="#36dad2" />
-            <GradientStop Offset="1" Color="#5877e6" />
+            <GradientStop Color="#36dad2"/>
+            <GradientStop Offset="1" Color="#5877e6"/>
         </LinearGradientBrush>
     </views:MvxWpfView.BorderBrush>
 
@@ -24,18 +24,17 @@
             <Grid x:Name="MainGrid" Margin="0,30,0,0">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <ContentControl
-                    x:Name="Master"
+                <ContentControl x:Name="Master"
                     Grid.Column="0"
-                    Width="250" />
+                    Width="250"/>
 
-                <ContentControl x:Name="Detail" Grid.Column="1" />
+                <ContentControl x:Name="Detail" Grid.Column="1"/>
             </Grid>
-            <utils:TopBar />
+            <utils:TopBar/>
         </Grid>
     </views:MvxWpfView.Content>
 </views:MvxWpfView>

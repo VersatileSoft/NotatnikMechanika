@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using NotatnikMechanika.Repository.Interfaces;
+﻿using NotatnikMechanika.Repository.Interfaces;
 using NotatnikMechanika.Service.Interfaces;
 using NotatnikMechanika.Service.Services.Base;
 using NotatnikMechanika.Shared.Models.Car;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Service.Services
 {

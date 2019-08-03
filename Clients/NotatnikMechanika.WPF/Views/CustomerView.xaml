@@ -17,7 +17,7 @@
     mc:Ignorable="d">
 
     <StackPanel>
-        <utils:TopBar />
+        <utils:TopBar/>
         <Grid>
             <utils:IconButton
                 Width="50"
@@ -26,104 +26,99 @@
                 HorizontalAlignment="Left"
                 Command="{Binding GoBackCommand}"
                 Foreground="{StaticResource SecondaryAccentBrush}"
-                IconKind="ArrowLeftBoldCircle" />
+                IconKind="ArrowLeftBoldCircle"/>
 
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Label
                     Margin="0,20,0,0"
                     HorizontalAlignment="Center"
                     Content="{Binding CustomerModel.Name}"
-                    FontSize="30" />
+                    FontSize="30"/>
 
                 <Label
                     Margin="0,20,0,0"
                     HorizontalAlignment="Center"
                     Content="{Binding CustomerModel.Surname}"
-                    FontSize="30" />
+                    FontSize="30"/>
             </StackPanel>
-
         </Grid>
 
         <utils:AnimatedWrapPanel>
-            <GroupBox
+            <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
                 Grid.Column="0"
                 Width="300"
                 Margin="16"
-                Header="Informacje"
-                Style="{DynamicResource MaterialDesignCardGroupBox}">
+                Header="Informacje">
                 <GroupBox.HeaderTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <materialDesign:PackIcon
                                 Grid.Column="0"
                                 Width="32"
                                 Height="32"
                                 VerticalAlignment="Center"
-                                Kind="User" />
-                            <TextBlock
+                                Kind="User"/>
+                            <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}"
                                 Grid.Column="1"
                                 Margin="8,0,0,0"
                                 VerticalAlignment="Center"
-                                Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                                Text="{Binding}" />
+                                Text="{Binding}"/>
                             <utils:IconButton
                                 Grid.Column="2"
                                 Width="32"
                                 Height="32"
                                 VerticalAlignment="Center"
-                                IconKind="Edit" />
+                                IconKind="Edit"/>
                         </Grid>
                     </DataTemplate>
                 </GroupBox.HeaderTemplate>
                 <StackPanel>
-                    <Label Content="{Binding CustomerModel.Name}" FontSize="20" />
-                    <Label Content="{Binding CustomerModel.Surname}" FontSize="20" />
-                    <Label Content="{Binding CustomerModel.Address}" FontSize="20" />
-                    <Label Content="{Binding CustomerModel.Phone}" FontSize="20" />
-                    <Label Content="{Binding CustomerModel.CompanyName}" FontSize="20" />
-                    <Label Content="{Binding CustomerModel.CompanyIdentyficator}" FontSize="20" />
+                    <Label Content="{Binding CustomerModel.Name}" FontSize="20"/>
+                    <Label Content="{Binding CustomerModel.Surname}" FontSize="20"/>
+                    <Label Content="{Binding CustomerModel.Address}" FontSize="20"/>
+                    <Label Content="{Binding CustomerModel.Phone}" FontSize="20"/>
+                    <Label Content="{Binding CustomerModel.CompanyName}" FontSize="20"/>
+                    <Label Content="{Binding CustomerModel.CompanyIdentyficator}" FontSize="20"/>
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox
+            <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
                 Grid.Column="1"
                 Width="300"
-                Margin="16"
-                Style="{DynamicResource MaterialDesignCardGroupBox}">
+                Margin="16">
                 <GroupBox.Header>
-
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <materialDesign:PackIcon
                             Grid.Column="0"
                             Width="32"
                             Height="32"
                             VerticalAlignment="Center"
-                            Kind="Car" />
-                        <TextBlock
+                            Kind="Car"/>
+                        <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}"
                             Grid.Column="1"
                             Margin="8,0,0,0"
                             VerticalAlignment="Center"
-                            Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                            Text="Samochody" />
+                            Text="Samochody"/>
                         <utils:IconButton
                             Grid.Column="2"
                             Width="32"
                             Height="32"
                             VerticalAlignment="Center"
                             Command="{Binding AddCarCommand}"
-                            IconKind="Add" />
+                            IconKind="Add"/>
                     </Grid>
                 </GroupBox.Header>
+                
                 <Grid>
                     <ListBox ItemsSource="{Binding Cars}">
                         <ListBox.ItemTemplate>
@@ -134,11 +129,11 @@
                                             <Label
                                                 Content="{Binding Brand}"
                                                 FontSize="18"
-                                                FontWeight="Bold" />
+                                                FontWeight="Bold"/>
                                             <Label
                                                 Content="{Binding Model}"
                                                 FontSize="18"
-                                                FontWeight="Bold" />
+                                                FontWeight="Bold"/>
                                         </StackPanel>
                                     </Expander.Header>
                                     <StackPanel
@@ -146,10 +141,10 @@
                                         Orientation="Vertical"
                                         TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                                         <StackPanel>
-                                            <Label Content="{Binding Plate}" FontSize="13" />
-                                            <Label Content="{Binding Engine}" FontSize="13" />
-                                            <Label Content="{Binding Power}" FontSize="13" />
-                                            <Label Content="{Binding Vin}" FontSize="13" />
+                                            <Label Content="{Binding Plate}" FontSize="13"/>
+                                            <Label Content="{Binding Engine}" FontSize="13"/>
+                                            <Label Content="{Binding Power}" FontSize="13"/>
+                                            <Label Content="{Binding Vin}" FontSize="13"/>
                                         </StackPanel>
                                         <StackPanel
                                             Margin="0,10,0,0"
@@ -161,14 +156,15 @@
                                                 Height="35"
                                                 Margin="0,0,10,0"
                                                 VerticalAlignment="Center"
-                                                IconKind="Add" />
+                                                IconKind="Add"/>
+
                                             <utils:IconButton
                                                 Grid.Column="0"
                                                 Width="25"
                                                 Height="25"
                                                 Margin="0,0,10,0"
                                                 VerticalAlignment="Center"
-                                                IconKind="Edit" />
+                                                IconKind="Edit"/>
 
                                             <utils:IconButton
                                                 Grid.Column="0"
@@ -177,7 +173,7 @@
                                                 Margin="0,0,10,0"
                                                 VerticalAlignment="Center"
                                                 IconKind="Delete"
-                                                Color="Red" />
+                                                Color="Red"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Expander>
@@ -187,12 +183,11 @@
                 </Grid>
             </GroupBox>
 
-            <GroupBox
+            <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
                 Grid.Column="1"
                 Width="300"
                 Margin="16"
-                Header="Ostatnie naprawy"
-                Style="{DynamicResource MaterialDesignCardGroupBox}">
+                Header="Ostatnie naprawy">
                 <GroupBox.HeaderTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -200,24 +195,22 @@
                                 Width="32"
                                 Height="32"
                                 VerticalAlignment="Center"
-                                Kind="Toolbox" />
-                            <TextBlock
+                                Kind="Toolbox"/>
+                            <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}"
                                 Margin="8,0,0,0"
                                 VerticalAlignment="Center"
-                                Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                                Text="{Binding}" />
+                                Text="{Binding}"/>
                         </StackPanel>
                     </DataTemplate>
                 </GroupBox.HeaderTemplate>
-                <Grid />
+                <Grid/>
             </GroupBox>
 
-            <GroupBox
+            <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
                 Grid.Column="1"
                 Width="300"
                 Margin="16"
-                Header="Dokumenty"
-                Style="{DynamicResource MaterialDesignCardGroupBox}">
+                Header="Dokumenty">
                 <GroupBox.HeaderTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -225,16 +218,15 @@
                                 Width="32"
                                 Height="32"
                                 VerticalAlignment="Center"
-                                Kind="FileDocument" />
-                            <TextBlock
+                                Kind="FileDocument"/>
+                            <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}"
                                 Margin="8,0,0,0"
                                 VerticalAlignment="Center"
-                                Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                                Text="{Binding}" />
+                                Text="{Binding}"/>
                         </StackPanel>
                     </DataTemplate>
                 </GroupBox.HeaderTemplate>
-                <Grid />
+                <Grid/>
             </GroupBox>
         </utils:AnimatedWrapPanel>
     </StackPanel>

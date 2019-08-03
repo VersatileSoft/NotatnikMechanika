@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using NotatnikMechanika.Data;
 using NotatnikMechanika.Data.Models;
 using NotatnikMechanika.Repository.Interfaces;
 using NotatnikMechanika.Shared.Models.Car;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Repository.Repositories
 {
@@ -18,7 +18,8 @@ namespace NotatnikMechanika.Repository.Repositories
 
         public async Task<IEnumerable<CarModel>> GetCarsByCustomerAsync(string userId, int customerId)
         {
-            return await _dbContext.Cars.Where(a => a.UserId == userId).Where(a => a.CustomerId == customerId).Select(a => new CarModel {
+            return await _dbContext.Cars.Where(a => a.UserId == userId).Where(a => a.CustomerId == customerId).Select(a => new CarModel
+            {
                 Brand = a.Brand,
                 CustomerId = customerId,
                 Engine = a.Engine,
@@ -26,7 +27,7 @@ namespace NotatnikMechanika.Repository.Repositories
                 Plate = a.Plate,
                 Power = a.Power,
                 Vin = a.Vin
-            }).ToListAsync();           
+            }).ToListAsync();
         }
     }
 }

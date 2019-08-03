@@ -2,8 +2,6 @@
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,10 +20,10 @@ namespace NotatnikMechanika.Client.Services
 
         public NavigationService(IUriHelper uriHelper)
         {
-            this._uriHelper = uriHelper;
+            _uriHelper = uriHelper;
         }
 
-        public async Task<bool> CanNavigate(string path) 
+        public async Task<bool> CanNavigate(string path)
         {
             return true;
         }
@@ -57,9 +55,9 @@ namespace NotatnikMechanika.Client.Services
 
         public Task<bool> Navigate(IMvxViewModel viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default)
         {
-            var vmName = viewModel.GetType().Name;
-            _uriHelper.NavigateTo("/" + (vmName.EndsWith("ViewModel") 
-                ? vmName.Substring(0, vmName.Length - 9) 
+            string vmName = viewModel.GetType().Name;
+            _uriHelper.NavigateTo("/" + (vmName.EndsWith("ViewModel")
+                ? vmName.Substring(0, vmName.Length - 9)
                 : vmName));
             return Task.FromResult(true);
         }
@@ -121,7 +119,7 @@ namespace NotatnikMechanika.Client.Services
 
         public Task<bool> Navigate<TViewModel>(IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default) where TViewModel : IMvxViewModel
         {
-            var vmName = typeof(TViewModel).Name;
+            string vmName = typeof(TViewModel).Name;
             _uriHelper.NavigateTo("/" + (vmName.EndsWith("ViewModel")
                 ? vmName.Substring(0, vmName.Length - 9)
                 : vmName));

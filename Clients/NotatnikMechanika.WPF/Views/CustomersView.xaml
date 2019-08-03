@@ -17,22 +17,20 @@
 
     <Grid>
         <StackPanel>
-
-            <TextBlock
+            <TextBlock Style="{StaticResource MaterialDesignDisplay2TextBlock}"
                 Margin="0,20,0,20"
                 HorizontalAlignment="Center"
-                Style="{StaticResource MaterialDesignDisplay2TextBlock}"
-                Text="Klienci" />
+                Text="Klienci"/>
 
             <ListView ItemsSource="{Binding Customers}" SelectionChanged="ListView_Selected">
                 <ListView.View>
-                    <GridView >
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Imię" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Surname}" Header="Nazwisko" />
-                        <GridViewColumn DisplayMemberBinding="{Binding CompanyName}" Header="Firma" />
-                        <GridViewColumn DisplayMemberBinding="{Binding CompanyIdentyficator}" Header="Nip" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Telefon" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Address}" Header="Adres" />
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Imię"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Surname}" Header="Nazwisko"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CompanyName}" Header="Firma"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CompanyIdentyficator}" Header="Nip"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Telefon"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Address}" Header="Adres"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -41,17 +39,16 @@
             Margin="0,0,20,20"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom">
-            <Button
+            <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
                 Width="50"
                 Height="50"
-                Command="{Binding AddCustomerCommand}"
-                Style="{StaticResource MaterialDesignFloatingActionAccentButton}">
+                Command="{Binding AddCustomerCommand}">
                 <materialDesign:PackIcon
                     Width="30"
                     Height="30"
                     VerticalAlignment="Center"
                     Foreground="White"
-                    Kind="Add" />
+                    Kind="Add"/>
             </Button>
         </Grid>
     </Grid>

@@ -1,10 +1,5 @@
-﻿using MvvmCross;
-using MvvmCross.Platforms.Wpf.Presenters;
-using MvvmCross.Platforms.Wpf.Views;
-using MvvmCross.Presenters;
+﻿using MvvmCross.Platforms.Wpf.Presenters;
 using NotatnikMechanika.WPF.Presenters.Attributes;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 

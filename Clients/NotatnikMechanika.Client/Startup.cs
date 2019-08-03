@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Components.Builder;
-using Microsoft.AspNetCore.Components.Layouts;
 using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;

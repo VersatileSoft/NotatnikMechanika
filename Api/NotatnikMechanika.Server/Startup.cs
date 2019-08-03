@@ -16,8 +16,6 @@ using NotatnikMechanika.Data;
 using NotatnikMechanika.Data.Models;
 using NotatnikMechanika.Repository;
 using NotatnikMechanika.Service;
-using NotatnikMechanika.Service.Interfaces;
-using NotatnikMechanika.Service.Services;
 using System.IO;
 using System.Linq;
 using System.Text;

@@ -12,7 +12,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -95,7 +94,7 @@ namespace NotatnikMechanika.Service.Services
                 string code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 string callbackUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host.Value}/api/Account/verify/email?userId={WebUtility.UrlEncode(newUser.Id)}&emailToken={HttpUtility.UrlEncode(code)}";
 
-                var message =  $"Please confirm your account by <a clicktracking=off href='{callbackUrl}'>clicking here</a>.";
+                string message = $"Please confirm your account by <a clicktracking=off href='{callbackUrl}'>clicking here</a>.";
 
                 await _emailSenderService.SendEmailAsync(user.Email, "Confirm your email", message);
             }

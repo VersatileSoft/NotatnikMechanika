@@ -7,38 +7,38 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.grey.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.grey.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <LinearGradientBrush x:Key="PrimaryHueLightBrush">
-                <GradientStop Color="#5877e6" />
-                <GradientStop Offset="1" Color="#36dad2" />
+                <GradientStop Color="#5877e6"/>
+                <GradientStop Offset="1" Color="#36dad2"/>
             </LinearGradientBrush>
 
             <LinearGradientBrush x:Key="PrimaryHueMidBrush">
-                <GradientStop Color="#5877e6" />
-                <GradientStop Offset="1" Color="#36dad2" />
+                <GradientStop Color="#5877e6"/>
+                <GradientStop Offset="1" Color="#36dad2"/>
             </LinearGradientBrush>
 
             <LinearGradientBrush x:Key="PrimaryHueDarkBrush">
-                <GradientStop Color="#5877e6" />
-                <GradientStop Offset="1" Color="#36dad2" />
+                <GradientStop Color="#5877e6"/>
+                <GradientStop Offset="1" Color="#36dad2"/>
             </LinearGradientBrush>
 
-            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#FFFFFF" />
+            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#FFFFFF"/>
 
-            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#FFFFFF" />
+            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#FFFFFF"/>
 
-            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#FFFFFF" />
+            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#FFFFFF"/>
             <!--  accent  -->
             <LinearGradientBrush x:Key="SecondaryAccentBrush">
-                <GradientStop Color="#5877e6" />
-                <GradientStop Offset="1" Color="#36dad2" />
+                <GradientStop Color="#5877e6"/>
+                <GradientStop Offset="1" Color="#36dad2"/>
             </LinearGradientBrush>
-            <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#FFFFFF" />
+            <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#FFFFFF"/>
         </ResourceDictionary>
     </Application.Resources>
 </views:MvxApplication>

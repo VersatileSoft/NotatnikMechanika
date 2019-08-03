@@ -1,7 +1,5 @@
 ﻿using MvvmCross.Platforms.Wpf.Views;
 using NotatnikMechanika.WPF.Presenters.Attributes;
-using System.Windows;
-using System.Windows.Media.Animation;
 
 namespace NotatnikMechanika.WPF.Views
 {
@@ -12,6 +10,6 @@ namespace NotatnikMechanika.WPF.Views
         public MenuView()
         {
             InitializeComponent();
-        }   
+        }
     }
 }

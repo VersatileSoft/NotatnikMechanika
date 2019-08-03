@@ -16,8 +16,8 @@
     mc:Ignorable="d">
     <views:MvxWpfView.Background>
         <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-            <GradientStop Color="#5877e6" />
-            <GradientStop Offset="1" Color="#36dad2" />
+            <GradientStop Color="#5877e6"/>
+            <GradientStop Offset="1" Color="#36dad2"/>
         </LinearGradientBrush>
     </views:MvxWpfView.Background>
 
@@ -26,8 +26,7 @@
             Height="100"
             Margin="10,10,10,10"
             Background="Transparent">
-            <Image
-                x:Name="Logo"
+            <Image x:Name="Logo"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Source="/NotatnikMechanika.WPF;component/Assets/AppIcon_Light.png">
@@ -35,7 +34,7 @@
                     <DropShadowEffect
                         BlurRadius="50"
                         Opacity="0.5"
-                        ShadowDepth="10" />
+                        ShadowDepth="10"/>
                 </Image.Effect>
             </Image>
         </Grid>
@@ -43,41 +42,41 @@
             Command="{Binding NavigateCommand}"
             CommandParameter="Orders"
             IconKind="ToolBox"
-            Text="Zlecenia" />
+            Text="Zlecenia"/>
 
         <utils:MenuButton
             Command="{Binding NavigateCommand}"
             CommandParameter="Clients"
             IconKind="User"
-            Text="Klienci" />
+            Text="Klienci"/>
 
         <utils:MenuButton
             Command="{Binding NavigateCommand}"
             CommandParameter="Services"
             IconKind="Server"
-            Text="Usługi" />
+            Text="Usługi"/>
 
         <utils:MenuButton
             Command="{Binding NavigateCommand}"
             CommandParameter="Archives"
             IconKind="Archive"
-            Text="Archiwum" />
+            Text="Archiwum"/>
 
         <utils:MenuButton
             Command="{Binding NavigateCommand}"
             CommandParameter="Receipts"
             IconKind="FileDocument"
-            Text="Faktury/Paragony" />
+            Text="Faktury/Paragony"/>
 
         <utils:MenuButton
             Command="{Binding NavigateCommand}"
             CommandParameter="Warehouse"
             IconKind="House"
-            Text="Magazyn" />
+            Text="Magazyn"/>
 
         <utils:MenuButton
             Command="{Binding LogoutCommand}"
             IconKind="Logout"
-            Text="Wyloguj" />
+            Text="Wyloguj"/>
     </StackPanel>
 </views:MvxWpfView>

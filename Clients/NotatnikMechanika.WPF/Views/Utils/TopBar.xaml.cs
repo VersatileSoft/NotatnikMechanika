@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace NotatnikMechanika.WPF.Views.Utils
 {
@@ -19,7 +10,7 @@ namespace NotatnikMechanika.WPF.Views.Utils
     public partial class TopBar : UserControl
     {
         private bool _restoreForDragMove;
-        private Window _mainWindow = Application.Current.MainWindow;
+        private readonly Window _mainWindow = Application.Current.MainWindow;
 
         public TopBar()
         {
@@ -59,7 +50,7 @@ namespace NotatnikMechanika.WPF.Views.Utils
             {
                 _restoreForDragMove = false;
 
-                var point = PointToScreen(e.MouseDevice.GetPosition(this));
+                Point point = PointToScreen(e.MouseDevice.GetPosition(this));
 
                 _mainWindow.Left = point.X - (_mainWindow.RestoreBounds.Width * 0.5);
                 _mainWindow.Top = point.Y;
@@ -83,9 +74,13 @@ namespace NotatnikMechanika.WPF.Views.Utils
         private void Maximize_Click(object sender, RoutedEventArgs e)
         {
             if (Application.Current.MainWindow.WindowState == WindowState.Normal)
+            {
                 Application.Current.MainWindow.WindowState = WindowState.Maximized;
+            }
             else
+            {
                 Application.Current.MainWindow.WindowState = WindowState.Normal;
+            }
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)

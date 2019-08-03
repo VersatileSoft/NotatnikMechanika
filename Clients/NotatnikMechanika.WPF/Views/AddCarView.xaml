@@ -17,13 +17,13 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" MaxHeight="570" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" MaxHeight="570"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <utils:TopBar Grid.Row="0" />
+        <utils:TopBar Grid.Row="0"/>
 
         <Grid Grid.Row="1">
             <utils:IconButton
@@ -33,21 +33,20 @@
                 HorizontalAlignment="Left"
                 Command="{Binding GoBackCommand}"
                 Foreground="{StaticResource SecondaryAccentBrush}"
-                IconKind="ArrowLeftBoldCircle" />
+                IconKind="ArrowLeftBoldCircle"/>
 
             <Label
                 Margin="0,20,0,0"
                 HorizontalAlignment="Center"
                 Content="Dodaj samochód"
-                FontSize="30" />
+                FontSize="30"/>
         </Grid>
 
-        <GroupBox
+        <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
             Grid.Row="2"
             MaxWidth="600"
             Margin="80,10,80,0"
-            Header="Dane samochodu"
-            Style="{DynamicResource MaterialDesignCardGroupBox}">
+            Header="Dane samochodu">
             <GroupBox.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -55,89 +54,82 @@
                             Width="32"
                             Height="32"
                             VerticalAlignment="Center"
-                            Kind="Car" />
-                        <TextBlock
+                            Kind="Car"/>
+                        <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}"
                             Margin="8,0,0,0"
                             VerticalAlignment="Center"
-                            Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                            Text="{Binding}" />
+                            Text="{Binding}"/>
                     </StackPanel>
                 </DataTemplate>
             </GroupBox.HeaderTemplate>
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <Grid ScrollViewer.CanContentScroll="True">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBox
+                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Grid.Row="0"
                         Margin="10,10,10,10"
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Marka"
                         AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Text="{Binding Model.Brand}"
-                        VerticalScrollBarVisibility="Disabled" />
+                        VerticalScrollBarVisibility="Disabled"/>
 
-                    <TextBox
+                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Grid.Row="1"
                         Margin="10,10,10,10"
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Model"
                         AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Text="{Binding Model.Model}"
-                        VerticalScrollBarVisibility="Disabled" />
+                        VerticalScrollBarVisibility="Disabled"/>
 
-                    <TextBox
+                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Grid.Row="2"
                         Grid.Column="0"
                         Margin="10,10,10,10"
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Numer rejestracyjny"
                         AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Text="{Binding Model.Plate}"
-                        VerticalScrollBarVisibility="Disabled" />
+                        VerticalScrollBarVisibility="Disabled"/>
 
-                    <TextBox
+                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Grid.Row="3"
                         Grid.Column="0"
                         Margin="10,10,10,10"
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Silnik"
                         AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Text="{Binding Model.Engine}"
-                        VerticalScrollBarVisibility="Disabled" />
+                        VerticalScrollBarVisibility="Disabled"/>
 
-                    <TextBox
+                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Grid.Row="4"
                         Grid.Column="0"
                         Margin="10,10,10,10"
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Moc"
                         AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Text="{Binding Model.Power}"
-                        VerticalScrollBarVisibility="Disabled" />
+                        VerticalScrollBarVisibility="Disabled"/>
 
-                    <TextBox
+                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Grid.Row="5"
                         Grid.Column="0"
                         Margin="10,10,10,10"
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="VIN"
                         AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Text="{Binding Model.Vin}"
-                        VerticalScrollBarVisibility="Disabled" />
+                        VerticalScrollBarVisibility="Disabled"/>
                 </Grid>
             </ScrollViewer>
         </GroupBox>
@@ -149,7 +141,7 @@
                 VerticalAlignment="Center"
                 Content="{Binding ErrorMessage}"
                 FontSize="15"
-                Foreground="#DDFF0000" />
+                Foreground="#DDFF0000"/>
 
             <utils:ButtonIndicator
                 Width="150"
@@ -162,7 +154,7 @@
                     <DropShadowEffect
                         BlurRadius="10"
                         Opacity=".5"
-                        Color="Black" />
+                        Color="Black"/>
                 </Button.Effect>
             </utils:ButtonIndicator>
         </StackPanel>

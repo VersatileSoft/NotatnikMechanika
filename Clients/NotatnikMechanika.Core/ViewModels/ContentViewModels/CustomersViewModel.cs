@@ -20,11 +20,11 @@ namespace NotatnikMechanika.Core.ViewModels
         public IEnumerable<CustomerModel> Customers { get; set; }
         public ICommand AddCustomerCommand { get; set; }
         public ICommand CustomerSelectedCommand { get; set; }
-       
+
 
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMvxNavigationService _navigationService;
-        
+
         public CustomersViewModel(IHttpRequestService httpRequestService, IMvxNavigationService navigationService)
         {
             _navigationService = navigationService;

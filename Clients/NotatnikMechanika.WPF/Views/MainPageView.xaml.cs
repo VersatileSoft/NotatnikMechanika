@@ -9,8 +9,8 @@ namespace NotatnikMechanika.WPF.Views
     public partial class MainPageView : MvxWpfView
     {
 
-        private DoubleAnimation _showMenuAnimation;
-        private DoubleAnimation _hideMenuAnimation;
+        private readonly DoubleAnimation _showMenuAnimation;
+        private readonly DoubleAnimation _hideMenuAnimation;
         private bool _isHide = false;
 
 

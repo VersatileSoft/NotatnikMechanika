@@ -1,19 +1,16 @@
-﻿<Button
+﻿<Button Style="{StaticResource MaterialDesignRaisedLightButton}"
     x:Class="NotatnikMechanika.WPF.Views.Utils.ButtonIndicator"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:NotatnikMechanika.WPF.Views.Utils"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Style="{StaticResource MaterialDesignRaisedLightButton}"
     mc:Ignorable="d">
     <Grid>
-        <Label x:Name="Label" Visibility="Visible" />
-        <ProgressBar
-            x:Name="Progress"
+        <Label x:Name="Label" Visibility="Visible"/>
+        <ProgressBar x:Name="Progress" Style="{StaticResource MaterialDesignCircularProgressBar}"
             IsIndeterminate="True"
-            Style="{StaticResource MaterialDesignCircularProgressBar}"
             Visibility="Collapsed"
-            Value="35" />
+            Value="35"/>
     </Grid>
 </Button>
