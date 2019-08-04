@@ -13,7 +13,7 @@
         <Setter Property="Source" Value="icon_foreground.xml"/>
     </Style>
     <Style x:Key="LoginAppTitleLabel" TargetType="Label">
-        <Setter Property="Margin" Value="0,250,0,0"/>
+        <Setter Property="Margin" Value="0,270,0,0"/>
         <Setter Property="FontFamily" Value="Lato-Bold.ttf#Lato-Bold"/>
         <Setter Property="FontSize" Value="30"/>
         <Setter Property="Text" Value="Notatnik Mechanika"/>

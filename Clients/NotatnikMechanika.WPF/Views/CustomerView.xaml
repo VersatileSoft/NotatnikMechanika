@@ -118,7 +118,7 @@
                             IconKind="Add"/>
                     </Grid>
                 </GroupBox.Header>
-                
+
                 <Grid>
                     <ListBox ItemsSource="{Binding Cars}">
                         <ListBox.ItemTemplate>

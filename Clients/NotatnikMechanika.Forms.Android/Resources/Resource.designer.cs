@@ -16396,6 +16396,9 @@ namespace NotatnikMechanika.Forms.Android
 			// aapt resource value: 0x7f0d01f6
 			public const int CardView_Light = 2131558902;
 			
+			// aapt resource value: 0x7f0d020d
+			public const int DrawerArrowStyle = 2131558925;
+			
 			// aapt resource value: 0x7f0d0209
 			public const int LoginTheme = 2131558921;
 			

@@ -20,7 +20,7 @@ namespace NotatnikMechanika.Forms.Android
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             UserDialogs.Init(() => Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity);
-            //Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
+            Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             FormsMaterial.Init(this, savedInstanceState);
 
             TabLayoutResource = Resource.Layout.Tabbar;
