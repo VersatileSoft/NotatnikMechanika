@@ -18,6 +18,8 @@ namespace NotatnikMechanika.Core.ViewModels
     {
         public IEnumerable<OrderModel> Orders { get; set; }
         public ICommand AddOrderCommand { get; set; }
+        public ICommand OrderSelectedCommand { get; set; }
+
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMvxNavigationService _navigationService;
         public OrdersViewModel(IHttpRequestService httpRequestService, IMvxNavigationService navigationService)
@@ -30,6 +32,8 @@ namespace NotatnikMechanika.Core.ViewModels
         private async Task AddOrderAction()
         {
             await _navigationService.Navigate<AddOrderViewModel>();
+
+            AddOrderCommand = new MvxAsyncCommand(() => _navigationService.Navigate<AddOrderViewModel>());
         }
 
         public override async Task Initialize()

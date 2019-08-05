@@ -27,11 +27,6 @@ namespace NotatnikMechanika.Data
                 .WithOne(c => c.Car)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Customer>()
-               .HasMany(i => i.Orders)
-               .WithOne(c => c.Customer)
-               .OnDelete(DeleteBehavior.Restrict);
-
             modelBuilder.Entity<User>()
                .HasMany(i => i.Orders)
                .WithOne(c => c.User)

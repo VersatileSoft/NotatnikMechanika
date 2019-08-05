@@ -33,6 +33,9 @@ namespace NotatnikMechanika.Repository.Repositories
 
             foreach (PropertyInfo prop in value.GetType().GetProperties())
             {
+                if (prop.GetValue(value) == null)
+                    continue;
+
                 entity.GetType().GetProperty(prop.Name).SetValue(entity, prop.GetValue(value));
             }
 

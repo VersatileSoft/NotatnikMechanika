@@ -5,8 +5,9 @@ namespace NotatnikMechanika.Shared.Models.Order
 {
     public class OrderModel
     {
-        public int CustomerId { get; set; }
+        public int Id { get; set; }
         public int CarId { get; set; }
+        public string Details { get; set; }
         public IEnumerable<int> ServicesIds { get; set; }
         public IEnumerable<int> CommoditiesIds { get; set; }
         public DateTime AcceptDate { get; set; }

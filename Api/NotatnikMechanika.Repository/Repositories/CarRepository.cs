@@ -21,6 +21,7 @@ namespace NotatnikMechanika.Repository.Repositories
             return await _dbContext.Cars.Where(a => a.UserId == userId).Where(a => a.CustomerId == customerId).Select(a => new CarModel
             {
                 Brand = a.Brand,
+                Id = a.Id,
                 CustomerId = customerId,
                 Engine = a.Engine,
                 Model = a.Model,

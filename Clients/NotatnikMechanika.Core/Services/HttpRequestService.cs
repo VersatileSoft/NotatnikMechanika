@@ -15,7 +15,8 @@ namespace NotatnikMechanika.Core.Services
         private readonly ISettingsService _settingsService;
 
         //TODO put to config file
-        private const string ServerAddress = "https://notatnikmechanika.ml/"; // "http://localhost:2137/" - for blazor tests
+       // private const string ServerAddress = "https://notatnikmechanika.ml/";
+        private const string ServerAddress = "http://localhost:2137/"; 
 
         public HttpRequestService(ISettingsService settingsService)
         {

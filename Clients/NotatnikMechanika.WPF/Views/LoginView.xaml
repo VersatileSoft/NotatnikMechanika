@@ -62,6 +62,7 @@
                         Foreground="White"
                         PasswordChanged="PasswordBox_PasswordChanged"/>
 
+
                     <Label
                         Height="30"
                         Margin="0,20,0,0"
@@ -79,7 +80,7 @@
                             Command="{Binding RegisterCommand}"
                             Content="Nie mam konta"/>
 
-                        <utils:ButtonIndicator
+                            <utils:ButtonIndicator
                             Width="130"
                             Height="40"
                             Margin="130,20,0,0"

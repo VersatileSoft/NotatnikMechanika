@@ -15,6 +15,5 @@ namespace NotatnikMechanika.Data.Models
         public string Address { get; set; }
 
         public virtual IEnumerable<Car> Cars { get; set; }
-        public virtual IEnumerable<Order> Orders { get; set; }
     }
 }

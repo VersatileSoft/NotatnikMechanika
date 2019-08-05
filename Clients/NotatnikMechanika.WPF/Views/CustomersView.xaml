@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utils="clr-namespace:NotatnikMechanika.WPF.Views.Utils"
     xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
@@ -39,17 +40,12 @@
             Margin="0,0,20,20"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom">
-            <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+            <utils:IconButton
                 Width="50"
                 Height="50"
-                Command="{Binding AddCustomerCommand}">
-                <materialDesign:PackIcon
-                    Width="30"
-                    Height="30"
-                    VerticalAlignment="Center"
-                    Foreground="White"
-                    Kind="Add"/>
-            </Button>
+                Command="{Binding AddCustomerCommand}"
+                Foreground="{StaticResource SecondaryAccentBrush}"
+                IconKind="Add"/>
         </Grid>
     </Grid>
 </views:MvxWpfView>
