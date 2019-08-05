@@ -42,11 +42,12 @@
                 FontSize="30"/>
         </Grid>
 
-        <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
+        <GroupBox
             Grid.Row="2"
             MaxWidth="600"
             Margin="80,10,80,0"
-            Header="Dane samochodu">
+            Header="Dane samochodu"
+            Style="{DynamicResource MaterialDesignCardGroupBox}">
             <GroupBox.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -75,61 +76,67 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    <TextBox
                         Grid.Row="0"
                         Margin="10,10,10,10"
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Marka"
                         AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Text="{Binding Model.Brand}"
                         VerticalScrollBarVisibility="Disabled"/>
 
-                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    <TextBox
                         Grid.Row="1"
                         Margin="10,10,10,10"
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Model"
                         AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Text="{Binding Model.Model}"
                         VerticalScrollBarVisibility="Disabled"/>
 
-                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    <TextBox
                         Grid.Row="2"
                         Grid.Column="0"
                         Margin="10,10,10,10"
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Numer rejestracyjny"
                         AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Text="{Binding Model.Plate}"
                         VerticalScrollBarVisibility="Disabled"/>
 
-                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    <TextBox
                         Grid.Row="3"
                         Grid.Column="0"
                         Margin="10,10,10,10"
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Silnik"
                         AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Text="{Binding Model.Engine}"
                         VerticalScrollBarVisibility="Disabled"/>
 
-                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    <TextBox
                         Grid.Row="4"
                         Grid.Column="0"
                         Margin="10,10,10,10"
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Moc"
                         AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Text="{Binding Model.Power}"
                         VerticalScrollBarVisibility="Disabled"/>
 
-                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    <TextBox
                         Grid.Row="5"
                         Grid.Column="0"
                         Margin="10,10,10,10"
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="VIN"
                         AcceptsReturn="True"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Text="{Binding Model.Vin}"
                         VerticalScrollBarVisibility="Disabled"/>
                 </Grid>

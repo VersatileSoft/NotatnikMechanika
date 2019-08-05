@@ -2,6 +2,7 @@
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using NotatnikMechanika.Core.Interfaces;
+using NotatnikMechanika.Core.Models;
 using NotatnikMechanika.Core.Services;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Order;
@@ -16,7 +17,7 @@ namespace NotatnikMechanika.Core.ViewModels
     [AddINotifyPropertyChangedInterface]
     public class OrdersViewModel : MvxViewModel
     {
-        public IEnumerable<OrderModel> Orders { get; set; }
+        public IEnumerable<OrderExtendedModel> Orders { get; set; }
         public ICommand AddOrderCommand { get; set; }
         public ICommand OrderSelectedCommand { get; set; }
 
@@ -27,6 +28,7 @@ namespace NotatnikMechanika.Core.ViewModels
             _httpRequestService = httpRequestService;
             _navigationService = navigationService;
             AddOrderCommand = new MvxAsyncCommand(AddOrderAction);
+
         }
 
         private async Task AddOrderAction()
@@ -38,7 +40,8 @@ namespace NotatnikMechanika.Core.ViewModels
 
         public override async Task Initialize()
         {
-            Response<List<OrderModel>> response = await _httpRequestService.SendGet<List<OrderModel>>(new OrderPaths().GetFullPath(CRUDPaths.GetAllPath), true);
+            Response<List<OrderExtendedModel>> response = await _httpRequestService.SendGet<List<OrderExtendedModel>>(new OrderPaths().GetFullPath(OrderPaths.GetExtendedOrders), true);
+
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 Orders = response.Content;

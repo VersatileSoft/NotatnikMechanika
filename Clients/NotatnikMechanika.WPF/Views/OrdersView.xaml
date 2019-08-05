@@ -28,12 +28,22 @@
             <ListView ItemsSource="{Binding Orders}" SelectionChanged="ListView_Selected">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Imię"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Surname}" Header="Nazwisko"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding CompanyName}" Header="Firma"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding CompanyIdentyficator}" Header="Nip"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Telefon"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Address}" Header="Adres"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CustomerModel.Name}" Header="Imię"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CustomerModel.Surname}" Header="Nazwisko"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CustomerModel.CompanyName}" Header="Firma"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CustomerModel.CompanyIdentyficator}" Header="Nip"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CustomerModel.Phone}" Header="Telefon"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CustomerModel.Address}" Header="Adres"/>
+
+                        <GridViewColumn DisplayMemberBinding="{Binding CarModel.Brand}" Header="Marka"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CarModel.Model}" Header="Model"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CarModel.Plate}" Header="Rejestracja"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CarModel.Engine}" Header="Silnik"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CarModel.Power}" Header="Moc"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CarModel.Vin}" Header="VIN"/>
+
+                        <GridViewColumn DisplayMemberBinding="{Binding AcceptDate, StringFormat='d'}" Header="Data przyjęcia zlecenia"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding FinishDate, StringFormat='d'}" Header="Data zakończenia zlecenia"/>
                     </GridView>
                 </ListView.View>
             </ListView>

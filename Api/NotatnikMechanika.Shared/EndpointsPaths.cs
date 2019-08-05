@@ -53,6 +53,7 @@ namespace NotatnikMechanika.Shared
     public class OrderPaths : IPaths
     {
         public const string Name = "api/order";
+        public const string GetExtendedOrders = "extendedOrders";
 
         public string GetFullPath(string path)
         {

@@ -34,7 +34,9 @@ namespace NotatnikMechanika.Repository.Repositories
             foreach (PropertyInfo prop in value.GetType().GetProperties())
             {
                 if (prop.GetValue(value) == null)
+                {
                     continue;
+                }
 
                 entity.GetType().GetProperty(prop.Name).SetValue(entity, prop.GetValue(value));
             }
@@ -73,6 +75,11 @@ namespace NotatnikMechanika.Repository.Repositories
 
                 foreach (PropertyInfo prop in model.GetType().GetProperties())
                 {
+                    if (entity.GetType().GetProperty(prop.Name) == null)
+                    {
+                        continue;
+                    }
+
                     prop.SetValue(model, entity.GetType().GetProperty(prop.Name).GetValue(entity));
                 }
                 list.Add(model);
