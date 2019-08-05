@@ -8,6 +8,6 @@ namespace NotatnikMechanika.Repository.Interfaces
 {
     public interface IOrderRepository : IRepositoryBase<OrderModel>
     {
-        Task<IEnumerable<OrderExtendedModel>> GetAllExtendedAsync(string userId);
+        Task<IEnumerable<OrderExtendedModel>> GetAllExtendedAsync(string userId, bool archived);
     }
 }

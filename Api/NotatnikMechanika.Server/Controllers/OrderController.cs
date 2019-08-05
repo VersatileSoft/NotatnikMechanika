@@ -19,11 +19,24 @@ namespace NotatnikMechanika.Server.Controllers
         {
             _orderService = orderService;
         }
-
+        /// <summary>
+        /// Get list of extended Orders only not archived
+        /// </summary>
+        /// <returns></returns>
         [HttpGet(OrderPaths.GetExtendedOrders)]
         public async Task<ActionResult<IEnumerable<OrderExtendedModel>>> GetAllExtendedAsync()
         {
-            return Ok(await _orderService.GetAllExtendedAsync(User.Identity.Name));
+            return Ok(await _orderService.GetAllExtendedAsync(User.Identity.Name, false));
+        }
+
+        /// <summary>
+        /// Get list of extended Orders only archived
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet(OrderPaths.GetArchivedExtendedOrders)]
+        public async Task<ActionResult<IEnumerable<OrderExtendedModel>>> GetAllArchivedExtendedAsync()
+        {
+            return Ok(await _orderService.GetAllExtendedAsync(User.Identity.Name, true));
         }
     }
 }

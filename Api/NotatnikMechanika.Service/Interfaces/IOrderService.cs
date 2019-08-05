@@ -8,6 +8,6 @@ namespace NotatnikMechanika.Service.Interfaces
 {
     public interface IOrderService : IServiceBase<OrderModel>
     {
-        Task<IEnumerable<OrderExtendedModel>> GetAllExtendedAsync(string userId);
+        Task<IEnumerable<OrderExtendedModel>> GetAllExtendedAsync(string userId, bool archived);
     }
 }

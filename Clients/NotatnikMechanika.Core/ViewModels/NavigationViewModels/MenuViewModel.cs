@@ -2,6 +2,7 @@
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using NotatnikMechanika.Core.Interfaces;
+using NotatnikMechanika.Core.ViewModels.ContentViewModels;
 using PropertyChanged;
 using System.Threading.Tasks;
 
@@ -41,16 +42,16 @@ namespace NotatnikMechanika.Core.ViewModels
                     await _navigationService.Navigate<CustomersViewModel>();
                     break;
                 case "Services":
-
+                    await _navigationService.Navigate<ServicesViewModel>();
                     break;
                 case "Archives":
-
+                    await _navigationService.Navigate<ArchivedOrdersViewModel>();
                     break;
                 case "Receipts":
 
                     break;
                 case "Warehouse":
-
+                    await _navigationService.Navigate<CommoditiesViewModel>();
                     break;
             }
         }

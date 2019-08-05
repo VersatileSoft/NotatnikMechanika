@@ -54,6 +54,7 @@ namespace NotatnikMechanika.Shared
     {
         public const string Name = "api/order";
         public const string GetExtendedOrders = "extendedOrders";
+        public const string GetArchivedExtendedOrders = "archivedExtendedOrders";
 
         public string GetFullPath(string path)
         {

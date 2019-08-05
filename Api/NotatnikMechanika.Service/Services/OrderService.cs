@@ -17,9 +17,9 @@ namespace NotatnikMechanika.Service.Services
             _orderRepository = orderRepository;
         }
 
-        public Task<IEnumerable<OrderExtendedModel>> GetAllExtendedAsync(string userId)
+        public Task<IEnumerable<OrderExtendedModel>> GetAllExtendedAsync(string userId, bool archived)
         {
-            return _orderRepository.GetAllExtendedAsync(userId);
+            return _orderRepository.GetAllExtendedAsync(userId, archived);
         }
     }
 }
