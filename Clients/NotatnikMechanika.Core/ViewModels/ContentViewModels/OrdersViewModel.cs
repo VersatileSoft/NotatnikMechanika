@@ -4,6 +4,7 @@ using MvvmCross.ViewModels;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Core.Models;
 using NotatnikMechanika.Core.Services;
+using NotatnikMechanika.Core.ViewModels.ContentViewModels;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Order;
 using PropertyChanged;
@@ -27,15 +28,8 @@ namespace NotatnikMechanika.Core.ViewModels
         {
             _httpRequestService = httpRequestService;
             _navigationService = navigationService;
-            AddOrderCommand = new MvxAsyncCommand(AddOrderAction);
-
-        }
-
-        private async Task AddOrderAction()
-        {
-            await _navigationService.Navigate<AddOrderViewModel>();
-
             AddOrderCommand = new MvxAsyncCommand(() => _navigationService.Navigate<AddOrderViewModel>());
+            OrderSelectedCommand = new MvxAsyncCommand<OrderExtendedModel>((order) => _navigationService.Navigate<OrderViewModel, OrderExtendedModel>(order));
         }
 
         public override async Task Initialize()

@@ -1,6 +1,6 @@
 ﻿using MvvmCross.Platforms.Wpf.Views;
+using NotatnikMechanika.Core.Models;
 using NotatnikMechanika.Core.ViewModels;
-using NotatnikMechanika.Shared.Models.Order;
 using NotatnikMechanika.WPF.Presenters.Attributes;
 using System.Windows.Controls;
 
@@ -15,9 +15,9 @@ namespace NotatnikMechanika.WPF.Views
         }
         private void ListView_Selected(object sender, System.Windows.RoutedEventArgs e)
         {
-            int id = ((sender as ListView).SelectedItem as OrderModel).Id;
+            OrderExtendedModel model = ((sender as ListView).SelectedItem as OrderExtendedModel);
 
-            (ViewModel as OrdersViewModel).OrderSelectedCommand.Execute(id);
+            (ViewModel as OrdersViewModel).OrderSelectedCommand.Execute(model);
         }
     }
 }
