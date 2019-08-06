@@ -1,5 +1,12 @@
-﻿using MvvmCross.Platforms.Wpf.Presenters;
+﻿using MaterialDesignThemes.Wpf;
+using MvvmCross.Platforms.Wpf.Presenters;
+using MvvmCross.Platforms.Wpf.Views;
+using MvvmCross.ViewModels;
+using NotatnikMechanika.Core.ViewModels.AddingViewModels;
 using NotatnikMechanika.WPF.Presenters.Attributes;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
@@ -39,9 +46,29 @@ namespace NotatnikMechanika.WPF.Presenters
         //    return await base.Show(request);
         //}
 
+        public override Task<bool> Close(IMvxViewModel toClose)
+        {
+            if (toClose is AddServiceToOrderViewModel || toClose is AddCommodityToOrderViewModel)
+            {
+                var dialogHosts = DialogPresentationAction.FindVisualChildren<DialogHost>(_contentControl);
+
+                if (!dialogHosts.Any())
+                {
+                    throw new Exception("Can not find dialog host in current logical tree");
+                }
+
+                DialogHost dialogHost = dialogHosts.ElementAt(0);
+
+                DialogHost.CloseDialogCommand.Execute(false, dialogHost);
+            }
+
+            return base.Close(toClose);
+        }
+
         public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Add(typeof(MasterDetailPageAttribute), new MasterDetailPageAction(_contentControl, _uiThreadDispatcher));
+            AttributeTypesToActionsDictionary.Add(typeof(DialogPresentationAttribute), new DialogPresentationAction(_contentControl, _uiThreadDispatcher));
             base.RegisterAttributeTypes();
         }
 
