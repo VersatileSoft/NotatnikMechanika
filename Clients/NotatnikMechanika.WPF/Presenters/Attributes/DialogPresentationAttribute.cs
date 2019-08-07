@@ -6,7 +6,6 @@ using MvvmCross.Presenters.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,7 +30,7 @@ namespace NotatnikMechanika.WPF.Presenters.Attributes
                 IMvxWpfViewLoader loader = Mvx.IoCProvider.Resolve<IMvxWpfViewLoader>();
                 FrameworkElement view = loader.CreateView(request);
 
-                var dialogHosts = FindVisualChildren<DialogHost>(contentControl);
+                IEnumerable<DialogHost> dialogHosts = FindVisualChildren<DialogHost>(contentControl);
 
                 if (!dialogHosts.Any())
                 {
@@ -59,15 +58,15 @@ namespace NotatnikMechanika.WPF.Presenters.Attributes
             int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
             for (int i = 0; i < childrenCount; i++)
             {
-                var child = VisualTreeHelper.GetChild(parent, i);
+                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
 
-                var childType = child as T;
+                T childType = child as T;
                 if (childType != null)
                 {
                     yield return (T)child;
                 }
 
-                foreach (var other in FindVisualChildren<T>(child))
+                foreach (T other in FindVisualChildren<T>(child))
                 {
                     yield return other;
                 }

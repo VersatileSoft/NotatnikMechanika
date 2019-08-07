@@ -1,8 +1,6 @@
 ﻿using MvvmCross.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using PropertyChanged;
+using System;
 
 namespace NotatnikMechanika.Core.ViewModels.ContentViewModels
 {

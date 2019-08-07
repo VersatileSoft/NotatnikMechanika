@@ -55,6 +55,10 @@ namespace NotatnikMechanika.Shared
         public const string Name = "api/order";
         public const string GetExtendedOrders = "extendedOrders";
         public const string GetArchivedExtendedOrders = "archivedExtendedOrders";
+        public const string AddServiceToOrder = "addService/{orderId}/{serviceId}";
+        public const string AddCommodityToOrder = "addCommodity/{orderId}/{commodityId}";
+        public const string DeleteServiceFromOrder = "deleteService/{orderId}/{serviceId}";
+        public const string DeleteCommodityFromOrder = "deleteCommodity/{orderId}/{commodityId}";
 
         public string GetFullPath(string path)
         {
@@ -65,6 +69,8 @@ namespace NotatnikMechanika.Shared
     public class ServicePaths : IPaths
     {
         public const string Name = "api/service";
+        public const string GetAllForOrderPath = "forOrder/{orderId}";
+        public const string GetAllInOrderPath = "inOrder/{orderId}";
 
         public string GetFullPath(string path)
         {
@@ -75,6 +81,8 @@ namespace NotatnikMechanika.Shared
     public class CommodityPaths : IPaths
     {
         public const string Name = "api/commodity";
+        public const string GetAllForOrderPath = "forOrder/{orderId}";
+        public const string GetAllInOrderPath = "inOrder/{orderId}";
 
         public string GetFullPath(string path)
         {

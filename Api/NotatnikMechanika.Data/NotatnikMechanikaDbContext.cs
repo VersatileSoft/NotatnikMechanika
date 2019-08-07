@@ -11,6 +11,8 @@ namespace NotatnikMechanika.Data
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<Commodity> Commodities { get; set; }
+        public virtual DbSet<OrderToCommodity> OrderToCommodities { get; set; }
+        public virtual DbSet<OrderToService> OrderToServices { get; set; }
 
         public NotatnikMechanikaDbContext(DbContextOptions<NotatnikMechanikaDbContext> options) : base(options) { }
 

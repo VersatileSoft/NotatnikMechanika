@@ -38,5 +38,33 @@ namespace NotatnikMechanika.Server.Controllers
         {
             return Ok(await _orderService.GetAllExtendedAsync(User.Identity.Name, true));
         }
+
+        [HttpPost(OrderPaths.AddServiceToOrder)]
+        public async Task<ActionResult> AddServiceToOrder(int orderId, int serviceId)
+        {
+            await _orderService.AddServiceToOrder(User.Identity.Name, orderId, serviceId);
+            return Ok();
+        }
+
+        [HttpPost(OrderPaths.AddCommodityToOrder)]
+        public async Task<ActionResult> AddCommodityToOrder(int orderId, int commodityId)
+        {
+            await _orderService.AddCommodityToOrder(User.Identity.Name, orderId, commodityId);
+            return Ok();
+        }
+
+        [HttpDelete(OrderPaths.DeleteServiceFromOrder)]
+        public async Task<ActionResult> DeleteServiceFromOrder(int orderId, int serviceId)
+        {
+            await _orderService.DeleteServiceFromOrder(User.Identity.Name, orderId, serviceId);
+            return Ok();
+        }
+
+        [HttpDelete(OrderPaths.DeleteCommodityFromOrder)]
+        public async Task<ActionResult> DeleteCommodityFromOrder(int orderId, int commodityId)
+        {
+            await _orderService.DeleteCommodityFromOrder(User.Identity.Name, orderId, commodityId);
+            return Ok();
+        }
     }
 }

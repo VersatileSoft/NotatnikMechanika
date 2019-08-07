@@ -21,8 +21,8 @@ namespace NotatnikMechanika.Core.ViewModels.ContentViewModels
 
         public IEnumerable<ServiceModel> Services { get; set; }
 
-        public ICommand AddServiceCommand { get; set;  }
-        public ICommand ServiceSelectedCommand { get; set;  }
+        public ICommand AddServiceCommand { get; set; }
+        public ICommand ServiceSelectedCommand { get; set; }
 
 
         public ServicesViewModel(IHttpRequestService httpRequestService, IMvxNavigationService navigationService)
@@ -38,7 +38,7 @@ namespace NotatnikMechanika.Core.ViewModels.ContentViewModels
         {
             Response<List<ServiceModel>> response = await _httpRequestService.SendGet<List<ServiceModel>>(new ServicePaths().GetFullPath(CRUDPaths.GetAllPath), true);
 
-            if(response.StatusCode == HttpStatusCode.OK)
+            if (response.StatusCode == HttpStatusCode.OK)
             {
                 Services = response.Content;
             }

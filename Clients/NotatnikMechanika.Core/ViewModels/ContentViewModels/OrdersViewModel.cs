@@ -6,7 +6,6 @@ using NotatnikMechanika.Core.Models;
 using NotatnikMechanika.Core.Services;
 using NotatnikMechanika.Core.ViewModels.ContentViewModels;
 using NotatnikMechanika.Shared;
-using NotatnikMechanika.Shared.Models.Order;
 using PropertyChanged;
 using System.Collections.Generic;
 using System.Net;

@@ -170,6 +170,26 @@
                             </utils:IconButton>
                         </Grid>
                     </GroupBox.Header>
+
+                    <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding Services}">
+                        <ListBox.ItemTemplate>
+                            <ItemContainerTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Margin="10"
+                                        VerticalAlignment="Center"
+                                        Text="{Binding Name}"/>
+
+                                </Grid>
+                            </ItemContainerTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
                 </GroupBox>
 
                 <GroupBox
@@ -209,6 +229,25 @@
                             </utils:IconButton>
                         </Grid>
                     </GroupBox.Header>
+
+                    <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding Commodities}">
+                        <ListBox.ItemTemplate>
+                            <ItemContainerTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Margin="10"
+                                        VerticalAlignment="Center"
+                                        Text="{Binding Name}"/>
+
+                                </Grid>
+                            </ItemContainerTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </GroupBox>
 
                 <GroupBox

@@ -1,6 +1,5 @@
 ﻿using MaterialDesignThemes.Wpf;
 using MvvmCross.Platforms.Wpf.Presenters;
-using MvvmCross.Platforms.Wpf.Views;
 using MvvmCross.ViewModels;
 using NotatnikMechanika.Core.ViewModels.AddingViewModels;
 using NotatnikMechanika.WPF.Presenters.Attributes;
@@ -50,7 +49,7 @@ namespace NotatnikMechanika.WPF.Presenters
         {
             if (toClose is AddServiceToOrderViewModel || toClose is AddCommodityToOrderViewModel)
             {
-                var dialogHosts = DialogPresentationAction.FindVisualChildren<DialogHost>(_contentControl);
+                System.Collections.Generic.IEnumerable<DialogHost> dialogHosts = DialogPresentationAction.FindVisualChildren<DialogHost>(_contentControl);
 
                 if (!dialogHosts.Any())
                 {

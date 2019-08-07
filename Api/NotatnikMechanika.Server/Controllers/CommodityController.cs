@@ -4,6 +4,8 @@ using NotatnikMechanika.Server.Controllers.Base;
 using NotatnikMechanika.Service.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Commodity;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Server.Controllers
 {
@@ -11,7 +13,23 @@ namespace NotatnikMechanika.Server.Controllers
     [Route(CommodityPaths.Name)]
     public class CommodityController : AbstractControllerBase<CommodityModel>
     {
+        private readonly ICommodityService _commodityService;
+
         public CommodityController(ICommodityService commodityService) : base(commodityService)
-        { }
+        {
+            _commodityService = commodityService;
+        }
+
+        [HttpGet(CommodityPaths.GetAllForOrderPath)]
+        public async Task<ActionResult<IEnumerable<CommodityForOrderModel>>> GetCommoditiesForOrder(int orderId)
+        {
+            return Ok(await _commodityService.GetCommoditiesForOrder(User.Identity.Name, orderId));
+        }
+
+        [HttpGet(CommodityPaths.GetAllInOrderPath)]
+        public async Task<ActionResult<IEnumerable<CommodityModel>>> GetCommoditiesInOrder(int orderId)
+        {
+            return Ok(await _commodityService.GetCommoditiesInOrder(User.Identity.Name, orderId));
+        }
     }
 }
