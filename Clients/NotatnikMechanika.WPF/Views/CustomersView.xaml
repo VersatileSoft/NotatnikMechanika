@@ -2,6 +2,7 @@
     x:Class="NotatnikMechanika.WPF.Views.CustomersView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:NotatnikMechanika.WPF.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -15,15 +16,29 @@
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
     mc:Ignorable="d">
-
+    <views:MvxWpfView.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </views:MvxWpfView.Resources>
     <Grid>
         <StackPanel>
-            <TextBlock Style="{StaticResource MaterialDesignDisplay2TextBlock}"
+            <TextBlock
                 Margin="0,20,0,20"
                 HorizontalAlignment="Center"
+                Style="{StaticResource MaterialDesignDisplay2TextBlock}"
                 Text="Klienci"/>
 
-            <ListView ItemsSource="{Binding Customers}" SelectionChanged="ListView_Selected">
+            <ProgressBar x:Name="Progress"
+                Width="50"
+                Height="50"
+                IsIndeterminate="True"
+                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=false}"
+                Value="50"/>
+
+            <ListView
+                ItemsSource="{Binding Customers}"
+                SelectionChanged="ListView_Selected"
+                Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Imię"/>

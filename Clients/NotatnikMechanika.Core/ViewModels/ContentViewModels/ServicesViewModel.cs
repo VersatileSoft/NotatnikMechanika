@@ -18,7 +18,7 @@ namespace NotatnikMechanika.Core.ViewModels.ContentViewModels
     {
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMvxNavigationService _navigationService;
-
+        public bool IsLoading { get; set; }
         public IEnumerable<ServiceModel> Services { get; set; }
 
         public ICommand AddServiceCommand { get; set; }
@@ -36,12 +36,14 @@ namespace NotatnikMechanika.Core.ViewModels.ContentViewModels
 
         public override async Task Initialize()
         {
+            IsLoading = true;
             Response<List<ServiceModel>> response = await _httpRequestService.SendGet<List<ServiceModel>>(new ServicePaths().GetFullPath(CRUDPaths.GetAllPath), true);
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 Services = response.Content;
             }
+            IsLoading = false;
         }
     }
 }

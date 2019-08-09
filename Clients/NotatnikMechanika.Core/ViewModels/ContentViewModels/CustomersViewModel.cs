@@ -20,6 +20,7 @@ namespace NotatnikMechanika.Core.ViewModels
         public IEnumerable<CustomerModel> Customers { get; set; }
         public ICommand AddCustomerCommand { get; set; }
         public ICommand CustomerSelectedCommand { get; set; }
+        public bool IsLoading { get; set; }
 
 
         private readonly IHttpRequestService _httpRequestService;
@@ -46,11 +47,13 @@ namespace NotatnikMechanika.Core.ViewModels
 
         public override async Task Initialize()
         {
+            IsLoading = true;
             Response<List<CustomerModel>> response = await _httpRequestService.SendGet<List<CustomerModel>>(new CustomerPaths().GetFullPath(CRUDPaths.GetAllPath), true);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 Customers = response.Content;
             }
+            IsLoading = false;
         }
     }
 }

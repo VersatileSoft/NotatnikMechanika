@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utils="clr-namespace:NotatnikMechanika.WPF.Views.Utils"
     xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
+    xmlns:converters="clr-namespace:NotatnikMechanika.WPF.Converters"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
     TextElement.FontSize="13"
@@ -16,6 +17,10 @@
     TextOptions.TextRenderingMode="Auto"
     mc:Ignorable="d">
 
+    <views:MvxWpfView.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </views:MvxWpfView.Resources>
+
     <Grid>
         <StackPanel>
             <TextBlock
@@ -24,7 +29,18 @@
                 Style="{StaticResource MaterialDesignDisplay2TextBlock}"
                 Text="Usługi"/>
 
-            <ListView ItemsSource="{Binding Services}" SelectionChanged="ListView_Selected">
+            <ProgressBar x:Name="Progress"
+                Width="50"
+                Height="50"
+                IsIndeterminate="True"
+                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=false}"
+                Value="50"/>
+
+            <ListView
+                ItemsSource="{Binding Services}"
+                SelectionChanged="ListView_Selected"
+                Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Nazwa"/>

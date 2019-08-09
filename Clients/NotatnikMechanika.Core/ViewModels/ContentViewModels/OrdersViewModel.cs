@@ -18,6 +18,7 @@ namespace NotatnikMechanika.Core.ViewModels
     public class OrdersViewModel : MvxViewModel
     {
         public IEnumerable<OrderExtendedModel> Orders { get; set; }
+        public bool IsLoading { get; set; }
         public ICommand AddOrderCommand { get; set; }
         public ICommand OrderSelectedCommand { get; set; }
 
@@ -33,12 +34,15 @@ namespace NotatnikMechanika.Core.ViewModels
 
         public override async Task Initialize()
         {
+            IsLoading = true;
             Response<List<OrderExtendedModel>> response = await _httpRequestService.SendGet<List<OrderExtendedModel>>(new OrderPaths().GetFullPath(OrderPaths.GetExtendedOrders), true);
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 Orders = response.Content;
             }
+
+            IsLoading = false;
         }
     }
 }

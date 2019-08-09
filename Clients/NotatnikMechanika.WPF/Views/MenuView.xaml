@@ -58,6 +58,12 @@
 
         <utils:MenuButton
             Command="{Binding NavigateCommand}"
+            CommandParameter="Warehouse"
+            IconKind="House"
+            Text="Magazyn"/>
+
+        <utils:MenuButton
+            Command="{Binding NavigateCommand}"
             CommandParameter="Archives"
             IconKind="Archive"
             Text="Archiwum"/>
@@ -67,12 +73,6 @@
             CommandParameter="Receipts"
             IconKind="FileDocument"
             Text="Faktury/Paragony"/>
-
-        <utils:MenuButton
-            Command="{Binding NavigateCommand}"
-            CommandParameter="Warehouse"
-            IconKind="House"
-            Text="Magazyn"/>
 
         <utils:MenuButton
             Command="{Binding LogoutCommand}"
