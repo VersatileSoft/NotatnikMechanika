@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
+    <UserSecretsId>2075508f-0fa6-4ec8-bcbc-35a133c1065f</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,6 +30,12 @@
     <ProjectReference Include="..\NotatnikMechanika.Repository\NotatnikMechanika.Repository.csproj" />
     <ProjectReference Include="..\NotatnikMechanika.Service\NotatnikMechanika.Service.csproj" />
     <ProjectReference Include="..\NotatnikMechanika.Shared\NotatnikMechanika.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <Target Name="WorkaroundNetStandard" AfterTargets="ResolvePackageAssets">

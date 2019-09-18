@@ -45,7 +45,7 @@ namespace NotatnikMechanika.Server
             services.AddMvc();
 
             services.AddDbContext<NotatnikMechanikaDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("RemoteConnection")) // RemoteConnection, LocalConnection           
+                options.UseSqlServer(Configuration.GetConnectionString("LocalConnection")) // RemoteConnection, LocalConnection           
             );
 
             services.AddIdentity<User, IdentityRole>(options =>
@@ -178,7 +178,7 @@ namespace NotatnikMechanika.Server
                 .AddJsonFile("appsettings.json")
                 .Build();
             DbContextOptionsBuilder<NotatnikMechanikaDbContext> builder = new DbContextOptionsBuilder<NotatnikMechanikaDbContext>();
-            string connectionString = configuration.GetConnectionString("RemoteConnection");
+            string connectionString = configuration.GetConnectionString("LocalConnection");
             builder.UseSqlServer(connectionString);
             return new NotatnikMechanikaDbContext(builder.Options);
         }
