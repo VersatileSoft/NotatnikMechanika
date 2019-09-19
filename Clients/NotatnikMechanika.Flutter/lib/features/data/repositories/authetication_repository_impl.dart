@@ -8,13 +8,13 @@ import 'package:notatnik_mechanika/features/domain/repositories/authetication_re
 
 class AuthenticationRepositoryImpl implements AutheticationRepository{
   @override
-  Future<Either<Failure, Token>> login(AuthenticateUserModel authenticateUserModel) {
+  Future<Either<Failure, Token>> login(AuthenticateUser authenticateUserModel) {
     // TODO: implement login
     return null;
   }
 
   @override
-  Future<Either<Failure, SuccesResponse>> register(CreateUserModel createUserModel) {
+  Future<Either<Failure, SuccesResponse>> register(CreateUser createUserModel) {
     // TODO: implement register
     return null;
   }

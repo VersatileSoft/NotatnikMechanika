@@ -6,10 +6,10 @@ abstract class AuthenticationRemoteDataSource {
   /// Calls the login endpoint.
   ///
   /// Throws a [ServerException] for all error codes.
-  Future<TokenModel> login(AuthenticateUserModel authenticateUserModel);
+  Future<TokenModel> login(AuthenticateUser authenticateUserModel);
 
   /// Calls the register endpoint.
   ///
   /// Throws a [ServerException] for all error codes.
-  Future register(CreateUserModel createUserModel);
+  Future register(CreateUser createUserModel);
 }

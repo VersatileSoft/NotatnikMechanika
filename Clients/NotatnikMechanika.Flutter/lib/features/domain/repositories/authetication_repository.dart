@@ -7,8 +7,8 @@ import 'package:notatnik_mechanika/features/domain/entities/user/token.dart';
 
 abstract class AutheticationRepository {
   Future<Either<Failure, Token>> login(
-      AuthenticateUserModel authenticateUserModel);
+      AuthenticateUser authenticateUserModel);
 
   Future<Either<Failure, SuccesResponse>> register(
-      CreateUserModel createUserModel);
+      CreateUser createUserModel);
 }

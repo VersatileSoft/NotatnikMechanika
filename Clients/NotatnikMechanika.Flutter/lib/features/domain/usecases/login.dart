@@ -5,13 +5,13 @@ import 'package:notatnik_mechanika/features/domain/entities/user/authenticate_us
 import 'package:notatnik_mechanika/features/domain/entities/user/token.dart';
 import 'package:notatnik_mechanika/features/domain/repositories/authetication_repository.dart';
 
-class Login implements UseCase<Token, AuthenticateUserModel> {
+class Login implements UseCase<Token, AuthenticateUser> {
   final AutheticationRepository repository;
 
   Login(this.repository);
 
   @override
-  Future<Either<Failure, Token>> call(AuthenticateUserModel params) async {
+  Future<Either<Failure, Token>> call(AuthenticateUser params) async {
     return await repository.login(params);
   }
 }
