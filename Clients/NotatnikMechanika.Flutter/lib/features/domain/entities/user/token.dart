@@ -1,5 +1,7 @@
-﻿class Token {
-  String token;
+﻿import 'package:equatable/equatable.dart';
 
-  Token({this.token});
+class Token extends Equatable {
+  final String token;
+
+  Token({this.token}) : super([token]);
 }

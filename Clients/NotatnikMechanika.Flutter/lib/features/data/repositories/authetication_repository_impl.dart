@@ -45,7 +45,7 @@ class AuthenticationRepositoryImpl implements AutheticationRepository {
   @override
   Future<Either<Failure, Token>> get token async {
     try {
-      return Right(await authenticationLocalDataSource.token);
+      return Right(await authenticationLocalDataSource.getToken());
     } catch (_) {
       return Left(CacheFailure());
     }

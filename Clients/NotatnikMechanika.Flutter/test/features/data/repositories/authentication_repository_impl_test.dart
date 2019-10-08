@@ -58,25 +58,25 @@ main() {
   _gettingTokenFromLocal(() {
     test('Should get exsisting [Token]', () async {
       // arrange
-      when(mockAuthenticationLocalDataSource.token)
+      when(mockAuthenticationLocalDataSource.getToken())
           .thenAnswer((_) async => fakeToken);
       // act
       final result = await authenticationRepositoryImpl.token;
       // assert
       expect(result, Right(fakeToken));
-      verify(mockAuthenticationLocalDataSource.token);
+      verify(mockAuthenticationLocalDataSource.getToken());
       verifyZeroInteractions(mockAuthenticationRemoteDataSource);
       verifyNoMoreInteractions(mockAuthenticationLocalDataSource);
     });
 
     test('Should return [Failure] if token not exsist', () async {
       // arrange
-      when(mockAuthenticationLocalDataSource.token).thenThrow(CacheException());
+      when(mockAuthenticationLocalDataSource.getToken()).thenThrow(CacheException());
       // act
       final result = await authenticationRepositoryImpl.token;
       // assert
       expect(result, Left(CacheFailure()));
-      verify(mockAuthenticationLocalDataSource.token);
+      verify(mockAuthenticationLocalDataSource.getToken());
       verifyNoMoreInteractions(mockAuthenticationLocalDataSource);
       verifyZeroInteractions(mockAuthenticationRemoteDataSource);
     });
