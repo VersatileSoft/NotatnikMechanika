@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notatnik_mechanika/bloc/authentication/authentication.dart';
-import 'package:notatnik_mechanika/pages/home/home_page.dart';
-import 'package:notatnik_mechanika/pages/login/login_page.dart';
-import 'package:notatnik_mechanika/pages/utils/app_gradient.dart';
-import 'package:notatnik_mechanika/pages/utils/photo_hero.dart';
+import 'package:notatnik_mechanika/features/presentation/bloc/authentication/authentication.dart';
+import 'package:notatnik_mechanika/features/presentation/pages/home/home_page.dart';
+import 'package:notatnik_mechanika/features/presentation/pages/login/login_page.dart';
+import 'package:notatnik_mechanika/features/presentation/pages/utils/app_gradient.dart';
+import 'package:notatnik_mechanika/features/presentation/pages/utils/photo_hero.dart';
 
 class SplashPage extends StatelessWidget {
   @override

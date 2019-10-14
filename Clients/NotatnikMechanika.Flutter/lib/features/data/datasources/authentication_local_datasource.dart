@@ -24,12 +24,14 @@ class AuthenticationLocalDataSourceImpl
   AuthenticationLocalDataSourceImpl({@required this.sharedPreferences});
 
   @override
-  Future cacheToken(TokenModel token) async {}
+  Future cacheToken(TokenModel token) async {
+    return sharedPreferences.setString(
+        CACHED_TOKEN, json.encode(token.toJson()));
+  }
 
   @override
   Future<TokenModel> getToken() {
     String stringToken = sharedPreferences.getString(CACHED_TOKEN);
-
     if (stringToken != null) {
       return Future.value(TokenModel.fromJson(json.decode(stringToken)));
     } else {

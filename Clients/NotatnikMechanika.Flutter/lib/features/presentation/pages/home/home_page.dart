@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notatnik_mechanika/bloc/authentication/authentication.dart';
-import 'package:notatnik_mechanika/pages/login/login_page.dart';
+import 'package:notatnik_mechanika/features/presentation/bloc/authentication/authentication.dart';
+import 'package:notatnik_mechanika/features/presentation/pages/login/login_page.dart';
 
 import '../app_drawer.dart';
 

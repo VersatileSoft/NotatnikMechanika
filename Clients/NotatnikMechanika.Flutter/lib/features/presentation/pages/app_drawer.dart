@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:notatnik_mechanika/pages/home/home_page.dart';
-import 'package:notatnik_mechanika/pages/login/login_page.dart';
-import 'package:notatnik_mechanika/pages/splash/splash_page.dart';
-import 'package:notatnik_mechanika/pages/utils/app_gradient.dart';
+import 'package:notatnik_mechanika/features/presentation/pages/home/home_page.dart';
+import 'package:notatnik_mechanika/features/presentation/pages/login/login_page.dart';
+
+import 'splash/splash_page.dart';
+import 'utils/app_gradient.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key key}) : super(key: key);

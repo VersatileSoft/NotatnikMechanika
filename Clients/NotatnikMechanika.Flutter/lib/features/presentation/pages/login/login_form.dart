@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notatnik_mechanika/bloc/authentication/authentication.dart';
-import 'package:notatnik_mechanika/bloc/login/login.dart';
-import 'package:notatnik_mechanika/pages/home/home.dart';
-import 'package:notatnik_mechanika/pages/utils/button_indicator.dart';
-import 'package:notatnik_mechanika/pages/utils/custom_input.dart';
-import 'package:notatnik_mechanika/pages/utils/error_message.dart';
-import 'package:notatnik_mechanika/pages/utils/photo_hero.dart';
+import 'package:notatnik_mechanika/features/presentation/bloc/authentication/authentication.dart';
+import 'package:notatnik_mechanika/features/presentation/bloc/login/login.dart';
+import 'package:notatnik_mechanika/features/presentation/pages/home/home_page.dart';
+import 'package:notatnik_mechanika/features/presentation/pages/utils/button_indicator.dart';
+import 'package:notatnik_mechanika/features/presentation/pages/utils/custom_input.dart';
+import 'package:notatnik_mechanika/features/presentation/pages/utils/error_message.dart';
+import 'package:notatnik_mechanika/features/presentation/pages/utils/photo_hero.dart';
 
 class LoginForm extends StatefulWidget {
   @override
