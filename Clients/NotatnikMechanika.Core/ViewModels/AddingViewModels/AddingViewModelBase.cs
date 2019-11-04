@@ -36,7 +36,7 @@ namespace NotatnikMechanika.Core.ViewModels
             GoBackCommand = new MvxAsyncCommand(() => _navigationService.Navigate<MainPageViewModel>());
         }
 
-        public override void Prepare(int parameter) 
+        public override void Prepare(int parameter)
         {
         }
 
