@@ -1,5 +1,4 @@
-﻿<views:MvxMasterDetailPage
-    x:Class="NotatnikMechanika.Forms.Views.MainPageView"
+﻿<views:MvxMasterDetailPage x:Class="NotatnikMechanika.Forms.Views.MainPageView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.ViewModels;assembly=NotatnikMechanika.Core"

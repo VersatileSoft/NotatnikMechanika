@@ -1,5 +1,4 @@
-﻿<views:MvxContentPage
-    x:Class="NotatnikMechanika.Forms.Views.RegistrationView"
+﻿<views:MvxContentPage x:Class="NotatnikMechanika.Forms.Views.RegistrationView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -12,9 +11,10 @@
     mc:Ignorable="d">
     <views:MvxContentPage.Content>
         <Grid x:Name="pageGrid" Opacity="0">
-            <Image Style="{StaticResource LoginAppIconImage}"
+            <Image
                 Margin="0,30,0,0"
-                VerticalOptions="Start"/>
+                VerticalOptions="Start"
+                Style="{StaticResource LoginAppIconImage}"/>
             <Label Opacity="100" Style="{StaticResource LoginAppTitleLabel}"/>
 
             <ScrollView>
@@ -37,37 +37,44 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Entry Style="{StaticResource LoginEntry}"
+                        <Entry
                             Grid.Column="0"
                             Placeholder="Imię"
+                            Style="{StaticResource LoginEntry}"
                             Text="{Binding CreateUserModel.Name}"/>
-                        <Entry Style="{StaticResource LoginEntry}"
+                        <Entry
                             Grid.Column="1"
                             Placeholder="Nazwisko"
+                            Style="{StaticResource LoginEntry}"
                             Text="{Binding CreateUserModel.Surname}"/>
                     </Grid>
 
-                    <Entry Style="{StaticResource LoginEntry}"
+                    <Entry
                         Keyboard="Email"
                         Placeholder="E-mail"
+                        Style="{StaticResource LoginEntry}"
                         Text="{Binding CreateUserModel.Email}"/>
-                    <Entry Style="{StaticResource LoginEntry}"
+                    <Entry
                         IsPassword="True"
                         Placeholder="Hasło"
+                        Style="{StaticResource LoginEntry}"
                         Text="{Binding CreateUserModel.Password}"/>
-                    <Entry Style="{StaticResource LoginEntry}"
+                    <Entry
                         IsPassword="True"
                         Placeholder="Powtórz hasło"
+                        Style="{StaticResource LoginEntry}"
                         Text="{Binding ConfirmPassword}"/>
 
                     <StackLayout Margin="0,10,0,0" Orientation="Horizontal">
-                        <Button Style="{StaticResource LoginButton}"
+                        <Button
                             Command="{Binding LoginCommand}"
+                            Style="{StaticResource LoginButton}"
                             Text="Mam konto"/>
 
-                        <Button Style="{StaticResource LoginButton}"
-                            Command="{Binding RegisterCommand}"
+                        <Button
                             HorizontalOptions="EndAndExpand"
+                            Command="{Binding RegisterCommand}"
+                            Style="{StaticResource LoginButton}"
                             Text="Stwórz konto"/>
                     </StackLayout>
                 </StackLayout>

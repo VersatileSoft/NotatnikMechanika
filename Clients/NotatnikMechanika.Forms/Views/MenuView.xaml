@@ -1,5 +1,4 @@
-﻿<views:MvxContentPage
-    x:Class="NotatnikMechanika.Forms.Views.MenuView"
+﻿<views:MvxContentPage x:Class="NotatnikMechanika.Forms.Views.MenuView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -19,20 +18,20 @@
                 <StackLayout
                     Margin="5,0,0,5"
                     HorizontalOptions="Fill"
-                    Orientation="Horizontal"
-                    VerticalOptions="EndAndExpand">
+                    VerticalOptions="EndAndExpand"
+                    Orientation="Horizontal">
                     <Image
+                        WidthRequest="20"
                         HeightRequest="20"
-                        IsOpaque="True"
-                        Source="RegularClientsIcon.xml"
                         VerticalOptions="Center"
-                        WidthRequest="20"/>
+                        IsOpaque="True"
+                        Source="RegularClientsIcon.xml"/>
 
                     <Label
+                        VerticalOptions="Center"
                         FontSize="Medium"
                         Text="Michał 'Grubas' Woźniak"
-                        TextColor="White"
-                        VerticalOptions="Center"/>
+                        TextColor="White"/>
                 </StackLayout>
             </Grid>
 
@@ -74,7 +73,7 @@
 
             <StackLayout Padding="15" VerticalOptions="EndAndExpand">
                 <Button Text="Ustawienia"/>
-                <Button Text="Wyloguj" Command="{Binding LogoutCommand}"/>
+                <Button Command="{Binding LogoutCommand}" Text="Wyloguj"/>
             </StackLayout>
         </StackLayout>
     </views:MvxContentPage.Content>

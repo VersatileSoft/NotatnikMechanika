@@ -1,5 +1,4 @@
-﻿<views:MvxContentPage
-    x:Class="NotatnikMechanika.Forms.Views.OrdersView"
+﻿<views:MvxContentPage x:Class="NotatnikMechanika.Forms.Views.OrdersView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -14,8 +13,8 @@
         <StackLayout>
             <Label
                 HorizontalOptions="CenterAndExpand"
-                Text="Welcome to Orders page!"
-                VerticalOptions="CenterAndExpand"/>
+                VerticalOptions="CenterAndExpand"
+                Text="Welcome to Orders page!"/>
         </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

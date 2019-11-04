@@ -3,11 +3,9 @@ using MvvmCross.Forms.Views;
 using NotatnikMechanika.Core.ViewModels;
 using NotatnikMechanika.Shared.Models.Customer;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace NotatnikMechanika.Forms.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     [MvxMasterDetailPagePresentation(MasterDetailPosition.Detail, NoHistory = true)]
     public partial class CustomersView : MvxContentPage<CustomersViewModel>
     {

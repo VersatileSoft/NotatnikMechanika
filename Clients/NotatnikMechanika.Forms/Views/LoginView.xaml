@@ -1,5 +1,4 @@
-<views:MvxContentPage
-    x:Class="NotatnikMechanika.Forms.Views.LoginView"
+<views:MvxContentPage x:Class="NotatnikMechanika.Forms.Views.LoginView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -19,8 +18,8 @@
                 <StackLayout x:Name="loginPanel"
                     Margin="0,0,0,150"
                     Padding="20"
-                    Opacity="0"
-                    VerticalOptions="End">
+                    VerticalOptions="End"
+                    Opacity="0">
                     <Label Style="{StaticResource LoginMessageLabel}">
                         <Label.FormattedText>
                             <FormattedString>
@@ -30,13 +29,15 @@
                         </Label.FormattedText>
                     </Label>
 
-                    <Entry Style="{StaticResource LoginEntry}"
+                    <Entry
                         Keyboard="Email"
                         Placeholder="E-mail"
+                        Style="{StaticResource LoginEntry}"
                         Text="{Binding UserModel.Email}"/>
-                    <Entry Style="{StaticResource LoginEntry}"
+                    <Entry
                         IsPassword="True"
                         Placeholder="Hasło"
+                        Style="{StaticResource LoginEntry}"
                         Text="{Binding UserModel.Password}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="-12">
@@ -45,13 +46,15 @@
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
-                        <Button Style="{StaticResource LoginButton}"
+                        <Button
                             Command="{Binding RegisterCommand}"
+                            Style="{StaticResource LoginButton}"
                             Text="Nie mam konta"/>
 
-                        <Button Style="{StaticResource LoginButton}"
-                            Command="{Binding LoginCommand}"
+                        <Button
                             HorizontalOptions="EndAndExpand"
+                            Command="{Binding LoginCommand}"
+                            Style="{StaticResource LoginButton}"
                             Text="Zaloguj"/>
                     </StackLayout>
                 </StackLayout>

@@ -2,7 +2,6 @@
 using MvvmCross.Forms.Platforms.Android.Core;
 using NotatnikMechanika.Core;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Forms.Android.Services;
 using NotatnikMechanika.Forms.Services;
 
 namespace NotatnikMechanika.Forms.Android

@@ -1,5 +1,4 @@
-﻿<ResourceDictionary
-    x:Class="NotatnikMechanika.Forms.Styles.GeneralDevicesStyle"
+﻿<ResourceDictionary x:Class="NotatnikMechanika.Forms.Styles.GeneralDevicesStyle"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
@@ -51,5 +50,4 @@
         <Setter Property="CornerRadius" Value="25"/>
         <Setter Property="WidthRequest" Value="150"/>
     </Style>
-
 </ResourceDictionary>

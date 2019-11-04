@@ -4,11 +4,9 @@ using MvvmCross.Forms.Views;
 using NotatnikMechanika.Core.ViewModels;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace NotatnikMechanika.Forms.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     [MvxMasterDetailPagePresentation(MasterDetailPosition.Master, NoHistory = true, WrapInNavigationPage = false)]
     public partial class MenuView : MvxContentPage<MenuViewModel>
     {

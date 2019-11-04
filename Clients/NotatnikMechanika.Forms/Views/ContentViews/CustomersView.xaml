@@ -1,5 +1,4 @@
-﻿<views:MvxContentPage
-    x:Class="NotatnikMechanika.Forms.Views.CustomersView"
+﻿<views:MvxContentPage x:Class="NotatnikMechanika.Forms.Views.CustomersView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -15,9 +14,9 @@
         <ScrollView Orientation="Both">
             <StackLayout>
                 <Grid
+                    HeightRequest="40"
                     Padding="10"
-                    BackgroundColor="#f0f0f0f0"
-                    HeightRequest="40">
+                    BackgroundColor="#f0f0f0f0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="100"/>
@@ -30,32 +29,32 @@
 
                     <Label
                         Grid.Column="0"
-                        Text="ID"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center"
+                        Text="ID"/>
                     <Label
                         Grid.Column="1"
-                        Text="Name"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center"
+                        Text="Name"/>
                     <Label
                         Grid.Column="2"
-                        Text="Surname"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center"
+                        Text="Surname"/>
                     <Label
                         Grid.Column="3"
-                        Text="CompanyName"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center"
+                        Text="CompanyName"/>
                     <Label
                         Grid.Column="4"
-                        Text="CompanyIdentyficator"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center"
+                        Text="CompanyIdentyficator"/>
                     <Label
                         Grid.Column="5"
-                        Text="Phone"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center"
+                        Text="Phone"/>
                     <Label
                         Grid.Column="6"
-                        Text="Address"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center"
+                        Text="Address"/>
                 </Grid>
 
                 <CollectionView
@@ -64,7 +63,7 @@
                     SelectionMode="Single">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Padding="10" HeightRequest="30">
+                            <Grid HeightRequest="30" Padding="10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="25"/>
                                     <ColumnDefinition Width="100"/>
@@ -77,32 +76,32 @@
 
                                 <Label
                                     Grid.Column="0"
-                                    Text="{Binding Id}"
-                                    VerticalOptions="Center"/>
+                                    VerticalOptions="Center"
+                                    Text="{Binding Id}"/>
                                 <Label
                                     Grid.Column="1"
-                                    Text="{Binding Name}"
-                                    VerticalOptions="Center"/>
+                                    VerticalOptions="Center"
+                                    Text="{Binding Name}"/>
                                 <Label
                                     Grid.Column="2"
-                                    Text="{Binding Surname}"
-                                    VerticalOptions="Center"/>
+                                    VerticalOptions="Center"
+                                    Text="{Binding Surname}"/>
                                 <Label
                                     Grid.Column="3"
-                                    Text="{Binding CompanyName}"
-                                    VerticalOptions="Center"/>
+                                    VerticalOptions="Center"
+                                    Text="{Binding CompanyName}"/>
                                 <Label
                                     Grid.Column="4"
-                                    Text="{Binding CompanyIdentyficator}"
-                                    VerticalOptions="Center"/>
+                                    VerticalOptions="Center"
+                                    Text="{Binding CompanyIdentyficator}"/>
                                 <Label
                                     Grid.Column="5"
-                                    Text="{Binding Phone}"
-                                    VerticalOptions="Center"/>
+                                    VerticalOptions="Center"
+                                    Text="{Binding Phone}"/>
                                 <Label
                                     Grid.Column="6"
-                                    Text="{Binding Address}"
-                                    VerticalOptions="Center"/>
+                                    VerticalOptions="Center"
+                                    Text="{Binding Address}"/>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

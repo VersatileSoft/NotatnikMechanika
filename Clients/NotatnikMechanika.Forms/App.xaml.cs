@@ -1,7 +1,9 @@
 ﻿using MvvmCross.Forms.Core;
 using NotatnikMechanika.Forms.Styles;
 using Xamarin.Essentials;
+using Xamarin.Forms.Xaml;
 
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace NotatnikMechanika.Forms
 {
     public partial class App : MvxFormsApplication
@@ -36,7 +38,7 @@ namespace NotatnikMechanika.Forms
             double width = mainDisplayInfo.Width;
             double height = mainDisplayInfo.Height;
 
-            return (width <= smallWightResolution && height <= smallHeightResolution);
+            return width <= smallWightResolution && height <= smallHeightResolution;
         }
 
         protected override void OnStart()
