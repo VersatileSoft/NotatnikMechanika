@@ -12,7 +12,6 @@ namespace NotatnikMechanika.Core.ViewModels
         public AddCommodityViewModel(IHttpRequestService httpRequestService, IMvxNavigationService navigationService, IMessageDialogService messageDialogService)
             : base(httpRequestService, navigationService, messageDialogService)
         {
-
         }
     }
 }

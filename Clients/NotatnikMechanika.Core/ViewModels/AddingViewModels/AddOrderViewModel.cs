@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
-
 namespace NotatnikMechanika.Core.ViewModels
 {
     public class AddOrderViewModel : AddingViewModelBase<OrderModel>
@@ -54,8 +53,7 @@ namespace NotatnikMechanika.Core.ViewModels
         private async Task SelectedCustomerChanged()
         {
             Response<List<CarModel>> carsResponse = await _httpRequestService.SendGet<List<CarModel>>(new CarPaths().GetFullPath(
-                CarPaths.GetByCustomerPath.Replace("{customerId}", SelectedCustomer.Id.ToString())),
-                true);
+                CarPaths.GetByCustomerPath.Replace("{customerId}", SelectedCustomer.Id.ToString())), true);
 
             if (carsResponse.StatusCode == HttpStatusCode.OK)
             {

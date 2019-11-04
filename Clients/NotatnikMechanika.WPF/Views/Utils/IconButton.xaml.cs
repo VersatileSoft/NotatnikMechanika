@@ -15,9 +15,8 @@ namespace NotatnikMechanika.WPF.Views.Utils
             InitializeComponent();
         }
 
-        public static readonly DependencyProperty IconKindProperty =
-   DependencyProperty.Register("IconKind", typeof(PackIconKind), typeof(IconButton), new
-      PropertyMetadata(PackIconKind.Read, new PropertyChangedCallback(OnOnIconKindChanged)));
+        public static readonly DependencyProperty IconKindProperty = DependencyProperty.Register("IconKind", typeof(PackIconKind), typeof(IconButton), new
+            PropertyMetadata(PackIconKind.Read, new PropertyChangedCallback(OnOnIconKindChanged)));
 
         private static void OnOnIconKindChanged(DependencyObject d,
            DependencyPropertyChangedEventArgs e)

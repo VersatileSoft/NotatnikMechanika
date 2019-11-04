@@ -1,5 +1,4 @@
-﻿<views:MvxWpfView
-    x:Class="NotatnikMechanika.WPF.Views.CustomerView"
+﻿<views:MvxWpfView x:Class="NotatnikMechanika.WPF.Views.CustomerView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -28,23 +27,23 @@
                 Width="50"
                 Height="50"
                 Margin="20,5,0,0"
-                HorizontalAlignment="Left"
                 Command="{Binding GoBackCommand}"
                 Foreground="{StaticResource SecondaryAccentBrush}"
+                HorizontalAlignment="Left"
                 IconKind="ArrowLeftBoldCircle"/>
 
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Label
                     Margin="0,20,0,0"
-                    HorizontalAlignment="Center"
                     Content="{Binding CustomerModel.Name}"
-                    FontSize="30"/>
+                    FontSize="30"
+                    HorizontalAlignment="Center"/>
 
                 <Label
                     Margin="0,20,0,0"
-                    HorizontalAlignment="Center"
                     Content="{Binding CustomerModel.Surname}"
-                    FontSize="30"/>
+                    FontSize="30"
+                    HorizontalAlignment="Center"/>
             </StackPanel>
         </Grid>
         <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
@@ -67,20 +66,20 @@
                                     Grid.Column="0"
                                     Width="32"
                                     Height="32"
-                                    VerticalAlignment="Center"
-                                    Kind="User"/>
+                                    Kind="User"
+                                    VerticalAlignment="Center"/>
                                 <TextBlock
                                     Grid.Column="1"
                                     Margin="8,0,0,0"
-                                    VerticalAlignment="Center"
                                     Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                                    Text="{Binding}"/>
+                                    Text="{Binding}"
+                                    VerticalAlignment="Center"/>
                                 <utils:IconButton
                                     Grid.Column="2"
                                     Width="32"
                                     Height="32"
-                                    VerticalAlignment="Center"
-                                    IconKind="Edit"/>
+                                    IconKind="Edit"
+                                    VerticalAlignment="Center"/>
                             </Grid>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>
@@ -110,22 +109,22 @@
                                 Grid.Column="0"
                                 Width="32"
                                 Height="32"
-                                VerticalAlignment="Center"
-                                Kind="Car"/>
+                                Kind="Car"
+                                VerticalAlignment="Center"/>
 
                             <TextBlock
                                 Grid.Column="1"
                                 Margin="8,0,0,0"
-                                VerticalAlignment="Center"
                                 Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                                Text="Samochody"/>
+                                Text="Samochody"
+                                VerticalAlignment="Center"/>
                             <utils:IconButton
                                 Grid.Column="2"
                                 Width="32"
                                 Height="32"
-                                VerticalAlignment="Center"
                                 Command="{Binding AddCarCommand}"
-                                IconKind="Add"/>
+                                IconKind="Add"
+                                VerticalAlignment="Center"/>
                         </Grid>
                     </GroupBox.Header>
 
@@ -165,24 +164,24 @@
                                                     Width="35"
                                                     Height="35"
                                                     Margin="0,0,10,0"
-                                                    VerticalAlignment="Center"
-                                                    IconKind="Add"/>
+                                                    IconKind="Add"
+                                                    VerticalAlignment="Center"/>
 
                                                 <utils:IconButton
                                                     Grid.Column="0"
                                                     Width="25"
                                                     Height="25"
                                                     Margin="0,0,10,0"
-                                                    VerticalAlignment="Center"
-                                                    IconKind="Edit"/>
+                                                    IconKind="Edit"
+                                                    VerticalAlignment="Center"/>
 
                                                 <utils:IconButton
                                                     Grid.Column="0"
                                                     Width="25"
                                                     Height="25"
                                                     Margin="0,0,10,0"
-                                                    VerticalAlignment="Center"
                                                     IconKind="Delete"
+                                                    VerticalAlignment="Center"
                                                     Color="Red"/>
                                             </StackPanel>
                                         </StackPanel>
@@ -205,14 +204,14 @@
                                 <materialDesign:PackIcon
                                     Width="32"
                                     Height="32"
-                                    VerticalAlignment="Center"
-                                    Kind="Toolbox"/>
+                                    Kind="Toolbox"
+                                    VerticalAlignment="Center"/>
 
                                 <TextBlock
                                     Margin="8,0,0,0"
-                                    VerticalAlignment="Center"
                                     Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                                    Text="{Binding}"/>
+                                    Text="{Binding}"
+                                    VerticalAlignment="Center"/>
                             </StackPanel>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>
@@ -231,14 +230,14 @@
                                 <materialDesign:PackIcon
                                     Width="32"
                                     Height="32"
-                                    VerticalAlignment="Center"
-                                    Kind="FileDocument"/>
+                                    Kind="FileDocument"
+                                    VerticalAlignment="Center"/>
 
                                 <TextBlock
                                     Margin="8,0,0,0"
-                                    VerticalAlignment="Center"
                                     Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                                    Text="{Binding}"/>
+                                    Text="{Binding}"
+                                    VerticalAlignment="Center"/>
                             </StackPanel>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>

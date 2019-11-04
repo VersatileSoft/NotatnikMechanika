@@ -9,7 +9,6 @@ namespace NotatnikMechanika.Core.ViewModels.ContentViewModels
     {
         public ServiceViewModel()
         {
-
         }
 
         public override void Prepare(int parameter)

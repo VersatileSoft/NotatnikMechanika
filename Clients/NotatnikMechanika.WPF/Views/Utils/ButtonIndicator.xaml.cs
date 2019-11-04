@@ -10,9 +10,8 @@ namespace NotatnikMechanika.WPF.Views.Utils
             InitializeComponent();
         }
 
-        public static readonly DependencyProperty IsWaitingProperty =
-   DependencyProperty.Register("IsWaiting", typeof(bool), typeof(ButtonIndicator), new
-      PropertyMetadata(false, new PropertyChangedCallback(OnIsWaitingChanged)));
+        public static readonly DependencyProperty IsWaitingProperty = DependencyProperty.Register("IsWaiting", typeof(bool), typeof(ButtonIndicator), new
+            PropertyMetadata(false, new PropertyChangedCallback(OnIsWaitingChanged)));
 
         public bool IsWaiting
         {
@@ -26,8 +25,7 @@ namespace NotatnikMechanika.WPF.Views.Utils
             set => Label.Content = value;
         }
 
-        private static void OnIsWaitingChanged(DependencyObject d,
-           DependencyPropertyChangedEventArgs e)
+        private static void OnIsWaitingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ButtonIndicator UserControl1Control = d as ButtonIndicator;
             UserControl1Control.OnIsWaitingChanged(e);

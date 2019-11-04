@@ -17,7 +17,6 @@ namespace NotatnikMechanika.Core.ViewModels
     {
         public AuthenticateUserModel UserModel { get; set; }
         public string ErrorMessage { get; set; }
-
         public bool IsWaiting { get; set; }
 
         public IMvxCommand LoginCommand { get; set; }

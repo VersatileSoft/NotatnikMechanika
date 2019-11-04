@@ -20,7 +20,6 @@ namespace NotatnikMechanika.Core.ViewModels
         public string ErrorMessage { get; set; }
         public bool IsWaiting { get; set; }
 
-
         private readonly IMvxNavigationService _navigationService;
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMessageDialogService _messageDialogService;

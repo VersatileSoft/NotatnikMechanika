@@ -1,5 +1,4 @@
-﻿<views:MvxWpfView
-    x:Class="NotatnikMechanika.WPF.Views.RegistrationView"
+﻿<views:MvxWpfView x:Class="NotatnikMechanika.WPF.Views.RegistrationView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -37,10 +36,10 @@
 
                 <Label
                     Margin="0,20,0,0"
-                    HorizontalAlignment="Center"
                     Content="Notatnik Mechanika"
                     FontSize="30"
-                    Foreground="#DDFFFFFF"/>
+                    Foreground="#DDFFFFFF"
+                    HorizontalAlignment="Center"/>
 
                 <StackPanel x:Name="TopInput"
                     Margin="0,0,0,-70"
@@ -48,7 +47,7 @@
                     Opacity="100"
                     Orientation="Horizontal">
 
-                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    <TextBox
                         Width="190"
                         Height="60"
                         Margin="0,10,0,10"
@@ -56,10 +55,11 @@
                         materialDesign:HintAssist.Hint="Imię"
                         AcceptsReturn="True"
                         Foreground="White"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Text="{Binding CreateUserModel.Name}"
                         VerticalScrollBarVisibility="Disabled"/>
 
-                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    <TextBox
                         Width="190"
                         Height="60"
                         Margin="20,10,0,10"
@@ -67,55 +67,60 @@
                         materialDesign:HintAssist.Hint="Nazwisko"
                         AcceptsReturn="True"
                         Foreground="White"
+                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                         Text="{Binding CreateUserModel.Surname}"
                         VerticalScrollBarVisibility="Disabled"/>
                 </StackPanel>
 
-                <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                <TextBox
                     Width="400"
                     Margin="0,0,0,10"
                     materialDesign:HintAssist.Foreground="White"
                     materialDesign:HintAssist.Hint="E-mail"
                     AcceptsReturn="True"
                     Foreground="White"
+                    Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                     Text="{Binding CreateUserModel.Email}"
                     VerticalScrollBarVisibility="Disabled"/>
 
-                <PasswordBox Style="{StaticResource MaterialDesignFilledPasswordFieldPasswordBox}"
+                <PasswordBox
                     Width="400"
                     Margin="0,0,0,10"
-                    VerticalAlignment="Top"
                     materialDesign:HintAssist.Foreground="White"
                     materialDesign:HintAssist.Hint="Hasło"
                     Foreground="White"
-                    PasswordChanged="PasswordBox_PasswordChanged"/>
+                    PasswordChanged="PasswordBox_PasswordChanged"
+                    Style="{StaticResource MaterialDesignFilledPasswordFieldPasswordBox}"
+                    VerticalAlignment="Top"/>
 
-                <PasswordBox x:Name="BottomInput" Style="{StaticResource MaterialDesignFilledPasswordFieldPasswordBox}"
+                <PasswordBox x:Name="BottomInput"
                     Width="400"
                     Margin="0,-70,0,0"
-                    VerticalAlignment="Top"
                     materialDesign:HintAssist.Foreground="White"
                     materialDesign:HintAssist.Hint="Powtórz hasło"
                     Foreground="White"
                     Opacity="100"
-                    PasswordChanged="RepeatPasswordBox_PasswordChanged"/>
+                    PasswordChanged="RepeatPasswordBox_PasswordChanged"
+                    Style="{StaticResource MaterialDesignFilledPasswordFieldPasswordBox}"
+                    VerticalAlignment="Top"/>
 
                 <Label
                     Height="27"
                     Margin="0,0,0,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
                     Content="{Binding ErrorMessage}"
                     FontSize="15"
-                    Foreground="#DDFF0000"/>
+                    Foreground="#DDFF0000"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
 
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    <Button
                         Width="130"
                         Height="40"
                         Margin="0,20,0,0"
                         Command="{Binding LoginCommand}"
-                        Content="Mam konto"/>
+                        Content="Mam konto"
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"/>
 
                     <utils:ButtonIndicator
                         Width="130"

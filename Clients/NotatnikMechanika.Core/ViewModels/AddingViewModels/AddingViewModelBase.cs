@@ -35,7 +35,11 @@ namespace NotatnikMechanika.Core.ViewModels
             AddCommand = new MvxAsyncCommand(AddAction);
             GoBackCommand = new MvxAsyncCommand(() => _navigationService.Navigate<MainPageViewModel>());
         }
-        public override void Prepare(int parameter) { }
+
+        public override void Prepare(int parameter) 
+        {
+        }
+
         private async Task AddAction()
         {
             IsWaiting = true;

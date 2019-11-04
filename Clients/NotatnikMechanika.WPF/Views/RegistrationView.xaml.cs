@@ -79,7 +79,5 @@ namespace NotatnikMechanika.WPF.Views
 
             _storyboard.Begin(Logo);
         }
-
-
     }
 }

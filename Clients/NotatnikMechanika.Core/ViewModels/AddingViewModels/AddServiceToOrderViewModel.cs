@@ -22,7 +22,6 @@ namespace NotatnikMechanika.Core.ViewModels.AddingViewModels
         public ICommand CloseCommand { get; set; }
         public ICommand AddRemoveServiceCommand { get; set; }
 
-
         public AddServiceToOrderViewModel(IHttpRequestService httpRequestService, IMvxNavigationService navigationService)
         {
             _httpRequestService = httpRequestService;

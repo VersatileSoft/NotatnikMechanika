@@ -9,7 +9,6 @@ namespace NotatnikMechanika.WPF.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
             return !(bool)value ? PackIconKind.Add : PackIconKind.Remove;
         }
 

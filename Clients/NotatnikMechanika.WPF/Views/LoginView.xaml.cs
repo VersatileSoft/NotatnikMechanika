@@ -10,7 +10,6 @@ namespace NotatnikMechanika.WPF.Views
     /// <summary>
     /// Interaction logic for LoginView.xaml
     /// </summary>
-
     public partial class LoginView : MvxWpfView<LoginViewModel>
     {
         private Storyboard _storyboard;

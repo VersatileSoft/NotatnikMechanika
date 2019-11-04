@@ -20,7 +20,6 @@ namespace NotatnikMechanika.WPF.Presenters.Attributes
 
     public class DialogPresentationAction : MvxPresentationAttributeAction
     {
-
         public DialogPresentationAction(ContentControl contentControl, Dispatcher uiThreadDispatcher)
         {
             ShowAction = (type, attribute, request) =>
@@ -38,7 +37,6 @@ namespace NotatnikMechanika.WPF.Presenters.Attributes
                 }
 
                 DialogHost dialogHost = dialogHosts.ElementAt(0);
-
 
                 uiThreadDispatcher.Invoke(() =>
                 {

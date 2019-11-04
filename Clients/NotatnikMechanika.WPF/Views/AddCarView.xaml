@@ -1,5 +1,4 @@
-﻿<views:MvxWpfView
-    x:Class="NotatnikMechanika.WPF.Views.AddCarView"
+﻿<views:MvxWpfView x:Class="NotatnikMechanika.WPF.Views.AddCarView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -19,7 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" MaxHeight="570"/>
+            <RowDefinition MaxHeight="570" Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -30,16 +29,16 @@
                 Width="50"
                 Height="50"
                 Margin="20,5,0,0"
-                HorizontalAlignment="Left"
                 Command="{Binding GoBackCommand}"
                 Foreground="{StaticResource SecondaryAccentBrush}"
+                HorizontalAlignment="Left"
                 IconKind="ArrowLeftBoldCircle"/>
 
             <Label
                 Margin="0,20,0,0"
-                HorizontalAlignment="Center"
                 Content="Dodaj samochód"
-                FontSize="30"/>
+                FontSize="30"
+                HorizontalAlignment="Center"/>
         </Grid>
 
         <GroupBox
@@ -54,14 +53,14 @@
                         <materialDesign:PackIcon
                             Width="32"
                             Height="32"
-                            VerticalAlignment="Center"
-                            Kind="Car"/>
+                            Kind="Car"
+                            VerticalAlignment="Center"/>
 
                         <TextBlock
                             Margin="8,0,0,0"
-                            VerticalAlignment="Center"
                             Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                            Text="{Binding}"/>
+                            Text="{Binding}"
+                            VerticalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>
             </GroupBox.HeaderTemplate>
@@ -146,11 +145,11 @@
         <StackPanel Grid.Row="3">
             <Label
                 Margin="0,10,0,10"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
                 Content="{Binding ErrorMessage}"
                 FontSize="15"
-                Foreground="#DDFF0000"/>
+                Foreground="#DDFF0000"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
 
             <utils:ButtonIndicator
                 Width="150"

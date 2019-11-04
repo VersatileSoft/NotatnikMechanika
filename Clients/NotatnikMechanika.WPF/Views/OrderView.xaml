@@ -1,5 +1,4 @@
-﻿<views:MvxWpfView
-    x:Class="NotatnikMechanika.WPF.Views.OrderView"
+﻿<views:MvxWpfView x:Class="NotatnikMechanika.WPF.Views.OrderView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -30,17 +29,17 @@
                     Width="50"
                     Height="50"
                     Margin="20,5,0,0"
-                    HorizontalAlignment="Left"
                     Command="{Binding GoBackCommand}"
                     Foreground="{StaticResource SecondaryAccentBrush}"
+                    HorizontalAlignment="Left"
                     IconKind="ArrowLeftBoldCircle"/>
 
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Label
                         Margin="0,20,0,0"
-                        HorizontalAlignment="Center"
                         Content="Szczegóły zlecenia"
-                        FontSize="30"/>
+                        FontSize="30"
+                        HorizontalAlignment="Center"/>
                 </StackPanel>
 
             </Grid>
@@ -67,20 +66,20 @@
                                         Grid.Column="0"
                                         Width="32"
                                         Height="32"
-                                        VerticalAlignment="Center"
-                                        Kind="User"/>
+                                        Kind="User"
+                                        VerticalAlignment="Center"/>
                                     <TextBlock
                                         Grid.Column="1"
                                         Margin="8,0,0,0"
-                                        VerticalAlignment="Center"
                                         Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                                        Text="{Binding}"/>
+                                        Text="{Binding}"
+                                        VerticalAlignment="Center"/>
                                     <utils:IconButton
                                         Grid.Column="2"
                                         Width="32"
                                         Height="32"
-                                        VerticalAlignment="Center"
-                                        IconKind="Edit"/>
+                                        IconKind="Edit"
+                                        VerticalAlignment="Center"/>
                                 </Grid>
                             </DataTemplate>
                         </GroupBox.HeaderTemplate>
@@ -111,21 +110,21 @@
                                     Grid.Column="0"
                                     Width="32"
                                     Height="32"
-                                    VerticalAlignment="Center"
-                                    Kind="Car"/>
+                                    Kind="Car"
+                                    VerticalAlignment="Center"/>
                                 <TextBlock
                                     Grid.Column="1"
                                     Margin="8,0,0,0"
-                                    VerticalAlignment="Center"
                                     Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                                    Text="Samochód"/>
+                                    Text="Samochód"
+                                    VerticalAlignment="Center"/>
                                 <utils:IconButton
                                     Grid.Column="2"
                                     Width="32"
                                     Height="32"
-                                    VerticalAlignment="Center"
                                     Command="{Binding AddCarCommand}"
-                                    IconKind="Add"/>
+                                    IconKind="Add"
+                                    VerticalAlignment="Center"/>
                             </Grid>
                         </GroupBox.Header>
                         <Grid>
@@ -157,21 +156,21 @@
                                     Grid.Column="0"
                                     Width="32"
                                     Height="32"
-                                    VerticalAlignment="Center"
-                                    Kind="Server"/>
+                                    Kind="Server"
+                                    VerticalAlignment="Center"/>
                                 <TextBlock
                                     Grid.Column="1"
                                     Margin="8,0,0,0"
-                                    VerticalAlignment="Center"
                                     Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                                    Text="Usługi"/>
+                                    Text="Usługi"
+                                    VerticalAlignment="Center"/>
                                 <utils:IconButton
                                     Grid.Column="2"
                                     Width="32"
                                     Height="32"
-                                    VerticalAlignment="Center"
                                     Command="{Binding AddServiceCommodityCommand}"
-                                    IconKind="Add">
+                                    IconKind="Add"
+                                    VerticalAlignment="Center">
                                     <Button.CommandParameter>
                                         <s:Boolean>True</s:Boolean>
                                     </Button.CommandParameter>
@@ -190,8 +189,8 @@
                                         <TextBlock
                                             Grid.Column="0"
                                             Margin="10"
-                                            VerticalAlignment="Center"
-                                            Text="{Binding Name}"/>
+                                            Text="{Binding Name}"
+                                            VerticalAlignment="Center"/>
 
                                     </Grid>
                                 </ItemContainerTemplate>
@@ -216,21 +215,21 @@
                                     Grid.Column="0"
                                     Width="32"
                                     Height="32"
-                                    VerticalAlignment="Center"
-                                    Kind="Toolbox"/>
+                                    Kind="Toolbox"
+                                    VerticalAlignment="Center"/>
                                 <TextBlock
                                     Grid.Column="1"
                                     Margin="8,0,0,0"
-                                    VerticalAlignment="Center"
                                     Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                                    Text="Towary"/>
+                                    Text="Towary"
+                                    VerticalAlignment="Center"/>
                                 <utils:IconButton
                                     Grid.Column="2"
                                     Width="32"
                                     Height="32"
-                                    VerticalAlignment="Center"
                                     Command="{Binding AddServiceCommodityCommand}"
-                                    IconKind="Add">
+                                    IconKind="Add"
+                                    VerticalAlignment="Center">
                                     <Button.CommandParameter>
                                         <s:Boolean>False</s:Boolean>
                                     </Button.CommandParameter>
@@ -249,8 +248,8 @@
                                         <TextBlock
                                             Grid.Column="0"
                                             Margin="10"
-                                            VerticalAlignment="Center"
-                                            Text="{Binding Name}"/>
+                                            Text="{Binding Name}"
+                                            VerticalAlignment="Center"/>
 
                                     </Grid>
                                 </ItemContainerTemplate>
@@ -270,13 +269,13 @@
                                     <materialDesign:PackIcon
                                         Width="32"
                                         Height="32"
-                                        VerticalAlignment="Center"
-                                        Kind="FileDocument"/>
+                                        Kind="FileDocument"
+                                        VerticalAlignment="Center"/>
                                     <TextBlock
                                         Margin="8,0,0,0"
-                                        VerticalAlignment="Center"
                                         Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                                        Text="{Binding}"/>
+                                        Text="{Binding}"
+                                        VerticalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GroupBox.HeaderTemplate>

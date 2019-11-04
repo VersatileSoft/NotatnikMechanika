@@ -21,7 +21,6 @@ namespace NotatnikMechanika.WPF.Views
         private void ListView_Selected(object sender, RoutedEventArgs e)
         {
             int id = ((sender as ListView).SelectedItem as CommodityModel).Id;
-
             (ViewModel as CommoditiesViewModel).CommoditySelectedCommand.Execute(id);
         }
     }

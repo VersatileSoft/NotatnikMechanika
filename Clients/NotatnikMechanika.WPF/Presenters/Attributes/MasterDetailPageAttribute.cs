@@ -21,7 +21,6 @@ namespace NotatnikMechanika.WPF.Presenters.Attributes
 
     public class MasterDetailPageAction : MvxPresentationAttributeAction
     {
-
         public MasterDetailPageAction(ContentControl contentControl, Dispatcher uiThreadDispatcher)
         {
             ShowAction = (type, attribute, request) =>

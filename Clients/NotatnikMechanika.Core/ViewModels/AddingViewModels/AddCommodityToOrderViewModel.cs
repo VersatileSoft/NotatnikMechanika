@@ -20,7 +20,6 @@ namespace NotatnikMechanika.Core.ViewModels.AddingViewModels
         public List<CommodityForOrderModel> CommodityModels { get; set; }
 
         public ICommand CloseCommand { get; set; }
-
         public ICommand AddRemoveCommodityCommand { get; set; }
 
         public AddCommodityToOrderViewModel(IHttpRequestService httpRequestService, IMvxNavigationService navigationService)

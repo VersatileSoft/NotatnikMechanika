@@ -11,7 +11,6 @@ namespace NotatnikMechanika.Core.ViewModels
         public AddCarViewModel(IHttpRequestService httpRequestService, IMvxNavigationService navigationService, IMessageDialogService messageDialogService)
             : base(httpRequestService, navigationService, messageDialogService)
         {
-
         }
 
         public override void Prepare(int customerId)

@@ -15,8 +15,7 @@ namespace NotatnikMechanika.WPF.Views
         }
         private void ListView_Selected(object sender, System.Windows.RoutedEventArgs e)
         {
-            OrderExtendedModel model = ((sender as ListView).SelectedItem as OrderExtendedModel);
-
+            OrderExtendedModel model = (sender as ListView).SelectedItem as OrderExtendedModel;
             (ViewModel as OrdersViewModel).OrderSelectedCommand.Execute(model);
         }
     }

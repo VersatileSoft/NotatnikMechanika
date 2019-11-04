@@ -8,7 +8,6 @@ namespace NotatnikMechanika.WPF.Views.Utils
 {
     internal class AnimatedWrapPanel : Panel
     {
-
         protected override Size MeasureOverride(Size availableSize)
         {
             Size infiniteSize = new Size(double.PositiveInfinity, double.PositiveInfinity);
@@ -41,7 +40,6 @@ namespace NotatnikMechanika.WPF.Views.Utils
 
             // The final height the Panel will require
             curY += curLineHeight;
-
 
             Size resultSize = new Size
             {
@@ -104,6 +102,5 @@ namespace NotatnikMechanika.WPF.Views.Utils
 
             return finalSize;
         }
-
     }
 }

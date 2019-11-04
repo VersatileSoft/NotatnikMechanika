@@ -7,7 +7,6 @@ namespace NotatnikMechanika.Core.ViewModels
     [AddINotifyPropertyChangedInterface]
     public class MainPageViewModel : MvxViewModel
     {
-
         private readonly IMvxNavigationService _navigationService;
 
         public MainPageViewModel(IMvxNavigationService navigationService)

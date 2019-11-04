@@ -16,7 +16,6 @@ namespace NotatnikMechanika.Core.ViewModels
         private readonly IMvxNavigationService _navigationService;
         private readonly ISettingsService _settingsService;
 
-
         public MenuViewModel(IMvxNavigationService navigationService, ISettingsService settingsService)
         {
             _navigationService = navigationService;
@@ -48,7 +47,6 @@ namespace NotatnikMechanika.Core.ViewModels
                     await _navigationService.Navigate<ArchivedOrdersViewModel>();
                     break;
                 case "Receipts":
-
                     break;
                 case "Warehouse":
                     await _navigationService.Navigate<CommoditiesViewModel>();

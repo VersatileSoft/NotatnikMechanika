@@ -16,7 +16,7 @@ namespace NotatnikMechanika.Core.Services
 
         //TODO put to config file
         //private const string ServerAddress = "https://notatnikmechanika.ml/";
-        private const string ServerAddress = "http://localhost:2137/"; 
+        private const string ServerAddress = "http://localhost:2137/";
 
         public HttpRequestService(ISettingsService settingsService)
         {
@@ -36,7 +36,6 @@ namespace NotatnikMechanika.Core.Services
             }
 
             HttpResponseMessage response = await client.GetAsync(ServerAddress + path);
-
             string responseString = await response.Content.ReadAsStringAsync();
 
             if (response.StatusCode == HttpStatusCode.OK)
@@ -51,20 +50,12 @@ namespace NotatnikMechanika.Core.Services
 
         public async Task<Response<ResponseModel>> SendPost<SendModel, ResponseModel>(SendModel model, string path, bool withAutorization) where ResponseModel : new()
         {
-
             if (!model.IsModelValid(out string errorMessage))
             {
                 return new Response<ResponseModel> { StatusCode = HttpStatusCode.BadRequest, ErrorMessage = errorMessage }; ;
             }
 
-            if (withAutorization)
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _settingsService.Token);
-            }
-            else
-            {
-                client.DefaultRequestHeaders.Authorization = null;
-            }
+            client.DefaultRequestHeaders.Authorization = withAutorization ? new AuthenticationHeaderValue("Bearer", _settingsService.Token) : null;
 
             string myContent = JsonConvert.SerializeObject(model);
 
@@ -73,7 +64,6 @@ namespace NotatnikMechanika.Core.Services
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             HttpResponseMessage response = await client.PostAsync(ServerAddress + path, byteContent);
-
             string responseString = await response.Content.ReadAsStringAsync();
 
             if (response.StatusCode == HttpStatusCode.OK)
@@ -93,14 +83,7 @@ namespace NotatnikMechanika.Core.Services
                 return new Response { StatusCode = HttpStatusCode.BadRequest, ErrorMessage = errorMessage }; ;
             }
 
-            if (withAutorization)
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _settingsService.Token);
-            }
-            else
-            {
-                client.DefaultRequestHeaders.Authorization = null;
-            }
+            client.DefaultRequestHeaders.Authorization = withAutorization ? new AuthenticationHeaderValue("Bearer", _settingsService.Token) : null;
 
             string myContent = JsonConvert.SerializeObject(model);
 
@@ -115,14 +98,7 @@ namespace NotatnikMechanika.Core.Services
 
         public async Task<Response> SendPost(string path, bool withAutorization)
         {
-            if (withAutorization)
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _settingsService.Token);
-            }
-            else
-            {
-                client.DefaultRequestHeaders.Authorization = null;
-            }
+            client.DefaultRequestHeaders.Authorization = withAutorization ? new AuthenticationHeaderValue("Bearer", _settingsService.Token) : null;
 
             HttpResponseMessage response = await client.PostAsync(ServerAddress + path, null);
 
@@ -131,14 +107,7 @@ namespace NotatnikMechanika.Core.Services
 
         public async Task<Response> SendDelete(string path, bool withAutorization)
         {
-            if (withAutorization)
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _settingsService.Token);
-            }
-            else
-            {
-                client.DefaultRequestHeaders.Authorization = null;
-            }
+            client.DefaultRequestHeaders.Authorization = withAutorization ? new AuthenticationHeaderValue("Bearer", _settingsService.Token) : null;
 
             HttpResponseMessage response = await client.DeleteAsync(ServerAddress + path);
 
