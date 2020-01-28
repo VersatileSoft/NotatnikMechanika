@@ -11,11 +11,10 @@
     mc:Ignorable="d">
     <views:MvxContentPage.Content>
         <Grid x:Name="pageGrid" Opacity="0">
-            <Image
-                Margin="0,30,0,0"
-                VerticalOptions="Start"
-                Style="{StaticResource LoginAppIconImage}"/>
-            <Label Opacity="100" Style="{StaticResource LoginAppTitleLabel}"/>
+            <StackLayout x:Name="appLogo" HorizontalOptions="Center" VerticalOptions="Start" Margin="0,120,0,0" Spacing="-64">
+                <Image Style="{StaticResource LoginAppIconImage}"/>
+                <Label Style="{StaticResource LoginAppTitleLabel}" Opacity="1"/>
+            </StackLayout>
 
             <ScrollView>
                 <StackLayout

@@ -1,8 +1,15 @@
 ﻿using MvvmCross.Forms.Core;
 using NotatnikMechanika.Forms.Styles;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+[assembly: ExportFont("Resources/Fonts/GoogleSans-Bold.ttf")]
+[assembly: ExportFont("Resources/Fonts/GoogleSans-BoldItalic.ttf")]
+[assembly: ExportFont("Resources/Fonts/GoogleSans-Italic.ttf")]
+[assembly: ExportFont("Resources/Fonts/GoogleSans-Medium.ttf")]
+[assembly: ExportFont("Resources/Fonts/GoogleSans-MediumItalic.ttf")]
+[assembly: ExportFont("Resources/Fonts/GoogleSans-Regular.ttf")]
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace NotatnikMechanika.Forms
 {

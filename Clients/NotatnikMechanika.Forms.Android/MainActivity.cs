@@ -7,6 +7,7 @@ using MvvmCross;
 using MvvmCross.Forms.Platforms.Android.Views;
 using MvvmCross.Platforms.Android;
 using NotatnikMechanika.Core;
+using Plugin.CurrentActivity;
 using Xamarin.Forms;
 
 namespace NotatnikMechanika.Forms.Android
@@ -21,6 +22,7 @@ namespace NotatnikMechanika.Forms.Android
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             UserDialogs.Init(() => Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity);
             FormsMaterial.Init(this, savedInstanceState);
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;

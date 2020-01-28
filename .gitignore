@@ -348,3 +348,4 @@ healthchecksdb
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
 Clients/NotatnikMechanika.Flutter/ios/Flutter/flutter_export_environment.sh
+Clients/NotatnikMechanika.Forms.Android/Resources/Resource.designer.cs

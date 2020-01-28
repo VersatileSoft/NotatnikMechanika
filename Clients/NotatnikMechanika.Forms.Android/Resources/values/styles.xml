@@ -3,16 +3,22 @@
   <style name="MainTheme.Splash" parent ="MainTheme.Base">
     <item name="android:windowBackground">@drawable/launch_screen</item>
     <item name="android:windowNoTitle">true</item>
-    <item name="android:statusBarColor">@android:color/transparent</item>
     <item name="android:windowLightStatusBar">false</item>
+    <item name="android:windowLightNavigationBar">false</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:navigationBarColor">@android:color/transparent</item>
   </style>
 
   <style name="LoginTheme" parent="MainTheme.Base">
     <item name="android:windowBackground">@drawable/icon_background</item>
     <item name="android:windowNoTitle">true</item>
-    <item name="android:textColorPrimary">@android:color/black</item>
-    <item name="android:statusBarColor">@android:color/transparent</item>
     <item name="android:windowLightStatusBar">false</item>
+    <item name="android:windowLightNavigationBar">false</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:navigationBarColor">@android:color/transparent</item>
+    <item name="android:textColorPrimary">@android:color/black</item>
   </style>
 
   <style name="MainTheme" parent="MainTheme.Base">
@@ -52,8 +58,8 @@
 
     <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
   </style>
-  <color name="ListViewSelected">#F0F0F0F0</color>
-  <color name="ListViewHighlighted">#F0F0F0F0</color>
+  <color name="ListViewSelected">#F0F0F0</color>
+  <color name="ListViewHighlighted">#F0F0F0</color>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">@color/colorAccent</item>

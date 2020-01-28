@@ -11,8 +11,10 @@
     mc:Ignorable="d">
     <views:MvxContentPage.Content>
         <Grid>
-            <Image x:Name="appIcon" Style="{StaticResource LoginAppIconImage}"/>
-            <Label x:Name="appTitle" Style="{StaticResource LoginAppTitleLabel}"/>
+            <StackLayout x:Name="appLogo" HorizontalOptions="Center" VerticalOptions="Center" Spacing="-64">
+                <Image Style="{StaticResource LoginAppIconImage}"/>
+                <Label x:Name="appTitle" Style="{StaticResource LoginAppTitleLabel}" HorizontalTextAlignment="Center"/>
+            </StackLayout>
 
             <ScrollView>
                 <StackLayout x:Name="loginPanel"
