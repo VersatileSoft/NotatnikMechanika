@@ -15,7 +15,7 @@ namespace NotatnikMechanika.Forms.Android
 {
 	
 	
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
 	public partial class Resource
 	{
 		
@@ -38,6 +38,18 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Animation.abc_slide_out_top = global::NotatnikMechanika.Forms.Android.Resource.Animation.abc_slide_out_top;
 			global::Acr.UserDialogs.Resource.Animation.abc_tooltip_enter = global::NotatnikMechanika.Forms.Android.Resource.Animation.abc_tooltip_enter;
 			global::Acr.UserDialogs.Resource.Animation.abc_tooltip_exit = global::NotatnikMechanika.Forms.Android.Resource.Animation.abc_tooltip_exit;
+			global::Acr.UserDialogs.Resource.Animation.btn_checkbox_to_checked_box_inner_merged_animation = global::NotatnikMechanika.Forms.Android.Resource.Animation.btn_checkbox_to_checked_box_inner_merged_animation;
+			global::Acr.UserDialogs.Resource.Animation.btn_checkbox_to_checked_box_outer_merged_animation = global::NotatnikMechanika.Forms.Android.Resource.Animation.btn_checkbox_to_checked_box_outer_merged_animation;
+			global::Acr.UserDialogs.Resource.Animation.btn_checkbox_to_checked_icon_null_animation = global::NotatnikMechanika.Forms.Android.Resource.Animation.btn_checkbox_to_checked_icon_null_animation;
+			global::Acr.UserDialogs.Resource.Animation.btn_checkbox_to_unchecked_box_inner_merged_animation = global::NotatnikMechanika.Forms.Android.Resource.Animation.btn_checkbox_to_unchecked_box_inner_merged_animation;
+			global::Acr.UserDialogs.Resource.Animation.btn_checkbox_to_unchecked_check_path_merged_animation = global::NotatnikMechanika.Forms.Android.Resource.Animation.btn_checkbox_to_unchecked_check_path_merged_animation;
+			global::Acr.UserDialogs.Resource.Animation.btn_checkbox_to_unchecked_icon_null_animation = global::NotatnikMechanika.Forms.Android.Resource.Animation.btn_checkbox_to_unchecked_icon_null_animation;
+			global::Acr.UserDialogs.Resource.Animation.btn_radio_to_off_mtrl_dot_group_animation = global::NotatnikMechanika.Forms.Android.Resource.Animation.btn_radio_to_off_mtrl_dot_group_animation;
+			global::Acr.UserDialogs.Resource.Animation.btn_radio_to_off_mtrl_ring_outer_animation = global::NotatnikMechanika.Forms.Android.Resource.Animation.btn_radio_to_off_mtrl_ring_outer_animation;
+			global::Acr.UserDialogs.Resource.Animation.btn_radio_to_off_mtrl_ring_outer_path_animation = global::NotatnikMechanika.Forms.Android.Resource.Animation.btn_radio_to_off_mtrl_ring_outer_path_animation;
+			global::Acr.UserDialogs.Resource.Animation.btn_radio_to_on_mtrl_dot_group_animation = global::NotatnikMechanika.Forms.Android.Resource.Animation.btn_radio_to_on_mtrl_dot_group_animation;
+			global::Acr.UserDialogs.Resource.Animation.btn_radio_to_on_mtrl_ring_outer_animation = global::NotatnikMechanika.Forms.Android.Resource.Animation.btn_radio_to_on_mtrl_ring_outer_animation;
+			global::Acr.UserDialogs.Resource.Animation.btn_radio_to_on_mtrl_ring_outer_path_animation = global::NotatnikMechanika.Forms.Android.Resource.Animation.btn_radio_to_on_mtrl_ring_outer_path_animation;
 			global::Acr.UserDialogs.Resource.Animation.design_bottom_sheet_slide_in = global::NotatnikMechanika.Forms.Android.Resource.Animation.design_bottom_sheet_slide_in;
 			global::Acr.UserDialogs.Resource.Animation.design_bottom_sheet_slide_out = global::NotatnikMechanika.Forms.Android.Resource.Animation.design_bottom_sheet_slide_out;
 			global::Acr.UserDialogs.Resource.Animation.design_snackbar_in = global::NotatnikMechanika.Forms.Android.Resource.Animation.design_snackbar_in;
@@ -145,6 +157,7 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Attribute.buttonBarNeutralButtonStyle = global::NotatnikMechanika.Forms.Android.Resource.Attribute.buttonBarNeutralButtonStyle;
 			global::Acr.UserDialogs.Resource.Attribute.buttonBarPositiveButtonStyle = global::NotatnikMechanika.Forms.Android.Resource.Attribute.buttonBarPositiveButtonStyle;
 			global::Acr.UserDialogs.Resource.Attribute.buttonBarStyle = global::NotatnikMechanika.Forms.Android.Resource.Attribute.buttonBarStyle;
+			global::Acr.UserDialogs.Resource.Attribute.buttonCompat = global::NotatnikMechanika.Forms.Android.Resource.Attribute.buttonCompat;
 			global::Acr.UserDialogs.Resource.Attribute.buttonGravity = global::NotatnikMechanika.Forms.Android.Resource.Attribute.buttonGravity;
 			global::Acr.UserDialogs.Resource.Attribute.buttonIconDimen = global::NotatnikMechanika.Forms.Android.Resource.Attribute.buttonIconDimen;
 			global::Acr.UserDialogs.Resource.Attribute.buttonPanelSideLayout = global::NotatnikMechanika.Forms.Android.Resource.Attribute.buttonPanelSideLayout;
@@ -238,7 +251,15 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Attribute.dividerHorizontal = global::NotatnikMechanika.Forms.Android.Resource.Attribute.dividerHorizontal;
 			global::Acr.UserDialogs.Resource.Attribute.dividerPadding = global::NotatnikMechanika.Forms.Android.Resource.Attribute.dividerPadding;
 			global::Acr.UserDialogs.Resource.Attribute.dividerVertical = global::NotatnikMechanika.Forms.Android.Resource.Attribute.dividerVertical;
+			global::Acr.UserDialogs.Resource.Attribute.drawableBottomCompat = global::NotatnikMechanika.Forms.Android.Resource.Attribute.drawableBottomCompat;
+			global::Acr.UserDialogs.Resource.Attribute.drawableEndCompat = global::NotatnikMechanika.Forms.Android.Resource.Attribute.drawableEndCompat;
+			global::Acr.UserDialogs.Resource.Attribute.drawableLeftCompat = global::NotatnikMechanika.Forms.Android.Resource.Attribute.drawableLeftCompat;
+			global::Acr.UserDialogs.Resource.Attribute.drawableRightCompat = global::NotatnikMechanika.Forms.Android.Resource.Attribute.drawableRightCompat;
 			global::Acr.UserDialogs.Resource.Attribute.drawableSize = global::NotatnikMechanika.Forms.Android.Resource.Attribute.drawableSize;
+			global::Acr.UserDialogs.Resource.Attribute.drawableStartCompat = global::NotatnikMechanika.Forms.Android.Resource.Attribute.drawableStartCompat;
+			global::Acr.UserDialogs.Resource.Attribute.drawableTint = global::NotatnikMechanika.Forms.Android.Resource.Attribute.drawableTint;
+			global::Acr.UserDialogs.Resource.Attribute.drawableTintMode = global::NotatnikMechanika.Forms.Android.Resource.Attribute.drawableTintMode;
+			global::Acr.UserDialogs.Resource.Attribute.drawableTopCompat = global::NotatnikMechanika.Forms.Android.Resource.Attribute.drawableTopCompat;
 			global::Acr.UserDialogs.Resource.Attribute.drawerArrowStyle = global::NotatnikMechanika.Forms.Android.Resource.Attribute.drawerArrowStyle;
 			global::Acr.UserDialogs.Resource.Attribute.dropdownListPreferredItemHeight = global::NotatnikMechanika.Forms.Android.Resource.Attribute.dropdownListPreferredItemHeight;
 			global::Acr.UserDialogs.Resource.Attribute.dropDownListViewStyle = global::NotatnikMechanika.Forms.Android.Resource.Attribute.dropDownListViewStyle;
@@ -345,6 +366,8 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Attribute.lineHeight = global::NotatnikMechanika.Forms.Android.Resource.Attribute.lineHeight;
 			global::Acr.UserDialogs.Resource.Attribute.lineSpacing = global::NotatnikMechanika.Forms.Android.Resource.Attribute.lineSpacing;
 			global::Acr.UserDialogs.Resource.Attribute.listChoiceBackgroundIndicator = global::NotatnikMechanika.Forms.Android.Resource.Attribute.listChoiceBackgroundIndicator;
+			global::Acr.UserDialogs.Resource.Attribute.listChoiceIndicatorMultipleAnimated = global::NotatnikMechanika.Forms.Android.Resource.Attribute.listChoiceIndicatorMultipleAnimated;
+			global::Acr.UserDialogs.Resource.Attribute.listChoiceIndicatorSingleAnimated = global::NotatnikMechanika.Forms.Android.Resource.Attribute.listChoiceIndicatorSingleAnimated;
 			global::Acr.UserDialogs.Resource.Attribute.listDividerAlertDialog = global::NotatnikMechanika.Forms.Android.Resource.Attribute.listDividerAlertDialog;
 			global::Acr.UserDialogs.Resource.Attribute.listItemLayout = global::NotatnikMechanika.Forms.Android.Resource.Attribute.listItemLayout;
 			global::Acr.UserDialogs.Resource.Attribute.listLayout = global::NotatnikMechanika.Forms.Android.Resource.Attribute.listLayout;
@@ -353,8 +376,10 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Attribute.listPreferredItemHeight = global::NotatnikMechanika.Forms.Android.Resource.Attribute.listPreferredItemHeight;
 			global::Acr.UserDialogs.Resource.Attribute.listPreferredItemHeightLarge = global::NotatnikMechanika.Forms.Android.Resource.Attribute.listPreferredItemHeightLarge;
 			global::Acr.UserDialogs.Resource.Attribute.listPreferredItemHeightSmall = global::NotatnikMechanika.Forms.Android.Resource.Attribute.listPreferredItemHeightSmall;
+			global::Acr.UserDialogs.Resource.Attribute.listPreferredItemPaddingEnd = global::NotatnikMechanika.Forms.Android.Resource.Attribute.listPreferredItemPaddingEnd;
 			global::Acr.UserDialogs.Resource.Attribute.listPreferredItemPaddingLeft = global::NotatnikMechanika.Forms.Android.Resource.Attribute.listPreferredItemPaddingLeft;
 			global::Acr.UserDialogs.Resource.Attribute.listPreferredItemPaddingRight = global::NotatnikMechanika.Forms.Android.Resource.Attribute.listPreferredItemPaddingRight;
+			global::Acr.UserDialogs.Resource.Attribute.listPreferredItemPaddingStart = global::NotatnikMechanika.Forms.Android.Resource.Attribute.listPreferredItemPaddingStart;
 			global::Acr.UserDialogs.Resource.Attribute.logo = global::NotatnikMechanika.Forms.Android.Resource.Attribute.logo;
 			global::Acr.UserDialogs.Resource.Attribute.logoDescription = global::NotatnikMechanika.Forms.Android.Resource.Attribute.logoDescription;
 			global::Acr.UserDialogs.Resource.Attribute.materialButtonStyle = global::NotatnikMechanika.Forms.Android.Resource.Attribute.materialButtonStyle;
@@ -396,6 +421,7 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Attribute.ratingBarStyle = global::NotatnikMechanika.Forms.Android.Resource.Attribute.ratingBarStyle;
 			global::Acr.UserDialogs.Resource.Attribute.ratingBarStyleIndicator = global::NotatnikMechanika.Forms.Android.Resource.Attribute.ratingBarStyleIndicator;
 			global::Acr.UserDialogs.Resource.Attribute.ratingBarStyleSmall = global::NotatnikMechanika.Forms.Android.Resource.Attribute.ratingBarStyleSmall;
+			global::Acr.UserDialogs.Resource.Attribute.recyclerViewStyle = global::NotatnikMechanika.Forms.Android.Resource.Attribute.recyclerViewStyle;
 			global::Acr.UserDialogs.Resource.Attribute.reverseLayout = global::NotatnikMechanika.Forms.Android.Resource.Attribute.reverseLayout;
 			global::Acr.UserDialogs.Resource.Attribute.rippleColor = global::NotatnikMechanika.Forms.Android.Resource.Attribute.rippleColor;
 			global::Acr.UserDialogs.Resource.Attribute.scrimAnimationDuration = global::NotatnikMechanika.Forms.Android.Resource.Attribute.scrimAnimationDuration;
@@ -496,6 +522,7 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Attribute.textColorSearchUrl = global::NotatnikMechanika.Forms.Android.Resource.Attribute.textColorSearchUrl;
 			global::Acr.UserDialogs.Resource.Attribute.textEndPadding = global::NotatnikMechanika.Forms.Android.Resource.Attribute.textEndPadding;
 			global::Acr.UserDialogs.Resource.Attribute.textInputStyle = global::NotatnikMechanika.Forms.Android.Resource.Attribute.textInputStyle;
+			global::Acr.UserDialogs.Resource.Attribute.textLocale = global::NotatnikMechanika.Forms.Android.Resource.Attribute.textLocale;
 			global::Acr.UserDialogs.Resource.Attribute.textStartPadding = global::NotatnikMechanika.Forms.Android.Resource.Attribute.textStartPadding;
 			global::Acr.UserDialogs.Resource.Attribute.theme = global::NotatnikMechanika.Forms.Android.Resource.Attribute.theme;
 			global::Acr.UserDialogs.Resource.Attribute.thickness = global::NotatnikMechanika.Forms.Android.Resource.Attribute.thickness;
@@ -720,6 +747,9 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Dimension.abc_edit_text_inset_horizontal_material = global::NotatnikMechanika.Forms.Android.Resource.Dimension.abc_edit_text_inset_horizontal_material;
 			global::Acr.UserDialogs.Resource.Dimension.abc_edit_text_inset_top_material = global::NotatnikMechanika.Forms.Android.Resource.Dimension.abc_edit_text_inset_top_material;
 			global::Acr.UserDialogs.Resource.Dimension.abc_floating_window_z = global::NotatnikMechanika.Forms.Android.Resource.Dimension.abc_floating_window_z;
+			global::Acr.UserDialogs.Resource.Dimension.abc_list_item_height_large_material = global::NotatnikMechanika.Forms.Android.Resource.Dimension.abc_list_item_height_large_material;
+			global::Acr.UserDialogs.Resource.Dimension.abc_list_item_height_material = global::NotatnikMechanika.Forms.Android.Resource.Dimension.abc_list_item_height_material;
+			global::Acr.UserDialogs.Resource.Dimension.abc_list_item_height_small_material = global::NotatnikMechanika.Forms.Android.Resource.Dimension.abc_list_item_height_small_material;
 			global::Acr.UserDialogs.Resource.Dimension.abc_list_item_padding_horizontal_material = global::NotatnikMechanika.Forms.Android.Resource.Dimension.abc_list_item_padding_horizontal_material;
 			global::Acr.UserDialogs.Resource.Dimension.abc_panel_menu_list_width = global::NotatnikMechanika.Forms.Android.Resource.Dimension.abc_panel_menu_list_width;
 			global::Acr.UserDialogs.Resource.Dimension.abc_progress_bar_height_material = global::NotatnikMechanika.Forms.Android.Resource.Dimension.abc_progress_bar_height_material;
@@ -891,11 +921,13 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Drawable.abc_action_bar_item_background_material = global::NotatnikMechanika.Forms.Android.Resource.Drawable.abc_action_bar_item_background_material;
 			global::Acr.UserDialogs.Resource.Drawable.abc_btn_borderless_material = global::NotatnikMechanika.Forms.Android.Resource.Drawable.abc_btn_borderless_material;
 			global::Acr.UserDialogs.Resource.Drawable.abc_btn_check_material = global::NotatnikMechanika.Forms.Android.Resource.Drawable.abc_btn_check_material;
+			global::Acr.UserDialogs.Resource.Drawable.abc_btn_check_material_anim = global::NotatnikMechanika.Forms.Android.Resource.Drawable.abc_btn_check_material_anim;
 			global::Acr.UserDialogs.Resource.Drawable.abc_btn_check_to_on_mtrl_000 = global::NotatnikMechanika.Forms.Android.Resource.Drawable.abc_btn_check_to_on_mtrl_000;
 			global::Acr.UserDialogs.Resource.Drawable.abc_btn_check_to_on_mtrl_015 = global::NotatnikMechanika.Forms.Android.Resource.Drawable.abc_btn_check_to_on_mtrl_015;
 			global::Acr.UserDialogs.Resource.Drawable.abc_btn_colored_material = global::NotatnikMechanika.Forms.Android.Resource.Drawable.abc_btn_colored_material;
 			global::Acr.UserDialogs.Resource.Drawable.abc_btn_default_mtrl_shape = global::NotatnikMechanika.Forms.Android.Resource.Drawable.abc_btn_default_mtrl_shape;
 			global::Acr.UserDialogs.Resource.Drawable.abc_btn_radio_material = global::NotatnikMechanika.Forms.Android.Resource.Drawable.abc_btn_radio_material;
+			global::Acr.UserDialogs.Resource.Drawable.abc_btn_radio_material_anim = global::NotatnikMechanika.Forms.Android.Resource.Drawable.abc_btn_radio_material_anim;
 			global::Acr.UserDialogs.Resource.Drawable.abc_btn_radio_to_on_mtrl_000 = global::NotatnikMechanika.Forms.Android.Resource.Drawable.abc_btn_radio_to_on_mtrl_000;
 			global::Acr.UserDialogs.Resource.Drawable.abc_btn_radio_to_on_mtrl_015 = global::NotatnikMechanika.Forms.Android.Resource.Drawable.abc_btn_radio_to_on_mtrl_015;
 			global::Acr.UserDialogs.Resource.Drawable.abc_btn_switch_to_on_mtrl_00001 = global::NotatnikMechanika.Forms.Android.Resource.Drawable.abc_btn_switch_to_on_mtrl_00001;
@@ -973,6 +1005,14 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Drawable.abc_vector_test = global::NotatnikMechanika.Forms.Android.Resource.Drawable.abc_vector_test;
 			global::Acr.UserDialogs.Resource.Drawable.avd_hide_password = global::NotatnikMechanika.Forms.Android.Resource.Drawable.avd_hide_password;
 			global::Acr.UserDialogs.Resource.Drawable.avd_show_password = global::NotatnikMechanika.Forms.Android.Resource.Drawable.avd_show_password;
+			global::Acr.UserDialogs.Resource.Drawable.btn_checkbox_checked_mtrl = global::NotatnikMechanika.Forms.Android.Resource.Drawable.btn_checkbox_checked_mtrl;
+			global::Acr.UserDialogs.Resource.Drawable.btn_checkbox_checked_to_unchecked_mtrl_animation = global::NotatnikMechanika.Forms.Android.Resource.Drawable.btn_checkbox_checked_to_unchecked_mtrl_animation;
+			global::Acr.UserDialogs.Resource.Drawable.btn_checkbox_unchecked_mtrl = global::NotatnikMechanika.Forms.Android.Resource.Drawable.btn_checkbox_unchecked_mtrl;
+			global::Acr.UserDialogs.Resource.Drawable.btn_checkbox_unchecked_to_checked_mtrl_animation = global::NotatnikMechanika.Forms.Android.Resource.Drawable.btn_checkbox_unchecked_to_checked_mtrl_animation;
+			global::Acr.UserDialogs.Resource.Drawable.btn_radio_off_mtrl = global::NotatnikMechanika.Forms.Android.Resource.Drawable.btn_radio_off_mtrl;
+			global::Acr.UserDialogs.Resource.Drawable.btn_radio_off_to_on_mtrl_animation = global::NotatnikMechanika.Forms.Android.Resource.Drawable.btn_radio_off_to_on_mtrl_animation;
+			global::Acr.UserDialogs.Resource.Drawable.btn_radio_on_mtrl = global::NotatnikMechanika.Forms.Android.Resource.Drawable.btn_radio_on_mtrl;
+			global::Acr.UserDialogs.Resource.Drawable.btn_radio_on_to_off_mtrl_animation = global::NotatnikMechanika.Forms.Android.Resource.Drawable.btn_radio_on_to_off_mtrl_animation;
 			global::Acr.UserDialogs.Resource.Drawable.design_bottom_navigation_item_background = global::NotatnikMechanika.Forms.Android.Resource.Drawable.design_bottom_navigation_item_background;
 			global::Acr.UserDialogs.Resource.Drawable.design_fab_background = global::NotatnikMechanika.Forms.Android.Resource.Drawable.design_fab_background;
 			global::Acr.UserDialogs.Resource.Drawable.design_ic_visibility = global::NotatnikMechanika.Forms.Android.Resource.Drawable.design_ic_visibility;
@@ -1003,6 +1043,39 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Drawable.roundedbgdark = global::NotatnikMechanika.Forms.Android.Resource.Drawable.roundedbgdark;
 			global::Acr.UserDialogs.Resource.Drawable.tooltip_frame_dark = global::NotatnikMechanika.Forms.Android.Resource.Drawable.tooltip_frame_dark;
 			global::Acr.UserDialogs.Resource.Drawable.tooltip_frame_light = global::NotatnikMechanika.Forms.Android.Resource.Drawable.tooltip_frame_light;
+			global::Acr.UserDialogs.Resource.Id.accessibility_action_clickable_span = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_action_clickable_span;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_0 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_0;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_1 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_1;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_10 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_10;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_11 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_11;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_12 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_12;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_13 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_13;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_14 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_14;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_15 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_15;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_16 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_16;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_17 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_17;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_18 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_18;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_19 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_19;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_2 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_2;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_20 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_20;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_21 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_21;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_22 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_22;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_23 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_23;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_24 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_24;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_25 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_25;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_26 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_26;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_27 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_27;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_28 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_28;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_29 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_29;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_3 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_3;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_30 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_30;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_31 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_31;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_4 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_4;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_5 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_5;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_6 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_6;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_7 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_7;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_8 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_8;
+			global::Acr.UserDialogs.Resource.Id.accessibility_custom_action_9 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_9;
 			global::Acr.UserDialogs.Resource.Id.actions = global::NotatnikMechanika.Forms.Android.Resource.Id.actions;
 			global::Acr.UserDialogs.Resource.Id.action_bar = global::NotatnikMechanika.Forms.Android.Resource.Id.action_bar;
 			global::Acr.UserDialogs.Resource.Id.action_bar_activity_content = global::NotatnikMechanika.Forms.Android.Resource.Id.action_bar_activity_content;
@@ -1037,6 +1110,7 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Id.center_horizontal = global::NotatnikMechanika.Forms.Android.Resource.Id.center_horizontal;
 			global::Acr.UserDialogs.Resource.Id.center_vertical = global::NotatnikMechanika.Forms.Android.Resource.Id.center_vertical;
 			global::Acr.UserDialogs.Resource.Id.checkbox = global::NotatnikMechanika.Forms.Android.Resource.Id.checkbox;
+			global::Acr.UserDialogs.Resource.Id.@checked = global::NotatnikMechanika.Forms.Android.Resource.Id.@checked;
 			global::Acr.UserDialogs.Resource.Id.chronometer = global::NotatnikMechanika.Forms.Android.Resource.Id.chronometer;
 			global::Acr.UserDialogs.Resource.Id.clip_horizontal = global::NotatnikMechanika.Forms.Android.Resource.Id.clip_horizontal;
 			global::Acr.UserDialogs.Resource.Id.clip_vertical = global::NotatnikMechanika.Forms.Android.Resource.Id.clip_vertical;
@@ -1055,6 +1129,7 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Id.design_menu_item_action_area_stub = global::NotatnikMechanika.Forms.Android.Resource.Id.design_menu_item_action_area_stub;
 			global::Acr.UserDialogs.Resource.Id.design_menu_item_text = global::NotatnikMechanika.Forms.Android.Resource.Id.design_menu_item_text;
 			global::Acr.UserDialogs.Resource.Id.design_navigation_view = global::NotatnikMechanika.Forms.Android.Resource.Id.design_navigation_view;
+			global::Acr.UserDialogs.Resource.Id.dialog_button = global::NotatnikMechanika.Forms.Android.Resource.Id.dialog_button;
 			global::Acr.UserDialogs.Resource.Id.disableHome = global::NotatnikMechanika.Forms.Android.Resource.Id.disableHome;
 			global::Acr.UserDialogs.Resource.Id.edit_query = global::NotatnikMechanika.Forms.Android.Resource.Id.edit_query;
 			global::Acr.UserDialogs.Resource.Id.end = global::NotatnikMechanika.Forms.Android.Resource.Id.end;
@@ -1071,6 +1146,7 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Id.forever = global::NotatnikMechanika.Forms.Android.Resource.Id.forever;
 			global::Acr.UserDialogs.Resource.Id.FUNCTION = global::NotatnikMechanika.Forms.Android.Resource.Id.FUNCTION;
 			global::Acr.UserDialogs.Resource.Id.ghost_view = global::NotatnikMechanika.Forms.Android.Resource.Id.ghost_view;
+			global::Acr.UserDialogs.Resource.Id.ghost_view_holder = global::NotatnikMechanika.Forms.Android.Resource.Id.ghost_view_holder;
 			global::Acr.UserDialogs.Resource.Id.group_divider = global::NotatnikMechanika.Forms.Android.Resource.Id.group_divider;
 			global::Acr.UserDialogs.Resource.Id.home = global::NotatnikMechanika.Forms.Android.Resource.Id.home;
 			global::Acr.UserDialogs.Resource.Id.homeAsUp = global::NotatnikMechanika.Forms.Android.Resource.Id.homeAsUp;
@@ -1106,6 +1182,8 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Id.notification_background = global::NotatnikMechanika.Forms.Android.Resource.Id.notification_background;
 			global::Acr.UserDialogs.Resource.Id.notification_main_column = global::NotatnikMechanika.Forms.Android.Resource.Id.notification_main_column;
 			global::Acr.UserDialogs.Resource.Id.notification_main_column_container = global::NotatnikMechanika.Forms.Android.Resource.Id.notification_main_column_container;
+			global::Acr.UserDialogs.Resource.Id.off = global::NotatnikMechanika.Forms.Android.Resource.Id.off;
+			global::Acr.UserDialogs.Resource.Id.on = global::NotatnikMechanika.Forms.Android.Resource.Id.on;
 			global::Acr.UserDialogs.Resource.Id.outline = global::NotatnikMechanika.Forms.Android.Resource.Id.outline;
 			global::Acr.UserDialogs.Resource.Id.parallax = global::NotatnikMechanika.Forms.Android.Resource.Id.parallax;
 			global::Acr.UserDialogs.Resource.Id.parentPanel = global::NotatnikMechanika.Forms.Android.Resource.Id.parentPanel;
@@ -1118,6 +1196,7 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Id.right_icon = global::NotatnikMechanika.Forms.Android.Resource.Id.right_icon;
 			global::Acr.UserDialogs.Resource.Id.right_side = global::NotatnikMechanika.Forms.Android.Resource.Id.right_side;
 			global::Acr.UserDialogs.Resource.Id.save_non_transition_alpha = global::NotatnikMechanika.Forms.Android.Resource.Id.save_non_transition_alpha;
+			global::Acr.UserDialogs.Resource.Id.save_overlay_view = global::NotatnikMechanika.Forms.Android.Resource.Id.save_overlay_view;
 			global::Acr.UserDialogs.Resource.Id.screen = global::NotatnikMechanika.Forms.Android.Resource.Id.screen;
 			global::Acr.UserDialogs.Resource.Id.scroll = global::NotatnikMechanika.Forms.Android.Resource.Id.scroll;
 			global::Acr.UserDialogs.Resource.Id.scrollable = global::NotatnikMechanika.Forms.Android.Resource.Id.scrollable;
@@ -1157,6 +1236,11 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Id.submit_area = global::NotatnikMechanika.Forms.Android.Resource.Id.submit_area;
 			global::Acr.UserDialogs.Resource.Id.SYM = global::NotatnikMechanika.Forms.Android.Resource.Id.SYM;
 			global::Acr.UserDialogs.Resource.Id.tabMode = global::NotatnikMechanika.Forms.Android.Resource.Id.tabMode;
+			global::Acr.UserDialogs.Resource.Id.tag_accessibility_actions = global::NotatnikMechanika.Forms.Android.Resource.Id.tag_accessibility_actions;
+			global::Acr.UserDialogs.Resource.Id.tag_accessibility_clickable_spans = global::NotatnikMechanika.Forms.Android.Resource.Id.tag_accessibility_clickable_spans;
+			global::Acr.UserDialogs.Resource.Id.tag_accessibility_heading = global::NotatnikMechanika.Forms.Android.Resource.Id.tag_accessibility_heading;
+			global::Acr.UserDialogs.Resource.Id.tag_accessibility_pane_title = global::NotatnikMechanika.Forms.Android.Resource.Id.tag_accessibility_pane_title;
+			global::Acr.UserDialogs.Resource.Id.tag_screen_reader_focusable = global::NotatnikMechanika.Forms.Android.Resource.Id.tag_screen_reader_focusable;
 			global::Acr.UserDialogs.Resource.Id.tag_transition_group = global::NotatnikMechanika.Forms.Android.Resource.Id.tag_transition_group;
 			global::Acr.UserDialogs.Resource.Id.tag_unhandled_key_event_manager = global::NotatnikMechanika.Forms.Android.Resource.Id.tag_unhandled_key_event_manager;
 			global::Acr.UserDialogs.Resource.Id.tag_unhandled_key_listeners = global::NotatnikMechanika.Forms.Android.Resource.Id.tag_unhandled_key_listeners;
@@ -1182,6 +1266,7 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Id.transition_position = global::NotatnikMechanika.Forms.Android.Resource.Id.transition_position;
 			global::Acr.UserDialogs.Resource.Id.transition_scene_layoutid_cache = global::NotatnikMechanika.Forms.Android.Resource.Id.transition_scene_layoutid_cache;
 			global::Acr.UserDialogs.Resource.Id.transition_transform = global::NotatnikMechanika.Forms.Android.Resource.Id.transition_transform;
+			global::Acr.UserDialogs.Resource.Id.@unchecked = global::NotatnikMechanika.Forms.Android.Resource.Id.@unchecked;
 			global::Acr.UserDialogs.Resource.Id.uniform = global::NotatnikMechanika.Forms.Android.Resource.Id.uniform;
 			global::Acr.UserDialogs.Resource.Id.unlabeled = global::NotatnikMechanika.Forms.Android.Resource.Id.unlabeled;
 			global::Acr.UserDialogs.Resource.Id.up = global::NotatnikMechanika.Forms.Android.Resource.Id.up;
@@ -1205,6 +1290,13 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Integer.mtrl_tab_indicator_anim_duration_ms = global::NotatnikMechanika.Forms.Android.Resource.Integer.mtrl_tab_indicator_anim_duration_ms;
 			global::Acr.UserDialogs.Resource.Integer.show_password_duration = global::NotatnikMechanika.Forms.Android.Resource.Integer.show_password_duration;
 			global::Acr.UserDialogs.Resource.Integer.status_bar_notification_info_maxnum = global::NotatnikMechanika.Forms.Android.Resource.Integer.status_bar_notification_info_maxnum;
+			global::Acr.UserDialogs.Resource.Interpolator.btn_checkbox_checked_mtrl_animation_interpolator_0 = global::NotatnikMechanika.Forms.Android.Resource.Interpolator.btn_checkbox_checked_mtrl_animation_interpolator_0;
+			global::Acr.UserDialogs.Resource.Interpolator.btn_checkbox_checked_mtrl_animation_interpolator_1 = global::NotatnikMechanika.Forms.Android.Resource.Interpolator.btn_checkbox_checked_mtrl_animation_interpolator_1;
+			global::Acr.UserDialogs.Resource.Interpolator.btn_checkbox_unchecked_mtrl_animation_interpolator_0 = global::NotatnikMechanika.Forms.Android.Resource.Interpolator.btn_checkbox_unchecked_mtrl_animation_interpolator_0;
+			global::Acr.UserDialogs.Resource.Interpolator.btn_checkbox_unchecked_mtrl_animation_interpolator_1 = global::NotatnikMechanika.Forms.Android.Resource.Interpolator.btn_checkbox_unchecked_mtrl_animation_interpolator_1;
+			global::Acr.UserDialogs.Resource.Interpolator.btn_radio_to_off_mtrl_animation_interpolator_0 = global::NotatnikMechanika.Forms.Android.Resource.Interpolator.btn_radio_to_off_mtrl_animation_interpolator_0;
+			global::Acr.UserDialogs.Resource.Interpolator.btn_radio_to_on_mtrl_animation_interpolator_0 = global::NotatnikMechanika.Forms.Android.Resource.Interpolator.btn_radio_to_on_mtrl_animation_interpolator_0;
+			global::Acr.UserDialogs.Resource.Interpolator.fast_out_slow_in = global::NotatnikMechanika.Forms.Android.Resource.Interpolator.fast_out_slow_in;
 			global::Acr.UserDialogs.Resource.Interpolator.mtrl_fast_out_linear_in = global::NotatnikMechanika.Forms.Android.Resource.Interpolator.mtrl_fast_out_linear_in;
 			global::Acr.UserDialogs.Resource.Interpolator.mtrl_fast_out_slow_in = global::NotatnikMechanika.Forms.Android.Resource.Interpolator.mtrl_fast_out_slow_in;
 			global::Acr.UserDialogs.Resource.Interpolator.mtrl_linear = global::NotatnikMechanika.Forms.Android.Resource.Interpolator.mtrl_linear;
@@ -1237,6 +1329,7 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Layout.abc_search_view = global::NotatnikMechanika.Forms.Android.Resource.Layout.abc_search_view;
 			global::Acr.UserDialogs.Resource.Layout.abc_select_dialog_material = global::NotatnikMechanika.Forms.Android.Resource.Layout.abc_select_dialog_material;
 			global::Acr.UserDialogs.Resource.Layout.abc_tooltip = global::NotatnikMechanika.Forms.Android.Resource.Layout.abc_tooltip;
+			global::Acr.UserDialogs.Resource.Layout.custom_dialog = global::NotatnikMechanika.Forms.Android.Resource.Layout.custom_dialog;
 			global::Acr.UserDialogs.Resource.Layout.design_bottom_navigation_item = global::NotatnikMechanika.Forms.Android.Resource.Layout.design_bottom_navigation_item;
 			global::Acr.UserDialogs.Resource.Layout.design_bottom_sheet_dialog = global::NotatnikMechanika.Forms.Android.Resource.Layout.design_bottom_sheet_dialog;
 			global::Acr.UserDialogs.Resource.Layout.design_layout_snackbar = global::NotatnikMechanika.Forms.Android.Resource.Layout.design_layout_snackbar;
@@ -1496,6 +1589,7 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Style.Base_Widget_AppCompat_SeekBar_Discrete = global::NotatnikMechanika.Forms.Android.Resource.Style.Base_Widget_AppCompat_SeekBar_Discrete;
 			global::Acr.UserDialogs.Resource.Style.Base_Widget_AppCompat_Spinner = global::NotatnikMechanika.Forms.Android.Resource.Style.Base_Widget_AppCompat_Spinner;
 			global::Acr.UserDialogs.Resource.Style.Base_Widget_AppCompat_Spinner_Underlined = global::NotatnikMechanika.Forms.Android.Resource.Style.Base_Widget_AppCompat_Spinner_Underlined;
+			global::Acr.UserDialogs.Resource.Style.Base_Widget_AppCompat_TextView = global::NotatnikMechanika.Forms.Android.Resource.Style.Base_Widget_AppCompat_TextView;
 			global::Acr.UserDialogs.Resource.Style.Base_Widget_AppCompat_TextView_SpinnerItem = global::NotatnikMechanika.Forms.Android.Resource.Style.Base_Widget_AppCompat_TextView_SpinnerItem;
 			global::Acr.UserDialogs.Resource.Style.Base_Widget_AppCompat_Toolbar = global::NotatnikMechanika.Forms.Android.Resource.Style.Base_Widget_AppCompat_Toolbar;
 			global::Acr.UserDialogs.Resource.Style.Base_Widget_AppCompat_Toolbar_Button_Navigation = global::NotatnikMechanika.Forms.Android.Resource.Style.Base_Widget_AppCompat_Toolbar_Button_Navigation;
@@ -1620,6 +1714,8 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Style.ThemeOverlay_AppCompat_ActionBar = global::NotatnikMechanika.Forms.Android.Resource.Style.ThemeOverlay_AppCompat_ActionBar;
 			global::Acr.UserDialogs.Resource.Style.ThemeOverlay_AppCompat_Dark = global::NotatnikMechanika.Forms.Android.Resource.Style.ThemeOverlay_AppCompat_Dark;
 			global::Acr.UserDialogs.Resource.Style.ThemeOverlay_AppCompat_Dark_ActionBar = global::NotatnikMechanika.Forms.Android.Resource.Style.ThemeOverlay_AppCompat_Dark_ActionBar;
+			global::Acr.UserDialogs.Resource.Style.ThemeOverlay_AppCompat_DayNight = global::NotatnikMechanika.Forms.Android.Resource.Style.ThemeOverlay_AppCompat_DayNight;
+			global::Acr.UserDialogs.Resource.Style.ThemeOverlay_AppCompat_DayNight_ActionBar = global::NotatnikMechanika.Forms.Android.Resource.Style.ThemeOverlay_AppCompat_DayNight_ActionBar;
 			global::Acr.UserDialogs.Resource.Style.ThemeOverlay_AppCompat_Dialog = global::NotatnikMechanika.Forms.Android.Resource.Style.ThemeOverlay_AppCompat_Dialog;
 			global::Acr.UserDialogs.Resource.Style.ThemeOverlay_AppCompat_Dialog_Alert = global::NotatnikMechanika.Forms.Android.Resource.Style.ThemeOverlay_AppCompat_Dialog_Alert;
 			global::Acr.UserDialogs.Resource.Style.ThemeOverlay_AppCompat_Light = global::NotatnikMechanika.Forms.Android.Resource.Style.ThemeOverlay_AppCompat_Light;
@@ -1752,6 +1848,7 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Style.Widget_AppCompat_Spinner_DropDown = global::NotatnikMechanika.Forms.Android.Resource.Style.Widget_AppCompat_Spinner_DropDown;
 			global::Acr.UserDialogs.Resource.Style.Widget_AppCompat_Spinner_DropDown_ActionBar = global::NotatnikMechanika.Forms.Android.Resource.Style.Widget_AppCompat_Spinner_DropDown_ActionBar;
 			global::Acr.UserDialogs.Resource.Style.Widget_AppCompat_Spinner_Underlined = global::NotatnikMechanika.Forms.Android.Resource.Style.Widget_AppCompat_Spinner_Underlined;
+			global::Acr.UserDialogs.Resource.Style.Widget_AppCompat_TextView = global::NotatnikMechanika.Forms.Android.Resource.Style.Widget_AppCompat_TextView;
 			global::Acr.UserDialogs.Resource.Style.Widget_AppCompat_TextView_SpinnerItem = global::NotatnikMechanika.Forms.Android.Resource.Style.Widget_AppCompat_TextView_SpinnerItem;
 			global::Acr.UserDialogs.Resource.Style.Widget_AppCompat_Toolbar = global::NotatnikMechanika.Forms.Android.Resource.Style.Widget_AppCompat_Toolbar;
 			global::Acr.UserDialogs.Resource.Style.Widget_AppCompat_Toolbar_Button_Navigation = global::NotatnikMechanika.Forms.Android.Resource.Style.Widget_AppCompat_Toolbar_Button_Navigation;
@@ -1913,11 +2010,21 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_autoSizePresetSizes = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_autoSizePresetSizes;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_autoSizeStepGranularity = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_autoSizeStepGranularity;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_autoSizeTextType = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_autoSizeTextType;
+			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_drawableBottomCompat = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_drawableBottomCompat;
+			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_drawableEndCompat = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_drawableEndCompat;
+			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_drawableLeftCompat = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_drawableLeftCompat;
+			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_drawableRightCompat = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_drawableRightCompat;
+			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_drawableStartCompat = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_drawableStartCompat;
+			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_drawableTint = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_drawableTint;
+			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_drawableTintMode = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_drawableTintMode;
+			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_drawableTopCompat = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_drawableTopCompat;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_firstBaselineToTopHeight = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_firstBaselineToTopHeight;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_fontFamily = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_fontFamily;
+			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_fontVariationSettings = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_fontVariationSettings;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_lastBaselineToBottomHeight = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_lastBaselineToBottomHeight;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_lineHeight = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_lineHeight;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_textAllCaps = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_textAllCaps;
+			global::Acr.UserDialogs.Resource.Styleable.AppCompatTextView_textLocale = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTextView_textLocale;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_actionBarDivider = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_actionBarDivider;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_actionBarItemBackground = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_actionBarItemBackground;
@@ -1991,14 +2098,18 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_homeAsUpIndicator = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_homeAsUpIndicator;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_imageButtonStyle = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_imageButtonStyle;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_listChoiceBackgroundIndicator = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_listChoiceBackgroundIndicator;
+			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_listChoiceIndicatorMultipleAnimated = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_listChoiceIndicatorMultipleAnimated;
+			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_listChoiceIndicatorSingleAnimated = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_listChoiceIndicatorSingleAnimated;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_listDividerAlertDialog = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_listDividerAlertDialog;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_listMenuViewStyle = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_listMenuViewStyle;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_listPopupWindowStyle = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_listPopupWindowStyle;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_listPreferredItemHeight = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_listPreferredItemHeight;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_listPreferredItemHeightLarge = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_listPreferredItemHeightLarge;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_listPreferredItemHeightSmall = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_listPreferredItemHeightSmall;
+			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingEnd = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingEnd;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingLeft = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingLeft;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingRight = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingRight;
+			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingStart = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingStart;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_panelBackground = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_panelBackground;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_panelMenuListTheme = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_panelMenuListTheme;
 			global::Acr.UserDialogs.Resource.Styleable.AppCompatTheme_panelMenuListWidth = global::NotatnikMechanika.Forms.Android.Resource.Styleable.AppCompatTheme_panelMenuListWidth;
@@ -2147,6 +2258,7 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Styleable.ColorStateListItem_android_color = global::NotatnikMechanika.Forms.Android.Resource.Styleable.ColorStateListItem_android_color;
 			global::Acr.UserDialogs.Resource.Styleable.CompoundButton = global::NotatnikMechanika.Forms.Android.Resource.Styleable.CompoundButton;
 			global::Acr.UserDialogs.Resource.Styleable.CompoundButton_android_button = global::NotatnikMechanika.Forms.Android.Resource.Styleable.CompoundButton_android_button;
+			global::Acr.UserDialogs.Resource.Styleable.CompoundButton_buttonCompat = global::NotatnikMechanika.Forms.Android.Resource.Styleable.CompoundButton_buttonCompat;
 			global::Acr.UserDialogs.Resource.Styleable.CompoundButton_buttonTint = global::NotatnikMechanika.Forms.Android.Resource.Styleable.CompoundButton_buttonTint;
 			global::Acr.UserDialogs.Resource.Styleable.CompoundButton_buttonTintMode = global::NotatnikMechanika.Forms.Android.Resource.Styleable.CompoundButton_buttonTintMode;
 			global::Acr.UserDialogs.Resource.Styleable.CoordinatorLayout = global::NotatnikMechanika.Forms.Android.Resource.Styleable.CoordinatorLayout;
@@ -2377,6 +2489,7 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Styleable.RecycleListView_paddingBottomNoButtons = global::NotatnikMechanika.Forms.Android.Resource.Styleable.RecycleListView_paddingBottomNoButtons;
 			global::Acr.UserDialogs.Resource.Styleable.RecycleListView_paddingTopNoTitle = global::NotatnikMechanika.Forms.Android.Resource.Styleable.RecycleListView_paddingTopNoTitle;
 			global::Acr.UserDialogs.Resource.Styleable.RecyclerView = global::NotatnikMechanika.Forms.Android.Resource.Styleable.RecyclerView;
+			global::Acr.UserDialogs.Resource.Styleable.RecyclerView_android_clipToPadding = global::NotatnikMechanika.Forms.Android.Resource.Styleable.RecyclerView_android_clipToPadding;
 			global::Acr.UserDialogs.Resource.Styleable.RecyclerView_android_descendantFocusability = global::NotatnikMechanika.Forms.Android.Resource.Styleable.RecyclerView_android_descendantFocusability;
 			global::Acr.UserDialogs.Resource.Styleable.RecyclerView_android_orientation = global::NotatnikMechanika.Forms.Android.Resource.Styleable.RecyclerView_android_orientation;
 			global::Acr.UserDialogs.Resource.Styleable.RecyclerView_fastScrollEnabled = global::NotatnikMechanika.Forms.Android.Resource.Styleable.RecyclerView_fastScrollEnabled;
@@ -2486,11 +2599,14 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Styleable.TextAppearance_android_textColor = global::NotatnikMechanika.Forms.Android.Resource.Styleable.TextAppearance_android_textColor;
 			global::Acr.UserDialogs.Resource.Styleable.TextAppearance_android_textColorHint = global::NotatnikMechanika.Forms.Android.Resource.Styleable.TextAppearance_android_textColorHint;
 			global::Acr.UserDialogs.Resource.Styleable.TextAppearance_android_textColorLink = global::NotatnikMechanika.Forms.Android.Resource.Styleable.TextAppearance_android_textColorLink;
+			global::Acr.UserDialogs.Resource.Styleable.TextAppearance_android_textFontWeight = global::NotatnikMechanika.Forms.Android.Resource.Styleable.TextAppearance_android_textFontWeight;
 			global::Acr.UserDialogs.Resource.Styleable.TextAppearance_android_textSize = global::NotatnikMechanika.Forms.Android.Resource.Styleable.TextAppearance_android_textSize;
 			global::Acr.UserDialogs.Resource.Styleable.TextAppearance_android_textStyle = global::NotatnikMechanika.Forms.Android.Resource.Styleable.TextAppearance_android_textStyle;
 			global::Acr.UserDialogs.Resource.Styleable.TextAppearance_android_typeface = global::NotatnikMechanika.Forms.Android.Resource.Styleable.TextAppearance_android_typeface;
 			global::Acr.UserDialogs.Resource.Styleable.TextAppearance_fontFamily = global::NotatnikMechanika.Forms.Android.Resource.Styleable.TextAppearance_fontFamily;
+			global::Acr.UserDialogs.Resource.Styleable.TextAppearance_fontVariationSettings = global::NotatnikMechanika.Forms.Android.Resource.Styleable.TextAppearance_fontVariationSettings;
 			global::Acr.UserDialogs.Resource.Styleable.TextAppearance_textAllCaps = global::NotatnikMechanika.Forms.Android.Resource.Styleable.TextAppearance_textAllCaps;
+			global::Acr.UserDialogs.Resource.Styleable.TextAppearance_textLocale = global::NotatnikMechanika.Forms.Android.Resource.Styleable.TextAppearance_textLocale;
 			global::Acr.UserDialogs.Resource.Styleable.TextInputLayout = global::NotatnikMechanika.Forms.Android.Resource.Styleable.TextInputLayout;
 			global::Acr.UserDialogs.Resource.Styleable.TextInputLayout_android_hint = global::NotatnikMechanika.Forms.Android.Resource.Styleable.TextInputLayout_android_hint;
 			global::Acr.UserDialogs.Resource.Styleable.TextInputLayout_android_textColorHint = global::NotatnikMechanika.Forms.Android.Resource.Styleable.TextInputLayout_android_textColorHint;
@@ -2539,6 +2655,7 @@ namespace NotatnikMechanika.Forms.Android
 			global::Acr.UserDialogs.Resource.Styleable.Toolbar_logo = global::NotatnikMechanika.Forms.Android.Resource.Styleable.Toolbar_logo;
 			global::Acr.UserDialogs.Resource.Styleable.Toolbar_logoDescription = global::NotatnikMechanika.Forms.Android.Resource.Styleable.Toolbar_logoDescription;
 			global::Acr.UserDialogs.Resource.Styleable.Toolbar_maxButtonHeight = global::NotatnikMechanika.Forms.Android.Resource.Styleable.Toolbar_maxButtonHeight;
+			global::Acr.UserDialogs.Resource.Styleable.Toolbar_menu = global::NotatnikMechanika.Forms.Android.Resource.Styleable.Toolbar_menu;
 			global::Acr.UserDialogs.Resource.Styleable.Toolbar_navigationContentDescription = global::NotatnikMechanika.Forms.Android.Resource.Styleable.Toolbar_navigationContentDescription;
 			global::Acr.UserDialogs.Resource.Styleable.Toolbar_navigationIcon = global::NotatnikMechanika.Forms.Android.Resource.Styleable.Toolbar_navigationIcon;
 			global::Acr.UserDialogs.Resource.Styleable.Toolbar_popupTheme = global::NotatnikMechanika.Forms.Android.Resource.Styleable.Toolbar_popupTheme;
@@ -11011,6 +11128,39 @@ namespace NotatnikMechanika.Forms.Android
 			global::Xamarin.Essentials.Resource.Drawable.notification_template_icon_low_bg = global::NotatnikMechanika.Forms.Android.Resource.Drawable.notification_template_icon_low_bg;
 			global::Xamarin.Essentials.Resource.Drawable.notification_tile_bg = global::NotatnikMechanika.Forms.Android.Resource.Drawable.notification_tile_bg;
 			global::Xamarin.Essentials.Resource.Drawable.notify_panel_notification_icon_bg = global::NotatnikMechanika.Forms.Android.Resource.Drawable.notify_panel_notification_icon_bg;
+			global::Xamarin.Essentials.Resource.Id.accessibility_action_clickable_span = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_action_clickable_span;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_0 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_0;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_1 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_1;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_10 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_10;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_11 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_11;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_12 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_12;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_13 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_13;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_14 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_14;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_15 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_15;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_16 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_16;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_17 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_17;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_18 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_18;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_19 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_19;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_2 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_2;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_20 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_20;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_21 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_21;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_22 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_22;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_23 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_23;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_24 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_24;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_25 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_25;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_26 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_26;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_27 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_27;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_28 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_28;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_29 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_29;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_3 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_3;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_30 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_30;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_31 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_31;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_4 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_4;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_5 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_5;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_6 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_6;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_7 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_7;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_8 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_8;
+			global::Xamarin.Essentials.Resource.Id.accessibility_custom_action_9 = global::NotatnikMechanika.Forms.Android.Resource.Id.accessibility_custom_action_9;
 			global::Xamarin.Essentials.Resource.Id.actions = global::NotatnikMechanika.Forms.Android.Resource.Id.actions;
 			global::Xamarin.Essentials.Resource.Id.action_container = global::NotatnikMechanika.Forms.Android.Resource.Id.action_container;
 			global::Xamarin.Essentials.Resource.Id.action_divider = global::NotatnikMechanika.Forms.Android.Resource.Id.action_divider;
@@ -11031,6 +11181,7 @@ namespace NotatnikMechanika.Forms.Android
 			global::Xamarin.Essentials.Resource.Id.chronometer = global::NotatnikMechanika.Forms.Android.Resource.Id.chronometer;
 			global::Xamarin.Essentials.Resource.Id.clip_horizontal = global::NotatnikMechanika.Forms.Android.Resource.Id.clip_horizontal;
 			global::Xamarin.Essentials.Resource.Id.clip_vertical = global::NotatnikMechanika.Forms.Android.Resource.Id.clip_vertical;
+			global::Xamarin.Essentials.Resource.Id.dialog_button = global::NotatnikMechanika.Forms.Android.Resource.Id.dialog_button;
 			global::Xamarin.Essentials.Resource.Id.end = global::NotatnikMechanika.Forms.Android.Resource.Id.end;
 			global::Xamarin.Essentials.Resource.Id.fill = global::NotatnikMechanika.Forms.Android.Resource.Id.fill;
 			global::Xamarin.Essentials.Resource.Id.fill_horizontal = global::NotatnikMechanika.Forms.Android.Resource.Id.fill_horizontal;
@@ -11052,6 +11203,11 @@ namespace NotatnikMechanika.Forms.Android
 			global::Xamarin.Essentials.Resource.Id.right_icon = global::NotatnikMechanika.Forms.Android.Resource.Id.right_icon;
 			global::Xamarin.Essentials.Resource.Id.right_side = global::NotatnikMechanika.Forms.Android.Resource.Id.right_side;
 			global::Xamarin.Essentials.Resource.Id.start = global::NotatnikMechanika.Forms.Android.Resource.Id.start;
+			global::Xamarin.Essentials.Resource.Id.tag_accessibility_actions = global::NotatnikMechanika.Forms.Android.Resource.Id.tag_accessibility_actions;
+			global::Xamarin.Essentials.Resource.Id.tag_accessibility_clickable_spans = global::NotatnikMechanika.Forms.Android.Resource.Id.tag_accessibility_clickable_spans;
+			global::Xamarin.Essentials.Resource.Id.tag_accessibility_heading = global::NotatnikMechanika.Forms.Android.Resource.Id.tag_accessibility_heading;
+			global::Xamarin.Essentials.Resource.Id.tag_accessibility_pane_title = global::NotatnikMechanika.Forms.Android.Resource.Id.tag_accessibility_pane_title;
+			global::Xamarin.Essentials.Resource.Id.tag_screen_reader_focusable = global::NotatnikMechanika.Forms.Android.Resource.Id.tag_screen_reader_focusable;
 			global::Xamarin.Essentials.Resource.Id.tag_transition_group = global::NotatnikMechanika.Forms.Android.Resource.Id.tag_transition_group;
 			global::Xamarin.Essentials.Resource.Id.tag_unhandled_key_event_manager = global::NotatnikMechanika.Forms.Android.Resource.Id.tag_unhandled_key_event_manager;
 			global::Xamarin.Essentials.Resource.Id.tag_unhandled_key_listeners = global::NotatnikMechanika.Forms.Android.Resource.Id.tag_unhandled_key_listeners;
@@ -11063,6 +11219,7 @@ namespace NotatnikMechanika.Forms.Android
 			global::Xamarin.Essentials.Resource.Integer.status_bar_notification_info_maxnum = global::NotatnikMechanika.Forms.Android.Resource.Integer.status_bar_notification_info_maxnum;
 			global::Xamarin.Essentials.Resource.Layout.browser_actions_context_menu_page = global::NotatnikMechanika.Forms.Android.Resource.Layout.browser_actions_context_menu_page;
 			global::Xamarin.Essentials.Resource.Layout.browser_actions_context_menu_row = global::NotatnikMechanika.Forms.Android.Resource.Layout.browser_actions_context_menu_row;
+			global::Xamarin.Essentials.Resource.Layout.custom_dialog = global::NotatnikMechanika.Forms.Android.Resource.Layout.custom_dialog;
 			global::Xamarin.Essentials.Resource.Layout.notification_action = global::NotatnikMechanika.Forms.Android.Resource.Layout.notification_action;
 			global::Xamarin.Essentials.Resource.Layout.notification_action_tombstone = global::NotatnikMechanika.Forms.Android.Resource.Layout.notification_action_tombstone;
 			global::Xamarin.Essentials.Resource.Layout.notification_template_custom_big = global::NotatnikMechanika.Forms.Android.Resource.Layout.notification_template_custom_big;
@@ -24705,118 +24862,130 @@ namespace NotatnikMechanika.Forms.Android
 			public const int character_counter_pattern = 2131558430;
 			
 			// aapt resource value: 0x7F0D001F
-			public const int fab_scroll_shrink_grow_autohide_behavior = 2131558431;
+			public const int copy_toast_msg = 2131558431;
 			
 			// aapt resource value: 0x7F0D0020
-			public const int fab_transformation_scrim_behavior = 2131558432;
+			public const int fab_scroll_shrink_grow_autohide_behavior = 2131558432;
 			
 			// aapt resource value: 0x7F0D0021
-			public const int fab_transformation_sheet_behavior = 2131558433;
+			public const int fab_transformation_scrim_behavior = 2131558433;
 			
 			// aapt resource value: 0x7F0D0022
-			public const int hide_bottom_view_on_scroll_behavior = 2131558434;
+			public const int fab_transformation_sheet_behavior = 2131558434;
 			
 			// aapt resource value: 0x7F0D0023
-			public const int library_name = 2131558435;
+			public const int fallback_menu_item_copy_link = 2131558435;
 			
 			// aapt resource value: 0x7F0D0024
-			public const int mr_button_content_description = 2131558436;
+			public const int fallback_menu_item_open_in_browser = 2131558436;
 			
 			// aapt resource value: 0x7F0D0025
-			public const int mr_cast_button_connected = 2131558437;
+			public const int fallback_menu_item_share_link = 2131558437;
 			
 			// aapt resource value: 0x7F0D0026
-			public const int mr_cast_button_connecting = 2131558438;
+			public const int hide_bottom_view_on_scroll_behavior = 2131558438;
 			
 			// aapt resource value: 0x7F0D0027
-			public const int mr_cast_button_disconnected = 2131558439;
+			public const int library_name = 2131558439;
 			
 			// aapt resource value: 0x7F0D0028
-			public const int mr_cast_dialog_title_view_placeholder = 2131558440;
+			public const int mr_button_content_description = 2131558440;
 			
 			// aapt resource value: 0x7F0D0029
-			public const int mr_chooser_searching = 2131558441;
+			public const int mr_cast_button_connected = 2131558441;
 			
 			// aapt resource value: 0x7F0D002A
-			public const int mr_chooser_title = 2131558442;
+			public const int mr_cast_button_connecting = 2131558442;
 			
 			// aapt resource value: 0x7F0D002B
-			public const int mr_controller_album_art = 2131558443;
+			public const int mr_cast_button_disconnected = 2131558443;
 			
 			// aapt resource value: 0x7F0D002C
-			public const int mr_controller_casting_screen = 2131558444;
+			public const int mr_cast_dialog_title_view_placeholder = 2131558444;
 			
 			// aapt resource value: 0x7F0D002D
-			public const int mr_controller_close_description = 2131558445;
+			public const int mr_chooser_searching = 2131558445;
 			
 			// aapt resource value: 0x7F0D002E
-			public const int mr_controller_collapse_group = 2131558446;
+			public const int mr_chooser_title = 2131558446;
 			
 			// aapt resource value: 0x7F0D002F
-			public const int mr_controller_disconnect = 2131558447;
+			public const int mr_controller_album_art = 2131558447;
 			
 			// aapt resource value: 0x7F0D0030
-			public const int mr_controller_expand_group = 2131558448;
+			public const int mr_controller_casting_screen = 2131558448;
 			
 			// aapt resource value: 0x7F0D0031
-			public const int mr_controller_no_info_available = 2131558449;
+			public const int mr_controller_close_description = 2131558449;
 			
 			// aapt resource value: 0x7F0D0032
-			public const int mr_controller_no_media_selected = 2131558450;
+			public const int mr_controller_collapse_group = 2131558450;
 			
 			// aapt resource value: 0x7F0D0033
-			public const int mr_controller_pause = 2131558451;
+			public const int mr_controller_disconnect = 2131558451;
 			
 			// aapt resource value: 0x7F0D0034
-			public const int mr_controller_play = 2131558452;
+			public const int mr_controller_expand_group = 2131558452;
 			
 			// aapt resource value: 0x7F0D0035
-			public const int mr_controller_stop = 2131558453;
+			public const int mr_controller_no_info_available = 2131558453;
 			
 			// aapt resource value: 0x7F0D0036
-			public const int mr_controller_stop_casting = 2131558454;
+			public const int mr_controller_no_media_selected = 2131558454;
 			
 			// aapt resource value: 0x7F0D0037
-			public const int mr_controller_volume_slider = 2131558455;
+			public const int mr_controller_pause = 2131558455;
 			
 			// aapt resource value: 0x7F0D0038
-			public const int mr_dialog_groupable_header = 2131558456;
+			public const int mr_controller_play = 2131558456;
 			
 			// aapt resource value: 0x7F0D0039
-			public const int mr_dialog_transferable_header = 2131558457;
+			public const int mr_controller_stop = 2131558457;
 			
 			// aapt resource value: 0x7F0D003A
-			public const int mr_system_route_name = 2131558458;
+			public const int mr_controller_stop_casting = 2131558458;
 			
 			// aapt resource value: 0x7F0D003B
-			public const int mr_user_route_category_name = 2131558459;
+			public const int mr_controller_volume_slider = 2131558459;
 			
 			// aapt resource value: 0x7F0D003C
-			public const int mtrl_chip_close_icon_content_description = 2131558460;
+			public const int mr_dialog_groupable_header = 2131558460;
 			
 			// aapt resource value: 0x7F0D003D
-			public const int password_toggle_content_description = 2131558461;
+			public const int mr_dialog_transferable_header = 2131558461;
 			
 			// aapt resource value: 0x7F0D003E
-			public const int path_password_eye = 2131558462;
+			public const int mr_system_route_name = 2131558462;
 			
 			// aapt resource value: 0x7F0D003F
-			public const int path_password_eye_mask_strike_through = 2131558463;
+			public const int mr_user_route_category_name = 2131558463;
 			
 			// aapt resource value: 0x7F0D0040
-			public const int path_password_eye_mask_visible = 2131558464;
+			public const int mtrl_chip_close_icon_content_description = 2131558464;
 			
 			// aapt resource value: 0x7F0D0041
-			public const int path_password_strike_through = 2131558465;
+			public const int password_toggle_content_description = 2131558465;
 			
 			// aapt resource value: 0x7F0D0042
-			public const int search_menu_title = 2131558466;
+			public const int path_password_eye = 2131558466;
 			
 			// aapt resource value: 0x7F0D0043
-			public const int status_bar_notification_info_overflow = 2131558467;
+			public const int path_password_eye_mask_strike_through = 2131558467;
 			
 			// aapt resource value: 0x7F0D0044
-			public const int view_scroll_translation_autohide_behavior = 2131558468;
+			public const int path_password_eye_mask_visible = 2131558468;
+			
+			// aapt resource value: 0x7F0D0045
+			public const int path_password_strike_through = 2131558469;
+			
+			// aapt resource value: 0x7F0D0046
+			public const int search_menu_title = 2131558470;
+			
+			// aapt resource value: 0x7F0D0047
+			public const int status_bar_notification_info_overflow = 2131558471;
+			
+			// aapt resource value: 0x7F0D0048
+			public const int view_scroll_translation_autohide_behavior = 2131558472;
 			
 			static String()
 			{
@@ -29597,7 +29766,10 @@ namespace NotatnikMechanika.Forms.Android
 			public const int Empty = 2131755008;
 			
 			// aapt resource value: 0x7F100001
-			public const int xamarin_essentials_fileprovider_file_paths = 2131755009;
+			public const int image_share_filepaths = 2131755009;
+			
+			// aapt resource value: 0x7F100002
+			public const int xamarin_essentials_fileprovider_file_paths = 2131755010;
 			
 			static Xml()
 			{
