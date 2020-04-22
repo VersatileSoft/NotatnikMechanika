@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using MvvmCross.Logging;
-using MvvmCross.Navigation;
 using NotatnikMechanika.Client.Services;
 using NotatnikMechanika.Core.Interfaces;
+using NotatnikMechanika.Core.PageModels;
 using NotatnikMechanika.Core.Services;
-using NotatnikMechanika.Core.ViewModels;
+using Xamarin.MVVMPackage.Services.Interfaces;
 
 namespace NotatnikMechanika.Client
 {
@@ -13,12 +12,12 @@ namespace NotatnikMechanika.Client
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IMvxLog, LogService>();
-            services.AddSingleton<IMvxNavigationService, NavigationService>();
+            //services.AddSingleton<IMvxLog, LogService>();
+            services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<ISettingsService, SettingsService>();
             services.AddSingleton<IHttpRequestService, HttpRequestService>();
 
-            services.AddSingleton<LoginViewModel>();
+            services.AddSingleton<LoginPageModel>();
         }
 
         public void Configure(IComponentsApplicationBuilder app)

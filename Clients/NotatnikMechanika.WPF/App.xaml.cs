@@ -1,13 +1,8 @@
-﻿using MvvmCross.Core;
-using MvvmCross.Platforms.Wpf.Views;
+﻿using Xamarin.MVVMPackage;
 
 namespace NotatnikMechanika.WPF
 {
-    public partial class App : MvxApplication
+    public partial class App : MvWpfApplication
     {
-        protected override void RegisterSetup()
-        {
-            this.RegisterSetupType<Setup>();
-        }
     }
 }

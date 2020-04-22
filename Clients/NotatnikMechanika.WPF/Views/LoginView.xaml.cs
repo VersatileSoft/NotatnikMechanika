@@ -1,5 +1,5 @@
 ﻿using MvvmCross.Platforms.Wpf.Views;
-using NotatnikMechanika.Core.ViewModels;
+using NotatnikMechanika.Core.PageModels;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,7 +10,7 @@ namespace NotatnikMechanika.WPF.Views
     /// <summary>
     /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class LoginView : MvxWpfView<LoginViewModel>
+    public partial class LoginView : MvxWpfView<LoginPageModel>
     {
         private Storyboard _storyboard;
         public LoginView()

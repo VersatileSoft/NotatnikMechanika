@@ -1,7 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using MvvmCross.Platforms.Wpf.Presenters;
 using MvvmCross.ViewModels;
-using NotatnikMechanika.Core.ViewModels.AddingViewModels;
+using NotatnikMechanika.Core.PageModels.AddingViewModels;
 using NotatnikMechanika.WPF.Presenters.Attributes;
 using System;
 using System.Linq;

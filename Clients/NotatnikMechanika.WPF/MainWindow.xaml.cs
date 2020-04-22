@@ -1,8 +1,6 @@
-﻿using MvvmCross.Platforms.Wpf.Views;
-
-namespace NotatnikMechanika.WPF
+﻿namespace NotatnikMechanika.WPF
 {
-    public partial class MainWindow : MvxWindow
+    public partial class MainWindow : Window
     {
         public MainWindow()
         {

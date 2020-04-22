@@ -1,5 +1,5 @@
 ﻿using MvvmCross.Platforms.Wpf.Views;
-using NotatnikMechanika.Core.ViewModels;
+using NotatnikMechanika.Core.PageModels;
 using System;
 using System.Windows;
 using System.Windows.Controls;

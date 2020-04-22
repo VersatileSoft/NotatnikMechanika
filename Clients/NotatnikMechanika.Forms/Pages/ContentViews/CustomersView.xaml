@@ -1,0 +1,114 @@
+﻿<views:MvContentPage x:Class="NotatnikMechanika.Forms.Views.CustomersView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
+    xmlns:views="clr-namespace:Xamarin.MVVMPackage.Pages;assembly=Xamarin.MVVMPackage"
+    Title="Stali klienci"
+    x:TypeArguments="viewModels:CustomersViewModel"
+    BackgroundColor="White"
+    Visual="Material"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <ScrollView Orientation="Both">
+            <StackLayout>
+                <Grid
+                    HeightRequest="40"
+                    Padding="10"
+                    BackgroundColor="#f0f0f0f0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        VerticalOptions="Center"
+                        Text="ID"/>
+                    <Label
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        Text="Name"/>
+                    <Label
+                        Grid.Column="2"
+                        VerticalOptions="Center"
+                        Text="Surname"/>
+                    <Label
+                        Grid.Column="3"
+                        VerticalOptions="Center"
+                        Text="CompanyName"/>
+                    <Label
+                        Grid.Column="4"
+                        VerticalOptions="Center"
+                        Text="CompanyIdentyficator"/>
+                    <Label
+                        Grid.Column="5"
+                        VerticalOptions="Center"
+                        Text="Phone"/>
+                    <Label
+                        Grid.Column="6"
+                        VerticalOptions="Center"
+                        Text="Address"/>
+                </Grid>
+
+                <CollectionView
+                    ItemsSource="{Binding Customers}"
+                    SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HeightRequest="30" Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="150"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label
+                                    Grid.Column="0"
+                                    VerticalOptions="Center"
+                                    Text="{Binding Id}"/>
+                                <Label
+                                    Grid.Column="1"
+                                    VerticalOptions="Center"
+                                    Text="{Binding Name}"/>
+                                <Label
+                                    Grid.Column="2"
+                                    VerticalOptions="Center"
+                                    Text="{Binding Surname}"/>
+                                <Label
+                                    Grid.Column="3"
+                                    VerticalOptions="Center"
+                                    Text="{Binding CompanyName}"/>
+                                <Label
+                                    Grid.Column="4"
+                                    VerticalOptions="Center"
+                                    Text="{Binding CompanyIdentyficator}"/>
+                                <Label
+                                    Grid.Column="5"
+                                    VerticalOptions="Center"
+                                    Text="{Binding Phone}"/>
+                                <Label
+                                    Grid.Column="6"
+                                    VerticalOptions="Center"
+                                    Text="{Binding Address}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <Label HorizontalTextAlignment="Center" Text="Brak klientów do pokazania, spróbuj dodać nowego!"/>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</views:MvContentPage>

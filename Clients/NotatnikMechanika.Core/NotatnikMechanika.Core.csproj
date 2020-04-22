@@ -2,17 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MvvmCross" Version="6.4.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="PropertyChanged.Fody" Version="3.2.7" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.2.8" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Api\NotatnikMechanika.Shared\NotatnikMechanika.Shared.csproj" />
+    <ProjectReference Include="..\..\Xamarin.MVVMPackage\Xamarin.MVVMPackage.csproj" />
   </ItemGroup>
 
   <ItemGroup>

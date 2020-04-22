@@ -1,5 +1,5 @@
 ﻿using MvvmCross.Platforms.Wpf.Views;
-using NotatnikMechanika.Core.ViewModels;
+using NotatnikMechanika.Core.PageModels;
 using NotatnikMechanika.Shared.Models.Customer;
 using NotatnikMechanika.WPF.Presenters.Attributes;
 using System.Windows.Controls;

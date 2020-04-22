@@ -1,8 +1,9 @@
-﻿using MvvmCross.Forms.Core;
+﻿using NotatnikMechanika.Core;
 using NotatnikMechanika.Forms.Styles;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.MVVMPackage;
 
 [assembly: ExportFont("Resources/Fonts/GoogleSans-Bold.ttf")]
 [assembly: ExportFont("Resources/Fonts/GoogleSans-BoldItalic.ttf")]
@@ -13,7 +14,7 @@ using Xamarin.Forms.Xaml;
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace NotatnikMechanika.Forms
 {
-    public partial class App : MvxFormsApplication
+    public partial class App : MvFormsApplication<MainPageService>
     {
         private const int smallWightResolution = 768;
         private const int smallHeightResolution = 1280;
@@ -22,6 +23,7 @@ namespace NotatnikMechanika.Forms
         {
             InitializeComponent();
             LoadStyles();
+            LoadMainPage();
         }
 
         private void LoadStyles()
@@ -50,7 +52,7 @@ namespace NotatnikMechanika.Forms
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+            
         }
 
         protected override void OnSleep()

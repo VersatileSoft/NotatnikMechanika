@@ -1,0 +1,80 @@
+﻿<views:MvContentPage x:Class="NotatnikMechanika.Forms.Views.MenuView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
+    xmlns:views="clr-namespace:Xamarin.MVVMPackage.Pages;assembly=Xamarin.MVVMPackage"
+    Title="Placeholder"
+    x:TypeArguments="viewModels:MenuViewModel"
+    Visual="Material"
+    mc:Ignorable="d">
+    <views:MvContentPage.Content>
+        <StackLayout>
+            <Grid HeightRequest="200">
+                <Image IsOpaque="False" Source="icon_background.xml"/>
+                <Image IsOpaque="True" Source="icon_foreground.xml"/>
+
+                <StackLayout
+                    Margin="5,0,0,5"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="EndAndExpand"
+                    Orientation="Horizontal">
+                    <Image
+                        WidthRequest="20"
+                        HeightRequest="20"
+                        VerticalOptions="Center"
+                        IsOpaque="True"
+                        Source="RegularClientsIcon.xml"/>
+
+                    <Label
+                        VerticalOptions="Center"
+                        FontSize="Medium"
+                        Text="Michał 'Grubas' Woźniak"
+                        TextColor="White"/>
+                </StackLayout>
+            </Grid>
+
+            <!--<CollectionView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="7*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image
+                                HeightRequest="30"
+                                HorizontalOptions="Center"
+                                Source="OrdersIcon.xml"
+                                VerticalOptions="Center"
+                                WidthRequest="30"/>
+                            <Label
+                                Grid.Column="1"
+                                FontAttributes="Bold"
+                                Text="Zlecenia"
+                                VerticalOptions="CenterAndExpand"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
+
+            <StackLayout Padding="15">
+                <Button
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="Orders"
+                    Text="Zlecenia"/>
+
+                <Button
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="Clients"
+                    Text="Klienci"/>
+            </StackLayout>
+
+            <StackLayout Padding="15" VerticalOptions="EndAndExpand">
+                <Button Text="Ustawienia"/>
+                <Button Command="{Binding LogoutCommand}" Text="Wyloguj"/>
+            </StackLayout>
+        </StackLayout>
+    </views:MvContentPage.Content>
+</views:MvContentPage>
