@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -11,26 +11,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\**" />
+    <EmbeddedResource Remove="Views\**" />
+    <None Remove="Views\**" />
+    <Page Remove="Views\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Assets\AppIcon_Light.png" />
-    <None Remove="Views\CustomersView.xaml" />
-    <None Remove="Views\CustomerView.xaml" />
-    <None Remove="Views\LoginView.xaml" />
-    <None Remove="Views\MenuView.xaml" />
-    <None Remove="Views\OrdersView.xaml" />
-    <None Remove="Views\RegistrationView.xaml" />
-    <None Remove="Views\Utils\AddCustomerView.xaml" />
-    <None Remove="Views\Utils\ButtonIndicator.xaml" />
-    <None Remove="Views\Utils\IconButton.xaml" />
-    <None Remove="Views\Utils\MenuButton.xaml" />
-    <None Remove="Views\Utils\NotificationsSnackbar.xaml" />
-    <None Remove="Views\Utils\TopBar.xaml" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MahApps.Metro" Version="2.0.0-alpha0660" />
     <PackageReference Include="MaterialDesignThemes" Version="3.1.0" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.2.8" />
-    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
   </ItemGroup>
 
   <ItemGroup>

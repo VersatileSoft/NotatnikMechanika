@@ -1,4 +1,6 @@
-﻿namespace NotatnikMechanika.WPF
+﻿using System.Windows;
+
+namespace NotatnikMechanika.WPF
 {
     public partial class MainWindow : Window
     {

@@ -2,7 +2,7 @@
 
 namespace Xamarin.MVVMPackage
 {
-    public abstract class MvWpfApplication
+    public abstract class MvWpfApplication : Application
     {
     }
 }
