@@ -1,8 +1,8 @@
-﻿<m:MvApplication x:Class="NotatnikMechanika.Forms.App"
+﻿<m:MvFormsApplication x:Class="NotatnikMechanika.Forms.App"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:m="clr-namespace:Xamarin.MVVMPackage;assembly=Xamarin.MVVMPackage"
+    xmlns:m="clr-namespace:MvvmPackage.Xamarin;assembly=MvvmPackage.Xamarin"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:core="clr-namespace:NotatnikMechanika.Core;assembly=NotatnikMechanika.Core"
     x:TypeArguments="core:MainPageService"
@@ -23,4 +23,4 @@
             </Setter>
         </Style>
     </Application.Resources>
-</m:MvApplication>
+</m:MvFormsApplication>

@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Api\NotatnikMechanika.Shared\NotatnikMechanika.Shared.csproj" />
-    <ProjectReference Include="..\..\Xamarin.MVVMPackage\Xamarin.MVVMPackage.csproj" />
+    <ProjectReference Include="..\..\MvvmPackage.Core\MvvmPackage.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

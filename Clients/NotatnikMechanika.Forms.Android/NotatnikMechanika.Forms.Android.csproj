@@ -133,9 +133,9 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Xamarin.MVVMPackage\Xamarin.MVVMPackage.csproj">
-      <Project>{6BBC1A93-20DE-4281-B106-969EF1A8BE20}</Project>
-      <Name>Xamarin.MVVMPackage</Name>
+    <ProjectReference Include="..\..\MvvmPackage.Xamarin\MvvmPackage.Xamarin.csproj">
+      <Project>{479716F2-6958-429F-AC3F-9BFBF9E6F040}</Project>
+      <Name>MvvmPackage.Xamarin</Name>
     </ProjectReference>
     <ProjectReference Include="..\NotatnikMechanika.Core\NotatnikMechanika.Core.csproj">
       <Project>{30a55818-ff4d-4b72-bb64-4b91b0c9a491}</Project>

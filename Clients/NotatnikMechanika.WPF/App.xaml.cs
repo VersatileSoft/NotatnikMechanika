@@ -1,9 +1,13 @@
-﻿using System.Windows;
-using Xamarin.MVVMPackage;
+﻿using MvvmPackage.Wpf;
+using NotatnikMechanika.Core;
 
 namespace NotatnikMechanika.WPF
 {
-    public partial class App : Application //MvWpfApplication
+    public partial class App : MvWpfApplication<MainPageService>
     {
+        public App()
+        {
+            InitializeComponent();
+        }
     }
 }

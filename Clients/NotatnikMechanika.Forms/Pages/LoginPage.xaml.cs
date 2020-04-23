@@ -1,7 +1,7 @@
+using MvvmPackage.Xamarin.Pages;
 using NotatnikMechanika.Core.PageModels;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.MVVMPackage.Pages;
 
 namespace NotatnikMechanika.Forms.Views
 {

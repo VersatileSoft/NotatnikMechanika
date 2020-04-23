@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace NotatnikMechanika.WPF.Views.Utils
+namespace NotatnikMechanika.WPF.Pages.Utils
 {
     /// <summary>
     /// Interaction logic for IconButton.xaml

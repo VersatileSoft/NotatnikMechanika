@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace NotatnikMechanika.WPF.Views.Utils
+namespace NotatnikMechanika.WPF.Pages.Utils
 {
     /// <summary>
     /// Interaction logic for TopBar.xaml

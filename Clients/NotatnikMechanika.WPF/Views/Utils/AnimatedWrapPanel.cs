@@ -4,9 +4,9 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace NotatnikMechanika.WPF.Views.Utils
+namespace NotatnikMechanika.WPF.Pages.Utils
 {
-    internal class AnimatedWrapPanel : Panel
+    public class AnimatedWrapPanel : Panel
     {
         protected override Size MeasureOverride(Size availableSize)
         {

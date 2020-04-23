@@ -1,11 +1,9 @@
-﻿using NotatnikMechanika.Core.PageModels;
-using NotatnikMechanika.Shared.Models.Customer;
-using Xamarin.Forms;
-using Xamarin.MVVMPackage.Pages;
+﻿using MvvmPackage.Xamarin.Pages;
+using NotatnikMechanika.Core.PageModels;
 
 namespace NotatnikMechanika.Forms.Views
 {
-    public partial class CustomersView : MvContentPage<CustomersViewModel>
+    public partial class CustomersView : MvContentPage<CustomersPageModel>
     {
         public CustomersView()
         {

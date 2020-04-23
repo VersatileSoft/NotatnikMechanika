@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace NotatnikMechanika.WPF.Views.Utils
+namespace NotatnikMechanika.WPF.Pages.Utils
 {
     public partial class ButtonIndicator : Button
     {

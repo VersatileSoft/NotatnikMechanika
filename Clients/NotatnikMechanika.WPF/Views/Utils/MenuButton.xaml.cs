@@ -1,7 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System.Windows.Controls;
 
-namespace NotatnikMechanika.WPF.Views.Utils
+namespace NotatnikMechanika.WPF.Pages.Utils
 {
     /// <summary>
     /// Interaction logic for MenuButton.xaml

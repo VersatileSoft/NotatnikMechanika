@@ -4,7 +4,7 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
-    xmlns:views="clr-namespace:Xamarin.MVVMPackage.Pages;assembly=Xamarin.MVVMPackage"
+    xmlns:views="clr-namespace:MvvmPackage.Xamarin.Pages;assembly=MvvmPackage.Xamarin"
     x:TypeArguments="viewModels:LoginPageModel"
     NavigationPage.HasNavigationBar="False"
     Visual="Material"

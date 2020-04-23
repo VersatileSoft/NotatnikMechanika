@@ -11,14 +11,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\**" />
-    <EmbeddedResource Remove="Views\**" />
-    <None Remove="Views\**" />
-    <Page Remove="Views\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Assets\AppIcon_Light.png" />
+    <None Remove="Pages\Utils\AddCustomerPage.xaml" />
+    <None Remove="Pages\Utils\ButtonIndicator.xaml" />
+    <None Remove="Pages\Utils\IconButton.xaml" />
+    <None Remove="Pages\Utils\MenuButton.xaml" />
+    <None Remove="Pages\Utils\NotificationsSnackbar.xaml" />
+    <None Remove="Pages\Utils\TopBar.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Xamarin.MVVMPackage\Xamarin.MVVMPackage.csproj" />
+    <ProjectReference Include="..\..\MvvmPackage.Wpf\MvvmPackage.Wpf.csproj" />
     <ProjectReference Include="..\NotatnikMechanika.Core\NotatnikMechanika.Core.csproj" />
   </ItemGroup>
 

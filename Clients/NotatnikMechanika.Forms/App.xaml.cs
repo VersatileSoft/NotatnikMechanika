@@ -1,9 +1,9 @@
-﻿using NotatnikMechanika.Core;
+﻿using MvvmPackage.Xamarin;
+using NotatnikMechanika.Core;
 using NotatnikMechanika.Forms.Styles;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Xamarin.MVVMPackage;
 
 [assembly: ExportFont("Resources/Fonts/GoogleSans-Bold.ttf")]
 [assembly: ExportFont("Resources/Fonts/GoogleSans-BoldItalic.ttf")]

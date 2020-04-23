@@ -1,10 +1,7 @@
-﻿using NotatnikMechanika.Core.Interfaces;
+﻿using MvvmPackage.Core.Services.Interfaces;
+using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Core.PageModels;
 using System;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.MVVMPackage;
-using Xamarin.MVVMPackage.Services.Interfaces;
 
 namespace NotatnikMechanika.Core
 {

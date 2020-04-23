@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.MVVMPackage;
 using Xamarin.MVVMPackage.Commands;
-using Xamarin.MVVMPackage.Services.Interfaces;
+using MvvmPackage.Core;
+using MvvmPackage.Core.Services.Interfaces;
 
 namespace NotatnikMechanika.Core.PageModels
 {

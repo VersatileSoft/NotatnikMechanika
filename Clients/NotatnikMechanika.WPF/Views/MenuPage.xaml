@@ -1,0 +1,82 @@
+﻿<pages:MvWpfPage x:Class="NotatnikMechanika.WPF.Pages.MenuPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utils="clr-namespace:NotatnikMechanika.WPF.Pages.Utils;assembly="
+    xmlns:pages="clr-namespace:MvvmPackage.Wpf.Pages;assembly=MvvmPackage.Wpf"
+    xmlns:core="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
+    x:TypeArguments="core:MenuPageModel"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="White"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    mc:Ignorable="d">
+    <UserControl.Background>
+        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="#5877e6"/>
+            <GradientStop Offset="1" Color="#36dad2"/>
+        </LinearGradientBrush>
+    </UserControl.Background>
+
+    <StackPanel>
+        <Grid
+            Height="100"
+            Margin="10,10,10,10"
+            Background="Transparent">
+            <Image x:Name="Logo"
+                HorizontalAlignment="Center"
+                Source="/NotatnikMechanika.WPF;component/Assets/AppIcon_Light.png"
+                VerticalAlignment="Center">
+                <Image.Effect>
+                    <DropShadowEffect
+                        BlurRadius="50"
+                        Opacity="0.5"
+                        ShadowDepth="10"/>
+                </Image.Effect>
+            </Image>
+        </Grid>
+        <utils:MenuButton
+            Command="{Binding NavigateCommand}"
+            CommandParameter="Orders"
+            IconKind="ToolBox"
+            Text="Zlecenia"/>
+
+        <utils:MenuButton
+            Command="{Binding NavigateCommand}"
+            CommandParameter="Clients"
+            IconKind="User"
+            Text="Klienci"/>
+
+        <utils:MenuButton
+            Command="{Binding NavigateCommand}"
+            CommandParameter="Services"
+            IconKind="Server"
+            Text="Usługi"/>
+
+        <utils:MenuButton
+            Command="{Binding NavigateCommand}"
+            CommandParameter="Warehouse"
+            IconKind="House"
+            Text="Magazyn"/>
+
+        <utils:MenuButton
+            Command="{Binding NavigateCommand}"
+            CommandParameter="Archives"
+            IconKind="Archive"
+            Text="Archiwum"/>
+
+        <utils:MenuButton
+            Command="{Binding NavigateCommand}"
+            CommandParameter="Receipts"
+            IconKind="FileDocument"
+            Text="Faktury/Paragony"/>
+
+        <utils:MenuButton
+            Command="{Binding LogoutCommand}"
+            IconKind="Logout"
+            Text="Wyloguj"/>
+    </StackPanel>
+</pages:MvWpfPage>

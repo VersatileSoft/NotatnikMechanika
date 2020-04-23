@@ -2,6 +2,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
-    xmlns:views="clr-namespace:Xamarin.MVVMPackage.Pages;assembly=Xamarin.MVVMPackage"
+    xmlns:views="clr-namespace:MvvmPackage.Xamarin.Pages;assembly=MvvmPackage.Xamarin"
     x:TypeArguments="viewModels:MainPageModel"
     Visual="Material"/>
