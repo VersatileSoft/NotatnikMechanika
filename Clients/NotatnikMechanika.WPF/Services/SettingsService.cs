@@ -11,7 +11,8 @@ namespace NotatnikMechanika.WPF.Services
             {
                 try
                 {
-                    return Settings.Default.Token as string;
+                    //return "dsf";
+                    return Settings.Default.Token;
                 }
                 catch (SettingsPropertyNotFoundException)
                 {

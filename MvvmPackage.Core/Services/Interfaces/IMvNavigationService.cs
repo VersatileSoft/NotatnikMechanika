@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MvvmPackage.Core.Services.Interfaces
 {
-    public interface INavigationService
+    public interface IMvNavigationService
     {
         /// <summary>
         /// Navigate to page assigned to given page model type
@@ -23,6 +23,6 @@ namespace MvvmPackage.Core.Services.Interfaces
         /// Pop current presenting page
         /// </summary>
         Task PopAsync();
-        Task ReloadMainPage();
+        Task ReloadMainPage<TMainPageService>() where TMainPageService : IMainPageService;
     }
 }

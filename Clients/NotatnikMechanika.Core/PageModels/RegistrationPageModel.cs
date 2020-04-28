@@ -21,11 +21,11 @@ namespace NotatnikMechanika.Core.PageModels
         public string ErrorMessage { get; set; }
         public bool IsWaiting { get; set; }
 
-        private readonly INavigationService _navigationService;
+        private readonly IMvNavigationService _navigationService;
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMessageDialogService _messageDialogService;
 
-        public RegistrationPageModel(INavigationService navigationService, IHttpRequestService httpRequestService, IMessageDialogService messageDialogService)
+        public RegistrationPageModel(IMvNavigationService navigationService, IHttpRequestService httpRequestService, IMessageDialogService messageDialogService)
         {
             _navigationService = navigationService;
             _httpRequestService = httpRequestService;

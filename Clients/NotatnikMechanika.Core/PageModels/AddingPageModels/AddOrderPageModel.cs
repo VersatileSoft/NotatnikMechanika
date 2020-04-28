@@ -1,4 +1,5 @@
-﻿using NotatnikMechanika.Core.Interfaces;
+﻿using MvvmPackage.Core.Services.Interfaces;
+using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Core.Services;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Car;
@@ -13,6 +14,9 @@ namespace NotatnikMechanika.Core.PageModels
 {
     public class AddOrderPageModel : AddingPageModelBase<OrderModel>
     {
+        public AddOrderPageModel(IMvNavigationService navigationService) : base(navigationService)
+        {
+        }
         //public override string SuccesMessage { get; set; } = "Zlecenie zostało dodane pomyślnie.";
 
         //public List<CustomerModel> Customers { get; set; }

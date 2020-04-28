@@ -1,7 +1,7 @@
 ﻿using MvvmPackage.Xamarin.Pages;
 using NotatnikMechanika.Core.PageModels;
 
-namespace NotatnikMechanika.Forms.Views
+namespace NotatnikMechanika.Forms.Pages
 {
     public partial class CustomersView : MvContentPage<CustomersPageModel>
     {

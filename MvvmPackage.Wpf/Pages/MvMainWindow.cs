@@ -3,6 +3,7 @@ using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
 using MvvmPackage.Wpf.Services;
 using System.Windows;
+using System.Windows.Navigation;
 
 namespace MvvmPackage.Wpf.Pages
 {
@@ -10,7 +11,7 @@ namespace MvvmPackage.Wpf.Pages
     {
         private readonly IMainPageService mainPageService;
         private readonly IWpfPageActivatorService pageActivatorService;
-
+        public NavigationService NavigationService { get; set; }
         protected MvMainWindow()
         {
             pageActivatorService = IoC.Container.Resolve<IWpfPageActivatorService>();
@@ -19,7 +20,7 @@ namespace MvvmPackage.Wpf.Pages
 
         public void LoadMainPage()
         {
-            Content = pageActivatorService.CreatePageFromPageModel(mainPageService.GetMainPageModelType());
+            NavigationService.Content = pageActivatorService.CreatePageFromPageModel(mainPageService.GetMainPageModelType());
         }
     }
 }

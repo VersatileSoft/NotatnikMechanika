@@ -24,7 +24,8 @@ namespace MvvmPackage.Xamarin
 
         public void LoadMainPage()
         {
-            MainPage = new NavigationPage(pageActivatorService.CreatePageFromPageModel(mainPageService.GetMainPageModelType()));
+            Page page = pageActivatorService.CreatePageFromPageModel(mainPageService.GetMainPageModelType());
+            Device.BeginInvokeOnMainThread(() => Application.Current.MainPage = page is Shell ? page : new NavigationPage(page));
         }
     }
 }

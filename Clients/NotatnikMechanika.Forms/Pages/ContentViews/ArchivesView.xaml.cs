@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace NotatnikMechanika.Forms.Views
+namespace NotatnikMechanika.Forms.Pages
 {
     public partial class ArchivesView : ContentPage
     {

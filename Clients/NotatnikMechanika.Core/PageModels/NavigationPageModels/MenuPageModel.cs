@@ -1,4 +1,4 @@
-﻿using MvvmPackage.Core;
+﻿ using MvvmPackage.Core;
 using PropertyChanged;
 
 namespace NotatnikMechanika.Core.PageModels

@@ -1,7 +1,30 @@
-﻿<views:MvContentPage x:Class="NotatnikMechanika.Forms.Views.MainPage"
+﻿<Shell x:Class="NotatnikMechanika.Forms.Pages.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
-    xmlns:views="clr-namespace:MvvmPackage.Xamarin.Pages;assembly=MvvmPackage.Xamarin"
-    x:TypeArguments="viewModels:MainPageModel"
-    Visual="Material"/>
+    xmlns:pages="clr-namespace:NotatnikMechanika.Forms.Pages;assembly=NotatnikMechanika.Forms"
+    Visual="Material">
+    
+
+        <Tab Title="Zlecenia">
+            <ShellContent Title="Aktualne zlecenia">
+                <pages:OrdersView />
+            </ShellContent>
+            <ShellContent Title="Archiwum">
+                <pages:ArchivesView />
+            </ShellContent>
+        </Tab>
+        <Tab Title="Usługi/Towary">
+            <ShellContent Title="Usługi">
+                <pages:ServicesView />
+            </ShellContent>
+            <ShellContent Title="Magazyn">
+                <pages:WarehouseView />
+            </ShellContent>
+        </Tab>
+        <Tab Title="Klienci">
+            <ShellContent>
+                <pages:CustomersView />
+            </ShellContent>
+        </Tab>
+</Shell>

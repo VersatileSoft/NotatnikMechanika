@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:MvvmPackage.Wpf.Pages;assembly=MvvmPackage.Wpf"
+    xmlns:utils="clr-namespace:NotatnikMechanika.WPF.Pages.Utils"
     Title="MainWindow"
     Width="800"
     Height="580"
@@ -14,4 +15,16 @@
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5"/>
     </WindowChrome.WindowChrome>
+
+    <Window.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <utils:TopBar Grid.Row="0"/>
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Row="1"/>
+        </Grid>
+    </Window.Content>
 </pages:MvMainWindow>

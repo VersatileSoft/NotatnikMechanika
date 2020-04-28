@@ -18,7 +18,7 @@ namespace MvvmPackage.Xamarin.Services
         public Page CreatePageFromPageModel(Type pageModelType)
         {
             string pageName = pageModelType.Name.Replace("Model", "");
-            return (Page)Activator.CreateInstance(Array.Find(IoC.PlatformProjectAssembly.GetTypes(), t => t.Name == pageName));
+            return (Page)Activator.CreateInstance(Array.Find(IoC.PlatformProjectAssembly.GetTypes(), t => t.Name == pageName));        
         }
 
         public Page CreatePageFromPageModel<TPageModel, TParameter>(TParameter parameter) where TPageModel : PageModelBase<TParameter>

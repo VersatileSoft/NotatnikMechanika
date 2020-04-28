@@ -12,12 +12,6 @@
 
   <ItemGroup>
     <None Remove="Assets\AppIcon_Light.png" />
-    <None Remove="Pages\Utils\AddCustomerPage.xaml" />
-    <None Remove="Pages\Utils\ButtonIndicator.xaml" />
-    <None Remove="Pages\Utils\IconButton.xaml" />
-    <None Remove="Pages\Utils\MenuButton.xaml" />
-    <None Remove="Pages\Utils\NotificationsSnackbar.xaml" />
-    <None Remove="Pages\Utils\TopBar.xaml" />
   </ItemGroup>
 
   <ItemGroup>

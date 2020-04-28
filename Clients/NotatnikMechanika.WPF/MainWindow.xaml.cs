@@ -8,10 +8,7 @@ namespace NotatnikMechanika.WPF
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        protected override void OnActivated(EventArgs e)
-        {
+            NavigationService = MainFrame.NavigationService;
             LoadMainPage();
         }
     }

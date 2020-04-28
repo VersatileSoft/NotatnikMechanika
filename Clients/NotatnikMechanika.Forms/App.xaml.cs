@@ -1,5 +1,6 @@
 ﻿using MvvmPackage.Xamarin;
 using NotatnikMechanika.Core;
+using NotatnikMechanika.Forms.Pages;
 using NotatnikMechanika.Forms.Styles;
 using Xamarin.Essentials;
 using Xamarin.Forms;

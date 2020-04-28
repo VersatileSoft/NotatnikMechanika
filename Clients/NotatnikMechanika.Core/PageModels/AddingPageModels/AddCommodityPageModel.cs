@@ -4,6 +4,9 @@ namespace NotatnikMechanika.Core.PageModels
 {
     public class AddCommodityPageModel : AddingPageModelBase<CommodityModel>
     {
+        public AddCommodityPageModel(MvvmPackage.Core.Services.Interfaces.IMvNavigationService navigationService) : base(navigationService)
+        {
+        }
         //public override string ErrorMessage { get; set; } = "Błąd podczas dodawania towaru.";
         //public override string SuccesMessage { get; set; } = "Towar został dodany pomyślnie.";
 

@@ -1,6 +1,9 @@
 ﻿using PropertyChanged;
 using Xamarin.MVVMPackage;
 using MvvmPackage.Core;
+using System.Windows.Input;
+using MvvmPackage.Core.Services.Interfaces;
+using Xamarin.MVVMPackage.Commands;
 
 namespace NotatnikMechanika.Core.PageModels
 {
@@ -9,25 +12,25 @@ namespace NotatnikMechanika.Core.PageModels
     {
         //public TModel Model { get; set; }
         //public ICommand AddCommand { get; set; }
-        //public ICommand GoBackCommand { get; set; }
+        public ICommand GoBackCommand { get; set; }
         //public bool IsWaiting { get; set; }
 
         //protected readonly IHttpRequestService _httpRequestService;
-        //protected readonly IMvxNavigationService _navigationService;
+        protected readonly IMvNavigationService _navigationService;
         //protected readonly IMessageDialogService _messageDialogService;
 
         //public virtual string ErrorMessage { get; set; }
         //public abstract string SuccesMessage { get; set; }
 
-        //public AddingViewModelBase(IHttpRequestService httpRequestService, IMvxNavigationService navigationService, IMessageDialogService messageDialogService)
-        //{
+        public AddingPageModelBase(IMvNavigationService navigationService)
+        {
         //    _httpRequestService = httpRequestService;
-        //    _navigationService = navigationService;
+            _navigationService = navigationService;
         //    _messageDialogService = messageDialogService;
         //    Model = new TModel();
         //    AddCommand = new MvxAsyncCommand(AddAction);
-        //    GoBackCommand = new MvxAsyncCommand(() => _navigationService.Navigate<MainPageViewModel>());
-        //}
+            GoBackCommand = new AsyncCommand(() => _navigationService.PopAsync());
+        }
 
         //public override void Prepare(int parameter)
         //{

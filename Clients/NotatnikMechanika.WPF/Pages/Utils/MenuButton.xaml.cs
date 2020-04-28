@@ -1,4 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
+using NotatnikMechanika.WPF.Utils;
+using System;
 using System.Windows.Controls;
 
 namespace NotatnikMechanika.WPF.Pages.Utils
@@ -8,6 +10,8 @@ namespace NotatnikMechanika.WPF.Pages.Utils
     /// </summary>
     public partial class MenuButton : Button
     {
+        public Type DetailPageModelType { get; set; }
+
         public MenuButton()
         {
             InitializeComponent();

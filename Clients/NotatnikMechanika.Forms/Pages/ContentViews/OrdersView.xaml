@@ -1,4 +1,4 @@
-﻿<views:MvContentPage x:Class="NotatnikMechanika.Forms.Views.OrdersView"
+﻿<views:MvContentPage x:Class="NotatnikMechanika.Forms.Pages.OrdersView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -9,6 +9,11 @@
     x:TypeArguments="viewModels:OrdersPageModel"
     Visual="Material"
     mc:Ignorable="d">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Konto" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <StackLayout>
             <Label

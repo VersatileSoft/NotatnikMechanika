@@ -3,7 +3,7 @@ using NotatnikMechanika.Core.PageModels;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace NotatnikMechanika.Forms.Views
+namespace NotatnikMechanika.Forms.Pages
 {
     public partial class LoginPage : MvContentPage<LoginPageModel>
     {

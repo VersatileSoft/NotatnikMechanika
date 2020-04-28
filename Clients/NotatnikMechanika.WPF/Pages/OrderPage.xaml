@@ -73,7 +73,6 @@
                                     <TextBlock
                                         Grid.Column="1"
                                         Margin="8,0,0,0"
-                                        Style="{StaticResource MaterialDesignSubheadingTextBlock}"
                                         Text="{Binding}"
                                         VerticalAlignment="Center"/>
                                     <utils:IconButton
@@ -117,7 +116,6 @@
                                 <TextBlock
                                     Grid.Column="1"
                                     Margin="8,0,0,0"
-                                    Style="{StaticResource MaterialDesignSubheadingTextBlock}"
                                     Text="Samochód"
                                     VerticalAlignment="Center"/>
                                 <utils:IconButton
@@ -163,7 +161,6 @@
                                 <TextBlock
                                     Grid.Column="1"
                                     Margin="8,0,0,0"
-                                    Style="{StaticResource MaterialDesignSubheadingTextBlock}"
                                     Text="Usługi"
                                     VerticalAlignment="Center"/>
                                 <utils:IconButton
@@ -222,7 +219,6 @@
                                 <TextBlock
                                     Grid.Column="1"
                                     Margin="8,0,0,0"
-                                    Style="{StaticResource MaterialDesignSubheadingTextBlock}"
                                     Text="Towary"
                                     VerticalAlignment="Center"/>
                                 <utils:IconButton
@@ -275,7 +271,6 @@
                                         VerticalAlignment="Center"/>
                                     <TextBlock
                                         Margin="8,0,0,0"
-                                        Style="{StaticResource MaterialDesignSubheadingTextBlock}"
                                         Text="{Binding}"
                                         VerticalAlignment="Center"/>
                                 </StackPanel>
