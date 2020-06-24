@@ -1,6 +1,4 @@
 # Notatnik Mechanika
-![Android](https://i.imgur.com/uLHdOim.png)
+![WPF](https://i.imgur.com/NkJUjnh.png)
 ![Windows 10](https://i.imgur.com/7Vsv9U2.jpg)
-
-# Build
-Requires .NET Core 3.0 Preview 7 or newer.
+![Android](https://i.imgur.com/uLHdOim.png)
