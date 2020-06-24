@@ -1,0 +1,37 @@
+﻿<pages:MvWpfMasterDetailPage x:Class="NotatnikMechanika.WPF.Pages.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utils="clr-namespace:NotatnikMechanika.WPF.Pages.Utils;assembly="
+    xmlns:pages="clr-namespace:MvvmPackage.Wpf.Pages;assembly=MvvmPackage.Wpf"
+    xmlns:core="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
+    x:TypeArguments="core:MainPageModel, core:MenuPageModel, core:OrdersPageModel"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    BorderThickness="1"
+    SizeChanged="MvxWpfPage_SizeChanged"
+    mc:Ignorable="d">
+    <UserControl.BorderBrush>
+        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="#36dad2"/>
+            <GradientStop Offset="1" Color="#5877e6"/>
+        </LinearGradientBrush>
+    </UserControl.BorderBrush>
+
+    <UserControl.Content>
+        <Grid x:Name="MainGrid">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ContentControl x:Name="Master"
+                    Grid.Column="0"
+                    Width="250"/>
+
+                <ContentControl x:Name="Detail" Grid.Column="1"/>
+            </Grid>
+    </UserControl.Content>
+</pages:MvWpfMasterDetailPage>

@@ -1,0 +1,83 @@
+﻿<views:MvContentPage x:Class="NotatnikMechanika.Forms.Pages.RegistrationPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
+    xmlns:views="clr-namespace:MvvmPackage.Xamarin.Pages;assembly=MvvmPackage.Xamarin"
+    x:TypeArguments="viewModels:RegistrationPageModel"
+    NavigationPage.HasNavigationBar="False"
+    Visual="Material"
+    mc:Ignorable="d">
+    <views:MvContentPage.Content>
+        <Grid x:Name="pageGrid" Opacity="0">
+            <StackLayout x:Name="appLogo" HorizontalOptions="Center" VerticalOptions="Start" Margin="0,120,0,0" Spacing="-64">
+                <Image Style="{StaticResource LoginAppIconImage}"/>
+                <Label Style="{StaticResource LoginAppTitleLabel}" Opacity="1"/>
+            </StackLayout>
+
+            <ScrollView>
+                <StackLayout
+                    Margin="0,0,0,150"
+                    Padding="20"
+                    VerticalOptions="End">
+                    <Label Style="{StaticResource LoginMessageLabel}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding ErrorMessage}" TextColor="#FF7A7A"/>
+                                <Span Text="Zarejestruj się, aby uzyskać dostęp do aplikacji." TextColor="White"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Entry
+                            Grid.Column="0"
+                            Placeholder="Imię"
+                            Style="{StaticResource LoginEntry}"
+                            Text="{Binding CreateUserModel.Name}"/>
+                        <Entry
+                            Grid.Column="1"
+                            Placeholder="Nazwisko"
+                            Style="{StaticResource LoginEntry}"
+                            Text="{Binding CreateUserModel.Surname}"/>
+                    </Grid>
+
+                    <Entry
+                        Keyboard="Email"
+                        Placeholder="E-mail"
+                        Style="{StaticResource LoginEntry}"
+                        Text="{Binding CreateUserModel.Email}"/>
+                    <Entry
+                        IsPassword="True"
+                        Placeholder="Hasło"
+                        Style="{StaticResource LoginEntry}"
+                        Text="{Binding CreateUserModel.Password}"/>
+                    <Entry
+                        IsPassword="True"
+                        Placeholder="Powtórz hasło"
+                        Style="{StaticResource LoginEntry}"
+                        Text="{Binding ConfirmPassword}"/>
+
+                    <StackLayout Margin="0,10,0,0" Orientation="Horizontal">
+                        <Button
+                            Command="{Binding LoginCommand}"
+                            Style="{StaticResource LoginButton}"
+                            Text="Mam konto"/>
+
+                        <Button
+                            HorizontalOptions="EndAndExpand"
+                            Command="{Binding RegisterCommand}"
+                            Style="{StaticResource LoginButton}"
+                            Text="Stwórz konto"/>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </views:MvContentPage.Content>
+</views:MvContentPage>

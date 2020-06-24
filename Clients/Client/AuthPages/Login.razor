@@ -1,0 +1,33 @@
+﻿@page "/login"
+@using NotatnikMechanika.Core.PageModels
+@inject LoginPageModel PageModel
+
+<h1>Register</h1>
+
+@if (!string.IsNullOrEmpty(PageModel.ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        <p>@PageModel.ErrorMessage</p>
+    </div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Please enter your details</h5>
+        <EditForm Model="PageModel.LoginModel" OnValidSubmit="PageModel.LoginAction">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <InputText Id="email" class="form-control" @bind-Value="PageModel.LoginModel.Email" />
+                <ValidationMessage For="@(() => PageModel.LoginModel.Email)" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <InputText Id="password" type="password" class="form-control" @bind-Value="PageModel.LoginModel.Password" />
+                <ValidationMessage For="@(() => PageModel.LoginModel.Password)" />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </EditForm>
+    </div>
+</div>
