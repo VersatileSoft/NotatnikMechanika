@@ -11,7 +11,7 @@ namespace NotatnikMechanika.WPF.Pages
     {
         private readonly DoubleAnimation _showMenuAnimation;
         private readonly DoubleAnimation _hideMenuAnimation;
-        private bool _isHide = false;
+        private bool _isHide;
 
 
         public MainPage()

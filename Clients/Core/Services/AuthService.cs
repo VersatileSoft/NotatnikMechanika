@@ -1,4 +1,5 @@
-﻿using NotatnikMechanika.Core.Interfaces;
+﻿using MvvmPackage.Core.Attributes;
+using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Core.Model;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.User;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Core.Services
 {
+    [SingleInstance]
     public class AuthService : IAuthService
     {
         private readonly HttpClient _httpClient;
@@ -25,12 +27,12 @@ namespace NotatnikMechanika.Core.Services
             _httpRequestService = httpRequestService;
         }
 
-        public async Task<RegisterResult> Register(RegisterModel registerModel)
+        public async Task<RegisterResult> RegisterAsync(RegisterModel registerModel)
         {
             return (await _httpRequestService.SendPost<RegisterModel, RegisterResult>(registerModel, new AccountPaths().GetFullPath(AccountPaths.RegisterPath))).Content;
         }
 
-        public async Task<LoginResult> Login(LoginModel loginModel)
+        public async Task<LoginResult> LoginAsync(LoginModel loginModel)
         {
             Response<LoginResult> loginResponse = await _httpRequestService.SendPost<LoginModel, LoginResult>(loginModel, new AccountPaths().GetFullPath(AccountPaths.LoginPath));
 
@@ -39,10 +41,17 @@ namespace NotatnikMechanika.Core.Services
                 return loginResponse.Content;
             }
 
-            _settingsService.Token = Task.FromResult(loginResponse.Content.Token);
+            await _settingsService.SetToken(loginResponse.Content.Token);
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResponse.Content.Token);
             AuthChanged?.Invoke(this, EventArgs.Empty);
             return loginResponse.Content;
+        }
+
+        public async Task LogoutAsync()
+        {
+            await _settingsService.SetToken("");
+            _httpClient.DefaultRequestHeaders.Authorization = null;
+            AuthChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

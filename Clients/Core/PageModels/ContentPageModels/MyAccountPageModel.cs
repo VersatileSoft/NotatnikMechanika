@@ -11,23 +11,14 @@ namespace NotatnikMechanika.Core.PageModels
     [AddINotifyPropertyChangedInterface]
     public class MyAccountPageModel : PageModelBase
     {
-        private readonly IMvNavigationService _navigationService;
-        private readonly ISettingsService _settingsService;
+        private readonly IAuthService _authService;
 
         public ICommand LogoutCommand { get; set; }
 
-        public MyAccountPageModel(IMvNavigationService navigationService, ISettingsService settingsService)
+        public MyAccountPageModel(IAuthService authService)
         {
-            _navigationService = navigationService;
-            _settingsService = settingsService;
-
-            LogoutCommand = new AsyncCommand(LogoutAction);
-        }
-
-        private Task LogoutAction()
-        {
-            _settingsService.Token = null;
-            return _navigationService.ReloadMainPage<MainPageService>();
+            _authService = authService;
+            LogoutCommand = new AsyncCommand(_authService.LogoutAsync);
         }
     }
 }

@@ -20,6 +20,5 @@ namespace MvvmPackage.Core.Services.Interfaces
         /// Pop current presenting page
         /// </summary>
         Task PopAsync();
-        Task ReloadMainPage<TMainPageService>() where TMainPageService : IMainPageService;
     }
 }

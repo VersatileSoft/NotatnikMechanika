@@ -1,13 +1,9 @@
 using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NotatnikMechanika.Data;
-using NotatnikMechanika.Data.Models;
 using NotatnikMechanika.Repository;
 using NotatnikMechanika.Service;
 
@@ -24,7 +20,9 @@ namespace NotatnikMechanika.Server
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<AppSettings>(options => Configuration.GetSection("AppSettings").Bind(options));
             services.AddDatabase(Configuration);
+            services.AddJwtAuthentication(Configuration);
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
@@ -53,6 +51,9 @@ namespace NotatnikMechanika.Server
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

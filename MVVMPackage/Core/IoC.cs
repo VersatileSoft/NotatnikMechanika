@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using MvvmPackage.Core.Attributes;
+using System;
 using System.Net.Http;
 using System.Reflection;
 
@@ -14,16 +15,15 @@ namespace MvvmPackage.Core
         public static Assembly PlatformProjectAssembly { get; set; }
         public static Assembly PlatformPackageProjectAssembly { get; set; }
 
-        public static void RegisterTypes()
+        public static void RegisterTypes(Action<ContainerBuilder> registerCustomTypes = null)
         {
             ConfigureServices(builder);
+            registerCustomTypes?.Invoke(builder);
             Container = builder.Build();
         }
 
         public static void ConfigureServices(ContainerBuilder builder)
         {
-          //  builder.RegisterType<HttpClient>();
-
             // Register services
             builder.RegisterAssemblyTypes(CoreProjectAssembly, PlatformProjectAssembly, PlatformPackageProjectAssembly)
                 .Where(t => t.GetCustomAttribute<SingleInstanceAttribute>() == null)

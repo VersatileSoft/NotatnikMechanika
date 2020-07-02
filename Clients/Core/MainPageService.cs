@@ -16,7 +16,7 @@ namespace NotatnikMechanika.Core
 
         public Type GetMainPageModelType()
         {
-            bool isAuthenticated = !string.IsNullOrEmpty(_settingsService.Token.Result);
+            bool isAuthenticated = !string.IsNullOrEmpty(_settingsService.GetToken().Result);
 
             if (isAuthenticated)
             {

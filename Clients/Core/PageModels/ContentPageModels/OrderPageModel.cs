@@ -1,5 +1,5 @@
 ﻿using MvvmPackage.Core;
-using NotatnikMechanika.Core.Models;
+using NotatnikMechanika.Shared.Models.Order;
 using PropertyChanged;
 
 namespace NotatnikMechanika.Core.PageModels

@@ -1,29 +1,28 @@
 ﻿using NotatnikMechanika.Core.Interfaces;
 using System.Configuration;
+using System.Threading.Tasks;
 
 namespace NotatnikMechanika.WPF.Services
 {
     public class SettingsService : ISettingsService
     {
-        public string Token
+        public Task<string> GetToken()
         {
-            get
+            try
             {
-                try
-                {
-                    //return "dsf";
-                    return Settings.Default.Token;
-                }
-                catch (SettingsPropertyNotFoundException)
-                {
-                    return null;
-                }
+                return Task.FromResult(Settings.Default.Token);
             }
-            set
+            catch (SettingsPropertyNotFoundException)
             {
-                Settings.Default.Token = value;
-                Settings.Default.Save();
+                return Task.FromResult<string>(null);
             }
+        }
+
+        public Task SetToken(string token)
+        {
+            Settings.Default.Token = token;
+            Settings.Default.Save();
+            return Task.CompletedTask;
         }
     }
 }

@@ -12,6 +12,7 @@ namespace MvvmPackage.Wpf.Pages
         {
             PageModel = IoC.Container.Resolve<TPageModel>();
             DataContext = PageModel;
+            Initialized += (s, e) => PageModel.Initialize();          
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NotatnikMechanika.Core.Models;
 using NotatnikMechanika.Data;
 using NotatnikMechanika.Data.Models;
 using NotatnikMechanika.Repository.Interfaces;

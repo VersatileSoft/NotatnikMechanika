@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NotatnikMechanika.Core.Models;
 using NotatnikMechanika.Server.Controllers.Base;
 using NotatnikMechanika.Service.Interfaces;
 using NotatnikMechanika.Shared;
@@ -19,12 +18,12 @@ namespace NotatnikMechanika.Server.Controllers
         {
             _orderService = orderService;
         }
+
         /// <summary>
         /// Get list of extended Orders only not archived
         /// </summary>
-        /// <returns></returns>
         [HttpGet(OrderPaths.GetExtendedOrders)]
-        public async Task<ActionResult<IEnumerable<OrderExtendedModel>>> GetAllExtendedAsync()
+        public async Task<ActionResult<AllExtendedOrdersResult>> GetAllExtendedAsync()
         {
             return Ok(await _orderService.GetAllExtendedAsync(User.Identity.Name, false));
         }
@@ -32,9 +31,8 @@ namespace NotatnikMechanika.Server.Controllers
         /// <summary>
         /// Get list of extended Orders only archived
         /// </summary>
-        /// <returns></returns>
         [HttpGet(OrderPaths.GetArchivedExtendedOrders)]
-        public async Task<ActionResult<IEnumerable<OrderExtendedModel>>> GetAllArchivedExtendedAsync()
+        public async Task<ActionResult<AllExtendedOrdersResult>> GetAllArchivedExtendedAsync()
         {
             return Ok(await _orderService.GetAllExtendedAsync(User.Identity.Name, true));
         }

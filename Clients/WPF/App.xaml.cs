@@ -1,5 +1,8 @@
-﻿using MvvmPackage.Wpf;
+﻿using Autofac;
+using MvvmPackage.Wpf;
 using NotatnikMechanika.Core;
+using System;
+using System.Net.Http;
 
 namespace NotatnikMechanika.WPF
 {
@@ -8,6 +11,14 @@ namespace NotatnikMechanika.WPF
         public App()
         {
             InitializeComponent();
+        }
+
+        protected override void RegisterTypes(ContainerBuilder builder)
+        {
+            builder.RegisterInstance(new HttpClient
+            {
+                BaseAddress = new Uri("https://localhost:44357/")
+            });
         }
     }
 }

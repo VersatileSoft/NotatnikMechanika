@@ -7,6 +7,7 @@ namespace NotatnikMechanika.Core.PageModels
     {
         public AddOrderPageModel(IMvNavigationService navigationService) : base(navigationService)
         {
+            
         }
         //public override string SuccesMessage { get; set; } = "Zlecenie zostało dodane pomyślnie.";
 

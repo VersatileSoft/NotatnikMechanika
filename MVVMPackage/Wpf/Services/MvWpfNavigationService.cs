@@ -42,11 +42,5 @@ namespace MvvmPackage.Wpf.Services
             _navigationService.GoBack();
             return Task.CompletedTask;
         }
-
-        public Task ReloadMainPage<TMainPageService>() where TMainPageService : IMainPageService
-        {
-            ((MvMainWindow)Application.Current.MainWindow).LoadMainPage();
-            return Task.CompletedTask;
-        }
     }
 }

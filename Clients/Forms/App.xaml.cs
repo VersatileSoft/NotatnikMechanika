@@ -1,5 +1,8 @@
-﻿using MvvmPackage.Xamarin;
+﻿using Autofac;
+using MvvmPackage.Core;
+using MvvmPackage.Xamarin;
 using NotatnikMechanika.Core;
+using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Forms.Styles;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -52,7 +55,8 @@ namespace NotatnikMechanika.Forms
 
         protected override void OnStart()
         {
-
+            IAuthService authService = IoC.Container.Resolve<IAuthService>();
+            authService.AuthChanged += (s, e) => LoadMainPage();
         }
 
         protected override void OnSleep()

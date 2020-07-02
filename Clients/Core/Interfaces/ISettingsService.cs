@@ -4,6 +4,7 @@ namespace NotatnikMechanika.Core.Interfaces
 {
     public interface ISettingsService
     {
-        Task<string> Token { get; set; }
+        Task SetToken(string token);
+        Task<string> GetToken();
     }
 }

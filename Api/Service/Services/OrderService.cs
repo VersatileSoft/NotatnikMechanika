@@ -1,10 +1,8 @@
-﻿using NotatnikMechanika.Core.Models;
-using NotatnikMechanika.Repository.Interfaces;
+﻿using NotatnikMechanika.Repository.Interfaces;
 using NotatnikMechanika.Service.Exception;
 using NotatnikMechanika.Service.Interfaces;
 using NotatnikMechanika.Service.Services.Base;
 using NotatnikMechanika.Shared.Models.Order;
-using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -103,9 +101,13 @@ namespace NotatnikMechanika.Service.Services
             await _orderRepository.DeleteServiceFromOrder(orderId, serviceId);
         }
 
-        public Task<IEnumerable<OrderExtendedModel>> GetAllExtendedAsync(string userId, bool archived)
+        public async Task<AllExtendedOrdersResult> GetAllExtendedAsync(string userId, bool archived)
         {
-            return _orderRepository.GetAllExtendedAsync(userId, archived);
+            return new AllExtendedOrdersResult
+            {
+                Successful = true,
+                Orders = await _orderRepository.GetAllExtendedAsync(userId, archived)
+            };
         }
     }
 }

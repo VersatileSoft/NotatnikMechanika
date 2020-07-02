@@ -1,4 +1,6 @@
-﻿namespace MvvmPackage.Core
+﻿using System.Threading.Tasks;
+
+namespace MvvmPackage.Core
 {
     public class PageModelBase
     {
@@ -16,6 +18,14 @@
         public virtual void OnAppearing()
         {
 
+        }
+        /// <summary>
+        /// Override to initialize page model,
+        /// called after OnAppearing
+        /// </summary>
+        public virtual Task Initialize()
+        {
+            return Task.CompletedTask;
         }
     }
 

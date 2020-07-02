@@ -4,6 +4,7 @@ using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared.Models.User;
 using PropertyChanged;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -19,39 +20,26 @@ namespace NotatnikMechanika.Core.PageModels
         public ICommand LoginCommand { get; set; }
         public ICommand RegisterCommand { get; set; }
 
-        private readonly IMvNavigationService _navigationService;
-        private readonly IHttpRequestService _httpRequestService;
-        private readonly ISettingsService _settingsService;
+        private readonly IAuthService _authService;
 
-        public LoginPageModel(IMvNavigationService navigationService, /*IHttpRequestService httpRequestService,*/ ISettingsService settingsService)
+        public LoginPageModel(IAuthService authService, IMvNavigationService navigationService)
         {
-            _navigationService = navigationService;
-            // _httpRequestService = httpRequestService;
-            _settingsService = settingsService;
-            LoginModel = new LoginModel();
+            _authService = authService;
 
+            LoginModel = new LoginModel();
             LoginCommand = new AsyncCommand(LoginAction);
-            RegisterCommand = new AsyncCommand(async () => await navigationService.NavigateToAsync<RegistrationPageModel>());
+            RegisterCommand = new AsyncCommand(navigationService.NavigateToAsync<RegistrationPageModel>);
         }
 
         public async Task LoginAction()
         {
-            _settingsService.Token = Task.FromResult("dfrewf"); //response.Content.Token;
-            await _navigationService.ReloadMainPage<MainPageService>();
-
-
-            //IsWaiting = true;
-            //Response<TokenModel> response = await _httpRequestService.SendPost<AuthenticateUserModel, TokenModel>(UserModel, new AccountPaths().GetFullPath(AccountPaths.LoginPath), false);
-            //if (response.StatusCode == HttpStatusCode.OK)
-            //{
-            //    _settingsService.Token = response.Content.Token;
-            //    await _navigationService.NavigateToAsync<MainPageModel>();
-            //}
-            //else
-            //{
-            //    ErrorMessage = response.ErrorMessage;
-            //}
-            //IsWaiting = false;
+            IsWaiting = true;
+            LoginResult loginResult = await _authService.LoginAsync(LoginModel);
+            if (!loginResult.Successful)
+            {
+                ErrorMessage = loginResult.Errors?.First();
+            }
+            IsWaiting = false;
         }
     }
 }

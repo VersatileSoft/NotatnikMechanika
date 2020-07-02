@@ -8,6 +8,7 @@ using NotatnikMechanika.Service.Exception;
 using NotatnikMechanika.Service.Interfaces;
 using NotatnikMechanika.Shared.Models.User;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
@@ -47,6 +48,7 @@ namespace NotatnikMechanika.Service.Services
                 User user = await _userManager.Users.SingleOrDefaultAsync(r => r.Email == email);
                 return new LoginResult
                 {
+                    Successful = true,
                     Token = GenerateToken(user)
                 };
             }
@@ -56,14 +58,14 @@ namespace NotatnikMechanika.Service.Services
                 return new LoginResult
                 {
                     Successful = false,
-                    Error = "Potwierdź adres email aby się zalogować."
+                    Errors = new List<string> { "Potwierdź adres email aby się zalogować." }
                 };
             }
 
             return new LoginResult
             {
                 Successful = false,
-                Error = "Nieprawidłowy login lub hasło"
+                Errors = new List<string> { "Nieprawidłowy login lub hasło" }
             };
         }
 

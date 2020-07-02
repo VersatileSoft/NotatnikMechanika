@@ -4,7 +4,7 @@ using MvvmPackage.Core.Services.Interfaces;
 using System;
 using System.Threading.Tasks;
 
-namespace NotatnikMechanika.Client.Services
+namespace MVVMPackage.Blazor.Services
 {
     public class NavigationService : IMvNavigationService
     {

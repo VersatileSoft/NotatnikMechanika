@@ -2,7 +2,7 @@
 using NotatnikMechanika.Shared.Models.Customer;
 using System;
 
-namespace NotatnikMechanika.Core.Models
+namespace NotatnikMechanika.Shared.Models.Order
 {
     public class OrderExtendedModel
     {

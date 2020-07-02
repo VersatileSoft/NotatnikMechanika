@@ -4,10 +4,9 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using System.Threading.Tasks;
-using System.Net.Http;
 using System;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace MVVMPackage.Blazor
 {
@@ -31,13 +30,13 @@ namespace MVVMPackage.Blazor
             builder.ConfigureContainer(new AutofacServiceProviderFactory(IoC.ConfigureServices));
             ConfigureServices(builder.Services);
             builder.Services.AddHttpClient("NotatnikMechanika.Server", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
-               // .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+            // .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
             builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("NotatnikMechanika.Server"));
 
-            var app = builder.Build();
-            await app.RunAsync();
+            WebAssemblyHost app = builder.Build();
             Services = app.Services;
             AppStart();
+            await app.RunAsync();
         }
     }
 }

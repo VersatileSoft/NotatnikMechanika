@@ -2,6 +2,7 @@
 using NotatnikMechanika.Core.PageModels;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
 namespace NotatnikMechanika.WPF.Pages
@@ -18,9 +19,9 @@ namespace NotatnikMechanika.WPF.Pages
             InitAnimations();
         }
 
-        private void PasswordBox_PasswordChanged(object sender, System.Windows.RoutedEventArgs e)
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            //    PageModel.UserModel.Password = ((PasswordBox)sender).Password;
+            PageModel.LoginModel.Password = ((PasswordBox)sender).Password;
         }
 
         private void InitAnimations()

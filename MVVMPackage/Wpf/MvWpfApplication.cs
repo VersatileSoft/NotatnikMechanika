@@ -1,4 +1,5 @@
-﻿using MvvmPackage.Core;
+﻿using Autofac;
+using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
 using System.Windows;
 
@@ -11,7 +12,9 @@ namespace MvvmPackage.Wpf
             IoC.PlatformProjectAssembly = GetType().Assembly;
             IoC.CoreProjectAssembly = typeof(TMainPageService).Assembly;
             IoC.PlatformPackageProjectAssembly = typeof(MvWpfApplication<TMainPageService>).Assembly;
-            IoC.RegisterTypes();
+            IoC.RegisterTypes(RegisterTypes);
         }
+
+        protected virtual void RegisterTypes(ContainerBuilder builder) { }
     }
 }

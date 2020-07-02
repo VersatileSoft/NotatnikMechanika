@@ -37,12 +37,5 @@ namespace MvvmPackage.Xamarin.Services
                    Application.Current.MainPage.Navigation.PopAsync()
                );
         }
-
-        public async Task ReloadMainPage<TMainPageService>() where TMainPageService : IMainPageService
-        {
-            await Device.InvokeOnMainThreadAsync(() =>
-                 ((MvFormsApplication<TMainPageService>)Application.Current).LoadMainPage()
-               );
-        }
     }
 }

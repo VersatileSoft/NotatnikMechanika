@@ -1,18 +1,30 @@
 ﻿@inherits LayoutComponentBase
-@inject MvvmPackage.Core.Services.Interfaces.IMainPageService mainPageService
-@using NotatnikMechanika.Core.PageModels
-@using NotatnikMechanika.Client.Shared
+@using NotatnikMechanika.Client.Utils
 
-<div class="sidebar">
-    <NavMenu />
-</div>
+<AuthorizeView>
 
-<div class="main">
-    <div class="top-row px-4">
-        <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
-    </div>
+    <Authorized>
+        <div class="sidebar">
+            <NavMenu />
+        </div>
 
-    <div class="content px-4">
-        @Body
-    </div>
-</div>
+        <div class="main">
+            <div class="top-row px-4">
+                <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+            </div>
+
+            <div class="content px-4">
+                @Body
+            </div>
+        </div>
+    </Authorized>
+
+    <NotAuthorized>
+        <Redirect Path="welcome"/>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+
+
+

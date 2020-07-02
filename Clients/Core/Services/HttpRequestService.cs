@@ -25,7 +25,7 @@ namespace NotatnikMechanika.Core.Services
 
         public async Task<Response<ResponseModel>> SendGet<ResponseModel>(string path) where ResponseModel : new()
         {
-            HttpResponseMessage response = await _client.GetAsync(ServerAddress + path);
+            HttpResponseMessage response = await _client.GetAsync(path);
             return await Response<ResponseModel>.GetResponse(response);
         }
 

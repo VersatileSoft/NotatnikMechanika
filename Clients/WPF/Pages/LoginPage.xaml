@@ -51,7 +51,7 @@
                         AcceptsReturn="True"
                         Foreground="White"
                         Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-                        Text="{Binding UserModel.Email}"
+                        Text="{Binding LoginModel.Email}"
                         VerticalScrollBarVisibility="Disabled"/>
 
                     <PasswordBox

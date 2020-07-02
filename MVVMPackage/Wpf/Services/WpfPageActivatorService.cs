@@ -6,7 +6,6 @@ namespace MvvmPackage.Wpf.Services
 {
     internal class WpfPageActivatorService : IWpfPageActivatorService
     {
-
         public UserControl CreatePageFromPageModel<TPageModel>() where TPageModel : PageModelBase
         {
             return CreatePageFromPageModel(typeof(TPageModel));
