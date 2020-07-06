@@ -21,7 +21,7 @@ namespace NotatnikMechanika.Server.Controllers
         }
 
         [HttpGet(CarPaths.GetByCustomerPath)]
-        public async Task<ActionResult<IEnumerable<CarModel>>> GetCarsByCustomerAsync(int customerId)
+        public async Task<ActionResult<CarsResult>> GetCarsByCustomerAsync(int customerId)
         {
             return Ok(await _carService.GetCarsByCustomerAsync(User.Identity.Name, customerId));
         }

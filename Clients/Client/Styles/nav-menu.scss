@@ -1,0 +1,33 @@
+﻿.nav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-image: linear-gradient(to bottom, #5877e6, #36dad2);
+    height: 100%;
+
+    .image {
+        width: 8rem;
+        align-self: center;
+        margin: 1rem;
+    }
+
+    .nav-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-items: start;
+        color: white !important;
+        font-size: larger;
+        text-decoration: none;
+        height: 6vh;
+        padding-left: 5px;
+
+        p {
+            margin: 0 10px;
+        }
+    }
+
+    .nav-item:hover{
+        background-color: aquamarine;
+    }
+}

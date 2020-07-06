@@ -1,7 +1,14 @@
 ﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
 using MVVMPackage.Core.Commands;
+using NotatnikMechanika.Core.Interfaces;
+using NotatnikMechanika.Core.Model;
+using NotatnikMechanika.Shared;
+using NotatnikMechanika.Shared.Models;
+using NotatnikMechanika.Shared.Models.Customer;
 using PropertyChanged;
+using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -10,22 +17,22 @@ namespace NotatnikMechanika.Core.PageModels
     [AddINotifyPropertyChangedInterface]
     public class CustomersPageModel : PageModelBase
     {
-        //public IEnumerable<CustomerModel> Customers { get; set; }
+        public IEnumerable<CustomerModel> Customers { get; set; }
         public ICommand AddCustomerCommand { get; set; }
-        //public ICommand CustomerSelectedCommand { get; set; }
-        //public bool IsLoading { get; set; }
+        public ICommand CustomerSelectedCommand { get; set; }
+        public bool IsLoading { get; set; }
 
 
-        //private readonly IHttpRequestService _httpRequestService;
+        private readonly IHttpRequestService _httpRequestService;
         private readonly IMvNavigationService _navigationService;
 
-        public CustomersPageModel(IMvNavigationService navigationService)
+        public CustomersPageModel(IMvNavigationService navigationService, IHttpRequestService httpRequestService)
         {
             _navigationService = navigationService;
-            //    _httpRequestService = httpRequestService;
+            _httpRequestService = httpRequestService;
 
             AddCustomerCommand = new AsyncCommand(AddCustomerAction);
-            //    CustomerSelectedCommand = new MvxAsyncCommand<int>(CustomerSelectedAction);
+            CustomerSelectedCommand = new AsyncCommand<int>(CustomerSelectedAction);
         }
 
         private async Task AddCustomerAction()
@@ -33,20 +40,20 @@ namespace NotatnikMechanika.Core.PageModels
             await _navigationService.NavigateToAsync<AddCustomerPageModel>();
         }
 
-        //private async Task CustomerSelectedAction(int customerId)
-        //{
-        //    await _navigationService.Navigate<CustomerViewModel, int>(customerId);
-        //}
+        private async Task CustomerSelectedAction(int customerId)
+        {
+            await _navigationService.NavigateToAsync<CustomerPageModel, int>(customerId);
+        }
 
-        //public override async Task Initialize()
-        //{
-        //    IsLoading = true;
-        //    Response<List<CustomerModel>> response = await _httpRequestService.SendGet<List<CustomerModel>>(new CustomerPaths().GetFullPath(CRUDPaths.GetAllPath), true);
-        //    if (response.StatusCode == HttpStatusCode.OK)
-        //    {
-        //        Customers = response.Content;
-        //    }
-        //    IsLoading = false;
-        //}
+        public override async Task Initialize()
+        {
+            IsLoading = true;
+            Response<GetAllResult<CustomerModel>> response = await _httpRequestService.SendGet<GetAllResult<CustomerModel>>(new CustomerPaths().GetFullPath(CRUDPaths.GetAllPath));
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                Customers = response.Content.Models;
+            }
+            IsLoading = false;
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NotatnikMechanika.Shared
 {
-    public abstract class ResultBase
+    public class ResultBase
     {
         public bool Successful { get; set; }
         public IEnumerable<string> Errors { get; set; }

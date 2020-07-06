@@ -6,13 +6,13 @@ namespace MvvmPackage.Wpf.Pages
 {
     public class MvWpfPage<TPageModel> : UserControl where TPageModel : PageModelBase
     {
-        protected TPageModel PageModel;
+        public TPageModel PageModel;
 
         public MvWpfPage()
         {
             PageModel = IoC.Container.Resolve<TPageModel>();
             DataContext = PageModel;
-            Initialized += (s, e) => PageModel.Initialize();          
+            Loaded += (s, e) => PageModel.Initialize();
         }
     }
 }

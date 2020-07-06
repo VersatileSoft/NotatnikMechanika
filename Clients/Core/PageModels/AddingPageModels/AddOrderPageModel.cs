@@ -1,79 +1,86 @@
 ﻿using MvvmPackage.Core.Services.Interfaces;
+using NotatnikMechanika.Core.Interfaces;
+using NotatnikMechanika.Core.Model;
+using NotatnikMechanika.Shared;
+using NotatnikMechanika.Shared.Models;
+using NotatnikMechanika.Shared.Models.Car;
+using NotatnikMechanika.Shared.Models.Customer;
 using NotatnikMechanika.Shared.Models.Order;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Core.PageModels
 {
     public class AddOrderPageModel : AddingPageModelBase<OrderModel>
     {
-        public AddOrderPageModel(IMvNavigationService navigationService) : base(navigationService)
+        public AddOrderPageModel(IMvNavigationService navigationService, IHttpRequestService httpRequestService, IMessageDialogService messageDialogService) :
+            base(navigationService, httpRequestService, messageDialogService)
         {
-            
+            Model.AcceptDate = DateTime.Now;
+            Model.FinishDate = DateTime.Now;
         }
-        //public override string SuccesMessage { get; set; } = "Zlecenie zostało dodane pomyślnie.";
 
-        //public List<CustomerModel> Customers { get; set; }
-        //public List<CarModel> Cars { get; set; }
+        public override string SuccesMessage { get; set; } = "Zlecenie zostało dodane pomyślnie.";
 
-        //private CustomerModel _selectedCustomer;
+        public IEnumerable<CustomerModel> Customers { get; set; }
+        public IEnumerable<CarModel> Cars { get; set; }
 
-        //public CustomerModel SelectedCustomer
-        //{
-        //    get => _selectedCustomer;
-        //    set
-        //    {
-        //        _selectedCustomer = value;
-        //        Task.Run(SelectedCustomerChanged);
-        //    }
-        //}
+        private CustomerModel _selectedCustomer;
 
-        //private CarModel _selectedCar;
+        public CustomerModel SelectedCustomer
+        {
+            get => _selectedCustomer;
+            set
+            {
+                _selectedCustomer = value;
+                Task.Run(SelectedCustomerChanged);
+            }
+        }
 
-        //public CarModel SelectedCar
-        //{
-        //    get => _selectedCar;
-        //    set
-        //    {
-        //        _selectedCar = value;
-        //        Model.CarId = _selectedCar.Id;
-        //    }
-        //}
+        private CarModel _selectedCar;
 
-        //public AddOrderViewModel(IHttpRequestService httpRequestService, IMvxNavigationService navigationService, IMessageDialogService messageDialogService)
-        //    : base(httpRequestService, navigationService, messageDialogService)
-        //{
-        //    Model.AcceptDate = DateTime.Now;
-        //    Model.FinishDate = DateTime.Now;
-        //}
+        public CarModel SelectedCar
+        {
+            get => _selectedCar;
+            set
+            {
+                _selectedCar = value;
+                Model.CarId = _selectedCar.Id;
+            }
+        }
 
-        //private async Task SelectedCustomerChanged()
-        //{
-        //    Response<List<CarModel>> carsResponse = await _httpRequestService.SendGet<List<CarModel>>(new CarPaths().GetFullPath(
-        //        CarPaths.GetByCustomerPath.Replace("{customerId}", SelectedCustomer.Id.ToString())), true);
+        private async Task SelectedCustomerChanged()
+        {
+            Response<CarsResult> carsResponse = await _httpRequestService.SendGet<CarsResult>(new CarPaths().GetFullPath(
+                CarPaths.GetByCustomerPath.Replace("{customerId}", SelectedCustomer.Id.ToString())));
 
-        //    if (carsResponse.StatusCode == HttpStatusCode.OK)
-        //    {
-        //        Cars = carsResponse.Content;
-        //    }
+            if (carsResponse.StatusCode == HttpStatusCode.OK)
+            {
+                Cars = carsResponse.Content.Cars;
+            }
 
-        //    if (Cars.Count > 0)
-        //    {
-        //        SelectedCar = Cars[0];
-        //    }
-        //}
+            if (Cars.Any())
+            {
+                SelectedCar = Cars?.FirstOrDefault();
+            }
+        }
 
-        //public override async Task Initialize()
-        //{
-        //    Response<List<CustomerModel>> customersResponse = await _httpRequestService.SendGet<List<CustomerModel>>(new CustomerPaths().GetFullPath(CRUDPaths.GetAllPath), true);
+        public override async Task Initialize()
+        {
+            Response<GetAllResult<CustomerModel>> customersResponse = await _httpRequestService.SendGet<GetAllResult<CustomerModel>>(new CustomerPaths().GetFullPath(CRUDPaths.GetAllPath));
 
-        //    if (customersResponse.StatusCode == HttpStatusCode.OK)
-        //    {
-        //        Customers = customersResponse.Content;
-        //    }
+            if (customersResponse.StatusCode == HttpStatusCode.OK)
+            {
+                Customers = customersResponse.Content.Models;
+            }
 
-        //    if (Customers.Count > 0)
-        //    {
-        //        SelectedCustomer = Customers[0];
-        //    }
-        //}
+            if (Customers.Any())
+            {
+                SelectedCustomer = Customers?.FirstOrDefault();
+            }
+        }
     }
 }

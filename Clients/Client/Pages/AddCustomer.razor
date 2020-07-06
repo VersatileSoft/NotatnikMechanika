@@ -1,0 +1,44 @@
+﻿@page "/addcustomer"
+@using NotatnikMechanika.Core.PageModels
+@using MVVMPackage.Blazor
+@inherits PageBaseInt<AddCustomerPageModel>
+
+
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        <div class="mat-layout-grid-cell">
+            <MatCard class="demo-mat-card">
+                <div class="demo-mat-card-content">
+                    <MatHeadline6 class="demo-mat-card-clean-margin">
+                        Dane Klienta
+                    </MatHeadline6>
+                </div>
+                <MatCardContent>
+                    <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                        <MatTextField @bind-Value="@PageModel.Model.Name" Label="Imię" Outlined="true"></MatTextField>
+                        <MatTextField @bind-Value="@PageModel.Model.Surname" Label="Nazwisko" Outlined="true"></MatTextField>
+                        <MatTextField @bind-Value="@PageModel.Model.Phone" Label="Telefon" Outlined="true"></MatTextField>
+                        <MatTextField @bind-Value="@PageModel.Model.Address" Label="Adres" Outlined="true"></MatTextField>
+                    </MatBody2>
+                </MatCardContent>
+            </MatCard>
+        </div>
+        <div class="mat-layout-grid-cell">
+            <MatCard class="demo-mat-card">
+                <div class="demo-mat-card-content">
+                    <MatHeadline6 class="demo-mat-card-clean-margin">
+                        Dane Firmy
+                    </MatHeadline6>
+                </div>
+                <MatCardContent>
+                    <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+                        <MatTextField @bind-Value="@PageModel.Model.CompanyName" Label="Nazwa firmy" Outlined="true"></MatTextField>
+                        <MatTextField @bind-Value="@PageModel.Model.CompanyIdentyficator" Label="NIP" Outlined="true"></MatTextField>
+                    </MatBody2>
+                </MatCardContent>
+            </MatCard>
+        </div>
+    </div>
+</div>
+
+<MatButton Raised="true" Label="Dodaj klienta" Command="@PageModel.AddCommand" />

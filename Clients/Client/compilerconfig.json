@@ -1,0 +1,18 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/auth-layout.css",
+    "inputFile": "Styles/auth-layout.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/nav-menu.css",
+    "inputFile": "Styles/nav-menu.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/main-layout.css",
+    "inputFile": "Styles/main-layout.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/customers.css",
+    "inputFile": "Styles/customers.scss"
+  }
+]

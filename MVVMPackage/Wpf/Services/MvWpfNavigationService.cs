@@ -27,8 +27,7 @@ namespace MvvmPackage.Wpf.Services
 
         public Task NavigateToAsync<TPageModel, TParameter>(TParameter parameter) where TPageModel : PageModelBase<TParameter>
         {
-            //await NavigateToAsync(Helpers.CreatePageFromPageModel<TPageModel, TParameter>(parameter));
-            throw new NotImplementedException();
+            return NavigateToAsync(_wpfPageActivatorService.CreatePageFromPageModel<TPageModel, TParameter>(parameter));
         }
 
         private Task NavigateToAsync(ContentControl page)

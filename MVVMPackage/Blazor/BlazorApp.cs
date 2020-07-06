@@ -31,8 +31,7 @@ namespace MVVMPackage.Blazor
             ConfigureServices(builder.Services);
             builder.Services.AddHttpClient("NotatnikMechanika.Server", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
             // .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
-            builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("NotatnikMechanika.Server"));
-
+            builder.Services.AddSingleton(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("NotatnikMechanika.Server"));
             WebAssemblyHost app = builder.Build();
             Services = app.Services;
             AppStart();

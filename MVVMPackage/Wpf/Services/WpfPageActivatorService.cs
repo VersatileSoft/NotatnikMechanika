@@ -1,4 +1,5 @@
 ﻿using MvvmPackage.Core;
+using MvvmPackage.Wpf.Pages;
 using System;
 using System.Windows.Controls;
 
@@ -19,7 +20,13 @@ namespace MvvmPackage.Wpf.Services
 
         public UserControl CreatePageFromPageModel<TPageModel, TParameter>(TParameter parameter) where TPageModel : PageModelBase<TParameter>
         {
-            throw new NotImplementedException();
+            MvWpfPage<TPageModel> page = (MvWpfPage<TPageModel>)CreatePageFromPageModel<TPageModel>();
+            if (page == null)
+            {
+                throw new NullReferenceException("Could not cast page");
+            }
+            page.PageModel.Parameter = parameter;
+            return page;
         }
 
         public UserControl CreatePageFromPageModel<TPageModel, TTargetPage>()

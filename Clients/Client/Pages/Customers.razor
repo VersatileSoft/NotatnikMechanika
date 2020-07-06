@@ -1,0 +1,62 @@
+﻿@page "/customers"
+@using NotatnikMechanika.Core.PageModels
+@using MVVMPackage.Blazor
+@using NotatnikMechanika.Shared.Models.Customer
+@inherits PageBase<CustomersPageModel>
+
+<div class="customers">
+    @if (PageModel.IsLoading)
+    {
+        <MatProgressBar Indeterminate="true" />
+    }
+    else
+    {
+        <MatHidden BreakPoint="@MatBreakpoint.SM" Direction="@MatHiddenDirection.Down">
+            <ChildContent>
+                <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" Label="Dodaj klienta" OnClick="(_ => PageModel.AddCustomerCommand.Execute(null))" />
+                <MatTable Items="PageModel.Customers" class="table" ShowPaging="false" UseSortHeaderRow="true" HeaderRowClass="table-header">
+                    <MatTableHeader>
+                        <th scope="col">Imię</th>
+                        <th scope="col">Nazwisko</th>
+                        <th scope="col">Adres</th>
+                        <th scope="col">Telefon</th>
+                        <th scope="col">Nazwa firmy</th>
+                        <th scope="col">Nip</th>
+                    </MatTableHeader>
+                    <MatTableRow>
+                        <td>@context.Name</td>
+                        <td>@context.Surname</td>
+                        <td>@context.Address</td>
+                        <td>@context.Phone</td>
+                        <td>@context.CompanyName</td>
+                        <td>@context.CompanyIdentyficator</td>
+                    </MatTableRow>
+                </MatTable>
+            </ChildContent>
+
+            <ElseContent>
+                <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" OnClick="(_ => PageModel.AddCustomerCommand.Execute(null))" />
+                <MatAccordion Multi="true">
+                    @foreach (CustomerModel customer in PageModel.Customers)
+                    {
+                        <MatExpansionPanel Style="background-color: #2c2c2c;">
+                            <MatExpansionPanelSummary>
+                                <MatExpansionPanelHeader>
+                                    <p>@customer.Name @customer.Surname</p>
+                                </MatExpansionPanelHeader>
+                            </MatExpansionPanelSummary>
+                            <MatExpansionPanelDetails>
+                                <p>@customer.Phone @customer.Address</p>
+                                <p>@customer.CompanyName @customer.CompanyIdentyficator</p>
+                                <MatButton Label="Szczegóły" Raised="true" OnClick="() => PageModel.CustomerSelectedCommand.Execute(customer.Id)" />
+                            </MatExpansionPanelDetails>
+                        </MatExpansionPanel>
+                    }
+                </MatAccordion>
+            </ElseContent>
+        </MatHidden>
+    }
+</div>
+
+
+

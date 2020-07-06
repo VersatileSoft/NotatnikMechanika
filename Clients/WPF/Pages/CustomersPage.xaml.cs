@@ -1,9 +1,10 @@
 ﻿using MvvmPackage.Wpf.Pages;
 using NotatnikMechanika.Core.PageModels;
+using NotatnikMechanika.Shared.Models.Customer;
+using System.Windows.Controls;
 
 namespace NotatnikMechanika.WPF.Pages
 {
-    //[MasterDetailPage(Position = MasterDetailPageAttribute.MasterDetailPosition.Detail)]
     public partial class CustomersPage : MvWpfPage<CustomersPageModel>
     {
         public CustomersPage()
@@ -13,8 +14,8 @@ namespace NotatnikMechanika.WPF.Pages
 
         private void ListPage_Selected(object sender, System.Windows.RoutedEventArgs e)
         {
-            //int id = ((sender as ListPage).SelectedItem as CustomerModel).Id;
-            //(PageModel as CustomersPageModel).CustomerSelectedCommand.Execute(id);
+            int id = ((sender as ListView)?.SelectedItem as CustomerModel)?.Id ?? 0;
+            PageModel.CustomerSelectedCommand.Execute(id);
         }
     }
 }

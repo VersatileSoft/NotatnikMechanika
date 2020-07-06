@@ -1,0 +1,12 @@
+﻿@page "/customer/{parameter}"
+@using NotatnikMechanika.Core.PageModels
+@using MVVMPackage.Blazor
+@inherits PageBaseInt<CustomerPageModel>
+
+
+@PageModel.CustomerModel.Name
+@PageModel.CustomerModel.Surname
+@PageModel.CustomerModel.Phone
+@PageModel.CustomerModel.Address
+@PageModel.CustomerModel.CompanyName
+@PageModel.CustomerModel.CompanyIdentyficator

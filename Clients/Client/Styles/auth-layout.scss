@@ -1,0 +1,42 @@
+﻿.authLayout {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	background-image: linear-gradient(to bottom, #5877e6, #36dad2);
+	color: white;
+
+	span {
+		background-color: transparent !important;
+	}
+
+	img {
+		width: 10rem;
+	}
+
+	p {
+		font-size: 2rem;
+		font-weight: bold;
+	}
+
+	.content {
+		align-self: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.input {
+		display: flex;
+		width: 20rem;
+		margin: 15px;
+		flex-direction: column;
+	}
+
+	.buttons {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+	}
+}

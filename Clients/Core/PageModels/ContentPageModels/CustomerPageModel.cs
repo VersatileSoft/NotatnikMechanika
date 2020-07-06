@@ -1,60 +1,68 @@
 ﻿using MvvmPackage.Core;
+using MvvmPackage.Core.Services.Interfaces;
+using MVVMPackage.Core.Commands;
+using NotatnikMechanika.Core.Interfaces;
+using NotatnikMechanika.Core.Model;
+using NotatnikMechanika.Shared;
+using NotatnikMechanika.Shared.Models.Car;
+using NotatnikMechanika.Shared.Models.Customer;
 using PropertyChanged;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace NotatnikMechanika.Core.PageModels
 {
     [AddINotifyPropertyChangedInterface]
     public class CustomerPageModel : PageModelBase<int>
     {
-        //public CustomerModel CustomerModel { get; set; }
-        //public IEnumerable<CarModel> Cars { get; set; }
-        //public string ErrorMessage { get; set; }
-        //public ICommand GoBackCommand { get; set; }
-        //public ICommand AddCarCommand { get; set; }
+        public CustomerModel CustomerModel { get; set; }
+        public IEnumerable<CarModel> Cars { get; set; }
+        public string ErrorMessage { get; set; }
+        public ICommand GoBackCommand { get; set; }
+        public ICommand AddCarCommand { get; set; }
 
-        //private readonly IHttpRequestService _httpRequestService;
+        private readonly IHttpRequestService _httpRequestService;
 
-        //public CustomerViewModel(IHttpRequestService httpRequestService, IMvxNavigationService navigationService)
-        //{
-        //    _httpRequestService = httpRequestService;
-        //    CustomerModel = new CustomerModel();
-        //    GoBackCommand = new MvxAsyncCommand(() => navigationService.Navigate<MainPageViewModel>());
-        //    AddCarCommand = new MvxAsyncCommand(() => navigationService.Navigate<AddCarViewModel, int>(CustomerModel.Id));
-        //}
+        public CustomerPageModel(IHttpRequestService httpRequestService, IMvNavigationService navigationService)
+        {
+            _httpRequestService = httpRequestService;
+            CustomerModel = new CustomerModel();
+            GoBackCommand = new AsyncCommand(() => navigationService.NavigateToAsync<MainPageModel>());
+            AddCarCommand = new AsyncCommand(() => navigationService.NavigateToAsync<AddCarPageModel, int>(CustomerModel.Id));
+        }
 
-        //public override void Prepare(int customerId)
-        //{
-        //    CustomerModel.Id = customerId;
-        //}
+        public override async Task Initialize()
+        {
+            CustomerModel.Id = Parameter;
 
-        //public override async Task Initialize()
-        //{
-        //    await base.Initialize();
+            Response<CustomerModel> responseCustomer = await _httpRequestService.SendGet<CustomerModel>(PathsHelper.GetPathsByModel<CustomerModel>().GetFullPath(CustomerModel.Id.ToString()));
 
-        //    Response<CustomerModel> responseCustomer = await _httpRequestService.SendGet<CustomerModel>(PathsHelper.GetPathsByModel<CustomerModel>().GetFullPath(CustomerModel.Id.ToString()), true);
+            if (responseCustomer.StatusCode == HttpStatusCode.OK)
+            {
+                CustomerModel = responseCustomer.Content;
+            }
+            else
+            {
+                ErrorMessage = responseCustomer.ErrorMessages?.FirstOrDefault();
+                return;
+            }
 
-        //    if (responseCustomer.StatusCode == HttpStatusCode.OK)
-        //    {
-        //        CustomerModel = responseCustomer.Content;
-        //    }
-        //    else
-        //    {
-        //        ErrorMessage = responseCustomer.ErrorMessage;
-        //        return;
-        //    }
+            Response<CarsResult> responseCars = await _httpRequestService.SendGet<CarsResult>(
+                PathsHelper
+                .GetPathsByModel<CarModel>()
+                .GetFullPath(CarPaths.GetByCustomerPath.Replace("{customerId}", CustomerModel.Id.ToString())));
 
-        //    Response<List<CarModel>> responseCars = await _httpRequestService.SendGet<List<CarModel>>(
-        //        path: PathsHelper.GetPathsByModel<CarModel>().GetFullPath(CarPaths.GetByCustomerPath.Replace("{customerId}", CustomerModel.Id.ToString())),
-        //        withAutorization: true);
-
-        //    if (responseCars.StatusCode == HttpStatusCode.OK)
-        //    {
-        //        Cars = responseCars.Content;
-        //    }
-        //    else
-        //    {
-        //        ErrorMessage = responseCars.ErrorMessage;
-        //    }
-        //}
+            if (responseCars.StatusCode == HttpStatusCode.OK)
+            {
+                Cars = responseCars.Content.Cars;
+            }
+            else
+            {
+                ErrorMessage = responseCars.ErrorMessages?.FirstOrDefault();
+            }
+        }
     }
 }

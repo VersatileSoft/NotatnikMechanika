@@ -1,37 +1,39 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">NotatnikMechanika</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+﻿<div class="nav-menu">
+
+    <img class="image" src="/images/app_icon.png" />
+
+    <a class="nav-item" href="/">
+        <MatIcon Icon="favorite" />
+        <p>Zlecenia</p>
+    </a>
+
+    <a class="nav-item" href="/customers">
+        <MatIcon Icon="account_box" />
+        <p>Klienci</p>
+    </a>
+
+    <a class="nav-item" href="/">
+        <MatIcon Icon="local_laundry_service" />
+        <p>Usługi</p>
+    </a>
+
+    <a class="nav-item" href="/">
+        <MatIcon Icon="home" />
+        <p>Magazyn</p>
+    </a>
+
+    <a class="nav-item" href="/">
+        <MatIcon Icon="restore_from_trash" />
+        <p>Archiwum</p>
+    </a>
+
+    <a class="nav-item" href="/">
+        <MatIcon Icon="file_copy" />
+        <p>Faktury/Paragony</p>
+    </a>
+
+    <a class="nav-item" href="/">
+        <MatIcon Icon="account_box" />
+        <p>Moje konto</p>
+    </a>
 </div>
-
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </li>
-    </ul>
-</div>
-
-@code {
-    private bool collapseNavMenu = true;
-
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-}

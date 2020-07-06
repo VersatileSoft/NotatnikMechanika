@@ -1,39 +1,22 @@
-﻿@page "/register"
+﻿@page "/registration"
 @using NotatnikMechanika.Core.PageModels
 @inject RegistrationPageModel PageModel
 
-<h1>Register</h1>
-
-@if (!string.IsNullOrEmpty(PageModel.ErrorMessage))
-{
-    <div class="alert alert-danger" role="alert">
-            <p>@PageModel.ErrorMessage</p>     
+<EditForm Model="PageModel.RegisterModel" OnValidSubmit="PageModel.RegisterAction">
+    <div class="input">
+        <MatTextField @bind-Value="PageModel.RegisterModel.Name" Icon="email" Label="Imię" Outlined="true" ValidationDisabled="true" />
     </div>
-}
-
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Please enter your details</h5>
-        <EditForm Model="PageModel.RegisterModel" OnValidSubmit="PageModel.RegisterAction">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <InputText Id="email" class="form-control" @bind-Value="PageModel.RegisterModel.Email" />
-                <ValidationMessage For="@(() => PageModel.RegisterModel.Email)" />
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <InputText Id="password" type="password" class="form-control" @bind-Value="PageModel.RegisterModel.Password" />
-                <ValidationMessage For="@(() => PageModel.RegisterModel.Password)" />
-            </div>
-            <div class="form-group">
-                <label for="password">Confirm Password</label>
-                <InputText Id="password" type="password" class="form-control" @bind-Value="PageModel.ConfirmPassword" />
-                <ValidationMessage For="@(() => PageModel.ConfirmPassword)" />
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </EditForm>
+    <div class="input">
+        <MatTextField @bind-Value="PageModel.RegisterModel.Surname" Icon="email" Label="Nazwisko" Outlined="true" ValidationDisabled="true" />
     </div>
-</div>
+    <div class="input">
+        <MatTextField @bind-Value="PageModel.RegisterModel.Email" Icon="email" Label="E-mali" Outlined="true" ValidationDisabled="true" />
+    </div>
+    <div class="input">
+        <MatTextField @bind-Value="PageModel.RegisterModel.Password" Icon="lock_outline" Label="Hasło" Type="password" Outlined="true" ValidationDisabled="true" />
+    </div>
+    <div class="buttons">
+        <MatButton @onclick="() => PageModel.LoginCommand.Execute(null)" Raised="true">Mam już konto</MatButton>
+        <MatButton type="submit" Raised="true">Zarejestruj się</MatButton>
+    </div>
+</EditForm>

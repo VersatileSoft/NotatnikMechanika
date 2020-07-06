@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Core.Model;
+using NotatnikMechanika.Shared;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -13,13 +14,8 @@ namespace NotatnikMechanika.Core.Services
     {
         private readonly HttpClient _client;
 
-        //TODO put to config file
-        //private const string ServerAddress = "https://notatnikmechanika.ml/";
-        private const string ServerAddress = "http://localhost:2137/";
-
         public HttpRequestService(HttpClient client)
         {
-            //_settingsService = settingsService;
             _client = client;
         }
 
@@ -42,28 +38,28 @@ namespace NotatnikMechanika.Core.Services
             return await Response<ResponseModel>.GetResponse(response);
         }
 
-        public async Task<Response<object>> SendPost<SendModel>(SendModel model, string path)
+        public async Task<Response<ResultBase>> SendPost<SendModel>(SendModel model, string path)
         {
-            if (!model.IsModelValid(out Response<object> errorResponse))
+            if (!model.IsModelValid(out Response<ResultBase> errorResponse))
             {
                 return errorResponse;
             }
 
             string myContent = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(myContent, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _client.PostAsync(ServerAddress + path, content);
-            return await Response<object>.GetResponse(response);
+            HttpResponseMessage response = await _client.PostAsync(path, content);
+            return await Response<ResultBase>.GetResponse(response);
         }
 
         public async Task<Response<object>> SendPost(string path)
         {
-            HttpResponseMessage response = await _client.PostAsync(ServerAddress + path, null);
+            HttpResponseMessage response = await _client.PostAsync(path, null);
             return await Response<object>.GetResponse(response);
         }
 
         public async Task<Response<object>> SendDelete(string path)
         {
-            HttpResponseMessage response = await _client.DeleteAsync(ServerAddress + path);
+            HttpResponseMessage response = await _client.DeleteAsync(path);
             return await Response<object>.GetResponse(response);
         }
     }

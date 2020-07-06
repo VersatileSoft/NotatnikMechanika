@@ -21,24 +21,24 @@ namespace MVVMPackage.Blazor.Services
             _navigationManager.NavigateTo("/" + (vmName.EndsWith("PageModel")
                 ? vmName.Replace("PageModel", "")
                 : vmName).ToLower());
-            return Task.FromResult(true);
+            return Task.CompletedTask;
         }
 
         public Task NavigateToAsync<TPageModel, TParameter>(TParameter parameter) where TPageModel : PageModelBase<TParameter>
         {
-            throw new NotImplementedException();
+            string vmName = typeof(TPageModel).Name;
+            string pageName = "/" + (vmName.EndsWith("PageModel")
+                ? vmName.Replace("PageModel", "")
+                : vmName).ToLower();
+
+            _navigationManager.NavigateTo($"{pageName}/{parameter}");
+
+            return Task.CompletedTask;
         }
 
         public Task PopAsync()
         {
             throw new NotImplementedException();
-        }
-
-        public Task ReloadMainPage<TMainPageService>() where TMainPageService : IMainPageService
-        {
-            //_navigationManager.
-
-            return null;
         }
     }
 }
