@@ -19,6 +19,7 @@ namespace NotatnikMechanika.Core.PageModels
     {
         public IEnumerable<CustomerModel> Customers { get; set; }
         public ICommand AddCustomerCommand { get; set; }
+        public ICommand RemoveCustomerCommand { get; set; }
         public ICommand CustomerSelectedCommand { get; set; }
         public bool IsLoading { get; set; }
 
@@ -32,12 +33,19 @@ namespace NotatnikMechanika.Core.PageModels
             _httpRequestService = httpRequestService;
 
             AddCustomerCommand = new AsyncCommand(AddCustomerAction);
+            RemoveCustomerCommand = new AsyncCommand<int>(RemoveCustomerAction);
             CustomerSelectedCommand = new AsyncCommand<int>(CustomerSelectedAction);
         }
 
         private async Task AddCustomerAction()
         {
             await _navigationService.NavigateToAsync<AddCustomerPageModel>();
+        }
+
+        private async Task RemoveCustomerAction(int id)
+        {
+            await _httpRequestService.SendDelete(new CustomerPaths().GetFullPath(id.ToString()));
+            await Initialize();
         }
 
         private async Task CustomerSelectedAction(int customerId)

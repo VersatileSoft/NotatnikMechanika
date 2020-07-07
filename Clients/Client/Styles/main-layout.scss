@@ -33,4 +33,34 @@
         bottom: 1rem;
         right: 1rem;
     }
+
+    .card {
+        min-width: 250px;
+        max-width: 400px;
+        min-height: 350px;
+        border-radius: 3px;
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1rem;
+            background-image: linear-gradient(to bottom, #5877e6, #36dad2);
+            border-radius: 3px;
+            text-align: center;
+
+            p {
+                margin: 15px;
+                display: inline-block;
+            }
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+
+            .text-field {
+                margin: 10px 60px;
+                display: inline-block;
+            }
+        }
+    }
 }

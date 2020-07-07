@@ -26,6 +26,8 @@ namespace NotatnikMechanika.Core.PageModels
 
         private readonly IHttpRequestService _httpRequestService;
 
+        public bool IsLoading { get; set; }
+
         public CustomerPageModel(IHttpRequestService httpRequestService, IMvNavigationService navigationService)
         {
             _httpRequestService = httpRequestService;
@@ -36,6 +38,7 @@ namespace NotatnikMechanika.Core.PageModels
 
         public override async Task Initialize()
         {
+            IsLoading = true;
             CustomerModel.Id = Parameter;
 
             Response<CustomerModel> responseCustomer = await _httpRequestService.SendGet<CustomerModel>(PathsHelper.GetPathsByModel<CustomerModel>().GetFullPath(CustomerModel.Id.ToString()));
@@ -63,6 +66,7 @@ namespace NotatnikMechanika.Core.PageModels
             {
                 ErrorMessage = responseCars.ErrorMessages?.FirstOrDefault();
             }
+            IsLoading = false;
         }
     }
 }

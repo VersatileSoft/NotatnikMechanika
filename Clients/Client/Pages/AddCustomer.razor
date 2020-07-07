@@ -4,41 +4,34 @@
 @inherits PageBaseInt<AddCustomerPageModel>
 
 
-<div class="mat-layout-grid">
-    <div class="mat-layout-grid-inner">
-        <div class="mat-layout-grid-cell">
-            <MatCard class="demo-mat-card">
-                <div class="demo-mat-card-content">
-                    <MatHeadline6 class="demo-mat-card-clean-margin">
-                        Dane Klienta
-                    </MatHeadline6>
+<div class="add-customer">
+    <div class="mat-layout-grid">
+        <div class="mat-layout-grid-inner">
+            <div class="mat-layout-grid-cell-span-6">
+                <div class="card mat-elevation-z13">
+                    <div class="card-header">
+                        <p>Dane Klienta</p>
+                    </div>
+                    <div class="card-content">
+                        <MatTextField @bind-Value="@PageModel.Model.Name" Class="text-field" Label="Imię" Outlined="true"></MatTextField>
+                        <MatTextField @bind-Value="@PageModel.Model.Surname" Class="text-field"  Label="Nazwisko" Outlined="true"></MatTextField>
+                        <MatTextField @bind-Value="@PageModel.Model.Phone" Class="text-field"  Label="Telefon" Outlined="true"></MatTextField>
+                        <MatTextField @bind-Value="@PageModel.Model.Address" Class="text-field"  Label="Adres" Outlined="true"></MatTextField>
+                    </div>
                 </div>
-                <MatCardContent>
-                    <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
-                        <MatTextField @bind-Value="@PageModel.Model.Name" Label="Imię" Outlined="true"></MatTextField>
-                        <MatTextField @bind-Value="@PageModel.Model.Surname" Label="Nazwisko" Outlined="true"></MatTextField>
-                        <MatTextField @bind-Value="@PageModel.Model.Phone" Label="Telefon" Outlined="true"></MatTextField>
-                        <MatTextField @bind-Value="@PageModel.Model.Address" Label="Adres" Outlined="true"></MatTextField>
-                    </MatBody2>
-                </MatCardContent>
-            </MatCard>
-        </div>
-        <div class="mat-layout-grid-cell">
-            <MatCard class="demo-mat-card">
-                <div class="demo-mat-card-content">
-                    <MatHeadline6 class="demo-mat-card-clean-margin">
-                        Dane Firmy
-                    </MatHeadline6>
+            </div>
+            <div class="mat-layout-grid-cell-span-6">
+                <div class="card mat-elevation-z13">
+                    <div class="card-header">
+                        <p>Dane Firmy</p>
+                    </div>
+                    <div class="card-content">
+                        <MatTextField @bind-Value="@PageModel.Model.CompanyName" Class="text-field" Label="Nazwa firmy" Outlined="true"></MatTextField>
+                        <MatTextField @bind-Value="@PageModel.Model.CompanyIdentyficator" Class="text-field" Label="NIP" Outlined="true"></MatTextField>
+                    </div>
                 </div>
-                <MatCardContent>
-                    <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
-                        <MatTextField @bind-Value="@PageModel.Model.CompanyName" Label="Nazwa firmy" Outlined="true"></MatTextField>
-                        <MatTextField @bind-Value="@PageModel.Model.CompanyIdentyficator" Label="NIP" Outlined="true"></MatTextField>
-                    </MatBody2>
-                </MatCardContent>
-            </MatCard>
+            </div>
         </div>
     </div>
+    <MatButton Raised="true" Label="Dodaj klienta" Command="@PageModel.AddCommand" />
 </div>
-
-<MatButton Raised="true" Label="Dodaj klienta" Command="@PageModel.AddCommand" />

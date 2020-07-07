@@ -14,5 +14,9 @@
   {
     "outputFile": "wwwroot/css/customers.css",
     "inputFile": "Styles/customers.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/add-customer.css",
+    "inputFile": "Styles/add-customer.scss"
   }
 ]

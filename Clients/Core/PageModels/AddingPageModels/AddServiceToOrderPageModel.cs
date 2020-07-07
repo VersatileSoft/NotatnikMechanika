@@ -1,4 +1,10 @@
 ﻿using MvvmPackage.Core;
+using MvvmPackage.Core.Services.Interfaces;
+using MVVMPackage.Core.Commands;
+using NotatnikMechanika.Core.Interfaces;
+using NotatnikMechanika.Shared.Models.Service;
+using System.Collections.Generic;
+using System.Windows.Input;
 
 namespace NotatnikMechanika.Core.PageModels
 {
@@ -12,10 +18,10 @@ namespace NotatnikMechanika.Core.PageModels
         //public ICommand CloseCommand { get; set; }
         //public ICommand AddRemoveServiceCommand { get; set; }
 
-        //public AddServiceToOrderViewModel(IHttpRequestService httpRequestService, IMvxNavigationService navigationService)
+        //public AddServiceToOrderPageModel(IHttpRequestService httpRequestService, IMvNavigationService navigationService)
         //{
         //    _httpRequestService = httpRequestService;
-        //    CloseCommand = new MvxAsyncCommand(() => navigationService.Close(this));
+        //   // CloseCommand = new AsyncCommand(() => navigationService.Close(this));
         //    AddRemoveServiceCommand = new MvxAsyncCommand<ServiceForOrderModel>(AddRemoveServiceAction);
         //}
 

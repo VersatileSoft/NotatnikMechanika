@@ -30,6 +30,8 @@
                         <td>@context.Phone</td>
                         <td>@context.CompanyName</td>
                         <td>@context.CompanyIdentyficator</td>
+                        <td><MatButton Label="Szczegóły" Raised="true" Command="PageModel.CustomerSelectedCommand" CommandParameter="context.Id" /></td>
+                        <td><MatButton Label="Usuń" Raised="true" Command="PageModel.RemoveCustomerCommand" CommandParameter="context.Id" /></td>
                     </MatTableRow>
                 </MatTable>
             </ChildContent>
@@ -48,7 +50,7 @@
                             <MatExpansionPanelDetails>
                                 <p>@customer.Phone @customer.Address</p>
                                 <p>@customer.CompanyName @customer.CompanyIdentyficator</p>
-                                <MatButton Label="Szczegóły" Raised="true" OnClick="() => PageModel.CustomerSelectedCommand.Execute(customer.Id)" />
+                                <MatButton Label="Szczegóły" Raised="true" Command="PageModel.CustomerSelectedCommand" CommandParameter="customer.Id" />
                             </MatExpansionPanelDetails>
                         </MatExpansionPanel>
                     }
@@ -57,6 +59,4 @@
         </MatHidden>
     }
 </div>
-
-
 
