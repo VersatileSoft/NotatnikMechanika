@@ -23,6 +23,7 @@ namespace NotatnikMechanika.Core.PageModels
         public string ErrorMessage { get; set; }
         public ICommand GoBackCommand { get; set; }
         public ICommand AddCarCommand { get; set; }
+        public ICommand RemoveCarCommand { get; set; }
 
         private readonly IHttpRequestService _httpRequestService;
 
@@ -34,6 +35,13 @@ namespace NotatnikMechanika.Core.PageModels
             CustomerModel = new CustomerModel();
             GoBackCommand = new AsyncCommand(() => navigationService.NavigateToAsync<MainPageModel>());
             AddCarCommand = new AsyncCommand(() => navigationService.NavigateToAsync<AddCarPageModel, int>(CustomerModel.Id));
+            RemoveCarCommand = new AsyncCommand<int>(RemoveCarAction);
+        }
+
+        private async Task RemoveCarAction(int id)
+        {
+            await _httpRequestService.SendDelete(new CarPaths().GetFullPath(id.ToString()));
+            await Initialize();
         }
 
         public override async Task Initialize()

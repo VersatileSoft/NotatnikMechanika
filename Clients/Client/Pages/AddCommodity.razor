@@ -1,0 +1,17 @@
+﻿@page "/addcommodity"
+@using NotatnikMechanika.Core.PageModels
+@using MVVMPackage.Blazor
+@inherits PageBaseInt<AddCommodityPageModel>
+
+<div class="card">
+    <div class="card-header">
+        <p>Dodaj Towar</p>
+    </div>
+
+    <div class="card-content mat-elevation-z13">
+        <MatTextField @bind-Value="@PageModel.Model.Name" Class="text-field" Label="Nazwa" Outlined="true"></MatTextField>
+        <MatTextField @bind-Value="@PageModel.Model.Price" Class="text-field" Label="Cena" Outlined="true"></MatTextField>
+    </div>
+</div>
+
+<MatButton Label="Zapisz" Command="PageModel.AddCommand" Raised="true" />

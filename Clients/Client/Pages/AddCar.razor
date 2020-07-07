@@ -1,0 +1,21 @@
+﻿@page "/addcar/{parameter}"
+@using NotatnikMechanika.Core.PageModels
+@using MVVMPackage.Blazor
+@inherits PageBaseInt<AddCarPageModel>
+
+<div class="card">
+    <div class="card-header">
+        <p>Dodaj samochód</p>
+    </div>
+
+    <div class="card-content mat-elevation-z13">
+        <MatTextField @bind-Value="@PageModel.Model.Brand" Class="text-field" Label="Marka" Outlined="true"></MatTextField>
+        <MatTextField @bind-Value="@PageModel.Model.Model" Class="text-field" Label="Model" Outlined="true"></MatTextField>
+        <MatTextField @bind-Value="@PageModel.Model.Plate" Class="text-field" Label="Rejestracja" Outlined="true"></MatTextField>
+        <MatTextField @bind-Value="@PageModel.Model.Engine" Class="text-field" Label="Silnik" Outlined="true"></MatTextField>
+        <MatTextField @bind-Value="@PageModel.Model.Power" Class="text-field" Label="Moc" Outlined="true"></MatTextField>
+        <MatTextField @bind-Value="@PageModel.Model.Vin" Class="text-field" Label="Vin" Outlined="true"></MatTextField>
+    </div>
+</div>
+
+<MatButton Label="Zapisz" Command="PageModel.AddCommand" Raised="true" />

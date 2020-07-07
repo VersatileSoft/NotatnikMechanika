@@ -12,7 +12,9 @@
             <div class="mat-layout-grid-cell">
                 <div class="card mat-elevation-z13">
                     <div class="card-header">
+                        <MatIconButton Icon="@MatIconNames.Person" />
                         <p>Informacje</p>
+                        <MatIconButton Icon="@MatIconNames.Edit" />
                     </div>
 
                     <div class="card-content">
@@ -28,7 +30,9 @@
             <div class="mat-layout-grid-cell">
                 <div class="card mat-elevation-z13">
                     <div class="card-header">
+                        <MatIconButton Icon="@MatIconNames.Card_giftcard" />
                         <p>Samochody</p>
+                        <MatIconButton Command="PageModel.AddCarCommand" Icon="@MatIconNames.Add" />
                     </div>
 
                     <div class="card-content">
@@ -44,6 +48,11 @@
                                         <p>@car.Plate</p>
                                         <p>@car.Vin</p>
                                         <p>@car.Power</p>
+                                        <div class="car-options">
+                                            <MatIconButton Icon="@MatIconNames.Add" />
+                                            <MatIconButton Icon="@MatIconNames.Edit" />
+                                            <MatIconButton Icon="@MatIconNames.Remove" Command="PageModel.RemoveCarCommand" CommandParameter="car.Id"/>
+                                        </div>
                                     </MatExpansionPanelDetails>
                                 </MatExpansionPanel>
                             }
