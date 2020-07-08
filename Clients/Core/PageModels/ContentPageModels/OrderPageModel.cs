@@ -84,7 +84,7 @@ namespace NotatnikMechanika.Core.PageModels
                 return;
             }
 
-            Response<List<ServiceModel>> servicesResponse = await _httpRequestService.SendGet<List<ServiceModel>>(new ServicePaths().GetFullPath(ServicePaths.GetAllInOrderPath.Replace("{orderId}", OrderModel.Id.ToString())));
+            /*Response<List<ServiceModel>> servicesResponse = await _httpRequestService.SendGet<List<ServiceModel>>(new ServicePaths().GetFullPath(ServicePaths.GetAllInOrderPath.Replace("{orderId}", OrderModel.Id.ToString())));
 
             if (servicesResponse.Successful)
             {
@@ -96,7 +96,7 @@ namespace NotatnikMechanika.Core.PageModels
             if (commoditiesResponse.Successful)
             {
                 Commodities = commoditiesResponse.Content;
-            }
+            }*/
             IsLoading = false;
         }
     }

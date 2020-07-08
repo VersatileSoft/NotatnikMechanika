@@ -15,10 +15,15 @@ namespace NotatnikMechanika.Server
             CreateMap<Order, OrderExtendedModel>()
                 .ForMember(dest => dest.CarModel, opt => opt.MapFrom(src => src.Car))
                 .ForMember(dest => dest.CustomerModel, opt => opt.MapFrom(src => src.Car.Customer));
+            CreateMap<OrderModel, Order>();
             CreateMap<Customer, CustomerModel>();
+            CreateMap<CustomerModel, Customer>();
             CreateMap<Car, CarModel>();
+            CreateMap<CarModel, Car>();
             CreateMap<Data.Models.Service, ServiceModel>();
+            CreateMap<ServiceModel, Data.Models.Service>();
             CreateMap<Commodity, CommodityModel>();
+            CreateMap<CommodityModel, Commodity>();
         }
     }
 }

@@ -2,11 +2,9 @@
 using MvvmPackage.Core.Services.Interfaces;
 using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Core.Model;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.User;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using static NotatnikMechanika.Shared.ResponseBuilder;

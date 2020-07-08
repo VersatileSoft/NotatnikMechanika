@@ -27,6 +27,7 @@ namespace NotatnikMechanika.Server
             services.AddSingleton(new MapperConfiguration(mc => mc.AddProfile(new MappingProfile())).CreateMapper());
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSwaggerGen();
         }
 
         public void ConfigureContainer(ContainerBuilder containerBuilder)
@@ -47,6 +48,13 @@ namespace NotatnikMechanika.Server
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();

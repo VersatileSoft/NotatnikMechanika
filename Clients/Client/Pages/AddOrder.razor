@@ -15,21 +15,28 @@
                             <p>Dane Klienta i samochodu</p>
                         </div>
                         <div class="card-content">
-                            <MatSelectItem @bind-Value="PageModel.SelectedCustomer" Outlined="true" Label="Klient" Items="PageModel.Customers?.ToList()?.AsReadOnly()">
-                                <ItemTemplate>
-                                    <p>@context.Name</p>
-                                    <p>@context.Surname</p>
-                                    <p>@context.Address</p>
-                                    <p>@context.CompanyName</p>
-                                </ItemTemplate>
-                            </MatSelectItem>
+                            @if (PageModel.Customers != null)
+                            {
+                                <MatSelectItem @bind-Value="PageModel.SelectedCustomer" Outlined="true" Label="Klient" Items="PageModel.Customers?.ToList()?.AsReadOnly()">
+                                    <ItemTemplate>
+                                        <p>@context?.Name</p>
+                                        <p>@context?.Surname</p>
+                                        <p>@context?.Address</p>
+                                        <p>@context?.CompanyName</p>
+                                    </ItemTemplate>
+                                </MatSelectItem>
+                            }
 
-                            <MatSelectItem @bind-Value="PageModel.SelectedCar" Outlined="true" Label="Klient" Items="PageModel.Cars?.ToList()?.AsReadOnly()">
-                                <ItemTemplate>
-                                    <p>@context?.Brand</p>
-                                    <p>@context?.Model</p>
-                                </ItemTemplate>
-                            </MatSelectItem>
+                            @if (PageModel.Cars != null)
+                            {
+                                <MatSelectItem @bind-Value="PageModel.SelectedCar" Outlined="true" Label="Klient" Items="PageModel.Cars?.ToList()?.AsReadOnly()">
+                                    <ItemTemplate>
+                                        <p>@context?.Brand</p>
+                                        <p>@context?.Model</p>
+                                    </ItemTemplate>
+                                </MatSelectItem>
+                            }
+                            
                         </div>
                     </div>
                 </div>
