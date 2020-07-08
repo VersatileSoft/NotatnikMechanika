@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Core.PageModels
 {
@@ -19,13 +20,9 @@ namespace NotatnikMechanika.Core.PageModels
     {
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMvNavigationService _navigationService;
-        public bool IsLoading { get; set; }
         public IEnumerable<ServiceModel> Services { get; set; }
-
         public ICommand AddServiceCommand { get; set; }
         public ICommand ServiceSelectedCommand { get; set; }
-
-
         public ICommand RemoveServiceCommand { get; set; }
 
         public ServicesPageModel(IHttpRequestService httpRequestService, IMvNavigationService navigationService)
@@ -34,7 +31,7 @@ namespace NotatnikMechanika.Core.PageModels
             _navigationService = navigationService;
 
             AddServiceCommand = new AsyncCommand(() => _navigationService.NavigateToAsync<AddServicePageModel>());
-            ServiceSelectedCommand = new AsyncCommand<int>((id) => _navigationService.NavigateToAsync<ServicePageModel, int>(id));
+            ServiceSelectedCommand = new AsyncCommand<int>((id) => _navigationService.NavigateToAsync<ServicePageModel>(id));
             RemoveServiceCommand = new AsyncCommand<int>(RemoveServiceAction);
         }
         private async Task RemoveServiceAction(int id)
@@ -46,11 +43,11 @@ namespace NotatnikMechanika.Core.PageModels
         public override async Task Initialize()
         {
             IsLoading = true;
-            Response<GetAllResult<ServiceModel>> response = await _httpRequestService.SendGet<GetAllResult<ServiceModel>>(new ServicePaths().GetFullPath(CRUDPaths.GetAllPath));
+            Response<List<ServiceModel>> response = await _httpRequestService.SendGet<List<ServiceModel>>(new ServicePaths().GetFullPath(CRUDPaths.GetAllPath));
 
-            if (response.StatusCode == HttpStatusCode.OK)
+            if (response.Successful)
             {
-                Services = response.Content.Models;
+                Services = response.Content;
             }
             IsLoading = false;
         }

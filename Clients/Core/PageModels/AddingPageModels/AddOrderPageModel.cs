@@ -1,16 +1,14 @@
 ﻿using MvvmPackage.Core.Services.Interfaces;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Core.Model;
 using NotatnikMechanika.Shared;
-using NotatnikMechanika.Shared.Models;
 using NotatnikMechanika.Shared.Models.Car;
 using NotatnikMechanika.Shared.Models.Customer;
 using NotatnikMechanika.Shared.Models.Order;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Core.PageModels
 {
@@ -54,33 +52,37 @@ namespace NotatnikMechanika.Core.PageModels
 
         private async Task SelectedCustomerChanged()
         {
-            Response<CarsResult> carsResponse = await _httpRequestService.SendGet<CarsResult>(new CarPaths().GetFullPath(
+            IsLoading = true;
+            Response<List<CarModel>> carsResponse = await _httpRequestService.SendGet<List<CarModel>>(new CarPaths().GetFullPath(
                 CarPaths.GetByCustomerPath.Replace("{customerId}", SelectedCustomer.Id.ToString())));
 
-            if (carsResponse.StatusCode == HttpStatusCode.OK)
+            if (carsResponse.Successful)
             {
-                Cars = carsResponse.Content.Cars;
+                Cars = carsResponse.Content;
             }
 
-            if (Cars.Any())
+            if (Cars?.Any() ?? false)
             {
                 SelectedCar = Cars?.FirstOrDefault();
             }
+            IsLoading = false;
         }
 
         public override async Task Initialize()
         {
-            Response<GetAllResult<CustomerModel>> customersResponse = await _httpRequestService.SendGet<GetAllResult<CustomerModel>>(new CustomerPaths().GetFullPath(CRUDPaths.GetAllPath));
+            IsLoading = true;
+            Response<List<CustomerModel>> customersResponse = await _httpRequestService.SendGet<List<CustomerModel>>(new CustomerPaths().GetFullPath(CRUDPaths.GetAllPath));
 
-            if (customersResponse.StatusCode == HttpStatusCode.OK)
+            if (customersResponse.Successful)
             {
-                Customers = customersResponse.Content.Models;
+                Customers = customersResponse.Content;
             }
 
-            if (Customers.Any())
+            if (Customers?.Any() ?? false)
             {
                 SelectedCustomer = Customers?.FirstOrDefault();
             }
+            IsLoading = false;
         }
     }
 }

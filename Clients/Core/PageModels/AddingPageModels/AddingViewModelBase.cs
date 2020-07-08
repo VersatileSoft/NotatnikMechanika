@@ -2,23 +2,21 @@
 using MvvmPackage.Core.Services.Interfaces;
 using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Core.Model;
 using NotatnikMechanika.Shared;
 using PropertyChanged;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Core.PageModels
 {
     [AddINotifyPropertyChangedInterface]
-    public abstract class AddingPageModelBase<TModel> : PageModelBase<int> where TModel : new()
+    public abstract class AddingPageModelBase<TModel> : PageModelBase where TModel : new()
     {
         public TModel Model { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand GoBackCommand { get; set; }
-        public bool IsWaiting { get; set; }
 
         protected readonly IHttpRequestService _httpRequestService;
         protected readonly IMvNavigationService _navigationService;
@@ -39,11 +37,10 @@ namespace NotatnikMechanika.Core.PageModels
 
         private async Task AddAction()
         {
-            IsWaiting = true;
+            IsLoading = true;
             string path = PathsHelper.GetPathsByModel<TModel>().GetFullPath(CRUDPaths.CreatePath);
-            Response<ResultBase> respone = await _httpRequestService.SendPost(Model, path);
-            IsWaiting = false;
-            if (respone.StatusCode == HttpStatusCode.OK)
+            Response respone = await _httpRequestService.SendPost(Model, path);
+            if (respone.Successful)
             {
                 await _messageDialogService.ShowMessageDialog(SuccesMessage);
                 await _navigationService.NavigateToAsync<MainPageModel>();
@@ -53,6 +50,7 @@ namespace NotatnikMechanika.Core.PageModels
                 ErrorMessage = respone.ErrorMessages?.FirstOrDefault();
                 await _messageDialogService.ShowMessageDialog(ErrorMessage);
             }
+            IsLoading = false;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace MvvmPackage.Core.Services.Interfaces
         /// <typeparam name="TParameter">Type of page parameter</typeparam>
         /// <param name="parameter">Parameter to pass in page model</param>
         /// <returns>Returns new page</returns>
-        TPage CreatePageFromPageModel<TPageModel, TParameter>(TParameter parameter) where TPageModel : PageModelBase<TParameter>;
+        TPage CreatePageFromPageModel<TPageModel>(int parameter) where TPageModel : PageModelBase;
 
         /// <summary>
         /// Crates new page of given type from given page model type

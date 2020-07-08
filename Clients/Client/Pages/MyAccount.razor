@@ -1,0 +1,9 @@
+﻿@page "/myaccount"
+@using NotatnikMechanika.Core.PageModels
+@using MVVMPackage.Blazor
+@inherits PageBase<MyAccountPageModel>
+
+
+<div class="my-account">
+    <MatButton Command="PageModel.LogoutCommand" Raised="true" Label="Wyloguj się"/>
+</div>

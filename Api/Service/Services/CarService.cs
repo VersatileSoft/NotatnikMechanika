@@ -4,6 +4,7 @@ using NotatnikMechanika.Service.Services.Base;
 using NotatnikMechanika.Shared.Models.Car;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Service.Services
 {
@@ -15,13 +16,9 @@ namespace NotatnikMechanika.Service.Services
             _carRepository = carRepository;
         }
 
-        public async Task<CarsResult> GetCarsByCustomerAsync(string userId, int customerId)
+        public async Task<Response<IEnumerable<CarModel>>> GetCarsByCustomerAsync(string userId, int customerId)
         {
-            return new CarsResult
-            {
-                Successful = true,
-                Cars = await _carRepository.GetCarsByCustomerAsync(userId, customerId)
-            };
+            return CreateResponse(await _carRepository.GetCarsByCustomerAsync(userId, customerId));
         }
     }
 }

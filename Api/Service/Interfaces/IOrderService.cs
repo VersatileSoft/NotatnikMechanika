@@ -2,15 +2,17 @@
 using NotatnikMechanika.Shared.Models.Order;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Service.Interfaces
 {
     public interface IOrderService : IServiceBase<OrderModel>
     {
-        Task<AllExtendedOrdersResult> GetAllExtendedAsync(string userId, bool archived);
-        Task AddServiceToOrder(string userId, int orderId, int serviceId);
-        Task AddCommodityToOrder(string userId, int orderId, int commodityId);
-        Task DeleteServiceFromOrder(string userId, int orderId, int serviceId);
-        Task DeleteCommodityFromOrder(string userId, int orderId, int commodityId);
+        Task<Response<IEnumerable<OrderExtendedModel>>> GetAllExtendedAsync(string userId, bool archived);
+        Task<Response> AddServiceToOrder(string userId, int orderId, int serviceId);
+        Task<Response> AddCommodityToOrder(string userId, int orderId, int commodityId);
+        Task<Response> DeleteServiceFromOrder(string userId, int orderId, int serviceId);
+        Task<Response> DeleteCommodityFromOrder(string userId, int orderId, int commodityId);
+        Task<Response<OrderExtendedModel>> GetExtendedAsync(string userId, int orderId, bool archived);
     }
 }

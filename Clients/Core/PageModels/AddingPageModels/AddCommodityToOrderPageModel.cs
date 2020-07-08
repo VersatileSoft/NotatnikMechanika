@@ -2,7 +2,7 @@
 
 namespace NotatnikMechanika.Core.PageModels
 {
-    public class AddCommodityToOrderPageModel : PageModelBase<int>
+    public class AddCommodityToOrderPageModel : PageModelBase
     {
         //private int _orderId;
         //private readonly IHttpRequestService _httpRequestService;

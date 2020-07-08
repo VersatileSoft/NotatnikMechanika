@@ -7,16 +7,15 @@ namespace NotatnikMechanika.Core.PageModels
 {
     public class AddCarPageModel : AddingPageModelBase<CarModel>
     {
-        
-         public override string SuccesMessage { get; set; } = "Samochód został dodany pomyślnie.";
+
+        public override string SuccesMessage { get; set; } = "Samochód został dodany pomyślnie.";
 
         public AddCarPageModel(
             IHttpRequestService httpRequestService,
             IMvNavigationService navigationService,
             IMessageDialogService messageDialogService)
             : base(navigationService, httpRequestService, messageDialogService)
-        {
-        }
+        { }
 
         public override Task Initialize()
         {

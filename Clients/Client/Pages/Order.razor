@@ -1,0 +1,105 @@
+﻿@page "/order/{parameter}"
+@using NotatnikMechanika.Core.PageModels
+@using MVVMPackage.Blazor
+@using NotatnikMechanika.Shared.Models.Car
+@using NotatnikMechanika.Shared.Models.Service
+@using NotatnikMechanika.Shared.Models.Commodity
+@inherits PageBase<OrderPageModel>
+
+@if (!PageModel.IsLoading)
+{
+    <div class="mat-layout-grid">
+        <div class="mat-layout-grid-inner">
+            <div class="mat-layout-grid-cell">
+                <div class="card mat-elevation-z13">
+                    <div class="card-header">
+                        <MatIconButton Icon="@MatIconNames.Person" />
+                        <p>Informacje</p>
+                        <MatIconButton Icon="@MatIconNames.Edit" />
+                    </div>
+
+                    <div class="card-content">
+                        <p>@PageModel.OrderModel.CustomerModel.Name</p>
+                        <p>@PageModel.OrderModel.CustomerModel.Surname</p>
+                        <p>@PageModel.OrderModel.CustomerModel.Phone</p>
+                        <p>@PageModel.OrderModel.CustomerModel.Address</p>
+                        <p>@PageModel.OrderModel.CustomerModel.CompanyName</p>
+                        <p>@PageModel.OrderModel.CustomerModel.CompanyIdentyficator</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mat-layout-grid-cell">
+                <div class="card mat-elevation-z13">
+                    <div class="card-header">
+                        <p>Samochód</p>
+                    </div>
+
+                    <div class="card-content">
+                        <p>@PageModel.OrderModel.CarModel.Brand</p>
+                        <p>@PageModel.OrderModel.CarModel.Model</p>
+                        <p>@PageModel.OrderModel.CarModel.Engine</p>
+                        <p>@PageModel.OrderModel.CarModel.Power</p>
+                        <p>@PageModel.OrderModel.CarModel.Plate</p>
+                        <p>@PageModel.OrderModel.CarModel.Vin</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mat-layout-grid-cell">
+                <div class="card mat-elevation-z13">
+                    <div class="card-header">
+                        <p>Usługi</p>
+                    </div>
+
+                    <div class="card-content">
+                        <MatAccordion>
+                            @foreach (ServiceModel service in PageModel.Services)
+                            {
+                                <MatExpansionPanel>
+                                    <MatExpansionPanelSummary>
+                                        <p>@service.Name</p>
+                                        <p>@service.Price</p>
+                                    </MatExpansionPanelSummary>
+                                    <MatExpansionPanelDetails>
+                                        <p>Nic tu niema</p>
+                                    </MatExpansionPanelDetails>
+                                </MatExpansionPanel>
+                            }
+                        </MatAccordion>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mat-layout-grid-cell">
+                <div class="card mat-elevation-z13">
+                    <div class="card-header">
+                        <p>Towary</p>
+                    </div>
+
+                    <div class="card-content">
+                        <MatAccordion>
+                            @foreach (CommodityModel commodity in PageModel.Commodities)
+                            {
+                                <MatExpansionPanel>
+                                    <MatExpansionPanelSummary>
+                                        <p>@commodity.Name</p>
+                                        <p>@commodity.Price</p>
+                                    </MatExpansionPanelSummary>
+                                    <MatExpansionPanelDetails>
+                                        <p>Nic tu niema</p>
+                                    </MatExpansionPanelDetails>
+                                </MatExpansionPanel>
+                            }
+                        </MatAccordion>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <MatProgressBar Indeterminate="true" />
+}
+
+

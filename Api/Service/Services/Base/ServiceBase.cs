@@ -1,75 +1,67 @@
 ﻿using NotatnikMechanika.Repository.Interfaces.Base;
-using NotatnikMechanika.Service.Exception;
 using NotatnikMechanika.Service.Interfaces.Base;
-using NotatnikMechanika.Shared;
-using NotatnikMechanika.Shared.Models;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Service.Services.Base
 {
-    public abstract class ServiceBase<T> : IServiceBase<T>
+    public abstract class ServiceBase<TModel> : IServiceBase<TModel>
     {
-        private readonly IRepositoryBase<T> _repositoryBase;
+        private readonly IRepositoryBase<TModel> _repositoryBase;
 
         protected string errorMessage = "This item is not yours or not exsists";
-        protected ServiceBase(IRepositoryBase<T> repositoryBase)
+        protected ServiceBase(IRepositoryBase<TModel> repositoryBase)
         {
             _repositoryBase = repositoryBase;
         }
 
-        public async Task<ResultBase> CreateAsync(string userId, T value)
+        public async Task<Response> CreateAsync(string userId, TModel value)
         {
             await _repositoryBase.CreateAsync(userId, value);
-            return new ResultBase
-            {
-                Successful = true
-            };
+            return SuccessEmptyResponse;
         }
 
-        public async Task DeleteAsync(string userId, int Id)
+        public async Task<Response> DeleteAsync(string userId, int Id)
         {
             if (await _repositoryBase.CheckIfUserMatch(userId, Id))
             {
                 await _repositoryBase.DeleteAsync(Id);
+                return SuccessEmptyResponse;
             }
             else
             {
-                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, errorMessage);
+                return BadRequestResponse(new List<string> { errorMessage });
             }
         }
 
-        public async Task<T> GetAsync(string userId, int Id)
+        public async Task<Response<TModel>> GetAsync(string userId, int Id)
         {
             if (await _repositoryBase.CheckIfUserMatch(userId, Id))
             {
-                return await _repositoryBase.GetAsync(Id);
+                return CreateResponse(await _repositoryBase.GetAsync(Id));
             }
             else
             {
-                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, errorMessage);
+                return BadRequestResponse<TModel>(new List<string> { errorMessage });
             }
         }
 
-        public async Task<GetAllResult<T>> GetAllAsync(string userId)
+        public async Task<Response<IEnumerable<TModel>>> GetAllAsync(string userId)
         {
-            return new GetAllResult<T>
-            {
-                Successful = true,
-                Models = await _repositoryBase.GetAllAsync(userId)
-            };
+            return CreateResponse(await _repositoryBase.GetAllAsync(userId));
         }
 
-        public async Task UpdateAsync(string userId, int Id, T value)
+        public async Task<Response> UpdateAsync(string userId, int Id, TModel value)
         {
             if (await _repositoryBase.CheckIfUserMatch(userId, Id))
             {
                 await _repositoryBase.UpdateAsync(Id, value);
+                return SuccessEmptyResponse;
             }
             else
             {
-                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, errorMessage);
+                return BadRequestResponse(new List<string> { errorMessage });
             }
         }
     }

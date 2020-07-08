@@ -12,13 +12,7 @@ namespace MvvmPackage.Wpf.Services
             return CreatePageFromPageModel(typeof(TPageModel));
         }
 
-        public UserControl CreatePageFromPageModel(Type pageModelType)
-        {
-            string pageName = pageModelType.Name.Replace("Model", "");
-            return (UserControl)Activator.CreateInstance(Array.Find(IoC.PlatformProjectAssembly.GetTypes(), t => t.Name == pageName));
-        }
-
-        public UserControl CreatePageFromPageModel<TPageModel, TParameter>(TParameter parameter) where TPageModel : PageModelBase<TParameter>
+        public UserControl CreatePageFromPageModel<TPageModel>(int parameter) where TPageModel : PageModelBase
         {
             MvWpfPage<TPageModel> page = (MvWpfPage<TPageModel>)CreatePageFromPageModel<TPageModel>();
             if (page == null)
@@ -27,6 +21,12 @@ namespace MvvmPackage.Wpf.Services
             }
             page.PageModel.Parameter = parameter;
             return page;
+        }
+
+        public UserControl CreatePageFromPageModel(Type pageModelType)
+        {
+            string pageName = pageModelType.Name.Replace("Model", "");
+            return (UserControl)Activator.CreateInstance(Array.Find(IoC.PlatformProjectAssembly.GetTypes(), t => t.Name == pageName));
         }
 
         public UserControl CreatePageFromPageModel<TPageModel, TTargetPage>()

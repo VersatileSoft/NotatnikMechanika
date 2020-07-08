@@ -1,0 +1,70 @@
+﻿@page "/orders"
+@using NotatnikMechanika.Core.PageModels
+@using MVVMPackage.Blazor
+@using NotatnikMechanika.Shared.Models.Order
+@inherits PageBase<OrdersPageModel>
+
+<div class="orders">
+    @if (PageModel.IsLoading)
+    {
+        <MatProgressBar Indeterminate="true" />
+    }
+    else
+    {
+        <MatHidden BreakPoint="@MatBreakpoint.SM" Direction="@MatHiddenDirection.Down">
+            <ChildContent>
+                <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" Label="Dodaj klienta" OnClick="(_ => PageModel.AddOrderCommand.Execute(null))" />
+                <MatTable Items="PageModel.Orders" class="table" ShowPaging="false" UseSortHeaderRow="true" HeaderRowClass="table-header">
+                    <MatTableHeader>
+                        <th scope="col">Imię</th>
+                        <th scope="col">Nazwisko</th>
+                        <th scope="col">Marka</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Data przyjęcia</th>
+                        <th scope="col">Data ukończenia</th>
+                    </MatTableHeader>
+                    <MatTableRow>
+                        <td>@context.CustomerModel.Name</td>
+                        <td>@context.CustomerModel.Surname</td>
+                        <td>@context.CarModel.Brand</td>
+                        <td>@context.CarModel.Model</td>
+                        <td>@context.AcceptDate</td>
+                        <td>@context.FinishDate</td>
+                        <td><MatButton Label="Szczegóły" Raised="true" Command="PageModel.OrderSelectedCommand" CommandParameter="context.Id" /></td>
+                        <td><MatButton Label="Usuń" Raised="true" Command="PageModel.RemoveOrderCommand" CommandParameter="context.Id" /></td>
+                    </MatTableRow>
+                </MatTable>
+            </ChildContent>
+
+            <ElseContent>
+                <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" OnClick="(_ => PageModel.AddOrderCommand.Execute(null))" />
+                <MatAccordion Multi="true">
+                    @foreach (OrderExtendedModel order in PageModel.Orders)
+                    {
+                        <MatExpansionPanel Style="background-color: #2c2c2c;">
+                            <MatExpansionPanelSummary>
+                                <MatExpansionPanelHeader>
+                                    <p>
+                                        @order.CustomerModel.Name 
+                                        @order.CustomerModel.Surname 
+                                        @order.AcceptDate
+                                        @order.FinishDate
+                                    </p>
+                                </MatExpansionPanelHeader>
+                            </MatExpansionPanelSummary>
+                            <MatExpansionPanelDetails>
+                                <p>@order.CarModel.Brand @order.CarModel.Model</p>
+                                <p>@order.CustomerModel.CompanyName @order.CustomerModel.CompanyIdentyficator</p>
+                                <MatButton Label="Szczegóły" Raised="true" Command="PageModel.OrderSelectedCommand" CommandParameter="order.Id" />
+                                <td><MatButton Label="Usuń" Raised="true" Command="PageModel.RemoveOrderCommand" CommandParameter="order.Id" /></td>
+                            </MatExpansionPanelDetails>
+                        </MatExpansionPanel>
+                    }
+                </MatAccordion>
+            </ElseContent>
+        </MatHidden>
+    }
+</div>
+
+
+

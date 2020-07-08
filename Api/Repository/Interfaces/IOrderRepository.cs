@@ -14,5 +14,6 @@ namespace NotatnikMechanika.Repository.Interfaces
         Task DeleteCommodityFromOrder(int orderId, int commodityId);
         Task<bool> CheckIfOrderToCommodityExsist(int orderId, int commodityId);
         Task<bool> CheckIfOrderToServiceExsist(int orderId, int serviceId);
+        Task<OrderExtendedModel> GetExtendedAsync(string userId, int id, bool archived);
     }
 }

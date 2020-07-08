@@ -2,7 +2,6 @@
 using MvvmPackage.Core.Services.Interfaces;
 using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Core.Model;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models;
 using NotatnikMechanika.Shared.Models.Customer;
@@ -11,6 +10,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Core.PageModels
 {
@@ -21,8 +21,6 @@ namespace NotatnikMechanika.Core.PageModels
         public ICommand AddCustomerCommand { get; set; }
         public ICommand RemoveCustomerCommand { get; set; }
         public ICommand CustomerSelectedCommand { get; set; }
-        public bool IsLoading { get; set; }
-
 
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMvNavigationService _navigationService;
@@ -50,16 +48,16 @@ namespace NotatnikMechanika.Core.PageModels
 
         private async Task CustomerSelectedAction(int customerId)
         {
-            await _navigationService.NavigateToAsync<CustomerPageModel, int>(customerId);
+            await _navigationService.NavigateToAsync<CustomerPageModel>(customerId);
         }
 
         public override async Task Initialize()
         {
             IsLoading = true;
-            Response<GetAllResult<CustomerModel>> response = await _httpRequestService.SendGet<GetAllResult<CustomerModel>>(new CustomerPaths().GetFullPath(CRUDPaths.GetAllPath));
-            if (response.StatusCode == HttpStatusCode.OK)
+            Response<List<CustomerModel>> response = await _httpRequestService.SendGet<List<CustomerModel>>(new CustomerPaths().GetFullPath(CRUDPaths.GetAllPath));
+            if (response.Successful)
             {
-                Customers = response.Content.Models;
+                Customers = response.Content;
             }
             IsLoading = false;
         }

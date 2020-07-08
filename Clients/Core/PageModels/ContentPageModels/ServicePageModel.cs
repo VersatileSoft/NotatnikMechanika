@@ -4,7 +4,7 @@ using PropertyChanged;
 namespace NotatnikMechanika.Core.PageModels
 {
     [AddINotifyPropertyChangedInterface]
-    public class ServicePageModel : PageModelBase<int>
+    public class ServicePageModel : PageModelBase
     {
         public ServicePageModel()
         {

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using NotatnikMechanika.Data;
 using NotatnikMechanika.Data.Models;
 using NotatnikMechanika.Repository.Interfaces;
@@ -11,7 +12,7 @@ namespace NotatnikMechanika.Repository.Repositories
 {
     public class CommodityRepository : RepositoryBase<CommodityModel, Commodity>, ICommodityRepository
     {
-        public CommodityRepository(NotatnikMechanikaDbContext dbContext) : base(dbContext)
+        public CommodityRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 

@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace NotatnikMechanika.Core.PageModels
 {
-    public class AddServiceToOrderPageModel : PageModelBase<int>
+    public class AddServiceToOrderPageModel : PageModelBase
     {
         //private int _orderId;
         //private readonly IHttpRequestService _httpRequestService;

@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using NotatnikMechanika.Data.Models;
 using NotatnikMechanika.Service.Exception;
 using NotatnikMechanika.Service.Interfaces;
+using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.User;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Service.Services
 {
@@ -39,54 +41,48 @@ namespace NotatnikMechanika.Service.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<LoginResult> AuthenticateAsync(string email, string password)
+        public async Task<Response<TokenModel>> AuthenticateAsync(string email, string password)
         {
             SignInResult result = await _signInManager.PasswordSignInAsync(email, password, false, false);
 
             if (result.Succeeded)
             {
                 User user = await _userManager.Users.SingleOrDefaultAsync(r => r.Email == email);
-                return new LoginResult
+
+                return CreateResponse(new TokenModel
                 {
-                    Successful = true,
                     Token = GenerateToken(user)
-                };
+                });
             }
 
             if (result.IsNotAllowed)
             {
-                return new LoginResult
-                {
-                    Successful = false,
-                    Errors = new List<string> { "Potwierdź adres email aby się zalogować." }
-                };
+                return BadRequestResponse<TokenModel>(new List<string> { "Potwierdź adres email aby się zalogować." });
             }
 
-            return new LoginResult
-            {
-                Successful = false,
-                Errors = new List<string> { "Nieprawidłowy login lub hasło" }
-            };
+            return BadRequestResponse<TokenModel>(new List<string> { "Nieprawidłowy login lub hasło" });
         }
 
-        public async Task ConfirmEmail(string userId, string emailToken)
+        public async Task<Response> ConfirmEmail(string userId, string emailToken)
         {
             User user = await _userManager.FindByIdAsync(userId);
 
             if (user == null)
             {
-                throw new HttpStatusCodeException(HttpStatusCode.NotFound, "Nie znaleziono użytkownika");
+                return BadRequestResponse(new List<string> { "Nie znaleziono użytkownika" });
             }
 
             IdentityResult result = await _userManager.ConfirmEmailAsync(user, emailToken);
 
             if (!result.Succeeded)
             {
-                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, "Link nieprawidłowy.");
+                return BadRequestResponse(new List<string> { "Link nieprawidłowy." });
             }
+
+            return SuccessEmptyResponse;
         }
 
-        public async Task<RegisterResult> RegisterAsync(RegisterModel registerModel)
+        public async Task<Response> RegisterAsync(RegisterModel registerModel)
         {
             User user = new User
             {
@@ -100,10 +96,7 @@ namespace NotatnikMechanika.Service.Services
 
             if (result.Succeeded)
             {
-                return new RegisterResult
-                {
-                    Successful = true
-                };
+                return SuccessEmptyResponse;
 
                 // User newUser = await _userManager.FindByEmailAsync(user.Email);
                 // string code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -115,20 +108,16 @@ namespace NotatnikMechanika.Service.Services
             }
             else
             {
-                return new RegisterResult
-                {
-                    Successful = false,
-                    Errors = result.Errors.Select(e => e.Description).ToList()
-                };
+                return BadRequestResponse(result.Errors.Select(e => e.Description).ToList());
             }
         }
 
-        public Task DeleteAsync(int id)
+        public Task<Response> DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(int id, EditUserModel value)
+        public Task<Response> UpdateAsync(int id, EditUserModel value)
         {
             throw new NotImplementedException();
         }

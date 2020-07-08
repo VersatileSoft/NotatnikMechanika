@@ -1,6 +1,6 @@
 ﻿namespace NotatnikMechanika.Shared.Models.User
 {
-    public class LoginResult : ResultBase
+    public class TokenModel
     {
         public string Token { get; set; }
     }

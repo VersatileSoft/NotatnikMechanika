@@ -25,9 +25,9 @@ namespace MvvmPackage.Wpf.Services
             return NavigateToAsync(_wpfPageActivatorService.CreatePageFromPageModel<TPageModel>());
         }
 
-        public Task NavigateToAsync<TPageModel, TParameter>(TParameter parameter) where TPageModel : PageModelBase<TParameter>
+        public Task NavigateToAsync<TPageModel>(int parameter) where TPageModel : PageModelBase
         {
-            return NavigateToAsync(_wpfPageActivatorService.CreatePageFromPageModel<TPageModel, TParameter>(parameter));
+            return NavigateToAsync(_wpfPageActivatorService.CreatePageFromPageModel<TPageModel>(parameter));
         }
 
         private Task NavigateToAsync(ContentControl page)

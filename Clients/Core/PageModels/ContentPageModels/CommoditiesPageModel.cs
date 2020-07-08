@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Core.PageModels
 {
@@ -19,7 +20,6 @@ namespace NotatnikMechanika.Core.PageModels
     {
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMvNavigationService _navigationService;
-        public bool IsLoading { get; set; }
         public IEnumerable<CommodityModel> Commodities { get; set; }
         public ICommand AddCommodityCommand { get; set; }
         public ICommand CommoditySelectedCommand { get; set; }
@@ -31,7 +31,7 @@ namespace NotatnikMechanika.Core.PageModels
             _navigationService = navigationService;
 
             AddCommodityCommand = new AsyncCommand(() => _navigationService.NavigateToAsync<AddCommodityPageModel>());
-            CommoditySelectedCommand = new AsyncCommand<int>((id) => _navigationService.NavigateToAsync<CommodityPageModel, int>(id));
+            CommoditySelectedCommand = new AsyncCommand<int>((id) => _navigationService.NavigateToAsync<CommodityPageModel>(id));
             RemoveCommodityCommand = new AsyncCommand<int>(RemoveCommodityAction);
         }
 
@@ -44,11 +44,11 @@ namespace NotatnikMechanika.Core.PageModels
         public override async Task Initialize()
         {
             IsLoading = true;
-            Response<GetAllResult<CommodityModel>> response = await _httpRequestService.SendGet<GetAllResult<CommodityModel>>(new CommodityPaths().GetFullPath(CRUDPaths.GetAllPath));
+            Response<List<CommodityModel>> response = await _httpRequestService.SendGet<List<CommodityModel>>(new CommodityPaths().GetFullPath(CRUDPaths.GetAllPath));
 
-            if (response.StatusCode == HttpStatusCode.OK)
+            if (response.Successful)
             {
-                Commodities = response.Content.Models;
+                Commodities = response.Content;
             }
             IsLoading = false;
         }

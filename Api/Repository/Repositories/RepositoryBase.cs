@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using NotatnikMechanika.Data;
 using NotatnikMechanika.Data.Models;
 using NotatnikMechanika.Repository.Interfaces.Base;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Repository.Repositories
@@ -12,34 +12,23 @@ namespace NotatnikMechanika.Repository.Repositories
     public abstract class RepositoryBase<ModelType, EntityType> : IRepositoryBase<ModelType> where ModelType : class, new() where EntityType : EntityBase, new()
     {
         protected readonly NotatnikMechanikaDbContext _dbContext;
+        protected readonly IMapper _mapper;
 
-        public RepositoryBase(NotatnikMechanikaDbContext dbContext)
+        protected RepositoryBase(NotatnikMechanikaDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
-        public async Task<bool> CheckIfUserMatch(string userId, int Id)
+        public Task<bool> CheckIfUserMatch(string userId, int Id)
         {
-            return await _dbContext.Set<EntityType>().Where(a => a.UserId == userId).Where(a => a.Id == Id).AnyAsync();
+            return _dbContext.Set<EntityType>().Where(a => a.UserId == userId).Where(a => a.Id == Id).AnyAsync();
         }
 
         public async Task CreateAsync(string userId, ModelType value)
         {
-
-            EntityType entity = new EntityType
-            {
-                UserId = userId
-            };
-
-            foreach (PropertyInfo prop in value.GetType().GetProperties())
-            {
-                if (prop.GetValue(value) == null)
-                {
-                    continue;
-                }
-
-                entity.GetType().GetProperty(prop.Name).SetValue(entity, prop.GetValue(value));
-            }
+            EntityType entity = _mapper.Map<EntityType>(value);
+            entity.UserId = userId;
 
             await _dbContext.Set<EntityType>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
@@ -53,48 +42,22 @@ namespace NotatnikMechanika.Repository.Repositories
 
         public async Task<ModelType> GetAsync(int Id)
         {
-            ModelType model = new ModelType();
-
             EntityType entity = await _dbContext.Set<EntityType>().Where(a => a.Id == Id).FirstOrDefaultAsync();
-
-            foreach (PropertyInfo prop in model.GetType().GetProperties())
-            {
-                prop.SetValue(model, entity.GetType().GetProperty(prop.Name).GetValue(entity));
-            }
-
-            return model;
+            return _mapper.Map<ModelType>(entity);
         }
 
         public async Task<IEnumerable<ModelType>> GetAllAsync(string userId)
         {
-            List<ModelType> list = new List<ModelType>();
-
-            foreach (EntityType entity in await _dbContext.Set<EntityType>().Where(a => a.UserId == userId).ToListAsync())
-            {
-                ModelType model = new ModelType();
-
-                foreach (PropertyInfo prop in model.GetType().GetProperties())
-                {
-                    if (entity.GetType().GetProperty(prop.Name) == null)
-                    {
-                        continue;
-                    }
-
-                    prop.SetValue(model, entity.GetType().GetProperty(prop.Name).GetValue(entity));
-                }
-                list.Add(model);
-            }
-            return list;
+            List<EntityType> result = await _dbContext.Set<EntityType>().Where(a => a.UserId == userId).ToListAsync();
+            return _mapper.Map<List<EntityType>, List<ModelType>>(result);
         }
 
-        public async Task UpdateAsync(int Id, ModelType value)
+        public async Task UpdateAsync(int id, ModelType value)
         {
-            EntityType entity = await _dbContext.Set<EntityType>().Where(a => a.Id == Id).FirstOrDefaultAsync();
+            EntityType entity = await _dbContext.Set<EntityType>().Where(a => a.Id == id).FirstOrDefaultAsync();
+            _mapper.Map(value, entity);
+            entity.Id = id;
 
-            foreach (PropertyInfo prop in value.GetType().GetProperties())
-            {
-                entity.GetType().GetProperty(prop.Name).SetValue(entity, prop.GetValue(value));
-            }
             _dbContext.Set<EntityType>().Update(entity);
             await _dbContext.SaveChangesAsync();
         }

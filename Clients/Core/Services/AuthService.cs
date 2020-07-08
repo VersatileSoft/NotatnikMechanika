@@ -1,6 +1,5 @@
 ﻿using MvvmPackage.Core.Attributes;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Core.Model;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.User;
 using System;
@@ -8,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Core.Services
 {
@@ -27,16 +27,16 @@ namespace NotatnikMechanika.Core.Services
             _httpRequestService = httpRequestService;
         }
 
-        public async Task<RegisterResult> RegisterAsync(RegisterModel registerModel)
+        public async Task<Response> RegisterAsync(RegisterModel registerModel)
         {
-            return (await _httpRequestService.SendPost<RegisterModel, RegisterResult>(registerModel, new AccountPaths().GetFullPath(AccountPaths.RegisterPath))).Content;
+            return await _httpRequestService.SendPost(registerModel, new AccountPaths().GetFullPath(AccountPaths.RegisterPath));
         }
 
-        public async Task<LoginResult> LoginAsync(LoginModel loginModel)
+        public async Task<TokenModel> LoginAsync(LoginModel loginModel)
         {
-            Response<LoginResult> loginResponse = await _httpRequestService.SendPost<LoginModel, LoginResult>(loginModel, new AccountPaths().GetFullPath(AccountPaths.LoginPath));
+            Response<TokenModel> loginResponse = await _httpRequestService.SendPost<LoginModel, TokenModel>(loginModel, new AccountPaths().GetFullPath(AccountPaths.LoginPath));
 
-            if (loginResponse.StatusCode != HttpStatusCode.OK)
+            if (!loginResponse.Successful)
             {
                 return loginResponse.Content;
             }

@@ -34,11 +34,11 @@ namespace NotatnikMechanika.Core.PageModels
         public async Task LoginAction()
         {
             IsWaiting = true;
-            LoginResult loginResult = await _authService.LoginAsync(LoginModel);
-            if (!loginResult.Successful)
-            {
-                ErrorMessage = loginResult.Errors?.First();
-            }
+            TokenModel loginResult = await _authService.LoginAsync(LoginModel);
+            //if (!loginResult.)
+            //{
+            //    ErrorMessage = loginResult.Errors?.First();
+            //}
             IsWaiting = false;
         }
     }

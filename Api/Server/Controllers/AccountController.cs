@@ -4,6 +4,7 @@ using NotatnikMechanika.Service.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.User;
 using System.Threading.Tasks;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Server.Controllers
 {
@@ -17,16 +18,16 @@ namespace NotatnikMechanika.Server.Controllers
         }
 
         [HttpPost(AccountPaths.LoginPath)]
-        public async Task<ActionResult<LoginResult>> LoginAsync([FromBody] LoginModel loginModel)
+        public async Task<ActionResult<Response<TokenModel>>> LoginAsync([FromBody] LoginModel loginModel)
         {
-            LoginResult result = await _accountService.AuthenticateAsync(loginModel.Email, loginModel.Password);
-            if (result.Successful)
+            Response<TokenModel> loginResponse = await _accountService.AuthenticateAsync(loginModel.Email, loginModel.Password);
+            if (loginResponse.Successful)
             {
-                return Ok(result);
+                return Ok(loginResponse);
             }
             else
             {
-                return Unauthorized(result);
+                return Unauthorized(loginResponse);
             }
         }
 
@@ -38,9 +39,9 @@ namespace NotatnikMechanika.Server.Controllers
         }
 
         [HttpPost(AccountPaths.RegisterPath)]
-        public async Task<ActionResult<RegisterResult>> RegisterAsync([FromBody] RegisterModel value)
+        public async Task<ActionResult<Response>> RegisterAsync([FromBody] RegisterModel value)
         {
-            RegisterResult result = await _accountService.RegisterAsync(value);
+            Response result = await _accountService.RegisterAsync(value);
 
             if (result.Successful)
             {
@@ -52,18 +53,16 @@ namespace NotatnikMechanika.Server.Controllers
 
         [Authorize]
         [HttpPut(AccountPaths.UpdatePath)]
-        public async Task<ActionResult> UpdateUserAsync(int id, [FromBody] EditUserModel value)
+        public async Task<ActionResult<Response>> UpdateUserAsync(int id, [FromBody] EditUserModel value)
         {
-            await _accountService.UpdateAsync(id, value);
-            return Ok();
+            return Ok(await _accountService.UpdateAsync(id, value));
         }
 
         [Authorize]
         [HttpDelete(AccountPaths.DeletePath)]
-        public async Task<ActionResult> DeleteAsync(int id)
+        public async Task<ActionResult<Response>> DeleteAsync(int id)
         {
-            await _accountService.DeleteAsync(id);
-            return Ok();
+            return Ok(await _accountService.DeleteAsync(id));
         }
     }
 }

@@ -2,15 +2,16 @@
 using NotatnikMechanika.Shared.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Service.Interfaces.Base
 {
-    public interface IServiceBase<T>
+    public interface IServiceBase<TModel>
     {
-        Task<GetAllResult<T>> GetAllAsync(string userId);
-        Task<T> GetAsync(string userId, int Id);
-        Task<ResultBase> CreateAsync(string userId, T value);
-        Task UpdateAsync(string userId, int Id, T value);
-        Task DeleteAsync(string userId, int Id);
+        Task<Response<IEnumerable<TModel>>> GetAllAsync(string userId);
+        Task<Response<TModel>> GetAsync(string userId, int Id);
+        Task<Response> CreateAsync(string userId, TModel value);
+        Task<Response> UpdateAsync(string userId, int Id, TModel value);
+        Task<Response> DeleteAsync(string userId, int Id);
     }
 }

@@ -15,7 +15,7 @@ namespace MvvmPackage.Core.Services.Interfaces
         /// <typeparam name="TPageModel">Page model type</typeparam>
         /// <typeparam name="TParameter">Parameter type</typeparam>
         /// <param name="parameter">Parameter to pass</param>
-        Task NavigateToAsync<TPageModel, TParameter>(TParameter parameter) where TPageModel : PageModelBase<TParameter>;
+        Task NavigateToAsync<TPageModel>(int parameter) where TPageModel : PageModelBase;
         /// <summary>
         /// Pop current presenting page
         /// </summary>

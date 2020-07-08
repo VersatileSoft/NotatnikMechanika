@@ -2,11 +2,10 @@
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Core.Model;
 using NotatnikMechanika.Shared;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Core.Services
 {
@@ -22,7 +21,7 @@ namespace NotatnikMechanika.Core.Services
         public async Task<Response<ResponseModel>> SendGet<ResponseModel>(string path) where ResponseModel : new()
         {
             HttpResponseMessage response = await _client.GetAsync(path);
-            return await Response<ResponseModel>.GetResponse(response);
+            return await ParseResponse<ResponseModel>(response);
         }
 
         public async Task<Response<ResponseModel>> SendPost<SendModel, ResponseModel>(SendModel model, string path) where ResponseModel : new()
@@ -35,12 +34,12 @@ namespace NotatnikMechanika.Core.Services
             string myContent = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(myContent, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await _client.PostAsync(path, content);
-            return await Response<ResponseModel>.GetResponse(response);
+            return await ParseResponse<ResponseModel>(response);
         }
 
-        public async Task<Response<ResultBase>> SendPost<SendModel>(SendModel model, string path)
+        public async Task<Response> SendPost<SendModel>(SendModel model, string path)
         {
-            if (!model.IsModelValid(out Response<ResultBase> errorResponse))
+            if (!model.IsModelValid(out Response errorResponse))
             {
                 return errorResponse;
             }
@@ -48,19 +47,19 @@ namespace NotatnikMechanika.Core.Services
             string myContent = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(myContent, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await _client.PostAsync(path, content);
-            return await Response<ResultBase>.GetResponse(response);
+            return await ParseResponse(response);
         }
 
-        public async Task<Response<object>> SendPost(string path)
+        public async Task<Response> SendPost(string path)
         {
             HttpResponseMessage response = await _client.PostAsync(path, null);
-            return await Response<object>.GetResponse(response);
+            return await ParseResponse(response);
         }
 
-        public async Task<Response<object>> SendDelete(string path)
+        public async Task<Response> SendDelete(string path)
         {
             HttpResponseMessage response = await _client.DeleteAsync(path);
-            return await Response<object>.GetResponse(response);
+            return await ParseResponse(response);
         }
     }
 }

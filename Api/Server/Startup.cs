@@ -1,4 +1,5 @@
 using Autofac;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,7 @@ namespace NotatnikMechanika.Server
             services.Configure<AppSettings>(options => Configuration.GetSection("AppSettings").Bind(options));
             services.AddDatabase(Configuration);
             services.AddJwtAuthentication(Configuration);
+            services.AddSingleton(new MapperConfiguration(mc => mc.AddProfile(new MappingProfile())).CreateMapper());
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

@@ -1,0 +1,51 @@
+﻿@page "/addorder"
+@using NotatnikMechanika.Core.PageModels
+@using MVVMPackage.Blazor
+@inherits PageBase<AddOrderPageModel>
+
+
+<div class="add-customer">
+    @if (!PageModel.IsLoading)
+    {
+        <div class="mat-layout-grid">
+            <div class="mat-layout-grid-inner">
+                <div class="mat-layout-grid-cell-span-6">
+                    <div class="card mat-elevation-z13">
+                        <div class="card-header">
+                            <p>Dane Klienta i samochodu</p>
+                        </div>
+                        <div class="card-content">
+                            <MatSelectItem @bind-Value="PageModel.SelectedCustomer" Outlined="true" Label="Klient" Items="PageModel.Customers?.ToList()?.AsReadOnly()">
+                                <ItemTemplate>
+                                    <p>@context.Name</p>
+                                    <p>@context.Surname</p>
+                                    <p>@context.Address</p>
+                                    <p>@context.CompanyName</p>
+                                </ItemTemplate>
+                            </MatSelectItem>
+
+                            <MatSelectItem @bind-Value="PageModel.SelectedCar" Outlined="true" Label="Klient" Items="PageModel.Cars?.ToList()?.AsReadOnly()">
+                                <ItemTemplate>
+                                    <p>@context?.Brand</p>
+                                    <p>@context?.Model</p>
+                                </ItemTemplate>
+                            </MatSelectItem>
+                        </div>
+                    </div>
+                </div>
+                <div class="mat-layout-grid-cell-span-6">
+                    <div class="card mat-elevation-z13">
+                        <div class="card-header">
+                            <p>Dane Firmy</p>
+                        </div>
+                        <div class="card-content">
+                            <MatDatePicker @bind-Value="PageModel.Model.AcceptDate" />
+                            <MatDatePicker @bind-Value="PageModel.Model.FinishDate" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <MatButton Raised="true" Label="Dodaj klienta" Command="@PageModel.AddCommand" />
+    }
+</div>

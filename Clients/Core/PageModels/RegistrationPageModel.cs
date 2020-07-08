@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Core.PageModels
 {
@@ -39,17 +40,17 @@ namespace NotatnikMechanika.Core.PageModels
         {
             IsWaiting = true;
 
-            Response<RegisterResult> response;
+            Response response;
             if (RegisterModel.Password != ConfirmPassword)
             {
-                response = Response<RegisterResult>.GetBadModelState(new List<string> { "Hasła są różne" });
+                response = BadRequestResponse(new List<string> { "Hasła są różne" });
             }
             else
             {
-                response = await _httpRequestService.SendPost<RegisterModel, RegisterResult>(RegisterModel, new AccountPaths().GetFullPath(AccountPaths.RegisterPath));
+                response = await _httpRequestService.SendPost(RegisterModel, new AccountPaths().GetFullPath(AccountPaths.RegisterPath));
             }
 
-            if (response.StatusCode == HttpStatusCode.OK)
+            if (response.Successful)
             {
                 await _messageDialogService.ShowMessageDialog("Konto zostało utworzone. Teraz możesz się zalogować.");
                 await _navigationService.NavigateToAsync<LoginPageModel>();

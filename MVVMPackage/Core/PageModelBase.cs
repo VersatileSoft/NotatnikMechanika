@@ -1,9 +1,17 @@
-﻿using System.Threading.Tasks;
+﻿using PropertyChanged;
+using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace MvvmPackage.Core
 {
-    public class PageModelBase
+    [AddINotifyPropertyChangedInterface]
+    public class PageModelBase : INotifyPropertyChanged
     {
+        public bool IsLoading { get; set; }
+        public int Parameter { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         /// <summary>
         /// Called when page is disappearing
         /// </summary>
@@ -27,10 +35,5 @@ namespace MvvmPackage.Core
         {
             return Task.CompletedTask;
         }
-    }
-
-    public abstract class PageModelBase<TParameter> : PageModelBase
-    {
-        public TParameter Parameter { get; set; }
     }
 }

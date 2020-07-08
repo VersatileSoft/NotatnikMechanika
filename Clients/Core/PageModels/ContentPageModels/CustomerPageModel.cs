@@ -2,7 +2,6 @@
 using MvvmPackage.Core.Services.Interfaces;
 using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Core.Model;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Car;
 using NotatnikMechanika.Shared.Models.Customer;
@@ -12,11 +11,12 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Core.PageModels
 {
     [AddINotifyPropertyChangedInterface]
-    public class CustomerPageModel : PageModelBase<int>
+    public class CustomerPageModel : PageModelBase
     {
         public CustomerModel CustomerModel { get; set; }
         public IEnumerable<CarModel> Cars { get; set; }
@@ -27,14 +27,12 @@ namespace NotatnikMechanika.Core.PageModels
 
         private readonly IHttpRequestService _httpRequestService;
 
-        public bool IsLoading { get; set; }
-
         public CustomerPageModel(IHttpRequestService httpRequestService, IMvNavigationService navigationService)
         {
             _httpRequestService = httpRequestService;
             CustomerModel = new CustomerModel();
             GoBackCommand = new AsyncCommand(() => navigationService.NavigateToAsync<MainPageModel>());
-            AddCarCommand = new AsyncCommand(() => navigationService.NavigateToAsync<AddCarPageModel, int>(CustomerModel.Id));
+            AddCarCommand = new AsyncCommand(() => navigationService.NavigateToAsync<AddCarPageModel>(CustomerModel.Id));
             RemoveCarCommand = new AsyncCommand<int>(RemoveCarAction);
         }
 
@@ -51,7 +49,7 @@ namespace NotatnikMechanika.Core.PageModels
 
             Response<CustomerModel> responseCustomer = await _httpRequestService.SendGet<CustomerModel>(PathsHelper.GetPathsByModel<CustomerModel>().GetFullPath(CustomerModel.Id.ToString()));
 
-            if (responseCustomer.StatusCode == HttpStatusCode.OK)
+            if (responseCustomer.Successful)
             {
                 CustomerModel = responseCustomer.Content;
             }
@@ -61,14 +59,14 @@ namespace NotatnikMechanika.Core.PageModels
                 return;
             }
 
-            Response<CarsResult> responseCars = await _httpRequestService.SendGet<CarsResult>(
+            Response<List<CarModel>> responseCars = await _httpRequestService.SendGet<List<CarModel>>(
                 PathsHelper
                 .GetPathsByModel<CarModel>()
                 .GetFullPath(CarPaths.GetByCustomerPath.Replace("{customerId}", CustomerModel.Id.ToString())));
 
-            if (responseCars.StatusCode == HttpStatusCode.OK)
+            if (responseCars.Successful)
             {
-                Cars = responseCars.Content.Cars;
+                Cars = responseCars.Content;
             }
             else
             {

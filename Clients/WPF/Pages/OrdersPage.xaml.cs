@@ -14,7 +14,7 @@ namespace NotatnikMechanika.WPF.Pages
         private void ListPage_Selected(object sender, System.Windows.RoutedEventArgs e)
         {
             OrderExtendedModel model = (sender as ListView).SelectedItem as OrderExtendedModel;
-            PageModel.OrderSelectedCommand.Execute(model);
+            PageModel.OrderSelectedCommand.Execute(model.Id);
         }
     }
 }

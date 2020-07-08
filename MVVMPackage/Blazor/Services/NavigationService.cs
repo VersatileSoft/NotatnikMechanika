@@ -17,23 +17,22 @@ namespace MVVMPackage.Blazor.Services
 
         public Task NavigateToAsync<TPageModel>() where TPageModel : PageModelBase
         {
-            string vmName = typeof(TPageModel).Name;
-            _navigationManager.NavigateTo("/" + (vmName.EndsWith("PageModel")
-                ? vmName.Replace("PageModel", "")
-                : vmName).ToLower());
+            _navigationManager.NavigateTo(GetPageName<TPageModel>());
             return Task.CompletedTask;
         }
 
-        public Task NavigateToAsync<TPageModel, TParameter>(TParameter parameter) where TPageModel : PageModelBase<TParameter>
+        public Task NavigateToAsync<TPageModel>(int parameter) where TPageModel : PageModelBase
+        {
+            _navigationManager.NavigateTo($"{GetPageName<TPageModel>()}/{parameter}");
+            return Task.CompletedTask;
+        }
+
+        private string GetPageName<TPageModel>()
         {
             string vmName = typeof(TPageModel).Name;
-            string pageName = "/" + (vmName.EndsWith("PageModel")
+            return "/" + (vmName.EndsWith("PageModel")
                 ? vmName.Replace("PageModel", "")
                 : vmName).ToLower();
-
-            _navigationManager.NavigateTo($"{pageName}/{parameter}");
-
-            return Task.CompletedTask;
         }
 
         public Task PopAsync()
