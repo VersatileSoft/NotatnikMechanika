@@ -63,7 +63,7 @@ namespace NotatnikMechanika.Service.Services
                 errors.Add("Usługa nie jest twoja");
             }
 
-            if (await _orderRepository.CheckIfOrderToCommodityExsist(orderId, serviceId))
+            if (await _orderRepository.CheckIfOrderToServiceExsist(orderId, serviceId))
             {
                 errors.Add("Usługa jest już dodana do zlecenia");
             }
@@ -119,7 +119,7 @@ namespace NotatnikMechanika.Service.Services
                 errors.Add("Usługa nie jest twoja");
             }
 
-            if (!await _orderRepository.CheckIfOrderToCommodityExsist(orderId, serviceId))
+            if (!await _orderRepository.CheckIfOrderToServiceExsist(orderId, serviceId))
             {
                 errors.Add("Usługa nie jest dodana do zlecenia");
             }

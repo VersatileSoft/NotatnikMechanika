@@ -8,7 +8,6 @@ using NotatnikMechanika.Shared.Models.Order;
 using NotatnikMechanika.Shared.Models.Service;
 using PropertyChanged;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using static NotatnikMechanika.Shared.ResponseBuilder;
@@ -22,7 +21,8 @@ namespace NotatnikMechanika.Core.PageModels
         private readonly IMvNavigationService _navigationService;
 
         public ICommand GoBackCommand { get; set; }
-        public ICommand AddServiceCommodityCommand { get; set; }
+        public ICommand AddServiceCommand { get; set; }
+        public ICommand AddCommodityCommand { get; set; }
 
         public OrderExtendedModel OrderModel { get; set; }
         public List<CommodityModel> Commodities { get; set; }
@@ -37,7 +37,8 @@ namespace NotatnikMechanika.Core.PageModels
             _httpRequestService = httpRequestService;
             _navigationService = navigationService;
             GoBackCommand = new AsyncCommand(() => navigationService.NavigateToAsync<MainPageModel>());
-            // AddServiceCommodityCommand = new AsyncCommand<bool>(AddServiceCommodityAction);
+            AddServiceCommand = new AsyncCommand(() => _navigationService.NavigateToAsync<AddServiceToOrderPageModel>(OrderModel.Id));
+            AddCommodityCommand = new AsyncCommand(() => _navigationService.NavigateToAsync<AddCommodityToOrderPageModel>(OrderModel.Id));
 
             // navigationService.AfterClose += NavigationService_AfterClose;
         }
@@ -48,23 +49,6 @@ namespace NotatnikMechanika.Core.PageModels
         //    {
         //        Task.Run(Initialize);
         //    }
-        //}
-
-        //private async Task AddServiceCommodityAction(bool isService)
-        //{
-        //    if (isService)
-        //    {
-        //        await _navigationService.NavigateToAsync<AddServiceToOrderPageModel, int>(OrderModel.Id);
-        //    }
-        //    else
-        //    {
-        //        await _navigationService.NavigateToAsync<AddCommodityToOrderPageModel, int>(OrderModel.Id);
-        //    }
-        //}
-
-        //public override void Prepare(OrderExtendedModel model)
-        //{
-        //    OrderModel = model;
         //}
 
         public override async Task Initialize()
@@ -84,7 +68,7 @@ namespace NotatnikMechanika.Core.PageModels
                 return;
             }
 
-            /*Response<List<ServiceModel>> servicesResponse = await _httpRequestService.SendGet<List<ServiceModel>>(new ServicePaths().GetFullPath(ServicePaths.GetAllInOrderPath.Replace("{orderId}", OrderModel.Id.ToString())));
+            Response<List<ServiceModel>> servicesResponse = await _httpRequestService.SendGet<List<ServiceModel>>(new ServicePaths().GetFullPath(ServicePaths.GetAllInOrderPath.Replace("{orderId}", OrderModel.Id.ToString())));
 
             if (servicesResponse.Successful)
             {
@@ -96,7 +80,7 @@ namespace NotatnikMechanika.Core.PageModels
             if (commoditiesResponse.Successful)
             {
                 Commodities = commoditiesResponse.Content;
-            }*/
+            }
             IsLoading = false;
         }
     }

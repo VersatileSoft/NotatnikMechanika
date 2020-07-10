@@ -6,6 +6,7 @@ using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Commodity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Server.Controllers
 {
@@ -21,13 +22,13 @@ namespace NotatnikMechanika.Server.Controllers
         }
 
         [HttpGet(CommodityPaths.GetAllForOrderPath)]
-        public async Task<ActionResult<IEnumerable<CommodityForOrderModel>>> GetCommoditiesForOrder(int orderId)
+        public async Task<ActionResult<Response<IEnumerable<CommodityForOrderModel>>>> GetCommoditiesForOrder(int orderId)
         {
             return Ok(await _commodityService.GetCommoditiesForOrder(User.Identity.Name, orderId));
         }
 
         [HttpGet(CommodityPaths.GetAllInOrderPath)]
-        public async Task<ActionResult<IEnumerable<CommodityModel>>> GetCommoditiesInOrder(int orderId)
+        public async Task<ActionResult<Response<IEnumerable<CommodityModel>>>> GetCommoditiesInOrder(int orderId)
         {
             return Ok(await _commodityService.GetCommoditiesInOrder(User.Identity.Name, orderId));
         }

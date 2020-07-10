@@ -51,20 +51,27 @@
                     </div>
 
                     <div class="card-content">
-                        @*<MatAccordion>
-                            @foreach (ServiceModel service in PageModel.Services)
-                            {
-                                <MatExpansionPanel>
-                                    <MatExpansionPanelSummary>
-                                        <p>@service.Name</p>
-                                        <p>@service.Price</p>
-                                    </MatExpansionPanelSummary>
-                                    <MatExpansionPanelDetails>
-                                        <p>Nic tu niema</p>
-                                    </MatExpansionPanelDetails>
-                                </MatExpansionPanel>
-                            }
-                        </MatAccordion>*@
+
+                        <MatButton Command="PageModel.AddServiceCommand" Label="Dodaj usługę" />
+
+                        @if (PageModel.Services != null)
+                        {
+                            <MatAccordion>
+                                @foreach (ServiceModel service in PageModel.Services)
+                                {
+                                    <MatExpansionPanel>
+                                        <MatExpansionPanelSummary>
+                                            <p>@service.Name</p>
+                                            <p>@service.Price</p>
+                                        </MatExpansionPanelSummary>
+                                        <MatExpansionPanelDetails>
+                                            <p>Nic tu niema</p>
+                                        </MatExpansionPanelDetails>
+                                    </MatExpansionPanel>
+                                }
+                            </MatAccordion>
+                        }
+
                     </div>
                 </div>
             </div>
@@ -76,20 +83,26 @@
                     </div>
 
                     <div class="card-content">
-                        @*<MatAccordion>
-                            @foreach (CommodityModel commodity in PageModel.Commodities)
-                            {
-                                <MatExpansionPanel>
-                                    <MatExpansionPanelSummary>
-                                        <p>@commodity.Name</p>
-                                        <p>@commodity.Price</p>
-                                    </MatExpansionPanelSummary>
-                                    <MatExpansionPanelDetails>
-                                        <p>Nic tu niema</p>
-                                    </MatExpansionPanelDetails>
-                                </MatExpansionPanel>
-                            }
-                        </MatAccordion>*@
+
+                        <MatButton Command="PageModel.AddCommodityCommand" Label="Dodaj Towar" />
+
+                        @if (PageModel.Services != null)
+                        {
+                            <MatAccordion>
+                                @foreach (CommodityModel commodity in PageModel.Commodities)
+                                {
+                                    <MatExpansionPanel>
+                                        <MatExpansionPanelSummary>
+                                            <p>@commodity.Name</p>
+                                            <p>@commodity.Price</p>
+                                        </MatExpansionPanelSummary>
+                                        <MatExpansionPanelDetails>
+                                            <p>Nic tu niema</p>
+                                        </MatExpansionPanelDetails>
+                                    </MatExpansionPanel>
+                                }
+                            </MatAccordion>
+                        }
                     </div>
                 </div>
             </div>

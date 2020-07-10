@@ -6,6 +6,7 @@ using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Service;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Server.Controllers
 {
@@ -20,15 +21,14 @@ namespace NotatnikMechanika.Server.Controllers
             _serviceService = serviceService;
         }
 
-
         [HttpGet(ServicePaths.GetAllForOrderPath)]
-        public async Task<ActionResult<IEnumerable<ServiceForOrderModel>>> GetServicesForOrder(int orderId)
+        public async Task<ActionResult<Response<IEnumerable<ServiceForOrderModel>>>> GetServicesForOrder(int orderId)
         {
             return Ok(await _serviceService.GetServicesForOrder(User.Identity.Name, orderId));
         }
 
         [HttpGet(ServicePaths.GetAllInOrderPath)]
-        public async Task<ActionResult<IEnumerable<ServiceModel>>> GetServicesInOrder(int orderId)
+        public async Task<ActionResult<Response<IEnumerable<ServiceModel>>>> GetServicesInOrder(int orderId)
         {
             return Ok(await _serviceService.GetServicesInOrder(User.Identity.Name, orderId));
         }

@@ -7,7 +7,7 @@ using MVVMPackage.Blazor;
 using NotatnikMechanika.Client.Services;
 using NotatnikMechanika.Core;
 using NotatnikMechanika.Core.Interfaces;
-using System;
+using System.Net.Http;
 
 namespace NotatnikMechanika.Client
 {
@@ -15,6 +15,8 @@ namespace NotatnikMechanika.Client
     {
         protected override void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient("NotatnikMechanika.Server", client => client.BaseAddress = BaseAddress);
+            services.AddSingleton(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("NotatnikMechanika.Server"));
             services.AddBlazoredLocalStorage();
             services.AddAuthorizationCore();
             services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();

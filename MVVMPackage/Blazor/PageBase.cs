@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmPackage.Core;
+using System;
 using System.Threading.Tasks;
 
 namespace MVVMPackage.Blazor
@@ -8,9 +10,10 @@ namespace MVVMPackage.Blazor
     {
         [Parameter]
         public string Parameter { get; set; }
+        public RenderFragment RenderFragment => BuildRenderTree;
 
         [Inject]
-        protected TPageModel PageModel { get; set; }
+        public TPageModel PageModel { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
@@ -26,6 +29,13 @@ namespace MVVMPackage.Blazor
             }
             await PageModel.Initialize();
             await base.OnParametersSetAsync();
+        }
+
+        public async Task DialogInitialize(IServiceProvider services, int parameter = 0)
+        {
+            PageModel = services.GetService<TPageModel>();
+            PageModel.Parameter = parameter;
+            await PageModel.Initialize();
         }
     }
 }

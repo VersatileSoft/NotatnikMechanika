@@ -1,9 +1,11 @@
 ﻿using NotatnikMechanika.Repository.Interfaces;
 using NotatnikMechanika.Service.Interfaces;
 using NotatnikMechanika.Service.Services.Base;
+using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Service;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Service.Services
 {
@@ -16,14 +18,15 @@ namespace NotatnikMechanika.Service.Services
             _serviceRepository = serviceRepository;
         }
 
-        public Task<IEnumerable<ServiceForOrderModel>> GetServicesForOrder(string userId, int orderId)
+        public async Task<Response<IEnumerable<ServiceForOrderModel>>> GetServicesForOrder(string userId, int orderId)
         {
-            return _serviceRepository.GetServicesForOrder(userId, orderId);
+            return CreateResponse(await _serviceRepository.GetServicesForOrder(userId, orderId));
         }
 
-        public Task<IEnumerable<ServiceModel>> GetServicesInOrder(string userId, int orderId)
+        public async Task<Response<IEnumerable<ServiceModel>>> GetServicesInOrder(string userId, int orderId)
         {
-            return _serviceRepository.GetServicesInOrder(userId, orderId);
+
+            return CreateResponse(await _serviceRepository.GetServicesInOrder(userId, orderId));
         }
     }
 }

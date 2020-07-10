@@ -1,0 +1,21 @@
+﻿@using NotatnikMechanika.Core.PageModels
+@using NotatnikMechanika.Shared.Models.Service
+@using MVVMPackage.Blazor
+@inherits PageBase<AddServiceToOrderPageModel>
+@attribute [DisplayDialog]
+
+<MatDialogTitle>Hi</MatDialogTitle>
+<MatDialogContent>
+    <p>Dodaj usługi</p>
+    @if (PageModel.ServiceModels != null)
+    {
+        @foreach (ServiceForOrderModel service in PageModel.ServiceModels)
+        {
+            <p>@service.Name @service.Price</p>
+            <MatIconButton Icon="@(service.IsInOrder ? MatIconNames.Remove : MatIconNames.Add)" Command="PageModel.AddRemoveServiceCommand" CommandParameter="service"/>
+        }
+    }
+</MatDialogContent>
+<MatDialogActions>
+    <MatButton Command="PageModel.CloseCommand">No Thanks</MatButton>
+</MatDialogActions>

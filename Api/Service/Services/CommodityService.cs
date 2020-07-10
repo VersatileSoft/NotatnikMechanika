@@ -4,6 +4,7 @@ using NotatnikMechanika.Service.Services.Base;
 using NotatnikMechanika.Shared.Models.Commodity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Service.Services
 {
@@ -16,14 +17,14 @@ namespace NotatnikMechanika.Service.Services
             _commodityRepository = commodityRepository;
         }
 
-        public Task<IEnumerable<CommodityForOrderModel>> GetCommoditiesForOrder(string userId, int orderId)
+        public async Task<Response<IEnumerable<CommodityForOrderModel>>> GetCommoditiesForOrder(string userId, int orderId)
         {
-            return _commodityRepository.GetCommoditiesForOrder(userId, orderId);
+            return CreateResponse(await _commodityRepository.GetCommoditiesForOrder(userId, orderId));
         }
 
-        public Task<IEnumerable<CommodityModel>> GetCommoditiesInOrder(string userId, int orderId)
+        public async Task<Response<IEnumerable<CommodityModel>>> GetCommoditiesInOrder(string userId, int orderId)
         {
-            return _commodityRepository.GetCommoditiesInOrder(userId, orderId);
+            return CreateResponse(await _commodityRepository.GetCommoditiesInOrder(userId, orderId));
         }
     }
 }

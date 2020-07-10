@@ -1,7 +1,11 @@
 ﻿@inherits LayoutComponentBase
 @using NotatnikMechanika.Client.Utils
+@using MvvmPackage.Core.Services.Interfaces
+@using MVVMPackage.Blazor.Services
+@inject IMvNavigationService NavigationService
 
 <div class="main-layout">
+    <MatDialog @bind-IsOpen="@dialogIsOpen" ChildContent="@dialogContent" />
     <AuthorizeView>
         <Authorized>
             <MatAppBarContainer Class="app-bar">
@@ -46,12 +50,29 @@
 @code
 {
     bool Opened = true;
+    bool dialogIsOpen = false;
+    RenderFragment dialogContent = d => { };
+
+    void DialogStateChanged(bool isShowing, RenderFragment dialogPage)
+    {
+        dialogIsOpen = isShowing;
+        dialogContent = dialogPage;
+        StateHasChanged();
+    }
 
     void ButtonClicked()
     {
         Opened = !Opened;
     }
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if(NavigationService is NavigationService navigationService)
+        {
+            navigationService.DialogChanged = DialogStateChanged;
+        }
+        base.OnAfterRender(firstRender);
+    }
 }
 
 

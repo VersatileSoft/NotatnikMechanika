@@ -20,5 +20,6 @@ namespace MvvmPackage.Core.Services.Interfaces
         /// Pop current presenting page
         /// </summary>
         Task PopAsync();
+        Task CloseDialog();
     }
 }

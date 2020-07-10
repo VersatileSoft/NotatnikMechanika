@@ -13,6 +13,7 @@ namespace MVVMPackage.Blazor
     public abstract class BlazorApp<TMainPageService, TComponent> where TMainPageService : IMainPageService where TComponent : IComponent
     {
         protected IServiceProvider Services { get; set; }
+        protected Uri BaseAddress { get; set; }
         protected BlazorApp()
         {
             IoC.PlatformProjectAssembly = GetType().Assembly;
@@ -27,11 +28,9 @@ namespace MVVMPackage.Blazor
         {
             WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<TComponent>("app");
+            BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
             builder.ConfigureContainer(new AutofacServiceProviderFactory(IoC.ConfigureServices));
             ConfigureServices(builder.Services);
-            builder.Services.AddHttpClient("NotatnikMechanika.Server", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
-            // .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
-            builder.Services.AddSingleton(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("NotatnikMechanika.Server"));
             WebAssemblyHost app = builder.Build();
             Services = app.Services;
             AppStart();
