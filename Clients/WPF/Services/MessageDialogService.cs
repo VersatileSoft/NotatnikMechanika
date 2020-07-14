@@ -5,9 +5,9 @@ namespace NotatnikMechanika.WPF.Services
 {
     public class MessageDialogService : IMessageDialogService
     {
-        public Task ShowMessageDialog(string message)
+        public Task ShowMessageDialog(string message, MessageDialogType type, string title = null)
         {
-            return Task.CompletedTask;
+            throw new System.NotImplementedException();
         }
     }
 }

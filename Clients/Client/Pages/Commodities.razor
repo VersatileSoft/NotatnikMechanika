@@ -13,7 +13,7 @@
     {
         <MatHidden BreakPoint="@MatBreakpoint.SM" Direction="@MatHiddenDirection.Down">
             <ChildContent>
-                <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" Label="Dodaj usługę" OnClick="(_ => PageModel.AddCommodityCommand.Execute(null))" />
+                <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" Label="Dodaj towar" OnClick="(_ => PageModel.AddCommodityCommand.Execute(null))" />
                 <MatTable Items="PageModel.Commodities" class="table" ShowPaging="false" UseSortHeaderRow="true" HeaderRowClass="table-header">
                     <MatTableHeader>
                         <th scope="col">Nazwa</th>

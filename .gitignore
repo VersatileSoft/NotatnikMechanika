@@ -349,3 +349,4 @@ healthchecksdb
 MigrationBackup/
 Clients/NotatnikMechanika.Flutter/ios/Flutter/flutter_export_environment.sh
 Clients/NotatnikMechanika.Forms.Android/Resources/Resource.designer.cs
+Api/Server/appsettings.json

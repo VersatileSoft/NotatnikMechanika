@@ -30,7 +30,7 @@ namespace MVVMPackage.Blazor.Services
             }
             else
             {
-                _navigationManager.NavigateTo(GetPageName<TPageModel>());
+                _navigationManager.NavigateTo(GetPageName<TPageModel>().ToLower());
             }
         }
 
@@ -42,7 +42,7 @@ namespace MVVMPackage.Blazor.Services
             }
             else
             {
-                _navigationManager.NavigateTo($"{GetPageName<TPageModel>()}/{parameter}");
+                _navigationManager.NavigateTo($"{GetPageName<TPageModel>().ToLower()}/{parameter}");
             }
         }
 
