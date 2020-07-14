@@ -5,6 +5,7 @@ using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Commodity;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using static NotatnikMechanika.Shared.ResponseBuilder;
@@ -15,46 +16,62 @@ namespace NotatnikMechanika.Core.PageModels
     {
         private int _orderId;
         private readonly IHttpRequestService _httpRequestService;
+        private readonly IMessageDialogService _messageDialogService;
 
         public List<CommodityForOrderModel> CommodityModels { get; set; }
 
         public ICommand CloseCommand { get; set; }
         public ICommand AddRemoveCommodityCommand { get; set; }
 
-        public AddCommodityToOrderPageModel(IHttpRequestService httpRequestService, IMvNavigationService navigationService)
+        public AddCommodityToOrderPageModel(IHttpRequestService httpRequestService, IMvNavigationService navigationService, IMessageDialogService messageDialogService)
         {
             _httpRequestService = httpRequestService;
+            _messageDialogService = messageDialogService;
             CloseCommand = new AsyncCommand(() => navigationService.CloseDialog());
             AddRemoveCommodityCommand = new AsyncCommand<CommodityForOrderModel>(AddRemoveCommodityAction);
         }
 
         private async Task AddRemoveCommodityAction(CommodityForOrderModel commodityModel)
         {
+            IsLoading = true;
             Response response;
             if (commodityModel.IsInOrder)
             {
-                response = await _httpRequestService.SendDelete(new OrderPaths().GetFullPath(OrderPaths.DeleteCommodityFromOrder.Replace("{orderId}", _orderId.ToString()).Replace("{commodityId}", commodityModel.Id.ToString())));
+                string path = new OrderPaths().GetFullPath(OrderPaths.DeleteCommodityFromOrder.Replace("{orderId}", _orderId.ToString()).Replace("{commodityId}", commodityModel.Id.ToString()));
+                response = await _httpRequestService.SendDelete(path);
             }
             else
             {
-                response = await _httpRequestService.SendPost(new OrderPaths().GetFullPath(OrderPaths.AddCommodityToOrder.Replace("{orderId}", _orderId.ToString()).Replace("{commodityId}", commodityModel.Id.ToString())));
+                string path = new OrderPaths().GetFullPath(OrderPaths.AddCommodityToOrder.Replace("{orderId}", _orderId.ToString()).Replace("{commodityId}", commodityModel.Id.ToString()));
+                response = await _httpRequestService.SendPost(path);
             }
 
             if (response.Successful)
             {
+                await _messageDialogService.ShowMessageDialog($"Pomyślnie {(commodityModel.IsInOrder ? "usunięto" : "dodano")} towar", MessageDialogType.Success);
                 await Initialize();
             }
+            else
+            {
+                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Coś poszło nie tak");
+            }
+            IsLoading = false;
         }
 
         public override async Task Initialize()
         {
             IsLoading = true;
             _orderId = Parameter;
-            Response<List<CommodityForOrderModel>> response = await _httpRequestService.SendGet<List<CommodityForOrderModel>>(new CommodityPaths().GetFullPath(CommodityPaths.GetAllForOrderPath.Replace("{orderId}", _orderId.ToString())));
+            string path = new CommodityPaths().GetFullPath(CommodityPaths.GetAllForOrderPath.Replace("{orderId}", _orderId.ToString()));
+            Response<List<CommodityForOrderModel>> response = await _httpRequestService.SendGet<List<CommodityForOrderModel>>(path);
 
             if (response.Successful)
             {
                 CommodityModels = response.Content;
+            }
+            else
+            {
+                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania towarów");
             }
             IsLoading = false;
         }

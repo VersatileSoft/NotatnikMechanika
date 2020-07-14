@@ -8,23 +8,23 @@
 
         <Tab Title="Zlecenia">
             <ShellContent Title="Aktualne zlecenia">
-                <pages:OrdersView />
+                <pages:OrdersPage />
             </ShellContent>
             <ShellContent Title="Archiwum">
-                <pages:ArchivesView />
-            </ShellContent>
+            <pages:OrdersPage />
+        </ShellContent>
         </Tab>
         <Tab Title="Usługi/Towary">
             <ShellContent Title="Usługi">
-                <pages:ServicesView />
-            </ShellContent>
+            <pages:OrdersPage />
+        </ShellContent>
             <ShellContent Title="Magazyn">
-                <pages:WarehouseView />
-            </ShellContent>
+            <pages:OrdersPage />
+        </ShellContent>
         </Tab>
         <Tab Title="Klienci">
             <ShellContent>
-                <pages:CustomersView />
+                <pages:CustomersPage />
             </ShellContent>
         </Tab>
 </Shell>

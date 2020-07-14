@@ -36,15 +36,13 @@ namespace NotatnikMechanika.Server.Controllers.Base
         [HttpPut(CRUDPaths.UpdatePath)]
         public async Task<ActionResult<Response>> UpdateAsync(int id, [FromBody] TModel value)
         {
-            await _serviceBase.UpdateAsync(User.Identity.Name, id, value);
-            return Ok();
+            return Ok(await _serviceBase.UpdateAsync(User.Identity.Name, id, value));
         }
 
         [HttpDelete(CRUDPaths.DeletePath)]
         public async Task<ActionResult<Response>> DeleteAsync(int id)
-        {
-            await _serviceBase.DeleteAsync(User.Identity.Name, id);
-            return Ok();
+        {           
+            return Ok(await _serviceBase.DeleteAsync(User.Identity.Name, id));
         }
     }
 }

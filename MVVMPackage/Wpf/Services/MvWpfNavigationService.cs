@@ -41,5 +41,10 @@ namespace MvvmPackage.Wpf.Services
             _navigationService.GoBack();
             return Task.CompletedTask;
         }
+
+        public Task CloseDialog()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

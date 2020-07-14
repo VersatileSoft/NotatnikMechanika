@@ -1,22 +1,21 @@
 ﻿@page "/registration"
 @using NotatnikMechanika.Core.PageModels
-@inject RegistrationPageModel PageModel
+@using MVVMPackage.Blazor
+@inherits PageBase<RegistrationPageModel>
 
-<EditForm Model="PageModel.RegisterModel" OnValidSubmit="PageModel.RegisterAction">
-    <div class="input">
-        <MatTextField @bind-Value="PageModel.RegisterModel.Name" Icon="email" Label="Imię" Outlined="true" ValidationDisabled="true" />
-    </div>
-    <div class="input">
-        <MatTextField @bind-Value="PageModel.RegisterModel.Surname" Icon="email" Label="Nazwisko" Outlined="true" ValidationDisabled="true" />
-    </div>
-    <div class="input">
-        <MatTextField @bind-Value="PageModel.RegisterModel.Email" Icon="email" Label="E-mali" Outlined="true" ValidationDisabled="true" />
-    </div>
-    <div class="input">
-        <MatTextField @bind-Value="PageModel.RegisterModel.Password" Icon="lock_outline" Label="Hasło" Type="password" Outlined="true" ValidationDisabled="true" />
-    </div>
-    <div class="buttons">
-        <MatButton @onclick="() => PageModel.LoginCommand.Execute(null)" Raised="true">Mam już konto</MatButton>
-        <MatButton type="submit" Raised="true">Zarejestruj się</MatButton>
-    </div>
-</EditForm>
+<div class="input">
+    <MatTextField @bind-Value="PageModel.RegisterModel.Name" Icon="email" Label="Imię" Outlined="true" ValidationDisabled="true" />
+</div>
+<div class="input">
+    <MatTextField @bind-Value="PageModel.RegisterModel.Surname" Icon="email" Label="Nazwisko" Outlined="true" ValidationDisabled="true" />
+</div>
+<div class="input">
+    <MatTextField @bind-Value="PageModel.RegisterModel.Email" Icon="email" Label="E-mali" Outlined="true" ValidationDisabled="true" />
+</div>
+<div class="input">
+    <MatTextField @bind-Value="PageModel.RegisterModel.Password" Icon="lock_outline" Label="Hasło" Type="password" Outlined="true" ValidationDisabled="true" />
+</div>
+<div class="buttons">
+    <MatButton @onclick="() => PageModel.LoginCommand.Execute(null)" Raised="true">Mam już konto</MatButton>
+    <MatButton type="submit" Raised="true" Command="PageModel.RegisterCommand">Zarejestruj się</MatButton>
+</div>

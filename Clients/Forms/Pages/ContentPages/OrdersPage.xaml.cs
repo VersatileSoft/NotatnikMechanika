@@ -4,9 +4,9 @@ using NotatnikMechanika.Forms.Pages.ContentViews;
 
 namespace NotatnikMechanika.Forms.Pages
 {
-    public partial class OrdersView : MvContentPage<OrdersPageModel>
+    public partial class OrdersPage : MvContentPage<OrdersPageModel>
     {
-        public OrdersView()
+        public OrdersPage()
         {
             InitializeComponent();
         }

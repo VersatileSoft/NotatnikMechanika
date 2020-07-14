@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Core.PageModels;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -35,8 +36,12 @@ namespace NotatnikMechanika.Client.Services
             }
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", savedToken);
-            JwtSecurityToken token = new JwtSecurityTokenHandler().ReadJwtToken(savedToken);
-            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(token.Claims, "jwt")));
+
+            // ReadJwtToken Not working on release, workaround for now
+            //JwtSecurityToken token = new JwtSecurityTokenHandler().ReadJwtToken(savedToken);
+            IEnumerable<Claim> claims = new List<Claim> { new Claim("Name", "dupa") };
+
+            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(claims, "jwt")));
         }
 
         public void StateChanged()

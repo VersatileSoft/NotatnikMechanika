@@ -19,9 +19,9 @@ namespace MvvmPackage.Xamarin.Services
             await NavigateToAsync(_pageActivatorService.CreatePageFromPageModel<TPageModel>());
         }
 
-        public async Task NavigateToAsync<TPageModel, TParameter>(TParameter parameter) where TPageModel : PageModelBase<TParameter>
+        public async Task NavigateToAsync<TPageModel>(int parameter) where TPageModel : PageModelBase
         {
-            await NavigateToAsync(_pageActivatorService.CreatePageFromPageModel<TPageModel, TParameter>(parameter));
+            await NavigateToAsync(_pageActivatorService.CreatePageFromPageModel<TPageModel>(parameter));
         }
 
         private async Task NavigateToAsync(Page page)
@@ -36,6 +36,11 @@ namespace MvvmPackage.Xamarin.Services
             await Device.InvokeOnMainThreadAsync(() =>
                    Application.Current.MainPage.Navigation.PopAsync()
                );
+        }
+
+        public Task CloseDialog()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

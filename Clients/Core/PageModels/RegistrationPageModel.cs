@@ -5,6 +5,7 @@ using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.User;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using static NotatnikMechanika.Shared.ResponseBuilder;
@@ -39,7 +40,7 @@ namespace NotatnikMechanika.Core.PageModels
             IsWaiting = true;
 
             Response response;
-            if (RegisterModel.Password != ConfirmPassword)
+            if (false)
             {
                 response = BadRequestResponse(new List<string> { "Hasła są różne" });
             }
@@ -50,12 +51,13 @@ namespace NotatnikMechanika.Core.PageModels
 
             if (response.Successful)
             {
-                await _messageDialogService.ShowMessageDialog("Konto zostało utworzone. Teraz możesz się zalogować.");
+                await _messageDialogService.ShowMessageDialog("Konto zostało utworzone. Teraz możesz się zalogować.", MessageDialogType.Success, "Rejestracja");
                 await _navigationService.NavigateToAsync<LoginPageModel>();
             }
             else
             {
                 ErrorMessage = response.ErrorMessages?[0];
+                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Success, "Błąd podczas rejestracji");
             }
             IsWaiting = false;
         }

@@ -10,7 +10,7 @@ namespace NotatnikMechanika.Core.Interfaces
     public interface IAuthService
     {
         event EventHandler AuthChanged;
-        Task<TokenModel> LoginAsync(LoginModel loginModel);
+        Task<Response<TokenModel>> LoginAsync(LoginModel loginModel);
         Task<Response> RegisterAsync(RegisterModel registerModel);
         Task LogoutAsync();
     }

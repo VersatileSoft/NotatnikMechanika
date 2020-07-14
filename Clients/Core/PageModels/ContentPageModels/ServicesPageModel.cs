@@ -8,6 +8,7 @@ using NotatnikMechanika.Shared.Models;
 using NotatnikMechanika.Shared.Models.Service;
 using PropertyChanged;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -20,15 +21,17 @@ namespace NotatnikMechanika.Core.PageModels
     {
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMvNavigationService _navigationService;
+        private readonly IMessageDialogService _messageDialogService;
         public IEnumerable<ServiceModel> Services { get; set; }
         public ICommand AddServiceCommand { get; set; }
         public ICommand ServiceSelectedCommand { get; set; }
         public ICommand RemoveServiceCommand { get; set; }
 
-        public ServicesPageModel(IHttpRequestService httpRequestService, IMvNavigationService navigationService)
+        public ServicesPageModel(IHttpRequestService httpRequestService, IMvNavigationService navigationService, IMessageDialogService messageDialogService)
         {
             _httpRequestService = httpRequestService;
             _navigationService = navigationService;
+            _messageDialogService = messageDialogService;
 
             AddServiceCommand = new AsyncCommand(() => _navigationService.NavigateToAsync<AddServicePageModel>());
             ServiceSelectedCommand = new AsyncCommand<int>((id) => _navigationService.NavigateToAsync<ServicePageModel>(id));
@@ -36,7 +39,15 @@ namespace NotatnikMechanika.Core.PageModels
         }
         private async Task RemoveServiceAction(int id)
         {
-            await _httpRequestService.SendDelete(new ServicePaths().GetFullPath(id.ToString()));
+            Response response = await _httpRequestService.SendDelete(new ServicePaths().GetFullPath(id.ToString()));
+            if (response.Successful)
+            {
+                await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto usługę", MessageDialogType.Success);
+            }
+            else
+            {
+                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas usuwania ułsugi");
+            }
             await Initialize();
         }
 
@@ -48,6 +59,10 @@ namespace NotatnikMechanika.Core.PageModels
             if (response.Successful)
             {
                 Services = response.Content;
+            }
+            else
+            {
+                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania usługi");
             }
             IsLoading = false;
         }

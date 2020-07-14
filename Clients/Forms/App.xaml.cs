@@ -7,6 +7,8 @@ using NotatnikMechanika.Forms.Styles;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System;
+using System.Net.Http;
 
 [assembly: ExportFont("Resources/Fonts/GoogleSans-Bold.ttf")]
 [assembly: ExportFont("Resources/Fonts/GoogleSans-BoldItalic.ttf")]
@@ -27,6 +29,13 @@ namespace NotatnikMechanika.Forms
             InitializeComponent();
             LoadStyles();
             LoadMainPage();
+        }
+        protected override void RegisterTypes(ContainerBuilder builder)
+        {
+            builder.RegisterInstance(new HttpClient
+            {
+                BaseAddress = new Uri("https://www.mechanicstoolkit.tk/")
+            });
         }
 
         private void LoadStyles()

@@ -42,13 +42,13 @@ namespace NotatnikMechanika.Core.PageModels
             Response respone = await _httpRequestService.SendPost(Model, path);
             if (respone.Successful)
             {
-                await _messageDialogService.ShowMessageDialog(SuccesMessage);
+                await _messageDialogService.ShowMessageDialog(SuccesMessage, MessageDialogType.Success, "Operacja powiodła się");
                 await _navigationService.NavigateToAsync<MainPageModel>();
             }
             else
             {
                 ErrorMessage = respone.ErrorMessages?.FirstOrDefault();
-                await _messageDialogService.ShowMessageDialog(ErrorMessage);
+                await _messageDialogService.ShowMessageDialog(ErrorMessage, MessageDialogType.Error, "Wystąpił błąd");
             }
             IsLoading = false;
         }

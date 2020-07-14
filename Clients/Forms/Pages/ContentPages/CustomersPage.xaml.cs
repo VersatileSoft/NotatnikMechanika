@@ -3,9 +3,9 @@ using NotatnikMechanika.Core.PageModels;
 
 namespace NotatnikMechanika.Forms.Pages
 {
-    public partial class CustomersView : MvContentPage<CustomersPageModel>
+    public partial class CustomersPage : MvContentPage<CustomersPageModel>
     {
-        public CustomersView()
+        public CustomersPage()
         {
             InitializeComponent();
         }

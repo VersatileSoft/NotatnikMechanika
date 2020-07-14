@@ -16,11 +16,13 @@ namespace MvvmPackage.Xamarin
             IoC.PlatformProjectAssembly = GetType().Assembly;
             IoC.CoreProjectAssembly = typeof(TMainPageService).Assembly;
             IoC.PlatformPackageProjectAssembly = typeof(MvFormsApplication<TMainPageService>).Assembly;
-            IoC.RegisterTypes();
+            IoC.RegisterTypes(RegisterTypes);
 
             pageActivatorService = IoC.Container.Resolve<IFormsPageActivatorService>();
             mainPageService = IoC.Container.Resolve<IMainPageService>();
         }
+
+        protected virtual void RegisterTypes(ContainerBuilder builder) { }
 
         public void LoadMainPage()
         {

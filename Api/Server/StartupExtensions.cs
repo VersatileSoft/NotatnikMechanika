@@ -16,7 +16,7 @@ namespace NotatnikMechanika.Server
         public static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<NotatnikMechanikaDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")) // RemoteConnection, LocalConnection           
+                options.UseSqlServer(configuration.GetConnectionString("PublishConnection")) // RemoteConnection, LocalConnection           
             );
 
             services.AddIdentity<User, IdentityRole>(options =>

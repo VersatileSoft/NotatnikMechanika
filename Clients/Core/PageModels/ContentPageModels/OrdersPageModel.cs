@@ -7,6 +7,7 @@ using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Order;
 using PropertyChanged;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -24,11 +25,13 @@ namespace NotatnikMechanika.Core.PageModels
 
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMvNavigationService _navigationService;
+        private readonly IMessageDialogService _messageDialogService;
 
-        public OrdersPageModel(IMvNavigationService navigationService, IHttpRequestService httpRequestService)
+        public OrdersPageModel(IMvNavigationService navigationService, IHttpRequestService httpRequestService, IMessageDialogService messageDialogService)
         {
             _httpRequestService = httpRequestService;
             _navigationService = navigationService;
+            _messageDialogService = messageDialogService;
             AddOrderCommand = new AsyncCommand(() => _navigationService.NavigateToAsync<AddOrderPageModel>());
             OrderSelectedCommand = new AsyncCommand<int>((id) => _navigationService.NavigateToAsync<OrderPageModel>(id));
             RemoveOrderCommand = new AsyncCommand<int>(RemoveOrderAction);
@@ -36,7 +39,16 @@ namespace NotatnikMechanika.Core.PageModels
 
         private async Task RemoveOrderAction(int id)
         {
-            await _httpRequestService.SendDelete(new OrderPaths().GetFullPath(CRUDPaths.DeletePath.Replace("{id}", id.ToString())));
+            Response response = await _httpRequestService.SendDelete(new OrderPaths().GetFullPath(CRUDPaths.DeletePath.Replace("{id}", id.ToString())));
+
+            if (response.Successful)
+            {
+                await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto zlecenie", MessageDialogType.Success);
+            }
+            else
+            {
+                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Success, "Błąd podczas usuwania zlecenia");
+            }
             await Initialize();
         }
 
@@ -47,6 +59,10 @@ namespace NotatnikMechanika.Core.PageModels
             if (response.Successful)
             {
                 Orders = response.Content;
+            }
+            else
+            {
+                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania zleceń");
             }
             IsLoading = false;
         }

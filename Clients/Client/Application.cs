@@ -1,5 +1,6 @@
 ﻿using Blazor.Extensions.Logging;
 using Blazored.LocalStorage;
+using MatBlazor;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -24,6 +25,15 @@ namespace NotatnikMechanika.Client
                 .AddBrowserConsole()
                 .SetMinimumLevel(LogLevel.Warning)
             );
+            services.AddMatToaster(config =>
+            {
+                config.Position = MatToastPosition.TopRight;
+                config.PreventDuplicates = true;
+                config.NewestOnTop = true;
+                config.ShowCloseButton = true;
+                config.MaximumOpacity = 95;
+                config.VisibleStateDuration = 3000;
+            });
         }
 
         protected override void AppStart()

@@ -58,7 +58,7 @@ namespace MVVMPackage.Blazor.Services
             Type[] types = IoC.PlatformProjectAssembly.GetTypes();
             string pageName = GetPageName<TPageModel>();
             pageType = Array.Find(types, t => t.Name == pageName);
-            return pageType.GetCustomAttribute<DisplayDialogAttribute>() != null;
+            return pageType?.GetCustomAttribute<DisplayDialogAttribute>() != null;
         }
 
         private string GetPageName<TPageModel>()

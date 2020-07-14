@@ -3,7 +3,6 @@ using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.User;
 using System;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -32,19 +31,19 @@ namespace NotatnikMechanika.Core.Services
             return await _httpRequestService.SendPost(registerModel, new AccountPaths().GetFullPath(AccountPaths.RegisterPath));
         }
 
-        public async Task<TokenModel> LoginAsync(LoginModel loginModel)
+        public async Task<Response<TokenModel>> LoginAsync(LoginModel loginModel)
         {
             Response<TokenModel> loginResponse = await _httpRequestService.SendPost<LoginModel, TokenModel>(loginModel, new AccountPaths().GetFullPath(AccountPaths.LoginPath));
 
             if (!loginResponse.Successful)
             {
-                return loginResponse.Content;
+                return loginResponse;
             }
 
             await _settingsService.SetToken(loginResponse.Content.Token);
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResponse.Content.Token);
             AuthChanged?.Invoke(this, EventArgs.Empty);
-            return loginResponse.Content;
+            return loginResponse;
         }
 
         public async Task LogoutAsync()

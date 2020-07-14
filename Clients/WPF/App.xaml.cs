@@ -17,7 +17,7 @@ namespace NotatnikMechanika.WPF
         {
             builder.RegisterInstance(new HttpClient
             {
-                BaseAddress = new Uri("https://localhost:44357/")
+                BaseAddress = new Uri("https://www.mechanicstoolkit.tk/")
             });
         }
     }

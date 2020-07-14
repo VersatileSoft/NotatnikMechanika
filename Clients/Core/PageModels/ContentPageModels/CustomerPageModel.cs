@@ -26,10 +26,12 @@ namespace NotatnikMechanika.Core.PageModels
         public ICommand RemoveCarCommand { get; set; }
 
         private readonly IHttpRequestService _httpRequestService;
+        private readonly IMessageDialogService _messageDialogService;
 
-        public CustomerPageModel(IHttpRequestService httpRequestService, IMvNavigationService navigationService)
+        public CustomerPageModel(IHttpRequestService httpRequestService, IMvNavigationService navigationService, IMessageDialogService messageDialogService)
         {
             _httpRequestService = httpRequestService;
+            _messageDialogService = messageDialogService;
             CustomerModel = new CustomerModel();
             GoBackCommand = new AsyncCommand(() => navigationService.NavigateToAsync<MainPageModel>());
             AddCarCommand = new AsyncCommand(() => navigationService.NavigateToAsync<AddCarPageModel>(CustomerModel.Id));
@@ -38,7 +40,15 @@ namespace NotatnikMechanika.Core.PageModels
 
         private async Task RemoveCarAction(int id)
         {
-            await _httpRequestService.SendDelete(new CarPaths().GetFullPath(id.ToString()));
+            Response response = await _httpRequestService.SendDelete(new CarPaths().GetFullPath(id.ToString()));
+            if (response.Successful)
+            {
+                await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto klienta", MessageDialogType.Success);
+            }
+            else
+            {
+                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczasu usuwania klienta");
+            }
             await Initialize();
         }
 
@@ -56,6 +66,7 @@ namespace NotatnikMechanika.Core.PageModels
             else
             {
                 ErrorMessage = responseCustomer.ErrorMessages?.FirstOrDefault();
+                await _messageDialogService.ShowMessageDialog(responseCustomer.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania klienta");
                 return;
             }
 
@@ -71,6 +82,7 @@ namespace NotatnikMechanika.Core.PageModels
             else
             {
                 ErrorMessage = responseCars.ErrorMessages?.FirstOrDefault();
+                await _messageDialogService.ShowMessageDialog(responseCars.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania samochodów klienta");
             }
             IsLoading = false;
         }

@@ -3,11 +3,10 @@ using MvvmPackage.Core.Services.Interfaces;
 using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
-using NotatnikMechanika.Shared.Models;
 using NotatnikMechanika.Shared.Models.Customer;
 using PropertyChanged;
 using System.Collections.Generic;
-using System.Net;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using static NotatnikMechanika.Shared.ResponseBuilder;
@@ -24,11 +23,13 @@ namespace NotatnikMechanika.Core.PageModels
 
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMvNavigationService _navigationService;
+        private readonly IMessageDialogService _messageDialogService;
 
-        public CustomersPageModel(IMvNavigationService navigationService, IHttpRequestService httpRequestService)
+        public CustomersPageModel(IMvNavigationService navigationService, IHttpRequestService httpRequestService, IMessageDialogService messageDialogService)
         {
             _navigationService = navigationService;
             _httpRequestService = httpRequestService;
+            _messageDialogService = messageDialogService;
 
             AddCustomerCommand = new AsyncCommand(AddCustomerAction);
             RemoveCustomerCommand = new AsyncCommand<int>(RemoveCustomerAction);
@@ -42,7 +43,16 @@ namespace NotatnikMechanika.Core.PageModels
 
         private async Task RemoveCustomerAction(int id)
         {
-            await _httpRequestService.SendDelete(new CustomerPaths().GetFullPath(id.ToString()));
+            Response response = await _httpRequestService.SendDelete(new CustomerPaths().GetFullPath(id.ToString()));
+            if (response.Successful)
+            {
+                await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto klienta", MessageDialogType.Success);
+            }
+            else
+            {
+                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Success, "Błąd podczas usuwania klienta");
+            }
+
             await Initialize();
         }
 
@@ -58,6 +68,10 @@ namespace NotatnikMechanika.Core.PageModels
             if (response.Successful)
             {
                 Customers = response.Content;
+            }
+            else
+            {
+                await _messageDialogService.ShowMessageDialog("Błąd podczas ładowania klientów", MessageDialogType.Error);
             }
             IsLoading = false;
         }

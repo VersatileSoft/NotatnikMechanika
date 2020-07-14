@@ -35,12 +35,12 @@
                         Keyboard="Email"
                         Placeholder="E-mail"
                         Style="{StaticResource LoginEntry}"
-                        Text="{Binding UserModel.Email}"/>
+                        Text="{Binding LoginModel.Email}"/>
                     <Entry
                         IsPassword="True"
                         Placeholder="Hasło"
                         Style="{StaticResource LoginEntry}"
-                        Text="{Binding UserModel.Password}"/>
+                        Text="{Binding LoginModel.Password}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="-12">
                         <CheckBox Style="{StaticResource LoginCheckBox}"/>
