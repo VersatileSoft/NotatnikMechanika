@@ -1,0 +1,13 @@
+﻿<div class="mat-layout-grid-cell">
+    <Card CardContent="@CardHeader" CardHeader="@CardHeader" />
+</div>
+
+@code {
+
+    [Parameter]
+    public RenderFragment CardHeader { get; set; }
+
+    [Parameter]
+    public RenderFragment CardContent { get; set; }
+
+}

@@ -1,0 +1,12 @@
+﻿<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        @ChildContent
+    </div>
+</div>
+
+@code{
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }   
+
+}

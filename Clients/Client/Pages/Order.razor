@@ -7,107 +7,96 @@
 
 @if (!PageModel.IsLoading)
 {
-    <div class="mat-layout-grid">
-        <div class="mat-layout-grid-inner">
-            <div class="mat-layout-grid-cell">
-                <div class="card mat-elevation-z13">
-                    <div class="card-header">
-                        <MatIconButton Icon="@MatIconNames.Person" />
-                        <p>Informacje</p>
-                        <MatIconButton Icon="@MatIconNames.Edit" />
-                    </div>
 
-                    <div class="card-content">
-                        <p>@PageModel.OrderModel.CustomerModel.Name</p>
-                        <p>@PageModel.OrderModel.CustomerModel.Surname</p>
-                        <p>@PageModel.OrderModel.CustomerModel.Phone</p>
-                        <p>@PageModel.OrderModel.CustomerModel.Address</p>
-                        <p>@PageModel.OrderModel.CustomerModel.CompanyName</p>
-                        <p>@PageModel.OrderModel.CustomerModel.CompanyIdentyficator</p>
-                    </div>
-                </div>
-            </div>
-            <div class="mat-layout-grid-cell">
-                <div class="card mat-elevation-z13">
-                    <div class="card-header">
-                        <p>Samochód</p>
-                    </div>
+    <WrapPanel>
+        <WrapPanelCard>
+            <CardHeader>
+                <MatIconButton Icon="@MatIconNames.Person" />
+                <p>Informacje</p>
+                <MatIconButton Icon="@MatIconNames.Edit" />
+            </CardHeader>
 
-                    <div class="card-content">
-                        <p>@PageModel.OrderModel.CarModel.Brand</p>
-                        <p>@PageModel.OrderModel.CarModel.Model</p>
-                        <p>@PageModel.OrderModel.CarModel.Engine</p>
-                        <p>@PageModel.OrderModel.CarModel.Power</p>
-                        <p>@PageModel.OrderModel.CarModel.Plate</p>
-                        <p>@PageModel.OrderModel.CarModel.Vin</p>
-                    </div>
-                </div>
-            </div>
+            <CardContent>
+                <p>@PageModel.OrderModel.CustomerModel.Name</p>
+                <p>@PageModel.OrderModel.CustomerModel.Surname</p>
+                <p>@PageModel.OrderModel.CustomerModel.Phone</p>
+                <p>@PageModel.OrderModel.CustomerModel.Address</p>
+                <p>@PageModel.OrderModel.CustomerModel.CompanyName</p>
+                <p>@PageModel.OrderModel.CustomerModel.CompanyIdentyficator</p>
+            </CardContent>
+        </WrapPanelCard>
 
-            <div class="mat-layout-grid-cell">
-                <div class="card mat-elevation-z13">
-                    <div class="card-header">
-                        <p>Usługi</p>
-                    </div>
+        <WrapPanelCard>
+            <CardHeader>
+                <p>Samochód</p>
+            </CardHeader>
 
-                    <div class="card-content">
+            <CardContent>
+                <p>@PageModel.OrderModel.CarModel.Brand</p>
+                <p>@PageModel.OrderModel.CarModel.Model</p>
+                <p>@PageModel.OrderModel.CarModel.Engine</p>
+                <p>@PageModel.OrderModel.CarModel.Power</p>
+                <p>@PageModel.OrderModel.CarModel.Plate</p>
+                <p>@PageModel.OrderModel.CarModel.Vin</p>
+            </CardContent>
+        </WrapPanelCard>
 
-                        <MatButton Command="PageModel.AddServiceCommand" Label="Dodaj usługę" />
+        <WrapPanelCard>
+            <CardHeader>
+                <p>Usługi</p>
+            </CardHeader>
 
-                        @if (PageModel.Services != null)
+            <CardContent>
+                <MatButton Command="PageModel.AddServiceCommand" Label="Dodaj usługę" />
+
+                @if (PageModel.Services != null)
+                {
+                    <MatAccordion>
+                        @foreach (ServiceModel service in PageModel.Services)
                         {
-                            <MatAccordion>
-                                @foreach (ServiceModel service in PageModel.Services)
-                                {
-                                    <MatExpansionPanel>
-                                        <MatExpansionPanelSummary>
-                                            <p>@service.Name</p>
-                                            <p>@service.Price</p>
-                                        </MatExpansionPanelSummary>
-                                        <MatExpansionPanelDetails>
-                                            <p>Nic tu niema</p>
-                                        </MatExpansionPanelDetails>
-                                    </MatExpansionPanel>
-                                }
-                            </MatAccordion>
+                            <MatExpansionPanel>
+                                <MatExpansionPanelSummary>
+                                    <p>@service.Name</p>
+                                    <p>@service.Price</p>
+                                </MatExpansionPanelSummary>
+                                <MatExpansionPanelDetails>
+                                    <p>Nic tu niema</p>
+                                </MatExpansionPanelDetails>
+                            </MatExpansionPanel>
                         }
+                    </MatAccordion>
+                }
+            </CardContent>
+        </WrapPanelCard>
 
-                    </div>
-                </div>
-            </div>
+        <WrapPanelCard>
+            <CardHeader>
+                <p>Towary</p>
+            </CardHeader>
 
-            <div class="mat-layout-grid-cell">
-                <div class="card mat-elevation-z13">
-                    <div class="card-header">
-                        <p>Towary</p>
-                    </div>
+            <CardContent>
+                <MatButton Command="PageModel.AddCommodityCommand" Label="Dodaj Towar" />
 
-                    <div class="card-content">
-
-                        <MatButton Command="PageModel.AddCommodityCommand" Label="Dodaj Towar" />
-
-                        @if (PageModel.Services != null)
+                @if (PageModel.Services != null)
+                {
+                    <MatAccordion>
+                        @foreach (CommodityModel commodity in PageModel.Commodities)
                         {
-                            <MatAccordion>
-                                @foreach (CommodityModel commodity in PageModel.Commodities)
-                                {
-                                    <MatExpansionPanel>
-                                        <MatExpansionPanelSummary>
-                                            <p>@commodity.Name</p>
-                                            <p>@commodity.Price</p>
-                                        </MatExpansionPanelSummary>
-                                        <MatExpansionPanelDetails>
-                                            <p>Nic tu niema</p>
-                                        </MatExpansionPanelDetails>
-                                    </MatExpansionPanel>
-                                }
-                            </MatAccordion>
+                            <MatExpansionPanel>
+                                <MatExpansionPanelSummary>
+                                    <p>@commodity.Name</p>
+                                    <p>@commodity.Price</p>
+                                </MatExpansionPanelSummary>
+                                <MatExpansionPanelDetails>
+                                    <p>Nic tu niema</p>
+                                </MatExpansionPanelDetails>
+                            </MatExpansionPanel>
                         }
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </MatAccordion>
+                }
+            </CardContent>
+        </WrapPanelCard>
+    </WrapPanel>
 }
 else
 {

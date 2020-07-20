@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Core.Model;
 using NotatnikMechanika.Shared;
 using System.Net.Http;
 using System.Text;
@@ -24,11 +23,11 @@ namespace NotatnikMechanika.Core.Services
             return await ParseResponse<ResponseModel>(response);
         }
 
-        public async Task<Response<ResponseModel>> SendPost<SendModel, ResponseModel>(SendModel model, string path) where ResponseModel : new()
+        public async Task<Response<ResponseModel>> SendPost<SendModel, ResponseModel>(SendModel model, string path) where ResponseModel : new() where SendModel : ValidateModelBase
         {
-            if (!model.IsModelValid(out Response<ResponseModel> errorResponse))
+            if (!model.IsValid)
             {
-                return errorResponse;
+                return BadModelStateResponse<ResponseModel>();
             }
 
             string myContent = JsonConvert.SerializeObject(model);
@@ -37,11 +36,11 @@ namespace NotatnikMechanika.Core.Services
             return await ParseResponse<ResponseModel>(response);
         }
 
-        public async Task<Response> SendPost<SendModel>(SendModel model, string path)
+        public async Task<Response> SendPost<SendModel>(SendModel model, string path) where SendModel : ValidateModelBase
         {
-            if (!model.IsModelValid(out Response errorResponse))
+            if (!model.IsValid)
             {
-                return errorResponse;
+                return BadModelStateResponse();
             }
 
             string myContent = JsonConvert.SerializeObject(model);

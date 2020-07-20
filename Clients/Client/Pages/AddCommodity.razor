@@ -3,15 +3,19 @@
 @using MVVMPackage.Blazor
 @inherits PageBase<AddCommodityPageModel>
 
-<div class="card">
-    <div class="card-header">
+<Card>
+    <CardHeader>
         <p>Dodaj Towar</p>
-    </div>
+    </CardHeader>
 
-    <div class="card-content mat-elevation-z13">
-        <MatTextField @bind-Value="@PageModel.Model.Name" Class="text-field" Label="Nazwa" Outlined="true" />
-        <MatTextField @bind-Value="@PageModel.Model.Price" Class="text-field" Label="Cena" Outlined="true" />
-    </div>
-</div>
+    <CardContent>
+        <EditForm Model="@PageModel.Model" OnValidSubmit="_ => PageModel.AddCommand.Execute(null)">
+            <MatTextField @bind-Value="@PageModel.Model.Name" Class="text-field" Label="Nazwa" Outlined="true" />
+            <ValidationMessage For="@(() => @PageModel.Model.Name)" />
+            <MatTextField @bind-Value="@PageModel.Model.Price" Class="text-field" Label="Cena" Outlined="true" />
+            <ValidationMessage For="@(() => @PageModel.Model.Price)" />
 
-<MatButton Label="Zapisz" Command="PageModel.AddCommand" Raised="true" />
+            <MatButton Label="Zapisz" Type="Submit" Raised="true" />
+        </EditForm>
+    </CardContent>
+</Card>

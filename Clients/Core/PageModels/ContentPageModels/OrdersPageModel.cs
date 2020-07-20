@@ -2,13 +2,11 @@
 using MvvmPackage.Core.Services.Interfaces;
 using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Core.Model;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Order;
 using PropertyChanged;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using static NotatnikMechanika.Shared.ResponseBuilder;
@@ -41,14 +39,17 @@ namespace NotatnikMechanika.Core.PageModels
         {
             Response response = await _httpRequestService.SendDelete(new OrderPaths().GetFullPath(CRUDPaths.DeletePath.Replace("{id}", id.ToString())));
 
-            if (response.Successful)
+            switch (response.ResponseResult)
             {
-                await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto zlecenie", MessageDialogType.Success);
+                case ResponseResult.Successful:
+                    await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto zlecenie", MessageDialogType.Success);
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas usuwania zlecenia");
+                    break;
             }
-            else
-            {
-                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Success, "Błąd podczas usuwania zlecenia");
-            }
+
             await Initialize();
         }
 
@@ -56,14 +57,18 @@ namespace NotatnikMechanika.Core.PageModels
         {
             IsLoading = true;
             Response<List<OrderExtendedModel>> response = await _httpRequestService.SendGet<List<OrderExtendedModel>>(new OrderPaths().GetFullPath(OrderPaths.GetExtendedOrders));
-            if (response.Successful)
+
+            switch (response.ResponseResult)
             {
-                Orders = response.Content;
+                case ResponseResult.Successful:
+                    Orders = response.Content;
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania zleceń");
+                    break;
             }
-            else
-            {
-                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania zleceń");
-            }
+
             IsLoading = false;
         }
     }

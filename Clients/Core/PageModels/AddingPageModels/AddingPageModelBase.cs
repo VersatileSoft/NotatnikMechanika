@@ -12,7 +12,7 @@ using static NotatnikMechanika.Shared.ResponseBuilder;
 namespace NotatnikMechanika.Core.PageModels
 {
     [AddINotifyPropertyChangedInterface]
-    public abstract class AddingPageModelBase<TModel> : PageModelBase where TModel : new()
+    public abstract class AddingPageModelBase<TModel> : PageModelBase where TModel : ValidateModelBase, new()
     {
         public TModel Model { get; set; }
         public ICommand AddCommand { get; set; }
@@ -39,16 +39,23 @@ namespace NotatnikMechanika.Core.PageModels
         {
             IsLoading = true;
             string path = PathsHelper.GetPathsByModel<TModel>().GetFullPath(CRUDPaths.CreatePath);
-            Response respone = await _httpRequestService.SendPost(Model, path);
-            if (respone.Successful)
+            Response response = await _httpRequestService.SendPost(Model, path);
+
+            switch (response.ResponseResult)
             {
-                await _messageDialogService.ShowMessageDialog(SuccesMessage, MessageDialogType.Success, "Operacja powiodła się");
-                await _navigationService.NavigateToAsync<MainPageModel>();
-            }
-            else
-            {
-                ErrorMessage = respone.ErrorMessages?.FirstOrDefault();
-                await _messageDialogService.ShowMessageDialog(ErrorMessage, MessageDialogType.Error, "Wystąpił błąd");
+                case ResponseResult.Successful:
+                    await _messageDialogService.ShowMessageDialog(SuccesMessage, MessageDialogType.Success, "Operacja powiodła się");
+                    await _navigationService.NavigateToAsync<MainPageModel>();
+                    break;
+
+                case ResponseResult.BadRequest:
+                    ErrorMessage = response.ErrorMessages?.FirstOrDefault();
+                    await _messageDialogService.ShowMessageDialog(ErrorMessage, MessageDialogType.Error, "Wystąpił błąd");
+                    break;
+
+                case ResponseResult.BadModelState:
+                    await _messageDialogService.ShowMessageDialog("Wypełnij formularz poprawnie", MessageDialogType.Error);
+                    break;
             }
             IsLoading = false;
         }

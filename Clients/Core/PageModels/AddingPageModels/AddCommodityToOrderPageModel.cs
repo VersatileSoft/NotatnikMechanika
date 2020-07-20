@@ -46,15 +46,22 @@ namespace NotatnikMechanika.Core.PageModels
                 response = await _httpRequestService.SendPost(path);
             }
 
-            if (response.Successful)
+            switch (response.ResponseResult)
             {
-                await _messageDialogService.ShowMessageDialog($"Pomyślnie {(commodityModel.IsInOrder ? "usunięto" : "dodano")} towar", MessageDialogType.Success);
-                await Initialize();
+                case ResponseResult.Successful:
+                    await _messageDialogService.ShowMessageDialog($"Pomyślnie {(commodityModel.IsInOrder ? "usunięto" : "dodano")} towar", MessageDialogType.Success);
+                    await Initialize();
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Coś poszło nie tak");
+                    break;
+
+                case ResponseResult.BadModelState:
+                    await _messageDialogService.ShowMessageDialog("Wypełnij dane poprawnie", MessageDialogType.Error);
+                    break;
             }
-            else
-            {
-                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Coś poszło nie tak");
-            }
+
             IsLoading = false;
         }
 
@@ -65,13 +72,15 @@ namespace NotatnikMechanika.Core.PageModels
             string path = new CommodityPaths().GetFullPath(CommodityPaths.GetAllForOrderPath.Replace("{orderId}", _orderId.ToString()));
             Response<List<CommodityForOrderModel>> response = await _httpRequestService.SendGet<List<CommodityForOrderModel>>(path);
 
-            if (response.Successful)
+            switch (response.ResponseResult)
             {
-                CommodityModels = response.Content;
-            }
-            else
-            {
-                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania towarów");
+                case ResponseResult.Successful:
+                    CommodityModels = response.Content;
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania towarów");
+                    break;
             }
             IsLoading = false;
         }

@@ -2,14 +2,11 @@
 using MvvmPackage.Core.Services.Interfaces;
 using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Core.Model;
 using NotatnikMechanika.Shared;
-using NotatnikMechanika.Shared.Models;
 using NotatnikMechanika.Shared.Models.Service;
 using PropertyChanged;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using static NotatnikMechanika.Shared.ResponseBuilder;
@@ -40,14 +37,18 @@ namespace NotatnikMechanika.Core.PageModels
         private async Task RemoveServiceAction(int id)
         {
             Response response = await _httpRequestService.SendDelete(new ServicePaths().GetFullPath(id.ToString()));
-            if (response.Successful)
+
+            switch (response.ResponseResult)
             {
-                await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto usługę", MessageDialogType.Success);
+                case ResponseResult.Successful:
+                    await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto usługę", MessageDialogType.Success);
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas usuwania ułsugi");
+                    break;
             }
-            else
-            {
-                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas usuwania ułsugi");
-            }
+
             await Initialize();
         }
 
@@ -56,13 +57,15 @@ namespace NotatnikMechanika.Core.PageModels
             IsLoading = true;
             Response<List<ServiceModel>> response = await _httpRequestService.SendGet<List<ServiceModel>>(new ServicePaths().GetFullPath(CRUDPaths.GetAllPath));
 
-            if (response.Successful)
+            switch (response.ResponseResult)
             {
-                Services = response.Content;
-            }
-            else
-            {
-                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania usługi");
+                case ResponseResult.Successful:
+                    Services = response.Content;
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania usługi");
+                    break;
             }
             IsLoading = false;
         }

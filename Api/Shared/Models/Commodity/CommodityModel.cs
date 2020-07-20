@@ -1,6 +1,6 @@
 ﻿namespace NotatnikMechanika.Shared.Models.Commodity
 {
-    public class CommodityModel
+    public class CommodityModel : ValidateModelBase
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -2,7 +2,7 @@
 
 namespace NotatnikMechanika.Shared.Models.User
 {
-    public class EditUserModel
+    public class EditUserModel : ValidateModelBase
     {
         [Required]
         public string UserName { get; set; }

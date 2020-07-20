@@ -58,40 +58,44 @@ namespace NotatnikMechanika.Core.PageModels
             string orderPath = new OrderPaths().GetFullPath(OrderPaths.GetExtendedOrder.Replace("{orderId}", Parameter.ToString()));
             Response<OrderExtendedModel> orderResponse = await _httpRequestService.SendGet<OrderExtendedModel>(orderPath);
 
-            if (orderResponse.Successful)
+            switch (orderResponse.ResponseResult)
             {
-                OrderModel = orderResponse.Content;
-            }
-            else
-            {
-                await _messageDialogService.ShowMessageDialog(orderResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania zlecenia");
-                return;
+                case ResponseResult.Successful:
+                    OrderModel = orderResponse.Content;
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(orderResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania zlecenia");
+                    return;
             }
 
             string servicesPath = new ServicePaths().GetFullPath(ServicePaths.GetAllInOrderPath.Replace("{orderId}", OrderModel.Id.ToString()));
             Response<List<ServiceModel>> servicesResponse = await _httpRequestService.SendGet<List<ServiceModel>>(servicesPath);
 
-            if (servicesResponse.Successful)
+            switch (servicesResponse.ResponseResult)
             {
-                Services = servicesResponse.Content;
-            }
-            else
-            {
-                await _messageDialogService.ShowMessageDialog(servicesResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania usług");
+                case ResponseResult.Successful:
+                    Services = servicesResponse.Content;
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(servicesResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania usług");
+                    break;
             }
 
             string commoditiesPath = new CommodityPaths().GetFullPath(CommodityPaths.GetAllInOrderPath.Replace("{orderId}", OrderModel.Id.ToString()));
             Response<List<CommodityModel>> commoditiesResponse = await _httpRequestService.SendGet<List<CommodityModel>>(commoditiesPath);
 
-            if (commoditiesResponse.Successful)
+            switch (servicesResponse.ResponseResult)
             {
-                Commodities = commoditiesResponse.Content;
-            }
-            else
-            {
-                await _messageDialogService.ShowMessageDialog(commoditiesResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania towarów");
-            }
+                case ResponseResult.Successful:
+                    Commodities = commoditiesResponse.Content;
+                    break;
 
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(commoditiesResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania towarów");
+                    break;
+            }
             IsLoading = false;
         }
     }

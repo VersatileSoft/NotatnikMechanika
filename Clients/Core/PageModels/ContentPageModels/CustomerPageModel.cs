@@ -8,7 +8,6 @@ using NotatnikMechanika.Shared.Models.Customer;
 using PropertyChanged;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using static NotatnikMechanika.Shared.ResponseBuilder;
@@ -41,13 +40,16 @@ namespace NotatnikMechanika.Core.PageModels
         private async Task RemoveCarAction(int id)
         {
             Response response = await _httpRequestService.SendDelete(new CarPaths().GetFullPath(id.ToString()));
-            if (response.Successful)
+
+            switch (response.ResponseResult)
             {
-                await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto klienta", MessageDialogType.Success);
-            }
-            else
-            {
-                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczasu usuwania klienta");
+                case ResponseResult.Successful:
+                    await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto klienta", MessageDialogType.Success);
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczasu usuwania klienta");
+                    break;
             }
             await Initialize();
         }
@@ -59,15 +61,16 @@ namespace NotatnikMechanika.Core.PageModels
 
             Response<CustomerModel> responseCustomer = await _httpRequestService.SendGet<CustomerModel>(PathsHelper.GetPathsByModel<CustomerModel>().GetFullPath(CustomerModel.Id.ToString()));
 
-            if (responseCustomer.Successful)
+            switch (responseCustomer.ResponseResult)
             {
-                CustomerModel = responseCustomer.Content;
-            }
-            else
-            {
-                ErrorMessage = responseCustomer.ErrorMessages?.FirstOrDefault();
-                await _messageDialogService.ShowMessageDialog(responseCustomer.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania klienta");
-                return;
+                case ResponseResult.Successful:
+                    CustomerModel = responseCustomer.Content;
+                    break;
+
+                case ResponseResult.BadRequest:
+                    ErrorMessage = responseCustomer.ErrorMessages?.FirstOrDefault();
+                    await _messageDialogService.ShowMessageDialog(responseCustomer.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania klienta");
+                    return;
             }
 
             Response<List<CarModel>> responseCars = await _httpRequestService.SendGet<List<CarModel>>(
@@ -75,15 +78,18 @@ namespace NotatnikMechanika.Core.PageModels
                 .GetPathsByModel<CarModel>()
                 .GetFullPath(CarPaths.GetByCustomerPath.Replace("{customerId}", CustomerModel.Id.ToString())));
 
-            if (responseCars.Successful)
+            switch (responseCars.ResponseResult)
             {
-                Cars = responseCars.Content;
+                case ResponseResult.Successful:
+                    Cars = responseCars.Content;
+                    break;
+
+                case ResponseResult.BadRequest:
+                    ErrorMessage = responseCars.ErrorMessages?.FirstOrDefault();
+                    await _messageDialogService.ShowMessageDialog(responseCars.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania samochodów klienta");
+                    break;
             }
-            else
-            {
-                ErrorMessage = responseCars.ErrorMessages?.FirstOrDefault();
-                await _messageDialogService.ShowMessageDialog(responseCars.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania samochodów klienta");
-            }
+
             IsLoading = false;
         }
     }

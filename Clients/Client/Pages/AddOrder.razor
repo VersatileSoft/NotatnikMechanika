@@ -7,52 +7,55 @@
 <div class="add-customer">
     @if (!PageModel.IsLoading)
     {
-        <div class="mat-layout-grid">
-            <div class="mat-layout-grid-inner">
-                <div class="mat-layout-grid-cell-span-6">
-                    <div class="card mat-elevation-z13">
-                        <div class="card-header">
-                            <p>Dane Klienta i samochodu</p>
-                        </div>
-                        <div class="card-content">
-                            @if (PageModel.Customers != null)
-                            {
-                                <MatSelectItem @bind-Value="PageModel.SelectedCustomer" Outlined="true" Label="Klient" Items="PageModel.Customers?.ToList()?.AsReadOnly()">
-                                    <ItemTemplate>
-                                        <p>@context?.Name</p>
-                                        <p>@context?.Surname</p>
-                                        <p>@context?.Address</p>
-                                        <p>@context?.CompanyName</p>
-                                    </ItemTemplate>
-                                </MatSelectItem>
-                            }
+    <EditForm Model="@PageModel.Model" OnValidSubmit="_ => PageModel.AddCommand.Execute(null)">
+        <WrapPanel >
+            <WrapPanelCard>
+                <CardHeader>
+                    <p>Dane Klienta i samochodu</p>
+                </CardHeader>
 
-                            @if (PageModel.Cars != null)
-                            {
-                                <MatSelectItem @bind-Value="PageModel.SelectedCar" Outlined="true" Label="Klient" Items="PageModel.Cars?.ToList()?.AsReadOnly()">
-                                    <ItemTemplate>
-                                        <p>@context?.Brand</p>
-                                        <p>@context?.Model</p>
-                                    </ItemTemplate>
-                                </MatSelectItem>
-                            }
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="mat-layout-grid-cell-span-6">
-                    <div class="card mat-elevation-z13">
-                        <div class="card-header">
-                            <p>Dane Firmy</p>
-                        </div>
-                        <div class="card-content">
-                            <MatDatePicker @bind-Value="PageModel.Model.AcceptDate" />
-                            <MatDatePicker @bind-Value="PageModel.Model.FinishDate" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                <CardContent>
+                    @if (PageModel.Customers != null)
+                    {
+                        <MatSelectItem @bind-Value="PageModel.SelectedCustomer" Outlined="true" Label="Klient" Items="PageModel.Customers?.ToList()?.AsReadOnly()">
+                            <ItemTemplate Context="customer">
+                                <p>@customer?.Name</p>
+                                <p>@customer?.Surname</p>
+                                <p>@customer?.Address</p>
+                                <p>@customer?.CompanyName</p>
+                            </ItemTemplate>
+                        </MatSelectItem>
+                    }
+
+                    @if (PageModel.Cars != null)
+                    {
+                        <MatSelectItem @bind-Value="PageModel.SelectedCar" Outlined="true" Label="Klient" Items="PageModel.Cars?.ToList()?.AsReadOnly()">
+                            <ItemTemplate Context="car">
+                                <p>@car?.Brand</p>
+                                <p>@car?.Model</p>
+                            </ItemTemplate>
+                        </MatSelectItem>
+                        <ValidationMessage For="@(() => @PageModel.Model.CarId)" />
+                    }
+                </CardContent>
+            </WrapPanelCard>
+
+            <WrapPanelCard>
+                <CardHeader>
+                    <p>Dane dodatkowe</p>
+                </CardHeader>
+
+                <CardContent>
+                    <MatDatePicker @bind-Value="PageModel.Model.AcceptDate" />
+                    <ValidationMessage For="@(() => @PageModel.Model.AcceptDate)" />
+                    <MatDatePicker @bind-Value="PageModel.Model.FinishDate" />
+                    <ValidationMessage For="@(() => @PageModel.Model.FinishDate)" />
+                    <MatTextField @bind-Value="@PageModel.Model.Details" Class="text-field" Label="Adres" Outlined="true"></MatTextField>
+                    <ValidationMessage For="@(() => @PageModel.Model.Details)" />
+                </CardContent>
+            </WrapPanelCard>
+        </WrapPanel>
         <MatButton Raised="true" Label="Dodaj klienta" Command="@PageModel.AddCommand" />
+    </EditForm>
     }
 </div>

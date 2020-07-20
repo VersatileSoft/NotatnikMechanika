@@ -1,8 +1,8 @@
 ﻿<pages:MvWpfApplication x:Class="NotatnikMechanika.WPF.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:pages="clr-namespace:MvvmPackage.Wpf;assembly=MvvmPackage.Wpf"                       
     xmlns:core="clr-namespace:NotatnikMechanika.Core;assembly=NotatnikMechanika.Core"
+    xmlns:pages="clr-namespace:MvvmPackage.Wpf;assembly=MvvmPackage.Wpf"
     x:TypeArguments="core:MainPageService"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.grey.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml"/>
+                <ResourceDictionary Source="Styles/AuthPagesStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <LinearGradientBrush x:Key="PrimaryHueLightBrush">

@@ -4,7 +4,7 @@ using System;
 
 namespace NotatnikMechanika.Shared.Models.Order
 {
-    public class OrderExtendedModel
+    public class OrderExtendedModel : ValidateModelBase
     {
         public int Id { get; set; }
         public CustomerModel CustomerModel { get; set; }

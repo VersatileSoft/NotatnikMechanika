@@ -35,14 +35,12 @@ namespace NotatnikMechanika.Core.Services
         {
             Response<TokenModel> loginResponse = await _httpRequestService.SendPost<LoginModel, TokenModel>(loginModel, new AccountPaths().GetFullPath(AccountPaths.LoginPath));
 
-            if (!loginResponse.Successful)
+            if (loginResponse.ResponseResult == ResponseResult.Successful)
             {
-                return loginResponse;
+                await _settingsService.SetToken(loginResponse.Content.Token);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResponse.Content.Token);
+                AuthChanged?.Invoke(this, EventArgs.Empty);
             }
-
-            await _settingsService.SetToken(loginResponse.Content.Token);
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResponse.Content.Token);
-            AuthChanged?.Invoke(this, EventArgs.Empty);
             return loginResponse;
         }
 

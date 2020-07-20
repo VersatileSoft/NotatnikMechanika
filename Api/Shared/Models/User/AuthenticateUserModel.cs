@@ -2,7 +2,7 @@
 
 namespace NotatnikMechanika.Shared.Models.User
 {
-    public class LoginModel
+    public class LoginModel : ValidateModelBase
     {
         [Required(ErrorMessage = "Pole email nie może być puste.")]
         [EmailAddress(ErrorMessage = "Nieprawidłowy format adresu E-mail.")]

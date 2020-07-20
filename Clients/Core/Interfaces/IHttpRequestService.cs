@@ -7,8 +7,8 @@ namespace NotatnikMechanika.Core.Interfaces
     public interface IHttpRequestService
     {
         Task<Response<ResponseModel>> SendGet<ResponseModel>(string path) where ResponseModel : new();
-        Task<Response<ResponseModel>> SendPost<SendModel, ResponseModel>(SendModel model, string path) where ResponseModel : new();
-        Task<Response> SendPost<SendModel>(SendModel model, string path);
+        Task<Response<ResponseModel>> SendPost<SendModel, ResponseModel>(SendModel model, string path) where ResponseModel : new() where SendModel : ValidateModelBase;
+        Task<Response> SendPost<SendModel>(SendModel model, string path) where SendModel : ValidateModelBase;
         Task<Response> SendPost(string path);
         Task<Response> SendDelete(string path);
     }

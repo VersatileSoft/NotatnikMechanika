@@ -7,115 +7,118 @@
 @if (!PageModel.IsLoading)
 {
 
-    <div class="mat-layout-grid">
-        <div class="mat-layout-grid-inner">
-            <div class="mat-layout-grid-cell">
-                <div class="card mat-elevation-z13">
-                    <div class="card-header">
-                        <MatIconButton Icon="@MatIconNames.Person" />
-                        <p>Informacje</p>
-                        <MatIconButton Icon="@MatIconNames.Edit" />
-                    </div>
+    <WrapPanel>
+        <WrapPanelCard>
+            <CardHeader>
+                <MatIconButton Icon="@MatIconNames.Person" />
+                <p>Informacje</p>
+                <MatIconButton Icon="@MatIconNames.Edit" />
+            </CardHeader>
 
-                    <div class="card-content">
-                        <p>@PageModel.CustomerModel.Name</p>
-                        <p>@PageModel.CustomerModel.Surname</p>
-                        <p>@PageModel.CustomerModel.Phone</p>
-                        <p>@PageModel.CustomerModel.Address</p>
-                        <p>@PageModel.CustomerModel.CompanyName</p>
-                        <p>@PageModel.CustomerModel.CompanyIdentyficator</p>
-                    </div>
-                </div>
-            </div>
-            <div class="mat-layout-grid-cell">
-                <div class="card mat-elevation-z13">
-                    <div class="card-header">
-                        <MatIconButton Icon="@MatIconNames.Card_giftcard" />
-                        <p>Samochody</p>
-                        <MatIconButton Command="PageModel.AddCarCommand" Icon="@MatIconNames.Add" />
-                    </div>
+            <CardContent>
+                <p>@PageModel.CustomerModel.Name</p>
+                <p>@PageModel.CustomerModel.Surname</p>
+                <p>@PageModel.CustomerModel.Phone</p>
+                <p>@PageModel.CustomerModel.Address</p>
+                <p>@PageModel.CustomerModel.CompanyName</p>
+                <p>@PageModel.CustomerModel.CompanyIdentyficator</p>
+            </CardContent>
+        </WrapPanelCard>
 
-                    <div class="card-content">
-                        <MatAccordion>
-                            @foreach (CarModel car in PageModel.Cars)
-                            {
-                                <MatExpansionPanel>
-                                    <MatExpansionPanelSummary>
-                                        <p>@car.Brand</p>
-                                        <p>@car.Model</p>
-                                    </MatExpansionPanelSummary>
-                                    <MatExpansionPanelDetails>
-                                        <p>@car.Plate</p>
-                                        <p>@car.Vin</p>
-                                        <p>@car.Power</p>
-                                        <div class="car-options">
-                                            <MatIconButton Icon="@MatIconNames.Add" />
-                                            <MatIconButton Icon="@MatIconNames.Edit" />
-                                            <MatIconButton Icon="@MatIconNames.Remove" Command="PageModel.RemoveCarCommand" CommandParameter="car.Id"/>
-                                        </div>
-                                    </MatExpansionPanelDetails>
-                                </MatExpansionPanel>
-                            }
-                        </MatAccordion>
-                    </div>
-                </div>
-            </div>
+        <WrapPanelCard>
 
-            <div class="mat-layout-grid-cell">
-                <div class="card mat-elevation-z13">
-                    <div class="card-header">
-                        <p>Samochody</p>
-                    </div>
+            <CardHeader>
+                <MatIconButton Icon="@MatIconNames.Card_giftcard" />
+                <p>Samochody</p>
+                <MatIconButton Command="PageModel.AddCarCommand" Icon="@MatIconNames.Add" />
+            </CardHeader>
+            <CardContent>
+                <MatAccordion>
+                    @foreach (CarModel car in PageModel.Cars)
+                    {
+                        <MatExpansionPanel>
+                            <MatExpansionPanelSummary>
+                                <p>@car.Brand</p>
+                                <p>@car.Model</p>
+                            </MatExpansionPanelSummary>
+                            <MatExpansionPanelDetails>
+                                <p>@car.Plate</p>
+                                <p>@car.Vin</p>
+                                <p>@car.Power</p>
+                                <div class="car-options">
+                                    <MatIconButton Icon="@MatIconNames.Add" />
+                                    <MatIconButton Icon="@MatIconNames.Edit" />
+                                    <MatIconButton Icon="@MatIconNames.Remove" Command="PageModel.RemoveCarCommand" CommandParameter="car.Id" />
+                                </div>
+                            </MatExpansionPanelDetails>
+                        </MatExpansionPanel>
+                    }
+                </MatAccordion>
+            </CardContent>
+        </WrapPanelCard>
 
-                    <div class="card-content">
-                        <MatAccordion>
-                            @foreach (CarModel car in PageModel.Cars)
-                            {
-                                <MatExpansionPanel>
-                                    <MatExpansionPanelSummary>
-                                        <p>@car.Brand</p>
-                                        <p>@car.Model</p>
-                                    </MatExpansionPanelSummary>
-                                    <MatExpansionPanelDetails>
-                                        <p>@car.Plate</p>
-                                        <p>@car.Vin</p>
-                                        <p>@car.Power</p>
-                                    </MatExpansionPanelDetails>
-                                </MatExpansionPanel>
-                            }
-                        </MatAccordion>
-                    </div>
-                </div>
-            </div>
+        <WrapPanelCard>
+            <CardHeader>
+                <MatIconButton Icon="@MatIconNames.Card_giftcard" />
+                <p>Samochody</p>
+                <MatIconButton Command="PageModel.AddCarCommand" Icon="@MatIconNames.Add" />
+            </CardHeader>
+            <CardContent>
+                <MatAccordion>
+                    @foreach (CarModel car in PageModel.Cars)
+                    {
+                        <MatExpansionPanel>
+                            <MatExpansionPanelSummary>
+                                <p>@car.Brand</p>
+                                <p>@car.Model</p>
+                            </MatExpansionPanelSummary>
+                            <MatExpansionPanelDetails>
+                                <p>@car.Plate</p>
+                                <p>@car.Vin</p>
+                                <p>@car.Power</p>
+                                <div class="car-options">
+                                    <MatIconButton Icon="@MatIconNames.Add" />
+                                    <MatIconButton Icon="@MatIconNames.Edit" />
+                                    <MatIconButton Icon="@MatIconNames.Remove" Command="PageModel.RemoveCarCommand" CommandParameter="car.Id" />
+                                </div>
+                            </MatExpansionPanelDetails>
+                        </MatExpansionPanel>
+                    }
+                </MatAccordion>
+            </CardContent>
+        </WrapPanelCard>
 
-            <div class="mat-layout-grid-cell">
-                <div class="card mat-elevation-z13">
-                    <div class="card-header">
-                        <p>Samochody</p>
-                    </div>
-
-                    <div class="card-content">
-                        <MatAccordion>
-                            @foreach (CarModel car in PageModel.Cars)
-                            {
-                                <MatExpansionPanel>
-                                    <MatExpansionPanelSummary>
-                                        <p>@car.Brand</p>
-                                        <p>@car.Model</p>
-                                    </MatExpansionPanelSummary>
-                                    <MatExpansionPanelDetails>
-                                        <p>@car.Plate</p>
-                                        <p>@car.Vin</p>
-                                        <p>@car.Power</p>
-                                    </MatExpansionPanelDetails>
-                                </MatExpansionPanel>
-                            }
-                        </MatAccordion>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <WrapPanelCard>
+            <CardHeader>
+                <MatIconButton Icon="@MatIconNames.Card_giftcard" />
+                <p>Samochody</p>
+                <MatIconButton Command="PageModel.AddCarCommand" Icon="@MatIconNames.Add" />
+            </CardHeader>
+            <CardContent>
+                <MatAccordion>
+                    @foreach (CarModel car in PageModel.Cars)
+                    {
+                        <MatExpansionPanel>
+                            <MatExpansionPanelSummary>
+                                <p>@car.Brand</p>
+                                <p>@car.Model</p>
+                            </MatExpansionPanelSummary>
+                            <MatExpansionPanelDetails>
+                                <p>@car.Plate</p>
+                                <p>@car.Vin</p>
+                                <p>@car.Power</p>
+                                <div class="car-options">
+                                    <MatIconButton Icon="@MatIconNames.Add" />
+                                    <MatIconButton Icon="@MatIconNames.Edit" />
+                                    <MatIconButton Icon="@MatIconNames.Remove" Command="PageModel.RemoveCarCommand" CommandParameter="car.Id" />
+                                </div>
+                            </MatExpansionPanelDetails>
+                        </MatExpansionPanel>
+                    }
+                </MatAccordion>
+            </CardContent>
+        </WrapPanelCard>
+    </WrapPanel>
 }
 else
 {

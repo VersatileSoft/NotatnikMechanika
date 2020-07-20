@@ -44,15 +44,17 @@ namespace NotatnikMechanika.Core.PageModels
         private async Task RemoveCustomerAction(int id)
         {
             Response response = await _httpRequestService.SendDelete(new CustomerPaths().GetFullPath(id.ToString()));
-            if (response.Successful)
-            {
-                await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto klienta", MessageDialogType.Success);
-            }
-            else
-            {
-                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Success, "Błąd podczas usuwania klienta");
-            }
 
+            switch (response.ResponseResult)
+            {
+                case ResponseResult.Successful:
+                    await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto klienta", MessageDialogType.Success);
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Success, "Błąd podczas usuwania klienta");
+                    break;
+            }
             await Initialize();
         }
 
@@ -65,13 +67,15 @@ namespace NotatnikMechanika.Core.PageModels
         {
             IsLoading = true;
             Response<List<CustomerModel>> response = await _httpRequestService.SendGet<List<CustomerModel>>(new CustomerPaths().GetFullPath(CRUDPaths.GetAllPath));
-            if (response.Successful)
+            switch (response.ResponseResult)
             {
-                Customers = response.Content;
-            }
-            else
-            {
-                await _messageDialogService.ShowMessageDialog("Błąd podczas ładowania klientów", MessageDialogType.Error);
+                case ResponseResult.Successful:
+                    Customers = response.Content;
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog("Błąd podczas ładowania klientów", MessageDialogType.Error);
+                    break;
             }
             IsLoading = false;
         }

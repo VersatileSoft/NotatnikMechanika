@@ -56,9 +56,15 @@ namespace NotatnikMechanika.Core.PageModels
             Response<List<CarModel>> carsResponse = await _httpRequestService.SendGet<List<CarModel>>(new CarPaths().GetFullPath(
                 CarPaths.GetByCustomerPath.Replace("{customerId}", SelectedCustomer.Id.ToString())));
 
-            if (carsResponse.Successful)
+            switch (carsResponse.ResponseResult)
             {
-                Cars = carsResponse.Content;
+                case ResponseResult.Successful:
+                    Cars = carsResponse.Content;
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(carsResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania samochodów klienta");
+                    break;
             }
 
             if (Cars?.Any() ?? false)
@@ -73,9 +79,15 @@ namespace NotatnikMechanika.Core.PageModels
             IsLoading = true;
             Response<List<CustomerModel>> customersResponse = await _httpRequestService.SendGet<List<CustomerModel>>(new CustomerPaths().GetFullPath(CRUDPaths.GetAllPath));
 
-            if (customersResponse.Successful)
+            switch (customersResponse.ResponseResult)
             {
-                Customers = customersResponse.Content;
+                case ResponseResult.Successful:
+                    Customers = customersResponse.Content;
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(customersResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania klientów");
+                    break;
             }
 
             if (Customers?.Any() ?? false)

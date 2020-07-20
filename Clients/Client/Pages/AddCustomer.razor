@@ -5,33 +5,35 @@
 
 
 <div class="add-customer">
-    <div class="mat-layout-grid">
-        <div class="mat-layout-grid-inner">
-            <div class="mat-layout-grid-cell-span-6">
-                <div class="card mat-elevation-z13">
-                    <div class="card-header">
-                        <p>Dane Klienta</p>
-                    </div>
-                    <div class="card-content">
-                        <MatTextField @bind-Value="@PageModel.Model.Name" Class="text-field" Label="Imię" Outlined="true"></MatTextField>
-                        <MatTextField @bind-Value="@PageModel.Model.Surname" Class="text-field"  Label="Nazwisko" Outlined="true"></MatTextField>
-                        <MatTextField @bind-Value="@PageModel.Model.Phone" Class="text-field"  Label="Telefon" Outlined="true"></MatTextField>
-                        <MatTextField @bind-Value="@PageModel.Model.Address" Class="text-field"  Label="Adres" Outlined="true"></MatTextField>
-                    </div>
-                </div>
-            </div>
-            <div class="mat-layout-grid-cell-span-6">
-                <div class="card mat-elevation-z13">
-                    <div class="card-header">
-                        <p>Dane Firmy</p>
-                    </div>
-                    <div class="card-content">
-                        <MatTextField @bind-Value="@PageModel.Model.CompanyName" Class="text-field" Label="Nazwa firmy" Outlined="true"></MatTextField>
-                        <MatTextField @bind-Value="@PageModel.Model.CompanyIdentyficator" Class="text-field" Label="NIP" Outlined="true"></MatTextField>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <MatButton Raised="true" Label="Dodaj klienta" Command="@PageModel.AddCommand" />
+    <EditForm Model="@PageModel.Model" OnInvalidSubmit="_ => PageModel.AddCommand.Execute(null)">
+        <WrapPanel>
+            <WrapPanelCard>
+                <CardHeader>
+                    <p>Dane Klienta</p>
+                </CardHeader>
+                <CardContent>
+                    <MatTextField @bind-Value="@PageModel.Model.Name" Class="text-field" Label="Imię" Outlined="true"></MatTextField>
+                    <ValidationMessage For="@(() => @PageModel.Model.Name)" />
+                    <MatTextField @bind-Value="@PageModel.Model.Surname" Class="text-field" Label="Nazwisko" Outlined="true"></MatTextField>
+                    <ValidationMessage For="@(() => @PageModel.Model.Surname)" />
+                    <MatTextField @bind-Value="@PageModel.Model.Phone" Class="text-field" Label="Telefon" Outlined="true"></MatTextField>
+                    <ValidationMessage For="@(() => @PageModel.Model.Phone)" />
+                    <MatTextField @bind-Value="@PageModel.Model.Address" Class="text-field" Label="Adres" Outlined="true"></MatTextField>
+                    <ValidationMessage For="@(() => @PageModel.Model.Address)" />
+                </CardContent>
+            </WrapPanelCard>
+            <WrapPanelCard>
+                <CardHeader>
+                    <p>Dane Firmy</p>
+                </CardHeader>
+                <CardContent>
+                    <MatTextField @bind-Value="@PageModel.Model.CompanyName" Class="text-field" Label="Nazwa firmy" Outlined="true"></MatTextField>
+                    <ValidationMessage For="@(() => @PageModel.Model.CompanyName)" />
+                    <MatTextField @bind-Value="@PageModel.Model.CompanyIdentyficator" Class="text-field" Label="NIP" Outlined="true"></MatTextField>
+                    <ValidationMessage For="@(() => @PageModel.Model.CompanyIdentyficator)" />
+                </CardContent>
+            </WrapPanelCard>
+        </WrapPanel>
+        <MatButton Raised="true" Label="Dodaj klienta" Type="Submit" />
+    </EditForm>
 </div>

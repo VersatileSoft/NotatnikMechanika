@@ -20,15 +20,7 @@ namespace NotatnikMechanika.Server.Controllers
         [HttpPost(AccountPaths.LoginPath)]
         public async Task<ActionResult<Response<TokenModel>>> LoginAsync([FromBody] LoginModel loginModel)
         {
-            Response<TokenModel> loginResponse = await _accountService.AuthenticateAsync(loginModel.Email, loginModel.Password);
-            if (loginResponse.Successful)
-            {
-                return Ok(loginResponse);
-            }
-            else
-            {
-                return Unauthorized(loginResponse);
-            }
+            return Ok(await _accountService.AuthenticateAsync(loginModel.Email, loginModel.Password));
         }
 
         [HttpGet("verify/email")]
@@ -41,14 +33,7 @@ namespace NotatnikMechanika.Server.Controllers
         [HttpPost(AccountPaths.RegisterPath)]
         public async Task<ActionResult<Response>> RegisterAsync([FromBody] RegisterModel value)
         {
-            Response result = await _accountService.RegisterAsync(value);
-
-            if (result.Successful)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result);
+            return Ok(await _accountService.RegisterAsync(value));
         }
 
         [Authorize]

@@ -37,15 +37,17 @@ namespace NotatnikMechanika.Core.PageModels
         private async Task RemoveCommodityAction(int id)
         {
             Response response = await _httpRequestService.SendDelete(new CommodityPaths().GetFullPath(id.ToString()));
-            if (response.Successful)
-            {
-                await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto towar", MessageDialogType.Success);
-            }
-            else
-            {
-                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas usuwania towaru");
-            }
 
+            switch (response.ResponseResult)
+            {
+                case ResponseResult.Successful:
+                    await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto towar", MessageDialogType.Success);
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas usuwania towaru");
+                    break;
+            }
             await Initialize();
         }
 
@@ -54,13 +56,15 @@ namespace NotatnikMechanika.Core.PageModels
             IsLoading = true;
             Response<List<CommodityModel>> response = await _httpRequestService.SendGet<List<CommodityModel>>(new CommodityPaths().GetFullPath(CRUDPaths.GetAllPath));
 
-            if (response.Successful)
+            switch (response.ResponseResult)
             {
-                Commodities = response.Content;
-            }
-            else
-            {
-                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania towarów");
+                case ResponseResult.Successful:
+                    Commodities = response.Content;
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania towarów");
+                    break;
             }
 
             IsLoading = false;

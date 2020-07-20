@@ -19,11 +19,6 @@ namespace NotatnikMechanika.WPF.Pages
             InitAnimations();
         }
 
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            PageModel.LoginModel.Password = ((PasswordBox)sender).Password;
-        }
-
         private void InitAnimations()
         {
             DoubleAnimation WithAnimation = new DoubleAnimation
@@ -49,10 +44,10 @@ namespace NotatnikMechanika.WPF.Pages
 
 
 
-            // Configure the animation to target the button's Width property.
-            Storyboard.SetTargetName(WithAnimation, Logo.Name);
-            Storyboard.SetTargetName(HeightAnimation, Logo.Name);
-            Storyboard.SetTargetName(OpacityAnimation, LoginControls.Name);
+        /*    // Configure the animation to target the button's Width property.
+         //   Storyboard.SetTargetName(WithAnimation, Logo.Name);
+         //   Storyboard.SetTargetName(HeightAnimation, Logo.Name);
+            //Storyboard.SetTargetName(OpacityAnimation, LoginControls.Name);
             Storyboard.SetTargetProperty(WithAnimation, new PropertyPath(WidthProperty));
             Storyboard.SetTargetProperty(HeightAnimation, new PropertyPath(HeightProperty));
             Storyboard.SetTargetProperty(OpacityAnimation, new PropertyPath(OpacityProperty));
@@ -63,7 +58,7 @@ namespace NotatnikMechanika.WPF.Pages
             _storyboard.Children.Add(HeightAnimation);
             _storyboard.Children.Add(OpacityAnimation);
 
-            _storyboard.Begin(Logo);
+           // _storyboard.Begin(Logo);*/
         }
     }
 }

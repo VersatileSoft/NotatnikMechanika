@@ -47,14 +47,20 @@ namespace NotatnikMechanika.Core.PageModels
                 response = await _httpRequestService.SendPost(path);
             }
 
-            if (response.Successful)
+            switch (response.ResponseResult)
             {
-                await _messageDialogService.ShowMessageDialog($"Pomyślnie {(serviceModel.IsInOrder ? "usunięto" : "dodano")} usługę", MessageDialogType.Success);
-                await Initialize();
-            }
-            else
-            {
-                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Coś poszło nie tak");
+                case ResponseResult.Successful:
+                    await _messageDialogService.ShowMessageDialog($"Pomyślnie {(serviceModel.IsInOrder ? "usunięto" : "dodano")} towar", MessageDialogType.Success);
+                    await Initialize();
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Coś poszło nie tak");
+                    break;
+
+                case ResponseResult.BadModelState:
+                    await _messageDialogService.ShowMessageDialog("Wypełnij dane poprawnie", MessageDialogType.Error);
+                    break;
             }
             IsLoading = false;
         }
@@ -67,13 +73,15 @@ namespace NotatnikMechanika.Core.PageModels
             string path = new ServicePaths().GetFullPath(ServicePaths.GetAllForOrderPath.Replace("{orderId}", _orderId.ToString()));
             Response<List<ServiceForOrderModel>> response = await _httpRequestService.SendGet<List<ServiceForOrderModel>>(path);
 
-            if (response.Successful)
+            switch (response.ResponseResult)
             {
-                ServiceModels = response.Content;
-            }
-            else
-            {
-                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania usług");
+                case ResponseResult.Successful:
+                    ServiceModels = response.Content;
+                    break;
+
+                case ResponseResult.BadRequest:
+                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania usług");
+                    break;
             }
             IsLoading = false;
         }

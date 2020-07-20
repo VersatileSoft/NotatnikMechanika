@@ -1,0 +1,19 @@
+﻿<div class="card mat-elevation-z13">
+    <div class="card-header">
+        @CardHeader
+    </div>
+
+    <div class="card-content">
+        @CardContent
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public RenderFragment CardHeader { get; set; }
+
+    [Parameter]
+    public RenderFragment CardContent { get; set; }
+
+}

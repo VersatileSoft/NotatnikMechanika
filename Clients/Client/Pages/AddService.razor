@@ -3,15 +3,19 @@
 @using MVVMPackage.Blazor
 @inherits PageBase<AddServicePageModel>
 
-<div class="card">
-    <div class="card-header">
-        <p>Dodaj Usługę</p>
-    </div>
 
-    <div class="card-content mat-elevation-z13">
-        <MatTextField @bind-Value="@PageModel.Model.Name" Class="text-field" Label="Nazwa" Outlined="true"></MatTextField>
-        <MatTextField @bind-Value="@PageModel.Model.Price" Class="text-field" Label="Cena" Outlined="true"></MatTextField>
-    </div>
-</div>
+<EditForm Model="PageModel.Model" OnValidSubmit="_ => PageModel.AddCommand.Execute(null)">
+    <Card>
+        <CardHeader>
+            <p>Dodaj Usługę</p>
+        </CardHeader>
 
-<MatButton Label="Zapisz" Command="PageModel.AddCommand" Raised="true" />
+        <CardContent>
+            <MatTextField @bind-Value="@PageModel.Model.Name" Class="text-field" Label="Nazwa" Outlined="true"></MatTextField>
+            <MatTextField @bind-Value="@PageModel.Model.Price" Class="text-field" Label="Cena" Outlined="true"></MatTextField>
+        </CardContent>
+    </Card>
+    <MatButton Label="Zapisz" Type="Submit" Raised="true" />
+</EditForm>
+
+    

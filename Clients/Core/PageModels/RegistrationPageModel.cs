@@ -4,7 +4,6 @@ using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.User;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -39,26 +38,25 @@ namespace NotatnikMechanika.Core.PageModels
         {
             IsWaiting = true;
 
-            Response response;
-            if (false)
+            Response response = await _httpRequestService.SendPost(RegisterModel, new AccountPaths().GetFullPath(AccountPaths.RegisterPath));
+
+            switch (response.ResponseResult)
             {
-                response = BadRequestResponse(new List<string> { "Hasła są różne" });
-            }
-            else
-            {
-                response = await _httpRequestService.SendPost(RegisterModel, new AccountPaths().GetFullPath(AccountPaths.RegisterPath));
+                case ResponseResult.Successful:
+                    await _messageDialogService.ShowMessageDialog("Konto zostało utworzone. Teraz możesz się zalogować.", MessageDialogType.Success, "Rejestracja");
+                    await _navigationService.NavigateToAsync<LoginPageModel>();
+                    break;
+
+                case ResponseResult.BadRequest:
+                    ErrorMessage = response.ErrorMessages?[0];
+                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas rejestracji");
+                    break;
+
+                case ResponseResult.BadModelState:
+                    await _messageDialogService.ShowMessageDialog("Wypełnij dane poprawnie", MessageDialogType.Error);
+                    break;
             }
 
-            if (response.Successful)
-            {
-                await _messageDialogService.ShowMessageDialog("Konto zostało utworzone. Teraz możesz się zalogować.", MessageDialogType.Success, "Rejestracja");
-                await _navigationService.NavigateToAsync<LoginPageModel>();
-            }
-            else
-            {
-                ErrorMessage = response.ErrorMessages?[0];
-                await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Success, "Błąd podczas rejestracji");
-            }
             IsWaiting = false;
         }
     }

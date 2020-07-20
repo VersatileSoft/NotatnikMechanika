@@ -2,7 +2,7 @@
 
 namespace NotatnikMechanika.Shared.Models.Order
 {
-    public class OrderModel
+    public class OrderModel : ValidateModelBase
     {
         public int Id { get; set; }
         public int CarId { get; set; }

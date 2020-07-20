@@ -2,7 +2,7 @@
 
 namespace NotatnikMechanika.Shared.Models.Customer
 {
-    public class CustomerModel
+    public class CustomerModel : ValidateModelBase
     {
         public int Id { get; set; }
 
