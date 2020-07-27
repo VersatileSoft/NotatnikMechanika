@@ -13,6 +13,7 @@ namespace NotatnikMechanika.WPF
             InitializeComponent();
             NavigationService = MainFrame.NavigationService;
             LoadMainPage();
+            MainDialogHost = DialogHost;
         }
 
         protected override void OnInitialized(EventArgs e)

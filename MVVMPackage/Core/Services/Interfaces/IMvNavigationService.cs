@@ -1,9 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace MvvmPackage.Core.Services.Interfaces
 {
     public interface IMvNavigationService
     {
+        event EventHandler<bool> DialogStateChanged;
+
         /// <summary>
         /// Navigate to page assigned to given page model type
         /// </summary>

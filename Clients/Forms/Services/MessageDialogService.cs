@@ -6,9 +6,13 @@ namespace NotatnikMechanika.Forms.Services
 {
     public class MessageDialogService : IMessageDialogService
     {
-        public Task ShowMessageDialog(string message)
+        /* public Task ShowMessageDialog(string message)
+         {
+             return UserDialogs.Instance.AlertAsync(message, "Notatnik Mechanika");
+         }*/
+        public Task ShowMessageDialog(string message, MessageDialogType type, string title = null)
         {
-            return UserDialogs.Instance.AlertAsync(message, "Notatnik Mechanika");
+            throw new System.NotImplementedException();
         }
     }
 }

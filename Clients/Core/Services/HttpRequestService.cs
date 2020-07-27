@@ -23,7 +23,7 @@ namespace NotatnikMechanika.Core.Services
             return await ParseResponse<ResponseModel>(response);
         }
 
-        public async Task<Response<ResponseModel>> SendPost<SendModel, ResponseModel>(SendModel model, string path) where ResponseModel : new() where SendModel : ValidateModelBase
+        public async Task<Response<ResponseModel>> SendPost<SendModel, ResponseModel>(SendModel model, string path) where SendModel : ValidateModelBase where ResponseModel : new()
         {
             if (!model.IsValid)
             {

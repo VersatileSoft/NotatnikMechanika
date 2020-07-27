@@ -1,4 +1,5 @@
-﻿using MvvmPackage.Wpf.Pages;
+﻿using MvvmPackage.Core;
+using MvvmPackage.Wpf.Pages;
 using NotatnikMechanika.Core.PageModels;
 
 namespace NotatnikMechanika.WPF.Pages
@@ -6,7 +7,7 @@ namespace NotatnikMechanika.WPF.Pages
     /// <summary>
     /// Interaction logic for AddServiceCommodityToOrderPage.xaml
     /// </summary>
-   // [DialogPresentation]
+    [DisplayDialog]
     public partial class AddServiceToOrderPage : MvWpfPage<AddServiceToOrderPageModel>
     {
         public AddServiceToOrderPage()

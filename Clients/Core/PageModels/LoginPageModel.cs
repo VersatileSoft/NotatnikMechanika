@@ -16,7 +16,6 @@ namespace NotatnikMechanika.Core.PageModels
     {
         public LoginModel LoginModel { get; set; }
         public string ErrorMessage { get; set; }
-        public bool IsWaiting { get; set; }
 
         public ICommand LoginCommand { get; set; }
         public ICommand RegisterCommand { get; set; }
@@ -32,11 +31,12 @@ namespace NotatnikMechanika.Core.PageModels
             LoginModel = new LoginModel();
             LoginCommand = new AsyncCommand(LoginAction);
             RegisterCommand = new AsyncCommand(navigationService.NavigateToAsync<RegistrationPageModel>);
+            IsLoading = false;
         }
 
         public async Task LoginAction()
         {
-            IsWaiting = true;
+            IsLoading = true;
             Response<TokenModel> loginResult = await _authService.LoginAsync(LoginModel);
 
             switch (loginResult.ResponseResult)
@@ -49,7 +49,7 @@ namespace NotatnikMechanika.Core.PageModels
                     await _messageDialogService.ShowMessageDialog("Wypełnij dane poprawnie", MessageDialogType.Error);
                     break;
             }
-            IsWaiting = false;
+            IsLoading = false;
         }
     }
 }

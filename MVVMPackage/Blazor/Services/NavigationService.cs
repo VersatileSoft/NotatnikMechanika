@@ -15,6 +15,24 @@ namespace MVVMPackage.Blazor.Services
         private readonly IServiceProvider _services;
 
         public Action<bool, RenderFragment> DialogChanged;
+        private bool dialogIsOpen;
+
+        public event EventHandler<bool> DialogStateChanged;
+
+        public bool DialogIsOpen
+        {
+            get => dialogIsOpen;
+            set
+            {
+                if (value != dialogIsOpen)
+                {
+                    dialogIsOpen = value;
+                    DialogStateChanged?.Invoke(this, value);
+                }
+            }
+        }
+
+        public RenderFragment DialogContent { get; set; } = _ => { };
 
         public NavigationService(NavigationManager navigationManager, IServiceProvider services)
         {
@@ -50,7 +68,9 @@ namespace MVVMPackage.Blazor.Services
         {
             PageBase<TPageModel> dialog = Activator.CreateInstance(dialogType) as PageBase<TPageModel>;
             await dialog.DialogInitialize(_services, parameter);
-            DialogChanged?.Invoke(true, dialog.RenderFragment);
+            dialog.PageModel.PropertyChanged += (s, e) => DialogStateChanged?.Invoke(this, DialogIsOpen);
+            DialogContent = dialog.RenderFragment;
+            DialogIsOpen = true;
         }
 
         private bool IsDialog<TPageModel>(out Type pageType)
@@ -76,7 +96,7 @@ namespace MVVMPackage.Blazor.Services
 
         public Task CloseDialog()
         {
-            DialogChanged?.Invoke(false, _ => { });
+            DialogIsOpen = false;
             return Task.CompletedTask;
         }
     }

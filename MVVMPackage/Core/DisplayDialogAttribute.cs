@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace MVVMPackage.Blazor
+namespace MvvmPackage.Core
 {
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
     public class DisplayDialogAttribute : Attribute

@@ -18,7 +18,6 @@ namespace NotatnikMechanika.Core.PageModels
         public ICommand RegisterCommand { get; set; }
         public ICommand LoginCommand { get; set; }
         public string ErrorMessage { get; set; }
-        public bool IsWaiting { get; set; }
 
         private readonly IMvNavigationService _navigationService;
         private readonly IHttpRequestService _httpRequestService;
@@ -32,11 +31,12 @@ namespace NotatnikMechanika.Core.PageModels
             RegisterModel = new RegisterModel();
             RegisterCommand = new AsyncCommand(RegisterAction);
             LoginCommand = new AsyncCommand(async () => await navigationService.NavigateToAsync<LoginPageModel>());
+            IsLoading = false;
         }
 
         public async Task RegisterAction()
         {
-            IsWaiting = true;
+            IsLoading = true;
 
             Response response = await _httpRequestService.SendPost(RegisterModel, new AccountPaths().GetFullPath(AccountPaths.RegisterPath));
 
@@ -57,7 +57,7 @@ namespace NotatnikMechanika.Core.PageModels
                     break;
             }
 
-            IsWaiting = false;
+            IsLoading = false;
         }
     }
 }

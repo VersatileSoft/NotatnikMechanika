@@ -1,21 +1,28 @@
 ﻿@using NotatnikMechanika.Core.PageModels
 @using NotatnikMechanika.Shared.Models.Commodity
 @using MVVMPackage.Blazor
+@using MvvmPackage.Core
 @inherits PageBase<AddCommodityToOrderPageModel>
 @attribute [DisplayDialog]
 
-<MatDialogTitle>Hi</MatDialogTitle>
+<MatDialogTitle>Dodaj usługi</MatDialogTitle>
 <MatDialogContent>
-    <p>Dodaj usługi</p>
-    @if (PageModel.CommodityModels != null)
+    @if (!PageModel.IsLoading && PageModel.CommodityModels != null)
     {
-        @foreach (CommodityForOrderModel service in PageModel.CommodityModels)
-        {
-            <p>@service.Name @service.Price</p>
-            <MatIconButton Icon="@(service.IsInOrder ? MatIconNames.Remove : MatIconNames.Add)" Command="PageModel.AddRemoveCommodityCommand" CommandParameter="service" />
-        }
+        <MatTable Items="PageModel.CommodityModels" class="table" ShowPaging="false" UseSortHeaderRow="true" RowClass="table-row" HeaderRowClass="table-header">
+            <MatTableHeader>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Cena</th>
+                <th scope="col">Edycja</th>
+            </MatTableHeader>
+            <MatTableRow>
+                <td>@context.Name</td>
+                <td>@context.Price</td>
+                <td><MatIconButton Icon="@(context.IsInOrder ? MatIconNames.Remove : MatIconNames.Add)" Command="PageModel.AddRemoveCommodityCommand" CommandParameter="context" /></td>
+            </MatTableRow>
+        </MatTable>
     }
 </MatDialogContent>
 <MatDialogActions>
-    <MatButton Command="PageModel.CloseCommand">No Thanks</MatButton>
+    <MatButton Command="PageModel.CloseCommand">OK</MatButton>
 </MatDialogActions>

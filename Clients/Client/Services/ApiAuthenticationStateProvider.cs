@@ -39,7 +39,7 @@ namespace NotatnikMechanika.Client.Services
 
             // ReadJwtToken Not working on release, workaround for now
             //JwtSecurityToken token = new JwtSecurityTokenHandler().ReadJwtToken(savedToken);
-            IEnumerable<Claim> claims = new List<Claim> { new Claim("Name", "dupa") };
+            IEnumerable<Claim> claims = new List<Claim> { new Claim("Name", "Placeholder") };
 
             return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(claims, "jwt")));
         }
@@ -48,7 +48,7 @@ namespace NotatnikMechanika.Client.Services
         {
             _logger.LogError("StateChanged");
             NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
-            _navigationManager.NavigateTo("/");
+            _navigationManager.NavigateTo("/orders");
         }
     }
 }

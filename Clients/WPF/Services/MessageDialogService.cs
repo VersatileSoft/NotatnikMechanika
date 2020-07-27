@@ -1,5 +1,6 @@
 ﻿using NotatnikMechanika.Core.Interfaces;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace NotatnikMechanika.WPF.Services
 {
@@ -7,7 +8,13 @@ namespace NotatnikMechanika.WPF.Services
     {
         public Task ShowMessageDialog(string message, MessageDialogType type, string title = null)
         {
-            throw new System.NotImplementedException();
+            if (Application.Current.MainWindow is MainWindow window)
+            {
+                window.Snackbar.IsActive = true;
+                window.Snackbar.MessageQueue.Enqueue(message, "OK", () => window.Snackbar.IsActive = false);
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

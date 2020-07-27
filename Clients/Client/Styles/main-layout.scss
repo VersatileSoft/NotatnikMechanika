@@ -19,11 +19,26 @@
         height: 100%;
     }
 
-    .table {
+    table {
         margin: 0;
         padding: 0;
 
         th {
+            color: white !important;
+        }
+
+        .table-row {
+            color: white !important;
+        }
+
+        td:last-child {
+            color: white !important;
+            text-align: center;
+            width: auto;
+            padding: 0;
+        }
+
+        .table-header {
             color: white !important;
         }
     }
@@ -47,7 +62,7 @@
             flex-direction: row;
             padding: 5px;
             justify-content: space-between;
-            
+
             p {
                 margin: 15px;
                 display: inline-block;
@@ -73,5 +88,14 @@
         flex-direction: row;
         align-content: center;
         justify-items: center;
+    }
+
+
+    .dialog {
+        .dialog-content-item {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
     }
 }

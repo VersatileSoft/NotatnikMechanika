@@ -2,6 +2,7 @@
 using MvvmPackage.Core.Services.Interfaces;
 using MvvmPackage.Wpf.Pages;
 using System;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,27 +14,23 @@ namespace MvvmPackage.Wpf.Services
     {
         private readonly NavigationService _navigationService;
         private readonly IWpfPageActivatorService _wpfPageActivatorService;
+
+        public event EventHandler<bool> DialogStateChanged;
+
         public MvWpfNavigationService(IWpfPageActivatorService wpfPageActivatorService)
         {
             _navigationService = ((MvMainWindow)Application.Current.MainWindow).NavigationService;
             _wpfPageActivatorService = wpfPageActivatorService;
         }
 
-
         public Task NavigateToAsync<TPageModel>() where TPageModel : PageModelBase
         {
-            return NavigateToAsync(_wpfPageActivatorService.CreatePageFromPageModel<TPageModel>());
+            return NavigateToAsync<TPageModel>(_wpfPageActivatorService.CreatePageFromPageModel<TPageModel>());
         }
 
         public Task NavigateToAsync<TPageModel>(int parameter) where TPageModel : PageModelBase
         {
-            return NavigateToAsync(_wpfPageActivatorService.CreatePageFromPageModel<TPageModel>(parameter));
-        }
-
-        private Task NavigateToAsync(ContentControl page)
-        {
-            _navigationService.Navigate(page);
-            return Task.CompletedTask;
+            return NavigateToAsync<TPageModel>(_wpfPageActivatorService.CreatePageFromPageModel<TPageModel>(parameter));
         }
 
         public Task PopAsync()
@@ -44,7 +41,38 @@ namespace MvvmPackage.Wpf.Services
 
         public Task CloseDialog()
         {
-            throw new NotImplementedException();
+            SetDialogState(false);
+            return Task.CompletedTask;
+        }
+
+        private bool IsDialog<TPageModel>()
+        {
+            Type[] types = IoC.PlatformProjectAssembly.GetTypes();
+            string pageName = typeof(TPageModel).Name.Replace("Model", "");
+            Type pageType = Array.Find(types, t => t.Name == pageName);
+            return pageType?.GetCustomAttribute<DisplayDialogAttribute>() != null;
+        }
+
+        private Task NavigateToAsync<TPageModel>(ContentControl page)
+        {
+            if (IsDialog<TPageModel>())
+            {
+                SetDialogState(true, page);
+                return Task.CompletedTask;
+            }
+
+            _navigationService.Navigate(page);
+            return Task.CompletedTask;
+        }
+
+        private void SetDialogState(bool isOpen, ContentControl page = null)
+        {
+            if (Application.Current.MainWindow is MvMainWindow mainWindow)
+            {
+                mainWindow.MainDialogHost.DialogContent = page;
+                mainWindow.MainDialogHost.IsOpen = isOpen;
+                DialogStateChanged?.Invoke(this, isOpen);
+            }
         }
     }
 }

@@ -1,13 +1,13 @@
 ﻿<pages:MvWpfPage x:Class="NotatnikMechanika.WPF.Pages.OrderPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:core="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:MvvmPackage.Wpf.Pages;assembly=MvvmPackage.Wpf"
     xmlns:s="clr-namespace:System;assembly=System.Runtime"
     xmlns:utils="clr-namespace:NotatnikMechanika.WPF.Pages.Utils;assembly="
-    xmlns:pages="clr-namespace:MvvmPackage.Wpf.Pages;assembly=MvvmPackage.Wpf"
-    xmlns:core="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
     x:TypeArguments="core:OrderPageModel"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
@@ -18,268 +18,256 @@
     TextOptions.TextRenderingMode="Auto"
     mc:Ignorable="d">
 
-    <materialDesign:DialogHost x:Name="OrderDialogHost">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <utils:TopBar Grid.Row="0"/>
-            <Grid Grid.Row="1">
-                <utils:IconButton
-                    Width="50"
-                    Height="50"
-                    Margin="20,5,0,0"
-                    Command="{Binding GoBackCommand}"
-                    Foreground="{StaticResource SecondaryAccentBrush}"
-                    HorizontalAlignment="Left"
-                    IconKind="ArrowLeftBoldCircle"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <utils:IconButton
+                Width="50"
+                Height="50"
+                Margin="20,5,0,0"
+                Command="{Binding GoBackCommand}"
+                Foreground="{StaticResource SecondaryAccentBrush}"
+                HorizontalAlignment="Left"
+                IconKind="ArrowLeftBoldCircle"/>
 
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Label
-                        Margin="0,20,0,0"
-                        Content="Szczegóły zlecenia"
-                        FontSize="30"
-                        HorizontalAlignment="Center"/>
-                </StackPanel>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Label
+                    Margin="0,20,0,0"
+                    Content="Szczegóły zlecenia"
+                    FontSize="30"
+                    HorizontalAlignment="Center"/>
+            </StackPanel>
 
-            </Grid>
-            <ScrollViewer
-                Grid.Row="2"
-                CanContentScroll="True"
-                VerticalScrollBarVisibility="Auto">
-                <utils:AnimatedWrapPanel>
-                    <GroupBox
-                        Grid.Column="0"
-                        Width="300"
-                        Margin="16"
-                        Header="Klient"
-                        Style="{DynamicResource MaterialDesignCardGroupBox}">
-                        <GroupBox.HeaderTemplate>
-                            <DataTemplate>
+        </Grid>
+        <ScrollViewer
+            Grid.Row="1"
+            CanContentScroll="True"
+            VerticalScrollBarVisibility="Auto">
+            <utils:AnimatedWrapPanel>
+                <GroupBox
+                    Grid.Column="0"
+                    Width="300"
+                    Margin="16"
+                    Header="Klient"
+                    Style="{DynamicResource MaterialDesignCardGroupBox}">
+                    <GroupBox.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon
+                                    Grid.Column="0"
+                                    Width="32"
+                                    Height="32"
+                                    Kind="User"
+                                    VerticalAlignment="Center"/>
+                                <TextBlock
+                                    Grid.Column="1"
+                                    Margin="8,0,0,0"
+                                    Text="{Binding}"
+                                    VerticalAlignment="Center"/>
+                                <utils:IconButton
+                                    Grid.Column="2"
+                                    Width="32"
+                                    Height="32"
+                                    IconKind="Edit"
+                                    VerticalAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </GroupBox.HeaderTemplate>
+                    <StackPanel>
+                        <Label Content="{Binding OrderModel.CustomerModel.Name}" FontSize="20"/>
+                        <Label Content="{Binding OrderModel.CustomerModel.Surname}" FontSize="20"/>
+                        <Label Content="{Binding OrderModel.CustomerModel.Address}" FontSize="20"/>
+                        <Label Content="{Binding OrderModel.CustomerModel.Phone}" FontSize="20"/>
+                        <Label Content="{Binding OrderModel.CustomerModel.CompanyName}" FontSize="20"/>
+                        <Label Content="{Binding OrderModel.CustomerModel.CompanyIdentyficator}" FontSize="20"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox
+                    Grid.Column="1"
+                    Width="300"
+                    Margin="16"
+                    Style="{DynamicResource MaterialDesignCardGroupBox}">
+                    <GroupBox.Header>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon
+                                Grid.Column="0"
+                                Width="32"
+                                Height="32"
+                                Kind="Car"
+                                VerticalAlignment="Center"/>
+                            <TextBlock
+                                Grid.Column="1"
+                                Margin="8,0,0,0"
+                                Text="Samochód"
+                                VerticalAlignment="Center"/>
+                            <utils:IconButton
+                                Grid.Column="2"
+                                Width="32"
+                                Height="32"
+                                Command="{Binding AddCarCommand}"
+                                IconKind="Add"
+                                VerticalAlignment="Center"/>
+                        </Grid>
+                    </GroupBox.Header>
+                    <Grid>
+                        <StackPanel>
+                            <Label Content="{Binding OrderModel.CarModel.Brand}" FontSize="20"/>
+                            <Label Content="{Binding OrderModel.CarModel.Model}" FontSize="20"/>
+                            <Label Content="{Binding OrderModel.CarModel.Plate}" FontSize="20"/>
+                            <Label Content="{Binding OrderModel.CarModel.Engine}" FontSize="20"/>
+                            <Label Content="{Binding OrderModel.CarModel.Power}" FontSize="20"/>
+                            <Label Content="{Binding OrderModel.CarModel.Vin}" FontSize="20"/>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox
+                    Grid.Column="1"
+                    Width="300"
+                    Margin="16"
+                    Style="{DynamicResource MaterialDesignCardGroupBox}">
+                    <GroupBox.Header>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon
+                                Grid.Column="0"
+                                Width="32"
+                                Height="32"
+                                Kind="Server"
+                                VerticalAlignment="Center"/>
+                            <TextBlock
+                                Grid.Column="1"
+                                Margin="8,0,0,0"
+                                Text="Usługi"
+                                VerticalAlignment="Center"/>
+                            <utils:IconButton
+                                Grid.Column="2"
+                                Width="32"
+                                Height="32"
+                                Command="{Binding AddServiceCommand}"
+                                IconKind="Add"
+                                VerticalAlignment="Center"/>
+                        </Grid>
+                    </GroupBox.Header>
+
+                    <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding Services}">
+                        <ListBox.ItemTemplate>
+                            <ItemContainerTemplate>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <materialDesign:PackIcon
+                                    <TextBlock
                                         Grid.Column="0"
-                                        Width="32"
-                                        Height="32"
-                                        Kind="User"
+                                        Margin="10"
+                                        Text="{Binding Name}"
                                         VerticalAlignment="Center"/>
-                                    <TextBlock
-                                        Grid.Column="1"
-                                        Margin="8,0,0,0"
-                                        Text="{Binding}"
-                                        VerticalAlignment="Center"/>
-                                    <utils:IconButton
-                                        Grid.Column="2"
-                                        Width="32"
-                                        Height="32"
-                                        IconKind="Edit"
-                                        VerticalAlignment="Center"/>
+
                                 </Grid>
-                            </DataTemplate>
-                        </GroupBox.HeaderTemplate>
-                        <StackPanel>
-                            <Label Content="{Binding OrderModel.CustomerModel.Name}" FontSize="20"/>
-                            <Label Content="{Binding OrderModel.CustomerModel.Surname}" FontSize="20"/>
-                            <Label Content="{Binding OrderModel.CustomerModel.Address}" FontSize="20"/>
-                            <Label Content="{Binding OrderModel.CustomerModel.Phone}" FontSize="20"/>
-                            <Label Content="{Binding OrderModel.CustomerModel.CompanyName}" FontSize="20"/>
-                            <Label Content="{Binding OrderModel.CustomerModel.CompanyIdentyficator}" FontSize="20"/>
-                        </StackPanel>
-                    </GroupBox>
+                            </ItemContainerTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
-                    <GroupBox
-                        Grid.Column="1"
-                        Width="300"
-                        Margin="16"
-                        Style="{DynamicResource MaterialDesignCardGroupBox}">
-                        <GroupBox.Header>
+                </GroupBox>
 
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <materialDesign:PackIcon
-                                    Grid.Column="0"
-                                    Width="32"
-                                    Height="32"
-                                    Kind="Car"
-                                    VerticalAlignment="Center"/>
-                                <TextBlock
-                                    Grid.Column="1"
-                                    Margin="8,0,0,0"
-                                    Text="Samochód"
-                                    VerticalAlignment="Center"/>
-                                <utils:IconButton
-                                    Grid.Column="2"
-                                    Width="32"
-                                    Height="32"
-                                    Command="{Binding AddCarCommand}"
-                                    IconKind="Add"
-                                    VerticalAlignment="Center"/>
-                            </Grid>
-                        </GroupBox.Header>
+                <GroupBox
+                    Grid.Column="1"
+                    Width="300"
+                    Margin="16"
+                    Style="{DynamicResource MaterialDesignCardGroupBox}">
+                    <GroupBox.Header>
                         <Grid>
-                            <StackPanel>
-                                <Label Content="{Binding OrderModel.CarModel.Brand}" FontSize="20"/>
-                                <Label Content="{Binding OrderModel.CarModel.Model}" FontSize="20"/>
-                                <Label Content="{Binding OrderModel.CarModel.Plate}" FontSize="20"/>
-                                <Label Content="{Binding OrderModel.CarModel.Engine}" FontSize="20"/>
-                                <Label Content="{Binding OrderModel.CarModel.Power}" FontSize="20"/>
-                                <Label Content="{Binding OrderModel.CarModel.Vin}" FontSize="20"/>
-                            </StackPanel>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon
+                                Grid.Column="0"
+                                Width="32"
+                                Height="32"
+                                Kind="Toolbox"
+                                VerticalAlignment="Center"/>
+                            <TextBlock
+                                Grid.Column="1"
+                                Margin="8,0,0,0"
+                                Text="Towary"
+                                VerticalAlignment="Center"/>
+                            <utils:IconButton
+                                Grid.Column="2"
+                                Width="32"
+                                Height="32"
+                                Command="{Binding AddCommodityCommand}"
+                                IconKind="Add"
+                                VerticalAlignment="Center"/>
                         </Grid>
-                    </GroupBox>
+                    </GroupBox.Header>
 
-                    <GroupBox
-                        Grid.Column="1"
-                        Width="300"
-                        Margin="16"
-                        Style="{DynamicResource MaterialDesignCardGroupBox}">
-                        <GroupBox.Header>
-
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <materialDesign:PackIcon
-                                    Grid.Column="0"
-                                    Width="32"
-                                    Height="32"
-                                    Kind="Server"
-                                    VerticalAlignment="Center"/>
-                                <TextBlock
-                                    Grid.Column="1"
-                                    Margin="8,0,0,0"
-                                    Text="Usługi"
-                                    VerticalAlignment="Center"/>
-                                <utils:IconButton
-                                    Grid.Column="2"
-                                    Width="32"
-                                    Height="32"
-                                    Command="{Binding AddServiceCommodityCommand}"
-                                    IconKind="Add"
-                                    VerticalAlignment="Center">
-                                    <Button.CommandParameter>
-                                        <s:Boolean>True</s:Boolean>
-                                    </Button.CommandParameter>
-                                </utils:IconButton>
-                            </Grid>
-                        </GroupBox.Header>
-
-                        <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding Services}">
-                            <ListBox.ItemTemplate>
-                                <ItemContainerTemplate>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock
-                                            Grid.Column="0"
-                                            Margin="10"
-                                            Text="{Binding Name}"
-                                            VerticalAlignment="Center"/>
-
-                                    </Grid>
-                                </ItemContainerTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-
-                    </GroupBox>
-
-                    <GroupBox
-                        Grid.Column="1"
-                        Width="300"
-                        Margin="16"
-                        Style="{DynamicResource MaterialDesignCardGroupBox}">
-                        <GroupBox.Header>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <materialDesign:PackIcon
-                                    Grid.Column="0"
-                                    Width="32"
-                                    Height="32"
-                                    Kind="Toolbox"
-                                    VerticalAlignment="Center"/>
-                                <TextBlock
-                                    Grid.Column="1"
-                                    Margin="8,0,0,0"
-                                    Text="Towary"
-                                    VerticalAlignment="Center"/>
-                                <utils:IconButton
-                                    Grid.Column="2"
-                                    Width="32"
-                                    Height="32"
-                                    Command="{Binding AddServiceCommodityCommand}"
-                                    IconKind="Add"
-                                    VerticalAlignment="Center">
-                                    <Button.CommandParameter>
-                                        <s:Boolean>False</s:Boolean>
-                                    </Button.CommandParameter>
-                                </utils:IconButton>
-                            </Grid>
-                        </GroupBox.Header>
-
-                        <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding Commodities}">
-                            <ListBox.ItemTemplate>
-                                <ItemContainerTemplate>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock
-                                            Grid.Column="0"
-                                            Margin="10"
-                                            Text="{Binding Name}"
-                                            VerticalAlignment="Center"/>
-
-                                    </Grid>
-                                </ItemContainerTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </GroupBox>
-
-                    <GroupBox
-                        Grid.Column="1"
-                        Width="300"
-                        Margin="16"
-                        Header="Dokumenty"
-                        Style="{DynamicResource MaterialDesignCardGroupBox}">
-                        <GroupBox.HeaderTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon
-                                        Width="32"
-                                        Height="32"
-                                        Kind="FileDocument"
-                                        VerticalAlignment="Center"/>
+                    <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding Commodities}">
+                        <ListBox.ItemTemplate>
+                            <ItemContainerTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
                                     <TextBlock
-                                        Margin="8,0,0,0"
-                                        Text="{Binding}"
+                                        Grid.Column="0"
+                                        Margin="10"
+                                        Text="{Binding Name}"
                                         VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </GroupBox.HeaderTemplate>
-                        <Grid/>
-                    </GroupBox>
-                </utils:AnimatedWrapPanel>
-            </ScrollViewer>
-        </Grid>
-    </materialDesign:DialogHost>
+
+                                </Grid>
+                            </ItemContainerTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </GroupBox>
+
+                <GroupBox
+                    Grid.Column="1"
+                    Width="300"
+                    Margin="16"
+                    Header="Dokumenty"
+                    Style="{DynamicResource MaterialDesignCardGroupBox}">
+                    <GroupBox.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon
+                                    Width="32"
+                                    Height="32"
+                                    Kind="FileDocument"
+                                    VerticalAlignment="Center"/>
+                                <TextBlock
+                                    Margin="8,0,0,0"
+                                    Text="{Binding}"
+                                    VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </GroupBox.HeaderTemplate>
+                    <Grid/>
+                </GroupBox>
+            </utils:AnimatedWrapPanel>
+        </ScrollViewer>
+    </Grid>
 </pages:MvWpfPage>

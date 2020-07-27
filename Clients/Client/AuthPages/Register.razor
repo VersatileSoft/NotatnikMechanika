@@ -3,19 +3,35 @@
 @using MVVMPackage.Blazor
 @inherits PageBase<RegistrationPageModel>
 
-<div class="input">
-    <MatTextField @bind-Value="PageModel.RegisterModel.Name" Icon="email" Label="Imię" Outlined="true" ValidationDisabled="true" />
-</div>
-<div class="input">
-    <MatTextField @bind-Value="PageModel.RegisterModel.Surname" Icon="email" Label="Nazwisko" Outlined="true" ValidationDisabled="true" />
-</div>
-<div class="input">
-    <MatTextField @bind-Value="PageModel.RegisterModel.Email" Icon="email" Label="E-mali" Outlined="true" ValidationDisabled="true" />
-</div>
-<div class="input">
-    <MatTextField @bind-Value="PageModel.RegisterModel.Password" Icon="lock_outline" Label="Hasło" Type="password" Outlined="true" ValidationDisabled="true" />
-</div>
-<div class="buttons">
-    <MatButton @onclick="() => PageModel.LoginCommand.Execute(null)" Raised="true">Mam już konto</MatButton>
-    <MatButton type="submit" Raised="true" Command="PageModel.RegisterCommand">Zarejestruj się</MatButton>
-</div>
+<EditForm Model="PageModel.RegisterModel" OnValidSubmit="PageModel.RegisterAction">
+    <DataAnnotationsValidator />
+    <div class="input">
+        <MatTextField @bind-Value="PageModel.RegisterModel.Name" Icon="@MatIconNames.Person" Label="Imię" Outlined="true" ValidationDisabled="true" />
+        <ValidationMessage For="@(() => @PageModel.RegisterModel.Name)" />
+    </div>
+    <div class="input">
+        <MatTextField @bind-Value="PageModel.RegisterModel.Surname" Icon="@MatIconNames.Person" Label="Nazwisko" Outlined="true" ValidationDisabled="true" />
+        <ValidationMessage For="@(() => @PageModel.RegisterModel.Surname)" />
+    </div>
+    <div class="input">
+        <MatTextField @bind-Value="PageModel.RegisterModel.Email" Icon="@MatIconNames.Email" Label="E-mali" Outlined="true" ValidationDisabled="true" />
+        <ValidationMessage For="@(() => @PageModel.RegisterModel.Email)" />
+    </div>
+    <div class="input">
+        <MatTextField @bind-Value="PageModel.RegisterModel.Password" Icon="@MatIconNames.Lock" Label="Hasło" Type="password" Outlined="true" ValidationDisabled="true" />
+        <ValidationMessage For="@(() => @PageModel.RegisterModel.Password)" />
+    </div>
+
+    <div class="input">
+        <MatTextField @bind-Value="PageModel.RegisterModel.ConfirmPassword" Icon="@MatIconNames.Lock" Label="Powtórz hasło" Type="password" Outlined="true" ValidationDisabled="true" />
+        <ValidationMessage For="@(() => @PageModel.RegisterModel.ConfirmPassword)" />
+    </div>
+
+    <div class="buttons">
+        <MatButton @onclick="() => PageModel.LoginCommand.Execute(null)" Raised="true">Mam już konto</MatButton>
+        <MatButton Type="Submit" Raised="true" Disabled="@PageModel.IsLoading">Zarejestruj się</MatButton>
+    </div>
+</EditForm>
+
+
+

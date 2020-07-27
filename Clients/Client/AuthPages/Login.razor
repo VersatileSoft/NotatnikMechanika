@@ -1,6 +1,7 @@
 ﻿@page "/login"
 @using NotatnikMechanika.Core.PageModels
-@inject LoginPageModel PageModel
+@using MVVMPackage.Blazor
+@inherits PageBase<LoginPageModel>
 
 <EditForm Model="PageModel.LoginModel" OnValidSubmit="PageModel.LoginAction">
     <DataAnnotationsValidator />
@@ -14,6 +15,6 @@
     </div>
     <div class="buttons">
         <MatButton @onclick="() => PageModel.RegisterCommand.Execute(null)" Raised="true">Nie mam konta</MatButton>
-        <MatButton Type="Submit" Raised="true">Zaloguj się</MatButton>
+        <MatButton Type="Submit" Raised="true" Disabled="PageModel.IsLoading">Zaloguj się</MatButton>
     </div>
 </EditForm>

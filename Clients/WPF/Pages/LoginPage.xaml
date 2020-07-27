@@ -68,7 +68,7 @@
                 Grid.ColumnSpan="2"
                 Margin="0,0,0,20"
                 materialDesign:HintAssist.Hint="Hasło"
-                utils:PasswordBoxAssistant.Password="{Binding LoginModel.Password, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"
+                utils:PasswordBoxAssistant.Password="{Binding LoginModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"
                 Style="{StaticResource PasswordBoxStyle}"/>
             <Label
                 Grid.Row="4"

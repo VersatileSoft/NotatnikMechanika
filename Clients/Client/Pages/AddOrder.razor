@@ -29,29 +29,29 @@
 
                     @if (PageModel.Cars != null)
                     {
-                        <MatSelectItem @bind-Value="PageModel.SelectedCar" Outlined="true" Label="Klient" Items="PageModel.Cars?.ToList()?.AsReadOnly()">
+                        <MatSelectItem @bind-Value="PageModel.SelectedCar" Outlined="true" Label="Samochód" Items="PageModel.Cars?.ToList()?.AsReadOnly()">
                             <ItemTemplate Context="car">
                                 <p>@car?.Brand</p>
                                 <p>@car?.Model</p>
                             </ItemTemplate>
                         </MatSelectItem>
-                        <ValidationMessage For="@(() => @PageModel.Model.CarId)" />
+                        <ValidationMessage For="@(() => PageModel.Model.CarId)" />
                     }
                 </CardContent>
             </WrapPanelCard>
 
             <WrapPanelCard>
                 <CardHeader>
-                    <p>Dane dodatkowe</p>
+                    <p>Szczegóły</p>
                 </CardHeader>
 
                 <CardContent>
                     <MatDatePicker @bind-Value="PageModel.Model.AcceptDate" />
-                    <ValidationMessage For="@(() => @PageModel.Model.AcceptDate)" />
+                    <ValidationMessage For="@(() => PageModel.Model.AcceptDate)" />
                     <MatDatePicker @bind-Value="PageModel.Model.FinishDate" />
-                    <ValidationMessage For="@(() => @PageModel.Model.FinishDate)" />
-                    <MatTextField @bind-Value="@PageModel.Model.Details" Class="text-field" Label="Adres" Outlined="true"></MatTextField>
-                    <ValidationMessage For="@(() => @PageModel.Model.Details)" />
+                    <ValidationMessage For="@(() => PageModel.Model.FinishDate)" />
+                    <MatTextField @bind-Value="@PageModel.Model.Details" Class="text-field" Label="Dane dodatkowe" Outlined="true"></MatTextField>
+                    <ValidationMessage For="@(() => PageModel.Model.Details)" />
                 </CardContent>
             </WrapPanelCard>
         </WrapPanel>

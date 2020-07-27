@@ -2,10 +2,16 @@
 @using NotatnikMechanika.Client.Utils
 @using MvvmPackage.Core.Services.Interfaces
 @using MVVMPackage.Blazor.Services
+@implements IDisposable
 @inject IMvNavigationService NavigationService
 
 <div class="main-layout">
-    <MatDialog @bind-IsOpen="@dialogIsOpen" ChildContent="@dialogContent" />
+
+    @if(NavigationService is NavigationService navigationService)
+    {
+        <MatDialog Class="dialog" @bind-IsOpen="navigationService.DialogIsOpen" ChildContent="@navigationService.DialogContent" />
+    }
+    
     <AuthorizeView>
         <Authorized>
             <MatAppBarContainer Class="app-bar">
@@ -50,26 +56,31 @@
 @code
 {
     bool Opened = true;
-    bool dialogIsOpen = false;
-    RenderFragment dialogContent = d => { };
 
-    void DialogStateChanged(bool isShowing, RenderFragment dialogPage)
-    {
-        dialogIsOpen = isShowing;
-        dialogContent = dialogPage;
-        StateHasChanged();
-    }
 
     void ButtonClicked()
     {
         Opened = !Opened;
     }
 
+    public void Dispose()
+    {
+        if (NavigationService is NavigationService navigationService)
+        {
+            navigationService.DialogStateChanged -= DialogStateChanged;
+        }
+    }
+
+    private void DialogStateChanged(object sender, bool isOpen)
+    {
+        StateHasChanged();
+    }
+
     protected override void OnAfterRender(bool firstRender)
     {
-        if(NavigationService is NavigationService navigationService)
+        if(firstRender && NavigationService is NavigationService navigationService)
         {
-            navigationService.DialogChanged = DialogStateChanged;
+            navigationService.DialogStateChanged += DialogStateChanged;
         }
         base.OnAfterRender(firstRender);
     }

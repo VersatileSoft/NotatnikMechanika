@@ -7,6 +7,7 @@ using NotatnikMechanika.Shared.Models.Commodity;
 using NotatnikMechanika.Shared.Models.Order;
 using NotatnikMechanika.Shared.Models.Service;
 using PropertyChanged;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ using static NotatnikMechanika.Shared.ResponseBuilder;
 namespace NotatnikMechanika.Core.PageModels
 {
     [AddINotifyPropertyChangedInterface]
-    public class OrderPageModel : PageModelBase
+    public class OrderPageModel : PageModelBase, IDisposable
     {
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMvNavigationService _navigationService;
@@ -41,16 +42,16 @@ namespace NotatnikMechanika.Core.PageModels
             AddServiceCommand = new AsyncCommand(() => _navigationService.NavigateToAsync<AddServiceToOrderPageModel>(OrderModel.Id));
             AddCommodityCommand = new AsyncCommand(() => _navigationService.NavigateToAsync<AddCommodityToOrderPageModel>(OrderModel.Id));
 
-            // navigationService.AfterClose += NavigationService_AfterClose;
+            navigationService.DialogStateChanged += NavigationService_AfterClose;
         }
 
-        //private void NavigationService_AfterClose(object sender, MvvmCross.Navigation.EventArguments.IMvxNavigateEventArgs e)
-        //{
-        //    if (e.ViewModel is AddServiceToOrderViewModel || e.ViewModel is AddCommodityToOrderViewModel)
-        //    {
-        //        Task.Run(Initialize);
-        //    }
-        //}
+        private void NavigationService_AfterClose(object sender, bool isOpen)
+        {
+            if (!isOpen)
+            {
+                Task.Run(Initialize);
+            }
+        }
 
         public override async Task Initialize()
         {
@@ -97,6 +98,11 @@ namespace NotatnikMechanika.Core.PageModels
                     break;
             }
             IsLoading = false;
+        }
+
+        public void Dispose()
+        {
+            _navigationService.DialogStateChanged -= NavigationService_AfterClose;
         }
     }
 }
