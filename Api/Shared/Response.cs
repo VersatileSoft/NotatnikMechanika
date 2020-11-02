@@ -10,8 +10,8 @@ namespace NotatnikMechanika.Shared
         public enum ResponseResult
         {
             Successful,
-            BadRequest,
-            BadModelState
+            BadRequest, //Błąd po stronie serwera
+            BadModelState, // Błąd walidacji
         }
 
         public class Response

@@ -20,7 +20,7 @@ namespace NotatnikMechanika.Core.Services
         public async Task<Response<ResponseModel>> SendGet<ResponseModel>(string path) where ResponseModel : new()
         {
             HttpResponseMessage response = await _client.GetAsync(path);
-            return await ParseResponse<ResponseModel>(response);
+            return await ParseResponse<ResponseModel>(response).ConfigureAwait(false);
         }
 
         public async Task<Response<ResponseModel>> SendPost<SendModel, ResponseModel>(SendModel model, string path) where SendModel : ValidateModelBase where ResponseModel : new()

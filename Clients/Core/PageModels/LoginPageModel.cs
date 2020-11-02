@@ -46,7 +46,7 @@ namespace NotatnikMechanika.Core.PageModels
                     break;
 
                 case ResponseResult.BadModelState:
-                    await _messageDialogService.ShowMessageDialog("Wypełnij dane poprawnie", MessageDialogType.Error);
+                    await _messageDialogService.ShowMessageDialog(LoginModel.Error, MessageDialogType.Error, "Wypełnij dane poprawnie");
                     break;
             }
             IsLoading = false;
