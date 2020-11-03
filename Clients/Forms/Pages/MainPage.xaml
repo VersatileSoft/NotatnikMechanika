@@ -3,28 +3,36 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
     xmlns:pages="clr-namespace:NotatnikMechanika.Forms.Pages;assembly=NotatnikMechanika.Forms"
-    Visual="Material">
-    
+    Visual="Material"
+    Style="{StaticResource ShellStyle}">
 
-        <Tab Title="Zlecenia">
-            <ShellContent Title="Aktualne zlecenia">
-                <pages:OrdersPage />
-            </ShellContent>
-            <ShellContent Title="Archiwum">
+    <Tab Title="Zlecenia">
+        
+        <ShellContent Title="Aktualne zlecenia">
             <pages:OrdersPage />
         </ShellContent>
-        </Tab>
-        <Tab Title="Usługi/Towary">
-            <ShellContent Title="Usługi">
+        
+        <ShellContent Title="Archiwum">
             <pages:OrdersPage />
         </ShellContent>
-            <ShellContent Title="Magazyn">
+        
+    </Tab>
+      
+    <Tab Title="Usługi/Towary">
+        
+        <ShellContent Title="Usługi">
             <pages:OrdersPage />
         </ShellContent>
-        </Tab>
-        <Tab Title="Klienci">
-            <ShellContent>
-                <pages:CustomersPage />
-            </ShellContent>
-        </Tab>
+        
+        <ShellContent Title="Magazyn">
+            <pages:OrdersPage />
+        </ShellContent>
+    </Tab>
+        
+    <Tab Title="Klienci">
+        <ShellContent>
+            <pages:CustomersPage />
+        </ShellContent>
+    </Tab>
+    
 </Shell>

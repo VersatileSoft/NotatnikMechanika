@@ -4,23 +4,11 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:m="clr-namespace:MvvmPackage.Xamarin;assembly=MvvmPackage.Xamarin"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:magicGradients="clr-namespace:MagicGradients;assembly=MagicGradients"
     xmlns:core="clr-namespace:NotatnikMechanika.Core;assembly=NotatnikMechanika.Core"
     x:TypeArguments="core:MainPageService"
     mc:Ignorable="d">
     <Application.Resources>
-        <ResourceDictionary x:Name="dictionary"/>
-
-        <!--  NavigationPage  -->
-        <!--  Set BarTextColor color to NavigationPage depending on platform  -->
-        <Style ApplyToDerivedTypes="True" TargetType="NavigationPage">
-            <Setter Property="BarTextColor">
-                <Setter.Value>
-                    <OnPlatform
-                        x:TypeArguments="Color"
-                        Android="Black"
-                        iOS="Black"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary Source="Styles/MainStyle.xaml" />
     </Application.Resources>
 </m:MvFormsApplication>

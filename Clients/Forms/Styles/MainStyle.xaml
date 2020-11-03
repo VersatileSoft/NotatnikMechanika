@@ -1,0 +1,91 @@
+﻿<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"                   
+    xmlns:magicGradients="clr-namespace:MagicGradients;assembly=MagicGradients"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Color x:Key="PageBackgroundColor">#333A45</Color>
+    <Color x:Key="NavigationBarColor">#102027</Color>
+    <Color x:Key="PrimaryColor">#37474f</Color>
+    <Color x:Key="PrimaryTextColor">#fff</Color>
+    <Color x:Key="GradientStart">#5877e6</Color>
+    <Color x:Key="GradientStop">#36dad2</Color>
+    
+    <Style x:Key="ShellStyle" TargetType="Shell">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="ForegroundColor" Value="{StaticResource GradientStart}" />
+        <Setter Property="TitleColor" Value="White" />
+        <Setter Property="DisabledColor" Value="#B4FFFFFF" />
+        <Setter Property="UnselectedColor" Value="#95FFFFFF" />
+        <Setter Property="TabBarBackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="TabBarForegroundColor" Value="White"/>
+        <Setter Property="TabBarUnselectedColor" Value="#95FFFFFF"/>
+        <Setter Property="TabBarTitleColor" Value="White"/>
+    </Style>
+
+    <Style TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}"/>
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}"/>
+    </Style>
+
+    <!--  LoginView/RegisterView  -->
+    <Style x:Key="LoginAppIconImage" TargetType="Image">
+        <Setter Property="Margin" Value="0,0,0,0"/>
+        <Setter Property="HeightRequest" Value="256"/>
+        <Setter Property="WidthRequest" Value="256"/>
+        <Setter Property="Source" Value="icon_foreground.xml"/>
+    </Style>
+    <Style x:Key="LoginAppTitleLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="GoogleSans-Bold"/>
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="Text" Value="Notatnik Mechanika"/>
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="Opacity" Value="0"/>
+    </Style>
+
+    <Style x:Key="LoginMessageLabel" TargetType="Label">
+        <Setter Property="Margin" Value="0,0,0,12"/>
+        <Setter Property="FontFamily" Value="GoogleSans-Medium"/>
+        <Setter Property="FontSize" Value="Subtitle"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+    <Style x:Key="LoginEntry" TargetType="Entry">
+        <Setter Property="FontFamily" Value="GoogleSans-Regular"/>
+        <Setter Property="TextColor" Value="White"/>
+    </Style>
+    <Style x:Key="LoginCheckBox" TargetType="CheckBox">
+        <Setter Property="Color" Value="White"/>
+    </Style>
+    <Style x:Key="LoginCheckBoxLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="GoogleSans-Regular"/>
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="Text" Value="Zapamiętaj mnie."/>
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+    <Style x:Key="LoginButton" TargetType="Button">
+        <Setter Property="FontFamily" Value="GoogleSans-Bold"/>
+        <Setter Property="BackgroundColor" Value="White"/>
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="CornerRadius" Value="25"/>
+        <Setter Property="WidthRequest" Value="150"/>
+    </Style>
+
+    <ControlTemplate x:Key="PageWithGradient">
+        <Grid>
+            <magicGradients:GradientView VerticalOptions="FillAndExpand" >
+                <magicGradients:GradientView.GradientSource>
+                    <magicGradients:LinearGradient Angle="45">
+                        <magicGradients:GradientStop Color="{StaticResource GradientStart}" Offset="0" />
+                        <magicGradients:GradientStop Color="{StaticResource GradientStop}" Offset="1" />
+                    </magicGradients:LinearGradient>
+                </magicGradients:GradientView.GradientSource>
+            </magicGradients:GradientView>
+            <ContentPresenter />
+        </Grid>
+    </ControlTemplate>
+
+</ResourceDictionary>

@@ -11,7 +11,7 @@ namespace NotatnikMechanika.Forms.Android
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.SetTheme(Resource.Style.LoginTheme);
+            base.SetTheme(Resource.Style.MainTheme);
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
