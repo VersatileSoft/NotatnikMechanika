@@ -22,7 +22,7 @@ namespace NotatnikMechanika.Core
         {
             string token = _settingsService.GetToken().Result;
 
-            if (!string.IsNullOrEmpty(token))
+            if (!string.IsNullOrEmpty(""))
             {
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
                 return typeof(MainPageModel);

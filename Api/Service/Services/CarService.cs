@@ -18,7 +18,7 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<Response<IEnumerable<CarModel>>> GetCarsByCustomerAsync(string userId, int customerId)
         {
-            return CreateResponse(await _carRepository.GetCarsByCustomerAsync(userId, customerId));
+            return SuccessResponse(await _carRepository.GetCarsByCustomerAsync(userId, customerId));
         }
     }
 }

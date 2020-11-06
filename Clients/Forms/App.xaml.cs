@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System;
 using System.Net.Http;
+using NotatnikMechanika.Forms.Pages;
 
 [assembly: ExportFont("Resources/Fonts/GoogleSans-Bold.ttf")]
 [assembly: ExportFont("Resources/Fonts/GoogleSans-BoldItalic.ttf")]
@@ -14,6 +15,7 @@ using System.Net.Http;
 [assembly: ExportFont("Resources/Fonts/GoogleSans-Medium.ttf")]
 [assembly: ExportFont("Resources/Fonts/GoogleSans-MediumItalic.ttf")]
 [assembly: ExportFont("Resources/Fonts/GoogleSans-Regular.ttf")]
+[assembly: ExportFont("Resources/Fonts/MaterialDesign.ttf", Alias = "MD")]
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace NotatnikMechanika.Forms
 {

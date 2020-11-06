@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -7,17 +8,18 @@ namespace NotatnikMechanika.Shared
 {
     public static class ResponseBuilder
     {
-        public enum ResponseResult
+        public enum ResponseType
         {
             Successful,
-            BadRequest, //Błąd po stronie serwera
+            Failure, //Błąd obsługi danych po stronie serwera
+            Unauthorized,
             BadModelState, // Błąd walidacji
         }
 
         public class Response
         {
             internal Response() { }
-            public ResponseResult ResponseResult { get; set; }
+            public ResponseType ResponseType { get; set; }
             public List<string> ErrorMessages { get; set; }
         }
 
@@ -27,44 +29,68 @@ namespace NotatnikMechanika.Shared
             public ResponseModel Content { get; set; }
         }
 
-        public static Response SuccessEmptyResponse => new Response { ResponseResult = ResponseResult.Successful };
-
-
-        public static Response BadModelStateResponse()
+        public static Response<ResponseModel> FailureResponse<ResponseModel>(ResponseType responseType, List<string> errorMessages = null)
         {
-            return new Response { ResponseResult = ResponseResult.BadModelState };
+            return new Response<ResponseModel> { ResponseType = responseType, ErrorMessages = errorMessages };
         }
 
-        public static Response<ResponseModel> BadModelStateResponse<ResponseModel>()
+        public static Response FailureResponse(ResponseType responseType, List<string> errorMessages = null)
         {
-            return new Response<ResponseModel> { ResponseResult = ResponseResult.BadModelState };
+            return new Response { ResponseType = responseType, ErrorMessages = errorMessages };
         }
 
-        public static Response<ResponseModel> BadRequestResponse<ResponseModel>(List<string> errorMessages)
+        #region Api
+
+        public static Response SuccessResponse()
         {
-            return new Response<ResponseModel> { ResponseResult = ResponseResult.BadRequest, ErrorMessages = errorMessages };
+            return new Response { ResponseType = ResponseType.Successful };
         }
 
-        public static Response BadRequestResponse(List<string> errorMessages)
+        public static Response<ResponseModel> SuccessResponse<ResponseModel>(ResponseModel model)
         {
-            return new Response { ResponseResult = ResponseResult.BadRequest, ErrorMessages = errorMessages };
+            return new Response<ResponseModel> { ResponseType = ResponseType.Successful, Content = model };
         }
 
-        public static Response<ResponseModel> CreateResponse<ResponseModel>(ResponseModel model)
-        {
-            return new Response<ResponseModel> { ResponseResult = ResponseResult.Successful, Content = model };
-        }
+        #endregion
+
+        #region Client
 
         public static async Task<Response<ResponseModel>> ParseResponse<ResponseModel>(HttpResponseMessage message)
         {
-            string responseString = await message.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<Response<ResponseModel>>(responseString);
+            if (message.IsSuccessStatusCode)
+            {
+                string responseString = await message.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Response<ResponseModel>>(responseString)
+                    ?? FailureResponse<ResponseModel>(ResponseType.Failure, new List<string> { { "Validation error" } });
+            }
+            else if (message.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                return FailureResponse<ResponseModel>(ResponseType.Unauthorized);
+            }
+            else
+            {
+                return FailureResponse<ResponseModel>(ResponseType.Failure, new List<string> { { message.ReasonPhrase } });
+            }
         }
 
         public static async Task<Response> ParseResponse(HttpResponseMessage message)
         {
-            string responseString = await message.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<Response>(responseString);
+            if (message.IsSuccessStatusCode)
+            {
+                string responseString = await message.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Response>(responseString)
+                    ?? FailureResponse(ResponseType.Failure, new List<string> { { "Validation error" } });
+            }
+            else if (message.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                return FailureResponse(ResponseType.Unauthorized);
+            }
+            else
+            {
+                return FailureResponse(ResponseType.Failure, new List<string> { { message.ReasonPhrase } });
+            }
         }
+
+        #endregion
     }
 }

@@ -15,7 +15,7 @@ namespace NotatnikMechanika.Client.Services
 
         public Task SetToken(string token)
         {
-            return _localStorage.SetItemAsync("token", token);
+            return _localStorage.SetItemAsync("token", token).AsTask();
         }
 
         public async Task<string> GetToken()

@@ -37,15 +37,15 @@ namespace NotatnikMechanika.Core.PageModels
         public async Task LoginAction()
         {
             IsLoading = true;
-            Response<TokenModel> loginResult = await _authService.LoginAsync(LoginModel);
+            Response<TokenModel> loginResult = await _authService.LoginAsync(LoginModel).ConfigureAwait(false);
 
-            switch (loginResult.ResponseResult)
+            switch (loginResult.ResponseType)
             {
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(loginResult.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas logowania");
                     break;
 
-                case ResponseResult.BadModelState:
+                case ResponseType.BadModelState:
                     await _messageDialogService.ShowMessageDialog(LoginModel.Error, MessageDialogType.Error, "Wypełnij dane poprawnie");
                     break;
             }

@@ -41,19 +41,19 @@ namespace NotatnikMechanika.Core.PageModels
             string path = PathsHelper.GetPathsByModel<TModel>().GetFullPath(CRUDPaths.CreatePath);
             Response response = await _httpRequestService.SendPost(Model, path);
 
-            switch (response.ResponseResult)
+            switch (response.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     await _messageDialogService.ShowMessageDialog(SuccesMessage, MessageDialogType.Success, "Operacja powiodła się");
                     await _navigationService.NavigateToAsync<MainPageModel>();
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     ErrorMessage = response.ErrorMessages?.FirstOrDefault();
                     await _messageDialogService.ShowMessageDialog(ErrorMessage, MessageDialogType.Error, "Wystąpił błąd");
                     break;
 
-                case ResponseResult.BadModelState:
+                case ResponseType.BadModelState:
                     await _messageDialogService.ShowMessageDialog("Wypełnij formularz poprawnie", MessageDialogType.Error);
                     break;
             }

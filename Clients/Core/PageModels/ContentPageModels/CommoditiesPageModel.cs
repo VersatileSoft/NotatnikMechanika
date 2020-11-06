@@ -38,13 +38,13 @@ namespace NotatnikMechanika.Core.PageModels
         {
             Response response = await _httpRequestService.SendDelete(new CommodityPaths().GetFullPath(id.ToString()));
 
-            switch (response.ResponseResult)
+            switch (response.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto towar", MessageDialogType.Success);
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas usuwania towaru");
                     break;
             }
@@ -56,13 +56,13 @@ namespace NotatnikMechanika.Core.PageModels
             IsLoading = true;
             Response<List<CommodityModel>> response = await _httpRequestService.SendGet<List<CommodityModel>>(new CommodityPaths().GetFullPath(CRUDPaths.GetAllPath));
 
-            switch (response.ResponseResult)
+            switch (response.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     Commodities = response.Content;
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania towarów");
                     break;
             }

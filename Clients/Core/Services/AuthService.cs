@@ -35,7 +35,7 @@ namespace NotatnikMechanika.Core.Services
         {
             Response<TokenModel> loginResponse = await _httpRequestService.SendPost<LoginModel, TokenModel>(loginModel, new AccountPaths().GetFullPath(AccountPaths.LoginPath));
 
-            if (loginResponse.ResponseResult == ResponseResult.Successful)
+            if (loginResponse.ResponseType == ResponseType.Successful)
             {
                 await _settingsService.SetToken(loginResponse.Content.Token);
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResponse.Content.Token);

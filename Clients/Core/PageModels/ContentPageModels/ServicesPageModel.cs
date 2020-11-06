@@ -38,13 +38,13 @@ namespace NotatnikMechanika.Core.PageModels
         {
             Response response = await _httpRequestService.SendDelete(new ServicePaths().GetFullPath(id.ToString()));
 
-            switch (response.ResponseResult)
+            switch (response.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto usługę", MessageDialogType.Success);
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas usuwania ułsugi");
                     break;
             }
@@ -57,13 +57,13 @@ namespace NotatnikMechanika.Core.PageModels
             IsLoading = true;
             Response<List<ServiceModel>> response = await _httpRequestService.SendGet<List<ServiceModel>>(new ServicePaths().GetFullPath(CRUDPaths.GetAllPath));
 
-            switch (response.ResponseResult)
+            switch (response.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     Services = response.Content;
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania usługi");
                     break;
             }

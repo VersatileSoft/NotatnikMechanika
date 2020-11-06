@@ -20,13 +20,13 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<Response<IEnumerable<ServiceForOrderModel>>> GetServicesForOrder(string userId, int orderId)
         {
-            return CreateResponse(await _serviceRepository.GetServicesForOrder(userId, orderId));
+            return SuccessResponse(await _serviceRepository.GetServicesForOrder(userId, orderId));
         }
 
         public async Task<Response<IEnumerable<ServiceModel>>> GetServicesInOrder(string userId, int orderId)
         {
 
-            return CreateResponse(await _serviceRepository.GetServicesInOrder(userId, orderId));
+            return SuccessResponse(await _serviceRepository.GetServicesInOrder(userId, orderId));
         }
     }
 }

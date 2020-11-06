@@ -11,54 +11,74 @@ namespace NotatnikMechanika.Core.Services
     public class HttpRequestService : IHttpRequestService
     {
         private readonly HttpClient _client;
+        //private readonly IAuthService _authService;
 
-        public HttpRequestService(HttpClient client)
+        public HttpRequestService(HttpClient client/*, IAuthService authService*/)
         {
             _client = client;
+            //_authService = authService;
         }
 
         public async Task<Response<ResponseModel>> SendGet<ResponseModel>(string path) where ResponseModel : new()
         {
-            HttpResponseMessage response = await _client.GetAsync(path);
-            return await ParseResponse<ResponseModel>(response).ConfigureAwait(false);
+            HttpResponseMessage responseMessage = await _client.GetAsync(path);
+            Response<ResponseModel> response = await ParseResponse<ResponseModel>(responseMessage).ConfigureAwait(false);
+            await Authorize(response).ConfigureAwait(false);
+            return response;
         }
 
         public async Task<Response<ResponseModel>> SendPost<SendModel, ResponseModel>(SendModel model, string path) where SendModel : ValidateModelBase where ResponseModel : new()
         {
             if (!model.IsValid)
             {
-                return BadModelStateResponse<ResponseModel>();
+                return FailureResponse<ResponseModel>(ResponseType.BadModelState);
             }
 
             string myContent = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(myContent, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _client.PostAsync(path, content);
-            return await ParseResponse<ResponseModel>(response);
+            HttpResponseMessage responseMessage = await _client.PostAsync(path, content);
+            Response<ResponseModel> response = await ParseResponse<ResponseModel>(responseMessage).ConfigureAwait(false);
+            await Authorize(response).ConfigureAwait(false);
+            return response;
         }
 
         public async Task<Response> SendPost<SendModel>(SendModel model, string path) where SendModel : ValidateModelBase
         {
             if (!model.IsValid)
             {
-                return BadModelStateResponse();
+                return FailureResponse(ResponseType.BadModelState);
             }
 
             string myContent = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(myContent, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _client.PostAsync(path, content);
-            return await ParseResponse(response);
+            HttpResponseMessage responseMessage = await _client.PostAsync(path, content);
+            Response response = await ParseResponse(responseMessage).ConfigureAwait(false);
+            await Authorize(response).ConfigureAwait(false);
+            return response;
         }
 
         public async Task<Response> SendPost(string path)
         {
-            HttpResponseMessage response = await _client.PostAsync(path, null);
-            return await ParseResponse(response);
+            HttpResponseMessage responseMessage = await _client.PostAsync(path, null);
+            Response response = await ParseResponse(responseMessage).ConfigureAwait(false);
+            await Authorize(response).ConfigureAwait(false);
+            return response;
         }
 
         public async Task<Response> SendDelete(string path)
         {
-            HttpResponseMessage response = await _client.DeleteAsync(path);
-            return await ParseResponse(response);
+            HttpResponseMessage responseMessage = await _client.DeleteAsync(path);
+            Response response = await ParseResponse(responseMessage).ConfigureAwait(false);
+            await Authorize(response).ConfigureAwait(false);
+            return response;
+        }
+
+        private async Task Authorize(Response response)
+        {
+            //if (response.ResponseType == ResponseType.Unauthorized)
+            //{
+            //    await _authService.LogoutAsync();
+            //}
         }
     }
 }

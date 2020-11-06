@@ -24,12 +24,15 @@ namespace NotatnikMechanika.Core.PageModels
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMvNavigationService _navigationService;
         private readonly IMessageDialogService _messageDialogService;
+        private readonly IAuthService _authService;
 
-        public OrdersPageModel(IMvNavigationService navigationService, IHttpRequestService httpRequestService, IMessageDialogService messageDialogService)
+        public OrdersPageModel(IMvNavigationService navigationService, IHttpRequestService httpRequestService, IMessageDialogService messageDialogService, IAuthService authService)
         {
             _httpRequestService = httpRequestService;
             _navigationService = navigationService;
             _messageDialogService = messageDialogService;
+            _authService = authService;
+            Orders = new List<OrderExtendedModel>();
             AddOrderCommand = new AsyncCommand(() => _navigationService.NavigateToAsync<AddOrderPageModel>());
             OrderSelectedCommand = new AsyncCommand<int>((id) => _navigationService.NavigateToAsync<OrderPageModel>(id));
             RemoveOrderCommand = new AsyncCommand<int>(RemoveOrderAction);
@@ -39,13 +42,13 @@ namespace NotatnikMechanika.Core.PageModels
         {
             Response response = await _httpRequestService.SendDelete(new OrderPaths().GetFullPath(CRUDPaths.DeletePath.Replace("{id}", id.ToString())));
 
-            switch (response.ResponseResult)
+            switch (response.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto zlecenie", MessageDialogType.Success);
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas usuwania zlecenia");
                     break;
             }
@@ -55,17 +58,24 @@ namespace NotatnikMechanika.Core.PageModels
 
         public override async Task Initialize()
         {
+
+            if (Orders.Any()) return;
+
             IsLoading = true;
             Response<List<OrderExtendedModel>> response = await _httpRequestService.SendGet<List<OrderExtendedModel>>(new OrderPaths().GetFullPath(OrderPaths.GetExtendedOrders));
 
-            switch (response.ResponseResult)
+            switch (response.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     Orders = response.Content;
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania zleceń");
+                    break;
+
+                case ResponseType.Unauthorized:
+                    await _authService.LogoutAsync();
                     break;
             }
 

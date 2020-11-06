@@ -41,13 +41,13 @@ namespace NotatnikMechanika.Core.PageModels
         {
             Response response = await _httpRequestService.SendDelete(new CarPaths().GetFullPath(id.ToString()));
 
-            switch (response.ResponseResult)
+            switch (response.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto klienta", MessageDialogType.Success);
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczasu usuwania klienta");
                     break;
             }
@@ -61,13 +61,13 @@ namespace NotatnikMechanika.Core.PageModels
 
             Response<CustomerModel> responseCustomer = await _httpRequestService.SendGet<CustomerModel>(PathsHelper.GetPathsByModel<CustomerModel>().GetFullPath(CustomerModel.Id.ToString()));
 
-            switch (responseCustomer.ResponseResult)
+            switch (responseCustomer.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     CustomerModel = responseCustomer.Content;
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     ErrorMessage = responseCustomer.ErrorMessages?.FirstOrDefault();
                     await _messageDialogService.ShowMessageDialog(responseCustomer.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania klienta");
                     return;
@@ -78,13 +78,13 @@ namespace NotatnikMechanika.Core.PageModels
                 .GetPathsByModel<CarModel>()
                 .GetFullPath(CarPaths.GetByCustomerPath.Replace("{customerId}", CustomerModel.Id.ToString())));
 
-            switch (responseCars.ResponseResult)
+            switch (responseCars.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     Cars = responseCars.Content;
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     ErrorMessage = responseCars.ErrorMessages?.FirstOrDefault();
                     await _messageDialogService.ShowMessageDialog(responseCars.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania samochodów klienta");
                     break;

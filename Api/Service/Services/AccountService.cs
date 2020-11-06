@@ -49,7 +49,7 @@ namespace NotatnikMechanika.Service.Services
             {
                 User user = await _userManager.Users.SingleOrDefaultAsync(r => r.Email == email);
 
-                return CreateResponse(new TokenModel
+                return SuccessResponse(new TokenModel
                 {
                     Token = GenerateToken(user)
                 });
@@ -57,10 +57,10 @@ namespace NotatnikMechanika.Service.Services
 
             if (result.IsNotAllowed)
             {
-                return BadRequestResponse<TokenModel>(new List<string> { "Potwierdź adres email aby się zalogować." });
+                return FailureResponse<TokenModel>(new List<string> { "Potwierdź adres email aby się zalogować." });
             }
 
-            return BadRequestResponse<TokenModel>(new List<string> { "Nieprawidłowy login lub hasło" });
+            return FailureResponse<TokenModel>(new List<string> { "Nieprawidłowy login lub hasło" });
         }
 
         public async Task<Response> ConfirmEmail(string userId, string emailToken)
@@ -69,17 +69,17 @@ namespace NotatnikMechanika.Service.Services
 
             if (user == null)
             {
-                return BadRequestResponse(new List<string> { "Nie znaleziono użytkownika" });
+                return FailureResponse(new List<string> { "Nie znaleziono użytkownika" });
             }
 
             IdentityResult result = await _userManager.ConfirmEmailAsync(user, emailToken);
 
             if (!result.Succeeded)
             {
-                return BadRequestResponse(new List<string> { "Link nieprawidłowy." });
+                return FailureResponse(new List<string> { "Link nieprawidłowy." });
             }
 
-            return SuccessEmptyResponse;
+            return SuccessResponse;
         }
 
         public async Task<Response> RegisterAsync(RegisterModel registerModel)
@@ -96,7 +96,7 @@ namespace NotatnikMechanika.Service.Services
 
             if (result.Succeeded)
             {
-                return SuccessEmptyResponse;
+                return SuccessResponse;
 
                 // User newUser = await _userManager.FindByEmailAsync(user.Email);
                 // string code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -108,7 +108,7 @@ namespace NotatnikMechanika.Service.Services
             }
             else
             {
-                return BadRequestResponse(result.Errors.Select(e => e.Description).ToList());
+                return FailureResponse(result.Errors.Select(e => e.Description).ToList());
             }
         }
 

@@ -12,6 +12,10 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\Fonts\MaterialDesign.ttf" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\GoogleSans-Bold.ttf" />
@@ -20,15 +24,16 @@
     <EmbeddedResource Include="Resources\Fonts\GoogleSans-Medium.ttf" />
     <EmbeddedResource Include="Resources\Fonts\GoogleSans-MediumItalic.ttf" />
     <EmbeddedResource Include="Resources\Fonts\GoogleSans-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\MaterialDesign.ttf" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Acr.UserDialogs" Version="7.1.0.446" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.1.0.466" />
     <PackageReference Include="MagicGradients" Version="1.1.1" />
-    <PackageReference Include="PropertyChanged.Fody" Version="3.2.8" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.3.0" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
-    <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.7.0.1080" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1560" />
+    <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.8.0.1560" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,6 +63,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="DataTemplates\CustomerItemTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Pages\ContentPages\MyAccountPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

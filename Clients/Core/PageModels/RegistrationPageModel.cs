@@ -40,19 +40,19 @@ namespace NotatnikMechanika.Core.PageModels
 
             Response response = await _httpRequestService.SendPost(RegisterModel, new AccountPaths().GetFullPath(AccountPaths.RegisterPath));
 
-            switch (response.ResponseResult)
+            switch (response.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     await _messageDialogService.ShowMessageDialog("Konto zostało utworzone. Teraz możesz się zalogować.", MessageDialogType.Success, "Rejestracja");
                     await _navigationService.NavigateToAsync<LoginPageModel>();
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     ErrorMessage = response.ErrorMessages?[0];
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas rejestracji");
                     break;
 
-                case ResponseResult.BadModelState:
+                case ResponseType.BadModelState:
                     await _messageDialogService.ShowMessageDialog("Wypełnij dane poprawnie", MessageDialogType.Error);
                     break;
             }

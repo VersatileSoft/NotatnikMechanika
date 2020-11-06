@@ -12,7 +12,7 @@ namespace NotatnikMechanika.WPF.Pages
     /// </summary>
     public partial class LoginPage : MvWpfPage<LoginPageModel>
     {
-        private Storyboard _storyboard;
+       // private Storyboard _storyboard;
         public LoginPage()
         {
             InitializeComponent();
@@ -21,26 +21,26 @@ namespace NotatnikMechanika.WPF.Pages
 
         private void InitAnimations()
         {
-            DoubleAnimation WithAnimation = new DoubleAnimation
-            {
-                From = 80,
-                To = 150,
-                Duration = new Duration(TimeSpan.FromMilliseconds(300))
-            };
+            //DoubleAnimation WithAnimation = new DoubleAnimation
+            //{
+            //    From = 80,
+            //    To = 150,
+            //    Duration = new Duration(TimeSpan.FromMilliseconds(300))
+            //};
 
-            DoubleAnimation HeightAnimation = new DoubleAnimation
-            {
-                From = 80,
-                To = 150,
-                Duration = new Duration(TimeSpan.FromMilliseconds(300))
-            };
+            //DoubleAnimation HeightAnimation = new DoubleAnimation
+            //{
+            //    From = 80,
+            //    To = 150,
+            //    Duration = new Duration(TimeSpan.FromMilliseconds(300))
+            //};
 
-            DoubleAnimation OpacityAnimation = new DoubleAnimation
-            {
-                From = 0,
-                To = 1,
-                Duration = new Duration(TimeSpan.FromMilliseconds(300))
-            };
+            //DoubleAnimation OpacityAnimation = new DoubleAnimation
+            //{
+            //    From = 0,
+            //    To = 1,
+            //    Duration = new Duration(TimeSpan.FromMilliseconds(300))
+            //};
 
 
 

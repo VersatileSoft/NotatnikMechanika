@@ -59,13 +59,13 @@ namespace NotatnikMechanika.Core.PageModels
             string orderPath = new OrderPaths().GetFullPath(OrderPaths.GetExtendedOrder.Replace("{orderId}", Parameter.ToString()));
             Response<OrderExtendedModel> orderResponse = await _httpRequestService.SendGet<OrderExtendedModel>(orderPath);
 
-            switch (orderResponse.ResponseResult)
+            switch (orderResponse.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     OrderModel = orderResponse.Content;
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(orderResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania zlecenia");
                     return;
             }
@@ -73,13 +73,13 @@ namespace NotatnikMechanika.Core.PageModels
             string servicesPath = new ServicePaths().GetFullPath(ServicePaths.GetAllInOrderPath.Replace("{orderId}", OrderModel.Id.ToString()));
             Response<List<ServiceModel>> servicesResponse = await _httpRequestService.SendGet<List<ServiceModel>>(servicesPath);
 
-            switch (servicesResponse.ResponseResult)
+            switch (servicesResponse.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     Services = servicesResponse.Content;
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(servicesResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania usług");
                     break;
             }
@@ -87,13 +87,13 @@ namespace NotatnikMechanika.Core.PageModels
             string commoditiesPath = new CommodityPaths().GetFullPath(CommodityPaths.GetAllInOrderPath.Replace("{orderId}", OrderModel.Id.ToString()));
             Response<List<CommodityModel>> commoditiesResponse = await _httpRequestService.SendGet<List<CommodityModel>>(commoditiesPath);
 
-            switch (servicesResponse.ResponseResult)
+            switch (servicesResponse.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     Commodities = commoditiesResponse.Content;
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(commoditiesResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania towarów");
                     break;
             }

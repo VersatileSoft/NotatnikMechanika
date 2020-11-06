@@ -46,18 +46,18 @@ namespace NotatnikMechanika.Core.PageModels
                 response = await _httpRequestService.SendPost(path);
             }
 
-            switch (response.ResponseResult)
+            switch (response.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     await _messageDialogService.ShowMessageDialog($"Pomyślnie {(commodityModel.IsInOrder ? "usunięto" : "dodano")} towar", MessageDialogType.Success);
                     await Initialize();
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Coś poszło nie tak");
                     break;
 
-                case ResponseResult.BadModelState:
+                case ResponseType.BadModelState:
                     await _messageDialogService.ShowMessageDialog("Wypełnij dane poprawnie", MessageDialogType.Error);
                     break;
             }
@@ -72,13 +72,13 @@ namespace NotatnikMechanika.Core.PageModels
             string path = new CommodityPaths().GetFullPath(CommodityPaths.GetAllForOrderPath.Replace("{orderId}", _orderId.ToString()));
             Response<List<CommodityForOrderModel>> response = await _httpRequestService.SendGet<List<CommodityForOrderModel>>(path);
 
-            switch (response.ResponseResult)
+            switch (response.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     CommodityModels = response.Content;
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania towarów");
                     break;
             }

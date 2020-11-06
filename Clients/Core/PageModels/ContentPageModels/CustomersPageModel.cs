@@ -30,7 +30,7 @@ namespace NotatnikMechanika.Core.PageModels
             _navigationService = navigationService;
             _httpRequestService = httpRequestService;
             _messageDialogService = messageDialogService;
-
+            Customers = new List<CustomerModel>();
             AddCustomerCommand = new AsyncCommand(AddCustomerAction);
             RemoveCustomerCommand = new AsyncCommand<int>(RemoveCustomerAction);
             CustomerSelectedCommand = new AsyncCommand<int>(CustomerSelectedAction);
@@ -45,13 +45,13 @@ namespace NotatnikMechanika.Core.PageModels
         {
             Response response = await _httpRequestService.SendDelete(new CustomerPaths().GetFullPath(id.ToString()));
 
-            switch (response.ResponseResult)
+            switch (response.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto klienta", MessageDialogType.Success);
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Success, "Błąd podczas usuwania klienta");
                     break;
             }
@@ -65,15 +65,17 @@ namespace NotatnikMechanika.Core.PageModels
 
         public override async Task Initialize()
         {
+            if (Customers.Any()) return;
+
             IsLoading = true;
             Response<List<CustomerModel>> response = await _httpRequestService.SendGet<List<CustomerModel>>(new CustomerPaths().GetFullPath(CRUDPaths.GetAllPath));
-            switch (response.ResponseResult)
+            switch (response.ResponseType)
             {
-                case ResponseResult.Successful:
+                case ResponseType.Successful:
                     Customers = response.Content;
                     break;
 
-                case ResponseResult.BadRequest:
+                case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog("Błąd podczas ładowania klientów", MessageDialogType.Error);
                     break;
             }

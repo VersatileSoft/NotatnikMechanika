@@ -9,7 +9,7 @@ namespace NotatnikMechanika.WPF.Pages
     /// </summary>
     public partial class RegistrationPage : MvWpfPage<RegistrationPageModel>
     {
-        private readonly Storyboard _storyboard;
+      //  private readonly Storyboard _storyboard;
 
         public RegistrationPage()
         {

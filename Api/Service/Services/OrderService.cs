@@ -42,11 +42,11 @@ namespace NotatnikMechanika.Service.Services
 
             if (errors.Count > 0)
             {
-                return BadRequestResponse(errors);
+                return FailureResponse(errors);
             }
 
             await _orderRepository.AddCommodityToOrder(orderId, commodityId);
-            return SuccessEmptyResponse;
+            return SuccessResponse;
         }
 
         public async Task<Response> AddServiceToOrder(string userId, int orderId, int serviceId)
@@ -70,11 +70,11 @@ namespace NotatnikMechanika.Service.Services
 
             if (errors.Count > 0)
             {
-                return BadRequestResponse(errors);
+                return FailureResponse(errors);
             }
 
             await _orderRepository.AddServiceToOrder(orderId, serviceId);
-            return SuccessEmptyResponse;
+            return SuccessResponse;
         }
 
         public async Task<Response> DeleteCommodityFromOrder(string userId, int orderId, int commodityId)
@@ -98,11 +98,11 @@ namespace NotatnikMechanika.Service.Services
 
             if (errors.Count > 0)
             {
-                return BadRequestResponse(errors);
+                return FailureResponse(errors);
             }
 
             await _orderRepository.DeleteCommodityFromOrder(orderId, commodityId);
-            return SuccessEmptyResponse;
+            return SuccessResponse;
         }
 
         public async Task<Response> DeleteServiceFromOrder(string userId, int orderId, int serviceId)
@@ -126,21 +126,21 @@ namespace NotatnikMechanika.Service.Services
 
             if (errors.Count > 0)
             {
-                return BadRequestResponse(errors);
+                return FailureResponse(errors);
             }
 
             await _orderRepository.DeleteServiceFromOrder(orderId, serviceId);
-            return SuccessEmptyResponse;
+            return SuccessResponse;
         }
 
         public async Task<Response<IEnumerable<OrderExtendedModel>>> GetAllExtendedAsync(string userId, bool archived)
         {
-            return CreateResponse(await _orderRepository.GetAllExtendedAsync(userId, archived));
+            return SuccessResponse(await _orderRepository.GetAllExtendedAsync(userId, archived));
         }
 
         public async Task<Response<OrderExtendedModel>> GetExtendedAsync(string userId, int id, bool archived)
         {
-            return CreateResponse(await _orderRepository.GetExtendedAsync(userId, id, archived));
+            return SuccessResponse(await _orderRepository.GetExtendedAsync(userId, id, archived));
         }
     }
 }
