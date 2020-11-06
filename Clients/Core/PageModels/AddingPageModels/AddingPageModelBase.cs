@@ -23,7 +23,7 @@ namespace NotatnikMechanika.Core.PageModels
         protected readonly IMessageDialogService _messageDialogService;
 
         public virtual string ErrorMessage { get; set; }
-        public abstract string SuccesMessage { get; set; }
+        public virtual string SuccesMessage { get; set; }
 
         protected AddingPageModelBase(IMvNavigationService navigationService, IHttpRequestService httpRequestService, IMessageDialogService messageDialogService)
         {

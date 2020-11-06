@@ -11,12 +11,12 @@ namespace NotatnikMechanika.Core.Services
     public class HttpRequestService : IHttpRequestService
     {
         private readonly HttpClient _client;
-        //private readonly IAuthService _authService;
+        private readonly IAuthService _authService;
 
-        public HttpRequestService(HttpClient client/*, IAuthService authService*/)
+        public HttpRequestService(HttpClient client, IAuthService authService)
         {
             _client = client;
-            //_authService = authService;
+            _authService = authService;
         }
 
         public async Task<Response<ResponseModel>> SendGet<ResponseModel>(string path) where ResponseModel : new()
@@ -75,10 +75,10 @@ namespace NotatnikMechanika.Core.Services
 
         private async Task Authorize(Response response)
         {
-            //if (response.ResponseType == ResponseType.Unauthorized)
-            //{
-            //    await _authService.LogoutAsync();
-            //}
+            if (response.ResponseType == ResponseType.Unauthorized)
+            {
+                await _authService.LogoutAsync();
+            }
         }
     }
 }

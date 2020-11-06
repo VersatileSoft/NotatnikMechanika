@@ -42,11 +42,11 @@ namespace NotatnikMechanika.Service.Services
 
             if (errors.Count > 0)
             {
-                return FailureResponse(errors);
+                return FailureResponse(ResponseType.Failure, errors);
             }
 
             await _orderRepository.AddCommodityToOrder(orderId, commodityId);
-            return SuccessResponse;
+            return SuccessResponse();
         }
 
         public async Task<Response> AddServiceToOrder(string userId, int orderId, int serviceId)
@@ -70,11 +70,11 @@ namespace NotatnikMechanika.Service.Services
 
             if (errors.Count > 0)
             {
-                return FailureResponse(errors);
+                return FailureResponse(ResponseType.Failure, errors);
             }
 
             await _orderRepository.AddServiceToOrder(orderId, serviceId);
-            return SuccessResponse;
+            return SuccessResponse();
         }
 
         public async Task<Response> DeleteCommodityFromOrder(string userId, int orderId, int commodityId)
@@ -98,11 +98,11 @@ namespace NotatnikMechanika.Service.Services
 
             if (errors.Count > 0)
             {
-                return FailureResponse(errors);
+                return FailureResponse(ResponseType.Failure, errors);
             }
 
             await _orderRepository.DeleteCommodityFromOrder(orderId, commodityId);
-            return SuccessResponse;
+            return SuccessResponse();
         }
 
         public async Task<Response> DeleteServiceFromOrder(string userId, int orderId, int serviceId)
@@ -126,11 +126,11 @@ namespace NotatnikMechanika.Service.Services
 
             if (errors.Count > 0)
             {
-                return FailureResponse(errors);
+                return FailureResponse(ResponseType.Failure, errors);
             }
 
             await _orderRepository.DeleteServiceFromOrder(orderId, serviceId);
-            return SuccessResponse;
+            return SuccessResponse();
         }
 
         public async Task<Response<IEnumerable<OrderExtendedModel>>> GetAllExtendedAsync(string userId, bool archived)

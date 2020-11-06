@@ -63,7 +63,7 @@ namespace MVVMPackage.Core
         /// <param name="eventName">Name of the event.</param>
         public void HandleEvent(object sender, object args, string eventName)
         {
-            List<(object subscriber, MethodInfo handler)> toRaise = new List<(object? subscriber, MethodInfo handler)>();
+            List<(object subscriber, MethodInfo handler)> toRaise = new List<(object subscriber, MethodInfo handler)>();
             List<Subscription> toRemove = new List<Subscription>();
 
             if (eventHandlers.TryGetValue(eventName, out List<Subscription> target))
@@ -189,13 +189,13 @@ namespace MVVMPackage.Core
 
         private struct Subscription
         {
-            public Subscription(WeakReference? subscriber, MethodInfo handler)
+            public Subscription(WeakReference subscriber, MethodInfo handler)
             {
                 Subscriber = subscriber;
                 Handler = handler ?? throw new ArgumentNullException(nameof(handler));
             }
 
-            public readonly WeakReference? Subscriber;
+            public readonly WeakReference Subscriber;
             public readonly MethodInfo Handler;
         }
     }

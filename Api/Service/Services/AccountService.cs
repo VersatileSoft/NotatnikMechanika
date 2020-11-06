@@ -57,10 +57,10 @@ namespace NotatnikMechanika.Service.Services
 
             if (result.IsNotAllowed)
             {
-                return FailureResponse<TokenModel>(new List<string> { "Potwierdź adres email aby się zalogować." });
+                return FailureResponse<TokenModel>(ResponseType.Failure, new List<string> { "Potwierdź adres email aby się zalogować." });
             }
 
-            return FailureResponse<TokenModel>(new List<string> { "Nieprawidłowy login lub hasło" });
+            return FailureResponse<TokenModel>(ResponseType.Failure, new List<string> { "Nieprawidłowy login lub hasło" });
         }
 
         public async Task<Response> ConfirmEmail(string userId, string emailToken)
@@ -69,17 +69,17 @@ namespace NotatnikMechanika.Service.Services
 
             if (user == null)
             {
-                return FailureResponse(new List<string> { "Nie znaleziono użytkownika" });
+                return FailureResponse(ResponseType.Failure, new List<string> { "Nie znaleziono użytkownika" });
             }
 
             IdentityResult result = await _userManager.ConfirmEmailAsync(user, emailToken);
 
             if (!result.Succeeded)
             {
-                return FailureResponse(new List<string> { "Link nieprawidłowy." });
+                return FailureResponse(ResponseType.Failure, new List<string> { "Link nieprawidłowy." });
             }
 
-            return SuccessResponse;
+            return SuccessResponse();
         }
 
         public async Task<Response> RegisterAsync(RegisterModel registerModel)
@@ -96,7 +96,7 @@ namespace NotatnikMechanika.Service.Services
 
             if (result.Succeeded)
             {
-                return SuccessResponse;
+                return SuccessResponse();
 
                 // User newUser = await _userManager.FindByEmailAsync(user.Email);
                 // string code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -108,7 +108,7 @@ namespace NotatnikMechanika.Service.Services
             }
             else
             {
-                return FailureResponse(result.Errors.Select(e => e.Description).ToList());
+                return FailureResponse(ResponseType.Failure, result.Errors.Select(e => e.Description).ToList());
             }
         }
 

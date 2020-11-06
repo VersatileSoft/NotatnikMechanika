@@ -19,7 +19,7 @@ namespace NotatnikMechanika.Service.Services.Base
         public async Task<Response> CreateAsync(string userId, TModel value)
         {
             await _repositoryBase.CreateAsync(userId, value);
-            return SuccessResponse;
+            return SuccessResponse();
         }
 
         public async Task<Response> DeleteAsync(string userId, int Id)
@@ -27,11 +27,11 @@ namespace NotatnikMechanika.Service.Services.Base
             if (await _repositoryBase.CheckIfUserMatch(userId, Id))
             {
                 await _repositoryBase.DeleteAsync(Id);
-                return SuccessResponse;
+                return SuccessResponse();
             }
             else
             {
-                return FailureResponse(new List<string> { errorMessage });
+                return FailureResponse(ResponseType.Failure, new List<string> { errorMessage });
             }
         }
 
@@ -43,7 +43,7 @@ namespace NotatnikMechanika.Service.Services.Base
             }
             else
             {
-                return FailureResponse<TModel>(new List<string> { errorMessage });
+                return FailureResponse<TModel>(ResponseType.Failure, new List<string> { errorMessage });
             }
         }
 
@@ -57,11 +57,11 @@ namespace NotatnikMechanika.Service.Services.Base
             if (await _repositoryBase.CheckIfUserMatch(userId, Id))
             {
                 await _repositoryBase.UpdateAsync(Id, value);
-                return SuccessResponse;
+                return SuccessResponse();
             }
             else
             {
-                return FailureResponse(new List<string> { errorMessage });
+                return FailureResponse(ResponseType.Failure, new List<string> { errorMessage });
             }
         }
     }

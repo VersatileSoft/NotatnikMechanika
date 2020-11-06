@@ -31,8 +31,17 @@ namespace MvvmPackage.Xamarin.Services
         private async Task NavigateToAsync(Page page)
         {
             await Device.InvokeOnMainThreadAsync(() =>
-                    Application.Current.MainPage.Navigation?.PushAsync(page)
-                );
+            {
+                INavigation x = Application.Current.MainPage.Navigation;
+                if (x != null)
+                {
+                    return x.PushAsync(page);
+                }
+                else
+                {
+                    return Task.CompletedTask;
+                }
+            });
         }
 
         public async Task PopAsync()
