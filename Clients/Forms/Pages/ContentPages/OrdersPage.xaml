@@ -4,7 +4,6 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"   
-    xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
     xmlns:views="clr-namespace:MvvmPackage.Xamarin.Pages;assembly=MvvmPackage.Xamarin"
     Title="Zlecenia"
     x:TypeArguments="viewModels:OrdersPageModel"
@@ -18,74 +17,78 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <CollectionView ItemsSource="{Binding Orders}" >
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical"
+
+            <RefreshView IsRefreshing="{Binding IsLoading, Mode=OneWay}"
+             Command="{Binding RefreshOrdersCommand}">
+                <CollectionView ItemsSource="{Binding Orders}" >
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
                            ItemSpacing="20"/>
-                </CollectionView.ItemsLayout>
+                    </CollectionView.ItemsLayout>
 
-                <CollectionView.Header>
-                    <BoxView HeightRequest="0"/>
-                </CollectionView.Header>
+                    <CollectionView.Header>
+                        <BoxView HeightRequest="0"/>
+                    </CollectionView.Header>
 
-                <CollectionView.Footer>
-                    <BoxView HeightRequest="0"/>
-                </CollectionView.Footer>
+                    <CollectionView.Footer>
+                        <BoxView HeightRequest="0"/>
+                    </CollectionView.Footer>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <ContentView>
-                            <Frame BackgroundColor="{StaticResource PrimaryColor}" Margin="20,0,20,0" CornerRadius="15">
-                                <StackLayout>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding CustomerModel.Name}" FontSize="20"/>
-                                        <Label Text="{Binding CustomerModel.Surname}" FontSize="20"/>
-                                    </StackLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <ContentView>
+                                <Frame BackgroundColor="{StaticResource PrimaryColor}" Margin="20,0,20,0" CornerRadius="15">
+                                    <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding CustomerModel.Name}" FontSize="20"/>
+                                            <Label Text="{Binding CustomerModel.Surname}" FontSize="20"/>
+                                        </StackLayout>
 
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding CarModel.Brand}" FontSize="20"/>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding CarModel.Brand}" FontSize="20"/>
 
-                                        <Label Text="{Binding CarModel.Model}" FontSize="20"/>
-                                    </StackLayout>
+                                            <Label Text="{Binding CarModel.Model}" FontSize="20"/>
+                                        </StackLayout>
 
-                                    <Label Text="{Binding CustomerModel.Phone}" FontSize="20"/>
+                                        <Label Text="{Binding CustomerModel.Phone}" FontSize="20"/>
 
-                                    <BoxView 
+                                        <BoxView 
                                         HeightRequest="2" 
                                         Margin="10"
                                         BackgroundColor="{StaticResource PageBackgroundColor}" 
                                         HorizontalOptions="FillAndExpand" />
 
-                                    <Label Text="Postęp: 30%" FontSize="20"/>
+                                        <Label Text="Postęp: 30%" FontSize="20"/>
 
-                                    <Frame 
+                                        <Frame 
                                         HeightRequest="10" 
                                         BackgroundColor="{StaticResource GradientStop}" 
                                         Margin="20,5,20,5"
                                         Padding="0"
                                         HorizontalOptions="FillAndExpand" >
-                                        <BoxView 
+                                            <BoxView 
                                             HeightRequest="10" 
                                             BackgroundColor="{StaticResource GradientStart}" 
                                             WidthRequest="50"
                                             HorizontalOptions="Start" >
-                                        </BoxView>
-                                    </Frame>
+                                            </BoxView>
+                                        </Frame>
 
-                                    <Label Text="Do końca: 5 dni" FontSize="20" Margin="0,10,0,0"/>
+                                        <Label Text="Do końca: 5 dni" FontSize="20" Margin="0,10,0,0"/>
 
-                                    <BoxView 
+                                        <BoxView 
                                         HeightRequest="2" 
                                         Margin="10"
                                         BackgroundColor="{StaticResource PageBackgroundColor}" 
                                         HorizontalOptions="FillAndExpand" />
 
-                                </StackLayout>
-                            </Frame>
-                        </ContentView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                    </StackLayout>
+                                </Frame>
+                            </ContentView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </views:MvContentPage>

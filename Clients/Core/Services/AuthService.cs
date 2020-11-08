@@ -24,6 +24,7 @@ namespace NotatnikMechanika.Core.Services
             _httpClient = httpClient;
             _settingsService = settingsService;
             _httpRequestService = httpRequestService;
+            _httpRequestService.Authorize += AuthorizeResponse;
         }
 
         public async Task<Response> RegisterAsync(RegisterModel registerModel)
@@ -49,6 +50,14 @@ namespace NotatnikMechanika.Core.Services
             await _settingsService.SetToken("");
             _httpClient.DefaultRequestHeaders.Authorization = null;
             AuthChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private async void AuthorizeResponse(object sender, Response response)
+        {
+            if (response.ResponseType == ResponseType.Unauthorized)
+            {
+                await LogoutAsync();
+            }
         }
     }
 }

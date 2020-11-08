@@ -8,6 +8,7 @@
     x:TypeArguments="viewModels:RegistrationPageModel"
     NavigationPage.HasNavigationBar="False"
     Visual="Material"
+    ControlTemplate="{StaticResource PageWithGradient}"
     mc:Ignorable="d">
     <views:MvContentPage.Content>
         <Grid x:Name="pageGrid" Opacity="0">

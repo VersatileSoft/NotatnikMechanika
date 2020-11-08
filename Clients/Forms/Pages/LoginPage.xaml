@@ -11,7 +11,6 @@
     ControlTemplate="{StaticResource PageWithGradient}"
     mc:Ignorable="d">
 
-
     <views:MvContentPage.Content>
         <Grid>
             <StackLayout x:Name="appLogo" HorizontalOptions="Center" VerticalOptions="Center" Spacing="-64">

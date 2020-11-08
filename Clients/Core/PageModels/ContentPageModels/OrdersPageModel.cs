@@ -6,6 +6,7 @@ using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Order;
 using PropertyChanged;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,10 +17,11 @@ namespace NotatnikMechanika.Core.PageModels
     [AddINotifyPropertyChangedInterface]
     public class OrdersPageModel : PageModelBase
     {
-        public IEnumerable<OrderExtendedModel> Orders { get; set; }
+        public ObservableCollection<OrderExtendedModel> Orders { get; set; }
         public ICommand AddOrderCommand { get; set; }
         public ICommand OrderSelectedCommand { get; set; }
         public ICommand RemoveOrderCommand { get; set; }
+        public ICommand RefreshOrdersCommand { get; set; }
 
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMvNavigationService _navigationService;
@@ -32,10 +34,11 @@ namespace NotatnikMechanika.Core.PageModels
             _navigationService = navigationService;
             _messageDialogService = messageDialogService;
             _authService = authService;
-            Orders = new List<OrderExtendedModel>();
+            Orders = new ObservableCollection<OrderExtendedModel>();
             AddOrderCommand = new AsyncCommand(() => _navigationService.NavigateToAsync<AddOrderPageModel>());
             OrderSelectedCommand = new AsyncCommand<int>((id) => _navigationService.NavigateToAsync<OrderPageModel>(id));
             RemoveOrderCommand = new AsyncCommand<int>(RemoveOrderAction);
+            RefreshOrdersCommand = new AsyncCommand(Initialize);
         }
 
         private async Task RemoveOrderAction(int id)
@@ -58,16 +61,13 @@ namespace NotatnikMechanika.Core.PageModels
 
         public override async Task Initialize()
         {
-
-            if (Orders.Any()) return;
-
             IsLoading = true;
             Response<List<OrderExtendedModel>> response = await _httpRequestService.SendGet<List<OrderExtendedModel>>(new OrderPaths().GetFullPath(OrderPaths.GetExtendedOrders));
 
             switch (response.ResponseType)
             {
                 case ResponseType.Successful:
-                    Orders = response.Content;
+                    Orders = new ObservableCollection<OrderExtendedModel>(response.Content);
                     break;
 
                 case ResponseType.Failure:

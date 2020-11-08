@@ -12,10 +12,6 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\Fonts\MaterialDesign.ttf" />
-  </ItemGroup>
-
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\GoogleSans-Bold.ttf" />
@@ -24,7 +20,6 @@
     <EmbeddedResource Include="Resources\Fonts\GoogleSans-Medium.ttf" />
     <EmbeddedResource Include="Resources\Fonts\GoogleSans-MediumItalic.ttf" />
     <EmbeddedResource Include="Resources\Fonts\GoogleSans-Regular.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\MaterialDesign.ttf" />
   </ItemGroup>
 
   <ItemGroup>

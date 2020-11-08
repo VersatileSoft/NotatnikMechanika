@@ -8,11 +8,12 @@ namespace NotatnikMechanika.Forms.Services
     {
         /* public Task ShowMessageDialog(string message)
          {
-             return UserDialogs.Instance.AlertAsync(message, "Notatnik Mechanika");
+             
          }*/
         public Task ShowMessageDialog(string message, MessageDialogType type, string title = null)
         {
-            throw new System.NotImplementedException();
+            // throw new System.NotImplementedException();
+            return UserDialogs.Instance.AlertAsync(message, "Notatnik Mechanika");
         }
     }
 }
