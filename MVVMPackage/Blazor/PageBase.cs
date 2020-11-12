@@ -13,20 +13,13 @@ namespace MVVMPackage.Blazor
         public RenderFragment RenderFragment => BuildRenderTree;
 
         [Inject]
-        public TPageModel PageModel { get; set; }
+        public TPageModel PageModel { get; private set; }
 
         protected override async Task OnParametersSetAsync()
         {
             PageModel.PropertyChanged += (s, e) => StateHasChanged();
 
-            if (int.TryParse(Parameter, out int param))
-            {
-                PageModel.Parameter = param;
-            }
-            else
-            {
-                PageModel.Parameter = 0;
-            }
+            PageModel.Parameter = int.TryParse(Parameter, out var param) ? param : 0;
             await PageModel.Initialize();
             await base.OnParametersSetAsync();
         }

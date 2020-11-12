@@ -1,5 +1,5 @@
 ﻿<ResourceDictionary
-    xmlns="http://xamarin.com/schemas/2014/forms"                   
+    xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:magicGradients="clr-namespace:MagicGradients;assembly=MagicGradients"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
@@ -9,74 +9,85 @@
     <Color x:Key="PrimaryTextColor">#fff</Color>
     <Color x:Key="GradientStart">#5877e6</Color>
     <Color x:Key="GradientStop">#36dad2</Color>
-    
-    <Style x:Key="ShellStyle" TargetType="Shell">
+
+    <Style TargetType="Shell" x:Key="ShellStyle">
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
         <Setter Property="ForegroundColor" Value="{StaticResource GradientStart}" />
         <Setter Property="TitleColor" Value="White" />
         <Setter Property="DisabledColor" Value="#B4FFFFFF" />
         <Setter Property="UnselectedColor" Value="#95FFFFFF" />
         <Setter Property="TabBarBackgroundColor" Value="{StaticResource PrimaryColor}" />
-        <Setter Property="TabBarForegroundColor" Value="White"/>
-        <Setter Property="TabBarUnselectedColor" Value="#95FFFFFF"/>
-        <Setter Property="TabBarTitleColor" Value="White"/>
+        <Setter Property="TabBarForegroundColor" Value="White" />
+        <Setter Property="TabBarUnselectedColor" Value="#95FFFFFF" />
+        <Setter Property="TabBarTitleColor" Value="White" />
     </Style>
 
     <Style TargetType="ContentPage">
-        <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}" />
+    </Style>
+
+    <Style TargetType="CollectionView">
+        <Setter Property="ItemsLayout">
+            <LinearItemsLayout ItemSpacing="20" Orientation="Vertical" />
+        </Setter>
     </Style>
 
     <Style TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}"/>
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
     </Style>
 
-    <!--  LoginView/RegisterView  -->
-    <Style x:Key="LoginAppIconImage" TargetType="Image">
-        <Setter Property="Margin" Value="0,0,0,0"/>
-        <Setter Property="HeightRequest" Value="256"/>
-        <Setter Property="WidthRequest" Value="256"/>
-        <Setter Property="Source" Value="icon_foreground.xml"/>
+    <Style TargetType="Image" x:Key="LoginAppIconImage">
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="HeightRequest" Value="256" />
+        <Setter Property="WidthRequest" Value="256" />
+        <Setter Property="Source" Value="icon_foreground.xml" />
     </Style>
-    <Style x:Key="LoginAppTitleLabel" TargetType="Label">
-        <Setter Property="FontFamily" Value="GoogleSans-Bold"/>
-        <Setter Property="FontSize" Value="30"/>
-        <Setter Property="Text" Value="Notatnik Mechanika"/>
-        <Setter Property="TextColor" Value="White"/>
-        <Setter Property="Opacity" Value="0"/>
+    <Style TargetType="BoxView" x:Key="LineDevider">
+        <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}" />
+        <Setter Property="HeightRequest" Value="2" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Margin" Value="10" />
+    </Style>
+    <Style TargetType="Label" x:Key="LoginAppTitleLabel">
+        <Setter Property="FontFamily" Value="GoogleSans-Bold" />
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="Text" Value="Notatnik Mechanika" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="Opacity" Value="0" />
     </Style>
 
-    <Style x:Key="LoginMessageLabel" TargetType="Label">
-        <Setter Property="Margin" Value="0,0,0,12"/>
-        <Setter Property="FontFamily" Value="GoogleSans-Medium"/>
-        <Setter Property="FontSize" Value="Subtitle"/>
-        <Setter Property="HorizontalOptions" Value="Center"/>
-        <Setter Property="VerticalOptions" Value="Center"/>
+    <Style TargetType="Label" x:Key="LoginMessageLabel">
+        <Setter Property="Margin" Value="0,0,0,12" />
+        <Setter Property="FontFamily" Value="GoogleSans-Medium" />
+        <Setter Property="FontSize" Value="Subtitle" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
     </Style>
-    <Style x:Key="LoginEntry" TargetType="Entry">
-        <Setter Property="FontFamily" Value="GoogleSans-Regular"/>
-        <Setter Property="TextColor" Value="White"/>
+    <Style TargetType="Entry" x:Key="LoginEntry">
+        <Setter Property="FontFamily" Value="GoogleSans-Regular" />
+        <Setter Property="TextColor" Value="White" />
     </Style>
-    <Style x:Key="LoginCheckBox" TargetType="CheckBox">
-        <Setter Property="Color" Value="White"/>
+    <Style TargetType="CheckBox" x:Key="LoginCheckBox">
+        <Setter Property="Color" Value="White" />
     </Style>
-    <Style x:Key="LoginCheckBoxLabel" TargetType="Label">
-        <Setter Property="FontFamily" Value="GoogleSans-Regular"/>
-        <Setter Property="FontSize" Value="Medium"/>
-        <Setter Property="Text" Value="Zapamiętaj mnie."/>
-        <Setter Property="TextColor" Value="White"/>
-        <Setter Property="VerticalOptions" Value="Center"/>
+    <Style TargetType="Label" x:Key="LoginCheckBoxLabel">
+        <Setter Property="FontFamily" Value="GoogleSans-Regular" />
+        <Setter Property="FontSize" Value="Medium" />
+        <Setter Property="Text" Value="Zapamiętaj mnie." />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="VerticalOptions" Value="Center" />
     </Style>
-    <Style x:Key="LoginButton" TargetType="Button">
-        <Setter Property="FontFamily" Value="GoogleSans-Bold"/>
-        <Setter Property="BackgroundColor" Value="White"/>
-        <Setter Property="TextColor" Value="Black"/>
-        <Setter Property="CornerRadius" Value="25"/>
-        <Setter Property="WidthRequest" Value="150"/>
+    <Style TargetType="Button" x:Key="LoginButton">
+        <Setter Property="FontFamily" Value="GoogleSans-Bold" />
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="CornerRadius" Value="25" />
+        <Setter Property="WidthRequest" Value="150" />
     </Style>
 
     <ControlTemplate x:Key="PageWithGradient">
         <Grid>
-            <magicGradients:GradientView VerticalOptions="FillAndExpand" >
+            <magicGradients:GradientView VerticalOptions="FillAndExpand">
                 <magicGradients:GradientView.GradientSource>
                     <magicGradients:LinearGradient Angle="45">
                         <magicGradients:GradientStop Color="{StaticResource GradientStart}" Offset="0" />

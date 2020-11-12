@@ -12,8 +12,8 @@ namespace MVVMPackage.Blazor
 {
     public abstract class BlazorApp<TMainPageService, TComponent> where TMainPageService : IMainPageService where TComponent : IComponent
     {
-        protected IServiceProvider Services { get; set; }
-        protected Uri BaseAddress { get; set; }
+        protected IServiceProvider Services { get; private set; }
+        protected Uri BaseAddress { get; private set; }
         protected BlazorApp()
         {
             IoC.PlatformProjectAssembly = GetType().Assembly;
@@ -26,12 +26,12 @@ namespace MVVMPackage.Blazor
 
         public async Task Build(string[] args)
         {
-            WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
+            var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<TComponent>("app");
             BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
             builder.ConfigureContainer(new AutofacServiceProviderFactory(IoC.ConfigureServices));
             ConfigureServices(builder.Services);
-            WebAssemblyHost app = builder.Build();
+            var app = builder.Build();
             Services = app.Services;
             AppStart();
             await app.RunAsync();

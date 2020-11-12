@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="NotatnikMechanika.Forms.DataTemplates.DropdownFrame"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Frame
+        BackgroundColor="{StaticResource PrimaryColor}"
+        CornerRadius="15"
+        Margin="20,0,20,0"
+        Padding="0">
+
+        <Grid>
+            <ProgressBar
+                BackgroundColor="{StaticResource GradientStop}"
+                Opacity="0"
+                Progress="0.5"
+                ProgressColor="{StaticResource GradientStart}"
+                x:Name="ProgressBar" />
+
+            <StackLayout Margin="15" Spacing="0">
+                <StackLayout Orientation="Horizontal">
+                    <Label
+                        FontSize="20"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        x:Name="TitleLabel" />
+
+                    <Button
+                        Clicked="Button_Clicked"
+                        Text="Zwiń"
+                        VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+
+                <ContentView x:Name="Details" />
+            </StackLayout>
+        </Grid>
+    </Frame>
+</ContentView>

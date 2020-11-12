@@ -1,38 +1,38 @@
-﻿<Shell x:Class="NotatnikMechanika.Forms.Pages.MainPage"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
-    xmlns:pages="clr-namespace:NotatnikMechanika.Forms.Pages;assembly=NotatnikMechanika.Forms"
+﻿<Shell
+    Style="{StaticResource ShellStyle}"
     Visual="Material"
-    Style="{StaticResource ShellStyle}">
+    x:Class="NotatnikMechanika.Forms.Pages.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:pages="clr-namespace:NotatnikMechanika.Forms.Pages;assembly=NotatnikMechanika.Forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <!--  ReSharper disable Xaml.InvalidType  -->
     <Tab Title="Zlecenia">
-        
+
         <ShellContent Title="Aktualne zlecenia">
             <pages:OrdersPage />
         </ShellContent>
-        
+
         <ShellContent Title="Archiwum">
             <pages:OrdersPage />
         </ShellContent>
-        
+
     </Tab>
-      
+
     <Tab Title="Usługi/Towary">
-        
         <ShellContent Title="Usługi">
             <pages:OrdersPage />
         </ShellContent>
-        
+
         <ShellContent Title="Magazyn">
             <pages:OrdersPage />
         </ShellContent>
     </Tab>
-        
+
     <Tab Title="Klienci">
         <ShellContent>
             <pages:CustomersPage />
         </ShellContent>
     </Tab>
-    
+
 </Shell>

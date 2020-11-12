@@ -1,4 +1,5 @@
-﻿using MvvmPackage.Core;
+﻿using System;
+using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
 using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
@@ -24,26 +25,24 @@ namespace NotatnikMechanika.Core.PageModels
         public ICommand RefreshOrdersCommand { get; set; }
 
         private readonly IHttpRequestService _httpRequestService;
-        private readonly IMvNavigationService _navigationService;
         private readonly IMessageDialogService _messageDialogService;
         private readonly IAuthService _authService;
 
         public OrdersPageModel(IMvNavigationService navigationService, IHttpRequestService httpRequestService, IMessageDialogService messageDialogService, IAuthService authService)
         {
             _httpRequestService = httpRequestService;
-            _navigationService = navigationService;
             _messageDialogService = messageDialogService;
             _authService = authService;
             Orders = new ObservableCollection<OrderExtendedModel>();
-            AddOrderCommand = new AsyncCommand(() => _navigationService.NavigateToAsync<AddOrderPageModel>());
-            OrderSelectedCommand = new AsyncCommand<int>((id) => _navigationService.NavigateToAsync<OrderPageModel>(id));
+            AddOrderCommand = new AsyncCommand(navigationService.NavigateToAsync<AddOrderPageModel>);
+            OrderSelectedCommand = new AsyncCommand<int>(navigationService.NavigateToAsync<OrderPageModel>);
             RemoveOrderCommand = new AsyncCommand<int>(RemoveOrderAction);
             RefreshOrdersCommand = new AsyncCommand(Initialize);
         }
 
         private async Task RemoveOrderAction(int id)
         {
-            Response response = await _httpRequestService.SendDelete(new OrderPaths().GetFullPath(CRUDPaths.DeletePath.Replace("{id}", id.ToString())));
+            var response = await _httpRequestService.SendDelete(new OrderPaths().GetFullPath(CRUDPaths.DeletePath.Replace("{id}", id.ToString())));
 
             switch (response.ResponseType)
             {
@@ -54,6 +53,12 @@ namespace NotatnikMechanika.Core.PageModels
                 case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas usuwania zlecenia");
                     break;
+                case ResponseType.Unauthorized:
+                    break;
+                case ResponseType.BadModelState:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             await Initialize();
@@ -62,12 +67,13 @@ namespace NotatnikMechanika.Core.PageModels
         public override async Task Initialize()
         {
             IsLoading = true;
-            Response<List<OrderExtendedModel>> response = await _httpRequestService.SendGet<List<OrderExtendedModel>>(new OrderPaths().GetFullPath(OrderPaths.GetExtendedOrders));
+            var response = await _httpRequestService.SendGet<List<OrderExtendedModel>>(new OrderPaths().GetFullPath(OrderPaths.GetExtendedOrders));
 
             switch (response.ResponseType)
             {
                 case ResponseType.Successful:
-                    Orders = new ObservableCollection<OrderExtendedModel>(response.Content);
+                    Orders.Clear();
+                    response.Content.ForEach(i => Orders.Add(i));
                     break;
 
                 case ResponseType.Failure:
@@ -77,6 +83,10 @@ namespace NotatnikMechanika.Core.PageModels
                 case ResponseType.Unauthorized:
                     await _authService.LogoutAsync();
                     break;
+                case ResponseType.BadModelState:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             IsLoading = false;

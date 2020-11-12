@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="NotatnikMechanika.Forms.DataTemplates.OrderItemTemplate"
+    x:DataType="order:OrderExtendedModel"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:dataTemplates="clr-namespace:NotatnikMechanika.Forms.DataTemplates;assembly=NotatnikMechanika.Forms"
+    xmlns:order="clr-namespace:NotatnikMechanika.Shared.Models.Order;assembly=NotatnikMechanika.Shared"
+    xmlns:pageModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <dataTemplates:DropdownFrame ShowProgress="True">
+
+        <dataTemplates:DropdownFrame.Title>
+            <MultiBinding StringFormat="{}{0} {1}">
+                <Binding Path="CustomerModel.Name" />
+                <Binding Path="CustomerModel.Surname" />
+            </MultiBinding>
+        </dataTemplates:DropdownFrame.Title>
+
+        <dataTemplates:DropdownFrame.FrameBody>
+            <StackLayout>
+                <Label FontSize="20" VerticalOptions="CenterAndExpand">
+                    <Label.Text>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Path="CarModel.Brand" />
+                            <Binding Path="CarModel.Model" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+
+                <Label FontSize="20" Text="{Binding CustomerModel.Phone}" />
+
+                <BoxView Style="{StaticResource LineDevider}" />
+
+                <Label FontSize="20" Text="Postęp: 50%" />
+
+                <Frame
+                    CornerRadius="4"
+                    HeightRequest="10"
+                    Margin="20,10,20,10"
+                    Padding="0">
+                    <ProgressBar
+                        BackgroundColor="{StaticResource GradientStop}"
+                        Progress="0.5"
+                        ProgressColor="{StaticResource GradientStart}" />
+                </Frame>
+
+                <Label FontSize="20" Text="Do końca: 5 dni" />
+
+                <BoxView Style="{StaticResource LineDevider}" />
+
+                <Button
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type pageModels:OrdersPageModel}}, Path=OrderSelectedCommand}"
+                    CommandParameter="{Binding Id}"
+                    Text="InfoIcon" />
+
+            </StackLayout>
+        </dataTemplates:DropdownFrame.FrameBody>
+    </dataTemplates:DropdownFrame>
+</ContentView>
