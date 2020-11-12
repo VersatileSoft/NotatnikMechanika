@@ -1,44 +1,45 @@
-<views:MvContentPage
-    ControlTemplate="{StaticResource PageWithGradient}"
-    NavigationPage.HasNavigationBar="False"
-    Visual="Material"
-    mc:Ignorable="d"
-    x:Class="NotatnikMechanika.Forms.Pages.LoginPage"
-    x:DataType="viewModels:LoginPageModel"
-    x:TypeArguments="viewModels:LoginPageModel"
+<views:MvContentPage x:Class="NotatnikMechanika.Forms.Pages.LoginPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
     xmlns:views="clr-namespace:MvvmPackage.Xamarin.Pages;assembly=MvvmPackage.Xamarin"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    x:DataType="viewModels:LoginPageModel"
+    x:TypeArguments="viewModels:LoginPageModel"
+    NavigationPage.HasNavigationBar="False"
+    Visual="Material"
+    mc:Ignorable="d">
+    <views:MvContentPage.Background>
+        <LinearGradientBrush EndPoint="1,0">
+            <GradientStop Offset="0.1" Color="{StaticResource GradientStart}"/>
+            <GradientStop Offset="1.0" Color="{StaticResource GradientStop}"/>
+        </LinearGradientBrush>
+    </views:MvContentPage.Background>
 
     <views:MvContentPage.Content>
         <Grid>
-            <StackLayout
+            <StackLayout x:Name="appLogo"
                 HorizontalOptions="Center"
-                Spacing="-64"
                 VerticalOptions="Center"
-                x:Name="appLogo">
-                <Image Style="{StaticResource LoginAppIconImage}" />
-                <Label
+                Spacing="-64">
+                <Image Style="{StaticResource LoginAppIconImage}"/>
+                <Label x:Name="appTitle"
                     HorizontalTextAlignment="Center"
-                    Style="{StaticResource LoginAppTitleLabel}"
-                    x:Name="appTitle" />
+                    Style="{StaticResource LoginAppTitleLabel}"/>
             </StackLayout>
 
             <ScrollView>
-                <StackLayout
+                <StackLayout x:Name="loginPanel"
                     Margin="0,0,0,150"
-                    Opacity="0"
                     Padding="20"
                     VerticalOptions="End"
-                    x:Name="loginPanel">
+                    Opacity="0">
                     <Label Style="{StaticResource LoginMessageLabel}">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{Binding ErrorMessage}" TextColor="#FF7A7A" />
-                                <Span Text="Zaloguj się, aby uzyskać dostęp do konta." TextColor="White" />
+                                <Span Text="{Binding ErrorMessage}" TextColor="#FF7A7A"/>
+                                <Span Text="Zaloguj się, aby uzyskać dostęp do konta." TextColor="White"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -47,29 +48,29 @@
                         Keyboard="Email"
                         Placeholder="E-mail"
                         Style="{StaticResource LoginEntry}"
-                        Text="{Binding LoginModel.Email}" />
+                        Text="{Binding LoginModel.Email}"/>
                     <Entry
                         IsPassword="True"
                         Placeholder="Hasło"
                         Style="{StaticResource LoginEntry}"
-                        Text="{Binding LoginModel.Password}" />
+                        Text="{Binding LoginModel.Password}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="-12">
-                        <CheckBox Style="{StaticResource LoginCheckBox}" />
-                        <Label Style="{StaticResource LoginCheckBoxLabel}" />
+                        <CheckBox Style="{StaticResource LoginCheckBox}"/>
+                        <Label Style="{StaticResource LoginCheckBoxLabel}"/>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
                         <Button
                             Command="{Binding RegisterCommand}"
                             Style="{StaticResource LoginButton}"
-                            Text="Nie mam konta" />
+                            Text="Nie mam konta"/>
 
                         <Button
-                            Command="{Binding LoginCommand}"
                             HorizontalOptions="EndAndExpand"
+                            Command="{Binding LoginCommand}"
                             Style="{StaticResource LoginButton}"
-                            Text="Zaloguj" />
+                            Text="Zaloguj"/>
                     </StackLayout>
                 </StackLayout>
             </ScrollView>

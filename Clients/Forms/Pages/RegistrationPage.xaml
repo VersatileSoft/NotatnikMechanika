@@ -8,13 +8,23 @@
     x:TypeArguments="viewModels:RegistrationPageModel"
     NavigationPage.HasNavigationBar="False"
     Visual="Material"
-    ControlTemplate="{StaticResource PageWithGradient}"
     mc:Ignorable="d">
+    <views:MvContentPage.Background>
+        <LinearGradientBrush EndPoint="1,0">
+            <GradientStop Offset="0.1" Color="{StaticResource GradientStart}"/>
+            <GradientStop Offset="1.0" Color="{StaticResource GradientStop}"/>
+        </LinearGradientBrush>
+    </views:MvContentPage.Background>
+
     <views:MvContentPage.Content>
         <Grid x:Name="pageGrid" Opacity="0">
-            <StackLayout x:Name="appLogo" HorizontalOptions="Center" VerticalOptions="Start" Margin="0,120,0,0" Spacing="-64">
+            <StackLayout x:Name="appLogo"
+                Margin="0,120,0,0"
+                HorizontalOptions="Center"
+                VerticalOptions="Start"
+                Spacing="-64">
                 <Image Style="{StaticResource LoginAppIconImage}"/>
-                <Label Style="{StaticResource LoginAppTitleLabel}" Opacity="1"/>
+                <Label Opacity="1" Style="{StaticResource LoginAppTitleLabel}"/>
             </StackLayout>
 
             <ScrollView>
