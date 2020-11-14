@@ -18,7 +18,7 @@
                 <MatAppBar Fixed="true">
                     <MatAppBarRow>
                         <MatAppBarSection>
-                            <MatIconButton Icon="menu" OnClick="@((e) => ButtonClicked())"></MatIconButton>
+                            <MatIconButton Icon="menu" OnClick="@(_ => ButtonClicked())"></MatIconButton>
                             <MatAppBarTitle>Notatnik mechanika</MatAppBarTitle>
                         </MatAppBarSection>
                     </MatAppBarRow>
@@ -27,21 +27,19 @@
                     <MatDrawerContainer Class="drawer-container">
                         <MatHidden Breakpoint="@MatBreakpoint.SM" Direction="@MatHiddenDirection.Up">
                             <ChildContent>
-                                <MatDrawer @bind-Opened="@Opened" Mode="@MatDrawerMode.Modal">
-                                    <NavMenu />
+                                <MatDrawer @bind-Opened="@_opened" Mode="@MatDrawerMode.Modal">
+                                    <NavMenu/>
                                 </MatDrawer>
                             </ChildContent>
 
                             <ElseContent>
-                                <MatDrawer @bind-Opened="@Opened" Mode="@MatDrawerMode.Dismissible">
+                                <MatDrawer @bind-Opened="@_opened" Mode="@MatDrawerMode.Dismissible">
                                     <NavMenu />
                                 </MatDrawer>
                             </ElseContent>
                         </MatHidden>
-                        <MatDrawerContent>
-                            <div class="page-content">
-                                @Body
-                            </div>
+                        <MatDrawerContent Class="page-content">
+                            @Body
                         </MatDrawerContent>
                     </MatDrawerContainer>
                 </MatAppBarContent>
@@ -55,12 +53,12 @@
 
 @code
 {
-    bool Opened = true;
+    bool _opened;
 
 
     void ButtonClicked()
     {
-        Opened = !Opened;
+        _opened = !_opened;
     }
 
     public void Dispose()

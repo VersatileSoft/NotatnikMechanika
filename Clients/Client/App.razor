@@ -1,4 +1,4 @@
-<MatThemeProvider Theme="@appTheme">
+<MatThemeProvider>
     <MatToastContainer />
     <Router AppAssembly="@typeof(Program).Assembly">
         <Found Context="routeData">
@@ -13,13 +13,3 @@
         </NotFound>
     </Router>
 </MatThemeProvider>
-
-@code{
-    MatTheme appTheme = new MatTheme()
-    {
-        Primary = MatThemeColors.BlueGrey._500.Value, 
-        Secondary = MatThemeColors.Orange._500.Value,
-        Background = "#303030",
-        Surface = "#2c2c2c"
-    };
-}

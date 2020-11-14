@@ -1,10 +1,12 @@
 ﻿@page "/registration"
+@layout AuthLayout
 @using NotatnikMechanika.Core.PageModels
 @using MVVMPackage.Blazor
 @inherits PageBase<RegistrationPageModel>
 
 <EditForm Model="PageModel.RegisterModel" OnValidSubmit="PageModel.RegisterAction">
     <DataAnnotationsValidator />
+
     <div class="input">
         <MatTextField @bind-Value="PageModel.RegisterModel.Name" Icon="@MatIconNames.Person" Label="Imię" Outlined="true" ValidationDisabled="true" />
         <ValidationMessage For="@(() => @PageModel.RegisterModel.Name)" />

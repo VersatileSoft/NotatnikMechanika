@@ -1,0 +1,11 @@
+﻿.panel-header{
+  width: max-content; 
+  font-size: 18px
+}
+
+.buttons{
+  display: flex; 
+  flex-direction: row; 
+  width: 100%; 
+  justify-content: space-evenly
+}

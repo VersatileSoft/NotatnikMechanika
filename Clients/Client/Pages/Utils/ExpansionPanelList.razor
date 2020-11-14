@@ -1,0 +1,30 @@
+﻿@using System.Collections.ObjectModel
+@typeparam TItem
+
+<MatAccordion Multi="true">
+    @foreach (var item in Items) //TODO replace with virtualize
+    {
+        <MatExpansionPanel Class="expansion-panel">
+            <MatExpansionPanelSummary>
+                <MatExpansionPanelHeader>
+                    @HeaderTemplate(item)
+                </MatExpansionPanelHeader>
+            </MatExpansionPanelSummary>
+            <MatExpansionPanelDetails Class="expansion-panel-details">
+                @BodyTemplate(item)
+            </MatExpansionPanelDetails>
+        </MatExpansionPanel>
+    }
+</MatAccordion>
+
+@code {
+    [Parameter]
+    public ObservableCollection<TItem> Items { get; set; }
+
+    [Parameter]
+    public RenderFragment<TItem> HeaderTemplate  { get; set; }
+
+    [Parameter]
+    public RenderFragment<TItem> BodyTemplate { get; set; }
+
+}

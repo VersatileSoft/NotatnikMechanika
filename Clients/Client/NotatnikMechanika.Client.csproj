@@ -12,9 +12,6 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="compilerconfig.json" />
-    <_ContentIncludedByDefault Remove="wwwroot\css\auth-layout.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\css\auth-layout.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\css\main-layout.min.css" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,5 +43,4 @@
     <Resource Include="wwwroot\AppIcon_Light.png" />
     <Resource Include="wwwroot\images\app_icon.png" />
   </ItemGroup>
-
 </Project>

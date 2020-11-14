@@ -1,0 +1,53 @@
+﻿@import '../GlobalStyles/Colors.scss';
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+    overflow: auto;
+    
+    .nav-header{
+        background-image: linear-gradient(to bottom, $GradientStart, $GradientStop);
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        padding: 20px 0;
+        
+        img {
+            width: 140px;
+            align-self: center;
+            margin: 0;
+        }
+        
+        h2 {
+            margin: 0;
+            align-self: center;
+        }
+    }
+    
+    .nav-content{
+        background-color: $PageBackgroundColor;
+        height: 100%;
+        a {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-items: start;
+            color: white !important;
+            font-size: larger;
+            text-decoration: none;
+            height: 50px;
+            padding-left: 5px;
+
+            p {
+                margin: 0 10px;
+            }
+        }
+
+        a:hover {
+            background-color: #3f4857;
+        }
+    }
+}

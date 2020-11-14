@@ -1,22 +1,22 @@
 ﻿[
   {
-    "outputFile": "wwwroot/css/auth-layout.css",
-    "inputFile": "Styles/auth-layout.scss"
+    "outputFile": "Shared/NavMenu.razor.css",
+    "inputFile": "Shared/NavMenu.razor.scss"
   },
   {
-    "outputFile": "wwwroot/css/nav-menu.css",
-    "inputFile": "Styles/nav-menu.scss"
+    "outputFile": "Pages/AddCustomer.razor.css",
+    "inputFile": "Pages/AddCustomer.razor.scss"
   },
   {
-    "outputFile": "wwwroot/css/main-layout.css",
-    "inputFile": "Styles/main-layout.scss"
+    "outputFile": "Pages/Customers.razor.css",
+    "inputFile": "Pages/Customers.razor.scss"
   },
   {
-    "outputFile": "wwwroot/css/customers.css",
-    "inputFile": "Styles/customers.scss"
+    "outputFile": "wwwroot/css/AppStyle.css",
+    "inputFile": "GlobalStyles/AppStyle.scss"
   },
   {
-    "outputFile": "wwwroot/css/add-customer.css",
-    "inputFile": "Styles/add-customer.scss"
+    "outputFile": "Pages/Orders.razor.css",
+    "inputFile": "Pages/Orders.razor.scss"
   }
 ]

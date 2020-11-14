@@ -1,13 +1,13 @@
-﻿<m:MvFormsApplication x:Class="NotatnikMechanika.Forms.App"
+﻿<m:MvFormsApplication
+    mc:Ignorable="d"
+    x:Class="NotatnikMechanika.Forms.App"
+    x:TypeArguments="core:MainPageService"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:core="clr-namespace:NotatnikMechanika.Core;assembly=NotatnikMechanika.Core"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:m="clr-namespace:MvvmPackage.Xamarin;assembly=MvvmPackage.Xamarin"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:magicGradients="clr-namespace:MagicGradients;assembly=MagicGradients"
-    xmlns:core="clr-namespace:NotatnikMechanika.Core;assembly=NotatnikMechanika.Core"
-    x:TypeArguments="core:MainPageService"
-    mc:Ignorable="d">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Application.Resources>
         <ResourceDictionary Source="Styles/MainStyle.xaml" />
     </Application.Resources>

@@ -38,29 +38,33 @@
 
             <ElseContent>
                 <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" OnClick="(_ => PageModel.AddOrderCommand.Execute(null))" />
-                <MatAccordion Multi="true">
-                    @foreach (OrderExtendedModel order in PageModel.Orders)
-                    {
-                        <MatExpansionPanel Style="background-color: #2c2c2c;">
-                            <MatExpansionPanelSummary>
-                                <MatExpansionPanelHeader>
-                                    <p>
-                                        @order.CustomerModel.Name 
-                                        @order.CustomerModel.Surname 
-                                        @order.AcceptDate
-                                        @order.FinishDate
-                                    </p>
-                                </MatExpansionPanelHeader>
-                            </MatExpansionPanelSummary>
-                            <MatExpansionPanelDetails>
-                                <p>@order.CarModel.Brand @order.CarModel.Model</p>
-                                <p>@order.CustomerModel.CompanyName @order.CustomerModel.CompanyIdentyficator</p>
-                                <MatButton Label="Szczegóły" Raised="true" Command="PageModel.OrderSelectedCommand" CommandParameter="order.Id" />
-                                <td><MatButton Label="Usuń" Raised="true" Command="PageModel.RemoveOrderCommand" CommandParameter="order.Id" /></td>
-                            </MatExpansionPanelDetails>
-                        </MatExpansionPanel>
-                    }
-                </MatAccordion>
+                <ExpansionPanelList Items="@PageModel.Orders">
+                    <HeaderTemplate Context="order">
+                        <p class="panel-header">
+                            @order.CustomerModel.Name
+                            @order.CustomerModel.Surname
+                        </p>
+                    </HeaderTemplate>
+                    
+                    <BodyTemplate Context="order">
+                        <p>@order.CarModel.Brand @order.CarModel.Model</p>
+                        <p>@order.CustomerModel.Phone</p>
+                        <MatDivider />
+                        <p>Postęp: 30%</p>
+                        
+                        <ProgressBar Progress="0.3" ></ProgressBar>
+                        
+                        <p>Do końca: 5 dni</p>
+                        
+                        <MatDivider />
+                        
+                        <div class="buttons">
+                            <MatIconButton Icon="info" Raised="true" Command="PageModel.OrderSelectedCommand" CommandParameter="order.Id"/>
+                            <MatIconButton Icon="info" Raised="true" Command="PageModel.OrderSelectedCommand" CommandParameter="order.Id"/>
+                            <MatIconButton Style="color: red;" Icon="delete" Raised="true" Command="PageModel.RemoveOrderCommand" CommandParameter="order.Id"/>
+                        </div>
+                    </BodyTemplate>
+                </ExpansionPanelList>
             </ElseContent>
         </MatHidden>
     }
