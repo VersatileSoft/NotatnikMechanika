@@ -11,43 +11,22 @@
     }
     else
     {
-        <MatHidden BreakPoint="@MatBreakpoint.SM" Direction="@MatHiddenDirection.Down">
-            <ChildContent>
-                <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" Label="Dodaj towar" OnClick="(_ => PageModel.AddCommodityCommand.Execute(null))" />
-                <MatTable Items="PageModel.Commodities" class="table" ShowPaging="false" UseSortHeaderRow="true" HeaderRowClass="table-header">
-                    <MatTableHeader>
-                        <th scope="col">Nazwa</th>
-                        <th scope="col">Cena</th>
-                    </MatTableHeader>
-                    <MatTableRow>
-                        <td>@context.Name</td>
-                        <td>@context.Price</td>
-                        <td><MatButton Label="Szczegóły" Raised="true" Command="PageModel.CommoditySelectedCommand" CommandParameter="context.Id" /></td>
-                        <td><MatButton Label="Usuń" Raised="true" Command="PageModel.RemoveCommodityCommand" CommandParameter="context.Id" /></td>
-                    </MatTableRow>
-                </MatTable>
-            </ChildContent>
-
-            <ElseContent>
-                <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" OnClick="(_ => PageModel.AddCommodityCommand.Execute(null))" />
-                <MatAccordion Multi="true">
-                    @foreach (CommodityModel customer in PageModel.Commodities)
-                    {
-                        <MatExpansionPanel Style="background-color: #2c2c2c;">
-                            <MatExpansionPanelSummary>
-                                <MatExpansionPanelHeader>
-                                    <p>@customer.Name @customer.Price</p>
-                                </MatExpansionPanelHeader>
-                            </MatExpansionPanelSummary>
-                            <MatExpansionPanelDetails>
-                                <MatButton Label="Szczegóły" Raised="true" Command="PageModel.CommoditySelectedCommand" CommandParameter="customer.Id" />
-                                <MatButton Label="Usuń" Raised="true" Command="PageModel.RemoveCommodityCommand" CommandParameter="customer.Id" />
-                            </MatExpansionPanelDetails>
-                        </MatExpansionPanel>
-                    }
-                </MatAccordion>
-            </ElseContent>
-        </MatHidden>
+        <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" OnClick="(_ => PageModel.AddCommodityCommand.Execute(null))" />
+        <ExpansionPanelList Items="@PageModel.Commodities">
+                <HeaderTemplate Context="commodity">
+                    <p class="expansion-panel-header-text">
+                        @commodity.Name @commodity.Price
+                    </p>
+                </HeaderTemplate>
+                
+                <BodyTemplate Context="service">
+                    <div class="panel-buttons">
+                        <MatIconButton Icon="info" Raised="true" Command="PageModel.CommoditySelectedCommand" CommandParameter="@service.Id"/>
+                        <MatIconButton Icon="info" Raised="true" Command="PageModel.CommoditySelectedCommand" CommandParameter="service.Id"/>
+                        <MatIconButton Style="color: red;" Icon="delete" Raised="true" Command="PageModel.RemoveCommodityCommand" CommandParameter="service.Id"/>
+                    </div>
+                </BodyTemplate>
+            </ExpansionPanelList>
     }
 </div>
 

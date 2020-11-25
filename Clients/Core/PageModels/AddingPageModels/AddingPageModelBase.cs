@@ -1,4 +1,5 @@
-﻿using MvvmPackage.Core;
+﻿using System;
+using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
 using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
@@ -9,53 +10,57 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using static NotatnikMechanika.Shared.ResponseBuilder;
 
+// ReSharper disable once CheckNamespace
 namespace NotatnikMechanika.Core.PageModels
 {
     [AddINotifyPropertyChangedInterface]
     public abstract class AddingPageModelBase<TModel> : PageModelBase where TModel : ValidateModelBase, new()
     {
-        public TModel Model { get; set; }
-        public ICommand AddCommand { get; set; }
-        public ICommand GoBackCommand { get; set; }
+        public TModel Model { get; }
+        public ICommand AddCommand { get; }
+        public ICommand GoBackCommand { get; }
 
-        protected readonly IHttpRequestService _httpRequestService;
-        protected readonly IMvNavigationService _navigationService;
-        protected readonly IMessageDialogService _messageDialogService;
+        protected readonly IHttpRequestService HttpRequestService;
+        protected readonly IMvNavigationService NavigationService;
+        protected readonly IMessageDialogService MessageDialogService;
 
         public virtual string ErrorMessage { get; set; }
         public virtual string SuccesMessage { get; set; }
 
         protected AddingPageModelBase(IMvNavigationService navigationService, IHttpRequestService httpRequestService, IMessageDialogService messageDialogService)
         {
-            _httpRequestService = httpRequestService;
-            _navigationService = navigationService;
-            _messageDialogService = messageDialogService;
+            HttpRequestService = httpRequestService;
+            NavigationService = navigationService;
+            MessageDialogService = messageDialogService;
             Model = new TModel();
             AddCommand = new AsyncCommand(AddAction);
-            GoBackCommand = new AsyncCommand(() => _navigationService.PopAsync());
+            GoBackCommand = new AsyncCommand(NavigationService.PopAsync);
         }
 
         private async Task AddAction()
         {
             IsLoading = true;
-            string path = PathsHelper.GetPathsByModel<TModel>().GetFullPath(CRUDPaths.CreatePath);
-            Response response = await _httpRequestService.SendPost(Model, path);
+            var response = await HttpRequestService.Create(Model);
 
             switch (response.ResponseType)
             {
                 case ResponseType.Successful:
-                    await _messageDialogService.ShowMessageDialog(SuccesMessage, MessageDialogType.Success, "Operacja powiodła się");
-                    await _navigationService.NavigateToAsync<MainPageModel>();
+                    await MessageDialogService.ShowMessageDialog(SuccesMessage, MessageDialogType.Success, "Operacja powiodła się");
+                    await NavigationService.NavigateToAsync<MainPageModel>();
                     break;
 
                 case ResponseType.Failure:
                     ErrorMessage = response.ErrorMessages?.FirstOrDefault();
-                    await _messageDialogService.ShowMessageDialog(ErrorMessage, MessageDialogType.Error, "Wystąpił błąd");
+                    await MessageDialogService.ShowMessageDialog(ErrorMessage, MessageDialogType.Error, "Wystąpił błąd");
                     break;
 
                 case ResponseType.BadModelState:
-                    await _messageDialogService.ShowMessageDialog("Wypełnij formularz poprawnie", MessageDialogType.Error);
+                    await MessageDialogService.ShowMessageDialog("Wypełnij formularz poprawnie", MessageDialogType.Error);
                     break;
+                case ResponseType.Unauthorized:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
             IsLoading = false;
         }

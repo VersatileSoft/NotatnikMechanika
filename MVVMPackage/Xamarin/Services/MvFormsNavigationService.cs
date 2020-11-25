@@ -28,19 +28,12 @@ namespace MvvmPackage.Xamarin.Services
             await NavigateToAsync(_pageActivatorService.CreatePageFromPageModel<TPageModel>(parameter));
         }
 
-        private async Task NavigateToAsync(Page page)
+        private static async Task NavigateToAsync(Page page)
         {
             await Device.InvokeOnMainThreadAsync(() =>
             {
-                INavigation x = Application.Current.MainPage.Navigation;
-                if (x != null)
-                {
-                    return x.PushAsync(page);
-                }
-                else
-                {
-                    return Task.CompletedTask;
-                }
+                var x = Application.Current.MainPage.Navigation;
+                return x?.PushAsync(page) ?? Task.CompletedTask;
             });
         }
 

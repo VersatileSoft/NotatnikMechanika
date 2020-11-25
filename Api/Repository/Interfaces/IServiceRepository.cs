@@ -7,7 +7,7 @@ namespace NotatnikMechanika.Repository.Interfaces
 {
     public interface IServiceRepository : IRepositoryBase<ServiceModel>
     {
-        Task<IEnumerable<ServiceForOrderModel>> GetServicesForOrder(string userId, int orderId);
-        Task<IEnumerable<ServiceModel>> GetServicesInOrder(string userId, int orderId);
+        Task<IEnumerable<ServiceModel>> AllAsync(string userId, int orderId);
+        Task<IEnumerable<ServiceModel>> ByOrderAsync(string userId, int orderId);
     }
 }

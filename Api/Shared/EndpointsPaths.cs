@@ -2,102 +2,127 @@
 
 namespace NotatnikMechanika.Shared
 {
-    public interface IPaths
+    public static class CrudPaths
     {
-        string GetFullPath(string path);
-    }
-    public static class CRUDPaths
-    {
-        public const string GetPath = "{id}";
-        public const string GetAllPath = "all";
+        
+        public const string ByIdPath = "{id}";
+        public const string AllPath = "all";
         public const string CreatePath = "";
         public const string UpdatePath = "{id}";
         public const string DeletePath = "{id}";
+        
+        public static string ById<TModel>(int id) => 
+            CrudPathByModel<TModel>(ByIdPath).Replace("{id}", id.ToString());
+        public static string All<TModel>() => CrudPathByModel<TModel>(AllPath);
+        public static string Create<TModel>() => CrudPathByModel<TModel>(CreatePath);
+        public static string Update<TModel>(int id) => 
+            CrudPathByModel<TModel>(UpdatePath).Replace("{id}", id.ToString());
+        public static string Delete<TModel>(int id) => 
+            CrudPathByModel<TModel>(DeletePath).Replace("{id}", id.ToString());
+        
+        private static string CrudPathByModel<TModel>(string path)
+        {
+            var controllerName = "api/" + typeof(TModel).Name.Replace("Model", "").ToLower();
+            return controllerName + "/" + path;
+        }
     }
 
-    public class AccountPaths : IPaths
+    public static class AccountPaths
     {
         public const string Name = "api/account";
         public const string LoginPath = "login";
         public const string RegisterPath = "create";
         public const string UpdatePath = "{id}";
         public const string DeletePath = "{id}";
-
-        public string GetFullPath(string path)
-        {
-            return Name + "/" + path;
-        }
+        
+        public static string Login() =>
+            Name + "/" + LoginPath;
+        
+        public static string Register() =>
+            Name + "/" + RegisterPath;
+        
+        public static string Update(int id) =>
+            Name + "/" + UpdatePath.Replace("{id}", id.ToString());
+        
+        public static string Delete(int id) =>
+            Name + "/" + DeletePath.Replace("{id}", id.ToString());
+        
     }
-    public class CarPaths : IPaths
+    public static class CarPaths
     {
         public const string Name = "api/car";
-
-        public const string GetByCustomerPath = "byCustomer/{customerId}";
-
-        public string GetFullPath(string path)
-        {
-            return Name + "/" + path;
-        }
+        public const string ByCustomerPath = "byCustomer/{customerId}";
+        
+        public static string ByCustomer(int customerId) =>
+            Name + "/" + ByCustomerPath.Replace("{customerId}", customerId.ToString());
     }
 
-    public class CustomerPaths : IPaths
+    public static class CustomerPaths
     {
         public const string Name = "api/customer";
-
-        public string GetFullPath(string path)
-        {
-            return Name + "/" + path;
-        }
     }
 
-    public class OrderPaths : IPaths
+    public static class OrderPaths
     {
         public const string Name = "api/order";
-        public const string GetExtendedOrders = "extendedOrders";
-        public const string GetExtendedOrder = "extendedOrder/{orderId}";
-        public const string GetArchivedExtendedOrders = "archivedExtendedOrders";
-        public const string AddServiceToOrder = "addService/{orderId}/{serviceId}";
-        public const string AddCommodityToOrder = "addCommodity/{orderId}/{commodityId}";
-        public const string DeleteServiceFromOrder = "deleteService/{orderId}/{serviceId}";
-        public const string DeleteCommodityFromOrder = "deleteCommodity/{orderId}/{commodityId}";
+        public const string ExtendedOrdersPath = "extendedOrders/{archived}";
+        public const string ExtendedOrderPath = "extendedOrder/{orderId}";
+        public const string AddServiceToOrderPath = "addService/{orderId}/{serviceId}";
+        public const string AddCommodityToOrderPath = "addCommodity/{orderId}/{commodityId}";
+        public const string DeleteServiceFromOrderPath = "deleteService/{orderId}/{serviceId}";
+        public const string DeleteCommodityFromOrderPath = "deleteCommodity/{orderId}/{commodityId}";
 
-        public string GetFullPath(string path)
-        {
-            return Name + "/" + path;
-        }
+        public static string Extended(bool archived) =>
+            Name + "/" + ExtendedOrdersPath.Replace("{archived}", archived.ToString());
+        
+        public static string Extended(int orderId) =>
+            Name + "/" + ExtendedOrderPath.Replace("{orderId}", orderId.ToString());
+        
+        public static string AddService(int orderId, int serviceId) =>
+            Name + "/" + AddServiceToOrderPath.
+                Replace("{orderId}", orderId.ToString()).
+                Replace("{serviceId}", serviceId.ToString());
+        
+        public static string AddCommodity(int orderId, int commodityId) =>
+            Name + "/" + AddCommodityToOrderPath.
+                Replace("{orderId}", orderId.ToString()).
+                Replace("{commodityId}", commodityId.ToString());
+        
+        public static string DeleteService(int orderId, int serviceId) =>
+            Name + "/" + DeleteServiceFromOrderPath.
+                Replace("{orderId}", orderId.ToString()).
+                Replace("{serviceId}", serviceId.ToString());
+        
+        public static string DeleteCommodity(int orderId, int commodityId) =>
+            Name + "/" + DeleteCommodityFromOrderPath.
+                Replace("{orderId}", orderId.ToString()).
+                Replace("{commodityId}", commodityId.ToString());
     }
 
-    public class ServicePaths : IPaths
-    {
+    public static class ServicePaths
+    {   
         public const string Name = "api/service";
-        public const string GetAllForOrderPath = "forOrder/{orderId}";
-        public const string GetAllInOrderPath = "inOrder/{orderId}";
-
-        public string GetFullPath(string path)
-        {
-            return Name + "/" + path;
-        }
+        public const string AllPath = "all/{orderId}";
+        public const string ByOrderPath = "byOrder/{orderId}";
+        
+        public static string All(int orderId) =>
+            Name + "/" + AllPath.Replace("{orderId}", orderId.ToString());
+        
+        public static string ByOrder(int orderId) =>
+            Name + "/" + ByOrderPath.Replace("{orderId}", orderId.ToString());
+        
     }
 
-    public class CommodityPaths : IPaths
+    public static class CommodityPaths
     {
         public const string Name = "api/commodity";
-        public const string GetAllForOrderPath = "forOrder/{orderId}";
-        public const string GetAllInOrderPath = "inOrder/{orderId}";
-
-        public string GetFullPath(string path)
-        {
-            return Name + "/" + path;
-        }
-    }
-
-    public static class PathsHelper
-    {
-        public static IPaths GetPathsByModel<TModel>()
-        {
-            string name = typeof(TModel).Name.Replace("Model", "Paths");
-            Type a = Type.GetType("NotatnikMechanika.Shared." + name);
-            return Activator.CreateInstance(a) as IPaths;
-        }
+        public const string AllPath = "all/{orderId}";
+        public const string ByOrderPath = "byOrder/{orderId}";
+        
+        public static string All(int orderId) =>
+            Name + "/" + AllPath.Replace("{orderId}", orderId.ToString());
+        
+        public static string ByOrder(int orderId) =>
+            Name + "/" + ByOrderPath.Replace("{orderId}", orderId.ToString());
     }
 }

@@ -21,16 +21,16 @@ namespace NotatnikMechanika.Server.Controllers
             _serviceService = serviceService;
         }
 
-        [HttpGet(ServicePaths.GetAllForOrderPath)]
-        public async Task<ActionResult<Response<IEnumerable<ServiceForOrderModel>>>> GetServicesForOrder(int orderId)
+        [HttpGet(ServicePaths.AllPath)]
+        public async Task<ActionResult<Response<IEnumerable<ServiceModel>>>> AllAsync(int orderId)
         {
-            return Ok(await _serviceService.GetServicesForOrder(User.Identity.Name, orderId));
+            return Ok(await _serviceService.AllAsync(User.Identity.Name, orderId));
         }
 
-        [HttpGet(ServicePaths.GetAllInOrderPath)]
-        public async Task<ActionResult<Response<IEnumerable<ServiceModel>>>> GetServicesInOrder(int orderId)
+        [HttpGet(ServicePaths.ByOrderPath)]
+        public async Task<ActionResult<Response<IEnumerable<ServiceModel>>>> ByOrderAsync(int orderId)
         {
-            return Ok(await _serviceService.GetServicesInOrder(User.Identity.Name, orderId));
+            return Ok(await _serviceService.ByOrderAsync(User.Identity.Name, orderId));
         }
     }
 }

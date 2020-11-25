@@ -19,7 +19,7 @@ namespace MvvmPackage.Wpf.Services
 
         public MvWpfNavigationService(IWpfPageActivatorService wpfPageActivatorService)
         {
-            _navigationService = ((MvMainWindow)Application.Current.MainWindow).NavigationService;
+            _navigationService = ((MvMainWindow)Application.Current.MainWindow)?.NavigationService;
             _wpfPageActivatorService = wpfPageActivatorService;
         }
 
@@ -45,11 +45,11 @@ namespace MvvmPackage.Wpf.Services
             return Task.CompletedTask;
         }
 
-        private bool IsDialog<TPageModel>()
+        private static bool IsDialog<TPageModel>()
         {
-            Type[] types = IoC.PlatformProjectAssembly.GetTypes();
-            string pageName = typeof(TPageModel).Name.Replace("Model", "");
-            Type pageType = Array.Find(types, t => t.Name == pageName);
+            var types = IoC.PlatformProjectAssembly.GetTypes();
+            var pageName = typeof(TPageModel).Name.Replace("Model", "");
+            var pageType = Array.Find(types, t => t.Name == pageName);
             return pageType?.GetCustomAttribute<DisplayDialogAttribute>() != null;
         }
 
@@ -67,12 +67,10 @@ namespace MvvmPackage.Wpf.Services
 
         private void SetDialogState(bool isOpen, ContentControl page = null)
         {
-            if (Application.Current.MainWindow is MvMainWindow mainWindow)
-            {
-                mainWindow.MainDialogHost.DialogContent = page;
-                mainWindow.MainDialogHost.IsOpen = isOpen;
-                DialogStateChanged?.Invoke(this, isOpen);
-            }
+            if (!(Application.Current.MainWindow is MvMainWindow mainWindow)) return;
+            mainWindow.MainDialogHost.DialogContent = page;
+            mainWindow.MainDialogHost.IsOpen = isOpen;
+            DialogStateChanged?.Invoke(this, isOpen);
         }
     }
 }

@@ -21,10 +21,10 @@ namespace NotatnikMechanika.Server.Controllers
             _carService = carService;
         }
 
-        [HttpGet(CarPaths.GetByCustomerPath)]
-        public async Task<ActionResult<Response<IEnumerable<CarModel>>>> GetCarsByCustomerAsync(int customerId)
+        [HttpGet(CarPaths.ByCustomerPath)]
+        public async Task<ActionResult<Response<IEnumerable<CarModel>>>> ByCustomerAsync(int customerId)
         {
-            return Ok(await _carService.GetCarsByCustomerAsync(User.Identity.Name, customerId));
+            return Ok(await _carService.ByCustomerAsync(User.Identity.Name, customerId));
         }
     }
 }

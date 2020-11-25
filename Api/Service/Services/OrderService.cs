@@ -23,7 +23,7 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<Response> AddCommodityToOrder(string userId, int orderId, int commodityId)
         {
-            List<string> errors = new List<string>();
+            var errors = new List<string>();
 
             if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
             {
@@ -51,7 +51,7 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<Response> AddServiceToOrder(string userId, int orderId, int serviceId)
         {
-            List<string> errors = new List<string>();
+            var errors = new List<string>();
 
             if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
             {
@@ -79,7 +79,7 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<Response> DeleteCommodityFromOrder(string userId, int orderId, int commodityId)
         {
-            List<string> errors = new List<string>();
+            var errors = new List<string>();
 
             if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
             {
@@ -107,7 +107,7 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<Response> DeleteServiceFromOrder(string userId, int orderId, int serviceId)
         {
-            List<string> errors = new List<string>();
+            var errors = new List<string>();
 
             if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
             {
@@ -133,14 +133,14 @@ namespace NotatnikMechanika.Service.Services
             return SuccessResponse();
         }
 
-        public async Task<Response<IEnumerable<OrderExtendedModel>>> GetAllExtendedAsync(string userId, bool archived)
+        public async Task<Response<IEnumerable<OrderExtendedModel>>> AllExtendedAsync(string userId, bool archived)
         {
-            return SuccessResponse(await _orderRepository.GetAllExtendedAsync(userId, archived));
+            return SuccessResponse(await _orderRepository.AllExtendedAsync(userId, archived));
         }
 
-        public async Task<Response<OrderExtendedModel>> GetExtendedAsync(string userId, int id, bool archived)
+        public async Task<Response<OrderExtendedModel>> ExtendedAsync(string userId, int id, bool archived)
         {
-            return SuccessResponse(await _orderRepository.GetExtendedAsync(userId, id, archived));
+            return SuccessResponse(await _orderRepository.ExtendedAsync(userId, id, archived));
         }
     }
 }

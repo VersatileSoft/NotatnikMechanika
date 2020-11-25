@@ -23,46 +23,37 @@ namespace NotatnikMechanika.Server.Controllers
         /// <summary>
         /// Get list of extended Orders only not archived
         /// </summary>
-        [HttpGet(OrderPaths.GetExtendedOrders)]
-        public async Task<ActionResult<Response<IEnumerable<OrderExtendedModel>>>> GetAllExtendedAsync()
+        [HttpGet(OrderPaths.ExtendedOrdersPath)]
+        public async Task<ActionResult<Response<IEnumerable<OrderExtendedModel>>>> AllExtendedAsync(bool archived = false)
         {
-            return Ok(await _orderService.GetAllExtendedAsync(User.Identity.Name, false));
+            return Ok(await _orderService.AllExtendedAsync(User.Identity.Name, archived));
         }
 
-        [HttpGet(OrderPaths.GetExtendedOrder)]
-        public async Task<ActionResult<Response<OrderExtendedModel>>> GetExtendedAsync(int orderId)
+        [HttpGet(OrderPaths.ExtendedOrderPath)]
+        public async Task<ActionResult<Response<OrderExtendedModel>>> ExtendedAsync(int orderId)
         {
-            return Ok(await _orderService.GetExtendedAsync(User.Identity.Name, orderId, false));
+            return Ok(await _orderService.ExtendedAsync(User.Identity.Name, orderId, false));
         }
 
-        /// <summary>
-        /// Get list of extended Orders only archived
-        /// </summary>
-        [HttpGet(OrderPaths.GetArchivedExtendedOrders)]
-        public async Task<ActionResult<Response<IEnumerable<OrderExtendedModel>>>> GetAllArchivedExtendedAsync()
-        {
-            return Ok(await _orderService.GetAllExtendedAsync(User.Identity.Name, true));
-        }
-
-        [HttpPost(OrderPaths.AddServiceToOrder)]
+        [HttpPost(OrderPaths.AddServiceToOrderPath)]
         public async Task<ActionResult<Response>> AddServiceToOrder(int orderId, int serviceId)
         {
             return Ok(await _orderService.AddServiceToOrder(User.Identity.Name, orderId, serviceId));
         }
 
-        [HttpPost(OrderPaths.AddCommodityToOrder)]
+        [HttpPost(OrderPaths.AddCommodityToOrderPath)]
         public async Task<ActionResult<Response>> AddCommodityToOrder(int orderId, int commodityId)
         {
             return Ok(await _orderService.AddCommodityToOrder(User.Identity.Name, orderId, commodityId));
         }
 
-        [HttpDelete(OrderPaths.DeleteServiceFromOrder)]
+        [HttpDelete(OrderPaths.DeleteServiceFromOrderPath)]
         public async Task<ActionResult<Response>> DeleteServiceFromOrder(int orderId, int serviceId)
         {
             return Ok(await _orderService.DeleteServiceFromOrder(User.Identity.Name, orderId, serviceId));
         }
 
-        [HttpDelete(OrderPaths.DeleteCommodityFromOrder)]
+        [HttpDelete(OrderPaths.DeleteCommodityFromOrderPath)]
         public async Task<ActionResult<Response>> DeleteCommodityFromOrder(int orderId, int commodityId)
         {
             return Ok(await _orderService.DeleteCommodityFromOrder(User.Identity.Name, orderId, commodityId));

@@ -1,23 +1,34 @@
 ﻿@using System.Collections.ObjectModel
 @typeparam TItem
 
-<MatAccordion Multi="true">
-    @foreach (var item in Items) //TODO replace with virtualize
-    {
-        <MatExpansionPanel Class="expansion-panel">
-            <MatExpansionPanelSummary>
-                <MatExpansionPanelHeader>
-                    @HeaderTemplate(item)
-                </MatExpansionPanelHeader>
-            </MatExpansionPanelSummary>
-            <MatExpansionPanelDetails Class="expansion-panel-details">
-                @BodyTemplate(item)
-            </MatExpansionPanelDetails>
-        </MatExpansionPanel>
-    }
-</MatAccordion>
+<MatHidden BreakPoint="@MatBreakpoint.SM" Direction="@MatHiddenDirection.Up">
+    <ChildContent>
+         <MatAccordion Multi="true">
+            @*Why Virtualize is not working????*@
+
+            @*<Virtualize Items="@Items">
+                       <ExpansionPanel HeaderTemplate="@HeaderTemplate(@context)" BodyTemplate="@BodyTemplate(@context)"/>
+                   </Virtualize>*@
+
+            @foreach (var item in Items) //TODO replace with virtualize
+            {
+                <ExpansionPanel HeaderTemplate="@HeaderTemplate(item)" BodyTemplate="@BodyTemplate(item)"/>
+            }
+        </MatAccordion>
+    </ChildContent>
+
+    <ElseContent>
+        <WrapPanel>
+            @foreach (var item in Items) //TODO replace with virtualize
+            {
+                <Card CardHeader="@HeaderTemplate(item)" CardContent="@BodyTemplate(item)" />
+            }
+        </WrapPanel>
+    </ElseContent>
+</MatHidden>
 
 @code {
+    
     [Parameter]
     public ObservableCollection<TItem> Items { get; set; }
 

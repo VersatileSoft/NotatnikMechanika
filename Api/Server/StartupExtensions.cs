@@ -16,7 +16,9 @@ namespace NotatnikMechanika.Server
         public static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<NotatnikMechanikaDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("PublishConnection"), b => b.EnableRetryOnFailure()) // RemoteConnection, LocalConnection           
+                options.UseSqlServer(configuration.GetConnectionString("PublishConnection"), // PublishConnection, DefaultConnection
+                    b => b.EnableRetryOnFailure()
+                )            
             );
 
             services.AddIdentity<User, IdentityRole>(options =>
@@ -34,11 +36,11 @@ namespace NotatnikMechanika.Server
 
         public static void AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
-            IConfigurationSection appSettingsSection = configuration.GetSection("AppSettings");
+            var appSettingsSection = configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
 
-            AppSettings appSettings = appSettingsSection.Get<AppSettings>();
-            byte[] key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
             services.AddAuthentication(x =>
             {

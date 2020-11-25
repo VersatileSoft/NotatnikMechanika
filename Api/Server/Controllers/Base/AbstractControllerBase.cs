@@ -15,31 +15,31 @@ namespace NotatnikMechanika.Server.Controllers.Base
             _serviceBase = serviceBase;
         }
 
-        [HttpGet(CRUDPaths.GetAllPath)]
-        public async Task<ActionResult<Response<IEnumerable<TModel>>>> GetAllAsync()
+        [HttpGet(CrudPaths.AllPath)]
+        public async Task<ActionResult<Response<IEnumerable<TModel>>>> AllAsync()
         {
-            return Ok(await _serviceBase.GetAllAsync(User.Identity.Name));
+            return Ok(await _serviceBase.AllAsync(User.Identity.Name));
         }
 
-        [HttpGet(CRUDPaths.GetPath)]
-        public async Task<ActionResult<Response<TModel>>> GetAsync(int id)
+        [HttpGet(CrudPaths.ByIdPath)]
+        public async Task<ActionResult<Response<TModel>>> ByIdAsync(int id)
         {
-            return Ok(await _serviceBase.GetAsync(User.Identity.Name, id));
+            return Ok(await _serviceBase.ByIdAsync(User.Identity.Name, id));
         }
 
-        [HttpPost(CRUDPaths.CreatePath)]
+        [HttpPost(CrudPaths.CreatePath)]
         public async Task<ActionResult<Response>> CreateAsync([FromBody] TModel value)
         {
             return Ok(await _serviceBase.CreateAsync(User.Identity.Name, value));
         }
 
-        [HttpPut(CRUDPaths.UpdatePath)]
+        [HttpPut(CrudPaths.UpdatePath)]
         public async Task<ActionResult<Response>> UpdateAsync(int id, [FromBody] TModel value)
         {
             return Ok(await _serviceBase.UpdateAsync(User.Identity.Name, id, value));
         }
 
-        [HttpDelete(CRUDPaths.DeletePath)]
+        [HttpDelete(CrudPaths.DeletePath)]
         public async Task<ActionResult<Response>> DeleteAsync(int id)
         {           
             return Ok(await _serviceBase.DeleteAsync(User.Identity.Name, id));

@@ -44,27 +44,16 @@
         <WrapPanelCard>
             <CardHeader>
                 <p>Usługi</p>
+                <MatIconButton Icon="@MatIconNames.Edit" Command="PageModel.AddServiceCommand"/>
             </CardHeader>
 
             <CardContent>
-                <MatButton Command="PageModel.AddServiceCommand" Label="Dodaj usługę" />
-
                 @if (PageModel.Services != null)
                 {
-                    <MatAccordion>
-                        @foreach (ServiceModel service in PageModel.Services)
-                        {
-                            <MatExpansionPanel>
-                                <MatExpansionPanelSummary>
-                                    <p>@service.Name</p>
-                                    <p>@service.Price</p>
-                                </MatExpansionPanelSummary>
-                                <MatExpansionPanelDetails>
-                                    <p>Nic tu niema</p>
-                                </MatExpansionPanelDetails>
-                            </MatExpansionPanel>
-                        }
-                    </MatAccordion>
+                    @foreach (var service in PageModel.Services)
+                    {
+                        <MatCheckbox Value="true" Label="@service.Name"></MatCheckbox>
+                    }
                 }
             </CardContent>
         </WrapPanelCard>
@@ -72,27 +61,16 @@
         <WrapPanelCard>
             <CardHeader>
                 <p>Towary</p>
+                <MatIconButton Icon="@MatIconNames.Edit" Command="PageModel.AddCommodityCommand"/>
             </CardHeader>
 
             <CardContent>
-                <MatButton Command="PageModel.AddCommodityCommand" Label="Dodaj Towar" />
-
                 @if (PageModel.Services != null)
                 {
-                    <MatAccordion>
-                        @foreach (CommodityModel commodity in PageModel.Commodities)
-                        {
-                            <MatExpansionPanel>
-                                <MatExpansionPanelSummary>
-                                    <p>@commodity.Name</p>
-                                    <p>@commodity.Price</p>
-                                </MatExpansionPanelSummary>
-                                <MatExpansionPanelDetails>
-                                    <p>Nic tu niema</p>
-                                </MatExpansionPanelDetails>
-                            </MatExpansionPanel>
-                        }
-                    </MatAccordion>
+                    @foreach (var commodity in PageModel.Commodities)
+                    {
+                        <MatCheckbox Value="true" Label="@commodity.Name"></MatCheckbox>
+                    }
                 }
             </CardContent>
         </WrapPanelCard>

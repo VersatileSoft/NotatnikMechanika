@@ -1,4 +1,5 @@
-﻿using MvvmPackage.Core;
+﻿using System;
+using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
 using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
@@ -17,12 +18,12 @@ namespace NotatnikMechanika.Core.PageModels
     [AddINotifyPropertyChangedInterface]
     public class CustomerPageModel : PageModelBase
     {
-        public CustomerModel CustomerModel { get; set; }
-        public IEnumerable<CarModel> Cars { get; set; }
+        public CustomerModel CustomerModel { get; private set; }
+        public IEnumerable<CarModel> Cars { get; private set; }
         public string ErrorMessage { get; set; }
-        public ICommand GoBackCommand { get; set; }
-        public ICommand AddCarCommand { get; set; }
-        public ICommand RemoveCarCommand { get; set; }
+        public ICommand GoBackCommand { get; }
+        public ICommand AddCarCommand { get; }
+        public ICommand RemoveCarCommand { get; }
 
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMessageDialogService _messageDialogService;
@@ -32,14 +33,14 @@ namespace NotatnikMechanika.Core.PageModels
             _httpRequestService = httpRequestService;
             _messageDialogService = messageDialogService;
             CustomerModel = new CustomerModel();
-            GoBackCommand = new AsyncCommand(() => navigationService.NavigateToAsync<MainPageModel>());
+            GoBackCommand = new AsyncCommand(navigationService.NavigateToAsync<MainPageModel>);
             AddCarCommand = new AsyncCommand(() => navigationService.NavigateToAsync<AddCarPageModel>(CustomerModel.Id));
             RemoveCarCommand = new AsyncCommand<int>(RemoveCarAction);
         }
 
         private async Task RemoveCarAction(int id)
         {
-            Response response = await _httpRequestService.SendDelete(new CarPaths().GetFullPath(id.ToString()));
+            var response = await _httpRequestService.Delete<CarModel>(id);
 
             switch (response.ResponseType)
             {
@@ -50,6 +51,12 @@ namespace NotatnikMechanika.Core.PageModels
                 case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczasu usuwania klienta");
                     break;
+                case ResponseType.Unauthorized:
+                    break;
+                case ResponseType.BadModelState:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
             await Initialize();
         }
@@ -59,7 +66,7 @@ namespace NotatnikMechanika.Core.PageModels
             IsLoading = true;
             CustomerModel.Id = Parameter;
 
-            Response<CustomerModel> responseCustomer = await _httpRequestService.SendGet<CustomerModel>(PathsHelper.GetPathsByModel<CustomerModel>().GetFullPath(CustomerModel.Id.ToString()));
+            var responseCustomer = await _httpRequestService.ById<CustomerModel>(CustomerModel.Id);
 
             switch (responseCustomer.ResponseType)
             {
@@ -71,12 +78,15 @@ namespace NotatnikMechanika.Core.PageModels
                     ErrorMessage = responseCustomer.ErrorMessages?.FirstOrDefault();
                     await _messageDialogService.ShowMessageDialog(responseCustomer.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania klienta");
                     return;
+                case ResponseType.Unauthorized:
+                    break;
+                case ResponseType.BadModelState:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
-            Response<List<CarModel>> responseCars = await _httpRequestService.SendGet<List<CarModel>>(
-                PathsHelper
-                .GetPathsByModel<CarModel>()
-                .GetFullPath(CarPaths.GetByCustomerPath.Replace("{customerId}", CustomerModel.Id.ToString())));
+            var responseCars = await _httpRequestService.All<CarModel>();
 
             switch (responseCars.ResponseType)
             {
@@ -88,6 +98,12 @@ namespace NotatnikMechanika.Core.PageModels
                     ErrorMessage = responseCars.ErrorMessages?.FirstOrDefault();
                     await _messageDialogService.ShowMessageDialog(responseCars.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania samochodów klienta");
                     break;
+                case ResponseType.Unauthorized:
+                    break;
+                case ResponseType.BadModelState:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             IsLoading = false;

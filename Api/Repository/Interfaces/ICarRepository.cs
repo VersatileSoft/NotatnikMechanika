@@ -7,6 +7,6 @@ namespace NotatnikMechanika.Repository.Interfaces
 {
     public interface ICarRepository : IRepositoryBase<CarModel>
     {
-        Task<IEnumerable<CarModel>> GetCarsByCustomerAsync(string userId, int customerId);
+        Task<IEnumerable<CarModel>> ByCustomerAsync(string userId, int customerId);
     }
 }

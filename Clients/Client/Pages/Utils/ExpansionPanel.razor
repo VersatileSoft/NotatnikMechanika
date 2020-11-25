@@ -1,0 +1,20 @@
+﻿<MatExpansionPanel Class="expansion-panel">
+    <MatExpansionPanelSummary>
+        <MatExpansionPanelHeader>
+            @HeaderTemplate
+        </MatExpansionPanelHeader>
+    </MatExpansionPanelSummary>
+    <MatExpansionPanelDetails Class="expansion-panel-details">
+        @BodyTemplate
+    </MatExpansionPanelDetails>
+</MatExpansionPanel>
+
+@code {
+    
+    [Parameter]
+    public RenderFragment HeaderTemplate  { get; set; }
+
+    [Parameter]
+    public RenderFragment BodyTemplate { get; set; }
+
+}

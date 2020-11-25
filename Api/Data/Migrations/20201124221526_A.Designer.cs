@@ -10,16 +10,16 @@ using NotatnikMechanika.Data;
 namespace NotatnikMechanika.Data.Migrations
 {
     [DbContext(typeof(NotatnikMechanikaDbContext))]
-    [Migration("20200622121159_A")]
+    [Migration("20201124221526_A")]
     partial class A
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.5")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -31,18 +31,18 @@ namespace NotatnikMechanika.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
+                        .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
@@ -53,7 +53,7 @@ namespace NotatnikMechanika.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -77,7 +77,7 @@ namespace NotatnikMechanika.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -157,7 +157,7 @@ namespace NotatnikMechanika.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("Brand")
                         .HasColumnType("nvarchar(max)");
@@ -197,7 +197,7 @@ namespace NotatnikMechanika.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -220,7 +220,7 @@ namespace NotatnikMechanika.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -255,7 +255,7 @@ namespace NotatnikMechanika.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("AcceptDate")
                         .HasColumnType("datetime2");
@@ -292,6 +292,9 @@ namespace NotatnikMechanika.Data.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Finished")
+                        .HasColumnType("bit");
+
                     b.HasKey("CommodityId", "OrderId");
 
                     b.HasIndex("OrderId");
@@ -307,6 +310,9 @@ namespace NotatnikMechanika.Data.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Finished")
+                        .HasColumnType("bit");
+
                     b.HasKey("ServiceId", "OrderId");
 
                     b.HasIndex("OrderId");
@@ -319,7 +325,7 @@ namespace NotatnikMechanika.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -350,8 +356,8 @@ namespace NotatnikMechanika.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
@@ -366,12 +372,12 @@ namespace NotatnikMechanika.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -392,17 +398,17 @@ namespace NotatnikMechanika.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
+                        .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
@@ -471,6 +477,10 @@ namespace NotatnikMechanika.Data.Migrations
                         .WithMany("Cars")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("NotatnikMechanika.Data.Models.Commodity", b =>
@@ -479,6 +489,8 @@ namespace NotatnikMechanika.Data.Migrations
                         .WithMany("Commodities")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("NotatnikMechanika.Data.Models.Customer", b =>
@@ -487,6 +499,8 @@ namespace NotatnikMechanika.Data.Migrations
                         .WithMany("Customers")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("NotatnikMechanika.Data.Models.Order", b =>
@@ -501,6 +515,10 @@ namespace NotatnikMechanika.Data.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Car");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("NotatnikMechanika.Data.Models.OrderToCommodity", b =>
@@ -516,6 +534,10 @@ namespace NotatnikMechanika.Data.Migrations
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Commodity");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("NotatnikMechanika.Data.Models.OrderToService", b =>
@@ -531,6 +553,10 @@ namespace NotatnikMechanika.Data.Migrations
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("NotatnikMechanika.Data.Models.Service", b =>
@@ -539,6 +565,48 @@ namespace NotatnikMechanika.Data.Migrations
                         .WithMany("Services")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NotatnikMechanika.Data.Models.Car", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("NotatnikMechanika.Data.Models.Commodity", b =>
+                {
+                    b.Navigation("OrderToCommodities");
+                });
+
+            modelBuilder.Entity("NotatnikMechanika.Data.Models.Customer", b =>
+                {
+                    b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("NotatnikMechanika.Data.Models.Order", b =>
+                {
+                    b.Navigation("OrderToCommodities");
+
+                    b.Navigation("OrderToServices");
+                });
+
+            modelBuilder.Entity("NotatnikMechanika.Data.Models.Service", b =>
+                {
+                    b.Navigation("OrderToServices");
+                });
+
+            modelBuilder.Entity("NotatnikMechanika.Data.Models.User", b =>
+                {
+                    b.Navigation("Cars");
+
+                    b.Navigation("Commodities");
+
+                    b.Navigation("Customers");
+
+                    b.Navigation("Orders");
+
+                    b.Navigation("Services");
                 });
 #pragma warning restore 612, 618
         }

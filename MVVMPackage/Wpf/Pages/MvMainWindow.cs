@@ -8,22 +8,22 @@ using System.Windows.Navigation;
 
 namespace MvvmPackage.Wpf.Pages
 {
-    public class MvMainWindow : Window
+    public abstract class MvMainWindow : Window
     {
-        private readonly IMainPageService mainPageService;
-        private readonly IWpfPageActivatorService pageActivatorService;
-        public NavigationService NavigationService { get; set; }
-        public DialogHost MainDialogHost { get; set; }
+        private readonly IMainPageService _mainPageService;
+        private readonly IWpfPageActivatorService _pageActivatorService;
+        public NavigationService NavigationService { get; protected set; }
+        public DialogHost MainDialogHost { get; protected set; }
 
         protected MvMainWindow()
         {
-            pageActivatorService = IoC.Container.Resolve<IWpfPageActivatorService>();
-            mainPageService = IoC.Container.Resolve<IMainPageService>();
+            _pageActivatorService = IoC.Container.Resolve<IWpfPageActivatorService>();
+            _mainPageService = IoC.Container.Resolve<IMainPageService>();
         }
 
-        public void LoadMainPage()
+        protected void LoadMainPage()
         {
-            NavigationService.Content = pageActivatorService.CreatePageFromPageModel(mainPageService.GetMainPageModelType());
+            NavigationService.Content = _pageActivatorService.CreatePageFromPageModel(_mainPageService.MainPageModelType());
         }
     }
 }

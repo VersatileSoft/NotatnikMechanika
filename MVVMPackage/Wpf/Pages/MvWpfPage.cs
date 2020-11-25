@@ -4,11 +4,11 @@ using System.Windows.Controls;
 
 namespace MvvmPackage.Wpf.Pages
 {
-    public class MvWpfPage<TPageModel> : UserControl where TPageModel : PageModelBase
+    public abstract class MvWpfPage<TPageModel> : UserControl where TPageModel : PageModelBase
     {
-        public TPageModel PageModel;
+        public readonly TPageModel PageModel;
 
-        public MvWpfPage()
+        protected MvWpfPage()
         {
             PageModel = IoC.Container.Resolve<TPageModel>();
             DataContext = PageModel;

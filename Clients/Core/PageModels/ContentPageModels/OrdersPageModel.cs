@@ -19,9 +19,9 @@ namespace NotatnikMechanika.Core.PageModels
     public class OrdersPageModel : PageModelBase
     {
         public ObservableCollection<OrderExtendedModel> Orders { get; set; }
-        public ICommand AddOrderCommand { get; set; }
+        public ICommand AddOrderCommand { get; }
         public ICommand OrderSelectedCommand { get; set; }
-        public ICommand RemoveOrderCommand { get; set; }
+        public ICommand RemoveOrderCommand { get; }
         public ICommand RefreshOrdersCommand { get; set; }
 
         private readonly IHttpRequestService _httpRequestService;
@@ -42,7 +42,7 @@ namespace NotatnikMechanika.Core.PageModels
 
         private async Task RemoveOrderAction(int id)
         {
-            var response = await _httpRequestService.SendDelete(new OrderPaths().GetFullPath(CRUDPaths.DeletePath.Replace("{id}", id.ToString())));
+            var response = await _httpRequestService.Delete<OrderModel>(id);
 
             switch (response.ResponseType)
             {
@@ -67,7 +67,7 @@ namespace NotatnikMechanika.Core.PageModels
         public override async Task Initialize()
         {
             IsLoading = true;
-            var response = await _httpRequestService.SendGet<List<OrderExtendedModel>>(new OrderPaths().GetFullPath(OrderPaths.GetExtendedOrders));
+            var response = await _httpRequestService.SendGet<List<OrderExtendedModel>>(OrderPaths.Extended(false));
 
             switch (response.ResponseType)
             {

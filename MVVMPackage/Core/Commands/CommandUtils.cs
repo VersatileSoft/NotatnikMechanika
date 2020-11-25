@@ -18,10 +18,10 @@ namespace MVVMPackage.Core.Commands
                     throw new InvalidCommandParameterException(typeof(T), o.GetType());
                 }
 
-                return valid;
+                return true;
             }
 
-            Type t = typeof(T);
+            var t = typeof(T);
 
             // The parameter is null. Is T Nullable?
             if (Nullable.GetUnderlyingType(t) != null)
@@ -37,7 +37,7 @@ namespace MVVMPackage.Core.Commands
                 throw new InvalidCommandParameterException(typeof(T));
             }
 
-            return valid;
+            return true;
         }
     }
 }

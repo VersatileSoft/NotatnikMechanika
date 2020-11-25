@@ -13,12 +13,12 @@ namespace NotatnikMechanika.Service.Services
             Options = optionsAccessor.Value;
         }
 
-        public AppSettings Options { get; } //set only via Secret Manager
+        private AppSettings Options { get; } //set only via Secret Manager
 
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            SendGridClient client = new SendGridClient(Options.SendGridKey);
-            SendGridMessage msg = new SendGridMessage()
+            var client = new SendGridClient(Options.SendGridKey);
+            var msg = new SendGridMessage()
             {
                 From = new EmailAddress(Options.EmailSender, Options.SenderName),
                 Subject = subject,

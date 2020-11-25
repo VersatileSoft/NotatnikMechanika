@@ -24,8 +24,8 @@ namespace NotatnikMechanika.Core.PageModels
         private readonly IMessageDialogService _messageDialogService;
 
         public ICommand GoBackCommand { get; }
-        public ICommand AddServiceCommand { get; set; }
-        public ICommand AddCommodityCommand { get; set; }
+        public ICommand AddServiceCommand { get; }
+        public ICommand AddCommodityCommand { get; }
         public ICommand RefreshOrderCommand { get; set; }
 
         public OrderExtendedModel OrderModel { get; set; }
@@ -61,17 +61,10 @@ namespace NotatnikMechanika.Core.PageModels
 
             IsLoading = true;
 
-            var orderPath = new OrderPaths().GetFullPath(
-                OrderPaths.GetExtendedOrder.Replace("{orderId}", Parameter.ToString()));
-            if ((OrderModel = await InitHelper<OrderExtendedModel>(orderPath)) == null) return;
-            
-            var servicesPath = new ServicePaths().GetFullPath(
-                ServicePaths.GetAllInOrderPath.Replace("{orderId}", OrderModel.Id.ToString()));
-            Services = await InitHelper<List<ServiceModel>>(servicesPath);
-
-            var commoditiesPath = new CommodityPaths().GetFullPath(
-                CommodityPaths.GetAllInOrderPath.Replace("{orderId}", OrderModel.Id.ToString()));
-            Commodities = await InitHelper<List<CommodityModel>>(commoditiesPath);
+            OrderModel = await InitHelper<OrderExtendedModel>(OrderPaths.Extended(Parameter));
+            if (OrderModel == null) return;
+            Services = await InitHelper<List<ServiceModel>>(ServicePaths.ByOrder(OrderModel.Id));
+            Commodities = await InitHelper<List<CommodityModel>>(CommodityPaths.ByOrder(OrderModel.Id));
             
             IsLoading = false;
         }

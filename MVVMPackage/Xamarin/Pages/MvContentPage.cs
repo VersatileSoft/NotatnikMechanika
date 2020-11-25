@@ -4,11 +4,11 @@ using Xamarin.Forms;
 
 namespace MvvmPackage.Xamarin.Pages
 {
-    public class MvContentPage<TPageModel> : ContentPage where TPageModel : PageModelBase
+    public abstract class MvContentPage<TPageModel> : ContentPage where TPageModel : PageModelBase
     {
-        public TPageModel PageModel { get; set; }
+        public TPageModel PageModel { get; }
 
-        public MvContentPage()
+        protected MvContentPage()
         {
             PageModel = IoC.Container.Resolve<TPageModel>();
             BindingContext = PageModel;

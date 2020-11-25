@@ -15,9 +15,14 @@ namespace NotatnikMechanika.Repository.Repositories
         public CarRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         { }
 
-        public async Task<IEnumerable<CarModel>> GetCarsByCustomerAsync(string userId, int customerId)
+        public async Task<IEnumerable<CarModel>> ByCustomerAsync(string userId, int customerId)
         {
-            return _mapper.Map<IEnumerable<CarModel>>(await _dbContext.Cars.Where(a => a.UserId == userId).Where(a => a.CustomerId == customerId).ToListAsync());
+            return Mapper.Map<IEnumerable<CarModel>>(
+                await DbContext.Cars.
+                    Where(a => a.UserId == userId).
+                    Where(a => a.CustomerId == customerId).
+                    ToListAsync()
+            );
         }
     }
 }

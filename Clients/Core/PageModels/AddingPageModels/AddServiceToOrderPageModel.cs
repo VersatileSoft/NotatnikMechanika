@@ -1,4 +1,5 @@
-﻿using MvvmPackage.Core;
+﻿using System;
+using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
 using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using static NotatnikMechanika.Shared.ResponseBuilder;
 
+// ReSharper disable once CheckNamespace
 namespace NotatnikMechanika.Core.PageModels
 {
     public class AddServiceToOrderPageModel : PageModelBase
@@ -18,32 +20,32 @@ namespace NotatnikMechanika.Core.PageModels
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMessageDialogService _messageDialogService;
 
-        public List<ServiceForOrderModel> ServiceModels { get; set; }
+        public List<ServiceModel> ServiceModels { get; private set; }
 
-        public ICommand CloseCommand { get; set; }
-        public ICommand AddRemoveServiceCommand { get; set; }
+        public ICommand CloseCommand { get; }
+        public ICommand AddRemoveServiceCommand { get; }
 
         public AddServiceToOrderPageModel(IHttpRequestService httpRequestService, IMvNavigationService navigationService, IMessageDialogService messageDialogService)
         {
             _httpRequestService = httpRequestService;
             _messageDialogService = messageDialogService;
-            CloseCommand = new AsyncCommand(() => navigationService.CloseDialog());
-            AddRemoveServiceCommand = new AsyncCommand<ServiceForOrderModel>(AddRemoveServiceAction);
+            CloseCommand = new AsyncCommand(navigationService.CloseDialog);
+            AddRemoveServiceCommand = new AsyncCommand<ServiceModel>(AddRemoveServiceAction);
         }
 
-        private async Task AddRemoveServiceAction(ServiceForOrderModel serviceModel)
+        private async Task AddRemoveServiceAction(ServiceModel serviceModel)
         {
             IsLoading = true;
             Response response;
 
             if (serviceModel.IsInOrder)
             {
-                string path = new OrderPaths().GetFullPath(OrderPaths.DeleteServiceFromOrder.Replace("{orderId}", _orderId.ToString()).Replace("{serviceId}", serviceModel.Id.ToString()));
+                var path = OrderPaths.DeleteService(_orderId, serviceModel.Id);
                 response = await _httpRequestService.SendDelete(path);
             }
             else
             {
-                string path = new OrderPaths().GetFullPath(OrderPaths.AddServiceToOrder.Replace("{orderId}", _orderId.ToString()).Replace("{serviceId}", serviceModel.Id.ToString()));
+                var path = OrderPaths.AddService(_orderId, serviceModel.Id);
                 response = await _httpRequestService.SendPost(path);
             }
 
@@ -61,6 +63,10 @@ namespace NotatnikMechanika.Core.PageModels
                 case ResponseType.BadModelState:
                     await _messageDialogService.ShowMessageDialog("Wypełnij dane poprawnie", MessageDialogType.Error);
                     break;
+                case ResponseType.Unauthorized:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
             IsLoading = false;
         }
@@ -70,8 +76,8 @@ namespace NotatnikMechanika.Core.PageModels
             IsLoading = true;
             _orderId = Parameter;
 
-            string path = new ServicePaths().GetFullPath(ServicePaths.GetAllForOrderPath.Replace("{orderId}", _orderId.ToString()));
-            Response<List<ServiceForOrderModel>> response = await _httpRequestService.SendGet<List<ServiceForOrderModel>>(path);
+            var path = ServicePaths.All(_orderId);
+            var response = await _httpRequestService.SendGet<List<ServiceModel>>(path);
 
             switch (response.ResponseType)
             {
@@ -82,6 +88,12 @@ namespace NotatnikMechanika.Core.PageModels
                 case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania usług");
                     break;
+                case ResponseType.Unauthorized:
+                    break;
+                case ResponseType.BadModelState:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
             IsLoading = false;
         }

@@ -8,8 +8,8 @@ namespace NotatnikMechanika.Service.Interfaces.Base
 {
     public interface IServiceBase<TModel>
     {
-        Task<Response<IEnumerable<TModel>>> GetAllAsync(string userId);
-        Task<Response<TModel>> GetAsync(string userId, int Id);
+        Task<Response<IEnumerable<TModel>>> AllAsync(string userId);
+        Task<Response<TModel>> ByIdAsync(string userId, int Id);
         Task<Response> CreateAsync(string userId, TModel value);
         Task<Response> UpdateAsync(string userId, int Id, TModel value);
         Task<Response> DeleteAsync(string userId, int Id);

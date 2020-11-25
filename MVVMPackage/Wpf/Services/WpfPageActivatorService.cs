@@ -1,7 +1,9 @@
 ﻿using MvvmPackage.Core;
 using MvvmPackage.Wpf.Pages;
 using System;
+using System.Linq;
 using System.Windows.Controls;
+using static MvvmPackage.Core.IoC;
 
 namespace MvvmPackage.Wpf.Services
 {
@@ -14,7 +16,7 @@ namespace MvvmPackage.Wpf.Services
 
         public UserControl CreatePageFromPageModel<TPageModel>(int parameter) where TPageModel : PageModelBase
         {
-            MvWpfPage<TPageModel> page = (MvWpfPage<TPageModel>)CreatePageFromPageModel<TPageModel>();
+            var page = (MvWpfPage<TPageModel>)CreatePageFromPageModel<TPageModel>();
             if (page == null)
             {
                 throw new NullReferenceException("Could not cast page");
@@ -25,8 +27,9 @@ namespace MvvmPackage.Wpf.Services
 
         public UserControl CreatePageFromPageModel(Type pageModelType)
         {
-            string pageName = pageModelType.Name.Replace("Model", "");
-            return (UserControl)Activator.CreateInstance(Array.Find(IoC.PlatformProjectAssembly.GetTypes(), t => t.Name == pageName));
+            var pageName = pageModelType.Name.Replace("Model", "");
+            var type = PlatformProjectAssembly.GetTypes().AsEnumerable().FirstOrDefault(t => t.Name == pageName);
+            return (UserControl)Activator.CreateInstance(type ?? typeof(UserControl));
         }
 
         public UserControl CreatePageFromPageModel<TPageModel, TTargetPage>()

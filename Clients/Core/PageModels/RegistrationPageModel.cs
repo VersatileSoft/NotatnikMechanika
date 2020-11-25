@@ -1,4 +1,5 @@
-﻿using MvvmPackage.Core;
+﻿using System;
+using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
 using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
@@ -13,10 +14,10 @@ namespace NotatnikMechanika.Core.PageModels
 {
     public class RegistrationPageModel : PageModelBase
     {
-        public RegisterModel RegisterModel { get; set; }
+        public RegisterModel RegisterModel { get; }
         public string ConfirmPassword { get; set; }
-        public ICommand RegisterCommand { get; set; }
-        public ICommand LoginCommand { get; set; }
+        public ICommand RegisterCommand { get; }
+        public ICommand LoginCommand { get; }
         public string ErrorMessage { get; set; }
 
         private readonly IMvNavigationService _navigationService;
@@ -38,7 +39,7 @@ namespace NotatnikMechanika.Core.PageModels
         {
             IsLoading = true;
 
-            Response response = await _httpRequestService.SendPost(RegisterModel, new AccountPaths().GetFullPath(AccountPaths.RegisterPath));
+            var response = await _httpRequestService.SendPost(RegisterModel, AccountPaths.Register());
 
             switch (response.ResponseType)
             {
@@ -55,6 +56,10 @@ namespace NotatnikMechanika.Core.PageModels
                 case ResponseType.BadModelState:
                     await _messageDialogService.ShowMessageDialog("Wypełnij dane poprawnie", MessageDialogType.Error);
                     break;
+                case ResponseType.Unauthorized:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             IsLoading = false;

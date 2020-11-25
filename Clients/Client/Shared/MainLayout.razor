@@ -4,6 +4,8 @@
 @using MVVMPackage.Blazor.Services
 @implements IDisposable
 @inject IMvNavigationService NavigationService
+@inject NavigationManager NavigationManager
+
 
 <div class="main-layout">
 
@@ -28,7 +30,7 @@
                         <MatHidden Breakpoint="@MatBreakpoint.SM" Direction="@MatHiddenDirection.Up">
                             <ChildContent>
                                 <MatDrawer @bind-Opened="@_opened" Mode="@MatDrawerMode.Modal">
-                                    <NavMenu/>
+                                    <NavMenu />
                                 </MatDrawer>
                             </ChildContent>
 
@@ -54,7 +56,6 @@
 @code
 {
     bool _opened;
-
 
     void ButtonClicked()
     {

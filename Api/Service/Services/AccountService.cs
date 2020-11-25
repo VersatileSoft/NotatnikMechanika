@@ -4,15 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using NotatnikMechanika.Data.Models;
-using NotatnikMechanika.Service.Exception;
 using NotatnikMechanika.Service.Interfaces;
-using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.User;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,48 +40,42 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<Response<TokenModel>> AuthenticateAsync(string email, string password)
         {
-            SignInResult result = await _signInManager.PasswordSignInAsync(email, password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(email, password, false, false);
 
-            if (result.Succeeded)
+            if (!result.Succeeded)
+                return FailureResponse<TokenModel>(ResponseType.Failure,
+                    result.IsNotAllowed
+                        ? new List<string> {"Potwierdź adres email aby się zalogować."}
+                        : new List<string> {"Nieprawidłowy login lub hasło"});
+            
+            var user = await _userManager.Users.SingleOrDefaultAsync(r => r.Email == email);
+
+            return SuccessResponse(new TokenModel
             {
-                User user = await _userManager.Users.SingleOrDefaultAsync(r => r.Email == email);
+                Token = GenerateToken(user)
+            });
 
-                return SuccessResponse(new TokenModel
-                {
-                    Token = GenerateToken(user)
-                });
-            }
-
-            if (result.IsNotAllowed)
-            {
-                return FailureResponse<TokenModel>(ResponseType.Failure, new List<string> { "Potwierdź adres email aby się zalogować." });
-            }
-
-            return FailureResponse<TokenModel>(ResponseType.Failure, new List<string> { "Nieprawidłowy login lub hasło" });
         }
 
         public async Task<Response> ConfirmEmail(string userId, string emailToken)
         {
-            User user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(userId);
 
             if (user == null)
             {
                 return FailureResponse(ResponseType.Failure, new List<string> { "Nie znaleziono użytkownika" });
             }
 
-            IdentityResult result = await _userManager.ConfirmEmailAsync(user, emailToken);
+            var result = await _userManager.ConfirmEmailAsync(user, emailToken);
 
-            if (!result.Succeeded)
-            {
-                return FailureResponse(ResponseType.Failure, new List<string> { "Link nieprawidłowy." });
-            }
-
-            return SuccessResponse();
+            return !result.Succeeded ? 
+                FailureResponse(ResponseType.Failure, new List<string> { "Link nieprawidłowy." }) : 
+                SuccessResponse();
         }
 
         public async Task<Response> RegisterAsync(RegisterModel registerModel)
         {
-            User user = new User
+            var user = new User
             {
                 UserName = registerModel.Email,
                 Email = registerModel.Email,
@@ -92,49 +83,38 @@ namespace NotatnikMechanika.Service.Services
                 Surname = registerModel.Surname
             };
 
-            IdentityResult result = await _userManager.CreateAsync(user, registerModel.Password);
+            var result = await _userManager.CreateAsync(user, registerModel.Password);
 
-            if (result.Succeeded)
-            {
-                return SuccessResponse();
-
-                // User newUser = await _userManager.FindByEmailAsync(user.Email);
-                // string code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                //  string callbackUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host.Value}/api/Account/verify/email?userId={WebUtility.UrlEncode(newUser.Id)}&emailToken={HttpUtility.UrlEncode(code)}";
-
-                //  string message = $"Please confirm your account by <a clicktracking=off href='{callbackUrl}'>clicking here</a>.";
-
-                // await _emailSenderService.SendEmailAsync(user.Email, "Confirm your email", message);
-            }
-            else
-            {
-                return FailureResponse(ResponseType.Failure, result.Errors.Select(e => e.Description).ToList());
-            }
+            return result.Succeeded ? 
+                SuccessResponse() : 
+                FailureResponse(ResponseType.Failure, result.Errors.Select(e => e.Description).ToList());
         }
 
-        public Task<Response> DeleteAsync(int id)
+        public async Task<Response> DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByIdAsync(id);
+            await _userManager.DeleteAsync(user);
+            return SuccessResponse();
         }
 
-        public Task<Response> UpdateAsync(int id, EditUserModel value)
+        public Task<Response> UpdateAsync(string id, EditUserModel value)
         {
             throw new NotImplementedException();
         }
 
         private string GenerateToken(User user)
         {
-            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            byte[] key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[] {
+                Subject = new ClaimsIdentity(new[] {
                     new Claim(ClaimTypes.Name, user.Id)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
-            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
+            var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
     }

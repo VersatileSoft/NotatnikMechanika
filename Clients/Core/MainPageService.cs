@@ -18,9 +18,9 @@ namespace NotatnikMechanika.Core
             _httpClient = httpClient;
         }
 
-        public Type GetMainPageModelType()
+        public Type MainPageModelType()
         {
-            string token = _settingsService.GetToken().Result;
+            var token = _settingsService.GetToken().Result;
 
             if (!string.IsNullOrEmpty(token))
             {

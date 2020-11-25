@@ -16,27 +16,28 @@ namespace NotatnikMechanika.Repository.Repositories
         {
         }
 
-        public async Task<IEnumerable<ServiceForOrderModel>> GetServicesForOrder(string userId, int orderId)
+        public async Task<IEnumerable<ServiceModel>> AllAsync(string userId, int orderId)
         {
-            return await _dbContext.Services.Where(a => a.UserId == userId).Include(service => service.OrderToServices).Select(a => new ServiceForOrderModel
-            {
-                Id = a.Id,
-                Name = a.Name,
-                Price = a.Price,
-                IsInOrder = a.OrderToServices.Where(b => b.OrderId == orderId).Any()
-            }).ToListAsync();
+            return await DbContext.Services.
+                Where(a => a.UserId == userId).
+                Include(service => service.OrderToServices).
+                Select(a => new ServiceModel
+                {
+                    Id = a.Id,
+                    Name = a.Name,
+                    Price = a.Price,
+                    IsInOrder = a.OrderToServices.Any(b => b.OrderId == orderId)
+                }).ToListAsync();
         }
 
-        public async Task<IEnumerable<ServiceModel>> GetServicesInOrder(string userId, int orderId)
+        public async Task<IEnumerable<ServiceModel>> ByOrderAsync(string userId, int orderId)
         {
-            Microsoft.EntityFrameworkCore.Query.IIncludableQueryable<Service, IEnumerable<OrderToService>> i = _dbContext.Services.Include(service => service.OrderToServices);
-
-            return await _dbContext.Services.Include(service => service.OrderToServices).Where(a => a.UserId == userId).Where(a => a.OrderToServices.Where(a => a.OrderId == orderId).Any()).Select(a => new ServiceModel
-            {
-                Id = a.Id,
-                Name = a.Name,
-                Price = a.Price
-            }).ToListAsync();
+            return await DbContext.Services.
+                Include(service => service.OrderToServices).
+                Where(a => a.UserId == userId).
+                Where(a => a.OrderToServices.Any(b => b.OrderId == orderId)).
+                Select(a => Mapper.Map<ServiceModel>(a)).
+                ToListAsync();
         }
     }
 }

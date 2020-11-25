@@ -1,4 +1,5 @@
-﻿using MvvmPackage.Core;
+﻿using System;
+using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
 using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using static NotatnikMechanika.Shared.ResponseBuilder;
 
+// ReSharper disable once CheckNamespace
 namespace NotatnikMechanika.Core.PageModels
 {
     public class AddCommodityToOrderPageModel : PageModelBase
@@ -18,31 +20,31 @@ namespace NotatnikMechanika.Core.PageModels
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMessageDialogService _messageDialogService;
 
-        public List<CommodityForOrderModel> CommodityModels { get; set; }
+        public List<CommodityModel> CommodityModels { get; private set; }
 
-        public ICommand CloseCommand { get; set; }
-        public ICommand AddRemoveCommodityCommand { get; set; }
+        public ICommand CloseCommand { get; }
+        public ICommand AddRemoveCommodityCommand { get; }
 
         public AddCommodityToOrderPageModel(IHttpRequestService httpRequestService, IMvNavigationService navigationService, IMessageDialogService messageDialogService)
         {
             _httpRequestService = httpRequestService;
             _messageDialogService = messageDialogService;
-            CloseCommand = new AsyncCommand(() => navigationService.CloseDialog());
-            AddRemoveCommodityCommand = new AsyncCommand<CommodityForOrderModel>(AddRemoveCommodityAction);
+            CloseCommand = new AsyncCommand(navigationService.CloseDialog);
+            AddRemoveCommodityCommand = new AsyncCommand<CommodityModel>(AddRemoveCommodityAction);
         }
 
-        private async Task AddRemoveCommodityAction(CommodityForOrderModel commodityModel)
+        private async Task AddRemoveCommodityAction(CommodityModel commodityModel)
         {
             IsLoading = true;
             Response response;
             if (commodityModel.IsInOrder)
             {
-                string path = new OrderPaths().GetFullPath(OrderPaths.DeleteCommodityFromOrder.Replace("{orderId}", _orderId.ToString()).Replace("{commodityId}", commodityModel.Id.ToString()));
+                var path = OrderPaths.DeleteCommodity(_orderId, commodityModel.Id);
                 response = await _httpRequestService.SendDelete(path);
             }
             else
             {
-                string path = new OrderPaths().GetFullPath(OrderPaths.AddCommodityToOrder.Replace("{orderId}", _orderId.ToString()).Replace("{commodityId}", commodityModel.Id.ToString()));
+                var path = OrderPaths.AddCommodity(_orderId, commodityModel.Id);
                 response = await _httpRequestService.SendPost(path);
             }
 
@@ -60,6 +62,10 @@ namespace NotatnikMechanika.Core.PageModels
                 case ResponseType.BadModelState:
                     await _messageDialogService.ShowMessageDialog("Wypełnij dane poprawnie", MessageDialogType.Error);
                     break;
+                case ResponseType.Unauthorized:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             IsLoading = false;
@@ -69,8 +75,8 @@ namespace NotatnikMechanika.Core.PageModels
         {
             IsLoading = true;
             _orderId = Parameter;
-            string path = new CommodityPaths().GetFullPath(CommodityPaths.GetAllForOrderPath.Replace("{orderId}", _orderId.ToString()));
-            Response<List<CommodityForOrderModel>> response = await _httpRequestService.SendGet<List<CommodityForOrderModel>>(path);
+            var path = CommodityPaths.All(_orderId);
+            var response = await _httpRequestService.SendGet<List<CommodityModel>>(path);
 
             switch (response.ResponseType)
             {
@@ -81,6 +87,12 @@ namespace NotatnikMechanika.Core.PageModels
                 case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania towarów");
                     break;
+                case ResponseType.Unauthorized:
+                    break;
+                case ResponseType.BadModelState:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
             IsLoading = false;
         }

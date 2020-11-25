@@ -18,15 +18,15 @@ namespace NotatnikMechanika.Service.Services
             _serviceRepository = serviceRepository;
         }
 
-        public async Task<Response<IEnumerable<ServiceForOrderModel>>> GetServicesForOrder(string userId, int orderId)
+        public async Task<Response<IEnumerable<ServiceModel>>> AllAsync(string userId, int orderId)
         {
-            return SuccessResponse(await _serviceRepository.GetServicesForOrder(userId, orderId));
+            return SuccessResponse(await _serviceRepository.AllAsync(userId, orderId));
         }
 
-        public async Task<Response<IEnumerable<ServiceModel>>> GetServicesInOrder(string userId, int orderId)
+        public async Task<Response<IEnumerable<ServiceModel>>> ByOrderAsync(string userId, int orderId)
         {
 
-            return SuccessResponse(await _serviceRepository.GetServicesInOrder(userId, orderId));
+            return SuccessResponse(await _serviceRepository.ByOrderAsync(userId, orderId));
         }
     }
 }

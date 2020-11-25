@@ -4,71 +4,42 @@
 @using NotatnikMechanika.Shared.Models.Order
 @inherits PageBase<OrdersPageModel>
 
-<div class="orders">
-    @if (PageModel.IsLoading)
-    {
-        <MatProgressBar Indeterminate="true" />
-    }
-    else
-    {
-        <MatHidden BreakPoint="@MatBreakpoint.SM" Direction="@MatHiddenDirection.Down">
-            <ChildContent>
-                <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" Label="Dodaj Zlecenie" OnClick="(_ => PageModel.AddOrderCommand.Execute(null))" />
-                <MatTable Items="PageModel.Orders" class="table" ShowPaging="false" UseSortHeaderRow="true" HeaderRowClass="table-header">
-                    <MatTableHeader>
-                        <th scope="col">Imię</th>
-                        <th scope="col">Nazwisko</th>
-                        <th scope="col">Marka</th>
-                        <th scope="col">Model</th>
-                        <th scope="col">Data przyjęcia</th>
-                        <th scope="col">Data ukończenia</th>
-                    </MatTableHeader>
-                    <MatTableRow>
-                        <td>@context.CustomerModel.Name</td>
-                        <td>@context.CustomerModel.Surname</td>
-                        <td>@context.CarModel.Brand</td>
-                        <td>@context.CarModel.Model</td>
-                        <td>@context.AcceptDate</td>
-                        <td>@context.FinishDate</td>
-                        <td><MatButton Label="Szczegóły" Raised="true" Command="PageModel.OrderSelectedCommand" CommandParameter="context.Id" /></td>
-                        <td><MatButton Label="Usuń" Raised="true" Command="PageModel.RemoveOrderCommand" CommandParameter="context.Id" /></td>
-                    </MatTableRow>
-                </MatTable>
-            </ChildContent>
+@if (PageModel.IsLoading)
+{
+    <MatProgressBar Indeterminate="true" />
+}
+else
+{
+    <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" OnClick="(_ => PageModel.AddOrderCommand.Execute(null))" />
+                    <ExpansionPanelList Items="@PageModel.Orders">
+                        <HeaderTemplate Context="order">
+                            <p class="expansion-panel-header-text">
+                                @order.CustomerModel.Name
+                                @order.CustomerModel.Surname
+                            </p>
+                        </HeaderTemplate>
+                        
+                        <BodyTemplate Context="order">
+                            <p>@order.CarModel.Brand @order.CarModel.Model</p>
+                            <p>@order.CustomerModel.Phone</p>
+                            <MatDivider />
+                            <p>Postęp: 30%</p>
+                            
+                            <ProgressBar Progress="0.3" ></ProgressBar>
+                            
+                            <p>Do końca: 5 dni</p>
+                            
+                            <MatDivider />
+                            
+                            <div class="panel-buttons">
+                                <MatIconButton Icon="info" Raised="true" Command="PageModel.OrderSelectedCommand" CommandParameter="order.Id"/>
+                                <MatIconButton Icon="info" Raised="true" Command="PageModel.OrderSelectedCommand" CommandParameter="order.Id"/>
+                                <MatIconButton Style="color: red;" Icon="delete" Raised="true" Command="PageModel.RemoveOrderCommand" CommandParameter="order.Id"/>
+                            </div>
+                        </BodyTemplate>
+                    </ExpansionPanelList>
+}
 
-            <ElseContent>
-                <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" OnClick="(_ => PageModel.AddOrderCommand.Execute(null))" />
-                <ExpansionPanelList Items="@PageModel.Orders">
-                    <HeaderTemplate Context="order">
-                        <p class="panel-header">
-                            @order.CustomerModel.Name
-                            @order.CustomerModel.Surname
-                        </p>
-                    </HeaderTemplate>
-                    
-                    <BodyTemplate Context="order">
-                        <p>@order.CarModel.Brand @order.CarModel.Model</p>
-                        <p>@order.CustomerModel.Phone</p>
-                        <MatDivider />
-                        <p>Postęp: 30%</p>
-                        
-                        <ProgressBar Progress="0.3" ></ProgressBar>
-                        
-                        <p>Do końca: 5 dni</p>
-                        
-                        <MatDivider />
-                        
-                        <div class="buttons">
-                            <MatIconButton Icon="info" Raised="true" Command="PageModel.OrderSelectedCommand" CommandParameter="order.Id"/>
-                            <MatIconButton Icon="info" Raised="true" Command="PageModel.OrderSelectedCommand" CommandParameter="order.Id"/>
-                            <MatIconButton Style="color: red;" Icon="delete" Raised="true" Command="PageModel.RemoveOrderCommand" CommandParameter="order.Id"/>
-                        </div>
-                    </BodyTemplate>
-                </ExpansionPanelList>
-            </ElseContent>
-        </MatHidden>
-    }
-</div>
 
 
 

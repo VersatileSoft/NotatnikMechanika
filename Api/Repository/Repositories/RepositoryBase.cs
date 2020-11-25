@@ -11,55 +11,55 @@ namespace NotatnikMechanika.Repository.Repositories
 {
     public abstract class RepositoryBase<ModelType, EntityType> : IRepositoryBase<ModelType> where ModelType : class, new() where EntityType : EntityBase, new()
     {
-        protected readonly NotatnikMechanikaDbContext _dbContext;
-        protected readonly IMapper _mapper;
+        protected readonly NotatnikMechanikaDbContext DbContext;
+        protected readonly IMapper Mapper;
 
         protected RepositoryBase(NotatnikMechanikaDbContext dbContext, IMapper mapper)
         {
-            _dbContext = dbContext;
-            _mapper = mapper;
+            DbContext = dbContext;
+            Mapper = mapper;
         }
 
-        public Task<bool> CheckIfUserMatch(string userId, int Id)
+        public Task<bool> CheckIfUserMatch(string userId, int id)
         {
-            return _dbContext.Set<EntityType>().Where(a => a.UserId == userId).Where(a => a.Id == Id).AnyAsync();
+            return DbContext.Set<EntityType>().Where(a => a.UserId == userId).Where(a => a.Id == id).AnyAsync();
         }
 
         public async Task CreateAsync(string userId, ModelType value)
         {
-            EntityType entity = _mapper.Map<EntityType>(value);
+            var entity = Mapper.Map<EntityType>(value);
             entity.UserId = userId;
 
-            await _dbContext.Set<EntityType>().AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            await DbContext.Set<EntityType>().AddAsync(entity);
+            await DbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int Id)
+        public async Task DeleteAsync(int id)
         {
-            _dbContext.Set<EntityType>().Remove(await _dbContext.Set<EntityType>().Where(a => a.Id == Id).FirstOrDefaultAsync());
-            await _dbContext.SaveChangesAsync();
+            DbContext.Set<EntityType>().Remove(await DbContext.Set<EntityType>().Where(a => a.Id == id).FirstOrDefaultAsync());
+            await DbContext.SaveChangesAsync();
         }
 
-        public async Task<ModelType> GetAsync(int Id)
+        public async Task<ModelType> ByIdAsync(int id)
         {
-            EntityType entity = await _dbContext.Set<EntityType>().Where(a => a.Id == Id).FirstOrDefaultAsync();
-            return _mapper.Map<ModelType>(entity);
+            var entity = await DbContext.Set<EntityType>().Where(a => a.Id == id).FirstOrDefaultAsync();
+            return Mapper.Map<ModelType>(entity);
         }
 
-        public async Task<IEnumerable<ModelType>> GetAllAsync(string userId)
+        public async Task<IEnumerable<ModelType>> AllAsync(string userId)
         {
-            List<EntityType> result = await _dbContext.Set<EntityType>().Where(a => a.UserId == userId).ToListAsync();
-            return _mapper.Map<List<EntityType>, List<ModelType>>(result);
+            var result = await DbContext.Set<EntityType>().Where(a => a.UserId == userId).ToListAsync();
+            return Mapper.Map<List<EntityType>, List<ModelType>>(result);
         }
 
         public async Task UpdateAsync(int id, ModelType value)
         {
-            EntityType entity = await _dbContext.Set<EntityType>().Where(a => a.Id == id).FirstOrDefaultAsync();
-            _mapper.Map(value, entity);
+            var entity = await DbContext.Set<EntityType>().Where(a => a.Id == id).FirstOrDefaultAsync();
+            Mapper.Map(value, entity);
             entity.Id = id;
 
-            _dbContext.Set<EntityType>().Update(entity);
-            await _dbContext.SaveChangesAsync();
+            DbContext.Set<EntityType>().Update(entity);
+            await DbContext.SaveChangesAsync();
         }
     }
 }

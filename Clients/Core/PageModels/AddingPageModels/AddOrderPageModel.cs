@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using static NotatnikMechanika.Shared.ResponseBuilder;
 
+// ReSharper disable once CheckNamespace
 namespace NotatnikMechanika.Core.PageModels
 {
     public class AddOrderPageModel : AddingPageModelBase<OrderModel>
@@ -53,8 +54,9 @@ namespace NotatnikMechanika.Core.PageModels
         private async Task SelectedCustomerChanged()
         {
             IsLoading = true;
-            Response<List<CarModel>> carsResponse = await _httpRequestService.SendGet<List<CarModel>>(new CarPaths().GetFullPath(
-                CarPaths.GetByCustomerPath.Replace("{customerId}", SelectedCustomer.Id.ToString())));
+            
+            var path = CarPaths.ByCustomer(SelectedCustomer.Id);
+            var carsResponse = await HttpRequestService.SendGet<List<CarModel>>(path);
 
             switch (carsResponse.ResponseType)
             {
@@ -63,8 +65,14 @@ namespace NotatnikMechanika.Core.PageModels
                     break;
 
                 case ResponseType.Failure:
-                    await _messageDialogService.ShowMessageDialog(carsResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania samochodów klienta");
+                    await MessageDialogService.ShowMessageDialog(carsResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania samochodów klienta");
                     break;
+                case ResponseType.Unauthorized:
+                    break;
+                case ResponseType.BadModelState:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             if (Cars?.Any() ?? false)
@@ -77,7 +85,7 @@ namespace NotatnikMechanika.Core.PageModels
         public override async Task Initialize()
         {
             IsLoading = true;
-            Response<List<CustomerModel>> customersResponse = await _httpRequestService.SendGet<List<CustomerModel>>(new CustomerPaths().GetFullPath(CRUDPaths.GetAllPath));
+            var customersResponse = await HttpRequestService.All<CustomerModel>();
 
             switch (customersResponse.ResponseType)
             {
@@ -86,8 +94,14 @@ namespace NotatnikMechanika.Core.PageModels
                     break;
 
                 case ResponseType.Failure:
-                    await _messageDialogService.ShowMessageDialog(customersResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania klientów");
+                    await MessageDialogService.ShowMessageDialog(customersResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania klientów");
                     break;
+                case ResponseType.Unauthorized:
+                    break;
+                case ResponseType.BadModelState:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             if (Customers?.Any() ?? false)
