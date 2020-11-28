@@ -54,27 +54,21 @@ namespace NotatnikMechanika.Data
               .WithOne(c => c.User)
               .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<OrderToCommodity>()
-                .HasKey(bc => new { bc.CommodityId, bc.OrderId });
-            modelBuilder.Entity<OrderToCommodity>()
-                .HasOne(bc => bc.Order)
-                .WithMany(b => b.OrderToCommodities)
-                .HasForeignKey(bc => bc.OrderId);
-            modelBuilder.Entity<OrderToCommodity>()
-                .HasOne(bc => bc.Commodity)
-                .WithMany(c => c.OrderToCommodities)
-                .HasForeignKey(bc => bc.CommodityId);
-
-            modelBuilder.Entity<OrderToService>()
-              .HasKey(bc => new { bc.ServiceId, bc.OrderId });
-            modelBuilder.Entity<OrderToService>()
-                .HasOne(bc => bc.Order)
-                .WithMany(b => b.OrderToServices)
-                .HasForeignKey(bc => bc.OrderId);
-            modelBuilder.Entity<OrderToService>()
-                .HasOne(bc => bc.Service)
-                .WithMany(c => c.OrderToServices)
-                .HasForeignKey(bc => bc.ServiceId);
+            modelBuilder.Entity<Order>()
+                .HasMany(o => o.Commodities)
+                .WithMany(c => c.Orders)
+                .UsingEntity<OrderToCommodity>(
+                    j => j.HasOne(o => o.Commodity).WithMany(c => c.OrderToCommodities),
+                    j => j.HasOne(o => o.Order).WithMany(o => o.OrderToCommodities)
+                    );
+            
+            modelBuilder.Entity<Order>()
+                .HasMany(o => o.Services)
+                .WithMany(c => c.Orders)
+                .UsingEntity<OrderToService>(
+                    j => j.HasOne(o => o.Service).WithMany(c => c.OrderToServices),
+                    j => j.HasOne(o => o.Order).WithMany(o => o.OrderToServices)
+                );
         }
     }
 }

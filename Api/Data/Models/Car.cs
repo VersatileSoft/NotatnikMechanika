@@ -13,6 +13,6 @@ namespace NotatnikMechanika.Data.Models
         public int CustomerId { get; set; }
 
         public virtual Customer Customer { get; set; }
-        public virtual IEnumerable<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

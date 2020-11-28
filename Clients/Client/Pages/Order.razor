@@ -52,7 +52,7 @@
                 {
                     @foreach (var service in PageModel.Services)
                     {
-                        <MatCheckbox Value="true" Label="@service.Name"></MatCheckbox>
+                        <MatCheckbox Value="@service.Finished" Label="@service.Name"></MatCheckbox>
                     }
                 }
             </CardContent>
@@ -65,11 +65,11 @@
             </CardHeader>
 
             <CardContent>
-                @if (PageModel.Services != null)
+                @if (PageModel.Commodities != null)
                 {
                     @foreach (var commodity in PageModel.Commodities)
                     {
-                        <MatCheckbox Value="true" Label="@commodity.Name"></MatCheckbox>
+                        <MatCheckbox Value="@commodity.Finished" Label="@commodity.Name"></MatCheckbox>
                     }
                 }
             </CardContent>

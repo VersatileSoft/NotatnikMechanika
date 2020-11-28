@@ -287,8 +287,8 @@ namespace NotatnikMechanika.Data.Migrations
                 name: "OrderToCommodities",
                 columns: table => new
                 {
-                    OrderId = table.Column<int>(type: "int", nullable: false),
                     CommodityId = table.Column<int>(type: "int", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
                     Finished = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -318,7 +318,7 @@ namespace NotatnikMechanika.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderToServices", x => new { x.ServiceId, x.OrderId });
+                    table.PrimaryKey("PK_OrderToServices", x => new { x.OrderId, x.ServiceId });
                     table.ForeignKey(
                         name: "FK_OrderToServices_Orders_OrderId",
                         column: x => x.OrderId,
@@ -408,9 +408,9 @@ namespace NotatnikMechanika.Data.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderToServices_OrderId",
+                name: "IX_OrderToServices_ServiceId",
                 table: "OrderToServices",
-                column: "OrderId");
+                column: "ServiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Services_UserId",

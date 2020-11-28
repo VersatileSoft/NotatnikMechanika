@@ -14,6 +14,6 @@ namespace NotatnikMechanika.Data.Models
         public string Phone { get; set; }
         public string Address { get; set; }
 
-        public virtual IEnumerable<Car> Cars { get; set; }
+        public virtual ICollection<Car> Cars { get; set; }
     }
 }

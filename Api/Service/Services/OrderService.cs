@@ -4,17 +4,19 @@ using NotatnikMechanika.Service.Services.Base;
 using NotatnikMechanika.Shared.Models.Order;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
+using NotatnikMechanika.Data.Models;
 using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Service.Services
 {
-    public class OrderService : ServiceBase<OrderModel>, IOrderService
+    public class OrderService : ServiceBase<OrderModel, Order>, IOrderService
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IServiceRepository _serviceRepository;
         private readonly ICommodityRepository _commodityRepository;
 
-        public OrderService(IOrderRepository orderRepository, IServiceRepository serviceRepository, ICommodityRepository commodityRepository) : base(orderRepository)
+        public OrderService(IOrderRepository orderRepository, IServiceRepository serviceRepository, ICommodityRepository commodityRepository, IMapper mapper) : base(orderRepository, mapper)
         {
             _orderRepository = orderRepository;
             _serviceRepository = serviceRepository;
@@ -35,7 +37,7 @@ namespace NotatnikMechanika.Service.Services
                 errors.Add("Towar nie jest twój");
             }
 
-            if (await _orderRepository.CheckIfOrderToCommodityExsist(orderId, commodityId))
+            if (await _orderRepository.IsCommodityInOrder(orderId, commodityId))
             {
                 errors.Add("Towar jest już dodany do zlecenia");
             }
@@ -45,7 +47,8 @@ namespace NotatnikMechanika.Service.Services
                 return FailureResponse(ResponseType.Failure, errors);
             }
 
-            await _orderRepository.AddCommodityToOrder(orderId, commodityId);
+            var commodity = await _commodityRepository.ByIdAsync(commodityId);
+            await _orderRepository.AddCommodityToOrder(orderId, commodity);
             return SuccessResponse();
         }
 
@@ -63,7 +66,7 @@ namespace NotatnikMechanika.Service.Services
                 errors.Add("Usługa nie jest twoja");
             }
 
-            if (await _orderRepository.CheckIfOrderToServiceExsist(orderId, serviceId))
+            if (await _orderRepository.IsServiceInOrder(orderId, serviceId))
             {
                 errors.Add("Usługa jest już dodana do zlecenia");
             }
@@ -73,7 +76,8 @@ namespace NotatnikMechanika.Service.Services
                 return FailureResponse(ResponseType.Failure, errors);
             }
 
-            await _orderRepository.AddServiceToOrder(orderId, serviceId);
+            var service = await _serviceRepository.ByIdAsync(serviceId);
+            await _orderRepository.AddServiceToOrder(orderId, service);
             return SuccessResponse();
         }
 
@@ -91,7 +95,7 @@ namespace NotatnikMechanika.Service.Services
                 errors.Add("Towar nie jest twój");
             }
 
-            if (!await _orderRepository.CheckIfOrderToCommodityExsist(orderId, commodityId))
+            if (!await _orderRepository.IsCommodityInOrder(orderId, commodityId))
             {
                 errors.Add("Towar nie jest dodany do zlecenia");
             }
@@ -101,7 +105,8 @@ namespace NotatnikMechanika.Service.Services
                 return FailureResponse(ResponseType.Failure, errors);
             }
 
-            await _orderRepository.DeleteCommodityFromOrder(orderId, commodityId);
+            var commodity = await _commodityRepository.ByIdAsync(commodityId);
+            await _orderRepository.DeleteCommodityFromOrder(orderId, commodity);
             return SuccessResponse();
         }
 
@@ -119,7 +124,7 @@ namespace NotatnikMechanika.Service.Services
                 errors.Add("Usługa nie jest twoja");
             }
 
-            if (!await _orderRepository.CheckIfOrderToServiceExsist(orderId, serviceId))
+            if (!await _orderRepository.IsServiceInOrder(orderId, serviceId))
             {
                 errors.Add("Usługa nie jest dodana do zlecenia");
             }
@@ -129,7 +134,8 @@ namespace NotatnikMechanika.Service.Services
                 return FailureResponse(ResponseType.Failure, errors);
             }
 
-            await _orderRepository.DeleteServiceFromOrder(orderId, serviceId);
+            var service = await _serviceRepository.ByIdAsync(serviceId);
+            await _orderRepository.DeleteServiceFromOrder(orderId, service);
             return SuccessResponse();
         }
 
@@ -140,7 +146,10 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<Response<OrderExtendedModel>> ExtendedAsync(string userId, int id, bool archived)
         {
-            return SuccessResponse(await _orderRepository.ExtendedAsync(userId, id, archived));
+            if (!await _orderRepository.CheckIfUserMatch(userId, id))
+                return FailureResponse<OrderExtendedModel>(ResponseType.Failure, new List<string> {NotAllowedError});
+            
+            return SuccessResponse(await _orderRepository.ExtendedAsync(id, archived));
         }
     }
 }

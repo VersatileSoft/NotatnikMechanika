@@ -302,18 +302,18 @@ namespace NotatnikMechanika.Data.Migrations
 
             modelBuilder.Entity("NotatnikMechanika.Data.Models.OrderToService", b =>
                 {
-                    b.Property<int>("ServiceId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderId")
+                    b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Finished")
                         .HasColumnType("bit");
 
-                    b.HasKey("ServiceId", "OrderId");
+                    b.HasKey("OrderId", "ServiceId");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("ServiceId");
 
                     b.ToTable("OrderToServices");
                 });

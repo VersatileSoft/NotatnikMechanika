@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Repository.Interfaces.Base
 {
-    public interface IRepositoryBase<T>
+    public interface IRepositoryBase<TEntity>
     {
-        Task CreateAsync(string userId, T value);
+        Task CreateAsync(string userId, TEntity value);
         Task<bool> CheckIfUserMatch(string userId, int id);
-        Task DeleteAsync(int id);
-        Task<T> ByIdAsync(int id);
-        Task<IEnumerable<T>> AllAsync(string userId);
-        Task UpdateAsync(int id, T value);
+        Task DeleteAsync(TEntity id);
+        Task<TEntity> ByIdAsync(int id);
+        Task<IEnumerable<TEntity>> AllAsync(string userId);
+        Task UpdateAsync(TEntity value);
     }
 }

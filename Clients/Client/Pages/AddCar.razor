@@ -9,7 +9,7 @@
     </div>
 
     <div class="card-content mat-elevation-z13">
-        <EditForm Model="@PageModel.Model" OnInvalidSubmit="_ => PageModel.AddCommand.Execute(null)">
+        <EditForm Model="@PageModel.Model" OnValidSubmit="_ => PageModel.AddCommand.Execute(null)">
             <MatTextField @bind-Value="@PageModel.Model.Brand" Class="text-field" Label="Marka" Outlined="true"></MatTextField>
             <ValidationMessage For="@(() => @PageModel.Model.Brand)" />
             <MatTextField @bind-Value="@PageModel.Model.Model" Class="text-field" Label="Model" Outlined="true"></MatTextField>

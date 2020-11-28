@@ -24,6 +24,9 @@ namespace NotatnikMechanika.Server.Controllers
         [HttpGet(CarPaths.ByCustomerPath)]
         public async Task<ActionResult<Response<IEnumerable<CarModel>>>> ByCustomerAsync(int customerId)
         {
+            if (User.Identity == null)
+                return Unauthorized();
+            
             return Ok(await _carService.ByCustomerAsync(User.Identity.Name, customerId));
         }
     }

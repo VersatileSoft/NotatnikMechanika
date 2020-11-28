@@ -24,12 +24,18 @@ namespace NotatnikMechanika.Server.Controllers
         [HttpGet(ServicePaths.AllPath)]
         public async Task<ActionResult<Response<IEnumerable<ServiceModel>>>> AllAsync(int orderId)
         {
+            if (User.Identity == null)
+                return Unauthorized();
+            
             return Ok(await _serviceService.AllAsync(User.Identity.Name, orderId));
         }
 
         [HttpGet(ServicePaths.ByOrderPath)]
         public async Task<ActionResult<Response<IEnumerable<ServiceModel>>>> ByOrderAsync(int orderId)
         {
+            if (User.Identity == null)
+                return Unauthorized();
+            
             return Ok(await _serviceService.ByOrderAsync(User.Identity.Name, orderId));
         }
     }

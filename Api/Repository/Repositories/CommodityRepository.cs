@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Repository.Repositories
 {
-    public class CommodityRepository : RepositoryBase<CommodityModel, Commodity>, ICommodityRepository
+    public class CommodityRepository : RepositoryBase<Commodity>, ICommodityRepository
     {
         public CommodityRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
@@ -20,14 +20,13 @@ namespace NotatnikMechanika.Repository.Repositories
         {
             return await DbContext.Commodities.
                 Where(a => a.UserId == userId).
-                Include(commodity => commodity.OrderToCommodities).
                 Select(a => 
                     new CommodityModel
                     {
                         Id = a.Id,
                         Name = a.Name,
                         Price = a.Price,
-                        IsInOrder = a.OrderToCommodities.Any(b => b.OrderId == orderId),
+                        IsInOrder = a.Orders.Any(o => o.Id == orderId),
                     }
                 ).ToListAsync();
         }
@@ -35,10 +34,17 @@ namespace NotatnikMechanika.Repository.Repositories
         public async Task<IEnumerable<CommodityModel>> ByOrderAsync(string userId, int orderId)
         {
             return await DbContext.Commodities.
-                Include(commodity => commodity.OrderToCommodities).
                 Where(a => a.UserId == userId).
-                Where(a => a.OrderToCommodities.Any(b => b.OrderId == orderId)).
-                Select(a => Mapper.Map<CommodityModel>(a)).
+                Where(c => c.Orders.Any(o => o.Id == orderId)).
+                Select(c => 
+                    new CommodityModel
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        Price = c.Price,
+                        IsInOrder = true,
+                        Finished = c.OrderToCommodities.FirstOrDefault(o => o.Order.Id == orderId).Finished
+                    }).
                 ToListAsync();
         }
     }

@@ -6,7 +6,7 @@ using NotatnikMechanika.Shared.Models.Customer;
 
 namespace NotatnikMechanika.Repository.Repositories
 {
-    public class CustomerRepository : RepositoryBase<CustomerModel, Customer>, ICustomerRepository
+    public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
     {
         public CustomerRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {

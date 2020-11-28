@@ -10,7 +10,7 @@ using NotatnikMechanika.Data;
 namespace NotatnikMechanika.Data.Migrations
 {
     [DbContext(typeof(NotatnikMechanikaDbContext))]
-    [Migration("20201124221526_A")]
+    [Migration("20201128193017_A")]
     partial class A
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -304,18 +304,18 @@ namespace NotatnikMechanika.Data.Migrations
 
             modelBuilder.Entity("NotatnikMechanika.Data.Models.OrderToService", b =>
                 {
-                    b.Property<int>("ServiceId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderId")
+                    b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Finished")
                         .HasColumnType("bit");
 
-                    b.HasKey("ServiceId", "OrderId");
+                    b.HasKey("OrderId", "ServiceId");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("ServiceId");
 
                     b.ToTable("OrderToServices");
                 });

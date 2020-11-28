@@ -5,7 +5,7 @@
 
 
 <div class="add-customer">
-    <EditForm Model="@PageModel.Model" OnInvalidSubmit="_ => PageModel.AddCommand.Execute(null)">
+    <EditForm Model="PageModel.Model" OnValidSubmit="_ => PageModel.AddCommand.Execute(null)">
         <WrapPanel>
             <WrapPanelCard>
                 <CardHeader>

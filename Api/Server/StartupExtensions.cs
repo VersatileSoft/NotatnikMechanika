@@ -18,7 +18,7 @@ namespace NotatnikMechanika.Server
             services.AddDbContext<NotatnikMechanikaDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("PublishConnection"), // PublishConnection, DefaultConnection
                     b => b.EnableRetryOnFailure()
-                )            
+                )
             );
 
             services.AddIdentity<User, IdentityRole>(options =>

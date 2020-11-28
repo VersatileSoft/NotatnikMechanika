@@ -7,6 +7,7 @@ namespace NotatnikMechanika.Data.Models
         public string Name { get; set; }
         public float Price { get; set; }
 
-        public virtual IEnumerable<OrderToCommodity> OrderToCommodities { get; set; }
+        public virtual ICollection<OrderToCommodity> OrderToCommodities { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

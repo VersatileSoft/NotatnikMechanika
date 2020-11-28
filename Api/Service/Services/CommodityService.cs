@@ -4,15 +4,17 @@ using NotatnikMechanika.Service.Services.Base;
 using NotatnikMechanika.Shared.Models.Commodity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
+using NotatnikMechanika.Data.Models;
 using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Service.Services
 {
-    public class CommodityService : ServiceBase<CommodityModel>, ICommodityService
+    public class CommodityService : ServiceBase<CommodityModel, Commodity>, ICommodityService
     {
         private readonly ICommodityRepository _commodityRepository;
 
-        public CommodityService(ICommodityRepository commodityRepository) : base(commodityRepository)
+        public CommodityService(ICommodityRepository commodityRepository, IMapper mapper) : base(commodityRepository, mapper)
         {
             _commodityRepository = commodityRepository;
         }
