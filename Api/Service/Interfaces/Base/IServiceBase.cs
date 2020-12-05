@@ -1,13 +1,10 @@
-﻿using NotatnikMechanika.Shared;
-using NotatnikMechanika.Shared.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using NotatnikMechanika.Data.Models;
 using static NotatnikMechanika.Shared.ResponseBuilder;
 
-namespace NotatnikMechanika.Service.Interfaces.Base
+namespace NotatnikMechanika.Api.Service.Interfaces.Base
 {
-    public interface IServiceBase<TModel> 
+    public interface IServiceBase<TModel>
     {
         Task<Response<IEnumerable<TModel>>> AllAsync(string userId);
         Task<Response<TModel>> ByIdAsync(string userId, int id);

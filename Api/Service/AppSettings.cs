@@ -1,4 +1,4 @@
-﻿namespace NotatnikMechanika.Service
+﻿namespace NotatnikMechanika.Api.Service
 {
     public class AppSettings
     {

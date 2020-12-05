@@ -15,13 +15,17 @@ namespace MvvmPackage.Xamarin.Services
 
         public Page CreatePageFromPageModel(Type pageModelType)
         {
-            var pageName = pageModelType.Name.Replace("Model", "");
+            string pageName = pageModelType.Name.Replace("Model", "");
             return (Page)Activator.CreateInstance(Array.Find(IoC.PlatformProjectAssembly.GetTypes(), t => t.Name == pageName));
         }
 
         public Page CreatePageFromPageModel<TPageModel>(int parameter) where TPageModel : PageModelBase
         {
-            if (!(CreatePageFromPageModel<TPageModel>() is MvContentPage<TPageModel> page)) return new Page();
+            if (!(CreatePageFromPageModel<TPageModel>() is MvContentPage<TPageModel> page))
+            {
+                return new Page();
+            }
+
             page.PageModel.Parameter = parameter;
             return page;
         }

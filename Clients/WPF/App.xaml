@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:core="clr-namespace:NotatnikMechanika.Core;assembly=NotatnikMechanika.Core"
     xmlns:pages="clr-namespace:MvvmPackage.Wpf;assembly=MvvmPackage.Wpf"
-    x:TypeArguments="core:MainPageService"
+    x:TypeArguments="core:CoreApplication"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

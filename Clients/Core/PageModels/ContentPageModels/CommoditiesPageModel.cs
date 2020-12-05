@@ -1,11 +1,10 @@
-﻿using System;
-using MvvmPackage.Core;
+﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using MVVMPackage.Core.Commands;
+using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Commodity;
 using PropertyChanged;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -37,7 +36,7 @@ namespace NotatnikMechanika.Core.PageModels
 
         private async Task RemoveCommodityAction(int id)
         {
-            var response = await _httpRequestService.Delete<CommodityModel>(id);
+            Response response = await _httpRequestService.Delete<CommodityModel>(id);
 
             switch (response.ResponseType)
             {
@@ -61,7 +60,7 @@ namespace NotatnikMechanika.Core.PageModels
         public override async Task Initialize()
         {
             IsLoading = true;
-            var response = await _httpRequestService.All<CommodityModel>();
+            Response<List<CommodityModel>> response = await _httpRequestService.All<CommodityModel>();
 
             switch (response.ResponseType)
             {

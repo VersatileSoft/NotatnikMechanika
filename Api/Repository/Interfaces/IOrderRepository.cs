@@ -1,11 +1,10 @@
-﻿using NotatnikMechanika.Repository.Interfaces.Base;
+﻿using NotatnikMechanika.Api.Data.Models;
+using NotatnikMechanika.Api.Repository.Interfaces.Base;
 using NotatnikMechanika.Shared.Models.Order;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using NotatnikMechanika.Data.Models;
-using NotatnikMechanika.Shared.Models.Commodity;
 
-namespace NotatnikMechanika.Repository.Interfaces
+namespace NotatnikMechanika.Api.Repository.Interfaces
 {
     public interface IOrderRepository : IRepositoryBase<Order>
     {

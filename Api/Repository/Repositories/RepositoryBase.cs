@@ -1,20 +1,20 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using NotatnikMechanika.Data;
-using NotatnikMechanika.Data.Models;
-using NotatnikMechanika.Repository.Interfaces.Base;
+using NotatnikMechanika.Api.Data;
+using NotatnikMechanika.Api.Data.Models;
+using NotatnikMechanika.Api.Repository.Interfaces.Base;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NotatnikMechanika.Repository.Repositories
+namespace NotatnikMechanika.Api.Repository.Repositories
 {
     public abstract class RepositoryBase<EntityType> : IRepositoryBase<EntityType> where EntityType : EntityBase, new()
     {
-        protected readonly NotatnikMechanikaDbContext DbContext;
+        protected readonly AppDbContext DbContext;
         protected readonly IMapper Mapper;
 
-        protected RepositoryBase(NotatnikMechanikaDbContext dbContext, IMapper mapper)
+        protected RepositoryBase(AppDbContext dbContext, IMapper mapper)
         {
             DbContext = dbContext;
             Mapper = mapper;
@@ -27,7 +27,7 @@ namespace NotatnikMechanika.Repository.Repositories
 
         public async Task CreateAsync(string userId, EntityType value)
         {
-            var entity = Mapper.Map<EntityType>(value);
+            EntityType entity = Mapper.Map<EntityType>(value);
             entity.UserId = userId;
 
             await DbContext.Set<EntityType>().AddAsync(entity);

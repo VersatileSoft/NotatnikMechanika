@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MVVMPackage.Core.Commands
+namespace MvvmPackage.Core.Commands
 {
     /// <summary>
     /// Implementation of an Async Command
@@ -27,10 +27,10 @@ namespace MVVMPackage.Core.Commands
                             Action<Exception> onException = null,
                             bool continueOnCapturedContext = false)
         {
-            this._execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            this._canExecute = canExecute;
-            this._onException = onException;
-            this._continueOnCapturedContext = continueOnCapturedContext;
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+            _onException = onException;
+            _continueOnCapturedContext = continueOnCapturedContext;
         }
 
         /// <summary>
@@ -99,10 +99,10 @@ namespace MVVMPackage.Core.Commands
                             Action<Exception> onException = null,
                             bool continueOnCapturedContext = false)
         {
-            this._execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            this._canExecute = canExecute;
-            this._onException = onException;
-            this._continueOnCapturedContext = continueOnCapturedContext;
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+            _onException = onException;
+            _continueOnCapturedContext = continueOnCapturedContext;
         }
 
         /// <summary>

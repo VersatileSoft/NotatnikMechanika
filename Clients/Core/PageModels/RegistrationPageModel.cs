@@ -1,10 +1,10 @@
-﻿using System;
-using MvvmPackage.Core;
+﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using MVVMPackage.Core.Commands;
+using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.User;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -39,7 +39,7 @@ namespace NotatnikMechanika.Core.PageModels
         {
             IsLoading = true;
 
-            var response = await _httpRequestService.SendPost(RegisterModel, AccountPaths.Register());
+            Response response = await _httpRequestService.SendPost(RegisterModel, AccountPaths.Register());
 
             switch (response.ResponseType)
             {

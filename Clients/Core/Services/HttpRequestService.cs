@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MvvmPackage.Core.Attributes;
+using Newtonsoft.Json;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
 using System;
@@ -22,8 +23,8 @@ namespace NotatnikMechanika.Core.Services
 
         public async Task<Response<ResponseModel>> SendGet<ResponseModel>(string path) where ResponseModel : new()
         {
-            var responseMessage = await _client.GetAsync(path);
-            var response = await ParseResponse<ResponseModel>(responseMessage).ConfigureAwait(false);
+            HttpResponseMessage responseMessage = await _client.GetAsync(path);
+            Response<ResponseModel> response = await ParseResponse<ResponseModel>(responseMessage).ConfigureAwait(false);
             Authorize?.Invoke(this, response);
             return response;
         }
@@ -35,10 +36,10 @@ namespace NotatnikMechanika.Core.Services
                 return FailureResponse<ResponseModel>(ResponseType.BadModelState);
             }
 
-            var myContent = JsonConvert.SerializeObject(model);
-            var content = new StringContent(myContent, Encoding.UTF8, "application/json");
-            var responseMessage = await _client.PostAsync(path, content);
-            var response = await ParseResponse<ResponseModel>(responseMessage).ConfigureAwait(false);
+            string myContent = JsonConvert.SerializeObject(model);
+            StringContent content = new StringContent(myContent, Encoding.UTF8, "application/json");
+            HttpResponseMessage responseMessage = await _client.PostAsync(path, content);
+            Response<ResponseModel> response = await ParseResponse<ResponseModel>(responseMessage).ConfigureAwait(false);
             Authorize?.Invoke(this, response);
             return response;
         }
@@ -50,18 +51,18 @@ namespace NotatnikMechanika.Core.Services
                 return FailureResponse(ResponseType.BadModelState);
             }
 
-            var myContent = JsonConvert.SerializeObject(model);
-            var content = new StringContent(myContent, Encoding.UTF8, "application/json");
-            var responseMessage = await _client.PostAsync(path, content);
-            var response = await ParseResponse(responseMessage).ConfigureAwait(false);
+            string myContent = JsonConvert.SerializeObject(model);
+            StringContent content = new StringContent(myContent, Encoding.UTF8, "application/json");
+            HttpResponseMessage responseMessage = await _client.PostAsync(path, content);
+            Response response = await ParseResponse(responseMessage).ConfigureAwait(false);
             Authorize?.Invoke(this, response);
             return response;
         }
 
         public async Task<Response> SendPost(string path)
         {
-            var responseMessage = await _client.PostAsync(path, null);
-            var response = await ParseResponse(responseMessage).ConfigureAwait(false);
+            HttpResponseMessage responseMessage = await _client.PostAsync(path, null);
+            Response response = await ParseResponse(responseMessage).ConfigureAwait(false);
             Authorize?.Invoke(this, response);
             return response;
         }
@@ -73,18 +74,18 @@ namespace NotatnikMechanika.Core.Services
                 return FailureResponse(ResponseType.BadModelState);
             }
 
-            var myContent = JsonConvert.SerializeObject(model);
-            var content = new StringContent(myContent, Encoding.UTF8, "application/json");
-            var responseMessage = await _client.PutAsync(path, content);
-            var response = await ParseResponse(responseMessage).ConfigureAwait(false);
+            string myContent = JsonConvert.SerializeObject(model);
+            StringContent content = new StringContent(myContent, Encoding.UTF8, "application/json");
+            HttpResponseMessage responseMessage = await _client.PutAsync(path, content);
+            Response response = await ParseResponse(responseMessage).ConfigureAwait(false);
             Authorize?.Invoke(this, response);
             return response;
         }
 
         public async Task<Response> SendDelete(string path)
         {
-            var responseMessage = await _client.DeleteAsync(path);
-            var response = await ParseResponse(responseMessage).ConfigureAwait(false);
+            HttpResponseMessage responseMessage = await _client.DeleteAsync(path);
+            Response response = await ParseResponse(responseMessage).ConfigureAwait(false);
             Authorize?.Invoke(this, response);
             return response;
         }

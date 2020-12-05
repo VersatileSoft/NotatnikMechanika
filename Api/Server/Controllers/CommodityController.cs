@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NotatnikMechanika.Server.Controllers.Base;
-using NotatnikMechanika.Service.Interfaces;
+using NotatnikMechanika.Api.Controllers.Base;
+using NotatnikMechanika.Api.Service.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Commodity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static NotatnikMechanika.Shared.ResponseBuilder;
 
-namespace NotatnikMechanika.Server.Controllers
+namespace NotatnikMechanika.Api.Controllers
 {
     [Authorize]
     [Route(CommodityPaths.Name)]
@@ -25,8 +25,10 @@ namespace NotatnikMechanika.Server.Controllers
         public async Task<ActionResult<Response<IEnumerable<CommodityModel>>>> AllAsync(int orderId)
         {
             if (User.Identity == null)
+            {
                 return Unauthorized();
-            
+            }
+
             return Ok(await _commodityService.AllAsync(User.Identity.Name, orderId));
         }
         
@@ -34,8 +36,10 @@ namespace NotatnikMechanika.Server.Controllers
         public async Task<ActionResult<Response<IEnumerable<CommodityModel>>>> ByOrderAsync(int orderId)
         {
             if (User.Identity == null)
+            {
                 return Unauthorized();
-            
+            }
+
             return Ok(await _commodityService.ByOrderAsync(User.Identity.Name, orderId));
         }
     }

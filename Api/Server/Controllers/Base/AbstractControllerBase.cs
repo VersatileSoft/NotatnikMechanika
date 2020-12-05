@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NotatnikMechanika.Service.Interfaces.Base;
+using NotatnikMechanika.Api.Extensions;
+using NotatnikMechanika.Api.Service.Interfaces.Base;
 using NotatnikMechanika.Shared;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static NotatnikMechanika.Shared.ResponseBuilder;
 
-namespace NotatnikMechanika.Server.Controllers.Base
+namespace NotatnikMechanika.Api.Controllers.Base
 {
     public abstract class AbstractControllerBase<TModel> : ControllerBase
     {
@@ -18,46 +19,31 @@ namespace NotatnikMechanika.Server.Controllers.Base
         [HttpGet(CrudPaths.AllPath)]
         public async Task<ActionResult<Response<IEnumerable<TModel>>>> AllAsync()
         {
-            if (User.Identity == null)
-                return Unauthorized();
-            
-            return Ok(await _serviceBase.AllAsync(User.Identity.Name));
+            return Ok(await _serviceBase.AllAsync(User.Id()));
         }
 
         [HttpGet(CrudPaths.ByIdPath)]
         public async Task<ActionResult<Response<TModel>>> ByIdAsync(int id)
         {
-            if (User.Identity == null)
-                return Unauthorized();
-            
-            return Ok(await _serviceBase.ByIdAsync(User.Identity.Name, id));
+            return Ok(await _serviceBase.ByIdAsync(User.Id(), id));
         }
 
         [HttpPost(CrudPaths.CreatePath)]
         public async Task<ActionResult<Response>> CreateAsync([FromBody] TModel value)
         {
-            if (User.Identity == null)
-                return Unauthorized();
-            
-            return Ok(await _serviceBase.CreateAsync(User.Identity.Name, value));
+            return Ok(await _serviceBase.CreateAsync(User.Id(), value));
         }
 
         [HttpPut(CrudPaths.UpdatePath)]
         public async Task<ActionResult<Response>> UpdateAsync(int id, [FromBody] TModel value)
         {
-            if (User.Identity == null)
-                return Unauthorized();
-            
-            return Ok(await _serviceBase.UpdateAsync(User.Identity.Name, id, value));
+            return Ok(await _serviceBase.UpdateAsync(User.Id(), id, value));
         }
 
         [HttpDelete(CrudPaths.DeletePath)]
         public async Task<ActionResult<Response>> DeleteAsync(int id)
         {   
-            if (User.Identity == null)
-                return Unauthorized();
-            
-            return Ok(await _serviceBase.DeleteAsync(User.Identity.Name, id));
+            return Ok(await _serviceBase.DeleteAsync(User.Id(), id));
         }
     }
 }

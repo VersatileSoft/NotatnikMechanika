@@ -1,12 +1,11 @@
-﻿using System;
-using MvvmPackage.Core;
+﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using MVVMPackage.Core.Commands;
+using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Car;
 using NotatnikMechanika.Shared.Models.Customer;
 using PropertyChanged;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -40,7 +39,7 @@ namespace NotatnikMechanika.Core.PageModels
 
         private async Task RemoveCarAction(int id)
         {
-            var response = await _httpRequestService.Delete<CarModel>(id);
+            Response response = await _httpRequestService.Delete<CarModel>(id);
 
             switch (response.ResponseType)
             {
@@ -66,7 +65,7 @@ namespace NotatnikMechanika.Core.PageModels
             IsLoading = true;
             CustomerModel.Id = Parameter;
 
-            var responseCustomer = await _httpRequestService.ById<CustomerModel>(CustomerModel.Id);
+            Response<CustomerModel> responseCustomer = await _httpRequestService.ById<CustomerModel>(CustomerModel.Id);
 
             switch (responseCustomer.ResponseType)
             {
@@ -86,7 +85,7 @@ namespace NotatnikMechanika.Core.PageModels
                     throw new ArgumentOutOfRangeException();
             }
 
-            var responseCars = await _httpRequestService.All<CarModel>();
+            Response<List<CarModel>> responseCars = await _httpRequestService.All<CarModel>();
 
             switch (responseCars.ResponseType)
             {

@@ -1,8 +1,10 @@
 ﻿@page "/orders"
+@using NotatnikMechanika.Client.Pages.Utils
 @using NotatnikMechanika.Core.PageModels
-@using MVVMPackage.Blazor
-@using NotatnikMechanika.Shared.Models.Order
+@using MvvmPackage.Blazor
+@using Microsoft.AspNetCore.Authorization
 @inherits PageBase<OrdersPageModel>
+@attribute [Authorize]
 
 @if (PageModel.IsLoading)
 {

@@ -1,14 +1,19 @@
 using Autofac;
 using AutoMapper;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NotatnikMechanika.Repository;
-using NotatnikMechanika.Service;
+using NotatnikMechanika.Api.Data;
+using NotatnikMechanika.Api.Data.Models;
+using NotatnikMechanika.Api.Repository;
+using NotatnikMechanika.Api.Service;
 
-namespace NotatnikMechanika.Server
+namespace NotatnikMechanika.Api
 {
     public class Startup
     {
@@ -22,12 +27,26 @@ namespace NotatnikMechanika.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<AppSettings>(options => Configuration.GetSection("AppSettings").Bind(options));
-            services.AddDatabase(Configuration);
-            services.AddJwtAuthentication(Configuration);
+
+            services.AddDbContext<AppDbContext>(options =>
+                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")) // PublishConnection, DefaultConnection, DockerConnection             
+             );
+
+            services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<AppDbContext>();
+
+            services.AddIdentityServer()
+                .AddApiAuthorization<ApplicationUser, AppDbContext>();
+
+            services.AddAuthentication()
+                .AddIdentityServerJwt();
+
             services.AddSingleton(new MapperConfiguration(mc => mc.AddProfile(new MappingProfile())).CreateMapper());
             services.AddControllersWithViews();
-            services.AddRazorPages();
             services.AddSwaggerGen();
+            services.AddRazorPages();
         }
 
         public void ConfigureContainer(ContainerBuilder containerBuilder)
@@ -46,22 +65,21 @@ namespace NotatnikMechanika.Server
             else
             {
                 app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });
-            
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
+
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
             app.UseRouting();
 
+            app.UseIdentityServer();
             app.UseAuthentication();
             app.UseAuthorization();
 

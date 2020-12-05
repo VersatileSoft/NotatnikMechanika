@@ -1,13 +1,11 @@
 ﻿using Blazor.Extensions.Logging;
 using Blazored.LocalStorage;
 using MatBlazor;
-using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MVVMPackage.Blazor;
-using NotatnikMechanika.Client.Services;
+using MvvmPackage.Blazor;
 using NotatnikMechanika.Core;
-using NotatnikMechanika.Core.Interfaces;
 using System.Net.Http;
 
 namespace NotatnikMechanika.Client
@@ -16,15 +14,18 @@ namespace NotatnikMechanika.Client
     {
         protected override void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient("NotatnikMechanika.Server", client => client.BaseAddress = BaseAddress);
-            services.AddSingleton(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("NotatnikMechanika.Server"));
-            services.AddBlazoredLocalStorage();
-            services.AddAuthorizationCore();
-            services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
+            services.AddHttpClient("NotatnikMechanika.Server", client => client.BaseAddress = BaseAddress)
+                .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+            services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("NotatnikMechanika.Server"));
+
+            services.AddApiAuthorization();
+
             services.AddLogging(builder => builder
                 .AddBrowserConsole()
                 .SetMinimumLevel(LogLevel.Warning)
             );
+
+            services.AddBlazoredLocalStorage();
             services.AddMatToaster(config =>
             {
                 config.Position = MatToastPosition.TopRight;
@@ -34,12 +35,6 @@ namespace NotatnikMechanika.Client
                 config.MaximumOpacity = 95;
                 config.VisibleStateDuration = 3000;
             });
-        }
-
-        protected override void AppStart()
-        {
-            IAuthService authService = Services.GetService<IAuthService>();
-            authService.AuthChanged += (s, e) => ((ApiAuthenticationStateProvider)Services.GetService<AuthenticationStateProvider>()).StateChanged();
         }
     }
 }

@@ -15,21 +15,31 @@ namespace NotatnikMechanika.Core.Interfaces
         Task<Response> SendPost(string path);
         Task<Response> SendUpdate<SendModel>(SendModel model, string path) where SendModel : ValidateModelBase;
         Task<Response> SendDelete(string path);
-        
+
         // CRUD shortcut
-        public Task<Response<ResponseModel>> ById<ResponseModel>(int id) where ResponseModel : new() =>
-            SendGet<ResponseModel>(CrudPaths.ById<ResponseModel>(id));
-        
-        public Task<Response<List<ResponseModel>>> All<ResponseModel>() where ResponseModel : new() =>
-            SendGet<List<ResponseModel>>(CrudPaths.All<ResponseModel>());
-        
-        public Task<Response> Create<SendModel>(SendModel model) where SendModel : ValidateModelBase =>
-            SendPost(model, CrudPaths.Create<SendModel>());
-        
-        public Task<Response> Update<SendModel>(SendModel model, int id) where SendModel : ValidateModelBase =>
-            SendUpdate(model, CrudPaths.Update<SendModel>(id));
-        
-        public Task<Response> Delete<DeleteModel>(int id) =>
-            SendDelete(CrudPaths.Delete<DeleteModel>(id));
+        public Task<Response<ResponseModel>> ById<ResponseModel>(int id) where ResponseModel : new()
+        {
+            return SendGet<ResponseModel>(CrudPaths.ById<ResponseModel>(id));
+        }
+
+        public Task<Response<List<ResponseModel>>> All<ResponseModel>() where ResponseModel : new()
+        {
+            return SendGet<List<ResponseModel>>(CrudPaths.All<ResponseModel>());
+        }
+
+        public Task<Response> Create<SendModel>(SendModel model) where SendModel : ValidateModelBase
+        {
+            return SendPost(model, CrudPaths.Create<SendModel>());
+        }
+
+        public Task<Response> Update<SendModel>(SendModel model, int id) where SendModel : ValidateModelBase
+        {
+            return SendUpdate(model, CrudPaths.Update<SendModel>(id));
+        }
+
+        public Task<Response> Delete<DeleteModel>(int id)
+        {
+            return SendDelete(CrudPaths.Delete<DeleteModel>(id));
+        }
     }
 }

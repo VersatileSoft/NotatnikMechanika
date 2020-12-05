@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-namespace NotatnikMechanika.Repository
+namespace NotatnikMechanika.Api.Repository
 {
     public class RepositoryModule : Module
     {

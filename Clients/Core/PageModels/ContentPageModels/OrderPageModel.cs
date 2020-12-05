@@ -1,6 +1,6 @@
 ﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using MVVMPackage.Core.Commands;
+using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Commodity;
@@ -57,12 +57,19 @@ namespace NotatnikMechanika.Core.PageModels
 
         public override async Task Initialize()
         {
-            if (IsLoading) return;
+            if (IsLoading)
+            {
+                return;
+            }
 
             IsLoading = true;
 
             OrderModel = await InitHelper<OrderExtendedModel>(OrderPaths.Extended(Parameter));
-            if (OrderModel == null) return;
+            if (OrderModel == null)
+            {
+                return;
+            }
+
             Services = await InitHelper<List<ServiceModel>>(ServicePaths.ByOrder(OrderModel.Id));
             Commodities = await InitHelper<List<CommodityModel>>(CommodityPaths.ByOrder(OrderModel.Id));
             
@@ -76,7 +83,7 @@ namespace NotatnikMechanika.Core.PageModels
         
         private async Task<TResponseContent> InitHelper<TResponseContent>(string path) where TResponseContent : class, new()
         {
-            var response = await _httpRequestService.SendGet<TResponseContent>(path);
+            Response<TResponseContent> response = await _httpRequestService.SendGet<TResponseContent>(path);
 
             switch (response.ResponseType)
             {

@@ -1,89 +1,18 @@
 ﻿@inherits LayoutComponentBase
-@using NotatnikMechanika.Client.Utils
-@using MvvmPackage.Core.Services.Interfaces
-@using MVVMPackage.Blazor.Services
-@implements IDisposable
-@inject IMvNavigationService NavigationService
-@inject NavigationManager NavigationManager
 
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
 
-<div class="main-layout">
+    <div class="main">
+        <div class="top-row px-4 auth">
+            <LoginDisplay />
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
 
-    @if(NavigationService is NavigationService navigationService)
-    {
-        <MatDialog Class="dialog" @bind-IsOpen="navigationService.DialogIsOpen" ChildContent="@navigationService.DialogContent" />
-    }
-    
-    <AuthorizeView>
-        <Authorized>
-            <MatAppBarContainer Class="app-bar">
-                <MatAppBar Fixed="true">
-                    <MatAppBarRow>
-                        <MatAppBarSection>
-                            <MatIconButton Icon="menu" OnClick="@(_ => ButtonClicked())"></MatIconButton>
-                            <MatAppBarTitle>Notatnik mechanika</MatAppBarTitle>
-                        </MatAppBarSection>
-                    </MatAppBarRow>
-                </MatAppBar>
-                <MatAppBarContent>
-                    <MatDrawerContainer Class="drawer-container">
-                        <MatHidden Breakpoint="@MatBreakpoint.SM" Direction="@MatHiddenDirection.Up">
-                            <ChildContent>
-                                <MatDrawer @bind-Opened="@_opened" Mode="@MatDrawerMode.Modal">
-                                    <NavMenu />
-                                </MatDrawer>
-                            </ChildContent>
-
-                            <ElseContent>
-                                <MatDrawer @bind-Opened="@_opened" Mode="@MatDrawerMode.Dismissible">
-                                    <NavMenu />
-                                </MatDrawer>
-                            </ElseContent>
-                        </MatHidden>
-                        <MatDrawerContent Class="page-content">
-                            @Body
-                        </MatDrawerContent>
-                    </MatDrawerContainer>
-                </MatAppBarContent>
-            </MatAppBarContainer>
-        </Authorized>
-        <NotAuthorized>
-            <Redirect Path="/" />
-        </NotAuthorized>
-    </AuthorizeView>
+        <div class="content px-4">
+            @Body
+        </div>
+    </div>
 </div>
-
-@code
-{
-    bool _opened;
-
-    void ButtonClicked()
-    {
-        _opened = !_opened;
-    }
-
-    public void Dispose()
-    {
-        if (NavigationService is NavigationService navigationService)
-        {
-            navigationService.DialogStateChanged -= DialogStateChanged;
-        }
-    }
-
-    private void DialogStateChanged(object sender, bool isOpen)
-    {
-        StateHasChanged();
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if(firstRender && NavigationService is NavigationService navigationService)
-        {
-            navigationService.DialogStateChanged += DialogStateChanged;
-        }
-        base.OnAfterRender(firstRender);
-    }
-}
-
-
-

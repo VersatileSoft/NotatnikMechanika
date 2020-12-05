@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NotatnikMechanika.Server.Controllers.Base;
-using NotatnikMechanika.Service.Interfaces;
+using NotatnikMechanika.Api.Controllers.Base;
+using NotatnikMechanika.Api.Service.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Customer;
 
-namespace NotatnikMechanika.Server.Controllers
+namespace NotatnikMechanika.Api.Controllers
 {
     [Authorize]
     [Route(CustomerPaths.Name)]

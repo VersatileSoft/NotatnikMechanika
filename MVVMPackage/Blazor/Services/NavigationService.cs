@@ -6,7 +6,7 @@ using System;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace MVVMPackage.Blazor.Services
+namespace MvvmPackage.Blazor.Services
 {
     [SingleInstance]
     public class NavigationService : IMvNavigationService
@@ -24,7 +24,11 @@ namespace MVVMPackage.Blazor.Services
             get => _dialogIsOpen;
             set
             {
-                if (value == _dialogIsOpen) return;
+                if (value == _dialogIsOpen)
+                {
+                    return;
+                }
+
                 _dialogIsOpen = value;
                 DialogStateChanged?.Invoke(this, value);
             }
@@ -40,7 +44,7 @@ namespace MVVMPackage.Blazor.Services
 
         public async Task NavigateToAsync<TPageModel>() where TPageModel : PageModelBase
         {
-            if (IsDialog<TPageModel>(out var pageType))
+            if (IsDialog<TPageModel>(out Type pageType))
             {
                 await OpenDialog<TPageModel>(pageType);
             }
@@ -52,7 +56,7 @@ namespace MVVMPackage.Blazor.Services
 
         public async Task NavigateToAsync<TPageModel>(int parameter) where TPageModel : PageModelBase
         {
-            if (IsDialog<TPageModel>(out var dialogType))
+            if (IsDialog<TPageModel>(out Type dialogType))
             {
                 await OpenDialog<TPageModel>(dialogType, parameter);
             }
@@ -64,7 +68,11 @@ namespace MVVMPackage.Blazor.Services
 
         private async Task OpenDialog<TPageModel>(Type dialogType, int parameter = 0) where TPageModel : PageModelBase
         {
-            if(!(Activator.CreateInstance(dialogType) is PageBase<TPageModel> dialog)) return;
+            if(!(Activator.CreateInstance(dialogType) is PageBase<TPageModel> dialog))
+            {
+                return;
+            }
+
             await dialog.DialogInitialize(_services, parameter);
             dialog.PageModel.PropertyChanged += (s, e) => DialogStateChanged?.Invoke(this, DialogIsOpen);
             DialogContent = dialog.RenderFragment;
@@ -73,15 +81,17 @@ namespace MVVMPackage.Blazor.Services
 
         private static bool IsDialog<TPageModel>(out Type pageType)
         {
-            var types = IoC.PlatformProjectAssembly.GetTypes();
-            var pageName = PageName<TPageModel>();
+            pageType = null;
+            /*Type[] types = IoC.PlatformProjectAssembly.GetTypes();
+            string pageName = PageName<TPageModel>();
             pageType = Array.Find(types, t => t.Name == pageName);
-            return pageType?.GetCustomAttribute<DisplayDialogAttribute>() != null;
+            return pageType?.GetCustomAttribute<DisplayDialogAttribute>() != null;*/
+            return false;
         }
 
         private static string PageName<TPageModel>()
         {
-            var vmName = typeof(TPageModel).Name;
+            string vmName = typeof(TPageModel).Name;
             return vmName.EndsWith("PageModel")
                 ? vmName.Replace("PageModel", "")
                 : vmName;

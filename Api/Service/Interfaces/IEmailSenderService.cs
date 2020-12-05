@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace NotatnikMechanika.Service.Interfaces
+namespace NotatnikMechanika.Api.Service.Interfaces
 {
     public interface IEmailSenderService
     {

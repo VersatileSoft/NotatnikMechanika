@@ -4,24 +4,24 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using NotatnikMechanika.Data;
+using NotatnikMechanika.Api.Data;
 using System;
 using System.Threading.Tasks;
 
-namespace NotatnikMechanika.Server
+namespace NotatnikMechanika.Api
 {
     public class Program
     {
         public static async Task Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
+            IHost host = CreateHostBuilder(args).Build();
 
-            using var scope = host.Services.CreateScope();
-            var services = scope.ServiceProvider;
+            using IServiceScope scope = host.Services.CreateScope();
+            IServiceProvider services = scope.ServiceProvider;
 
             try
             {
-                var dbContext = services.GetRequiredService<NotatnikMechanikaDbContext>();
+                var dbContext = services.GetRequiredService<AppDbContext>();
                 if (dbContext.Database.IsSqlServer())
                 {
                     dbContext.Database.Migrate();
@@ -29,7 +29,7 @@ namespace NotatnikMechanika.Server
             }
             catch (Exception ex)
             {
-                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+                ILogger<Program> logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
                 logger.LogError(ex, "An error occurred while migrating or seeding the database.");
 
@@ -46,8 +46,7 @@ namespace NotatnikMechanika.Server
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                })
-                .UseServiceProviderFactory(new AutofacServiceProviderFactory());
+                }).UseServiceProviderFactory(new AutofacServiceProviderFactory());
         }
     }
 }

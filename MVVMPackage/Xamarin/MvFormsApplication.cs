@@ -1,33 +1,27 @@
 ﻿using Autofac;
 using MvvmPackage.Core;
-using MvvmPackage.Core.Services.Interfaces;
 using MvvmPackage.Xamarin.Services.Interfaces;
 using Xamarin.Forms;
 
 namespace MvvmPackage.Xamarin
 {
-    public abstract class MvFormsApplication<TMainPageService> : Application where TMainPageService : IMainPageService
+    public abstract class MvFormsApplication<CoreApp> : Application where CoreApp : CoreApplicationBase, new()
     {
-        private readonly IMainPageService _mainPageService;
-        private readonly IFormsPageActivatorService _pageActivatorService;
 
         protected MvFormsApplication()
         {
-            IoC.PlatformProjectAssembly = GetType().Assembly;
-            IoC.CoreProjectAssembly = typeof(TMainPageService).Assembly;
-            IoC.PlatformPackageProjectAssembly = typeof(MvFormsApplication<TMainPageService>).Assembly;
-            IoC.RegisterTypes(RegisterTypes);
-
-            _pageActivatorService = IoC.Container.Resolve<IFormsPageActivatorService>();
-            _mainPageService = IoC.Container.Resolve<IMainPageService>();
+            CoreApplicationBase.CreateApp<CoreApp>(new[]
+                { 
+                    typeof(MvFormsApplication<CoreApp>).Assembly, 
+                    GetType().Assembly
+                });
+            MainPage = IoC.Container.Resolve<IFormsPageActivatorService>().CreatePageFromPageModel(CoreApplicationBase.Instance.MainPageModelType);
         }
 
-        protected virtual void RegisterTypes(ContainerBuilder builder) { }
-
-        protected void LoadMainPage()
+        protected override async void OnStart()
         {
-            var page = _pageActivatorService.CreatePageFromPageModel(_mainPageService.MainPageModelType());
-            MainPage = page is Shell ? page : new NavigationPage(page);
+            await CoreApplicationBase.Instance.OnStart();
+            base.OnStart();
         }
     }
 }

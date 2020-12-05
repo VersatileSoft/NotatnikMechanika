@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace NotatnikMechanika.Repository.Interfaces.Base
+namespace NotatnikMechanika.Api.Repository.Interfaces.Base
 {
     public interface IRepositoryBase<TEntity>
     {

@@ -1,10 +1,10 @@
-﻿using System;
-using MvvmPackage.Core;
+﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using MVVMPackage.Core.Commands;
+using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
 using PropertyChanged;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -40,7 +40,7 @@ namespace NotatnikMechanika.Core.PageModels
         private async Task AddAction()
         {
             IsLoading = true;
-            var response = await HttpRequestService.Create(Model);
+            Response response = await HttpRequestService.Create(Model);
 
             switch (response.ResponseType)
             {

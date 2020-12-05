@@ -1,19 +1,18 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using NotatnikMechanika.Data;
-using NotatnikMechanika.Data.Models;
-using NotatnikMechanika.Repository.Interfaces;
+using NotatnikMechanika.Api.Data;
+using NotatnikMechanika.Api.Data.Models;
+using NotatnikMechanika.Api.Repository.Interfaces;
 using NotatnikMechanika.Shared.Models.Order;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using NotatnikMechanika.Shared.Models.Commodity;
 
-namespace NotatnikMechanika.Repository.Repositories
+namespace NotatnikMechanika.Api.Repository.Repositories
 {
     public class OrderRepository : RepositoryBase<Order>, IOrderRepository
     {
-        public OrderRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public OrderRepository(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         { }
 
         public async Task AddCommodityToOrder(int orderId, Commodity commodity)

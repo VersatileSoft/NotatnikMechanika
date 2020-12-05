@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-namespace NotatnikMechanika.Service
+namespace NotatnikMechanika.Api.Service
 {
     public class ServiceModule : Module
     {

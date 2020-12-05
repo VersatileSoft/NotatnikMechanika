@@ -1,10 +1,10 @@
-﻿using NotatnikMechanika.Service.Interfaces.Base;
+﻿using NotatnikMechanika.Api.Service.Interfaces.Base;
 using NotatnikMechanika.Shared.Models.Commodity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static NotatnikMechanika.Shared.ResponseBuilder;
 
-namespace NotatnikMechanika.Service.Interfaces
+namespace NotatnikMechanika.Api.Service.Interfaces
 {
     public interface ICommodityService : IServiceBase<CommodityModel>
     {

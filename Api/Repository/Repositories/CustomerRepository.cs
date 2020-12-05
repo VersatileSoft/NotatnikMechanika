@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
-using NotatnikMechanika.Data;
-using NotatnikMechanika.Data.Models;
-using NotatnikMechanika.Repository.Interfaces;
-using NotatnikMechanika.Shared.Models.Customer;
+using NotatnikMechanika.Api.Data;
+using NotatnikMechanika.Api.Data.Models;
+using NotatnikMechanika.Api.Repository.Interfaces;
 
-namespace NotatnikMechanika.Repository.Repositories
+namespace NotatnikMechanika.Api.Repository.Repositories
 {
     public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
     {
-        public CustomerRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public CustomerRepository(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
     }

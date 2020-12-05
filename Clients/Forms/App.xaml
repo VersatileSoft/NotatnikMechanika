@@ -1,7 +1,7 @@
 ﻿<m:MvFormsApplication
     mc:Ignorable="d"
     x:Class="NotatnikMechanika.Forms.App"
-    x:TypeArguments="core:MainPageService"
+    x:TypeArguments="core:CoreApplication"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:core="clr-namespace:NotatnikMechanika.Core;assembly=NotatnikMechanika.Core"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"

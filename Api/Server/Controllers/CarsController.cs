@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NotatnikMechanika.Server.Controllers.Base;
-using NotatnikMechanika.Service.Interfaces;
+using NotatnikMechanika.Api.Controllers.Base;
+using NotatnikMechanika.Api.Service.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Car;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static NotatnikMechanika.Shared.ResponseBuilder;
 
-namespace NotatnikMechanika.Server.Controllers
+namespace NotatnikMechanika.Api.Controllers
 {
     [Authorize]
     [Route(CarPaths.Name)]
@@ -25,8 +25,10 @@ namespace NotatnikMechanika.Server.Controllers
         public async Task<ActionResult<Response<IEnumerable<CarModel>>>> ByCustomerAsync(int customerId)
         {
             if (User.Identity == null)
+            {
                 return Unauthorized();
-            
+            }
+
             return Ok(await _carService.ByCustomerAsync(User.Identity.Name, customerId));
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace MVVMPackage.Core.Commands
+namespace MvvmPackage.Core.Commands
 {
     internal static class CommandUtils
     {
@@ -21,7 +21,7 @@ namespace MVVMPackage.Core.Commands
                 return true;
             }
 
-            var t = typeof(T);
+            Type t = typeof(T);
 
             // The parameter is null. Is T Nullable?
             if (Nullable.GetUnderlyingType(t) != null)

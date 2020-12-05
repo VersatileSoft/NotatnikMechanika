@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace NotatnikMechanika.Forms.DataTemplates
 {
@@ -43,13 +38,16 @@ namespace NotatnikMechanika.Forms.DataTemplates
         
         private static void TitlePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (DropdownFrame)bindable;
+            DropdownFrame control = (DropdownFrame)bindable;
             control.TitleLabel.Text = newValue.ToString();
         }
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            if(_detailsHeight == 0) _detailsHeight = Details.Height;
+            if(_detailsHeight == 0)
+            {
+                _detailsHeight = Details.Height;
+            }
 
             void Callback(double input)
             {

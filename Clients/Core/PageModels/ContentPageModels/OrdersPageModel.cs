@@ -1,11 +1,11 @@
-﻿using System;
-using MvvmPackage.Core;
+﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using MVVMPackage.Core.Commands;
+using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Order;
 using PropertyChanged;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -42,7 +42,7 @@ namespace NotatnikMechanika.Core.PageModels
 
         private async Task RemoveOrderAction(int id)
         {
-            var response = await _httpRequestService.Delete<OrderModel>(id);
+            Response response = await _httpRequestService.Delete<OrderModel>(id);
 
             switch (response.ResponseType)
             {
@@ -67,7 +67,7 @@ namespace NotatnikMechanika.Core.PageModels
         public override async Task Initialize()
         {
             IsLoading = true;
-            var response = await _httpRequestService.SendGet<List<OrderExtendedModel>>(OrderPaths.Extended(false));
+            Response<List<OrderExtendedModel>> response = await _httpRequestService.SendGet<List<OrderExtendedModel>>(OrderPaths.Extended(false));
 
             switch (response.ResponseType)
             {

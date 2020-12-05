@@ -1,10 +1,10 @@
-﻿using System;
-using MvvmPackage.Core;
+﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using MVVMPackage.Core.Commands;
+using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Commodity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,12 +39,12 @@ namespace NotatnikMechanika.Core.PageModels
             Response response;
             if (commodityModel.IsInOrder)
             {
-                var path = OrderPaths.DeleteCommodity(_orderId, commodityModel.Id);
+                string path = OrderPaths.DeleteCommodity(_orderId, commodityModel.Id);
                 response = await _httpRequestService.SendDelete(path);
             }
             else
             {
-                var path = OrderPaths.AddCommodity(_orderId, commodityModel.Id);
+                string path = OrderPaths.AddCommodity(_orderId, commodityModel.Id);
                 response = await _httpRequestService.SendPost(path);
             }
 
@@ -75,8 +75,8 @@ namespace NotatnikMechanika.Core.PageModels
         {
             IsLoading = true;
             _orderId = Parameter;
-            var path = CommodityPaths.All(_orderId);
-            var response = await _httpRequestService.SendGet<List<CommodityModel>>(path);
+            string path = CommodityPaths.All(_orderId);
+            Response<List<CommodityModel>> response = await _httpRequestService.SendGet<List<CommodityModel>>(path);
 
             switch (response.ResponseType)
             {

@@ -19,7 +19,7 @@ namespace MvvmPackage.Wpf.Pages
         protected void Init()
         {
             _wpfPageActivatorService = IoC.Container.Resolve<IWpfPageActivatorService>();
-            var menuPage = (IMasterUserControl)_wpfPageActivatorService.CreatePageFromPageModel<TMasterPageModel>();
+            IMasterUserControl menuPage = (IMasterUserControl)_wpfPageActivatorService.CreatePageFromPageModel<TMasterPageModel>();
             menuPage.MenuButtonClick += MainPage_MenuButtonClick;
             MasterContent = (ContentControl)menuPage;
             DetailContent = _wpfPageActivatorService.CreatePageFromPageModel<TDetailPageModel>();

@@ -1,11 +1,10 @@
-﻿using System;
-using MvvmPackage.Core;
+﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using MVVMPackage.Core.Commands;
+using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Service;
 using PropertyChanged;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -36,7 +35,7 @@ namespace NotatnikMechanika.Core.PageModels
         }
         private async Task RemoveServiceAction(int id)
         {
-            var response = await _httpRequestService.Delete<ServiceModel>(id);
+            Response response = await _httpRequestService.Delete<ServiceModel>(id);
 
             switch (response.ResponseType)
             {
@@ -61,7 +60,7 @@ namespace NotatnikMechanika.Core.PageModels
         public override async Task Initialize()
         {
             IsLoading = true;
-            var response = await _httpRequestService.All<ServiceModel>();
+            Response<List<ServiceModel>> response = await _httpRequestService.All<ServiceModel>();
 
             switch (response.ResponseType)
             {

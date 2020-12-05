@@ -16,7 +16,7 @@ namespace MvvmPackage.Wpf.Services
 
         public UserControl CreatePageFromPageModel<TPageModel>(int parameter) where TPageModel : PageModelBase
         {
-            var page = (MvWpfPage<TPageModel>)CreatePageFromPageModel<TPageModel>();
+            MvWpfPage<TPageModel> page = (MvWpfPage<TPageModel>)CreatePageFromPageModel<TPageModel>();
             if (page == null)
             {
                 throw new NullReferenceException("Could not cast page");
@@ -27,8 +27,8 @@ namespace MvvmPackage.Wpf.Services
 
         public UserControl CreatePageFromPageModel(Type pageModelType)
         {
-            var pageName = pageModelType.Name.Replace("Model", "");
-            var type = PlatformProjectAssembly.GetTypes().AsEnumerable().FirstOrDefault(t => t.Name == pageName);
+            string pageName = pageModelType.Name.Replace("Model", "");
+            Type type = CoreApplicationBase.Assemblies[1].GetTypes().AsEnumerable().FirstOrDefault(t => t.Name == pageName);
             return (UserControl)Activator.CreateInstance(type ?? typeof(UserControl));
         }
 

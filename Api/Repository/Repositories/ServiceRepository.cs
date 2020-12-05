@@ -1,18 +1,18 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using NotatnikMechanika.Data;
-using NotatnikMechanika.Data.Models;
-using NotatnikMechanika.Repository.Interfaces;
+using NotatnikMechanika.Api.Data;
+using NotatnikMechanika.Api.Data.Models;
+using NotatnikMechanika.Api.Repository.Interfaces;
 using NotatnikMechanika.Shared.Models.Service;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NotatnikMechanika.Repository.Repositories
+namespace NotatnikMechanika.Api.Repository.Repositories
 {
     public class ServiceRepository : RepositoryBase<Service>, IServiceRepository
     {
-        public ServiceRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public ServiceRepository(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 

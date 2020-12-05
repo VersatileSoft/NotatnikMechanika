@@ -1,4 +1,4 @@
-﻿namespace NotatnikMechanika.Data.Models
+﻿namespace NotatnikMechanika.Api.Data.Models
 {
     public class OrderToCommodity
     {

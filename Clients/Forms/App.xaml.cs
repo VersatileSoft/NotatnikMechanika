@@ -1,13 +1,7 @@
-﻿using Autofac;
-using MvvmPackage.Core;
-using MvvmPackage.Xamarin;
+﻿using MvvmPackage.Xamarin;
 using NotatnikMechanika.Core;
-using NotatnikMechanika.Core.Interfaces;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System;
-using System.Net.Http;
-using NotatnikMechanika.Forms.Pages;
 
 [assembly: ExportFont("Resources/Fonts/GoogleSans-Bold.ttf")]
 [assembly: ExportFont("Resources/Fonts/GoogleSans-BoldItalic.ttf")]
@@ -18,25 +12,16 @@ using NotatnikMechanika.Forms.Pages;
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace NotatnikMechanika.Forms
 {
-    public partial class App : MvFormsApplication<MainPageService>
+    public partial class App : MvFormsApplication<CoreApplication>
     {
         public App()
         {
             InitializeComponent();
-            LoadMainPage();
-        }
-        protected override void RegisterTypes(ContainerBuilder builder)
-        {
-            builder.RegisterInstance(new HttpClient
-            {
-                BaseAddress = new Uri("https://www.mechanicstoolkit.tk/")
-            });
         }
 
         protected override void OnStart()
         {
-            IAuthService authService = IoC.Container.Resolve<IAuthService>();
-            authService.AuthChanged += (s, e) => LoadMainPage();
+            // Handle when your app starts
         }
 
         protected override void OnSleep()

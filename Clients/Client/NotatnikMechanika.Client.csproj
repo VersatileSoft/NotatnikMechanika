@@ -1,29 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="compilerconfig.json" />
-    <Content Remove="wwwroot\AppIcon_Light.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="compilerconfig.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="compilerconfig.json" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Blazor.Extensions.Logging" Version="1.1.1" />
-    <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
-    
+    <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />    
     <PackageReference Include="MatBlazor" Version="2.7.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
@@ -34,13 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Api\Shared\NotatnikMechanika.Shared.csproj" />
-    <ProjectReference Include="..\..\MVVMPackage\Blazor\MVVMPackage.Blazor.csproj" />
+    <ProjectReference Include="..\..\MvvmPackage\Blazor\MvvmPackage.Blazor.csproj" />
     <ProjectReference Include="..\Core\NotatnikMechanika.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="wwwroot\AppIcon_Light.png" />
-    <Resource Include="wwwroot\images\app_icon.png" />
   </ItemGroup>
 </Project>

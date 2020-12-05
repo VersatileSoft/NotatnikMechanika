@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using NotatnikMechanika.Data.Models;
+using NotatnikMechanika.Api.Data.Models;
 using NotatnikMechanika.Shared.Models.Car;
 using NotatnikMechanika.Shared.Models.Commodity;
 using NotatnikMechanika.Shared.Models.Customer;
 using NotatnikMechanika.Shared.Models.Order;
 using NotatnikMechanika.Shared.Models.Service;
 
-namespace NotatnikMechanika.Server
+namespace NotatnikMechanika.Api
 {
     public class MappingProfile : Profile
     {

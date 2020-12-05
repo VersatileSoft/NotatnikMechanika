@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Options;
-using NotatnikMechanika.Service.Interfaces;
+using NotatnikMechanika.Api.Service.Interfaces;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
 
-namespace NotatnikMechanika.Service.Services
+namespace NotatnikMechanika.Api.Service.Services
 {
     public class EmailSenderService : IEmailSenderService
     {
@@ -17,8 +17,8 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            var client = new SendGridClient(Options.SendGridKey);
-            var msg = new SendGridMessage()
+            SendGridClient client = new SendGridClient(Options.SendGridKey);
+            SendGridMessage msg = new SendGridMessage()
             {
                 From = new EmailAddress(Options.EmailSender, Options.SenderName),
                 Subject = subject,

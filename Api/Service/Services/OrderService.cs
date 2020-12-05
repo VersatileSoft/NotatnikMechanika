@@ -1,14 +1,14 @@
-﻿using NotatnikMechanika.Repository.Interfaces;
-using NotatnikMechanika.Service.Interfaces;
+﻿using AutoMapper;
+using NotatnikMechanika.Api.Data.Models;
+using NotatnikMechanika.Api.Repository.Interfaces;
+using NotatnikMechanika.Api.Service.Interfaces;
 using NotatnikMechanika.Service.Services.Base;
 using NotatnikMechanika.Shared.Models.Order;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
-using NotatnikMechanika.Data.Models;
 using static NotatnikMechanika.Shared.ResponseBuilder;
 
-namespace NotatnikMechanika.Service.Services
+namespace NotatnikMechanika.Api.Service.Services
 {
     public class OrderService : ServiceBase<OrderModel, Order>, IOrderService
     {
@@ -25,7 +25,7 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<Response> AddCommodityToOrder(string userId, int orderId, int commodityId)
         {
-            var errors = new List<string>();
+            List<string> errors = new List<string>();
 
             if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
             {
@@ -54,7 +54,7 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<Response> AddServiceToOrder(string userId, int orderId, int serviceId)
         {
-            var errors = new List<string>();
+            List<string> errors = new List<string>();
 
             if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
             {
@@ -83,7 +83,7 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<Response> DeleteCommodityFromOrder(string userId, int orderId, int commodityId)
         {
-            var errors = new List<string>();
+            List<string> errors = new List<string>();
 
             if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
             {
@@ -112,7 +112,7 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<Response> DeleteServiceFromOrder(string userId, int orderId, int serviceId)
         {
-            var errors = new List<string>();
+            List<string> errors = new List<string>();
 
             if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
             {
@@ -147,8 +147,10 @@ namespace NotatnikMechanika.Service.Services
         public async Task<Response<OrderExtendedModel>> ExtendedAsync(string userId, int id, bool archived)
         {
             if (!await _orderRepository.CheckIfUserMatch(userId, id))
+            {
                 return FailureResponse<OrderExtendedModel>(ResponseType.Failure, new List<string> {NotAllowedError});
-            
+            }
+
             return SuccessResponse(await _orderRepository.ExtendedAsync(id, archived));
         }
     }

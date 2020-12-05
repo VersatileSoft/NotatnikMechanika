@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using static System.String;
 
-namespace MVVMPackage.Core
+namespace MvvmPackage.Core
 {
     /// <summary>
     /// Weak event manager to subscribe and unsubscribe from events.
@@ -63,14 +63,14 @@ namespace MVVMPackage.Core
         /// <param name="eventName">Name of the event.</param>
         public void HandleEvent(object sender, object args, string eventName)
         {
-            var toRaise = new List<(object subscriber, MethodInfo handler)>();
-            var toRemove = new List<Subscription>();
+            List<(object subscriber, MethodInfo handler)> toRaise = new List<(object subscriber, MethodInfo handler)>();
+            List<Subscription> toRemove = new List<Subscription>();
 
-            if (_eventHandlers.TryGetValue(eventName, out var target))
+            if (_eventHandlers.TryGetValue(eventName, out List<Subscription> target))
             {
-                foreach (var subscription in target)
+                foreach (Subscription subscription in target)
                 {
-                    var isStatic = subscription.Subscriber == null;
+                    bool isStatic = subscription.Subscriber == null;
                     if (isStatic)
                     {
                         // For a static method, we'll just pass null as the first parameter of MethodInfo.Invoke
@@ -78,7 +78,7 @@ namespace MVVMPackage.Core
                         continue;
                     }
 
-                    var subscriber = subscription.Subscriber?.Target;
+                    object subscriber = subscription.Subscriber?.Target;
 
                     if (subscriber is null)
                     {
@@ -91,15 +91,15 @@ namespace MVVMPackage.Core
                     }
                 }
 
-                foreach (var subscription in toRemove)
+                foreach (Subscription subscription in toRemove)
                 {
                     target.Remove(subscription);
                 }
             }
 
-            foreach (var t in toRaise)
+            foreach ((object subscriber, MethodInfo handler) t in toRaise)
             {
-                var (subscriber, handler) = t;
+                (object subscriber, MethodInfo handler) = t;
                 handler.Invoke(subscriber, new[] { sender, args });
             }
         }
@@ -148,7 +148,7 @@ namespace MVVMPackage.Core
 
         private void AddEventHandler(string eventName, object handlerTarget, MethodInfo methodInfo)
         {
-            if (!_eventHandlers.TryGetValue(eventName, out var targets))
+            if (!_eventHandlers.TryGetValue(eventName, out List<Subscription> targets))
             {
                 targets = new List<Subscription>();
                 _eventHandlers.Add(eventName, targets);
@@ -166,14 +166,14 @@ namespace MVVMPackage.Core
 
         private void RemoveEventHandler(string eventName, object handlerTarget, MemberInfo methodInfo)
         {
-            if (!_eventHandlers.TryGetValue(eventName, out var subscriptions))
+            if (!_eventHandlers.TryGetValue(eventName, out List<Subscription> subscriptions))
             {
                 return;
             }
 
-            for (var n = subscriptions.Count; n > 0; n--)
+            for (int n = subscriptions.Count; n > 0; n--)
             {
-                var current = subscriptions[n - 1];
+                Subscription current = subscriptions[n - 1];
 
                 if (current.Subscriber?.Target != handlerTarget || current.Handler.Name != methodInfo.Name)
                 {

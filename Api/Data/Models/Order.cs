@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NotatnikMechanika.Data.Models
+namespace NotatnikMechanika.Api.Data.Models
 {
     public class Order : EntityBase
     {

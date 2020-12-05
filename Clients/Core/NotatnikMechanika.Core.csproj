@@ -6,14 +6,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Services\AuthService.cs~RF62390bd.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityModel.OidcClient" Version="4.0.0-preview.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.3.1" />
     <PackageReference Include="System.Text.Json" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Api\Shared\NotatnikMechanika.Shared.csproj" />
-    <ProjectReference Include="..\..\MVVMPackage\Core\MvvmPackage.Core.csproj" />
+    <ProjectReference Include="..\..\MvvmPackage\Core\MvvmPackage.Core.csproj" />
+    <ProjectReference Include="..\..\Shared\NotatnikMechanika.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

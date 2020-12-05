@@ -1,8 +1,4 @@
-﻿using Autofac;
-using MvvmPackage.Core;
-using MvvmPackage.Wpf.Pages;
-using NotatnikMechanika.Core.Interfaces;
-using System;
+﻿using MvvmPackage.Wpf.Pages;
 
 namespace NotatnikMechanika.WPF
 {
@@ -12,15 +8,7 @@ namespace NotatnikMechanika.WPF
         {
             InitializeComponent();
             NavigationService = MainFrame.NavigationService;
-            LoadMainPage();
             MainDialogHost = DialogHost;
-        }
-
-        protected override void OnInitialized(EventArgs e)
-        {
-            var authService = IoC.Container.Resolve<IAuthService>();
-            authService.AuthChanged += (s, e) => LoadMainPage();
-            base.OnInitialized(e);
         }
     }
 }

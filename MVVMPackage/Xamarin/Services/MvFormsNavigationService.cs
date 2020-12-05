@@ -32,7 +32,7 @@ namespace MvvmPackage.Xamarin.Services
         {
             await Device.InvokeOnMainThreadAsync(() =>
             {
-                var x = Application.Current.MainPage.Navigation;
+                INavigation x = Application.Current.MainPage.Navigation;
                 return x?.PushAsync(page) ?? Task.CompletedTask;
             });
         }

@@ -1,9 +1,5 @@
 ﻿using MvvmPackage.Wpf.Pages;
 using NotatnikMechanika.Core.PageModels;
-using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Animation;
 
 namespace NotatnikMechanika.WPF.Pages
 {

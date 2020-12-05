@@ -192,10 +192,6 @@
     <AndroidResource Include="Resources\drawable\DashboardIcon.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MVVMPackage\Xamarin\MvvmPackage.Xamarin.csproj">
-      <Project>{e0f158da-4777-4742-a123-f469cdb3427c}</Project>
-      <Name>MvvmPackage.Xamarin</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Forms\NotatnikMechanika.Forms.csproj">
       <Project>{5ffed678-5e44-4bfb-9b4b-4da84e156864}</Project>
       <Name>NotatnikMechanika.Forms</Name>

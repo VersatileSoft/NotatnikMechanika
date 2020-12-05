@@ -1,8 +1,7 @@
-﻿using NotatnikMechanika.Data.Models;
-using NotatnikMechanika.Repository.Interfaces.Base;
-using NotatnikMechanika.Shared.Models.Customer;
+﻿using NotatnikMechanika.Api.Data.Models;
+using NotatnikMechanika.Api.Repository.Interfaces.Base;
 
-namespace NotatnikMechanika.Repository.Interfaces
+namespace NotatnikMechanika.Api.Repository.Interfaces
 {
     public interface ICustomerRepository : IRepositoryBase<Customer>
     {

@@ -54,9 +54,9 @@ namespace NotatnikMechanika.Core.PageModels
         private async Task SelectedCustomerChanged()
         {
             IsLoading = true;
-            
-            var path = CarPaths.ByCustomer(SelectedCustomer.Id);
-            var carsResponse = await HttpRequestService.SendGet<List<CarModel>>(path);
+
+            string path = CarPaths.ByCustomer(SelectedCustomer.Id);
+            Response<List<CarModel>> carsResponse = await HttpRequestService.SendGet<List<CarModel>>(path);
 
             switch (carsResponse.ResponseType)
             {
@@ -85,7 +85,7 @@ namespace NotatnikMechanika.Core.PageModels
         public override async Task Initialize()
         {
             IsLoading = true;
-            var customersResponse = await HttpRequestService.All<CustomerModel>();
+            Response<List<CustomerModel>> customersResponse = await HttpRequestService.All<CustomerModel>();
 
             switch (customersResponse.ResponseType)
             {

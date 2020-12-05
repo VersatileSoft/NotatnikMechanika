@@ -4,7 +4,7 @@ using MvvmPackage.Core;
 using System;
 using System.Threading.Tasks;
 
-namespace MVVMPackage.Blazor
+namespace MvvmPackage.Blazor
 {
     public class PageBase<TPageModel> : ComponentBase where TPageModel : PageModelBase
     {
@@ -19,7 +19,7 @@ namespace MVVMPackage.Blazor
         {
             PageModel.PropertyChanged += (s, e) => StateHasChanged();
 
-            PageModel.Parameter = int.TryParse(Parameter, out var param) ? param : 0;
+            PageModel.Parameter = int.TryParse(Parameter, out int param) ? param : 0;
             await PageModel.Initialize();
             await base.OnParametersSetAsync();
         }
