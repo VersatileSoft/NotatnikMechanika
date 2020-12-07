@@ -20,14 +20,14 @@ namespace NotatnikMechanika.Service.Services
             _orderRepository = orderRepository;
         }
 
-        public async Task<Response<IEnumerable<ServiceModel>>> AllAsync(string userId, int orderId)
+        public async Task<Response<IEnumerable<ServiceModel>>> AllAsync(int orderId)
         {
-            return SuccessResponse(await _serviceRepository.AllAsync(userId, orderId));
+            return SuccessResponse(await _serviceRepository.AllAsync(orderId));
         }
 
-        public async Task<Response<IEnumerable<ServiceModel>>> ByOrderAsync(string userId, int orderId)
+        public async Task<Response<IEnumerable<ServiceModel>>> ByOrderAsync(int orderId)
         {
-            if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
+            if (!await _orderRepository.CheckIfUserMatch(orderId))
                 return FailureResponse<IEnumerable<ServiceModel>>(ResponseType.Failure, new List<string> {NotAllowedError});
             
             return SuccessResponse(await _serviceRepository.ByOrderAsync(orderId));

@@ -23,16 +23,16 @@ namespace NotatnikMechanika.Service.Services
             _commodityRepository = commodityRepository;
         }
 
-        public async Task<Response> AddCommodityToOrder(string userId, int orderId, int commodityId)
+        public async Task<Response> AddCommodityToOrder(int orderId, int commodityId)
         {
             var errors = new List<string>();
 
-            if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
+            if (!await _orderRepository.CheckIfUserMatch(orderId))
             {
                 errors.Add("Zlecenie nie jest twoje");
             }
 
-            if (!await _commodityRepository.CheckIfUserMatch(userId, commodityId))
+            if (!await _commodityRepository.CheckIfUserMatch(commodityId))
             {
                 errors.Add("Towar nie jest twój");
             }
@@ -52,16 +52,16 @@ namespace NotatnikMechanika.Service.Services
             return SuccessResponse();
         }
 
-        public async Task<Response> AddServiceToOrder(string userId, int orderId, int serviceId)
+        public async Task<Response> AddServiceToOrder(int orderId, int serviceId)
         {
             var errors = new List<string>();
 
-            if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
+            if (!await _orderRepository.CheckIfUserMatch(orderId))
             {
                 errors.Add("Zlecenie nie jest twoje");
             }
 
-            if (!await _serviceRepository.CheckIfUserMatch(userId, serviceId))
+            if (!await _serviceRepository.CheckIfUserMatch(serviceId))
             {
                 errors.Add("Usługa nie jest twoja");
             }
@@ -81,16 +81,16 @@ namespace NotatnikMechanika.Service.Services
             return SuccessResponse();
         }
 
-        public async Task<Response> DeleteCommodityFromOrder(string userId, int orderId, int commodityId)
+        public async Task<Response> DeleteCommodityFromOrder(int orderId, int commodityId)
         {
             var errors = new List<string>();
 
-            if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
+            if (!await _orderRepository.CheckIfUserMatch(orderId))
             {
                 errors.Add("Zlecenie nie jest twoje");
             }
 
-            if (!await _commodityRepository.CheckIfUserMatch(userId, commodityId))
+            if (!await _commodityRepository.CheckIfUserMatch(commodityId))
             {
                 errors.Add("Towar nie jest twój");
             }
@@ -110,16 +110,16 @@ namespace NotatnikMechanika.Service.Services
             return SuccessResponse();
         }
 
-        public async Task<Response> DeleteServiceFromOrder(string userId, int orderId, int serviceId)
+        public async Task<Response> DeleteServiceFromOrder(int orderId, int serviceId)
         {
             var errors = new List<string>();
 
-            if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
+            if (!await _orderRepository.CheckIfUserMatch(orderId))
             {
                 errors.Add("Zlecenie nie jest twoje");
             }
 
-            if (!await _serviceRepository.CheckIfUserMatch(userId, serviceId))
+            if (!await _serviceRepository.CheckIfUserMatch(serviceId))
             {
                 errors.Add("Usługa nie jest twoja");
             }
@@ -139,14 +139,14 @@ namespace NotatnikMechanika.Service.Services
             return SuccessResponse();
         }
 
-        public async Task<Response<IEnumerable<OrderExtendedModel>>> AllExtendedAsync(string userId, bool archived)
+        public async Task<Response<IEnumerable<OrderExtendedModel>>> AllExtendedAsync(bool archived)
         {
-            return SuccessResponse(await _orderRepository.AllExtendedAsync(userId, archived));
+            return SuccessResponse(await _orderRepository.AllExtendedAsync(archived));
         }
 
-        public async Task<Response<OrderExtendedModel>> ExtendedAsync(string userId, int id, bool archived)
+        public async Task<Response<OrderExtendedModel>> ExtendedAsync(int id, bool archived)
         {
-            if (!await _orderRepository.CheckIfUserMatch(userId, id))
+            if (!await _orderRepository.CheckIfUserMatch(id))
                 return FailureResponse<OrderExtendedModel>(ResponseType.Failure, new List<string> {NotAllowedError});
             
             return SuccessResponse(await _orderRepository.ExtendedAsync(id, archived));

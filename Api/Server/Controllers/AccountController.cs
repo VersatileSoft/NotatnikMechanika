@@ -24,9 +24,9 @@ namespace NotatnikMechanika.Server.Controllers
         }
 
         [HttpGet("verify/email")]
-        public async Task<RedirectResult> ConfirmEmail(string userId, string emailToken)
+        public async Task<RedirectResult> ConfirmEmail(string emailToken)
         {
-            await _accountService.ConfirmEmail(userId, emailToken);
+            await _accountService.ConfirmEmail(emailToken);
             return Redirect($"{Request.Scheme}://{Request.Host.Value}");
         }
 
@@ -38,16 +38,16 @@ namespace NotatnikMechanika.Server.Controllers
 
         [Authorize]
         [HttpPut(AccountPaths.UpdatePath)]
-        public async Task<ActionResult<Response>> UpdateUserAsync(string id, [FromBody] EditUserModel value)
+        public async Task<ActionResult<Response>> UpdateUserAsync([FromBody] EditUserModel value)
         {
-            return Ok(await _accountService.UpdateAsync(id, value));
+            return Ok(await _accountService.UpdateAsync(value));
         }
 
         [Authorize]
         [HttpDelete(AccountPaths.DeletePath)]
-        public async Task<ActionResult<Response>> DeleteAsync(string id)
+        public async Task<ActionResult<Response>> DeleteAsync()
         {
-            return Ok(await _accountService.DeleteAsync(id));
+            return Ok(await _accountService.DeleteAsync());
         }
     }
 }

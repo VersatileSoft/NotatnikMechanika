@@ -25,6 +25,9 @@ namespace NotatnikMechanika.Server
                 if (dbContext.Database.IsSqlServer())
                 {
                     dbContext.Database.Migrate();
+
+                    
+
                 }
             }
             catch (Exception ex)
@@ -43,10 +46,7 @@ namespace NotatnikMechanika.Server
         private static IHostBuilder CreateHostBuilder(string[] args)
         {
             return Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                })
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory());
         }
     }

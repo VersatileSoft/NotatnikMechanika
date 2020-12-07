@@ -9,10 +9,10 @@ namespace NotatnikMechanika.Service.Interfaces.Base
 {
     public interface IServiceBase<TModel> 
     {
-        Task<Response<IEnumerable<TModel>>> AllAsync(string userId);
-        Task<Response<TModel>> ByIdAsync(string userId, int id);
-        Task<Response> CreateAsync(string userId, TModel value);
-        Task<Response> UpdateAsync(string userId, int id, TModel value);
-        Task<Response> DeleteAsync(string userId, int id);
+        Task<Response<IEnumerable<TModel>>> AllAsync();
+        Task<Response<TModel>> ByIdAsync(int id);
+        Task<Response> CreateAsync(TModel value);
+        Task<Response> UpdateAsync(int id, TModel value);
+        Task<Response> DeleteAsync(int id);
     }
 }

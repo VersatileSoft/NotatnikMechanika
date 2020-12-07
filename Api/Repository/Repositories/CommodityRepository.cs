@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using NotatnikMechanika.Data;
 using NotatnikMechanika.Data.Models;
@@ -12,15 +13,15 @@ namespace NotatnikMechanika.Repository.Repositories
 {
     public class CommodityRepository : RepositoryBase<Commodity>, ICommodityRepository
     {
-        public CommodityRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public CommodityRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor) : base(dbContext, mapper, httpContextAccessor)
         {
         }
         
-        public async Task<IEnumerable<CommodityModel>> AllAsync(string userId, int orderId)
+        public async Task<IEnumerable<CommodityModel>> AllAsync(int orderId)
         {
-            return await DbContext.Commodities.
-                Where(a => a.UserId == userId).
-                Select(a => 
+            return await DbContext.Commodities
+                .OwnedByUser(CurrentUserId)
+                .Select(a => 
                     new CommodityModel
                     {
                         Id = a.Id,
@@ -31,12 +32,12 @@ namespace NotatnikMechanika.Repository.Repositories
                 ).ToListAsync();
         }
 
-        public async Task<IEnumerable<CommodityModel>> ByOrderAsync(string userId, int orderId)
+        public async Task<IEnumerable<CommodityModel>> ByOrderAsync(int orderId)
         {
-            return await DbContext.Commodities.
-                Where(a => a.UserId == userId).
-                Where(c => c.Orders.Any(o => o.Id == orderId)).
-                Select(c => 
+            return await DbContext.Commodities
+                .OwnedByUser(CurrentUserId)
+                .Where(c => c.Orders.Any(o => o.Id == orderId))
+                .Select(c => 
                     new CommodityModel
                     {
                         Id = c.Id,

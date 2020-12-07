@@ -11,12 +11,12 @@ using System.Text;
 
 namespace NotatnikMechanika.Server
 {
-    public static class StartupExtensions
+    public static class Extensions
     {
         public static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<NotatnikMechanikaDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DockerConnection"), // PublishConnection, DefaultConnection, DockerConnection
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), // PublishConnection, DefaultConnection, DockerConnection
                     b => b.EnableRetryOnFailure()
                 )
             );
@@ -36,11 +36,11 @@ namespace NotatnikMechanika.Server
 
         public static void AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
-            var appSettingsSection = configuration.GetSection("AppSettings");
+            IConfigurationSection appSettingsSection = configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
 
-            var appSettings = appSettingsSection.Get<AppSettings>();
-            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            AppSettings appSettings = appSettingsSection.Get<AppSettings>();
+            byte[] key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
             services.AddAuthentication(x =>
             {

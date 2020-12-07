@@ -24,6 +24,11 @@ namespace NotatnikMechanika.Service.Services
         private readonly SignInManager<User> _signInManager;
         private readonly IEmailSenderService _emailSenderService;
         private readonly IHttpContextAccessor _httpContextAccessor;
+
+        private string CurrentUserId
+        {
+            get => _httpContextAccessor.HttpContext.User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value;          
+        }
         public AccountService(
             IOptions<AppSettings> appSettings,
             UserManager<User> userManager,
@@ -57,9 +62,9 @@ namespace NotatnikMechanika.Service.Services
 
         }
 
-        public async Task<Response> ConfirmEmail(string userId, string emailToken)
+        public async Task<Response> ConfirmEmail(string emailToken)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(CurrentUserId);
 
             if (user == null)
             {
@@ -90,14 +95,14 @@ namespace NotatnikMechanika.Service.Services
                 FailureResponse(ResponseType.Failure, result.Errors.Select(e => e.Description).ToList());
         }
 
-        public async Task<Response> DeleteAsync(string id)
+        public async Task<Response> DeleteAsync()
         {
-            var user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(CurrentUserId);
             await _userManager.DeleteAsync(user);
             return SuccessResponse();
         }
 
-        public Task<Response> UpdateAsync(string id, EditUserModel value)
+        public Task<Response> UpdateAsync(EditUserModel value)
         {
             throw new NotImplementedException();
         }
@@ -109,7 +114,7 @@ namespace NotatnikMechanika.Service.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] {
-                    new Claim(ClaimTypes.Name, user.Id)
+                    new Claim(ClaimTypes.NameIdentifier, user.Id)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

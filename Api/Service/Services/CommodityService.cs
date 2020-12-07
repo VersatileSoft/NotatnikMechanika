@@ -19,14 +19,14 @@ namespace NotatnikMechanika.Service.Services
             _commodityRepository = commodityRepository;
         }
 
-        public async Task<Response<IEnumerable<CommodityModel>>> AllAsync(string userId, int orderId)
+        public async Task<Response<IEnumerable<CommodityModel>>> AllAsync(int orderId)
         {
-            return SuccessResponse(await _commodityRepository.AllAsync(userId, orderId));
+            return SuccessResponse(await _commodityRepository.AllAsync(orderId));
         }
 
-        public async Task<Response<IEnumerable<CommodityModel>>> ByOrderAsync(string userId, int orderId)
+        public async Task<Response<IEnumerable<CommodityModel>>> ByOrderAsync(int orderId)
         {
-            return SuccessResponse(await _commodityRepository.ByOrderAsync(userId, orderId));
+            return SuccessResponse(await _commodityRepository.ByOrderAsync(orderId));
         }
     }
 }

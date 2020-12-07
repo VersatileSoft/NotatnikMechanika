@@ -8,12 +8,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NotatnikMechanika.Shared.Models.Commodity;
+using Microsoft.AspNetCore.Http;
 
 namespace NotatnikMechanika.Repository.Repositories
 {
     public class OrderRepository : RepositoryBase<Order>, IOrderRepository
     {
-        public OrderRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public OrderRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor) : base(dbContext, mapper, httpContextAccessor)
         { }
 
         public async Task AddCommodityToOrder(int orderId, Commodity commodity)
@@ -50,12 +51,12 @@ namespace NotatnikMechanika.Repository.Repositories
             await DbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<OrderExtendedModel>> AllExtendedAsync(string userId, bool archived)
+        public async Task<IEnumerable<OrderExtendedModel>> AllExtendedAsync(bool archived)
         {
             var queryResult = await DbContext.Orders
                 .Include(o => o.Car)
                 .ThenInclude(c => c.Customer)
-                .Where(o => o.UserId == userId)
+                .OwnedByUser(CurrentUserId)
                 .Where(o => o.Archived == archived)
                 .ToListAsync();
 

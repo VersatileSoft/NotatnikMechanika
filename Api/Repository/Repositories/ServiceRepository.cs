@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using NotatnikMechanika.Data;
 using NotatnikMechanika.Data.Models;
@@ -12,15 +13,15 @@ namespace NotatnikMechanika.Repository.Repositories
 {
     public class ServiceRepository : RepositoryBase<Service>, IServiceRepository
     {
-        public ServiceRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public ServiceRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor) : base(dbContext, mapper, httpContextAccessor)
         {
         }
 
-        public async Task<IEnumerable<ServiceModel>> AllAsync(string userId, int orderId)
+        public async Task<IEnumerable<ServiceModel>> AllAsync(int orderId)
         {
-            return await DbContext.Services.
-                Where(a => a.UserId == userId).
-                Select(a => 
+            return await DbContext.Services
+                .OwnedByUser(CurrentUserId)
+                .Select(a => 
                     new ServiceModel
                     {
                         Id = a.Id,
@@ -33,9 +34,9 @@ namespace NotatnikMechanika.Repository.Repositories
 
         public async Task<IEnumerable<ServiceModel>> ByOrderAsync(int orderId)
         {
-            return await DbContext.Services.
-                Where(c => c.Orders.Any(o => o.Id == orderId)).
-                Select(c => 
+            return await DbContext.Services
+                .Where(c => c.Orders.Any(o => o.Id == orderId))
+                .Select(c => 
                     new ServiceModel
                     {
                         Id = c.Id,

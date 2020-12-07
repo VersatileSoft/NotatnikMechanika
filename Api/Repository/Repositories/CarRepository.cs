@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using NotatnikMechanika.Data;
 using NotatnikMechanika.Data.Models;
@@ -12,7 +13,7 @@ namespace NotatnikMechanika.Repository.Repositories
 {
     public class CarRepository : RepositoryBase<Car>, ICarRepository
     {
-        public CarRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public CarRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor) : base(dbContext, mapper, httpContextAccessor)
         { }
 
         public async Task<IEnumerable<CarModel>> ByCustomerAsync(int customerId)

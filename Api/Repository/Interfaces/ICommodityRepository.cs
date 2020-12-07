@@ -8,7 +8,7 @@ namespace NotatnikMechanika.Repository.Interfaces
 {
     public interface ICommodityRepository : IRepositoryBase<Commodity>
     {
-        Task<IEnumerable<CommodityModel>> AllAsync(string userId, int orderId);
-        Task<IEnumerable<CommodityModel>> ByOrderAsync(string userId, int orderId);
+        Task<IEnumerable<CommodityModel>> AllAsync(int orderId);
+        Task<IEnumerable<CommodityModel>> ByOrderAsync(int orderId);
     }
 }

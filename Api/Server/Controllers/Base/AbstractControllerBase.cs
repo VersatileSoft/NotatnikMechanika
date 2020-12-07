@@ -18,46 +18,31 @@ namespace NotatnikMechanika.Server.Controllers.Base
         [HttpGet(CrudPaths.AllPath)]
         public async Task<ActionResult<Response<IEnumerable<TModel>>>> AllAsync()
         {
-            if (User.Identity == null)
-                return Unauthorized();
-            
-            return Ok(await _serviceBase.AllAsync(User.Identity.Name));
+            return Ok(await _serviceBase.AllAsync());
         }
 
         [HttpGet(CrudPaths.ByIdPath)]
         public async Task<ActionResult<Response<TModel>>> ByIdAsync(int id)
         {
-            if (User.Identity == null)
-                return Unauthorized();
-            
-            return Ok(await _serviceBase.ByIdAsync(User.Identity.Name, id));
+            return Ok(await _serviceBase.ByIdAsync(id));
         }
 
         [HttpPost(CrudPaths.CreatePath)]
         public async Task<ActionResult<Response>> CreateAsync([FromBody] TModel value)
         {
-            if (User.Identity == null)
-                return Unauthorized();
-            
-            return Ok(await _serviceBase.CreateAsync(User.Identity.Name, value));
+            return Ok(await _serviceBase.CreateAsync(value));
         }
 
         [HttpPut(CrudPaths.UpdatePath)]
         public async Task<ActionResult<Response>> UpdateAsync(int id, [FromBody] TModel value)
         {
-            if (User.Identity == null)
-                return Unauthorized();
-            
-            return Ok(await _serviceBase.UpdateAsync(User.Identity.Name, id, value));
+            return Ok(await _serviceBase.UpdateAsync(id, value));
         }
 
         [HttpDelete(CrudPaths.DeletePath)]
         public async Task<ActionResult<Response>> DeleteAsync(int id)
         {   
-            if (User.Identity == null)
-                return Unauthorized();
-            
-            return Ok(await _serviceBase.DeleteAsync(User.Identity.Name, id));
+            return Ok(await _serviceBase.DeleteAsync(id));
         }
     }
 }

@@ -8,8 +8,8 @@ namespace NotatnikMechanika.Service.Interfaces
     {
         Task<Response<TokenModel>> AuthenticateAsync(string email, string password);
         Task<Response> RegisterAsync(RegisterModel value);
-        Task<Response> UpdateAsync(string id, EditUserModel value);
-        Task<Response> DeleteAsync(string id);
-        Task<Response> ConfirmEmail(string userId, string emailToken);
+        Task<Response> UpdateAsync(EditUserModel value);
+        Task<Response> DeleteAsync();
+        Task<Response> ConfirmEmail(string emailToken);
     }
 }

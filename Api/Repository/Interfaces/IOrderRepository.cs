@@ -9,7 +9,7 @@ namespace NotatnikMechanika.Repository.Interfaces
 {
     public interface IOrderRepository : IRepositoryBase<Order>
     {
-        Task<IEnumerable<OrderExtendedModel>> AllExtendedAsync(string userId, bool archived);
+        Task<IEnumerable<OrderExtendedModel>> AllExtendedAsync(bool archived);
         Task AddCommodityToOrder(int orderId, Commodity commodity);
         Task AddServiceToOrder(int orderId, Service service);
         Task DeleteServiceFromOrder(int orderId, Service service);

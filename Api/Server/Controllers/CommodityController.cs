@@ -24,10 +24,7 @@ namespace NotatnikMechanika.Server.Controllers
         [HttpGet(CommodityPaths.AllPath)]
         public async Task<ActionResult<Response<IEnumerable<CommodityModel>>>> AllAsync(int orderId)
         {
-            if (User.Identity == null)
-                return Unauthorized();
-            
-            return Ok(await _commodityService.AllAsync(User.Identity.Name, orderId));
+            return Ok(await _commodityService.AllAsync(orderId));
         }
         
         [HttpGet(CommodityPaths.ByOrderPath)]
@@ -36,7 +33,7 @@ namespace NotatnikMechanika.Server.Controllers
             if (User.Identity == null)
                 return Unauthorized();
             
-            return Ok(await _commodityService.ByOrderAsync(User.Identity.Name, orderId));
+            return Ok(await _commodityService.ByOrderAsync(orderId));
         }
     }
 }

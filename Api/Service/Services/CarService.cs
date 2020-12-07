@@ -20,9 +20,9 @@ namespace NotatnikMechanika.Service.Services
             _customerRepository = customerRepository;
         }
 
-        public async Task<Response<IEnumerable<CarModel>>> ByCustomerAsync(string userId, int customerId)
+        public async Task<Response<IEnumerable<CarModel>>> ByCustomerAsync(int customerId)
         {
-            if (!await _customerRepository.CheckIfUserMatch(userId, customerId))
+            if (!await _customerRepository.CheckIfUserMatch(customerId))
                 return FailureResponse<IEnumerable<CarModel>>(ResponseType.Failure, new List<string> {NotAllowedError});
                     
             return SuccessResponse(await _carRepository.ByCustomerAsync(customerId));
