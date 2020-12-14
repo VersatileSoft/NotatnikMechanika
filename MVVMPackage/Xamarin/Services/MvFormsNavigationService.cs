@@ -20,40 +20,45 @@ namespace MvvmPackage.Xamarin.Services
 
         public async Task NavigateToAsync<TPageModel>() where TPageModel : PageModelBase
         {
-            await NavigateToAsync(_pageActivatorService.CreatePageFromPageModel<TPageModel>());
+            await NavigateToAsync(_pageActivatorService.CreatePageFromPageModel<TPageModel>()).ConfigureAwait(false);
         }
 
-        public async Task NavigateToAsync<TPageModel>(int parameter) where TPageModel : PageModelBase
+        public async Task NavigateToAsync<TPageModel>(bool animated) where TPageModel : PageModelBase
         {
-            await NavigateToAsync(_pageActivatorService.CreatePageFromPageModel<TPageModel>(parameter));
+            await NavigateToAsync(_pageActivatorService.CreatePageFromPageModel<TPageModel>(), animated).ConfigureAwait(false);
         }
 
-        private async Task NavigateToAsync(Page page)
+        public async Task NavigateToAsync<TPageModel>(int parameter, bool animated) where TPageModel : PageModelBase
+        {
+            await NavigateToAsync(_pageActivatorService.CreatePageFromPageModel<TPageModel>(parameter), animated).ConfigureAwait(false);
+        }
+
+        private async Task NavigateToAsync(Page page, bool animated = true)
         {
             await Device.InvokeOnMainThreadAsync(() =>
             {
                 INavigation x = Application.Current.MainPage.Navigation;
                 if (x != null)
                 {
-                    return x.PushAsync(page);
+                    return x.PushAsync(page, animated);
                 }
                 else
                 {
                     return Task.CompletedTask;
                 }
-            });
+            }).ConfigureAwait(false);
         }
 
         public async Task PopAsync()
         {
             await Device.InvokeOnMainThreadAsync(() =>
                    Application.Current.MainPage.Navigation.PopAsync()
-               );
+               ).ConfigureAwait(false);
         }
 
         public Task CloseDialog()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }
