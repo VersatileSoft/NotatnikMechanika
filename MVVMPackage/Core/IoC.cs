@@ -9,7 +9,7 @@ namespace MvvmPackage.Core
     public static class IoC
     {
         public static IContainer Container;
-        private static readonly ContainerBuilder builder = new ContainerBuilder();
+        private static readonly ContainerBuilder Builder = new ContainerBuilder();
 
         public static Assembly CoreProjectAssembly { get; set; }
         public static Assembly PlatformProjectAssembly { get; set; }
@@ -17,9 +17,9 @@ namespace MvvmPackage.Core
 
         public static void RegisterTypes(Action<ContainerBuilder> registerCustomTypes = null)
         {
-            ConfigureServices(builder);
-            registerCustomTypes?.Invoke(builder);
-            Container = builder.Build();
+            ConfigureServices(Builder);
+            registerCustomTypes?.Invoke(Builder);
+            Container = Builder.Build();
         }
 
         public static void ConfigureServices(ContainerBuilder builder)

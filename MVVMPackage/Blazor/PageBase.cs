@@ -27,8 +27,11 @@ namespace MVVMPackage.Blazor
         public async Task DialogInitialize(IServiceProvider services, int parameter = 0)
         {
             PageModel = services.GetService<TPageModel>();
-            PageModel.Parameter = parameter;
-            await PageModel.Initialize();
+            if (PageModel != null)
+            {
+                PageModel.Parameter = parameter;
+                await PageModel.Initialize();
+            }
         }
     }
 }

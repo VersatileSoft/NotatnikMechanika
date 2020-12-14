@@ -2,67 +2,72 @@
 using NotatnikMechanika.Service.Interfaces.Base;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
+using NotatnikMechanika.Data.Models;
 using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Service.Services.Base
 {
-    public abstract class ServiceBase<TModel> : IServiceBase<TModel>
+    public abstract class ServiceBase<TModel, TEntity> : IServiceBase<TModel> where TEntity : EntityBase
     {
-        private readonly IRepositoryBase<TModel> _repositoryBase;
+        private readonly IRepositoryBase<TEntity> _repositoryBase;
+        private readonly IMapper _mapper;
 
-        protected string errorMessage = "This item is not yours or not exsists";
-        protected ServiceBase(IRepositoryBase<TModel> repositoryBase)
+        protected string CurrentUserId { get => _repositoryBase.CurrentUserId; }
+
+        protected const string NotAllowedError = "This item is not yours or not exsists";
+
+        protected ServiceBase(IRepositoryBase<TEntity> repositoryBase, IMapper mapper)
         {
             _repositoryBase = repositoryBase;
+            _mapper = mapper;
         }
 
-        public async Task<Response> CreateAsync(string userId, TModel value)
+        public async Task<Response> CreateAsync(TModel value)
         {
-            await _repositoryBase.CreateAsync(userId, value);
+            var entity = _mapper.Map<TEntity>(value);
+            entity.UserId = CurrentUserId;
+            
+            await _repositoryBase.CreateAsync(entity);
             return SuccessResponse();
         }
 
-        public async Task<Response> DeleteAsync(string userId, int Id)
+        public async Task<Response> DeleteAsync(int id)
         {
-            if (await _repositoryBase.CheckIfUserMatch(userId, Id))
-            {
-                await _repositoryBase.DeleteAsync(Id);
-                return SuccessResponse();
-            }
-            else
-            {
-                return FailureResponse(ResponseType.Failure, new List<string> { errorMessage });
-            }
+            if (!await _repositoryBase.CheckIfUserMatch(id))
+                return FailureResponse(ResponseType.Failure, new List<string> {NotAllowedError});
+            
+            var entity = await _repositoryBase.ByIdAsync(id);
+            await _repositoryBase.DeleteAsync(entity);
+            return SuccessResponse();
         }
 
-        public async Task<Response<TModel>> GetAsync(string userId, int Id)
+        public async Task<Response<TModel>> ByIdAsync(int id)
         {
-            if (await _repositoryBase.CheckIfUserMatch(userId, Id))
-            {
-                return SuccessResponse(await _repositoryBase.GetAsync(Id));
-            }
-            else
-            {
-                return FailureResponse<TModel>(ResponseType.Failure, new List<string> { errorMessage });
-            }
+            if (!await _repositoryBase.CheckIfUserMatch(id))
+                return FailureResponse<TModel>(ResponseType.Failure, new List<string> { NotAllowedError });
+            
+            var model = _mapper.Map<TModel>(await _repositoryBase.ByIdAsync(id));
+            return SuccessResponse(model);
         }
 
-        public async Task<Response<IEnumerable<TModel>>> GetAllAsync(string userId)
+        public async Task<Response<IEnumerable<TModel>>> AllAsync()
         {
-            return SuccessResponse(await _repositoryBase.GetAllAsync(userId));
+            var result = _mapper.Map<IEnumerable<TEntity>, IEnumerable<TModel>>(await _repositoryBase.AllAsync());
+            return SuccessResponse(result);
         }
 
-        public async Task<Response> UpdateAsync(string userId, int Id, TModel value)
+        public async Task<Response> UpdateAsync(int id, TModel value)
         {
-            if (await _repositoryBase.CheckIfUserMatch(userId, Id))
-            {
-                await _repositoryBase.UpdateAsync(Id, value);
-                return SuccessResponse();
-            }
-            else
-            {
-                return FailureResponse(ResponseType.Failure, new List<string> { errorMessage });
-            }
+            if (!await _repositoryBase.CheckIfUserMatch(id))
+                return FailureResponse(ResponseType.Failure, new List<string> {NotAllowedError});
+
+            var entity = await _repositoryBase.ByIdAsync(id);
+            _mapper.Map(value, entity);
+            entity.Id = id;
+            
+            await _repositoryBase.UpdateAsync(entity);
+            return SuccessResponse();
         }
     }
 }

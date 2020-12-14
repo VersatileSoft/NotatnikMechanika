@@ -11,23 +11,23 @@ namespace MvvmPackage.Wpf.Pages
         where TMasterPageModel : PageModelBase
         where TDetailPageModel : PageModelBase
     {
-        protected IWpfPageActivatorService wpfPageActivatorService;
+        private IWpfPageActivatorService _wpfPageActivatorService;
 
         protected abstract ContentControl MasterContent { set; }
         protected abstract ContentControl DetailContent { set; }
 
         protected void Init()
         {
-            wpfPageActivatorService = IoC.Container.Resolve<IWpfPageActivatorService>();
-            IMasterUserControl menuPage = (IMasterUserControl)wpfPageActivatorService.CreatePageFromPageModel<TMasterPageModel>();
+            _wpfPageActivatorService = IoC.Container.Resolve<IWpfPageActivatorService>();
+            var menuPage = (IMasterUserControl)_wpfPageActivatorService.CreatePageFromPageModel<TMasterPageModel>();
             menuPage.MenuButtonClick += MainPage_MenuButtonClick;
             MasterContent = (ContentControl)menuPage;
-            DetailContent = wpfPageActivatorService.CreatePageFromPageModel<TDetailPageModel>();
+            DetailContent = _wpfPageActivatorService.CreatePageFromPageModel<TDetailPageModel>();
         }
 
         private void MainPage_MenuButtonClick(object sender, Type e)
         {
-            DetailContent = wpfPageActivatorService.CreatePageFromPageModel(e);
+            DetailContent = _wpfPageActivatorService.CreatePageFromPageModel(e);
         }
     }
 }

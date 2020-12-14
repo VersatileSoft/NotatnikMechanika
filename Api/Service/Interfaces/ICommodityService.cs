@@ -8,7 +8,7 @@ namespace NotatnikMechanika.Service.Interfaces
 {
     public interface ICommodityService : IServiceBase<CommodityModel>
     {
-        Task<Response<IEnumerable<CommodityForOrderModel>>> GetCommoditiesForOrder(string userId, int orderId);
-        Task<Response<IEnumerable<CommodityModel>>> GetCommoditiesInOrder(string userId, int orderId);
+        Task<Response<IEnumerable<CommodityModel>>> AllAsync(int orderId);
+        Task<Response<IEnumerable<CommodityModel>>> ByOrderAsync(int orderId);
     }
 }

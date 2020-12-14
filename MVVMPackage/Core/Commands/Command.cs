@@ -41,10 +41,7 @@ namespace MVVMPackage.Core.Commands
                 {
                     execute((T)o);
                 }
-            }, o =>
-            {
-                return CommandUtils.IsValidCommandParameter<T>(o) && canExecute((T)o);
-            })
+            }, o => CommandUtils.IsValidCommandParameter<T>(o) && canExecute((T)o))
         {
             if (execute == null)
             {
@@ -63,17 +60,17 @@ namespace MVVMPackage.Core.Commands
     /// </summary>
     public class Command : ICommand
     {
-        private readonly Func<object, bool> canExecute;
-        private readonly Action<object> execute;
-        private readonly WeakEventManager weakEventManager = new WeakEventManager();
+        private readonly Func<object, bool> _canExecute;
+        private readonly Action<object> _execute;
+        private readonly WeakEventManager _weakEventManager = new WeakEventManager();
 
         /// <summary>
         /// Command that takes an action to execute.
         /// </summary>
         /// <param name="execute">Action to execute.</param>
-        public Command(Action<object> execute)
+        protected Command(Action<object> execute)
         {
-            this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            this._execute = execute ?? throw new ArgumentNullException(nameof(execute));
         }
 
         /// <summary>
@@ -93,9 +90,9 @@ namespace MVVMPackage.Core.Commands
         /// </summary>
         /// <param name="execute">Action to execute.</param>
         /// <param name="canExecute">Function to determine if can execute.</param>
-        public Command(Action<object> execute, Func<object, bool> canExecute) : this(execute)
+        protected Command(Action<object> execute, Func<object, bool> canExecute) : this(execute)
         {
-            this.canExecute = canExecute;
+            this._canExecute = canExecute;
         }
 
         /// <summary>
@@ -112,7 +109,7 @@ namespace MVVMPackage.Core.Commands
 
             if (canExecute != null)
             {
-                this.canExecute = o => canExecute();
+                this._canExecute = o => canExecute();
             }
         }
 
@@ -123,7 +120,7 @@ namespace MVVMPackage.Core.Commands
         /// <returns>If it can be executed.</returns>
         public bool CanExecute(object parameter)
         {
-            return canExecute?.Invoke(parameter) ?? true;
+            return _canExecute?.Invoke(parameter) ?? true;
         }
 
         /// <summary>
@@ -131,8 +128,8 @@ namespace MVVMPackage.Core.Commands
         /// </summary>
         public event EventHandler CanExecuteChanged
         {
-            add { weakEventManager.AddEventHandler(value); }
-            remove { weakEventManager.RemoveEventHandler(value); }
+            add => _weakEventManager.AddEventHandler(value);
+            remove => _weakEventManager.RemoveEventHandler(value);
         }
 
         /// <summary>
@@ -141,7 +138,7 @@ namespace MVVMPackage.Core.Commands
         /// <param name="parameter">Parameter to pass to execute method.</param>
         public void Execute(object parameter)
         {
-            execute(parameter);
+            _execute(parameter);
         }
 
         /// <summary>
@@ -149,7 +146,7 @@ namespace MVVMPackage.Core.Commands
         /// </summary>
         public void RaiseCanExecuteChanged()
         {
-            weakEventManager.HandleEvent(this, EventArgs.Empty, nameof(CanExecuteChanged));
+            _weakEventManager.HandleEvent(this, EventArgs.Empty, nameof(CanExecuteChanged));
         }
     }
 }

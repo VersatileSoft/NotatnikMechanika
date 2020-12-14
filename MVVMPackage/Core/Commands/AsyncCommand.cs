@@ -9,11 +9,11 @@ namespace MVVMPackage.Core.Commands
     /// </summary>
     public class AsyncCommand : IAsyncCommand
     {
-        private readonly Func<Task> execute;
-        private readonly Func<object, bool> canExecute;
-        private readonly Action<Exception> onException;
-        private readonly bool continueOnCapturedContext;
-        private readonly WeakEventManager weakEventManager = new WeakEventManager();
+        private readonly Func<Task> _execute;
+        private readonly Func<object, bool> _canExecute;
+        private readonly Action<Exception> _onException;
+        private readonly bool _continueOnCapturedContext;
+        private readonly WeakEventManager _weakEventManager = new WeakEventManager();
 
         /// <summary>
         /// Create a new AsyncCommand
@@ -27,10 +27,10 @@ namespace MVVMPackage.Core.Commands
                             Action<Exception> onException = null,
                             bool continueOnCapturedContext = false)
         {
-            this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            this.canExecute = canExecute;
-            this.onException = onException;
-            this.continueOnCapturedContext = continueOnCapturedContext;
+            this._execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            this._canExecute = canExecute;
+            this._onException = onException;
+            this._continueOnCapturedContext = continueOnCapturedContext;
         }
 
         /// <summary>
@@ -38,8 +38,8 @@ namespace MVVMPackage.Core.Commands
         /// </summary>
         public event EventHandler CanExecuteChanged
         {
-            add { weakEventManager.AddEventHandler(value); }
-            remove { weakEventManager.RemoveEventHandler(value); }
+            add => _weakEventManager.AddEventHandler(value);
+            remove => _weakEventManager.RemoveEventHandler(value);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace MVVMPackage.Core.Commands
         /// <returns>If it can be executed.</returns>
         public bool CanExecute(object parameter)
         {
-            return canExecute?.Invoke(parameter) ?? true;
+            return _canExecute?.Invoke(parameter) ?? true;
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace MVVMPackage.Core.Commands
         /// <returns>Task of action being executed that can be awaited.</returns>
         public Task ExecuteAsync()
         {
-            return execute();
+            return _execute();
         }
 
         /// <summary>
@@ -66,13 +66,13 @@ namespace MVVMPackage.Core.Commands
         /// </summary>
         public void RaiseCanExecuteChanged()
         {
-            weakEventManager.HandleEvent(this, EventArgs.Empty, nameof(CanExecuteChanged));
+            _weakEventManager.HandleEvent(this, EventArgs.Empty, nameof(CanExecuteChanged));
         }
 
         #region Explicit implementations
         void ICommand.Execute(object parameter)
         {
-            ExecuteAsync().SafeFireAndForget(onException, continueOnCapturedContext);
+            ExecuteAsync().SafeFireAndForget(_onException, _continueOnCapturedContext);
         }
         #endregion
     }
@@ -81,11 +81,11 @@ namespace MVVMPackage.Core.Commands
     /// </summary>
     public class AsyncCommand<T> : IAsyncCommand<T>
     {
-        private readonly Func<T, Task> execute;
-        private readonly Func<object, bool> canExecute;
-        private readonly Action<Exception> onException;
-        private readonly bool continueOnCapturedContext;
-        private readonly WeakEventManager weakEventManager = new WeakEventManager();
+        private readonly Func<T, Task> _execute;
+        private readonly Func<object, bool> _canExecute;
+        private readonly Action<Exception> _onException;
+        private readonly bool _continueOnCapturedContext;
+        private readonly WeakEventManager _weakEventManager = new WeakEventManager();
 
         /// <summary>
         /// Create a new AsyncCommand
@@ -99,10 +99,10 @@ namespace MVVMPackage.Core.Commands
                             Action<Exception> onException = null,
                             bool continueOnCapturedContext = false)
         {
-            this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            this.canExecute = canExecute;
-            this.onException = onException;
-            this.continueOnCapturedContext = continueOnCapturedContext;
+            this._execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            this._canExecute = canExecute;
+            this._onException = onException;
+            this._continueOnCapturedContext = continueOnCapturedContext;
         }
 
         /// <summary>
@@ -110,8 +110,8 @@ namespace MVVMPackage.Core.Commands
         /// </summary>
         public event EventHandler CanExecuteChanged
         {
-            add { weakEventManager.AddEventHandler(value); }
-            remove { weakEventManager.RemoveEventHandler(value); }
+            add => _weakEventManager.AddEventHandler(value);
+            remove => _weakEventManager.RemoveEventHandler(value);
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace MVVMPackage.Core.Commands
         /// <returns>If it can be executed</returns>
         public bool CanExecute(object parameter)
         {
-            return canExecute?.Invoke(parameter) ?? true;
+            return _canExecute?.Invoke(parameter) ?? true;
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace MVVMPackage.Core.Commands
         /// <returns>Task that is executing and can be awaited.</returns>
         public Task ExecuteAsync(T parameter)
         {
-            return execute(parameter);
+            return _execute(parameter);
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace MVVMPackage.Core.Commands
         /// </summary>
         public void RaiseCanExecuteChanged()
         {
-            weakEventManager.HandleEvent(this, EventArgs.Empty, nameof(CanExecuteChanged));
+            _weakEventManager.HandleEvent(this, EventArgs.Empty, nameof(CanExecuteChanged));
         }
 
         #region Explicit implementations
@@ -147,7 +147,7 @@ namespace MVVMPackage.Core.Commands
         {
             if (CommandUtils.IsValidCommandParameter<T>(parameter))
             {
-                ExecuteAsync((T)parameter).SafeFireAndForget(onException, continueOnCapturedContext);
+                ExecuteAsync((T)parameter).SafeFireAndForget(_onException, _continueOnCapturedContext);
             }
         }
         #endregion

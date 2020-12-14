@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using NotatnikMechanika.Data;
 using NotatnikMechanika.Data.Models;
@@ -10,33 +11,41 @@ using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Repository.Repositories
 {
-    public class ServiceRepository : RepositoryBase<ServiceModel, Service>, IServiceRepository
+    public class ServiceRepository : RepositoryBase<Service>, IServiceRepository
     {
-        public ServiceRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public ServiceRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor) : base(dbContext, mapper, httpContextAccessor)
         {
         }
 
-        public async Task<IEnumerable<ServiceForOrderModel>> GetServicesForOrder(string userId, int orderId)
+        public async Task<IEnumerable<ServiceModel>> AllAsync(int orderId)
         {
-            return await _dbContext.Services.Where(a => a.UserId == userId).Include(service => service.OrderToServices).Select(a => new ServiceForOrderModel
-            {
-                Id = a.Id,
-                Name = a.Name,
-                Price = a.Price,
-                IsInOrder = a.OrderToServices.Where(b => b.OrderId == orderId).Any()
-            }).ToListAsync();
+            return await DbContext.Services
+                .OwnedByUser(CurrentUserId)
+                .Select(a => 
+                    new ServiceModel
+                    {
+                        Id = a.Id,
+                        Name = a.Name,
+                        Price = a.Price,
+                        IsInOrder = a.Orders.Any(o => o.Id == orderId),
+                    }
+                ).ToListAsync();
         }
 
-        public async Task<IEnumerable<ServiceModel>> GetServicesInOrder(string userId, int orderId)
+        public async Task<IEnumerable<ServiceModel>> ByOrderAsync(int orderId)
         {
-            Microsoft.EntityFrameworkCore.Query.IIncludableQueryable<Service, IEnumerable<OrderToService>> i = _dbContext.Services.Include(service => service.OrderToServices);
-
-            return await _dbContext.Services.Include(service => service.OrderToServices).Where(a => a.UserId == userId).Where(a => a.OrderToServices.Where(a => a.OrderId == orderId).Any()).Select(a => new ServiceModel
-            {
-                Id = a.Id,
-                Name = a.Name,
-                Price = a.Price
-            }).ToListAsync();
+            return await DbContext.Services
+                .Where(c => c.Orders.Any(o => o.Id == orderId))
+                .Select(c => 
+                    new ServiceModel
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        Price = c.Price,
+                        IsInOrder = true,
+                        Finished = c.OrderToServices.FirstOrDefault(o => o.Order.Id == orderId).Finished
+                    }).
+                ToListAsync();
         }
     }
 }

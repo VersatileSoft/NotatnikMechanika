@@ -2,12 +2,13 @@
 using NotatnikMechanika.Shared.Models.Service;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using NotatnikMechanika.Data.Models;
 
 namespace NotatnikMechanika.Repository.Interfaces
 {
-    public interface IServiceRepository : IRepositoryBase<ServiceModel>
+    public interface IServiceRepository : IRepositoryBase<Service>
     {
-        Task<IEnumerable<ServiceForOrderModel>> GetServicesForOrder(string userId, int orderId);
-        Task<IEnumerable<ServiceModel>> GetServicesInOrder(string userId, int orderId);
+        Task<IEnumerable<ServiceModel>> AllAsync(int orderId);
+        Task<IEnumerable<ServiceModel>> ByOrderAsync(int orderId);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using NotatnikMechanika.Data;
 using NotatnikMechanika.Data.Models;
@@ -10,14 +11,18 @@ using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Repository.Repositories
 {
-    public class CarRepository : RepositoryBase<CarModel, Car>, ICarRepository
+    public class CarRepository : RepositoryBase<Car>, ICarRepository
     {
-        public CarRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public CarRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor) : base(dbContext, mapper, httpContextAccessor)
         { }
 
-        public async Task<IEnumerable<CarModel>> GetCarsByCustomerAsync(string userId, int customerId)
+        public async Task<IEnumerable<CarModel>> ByCustomerAsync(int customerId)
         {
-            return _mapper.Map<IEnumerable<CarModel>>(await _dbContext.Cars.Where(a => a.UserId == userId).Where(a => a.CustomerId == customerId).ToListAsync());
+            return Mapper.Map<IEnumerable<CarModel>>(
+                await DbContext.Cars.
+                    Where(a => a.CustomerId == customerId).
+                    ToListAsync()
+            );
         }
     }
 }

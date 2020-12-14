@@ -21,16 +21,19 @@ namespace NotatnikMechanika.Server.Controllers
             _commodityService = commodityService;
         }
 
-        [HttpGet(CommodityPaths.GetAllForOrderPath)]
-        public async Task<ActionResult<Response<IEnumerable<CommodityForOrderModel>>>> GetCommoditiesForOrder(int orderId)
+        [HttpGet(CommodityPaths.AllPath)]
+        public async Task<ActionResult<Response<IEnumerable<CommodityModel>>>> AllAsync(int orderId)
         {
-            return Ok(await _commodityService.GetCommoditiesForOrder(User.Identity.Name, orderId));
+            return Ok(await _commodityService.AllAsync(orderId));
         }
-
-        [HttpGet(CommodityPaths.GetAllInOrderPath)]
-        public async Task<ActionResult<Response<IEnumerable<CommodityModel>>>> GetCommoditiesInOrder(int orderId)
+        
+        [HttpGet(CommodityPaths.ByOrderPath)]
+        public async Task<ActionResult<Response<IEnumerable<CommodityModel>>>> ByOrderAsync(int orderId)
         {
-            return Ok(await _commodityService.GetCommoditiesInOrder(User.Identity.Name, orderId));
+            if (User.Identity == null)
+                return Unauthorized();
+            
+            return Ok(await _commodityService.ByOrderAsync(orderId));
         }
     }
 }

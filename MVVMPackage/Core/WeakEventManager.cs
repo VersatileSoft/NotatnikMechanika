@@ -11,7 +11,7 @@ namespace MVVMPackage.Core
     /// </summary>
     public class WeakEventManager
     {
-        private readonly Dictionary<string, List<Subscription>> eventHandlers = new Dictionary<string, List<Subscription>>();
+        private readonly Dictionary<string, List<Subscription>> _eventHandlers = new Dictionary<string, List<Subscription>>();
 
         /// <summary>
         /// Add an event handler to the manager.
@@ -63,15 +63,14 @@ namespace MVVMPackage.Core
         /// <param name="eventName">Name of the event.</param>
         public void HandleEvent(object sender, object args, string eventName)
         {
-            List<(object subscriber, MethodInfo handler)> toRaise = new List<(object subscriber, MethodInfo handler)>();
-            List<Subscription> toRemove = new List<Subscription>();
+            var toRaise = new List<(object subscriber, MethodInfo handler)>();
+            var toRemove = new List<Subscription>();
 
-            if (eventHandlers.TryGetValue(eventName, out List<Subscription> target))
+            if (_eventHandlers.TryGetValue(eventName, out var target))
             {
-                for (int i = 0; i < target.Count; i++)
+                foreach (var subscription in target)
                 {
-                    Subscription subscription = target[i];
-                    bool isStatic = subscription.Subscriber == null;
+                    var isStatic = subscription.Subscriber == null;
                     if (isStatic)
                     {
                         // For a static method, we'll just pass null as the first parameter of MethodInfo.Invoke
@@ -79,7 +78,7 @@ namespace MVVMPackage.Core
                         continue;
                     }
 
-                    object subscriber = subscription.Subscriber?.Target;
+                    var subscriber = subscription.Subscriber?.Target;
 
                     if (subscriber is null)
                     {
@@ -92,16 +91,15 @@ namespace MVVMPackage.Core
                     }
                 }
 
-                for (int i = 0; i < toRemove.Count; i++)
+                foreach (var subscription in toRemove)
                 {
-                    Subscription subscription = toRemove[i];
                     target.Remove(subscription);
                 }
             }
 
-            for (int i = 0; i < toRaise.Count; i++)
+            foreach (var t in toRaise)
             {
-                (object subscriber, MethodInfo handler) = toRaise[i];
+                var (subscriber, handler) = t;
                 handler.Invoke(subscriber, new[] { sender, args });
             }
         }
@@ -150,10 +148,10 @@ namespace MVVMPackage.Core
 
         private void AddEventHandler(string eventName, object handlerTarget, MethodInfo methodInfo)
         {
-            if (!eventHandlers.TryGetValue(eventName, out List<Subscription> targets))
+            if (!_eventHandlers.TryGetValue(eventName, out var targets))
             {
                 targets = new List<Subscription>();
-                eventHandlers.Add(eventName, targets);
+                _eventHandlers.Add(eventName, targets);
             }
 
             if (handlerTarget is null)
@@ -168,14 +166,14 @@ namespace MVVMPackage.Core
 
         private void RemoveEventHandler(string eventName, object handlerTarget, MemberInfo methodInfo)
         {
-            if (!eventHandlers.TryGetValue(eventName, out List<Subscription> subscriptions))
+            if (!_eventHandlers.TryGetValue(eventName, out var subscriptions))
             {
                 return;
             }
 
-            for (int n = subscriptions.Count; n > 0; n--)
+            for (var n = subscriptions.Count; n > 0; n--)
             {
-                Subscription current = subscriptions[n - 1];
+                var current = subscriptions[n - 1];
 
                 if (current.Subscriber?.Target != handlerTarget || current.Handler.Name != methodInfo.Name)
                 {
@@ -187,7 +185,7 @@ namespace MVVMPackage.Core
             }
         }
 
-        private struct Subscription
+        private readonly struct Subscription
         {
             public Subscription(WeakReference subscriber, MethodInfo handler)
             {

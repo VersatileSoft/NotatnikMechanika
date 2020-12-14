@@ -27,21 +27,15 @@ namespace NotatnikMechanika.Core.Services
             _httpRequestService.Authorize += AuthorizeResponse;
         }
 
-        public async Task<Response> RegisterAsync(RegisterModel registerModel)
-        {
-            return await _httpRequestService.SendPost(registerModel, new AccountPaths().GetFullPath(AccountPaths.RegisterPath));
-        }
-
         public async Task<Response<TokenModel>> LoginAsync(LoginModel loginModel)
         {
-            Response<TokenModel> loginResponse = await _httpRequestService.SendPost<LoginModel, TokenModel>(loginModel, new AccountPaths().GetFullPath(AccountPaths.LoginPath));
+            var loginResponse = await _httpRequestService.SendPost<LoginModel, TokenModel>(loginModel, AccountPaths.Login());
 
-            if (loginResponse.ResponseType == ResponseType.Successful)
-            {
-                await _settingsService.SetToken(loginResponse.Content.Token);
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResponse.Content.Token);
-                AuthChanged?.Invoke(this, EventArgs.Empty);
-            }
+            if (loginResponse.ResponseType != ResponseType.Successful) return loginResponse;
+           
+            await _settingsService.SetToken(loginResponse.Content.Token);
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResponse.Content.Token);
+            AuthChanged?.Invoke(this, EventArgs.Empty);
             return loginResponse;
         }
 

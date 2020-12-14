@@ -11,7 +11,6 @@ namespace NotatnikMechanika.Core.Interfaces
     {
         event EventHandler AuthChanged;
         Task<Response<TokenModel>> LoginAsync(LoginModel loginModel);
-        Task<Response> RegisterAsync(RegisterModel registerModel);
         Task LogoutAsync();
     }
 }

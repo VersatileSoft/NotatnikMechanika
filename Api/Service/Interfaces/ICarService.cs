@@ -8,6 +8,6 @@ namespace NotatnikMechanika.Service.Interfaces
 {
     public interface ICarService : IServiceBase<CarModel>
     {
-        Task<Response<IEnumerable<CarModel>>> GetCarsByCustomerAsync(string userId, int customerId);
+        Task<Response<IEnumerable<CarModel>>> ByCustomerAsync(int customerId);
     }
 }

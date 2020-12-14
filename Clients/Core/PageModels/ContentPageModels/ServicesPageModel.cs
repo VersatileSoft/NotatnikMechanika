@@ -1,4 +1,5 @@
-﻿using MvvmPackage.Core;
+﻿using System;
+using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
 using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
@@ -6,6 +7,7 @@ using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Service;
 using PropertyChanged;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -17,26 +19,24 @@ namespace NotatnikMechanika.Core.PageModels
     public class ServicesPageModel : PageModelBase
     {
         private readonly IHttpRequestService _httpRequestService;
-        private readonly IMvNavigationService _navigationService;
         private readonly IMessageDialogService _messageDialogService;
-        public IEnumerable<ServiceModel> Services { get; set; }
-        public ICommand AddServiceCommand { get; set; }
-        public ICommand ServiceSelectedCommand { get; set; }
-        public ICommand RemoveServiceCommand { get; set; }
+        public ObservableCollection<ServiceModel> Services { get; }
+        public ICommand AddServiceCommand { get; }
+        public ICommand ServiceSelectedCommand { get; }
+        public ICommand RemoveServiceCommand { get; }
 
         public ServicesPageModel(IHttpRequestService httpRequestService, IMvNavigationService navigationService, IMessageDialogService messageDialogService)
         {
             _httpRequestService = httpRequestService;
-            _navigationService = navigationService;
             _messageDialogService = messageDialogService;
-
-            AddServiceCommand = new AsyncCommand(() => _navigationService.NavigateToAsync<AddServicePageModel>());
-            ServiceSelectedCommand = new AsyncCommand<int>((id) => _navigationService.NavigateToAsync<ServicePageModel>(id));
+            Services = new ObservableCollection<ServiceModel>();
+            AddServiceCommand = new AsyncCommand(navigationService.NavigateToAsync<AddServicePageModel>);
+            ServiceSelectedCommand = new AsyncCommand<int>(navigationService.NavigateToAsync<ServicePageModel>);
             RemoveServiceCommand = new AsyncCommand<int>(RemoveServiceAction);
         }
         private async Task RemoveServiceAction(int id)
         {
-            Response response = await _httpRequestService.SendDelete(new ServicePaths().GetFullPath(id.ToString()));
+            var response = await _httpRequestService.Delete<ServiceModel>(id);
 
             switch (response.ResponseType)
             {
@@ -47,6 +47,12 @@ namespace NotatnikMechanika.Core.PageModels
                 case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas usuwania ułsugi");
                     break;
+                case ResponseType.Unauthorized:
+                    break;
+                case ResponseType.BadModelState:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             await Initialize();
@@ -55,17 +61,24 @@ namespace NotatnikMechanika.Core.PageModels
         public override async Task Initialize()
         {
             IsLoading = true;
-            Response<List<ServiceModel>> response = await _httpRequestService.SendGet<List<ServiceModel>>(new ServicePaths().GetFullPath(CRUDPaths.GetAllPath));
+            var response = await _httpRequestService.All<ServiceModel>();
 
             switch (response.ResponseType)
             {
                 case ResponseType.Successful:
-                    Services = response.Content;
+                    Services.Clear();
+                    response.Content.ForEach(m => Services.Add(m));
                     break;
 
                 case ResponseType.Failure:
                     await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania usługi");
                     break;
+                case ResponseType.Unauthorized:
+                    break;
+                case ResponseType.BadModelState:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
             IsLoading = false;
         }

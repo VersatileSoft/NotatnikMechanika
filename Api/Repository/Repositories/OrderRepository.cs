@@ -7,81 +7,70 @@ using NotatnikMechanika.Shared.Models.Order;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NotatnikMechanika.Shared.Models.Commodity;
+using Microsoft.AspNetCore.Http;
 
 namespace NotatnikMechanika.Repository.Repositories
 {
-    public class OrderRepository : RepositoryBase<OrderModel, Order>, IOrderRepository
+    public class OrderRepository : RepositoryBase<Order>, IOrderRepository
     {
-        public OrderRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public OrderRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor) : base(dbContext, mapper, httpContextAccessor)
         { }
 
-        public Task AddCommodityToOrder(int orderId, int commodityId)
+        public async Task AddCommodityToOrder(int orderId, Commodity commodity)
         {
-            _dbContext.OrderToCommodities.Add(new OrderToCommodity
-            {
-                CommodityId = commodityId,
-                OrderId = orderId
-            });
-
-            return _dbContext.SaveChangesAsync();
+            (await DbContext.Orders.Include(o => o.Commodities).SingleAsync(o => o.Id == orderId)).Commodities.Add(commodity);
+            await DbContext.SaveChangesAsync();
         }
 
-        public Task AddServiceToOrder(int orderId, int serviceId)
+        public async Task AddServiceToOrder(int orderId, Service service)
         {
-            _dbContext.OrderToServices.Add(new OrderToService
-            {
-                ServiceId = serviceId,
-                OrderId = orderId
-            });
-
-            return _dbContext.SaveChangesAsync();
+            (await DbContext.Orders.Include(o => o.Services).SingleAsync(o => o.Id == orderId)).Services.Add(service);
+            await DbContext.SaveChangesAsync();
         }
 
-        public Task<bool> CheckIfOrderToCommodityExsist(int orderId, int commodityId)
+        public Task<bool> IsCommodityInOrder(int orderId, int commodityId)
         {
-            return _dbContext.OrderToCommodities.Where(a => a.OrderId == orderId).Where(c => c.CommodityId == commodityId).AnyAsync();
+            return DbContext.OrderToCommodities.AnyAsync(c => c.Commodity.Id == commodityId && c.Order.Id == orderId);
         }
 
-        public Task<bool> CheckIfOrderToServiceExsist(int orderId, int serviceId)
+        public Task<bool> IsServiceInOrder(int orderId, int serviceId)
         {
-            return _dbContext.OrderToServices.Where(a => a.OrderId == orderId).Where(c => c.ServiceId == serviceId).AnyAsync();
+            return DbContext.OrderToServices.AnyAsync(c => c.Service.Id == serviceId && c.Order.Id == orderId);
         }
 
-        public async Task DeleteCommodityFromOrder(int orderId, int commodityId)
+        public async Task DeleteCommodityFromOrder(int orderId, Commodity commodity)
         {
-            _dbContext.OrderToCommodities.Remove(await _dbContext.OrderToCommodities.Where(a => a.OrderId == orderId).Where(c => c.CommodityId == commodityId).FirstOrDefaultAsync());
-            await _dbContext.SaveChangesAsync();
+            (await DbContext.Orders.Include(o => o.Commodities).SingleAsync(o => o.Id == orderId)).Commodities.Remove(commodity);
+            await DbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteServiceFromOrder(int orderId, int serviceId)
+        public async Task DeleteServiceFromOrder(int orderId, Service service)
         {
-            _dbContext.OrderToServices.Remove(await _dbContext.OrderToServices.Where(a => a.OrderId == orderId).Where(c => c.ServiceId == serviceId).FirstOrDefaultAsync());
-            await _dbContext.SaveChangesAsync();
+            (await DbContext.Orders.Include(o => o.Services).SingleAsync(o => o.Id == orderId)).Services.Remove(service);
+            await DbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<OrderExtendedModel>> GetAllExtendedAsync(string userId, bool archived)
+        public async Task<IEnumerable<OrderExtendedModel>> AllExtendedAsync(bool archived)
         {
-            List<Order> queryResult = await _dbContext.Orders
+            var queryResult = await DbContext.Orders
                 .Include(o => o.Car)
                 .ThenInclude(c => c.Customer)
-                .Where(o => o.UserId == userId)
+                .OwnedByUser(CurrentUserId)
                 .Where(o => o.Archived == archived)
                 .ToListAsync();
 
-            return _mapper.Map<IEnumerable<OrderExtendedModel>>(queryResult);
+            return Mapper.Map<IEnumerable<OrderExtendedModel>>(queryResult);
         }
 
-        public async Task<OrderExtendedModel> GetExtendedAsync(string userId, int id, bool archived)
+        public async Task<OrderExtendedModel> ExtendedAsync(int id, bool archived)
         {
-            Order queryResult = await _dbContext.Orders
+            var queryResult = await DbContext.Orders
                 .Include(o => o.Car)
                 .ThenInclude(c => c.Customer)
-                .Where(o => o.UserId == userId)
-                .Where(o => o.Archived == archived)
-                .Where(o => o.Id == id)
-                .FirstOrDefaultAsync();
+                .SingleAsync(o => o.Archived == archived && o.Id == id);
 
-            return _mapper.Map<OrderExtendedModel>(queryResult);
+            return Mapper.Map<OrderExtendedModel>(queryResult);
         }
     }
 }

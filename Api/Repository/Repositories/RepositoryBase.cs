@@ -1,65 +1,67 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using NotatnikMechanika.Data;
 using NotatnikMechanika.Data.Models;
 using NotatnikMechanika.Repository.Interfaces.Base;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Repository.Repositories
 {
-    public abstract class RepositoryBase<ModelType, EntityType> : IRepositoryBase<ModelType> where ModelType : class, new() where EntityType : EntityBase, new()
+    public abstract class RepositoryBase<EntityType> : IRepositoryBase<EntityType> where EntityType : EntityBase, new()
     {
-        protected readonly NotatnikMechanikaDbContext _dbContext;
-        protected readonly IMapper _mapper;
+        protected readonly NotatnikMechanikaDbContext DbContext;
+        protected readonly IMapper Mapper;
 
-        protected RepositoryBase(NotatnikMechanikaDbContext dbContext, IMapper mapper)
+        public string CurrentUserId => 
+            _httpContextAccessor.HttpContext.User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value;
+
+        protected readonly IHttpContextAccessor _httpContextAccessor;
+
+        protected RepositoryBase(NotatnikMechanikaDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
-            _dbContext = dbContext;
-            _mapper = mapper;
+            DbContext = dbContext;
+            Mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
         }
 
-        public Task<bool> CheckIfUserMatch(string userId, int Id)
+        public Task<bool> CheckIfUserMatch(int id)
         {
-            return _dbContext.Set<EntityType>().Where(a => a.UserId == userId).Where(a => a.Id == Id).AnyAsync();
+            return DbContext.Set<EntityType>().OwnedByUser(CurrentUserId).Where(a => a.Id == id).AnyAsync();
         }
 
-        public async Task CreateAsync(string userId, ModelType value)
+        public async Task CreateAsync(EntityType value)
         {
-            EntityType entity = _mapper.Map<EntityType>(value);
-            entity.UserId = userId;
+            EntityType entity = Mapper.Map<EntityType>(value);
+            entity.UserId = CurrentUserId;
 
-            await _dbContext.Set<EntityType>().AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            await DbContext.Set<EntityType>().AddAsync(entity);
+            await DbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int Id)
+        public async Task DeleteAsync(EntityType entity)
         {
-            _dbContext.Set<EntityType>().Remove(await _dbContext.Set<EntityType>().Where(a => a.Id == Id).FirstOrDefaultAsync());
-            await _dbContext.SaveChangesAsync();
+            DbContext.Set<EntityType>().Remove(entity);
+            await DbContext.SaveChangesAsync();
         }
 
-        public async Task<ModelType> GetAsync(int Id)
+        public Task<EntityType> ByIdAsync(int id)
         {
-            EntityType entity = await _dbContext.Set<EntityType>().Where(a => a.Id == Id).FirstOrDefaultAsync();
-            return _mapper.Map<ModelType>(entity);
+            return DbContext.Set<EntityType>().SingleAsync(a => a.Id == id);
         }
 
-        public async Task<IEnumerable<ModelType>> GetAllAsync(string userId)
+        public async Task<IEnumerable<EntityType>> AllAsync()
         {
-            List<EntityType> result = await _dbContext.Set<EntityType>().Where(a => a.UserId == userId).ToListAsync();
-            return _mapper.Map<List<EntityType>, List<ModelType>>(result);
+            return await DbContext.Set<EntityType>().OwnedByUser(CurrentUserId).ToListAsync();
         }
 
-        public async Task UpdateAsync(int id, ModelType value)
+        public async Task UpdateAsync(EntityType value)
         {
-            EntityType entity = await _dbContext.Set<EntityType>().Where(a => a.Id == id).FirstOrDefaultAsync();
-            _mapper.Map(value, entity);
-            entity.Id = id;
-
-            _dbContext.Set<EntityType>().Update(entity);
-            await _dbContext.SaveChangesAsync();
+            DbContext.Set<EntityType>().Update(value);
+            await DbContext.SaveChangesAsync();
         }
     }
 }

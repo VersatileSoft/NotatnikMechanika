@@ -8,10 +8,10 @@ namespace NotatnikMechanika.Data.Models
         public string Name { get; set; }
         public string Surname { get; set; }
 
-        public virtual IEnumerable<Car> Cars { get; set; }
-        public virtual IEnumerable<Customer> Customers { get; set; }
-        public virtual IEnumerable<Order> Orders { get; set; }
-        public virtual IEnumerable<Service> Services { get; set; }
-        public virtual IEnumerable<Commodity> Commodities { get; set; }
+        public virtual ICollection<Car> Cars { get; set; }
+        public virtual ICollection<Customer> Customers { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Service> Services { get; set; }
+        public virtual ICollection<Commodity> Commodities { get; set; }
     }
 }

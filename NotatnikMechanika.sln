@@ -37,9 +37,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotatnikMechanika.Service",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotatnikMechanika.Repository", "Api\Repository\NotatnikMechanika.Repository.csproj", "{F7A3A1B3-EBD3-4E00-B166-829938ECC60F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotatnikMechanika.Component", "Api\Component\NotatnikMechanika.Component.csproj", "{D6949BD1-9838-4596-BF18-E02C2DB7DE89}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotatnikMechanika.Data", "Api\Data\NotatnikMechanika.Data.csproj", "{2FA117B8-9E29-4464-911B-9EF966CD81D4}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F68431D8-BF5B-4CB0-AC32-414CB9482FD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -465,7 +465,6 @@ Global
 		{49EF1200-C734-4B59-A042-A4EFAF95D55F} = {CB020155-2ED3-47A4-9280-16802F94DF68}
 		{6992ACEE-7A62-47B8-8E6E-FC908D118B9F} = {535D483F-7F9A-48BE-B700-52FAC05F0EC9}
 		{F7A3A1B3-EBD3-4E00-B166-829938ECC60F} = {535D483F-7F9A-48BE-B700-52FAC05F0EC9}
-		{D6949BD1-9838-4596-BF18-E02C2DB7DE89} = {535D483F-7F9A-48BE-B700-52FAC05F0EC9}
 		{2FA117B8-9E29-4464-911B-9EF966CD81D4} = {535D483F-7F9A-48BE-B700-52FAC05F0EC9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

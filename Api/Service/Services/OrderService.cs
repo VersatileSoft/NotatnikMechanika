@@ -4,38 +4,40 @@ using NotatnikMechanika.Service.Services.Base;
 using NotatnikMechanika.Shared.Models.Order;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
+using NotatnikMechanika.Data.Models;
 using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Service.Services
 {
-    public class OrderService : ServiceBase<OrderModel>, IOrderService
+    public class OrderService : ServiceBase<OrderModel, Order>, IOrderService
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IServiceRepository _serviceRepository;
         private readonly ICommodityRepository _commodityRepository;
 
-        public OrderService(IOrderRepository orderRepository, IServiceRepository serviceRepository, ICommodityRepository commodityRepository) : base(orderRepository)
+        public OrderService(IOrderRepository orderRepository, IServiceRepository serviceRepository, ICommodityRepository commodityRepository, IMapper mapper) : base(orderRepository, mapper)
         {
             _orderRepository = orderRepository;
             _serviceRepository = serviceRepository;
             _commodityRepository = commodityRepository;
         }
 
-        public async Task<Response> AddCommodityToOrder(string userId, int orderId, int commodityId)
+        public async Task<Response> AddCommodityToOrder(int orderId, int commodityId)
         {
-            List<string> errors = new List<string>();
+            var errors = new List<string>();
 
-            if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
+            if (!await _orderRepository.CheckIfUserMatch(orderId))
             {
                 errors.Add("Zlecenie nie jest twoje");
             }
 
-            if (!await _commodityRepository.CheckIfUserMatch(userId, commodityId))
+            if (!await _commodityRepository.CheckIfUserMatch(commodityId))
             {
                 errors.Add("Towar nie jest twój");
             }
 
-            if (await _orderRepository.CheckIfOrderToCommodityExsist(orderId, commodityId))
+            if (await _orderRepository.IsCommodityInOrder(orderId, commodityId))
             {
                 errors.Add("Towar jest już dodany do zlecenia");
             }
@@ -45,25 +47,26 @@ namespace NotatnikMechanika.Service.Services
                 return FailureResponse(ResponseType.Failure, errors);
             }
 
-            await _orderRepository.AddCommodityToOrder(orderId, commodityId);
+            var commodity = await _commodityRepository.ByIdAsync(commodityId);
+            await _orderRepository.AddCommodityToOrder(orderId, commodity);
             return SuccessResponse();
         }
 
-        public async Task<Response> AddServiceToOrder(string userId, int orderId, int serviceId)
+        public async Task<Response> AddServiceToOrder(int orderId, int serviceId)
         {
-            List<string> errors = new List<string>();
+            var errors = new List<string>();
 
-            if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
+            if (!await _orderRepository.CheckIfUserMatch(orderId))
             {
                 errors.Add("Zlecenie nie jest twoje");
             }
 
-            if (!await _serviceRepository.CheckIfUserMatch(userId, serviceId))
+            if (!await _serviceRepository.CheckIfUserMatch(serviceId))
             {
                 errors.Add("Usługa nie jest twoja");
             }
 
-            if (await _orderRepository.CheckIfOrderToServiceExsist(orderId, serviceId))
+            if (await _orderRepository.IsServiceInOrder(orderId, serviceId))
             {
                 errors.Add("Usługa jest już dodana do zlecenia");
             }
@@ -73,25 +76,26 @@ namespace NotatnikMechanika.Service.Services
                 return FailureResponse(ResponseType.Failure, errors);
             }
 
-            await _orderRepository.AddServiceToOrder(orderId, serviceId);
+            var service = await _serviceRepository.ByIdAsync(serviceId);
+            await _orderRepository.AddServiceToOrder(orderId, service);
             return SuccessResponse();
         }
 
-        public async Task<Response> DeleteCommodityFromOrder(string userId, int orderId, int commodityId)
+        public async Task<Response> DeleteCommodityFromOrder(int orderId, int commodityId)
         {
-            List<string> errors = new List<string>();
+            var errors = new List<string>();
 
-            if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
+            if (!await _orderRepository.CheckIfUserMatch(orderId))
             {
                 errors.Add("Zlecenie nie jest twoje");
             }
 
-            if (!await _commodityRepository.CheckIfUserMatch(userId, commodityId))
+            if (!await _commodityRepository.CheckIfUserMatch(commodityId))
             {
                 errors.Add("Towar nie jest twój");
             }
 
-            if (!await _orderRepository.CheckIfOrderToCommodityExsist(orderId, commodityId))
+            if (!await _orderRepository.IsCommodityInOrder(orderId, commodityId))
             {
                 errors.Add("Towar nie jest dodany do zlecenia");
             }
@@ -101,25 +105,26 @@ namespace NotatnikMechanika.Service.Services
                 return FailureResponse(ResponseType.Failure, errors);
             }
 
-            await _orderRepository.DeleteCommodityFromOrder(orderId, commodityId);
+            var commodity = await _commodityRepository.ByIdAsync(commodityId);
+            await _orderRepository.DeleteCommodityFromOrder(orderId, commodity);
             return SuccessResponse();
         }
 
-        public async Task<Response> DeleteServiceFromOrder(string userId, int orderId, int serviceId)
+        public async Task<Response> DeleteServiceFromOrder(int orderId, int serviceId)
         {
-            List<string> errors = new List<string>();
+            var errors = new List<string>();
 
-            if (!await _orderRepository.CheckIfUserMatch(userId, orderId))
+            if (!await _orderRepository.CheckIfUserMatch(orderId))
             {
                 errors.Add("Zlecenie nie jest twoje");
             }
 
-            if (!await _serviceRepository.CheckIfUserMatch(userId, serviceId))
+            if (!await _serviceRepository.CheckIfUserMatch(serviceId))
             {
                 errors.Add("Usługa nie jest twoja");
             }
 
-            if (!await _orderRepository.CheckIfOrderToServiceExsist(orderId, serviceId))
+            if (!await _orderRepository.IsServiceInOrder(orderId, serviceId))
             {
                 errors.Add("Usługa nie jest dodana do zlecenia");
             }
@@ -129,18 +134,22 @@ namespace NotatnikMechanika.Service.Services
                 return FailureResponse(ResponseType.Failure, errors);
             }
 
-            await _orderRepository.DeleteServiceFromOrder(orderId, serviceId);
+            var service = await _serviceRepository.ByIdAsync(serviceId);
+            await _orderRepository.DeleteServiceFromOrder(orderId, service);
             return SuccessResponse();
         }
 
-        public async Task<Response<IEnumerable<OrderExtendedModel>>> GetAllExtendedAsync(string userId, bool archived)
+        public async Task<Response<IEnumerable<OrderExtendedModel>>> AllExtendedAsync(bool archived)
         {
-            return SuccessResponse(await _orderRepository.GetAllExtendedAsync(userId, archived));
+            return SuccessResponse(await _orderRepository.AllExtendedAsync(archived));
         }
 
-        public async Task<Response<OrderExtendedModel>> GetExtendedAsync(string userId, int id, bool archived)
+        public async Task<Response<OrderExtendedModel>> ExtendedAsync(int id, bool archived)
         {
-            return SuccessResponse(await _orderRepository.GetExtendedAsync(userId, id, archived));
+            if (!await _orderRepository.CheckIfUserMatch(id))
+                return FailureResponse<OrderExtendedModel>(ResponseType.Failure, new List<string> {NotAllowedError});
+            
+            return SuccessResponse(await _orderRepository.ExtendedAsync(id, archived));
         }
     }
 }

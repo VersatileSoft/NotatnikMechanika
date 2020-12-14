@@ -11,12 +11,14 @@ using System.Text;
 
 namespace NotatnikMechanika.Server
 {
-    public static class StartupExtensions
+    public static class Extensions
     {
         public static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<NotatnikMechanikaDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("PublishConnection"), b => b.EnableRetryOnFailure()) // RemoteConnection, LocalConnection           
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), // PublishConnection, DefaultConnection, DockerConnection
+                    b => b.EnableRetryOnFailure()
+                )
             );
 
             services.AddIdentity<User, IdentityRole>(options =>

@@ -4,58 +4,32 @@
 @using NotatnikMechanika.Shared.Models.Customer
 @inherits PageBase<CustomersPageModel>
 
-<div class="customers">
-    @if (PageModel.IsLoading)
-    {
-        <MatProgressBar Indeterminate="true" />
-    }
-    else
-    {
-        <MatHidden BreakPoint="@MatBreakpoint.SM" Direction="@MatHiddenDirection.Down">
-            <ChildContent>
-                <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" Label="Dodaj klienta" OnClick="(_ => PageModel.AddCustomerCommand.Execute(null))" />
-                <MatTable Items="PageModel.Customers" class="table" ShowPaging="false" UseSortHeaderRow="true" HeaderRowClass="table-header">
-                    <MatTableHeader>
-                        <th scope="col">Imię</th>
-                        <th scope="col">Nazwisko</th>
-                        <th scope="col">Adres</th>
-                        <th scope="col">Telefon</th>
-                        <th scope="col">Nazwa firmy</th>
-                        <th scope="col">Nip</th>
-                    </MatTableHeader>
-                    <MatTableRow>
-                        <td>@context.Name</td>
-                        <td>@context.Surname</td>
-                        <td>@context.Address</td>
-                        <td>@context.Phone</td>
-                        <td>@context.CompanyName</td>
-                        <td>@context.CompanyIdentyficator</td>
-                        <td><MatButton Label="Szczegóły" Raised="true" Command="PageModel.CustomerSelectedCommand" CommandParameter="context.Id" /></td>
-                        <td><MatButton Label="Usuń" Raised="true" Command="PageModel.RemoveCustomerCommand" CommandParameter="context.Id" /></td>
-                    </MatTableRow>
-                </MatTable>
-            </ChildContent>
-
-            <ElseContent>
-                <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" OnClick="(_ => PageModel.AddCustomerCommand.Execute(null))" />
-                <MatAccordion Multi="true">
-                    @foreach (CustomerModel customer in PageModel.Customers)
-                    {
-                        <MatExpansionPanel Style="background-color: #2c2c2c;">
-                            <MatExpansionPanelSummary>
-                                <MatExpansionPanelHeader>
-                                    <p>@customer.Name @customer.Surname</p>
-                                </MatExpansionPanelHeader>
-                            </MatExpansionPanelSummary>
-                            <MatExpansionPanelDetails>
-                                <p>@customer.Phone @customer.Address</p>
-                                <p>@customer.CompanyName @customer.CompanyIdentyficator</p>
-                                <MatButton Label="Szczegóły" Raised="true" Command="PageModel.CustomerSelectedCommand" CommandParameter="customer.Id" />
-                            </MatExpansionPanelDetails>
-                        </MatExpansionPanel>
-                    }
-                </MatAccordion>
-            </ElseContent>
-        </MatHidden>
-    }
-</div>
+@if (PageModel.IsLoading)
+{
+    <MatProgressBar Indeterminate="true" />
+}
+else
+{
+    <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" OnClick="(_ => PageModel.AddCustomerCommand.Execute(null))" />
+    <ExpansionPanelList Items="@PageModel.Customers">
+        <HeaderTemplate Context="customer">
+            <p class="expansion-panel-header-text">
+                @customer.Name @customer.Surname
+            </p>
+        </HeaderTemplate>
+        
+        <BodyTemplate Context="customer">
+            <MatDivider /> 
+            <p>Samochody: 3</p>
+            <p>Ostatnia naprawa: 28.10.2020</p>
+            <p>@customer.Phone @customer.Address</p>
+            <p>@customer.CompanyName @customer.CompanyIdentyficator</p>
+            <MatDivider />
+            <div class="panel-buttons">
+                <MatIconButton Icon="info" Raised="true" Command="PageModel.CustomerSelectedCommand" CommandParameter="customer.Id"/>
+                <MatIconButton Icon="info" Raised="true" Command="PageModel.CustomerSelectedCommand" CommandParameter="customer.Id"/>
+                <MatIconButton Style="color: red;" Icon="delete" Raised="true" Command="PageModel.RemoveCustomerCommand" CommandParameter="customer.Id"/>
+            </div>
+        </BodyTemplate>
+    </ExpansionPanelList>
+}
