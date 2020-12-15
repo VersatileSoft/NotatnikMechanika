@@ -1,61 +1,159 @@
 ﻿@page "/addorder"
 @using NotatnikMechanika.Core.PageModels
 @using MVVMPackage.Blazor
+@using NotatnikMechanika.Shared.Models.Customer;
+@using NotatnikMechanika.Shared.Models.Car;
 @inherits PageBase<AddOrderPageModel>
 
 
-<div class="add-customer">
-    @if (!PageModel.IsLoading)
-    {
-    <EditForm Model="PageModel.Model" OnValidSubmit="_ => PageModel.AddCommand.Execute(null)">
-        <WrapPanel >
-            <WrapPanelCard>
-                <CardHeader>
-                    <p>Dane Klienta i samochodu</p>
-                </CardHeader>
+@if (PageModel.IsLoading)
+{
+    <MBCircularProgress class="circular-progress" CircularProgressType="@MBCircularProgressType.Indeterminate" />
+}
+else
+{
 
-                <CardContent>
+    <div class="mdc-layout-grid__cell">
+        <MBCard AutoStyled="true">
+            <Primary>
+                <EditForm Model="PageModel.Model" OnValidSubmit="_ => PageModel.AddCommand.Execute(null)">
+                    <DataAnnotationsValidator />
+
                     @if (PageModel.Customers != null)
                     {
-                        <MatSelectItem @bind-Value="PageModel.SelectedCustomer" Outlined="true" Label="Klient" Items="PageModel.Customers?.ToList()?.AsReadOnly()">
-                            <ItemTemplate Context="customer">
-                                <p>@customer?.Name</p>
-                                <p>@customer?.Surname</p>
-                                <p>@customer?.Address</p>
-                                <p>@customer?.CompanyName</p>
-                            </ItemTemplate>
-                        </MatSelectItem>
+                        <p><MBSelect 
+                                Label="Klient" 
+                                @bind-Value="PageModel.SelectedCustomer" 
+                                Items="Customers" 
+                                SelectInputStyle="MBSelectInputStyle.Outlined" 
+                                ItemValidation="@MBItemValidation.NoSelection" /></p>
                     }
 
                     @if (PageModel.Cars != null)
                     {
-                        <MatSelectItem @bind-Value="PageModel.SelectedCar" Outlined="true" Label="Samochód" Items="PageModel.Cars?.ToList()?.AsReadOnly()">
-                            <ItemTemplate Context="car">
-                                <p>@car?.Brand</p>
-                                <p>@car?.Model</p>
-                            </ItemTemplate>
-                        </MatSelectItem>
-                        <ValidationMessage For="@(() => PageModel.Model.CarId)" />
-                    }
-                </CardContent>
-            </WrapPanelCard>
+                        <p><MBSelect 
+                                Label="Samochód" 
+                                @bind-Value="PageModel.SelectedCar" 
+                                Items="Cars" 
+                                SelectInputStyle="MBSelectInputStyle.Outlined" 
+                                ItemValidation="@MBItemValidation.NoSelection" /></p>
+                    }         
 
-            <WrapPanelCard>
-                <CardHeader>
-                    <p>Szczegóły</p>
-                </CardHeader>
+                    <p><MBDatePicker Label="Data przyjęcia"
+                                    @bind-Value="PageModel.Model.AcceptDate"
+                                    SelectInputStyle="MBSelectInputStyle.Outlined" /></p>
 
-                <CardContent>
-                    <MatDatePicker @bind-Value="PageModel.Model.AcceptDate" />
-                    <ValidationMessage For="@(() => PageModel.Model.AcceptDate)" />
-                    <MatDatePicker @bind-Value="PageModel.Model.FinishDate" />
-                    <ValidationMessage For="@(() => PageModel.Model.FinishDate)" />
-                    <MatTextField @bind-Value="@PageModel.Model.Details" Class="text-field" Label="Dane dodatkowe" Outlined="true"></MatTextField>
-                    <ValidationMessage For="@(() => PageModel.Model.Details)" />
-                </CardContent>
-            </WrapPanelCard>
-        </WrapPanel>
-        <MatButton Raised="true" Label="Dodaj klienta" Type="Submit" />
-    </EditForm>
+                    <p><MBDatePicker Label="Data zakończenia"
+                                    @bind-Value="PageModel.Model.FinishDate"
+                                    SelectInputStyle="MBSelectInputStyle.Outlined" /></p>
+
+                    <p><MBTextField @bind-Value="@PageModel.Model.Details" 
+                                    Label="Dane dodatkowe" 
+                                    TextInputStyle="MBTextInputStyle.Outlined" 
+                                    ValidationMessageFor="@(() => PageModel.Model.Details)"/></p>
+                    
+                    <MBButton ButtonStyle="@MBButtonStyle.ContainedRaised" Label="Dodaj zlecenie" Type="Submit" />
+                </EditForm>
+            </Primary>
+        </MBCard>
+    </div>    
+
+    <div class="mdc-layout-grid__cell">
+        <MBCard AutoStyled="true">
+            <Primary>
+                
+                @if (PageModel.Services != null)
+                {
+                    <MBList Items="@PageModel.Services"
+                            Context="service"
+                            ShowSeparators="true"
+                            ListStyle="MBListStyle.Outlined">
+
+                        <Icon><MBIcon IconName="local_grocery_store" /></Icon>
+                        <Title>@service.Name</Title>
+                        <LineTwo>@service.Price</LineTwo>
+                        <Actions>
+                            <div style="width: 10rem">
+                                    <MBCheckbox @onclick="@(() => ToggleItem(service.Id, true))"/>
+                            </div>
+                        </Actions>
+                    </MBList>
+                }
+                else
+                {
+                    <p>Lista usług jest pusta</p>
+                }
+            </Primary>
+        </MBCard>
+    </div>  
+
+    <div class="mdc-layout-grid__cell">
+        <MBCard AutoStyled="true">
+            <Primary>           
+                @if (PageModel.Commodities != null)
+                {
+                    <MBList Items="@PageModel.Commodities"
+                            Context="commodity"
+                            ShowSeparators="true"
+                            ListStyle="MBListStyle.Outlined">
+
+                        <Icon><MBIcon IconName="local_grocery_store" /></Icon>
+                        <Title>@commodity.Name</Title>
+                        <LineTwo>@commodity.Price</LineTwo>
+                        <Actions>
+                            <div style="width: 10rem">
+                                <MBCheckbox @onclick="@(() => ToggleItem(commodity.Id, false))"/>
+                            </div>
+                        </Actions>
+                    </MBList>
+                }
+                else
+                {
+                    <p>Lista towarów jest pusta</p>
+                }
+            </Primary>
+        </MBCard>
+    </div>  
+
+}
+
+@code{
+
+    IEnumerable<MBListElement<CustomerModel>> Customers {
+        get => PageModel.Customers.Select(c => new MBListElement<CustomerModel> { Label = $"{c.Name} {c.Surname}", SelectedValue = c });      
     }
-</div>
+
+    IEnumerable<MBListElement<CarModel>> Cars {
+        get => PageModel.Cars.Select(c => new MBListElement<CarModel> { Label = $"{c.Brand} {c.Model}", SelectedValue = c });      
+    }
+
+
+    private void ToggleItem(int id, bool service){
+
+        // TODO Optimize somehow this code
+
+        if(service)
+        {
+            if(PageModel.Model.Services.Any(i => i == id))
+            {
+                ((List<int>)PageModel.Model.Services).Remove(id);
+            }
+            else
+            {
+                ((List<int>)PageModel.Model.Services).Add(id);
+            }
+
+        }
+        else
+        {
+            if(PageModel.Model.Commodities.Any(i => i == id))
+             {
+                ((List<int>)PageModel.Model.Commodities).Remove(id);
+            }
+            else
+            {
+                ((List<int>)PageModel.Model.Commodities).Add(id);
+            }
+        }
+    }
+}

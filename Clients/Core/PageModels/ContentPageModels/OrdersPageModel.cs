@@ -67,7 +67,7 @@ namespace NotatnikMechanika.Core.PageModels
         public override async Task Initialize()
         {
             IsLoading = true;
-            var response = await _httpRequestService.SendGet<List<OrderExtendedModel>>(OrderPaths.Extended(false));
+            var response = await _httpRequestService.SendGet<List<OrderExtendedModel>>(OrderPaths.Extended(Parameter.HasValue));
 
             switch (response.ResponseType)
             {

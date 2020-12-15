@@ -16,7 +16,7 @@ namespace NotatnikMechanika.Core.PageModels
     [AddINotifyPropertyChangedInterface]
     public abstract class AddingPageModelBase<TModel> : PageModelBase where TModel : ValidateModelBase, new()
     {
-        public TModel Model { get; }
+        public virtual TModel Model { get; protected set; }
         public ICommand AddCommand { get; }
         public ICommand GoBackCommand { get; }
 
@@ -37,7 +37,7 @@ namespace NotatnikMechanika.Core.PageModels
             GoBackCommand = new AsyncCommand(NavigationService.PopAsync);
         }
 
-        private async Task AddAction()
+        protected virtual async Task AddAction()
         {
             IsLoading = true;
             var response = await HttpRequestService.Create(Model);

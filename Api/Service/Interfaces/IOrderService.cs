@@ -14,5 +14,8 @@ namespace NotatnikMechanika.Service.Interfaces
         Task<Response> DeleteServiceFromOrder(int orderId, int serviceId);
         Task<Response> DeleteCommodityFromOrder(int orderId, int commodityId);
         Task<Response<OrderExtendedModel>> ExtendedAsync(int orderId, bool archived);
+        Task<Response> AddExtendedAsync(AddOrderModel addOrderModel);
+        Task<Response> UpdateServiceStatusAsync(int orderId, int serviceId, bool finished);
+        Task<Response> UpdateCommodityStatusAsync(int orderId, int commodityId, bool finished);
     }
 }

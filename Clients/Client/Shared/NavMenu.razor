@@ -1,45 +1,30 @@
-﻿<div class="nav-menu">
+﻿@inject NavigationManager NavigationService
 
-    <div class="nav-header">
-        <img alt="logo" src="/images/app_icon.png" />
-        <h2>Notatnik Mechanika</h2>
+<MBDrawer @ref="@Drawer" IsDismissible="true">
+    <div class="mdc-list">
+        <MBListItem LeadingIcon="favorite" Label="Zlecenia" @onclick="@(e => ListItemClickHandler("orders"))" />
+        <MBListItem LeadingIcon="account_box" Label="Klienci" @onclick="@(e => ListItemClickHandler("customers"))" />
+        <MBListItem LeadingIcon="local_laundry_service" Label="Usługi" @onclick="@(e => ListItemClickHandler("services"))" />
+        <MBListItem LeadingIcon="home" Label="Magazyn" @onclick="@(e => ListItemClickHandler("commodities"))" />
+        <MBListItem LeadingIcon="restore_from_trash" Label="Archiwum" @onclick="@(e => ListItemClickHandler("orders/archived"))" />
+        <MBListItem LeadingIcon="file_copy" Label="Faktury/Paragony" @onclick="@(e => ListItemClickHandler(""))" />
+        <MBListItem LeadingIcon="account_box" Label="Moje konto" @onclick="@(e => ListItemClickHandler("myaccount"))" />
     </div>
-    
-    <div class="nav-content">
+</MBDrawer>
 
-        <a href="/orders">
-            <MatIcon Icon="favorite" />
-            <p>Zlecenia</p>
-        </a>
 
-        <a href="/customers">
-            <MatIcon Icon="account_box" />
-            <p>Klienci</p>
-        </a>
+@code{
+        
+    private MBDrawer Drawer { get; set; }    
 
-        <a href="/services">
-            <MatIcon Icon="local_laundry_service" />
-            <p>Usługi</p>
-        </a>
+    private void ListItemClickHandler(string NavigationReference)
+    {
+        Drawer.NotifyNavigation();
+        NavigationService.NavigateTo(NavigationReference);
+    }
 
-        <a href="/commodities">
-            <MatIcon Icon="home" />
-            <p>Magazyn</p>
-        </a>
-
-        <a href="/">
-            <MatIcon Icon="restore_from_trash" />
-            <p>Archiwum</p>
-        </a>
-
-        <a href="/">
-            <MatIcon Icon="file_copy" />
-            <p>Faktury/Paragony</p>
-        </a>
-
-        <a href="/myaccount">
-            <MatIcon Icon="account_box" />
-            <p>Moje konto</p>
-        </a>
-    </div>
-</div>
+    public void SideBarToggle()
+    {
+       Drawer.Toggle();
+    }       
+}

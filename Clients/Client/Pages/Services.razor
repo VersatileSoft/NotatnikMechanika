@@ -4,29 +4,33 @@
 @using NotatnikMechanika.Shared.Models.Service
 @inherits PageBase<ServicesPageModel>
 
-<div class="services">
-    @if (PageModel.IsLoading)
-    {
-        <MatProgressBar Indeterminate="true" />
-    }
-    else
-    {
-        <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" OnClick="(_ => PageModel.AddServiceCommand.Execute(null))" />
-        <ExpansionPanelList Items="@PageModel.Services">
-                <HeaderTemplate Context="service">
-                    <p class="expansion-panel-header-text">
-                        @service.Name @service.Price
-                    </p>
-                </HeaderTemplate>
-                
-                <BodyTemplate Context="service">
-                    <div class="panel-buttons">
-                        <MatIconButton Icon="info" Raised="true" Command="PageModel.ServiceSelectedCommand" CommandParameter="@service.Id"/>
-                        <MatIconButton Icon="info" Raised="true" Command="PageModel.ServiceSelectedCommand" CommandParameter="service.Id"/>
-                        <MatIconButton Style="color: red;" Icon="delete" Raised="true" Command="PageModel.RemoveServiceCommand" CommandParameter="service.Id"/>
-                    </div>
-                </BodyTemplate>
-            </ExpansionPanelList>
-    }
-</div>
 
+@if (PageModel.IsLoading)
+{
+    <MBCircularProgress class="circular-progress" CircularProgressType="@MBCircularProgressType.Indeterminate" />
+}
+else
+{
+    <MBFloatingActionButton class="app-fab--absolute" Icon="add" @onclick="@(e => PageModel.AddServiceCommand.Execute(null))" />
+
+    <Virtualize Context="service" Items="@PageModel.Services">
+        <div class="mdc-layout-grid__cell">
+            <MBCard AutoStyled="true">
+                <Primary>
+                    <div class="mdc-layout-grid__cell">
+                        <p>
+                            @service.Name 
+                            @service.Price
+                        </p>
+
+                        <p>
+                            <MBIconButton Icon="info" @onclick="_ => PageModel.ServiceSelectedCommand.Execute(service.Id)" />
+                            <MBIconButton Icon="info" @onclick="_ => PageModel.ServiceSelectedCommand.Execute(service.Id)" />
+                            <MBIconButton Icon="delete" @onclick="_ => PageModel.ServiceSelectedCommand.Execute(service.Id)" />
+                        </p>
+                    </div>
+                </Primary>
+            </MBCard>
+        </div>
+    </Virtualize>
+}

@@ -29,7 +29,7 @@ namespace NotatnikMechanika.Service.Services.Base
             entity.UserId = CurrentUserId;
             
             await _repositoryBase.CreateAsync(entity);
-            return SuccessResponse();
+            return SuccessResponse(resourceId: entity.Id);
         }
 
         public async Task<Response> DeleteAsync(int id)

@@ -20,9 +20,6 @@ namespace NotatnikMechanika.Server.Controllers
             _orderService = orderService;
         }
 
-        /// <summary>
-        /// Get list of extended Orders only not archived
-        /// </summary>
         [HttpGet(OrderPaths.ExtendedOrdersPath)]
         public async Task<ActionResult<Response<IEnumerable<OrderExtendedModel>>>> AllExtendedAsync(bool archived = false)
         {
@@ -33,6 +30,12 @@ namespace NotatnikMechanika.Server.Controllers
         public async Task<ActionResult<Response<OrderExtendedModel>>> ExtendedAsync(int orderId)
         {           
             return Ok(await _orderService.ExtendedAsync(orderId, false));
+        }
+
+        [HttpPost(OrderPaths.AddExtendedOrderPath)]
+        public async Task<ActionResult<Response<OrderExtendedModel>>> AddExtendedAsync([FromBody] AddOrderModel addOrderModel)
+        {
+            return Ok(await _orderService.AddExtendedAsync(addOrderModel));
         }
 
         [HttpPost(OrderPaths.AddServiceToOrderPath)]
@@ -46,6 +49,19 @@ namespace NotatnikMechanika.Server.Controllers
         {
             return Ok(await _orderService.AddCommodityToOrder(orderId, commodityId));
         }
+
+        [HttpPut(OrderPaths.UpdateServiceStatusPath)]
+        public async Task<ActionResult<Response>> UpdateServiceStatusAsync(int orderId, int serviceId, bool finished)
+        {
+            return Ok(await _orderService.UpdateServiceStatusAsync(orderId, serviceId, finished));
+        }
+
+        [HttpPut(OrderPaths.UpdateCommodityStatusPath)]
+        public async Task<ActionResult<Response>> UpdateCommodityStatusAsync(int orderId, int commodityId, bool finished)
+        {
+            return Ok(await _orderService.UpdateCommodityStatusAsync(orderId, commodityId, finished));
+        }
+
 
         [HttpDelete(OrderPaths.DeleteServiceFromOrderPath)]
         public async Task<ActionResult<Response>> DeleteServiceFromOrder(int orderId, int serviceId)

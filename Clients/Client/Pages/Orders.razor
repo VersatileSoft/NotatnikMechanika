@@ -1,45 +1,43 @@
-﻿@page "/orders"
+﻿@page "/orders/"
+@page "/orders/{parameter}"
 @using NotatnikMechanika.Core.PageModels
 @using MVVMPackage.Blazor
 @using NotatnikMechanika.Shared.Models.Order
 @inherits PageBase<OrdersPageModel>
 
+
 @if (PageModel.IsLoading)
 {
-    <MatProgressBar Indeterminate="true" />
+    <MBCircularProgress class="circular-progress" CircularProgressType="@MBCircularProgressType.Indeterminate" />
 }
 else
 {
-    <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" OnClick="(_ => PageModel.AddOrderCommand.Execute(null))" />
-                    <ExpansionPanelList Items="@PageModel.Orders">
-                        <HeaderTemplate Context="order">
-                            <p class="expansion-panel-header-text">
-                                @order.CustomerModel.Name
-                                @order.CustomerModel.Surname
-                            </p>
-                        </HeaderTemplate>
-                        
-                        <BodyTemplate Context="order">
-                            <p>@order.CarModel.Brand @order.CarModel.Model</p>
-                            <p>@order.CustomerModel.Phone</p>
-                            <MatDivider />
-                            <p>Postęp: 30%</p>
-                            
-                            <ProgressBar Progress="0.3" ></ProgressBar>
-                            
-                            <p>Do końca: 5 dni</p>
-                            
-                            <MatDivider />
-                            
-                            <div class="panel-buttons">
-                                <MatIconButton Icon="info" Raised="true" Command="PageModel.OrderSelectedCommand" CommandParameter="order.Id"/>
-                                <MatIconButton Icon="info" Raised="true" Command="PageModel.OrderSelectedCommand" CommandParameter="order.Id"/>
-                                <MatIconButton Style="color: red;" Icon="delete" Raised="true" Command="PageModel.RemoveOrderCommand" CommandParameter="order.Id"/>
-                            </div>
-                        </BodyTemplate>
-                    </ExpansionPanelList>
+    <MBFloatingActionButton class="app-fab--absolute" Icon="add" @onclick="@(e => PageModel.AddOrderCommand.Execute(null))" />
+
+    <Virtualize Context="order" Items="@PageModel.Orders">
+        <div class="mdc-layout-grid__cell">
+            <MBCard AutoStyled="true">
+                <Primary>
+                    <p>
+                        @order.CustomerModel.Name
+                        @order.CustomerModel.Surname
+                    </p>
+                    <p>@order.CarModel.Brand @order.CarModel.Model</p>
+                    <p>@order.CustomerModel.Phone</p>
+                    <p><MBDivider/></p>
+                    <p>Postęp: @((int)(order.Proggress * 100))%</p>                      
+                    <p><MBLinearProgress LinearProgressType="MBLinearProgressType.Determinate" Value="@order.Proggress" /></p>                         
+                    <p>@( DateTime.Now < order.FinishDate ? $"Do końca: {(order.FinishDate - DateTime.Now).TotalDays} dni" : "Czas się skończył!!")</p>                           
+                    <p><MBDivider/></p>
+                    <p>
+                        <MBIconButton Icon="info" @onclick="_ => PageModel.OrderSelectedCommand.Execute(order.Id)" />
+                        <MBIconButton Icon="info" @onclick="_ => PageModel.OrderSelectedCommand.Execute(order.Id)" />
+                        <MBIconButton Icon="delete" @onclick="_ => PageModel.RemoveOrderCommand.Execute(order.Id)" />
+                    </p>
+                </Primary>
+            </MBCard>         
+        </div>
+    </Virtualize>
 }
-
-
 
 

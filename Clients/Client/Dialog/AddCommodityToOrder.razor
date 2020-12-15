@@ -4,7 +4,7 @@
 @inherits PageBase<AddCommodityToOrderPageModel>
 @attribute [DisplayDialog]
 
-<MatDialogTitle>Dodaj usługi</MatDialogTitle>
+@*<MatDialogTitle>Dodaj usługi</MatDialogTitle>
 <MatDialogContent>
     @if (!PageModel.IsLoading && PageModel.CommodityModels != null)
     {
@@ -23,5 +23,5 @@
     }
 </MatDialogContent>
 <MatDialogActions>
-    <MatButton Command="PageModel.CloseCommand">OK</MatButton>
-</MatDialogActions>
+    <MBButton  Command="PageModel.CloseCommand">OK</MBButton >
+</MatDialogActions>*@

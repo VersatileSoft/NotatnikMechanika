@@ -88,10 +88,13 @@
     public static class OrderPaths
     {
         public const string Name = "api/order";
-        public const string ExtendedOrdersPath = "extendedOrders?archived={archived}";
+        public const string ExtendedOrdersPath = "extendedOrders/{archived}";
         public const string ExtendedOrderPath = "extendedOrder/{orderId}";
+        public const string AddExtendedOrderPath = "addExtendedOrder";
         public const string AddServiceToOrderPath = "addService/{orderId}/{serviceId}";
         public const string AddCommodityToOrderPath = "addCommodity/{orderId}/{commodityId}";
+        public const string UpdateServiceStatusPath = "updateServiceStatus/{orderId}/{serviceId}/{finished}";
+        public const string UpdateCommodityStatusPath = "updateCommodityStatus/{orderId}/{commodityId}/{finished}";
         public const string DeleteServiceFromOrderPath = "deleteService/{orderId}/{serviceId}";
         public const string DeleteCommodityFromOrderPath = "deleteCommodity/{orderId}/{commodityId}";
 
@@ -103,6 +106,11 @@
         public static string Extended(int orderId)
         {
             return Name + "/" + ExtendedOrderPath.Replace("{orderId}", orderId.ToString());
+        }
+
+        public static string AddExtended()
+        {
+            return Name + "/" + AddExtendedOrderPath;
         }
 
         public static string AddService(int orderId, int serviceId)
@@ -117,6 +125,22 @@
             return Name + "/" + AddCommodityToOrderPath
                 .Replace("{orderId}", orderId.ToString())
                 .Replace("{commodityId}", commodityId.ToString());
+        }
+
+        public static string UpdateServiceStatus(int orderId, int serviceId, bool finished)
+        {
+            return Name + "/" + UpdateServiceStatusPath
+                .Replace("{orderId}", orderId.ToString())
+                .Replace("{serviceId}", serviceId.ToString())
+                .Replace("{finished}", finished.ToString());
+        }
+
+        public static string UpdateCommodityStatus(int orderId, int commodityId, bool finished)
+        {
+            return Name + "/" + UpdateCommodityStatusPath
+                .Replace("{orderId}", orderId.ToString())
+                .Replace("{commodityId}", commodityId.ToString())
+                .Replace("{finished}", finished.ToString());
         }
 
         public static string DeleteService(int orderId, int serviceId)

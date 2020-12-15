@@ -81,6 +81,14 @@ namespace NotatnikMechanika.Core.Services
             return response;
         }
 
+        public async Task<Response> SendUpdate(string path)
+        {
+            var responseMessage = await _client.PutAsync(path, null);
+            var response = await ParseResponse(responseMessage).ConfigureAwait(false);
+            Authorize?.Invoke(this, response);
+            return response;
+        }
+
         public async Task<Response> SendDelete(string path)
         {
             var responseMessage = await _client.DeleteAsync(path);

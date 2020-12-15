@@ -1,89 +1,55 @@
 ﻿@inherits LayoutComponentBase
 @using NotatnikMechanika.Client.Utils
 @using MvvmPackage.Core.Services.Interfaces
-@using MVVMPackage.Blazor.Services
-@implements IDisposable
+@using Microsoft.Extensions.Logging;
 @inject IMvNavigationService NavigationService
 @inject NavigationManager NavigationManager
+@inject ILogger<MainLayout> logger;
+@inject IMBAnimatedNavigationManager AnimatedNavigationService
+
+<AuthorizeView>
+    <Authorized>     
+        <NavMenu @ref="@NavBar" />
 
 
-<div class="main-layout">
+        <div class="mdc-drawer-app-content">
+            <MBTopAppBar Title="Notatnik Mechanika"
+                         NavIcon="menu"
+                         @onclick="@(e => NavBar?.SideBarToggle())"
+                         ScrollTarget="#main-content"
+                         TopAppBarType="@MBTopAppBarType.Dense"
+                         class="mdc-top-app-bar--short-has-action-item mdc-elevation--z5">
 
-    @if(NavigationService is NavigationService navigationService)
-    {
-        <MatDialog Class="dialog" @bind-IsOpen="navigationService.DialogIsOpen" ChildContent="@navigationService.DialogContent" />
-    }
-    
-    <AuthorizeView>
-        <Authorized>
-            <MatAppBarContainer Class="app-bar">
-                <MatAppBar Fixed="true">
-                    <MatAppBarRow>
-                        <MatAppBarSection>
-                            <MatIconButton Icon="menu" OnClick="@(_ => ButtonClicked())"></MatIconButton>
-                            <MatAppBarTitle>Notatnik mechanika</MatAppBarTitle>
-                        </MatAppBarSection>
-                    </MatAppBarRow>
-                </MatAppBar>
-                <MatAppBarContent>
-                    <MatDrawerContainer Class="drawer-container">
-                        <MatHidden Breakpoint="@MatBreakpoint.SM" Direction="@MatHiddenDirection.Up">
-                            <ChildContent>
-                                <MatDrawer @bind-Opened="@_opened" Mode="@MatDrawerMode.Modal">
-                                    <NavMenu />
-                                </MatDrawer>
-                            </ChildContent>
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                    <MBIconButton Icon="account_box" @onclick="@(e => AnimatedNavigationService.NavigateTo("account"))" />
+                </section>
+            </MBTopAppBar>
 
-                            <ElseContent>
-                                <MatDrawer @bind-Opened="@_opened" Mode="@MatDrawerMode.Dismissible">
-                                    <NavMenu />
-                                </MatDrawer>
-                            </ElseContent>
-                        </MatHidden>
-                        <MatDrawerContent Class="page-content">
-                            @Body
-                        </MatDrawerContent>
-                    </MatDrawerContainer>
-                </MatAppBarContent>
-            </MatAppBarContainer>
-        </Authorized>
-        <NotAuthorized>
-            <Redirect Path="/" />
-        </NotAuthorized>
-    </AuthorizeView>
-</div>
+            <main class="main-content" id="main-content">
+                <div class="max-width-content">
+                    <MBAnimatedNavigation>
+                        <div class="mdc-top-app-bar--dense-fixed-adjust">
+                            <div class="main-content">
+                                <div class="mdc-layout-grid">
+                                    <div class="mdc-layout-grid__inner">
+                                        @Body
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </MBAnimatedNavigation>
+                </div>
+            </main>
+        </div>
 
-@code
-{
-    bool _opened;
 
-    void ButtonClicked()
-    {
-        _opened = !_opened;
-    }
+    </Authorized>
+    <NotAuthorized>
+        <Redirect Path="/" />
+    </NotAuthorized>
+</AuthorizeView>
 
-    public void Dispose()
-    {
-        if (NavigationService is NavigationService navigationService)
-        {
-            navigationService.DialogStateChanged -= DialogStateChanged;
-        }
-    }
+@code{
 
-    private void DialogStateChanged(object sender, bool isOpen)
-    {
-        StateHasChanged();
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if(firstRender && NavigationService is NavigationService navigationService)
-        {
-            navigationService.DialogStateChanged += DialogStateChanged;
-        }
-        base.OnAfterRender(firstRender);
-    }
+    private NavMenu NavBar { get; set; }    
 }
-
-
-

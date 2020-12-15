@@ -11,5 +11,6 @@ namespace NotatnikMechanika.Shared.Models.Order
         public CarModel CarModel { get; set; }
         public DateTime AcceptDate { get; set; }
         public DateTime FinishDate { get; set; }
+        public float Proggress { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
+using MvvmPackage.Core.Utils;
 using MVVMPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
@@ -9,6 +10,8 @@ using NotatnikMechanika.Shared.Models.Service;
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -29,8 +32,8 @@ namespace NotatnikMechanika.Core.PageModels
         public ICommand RefreshOrderCommand { get; set; }
 
         public OrderExtendedModel OrderModel { get; set; }
-        public List<CommodityModel> Commodities { get; set; }
-        public List<ServiceModel> Services { get; set; }
+        public TrulyObservableCollection<CommodityModel> Commodities { get; set; }
+        public TrulyObservableCollection<ServiceModel> Services { get; set; }
 
 
         public OrderPageModel(IHttpRequestService httpRequestService, IMvNavigationService navigationService, IMessageDialogService messageDialogService)
@@ -43,8 +46,38 @@ namespace NotatnikMechanika.Core.PageModels
             GoBackCommand = new AsyncCommand(navigationService.NavigateToAsync<MainPageModel>);
             AddServiceCommand = new AsyncCommand(() => _navigationService.NavigateToAsync<AddServiceToOrderPageModel>(OrderModel.Id));
             AddCommodityCommand = new AsyncCommand(() => _navigationService.NavigateToAsync<AddCommodityToOrderPageModel>(OrderModel.Id));
+            Commodities = new TrulyObservableCollection<CommodityModel>();
+            Services = new TrulyObservableCollection<ServiceModel>();
 
+            Services.ItemChanged += Services_ItemChanged;
+            Commodities.ItemChanged += Commodities_ItemChanged;
             navigationService.DialogStateChanged += NavigationService_AfterClose;
+        }
+
+        private async void Commodities_ItemChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var commodity = (CommodityModel)sender;
+            Response response = await _httpRequestService.SendUpdate(OrderPaths.UpdateCommodityStatus(OrderModel.Id, commodity.Id, commodity.Finished));
+            await NotifyItemChangedResult(response);
+        }
+
+        private async void Services_ItemChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var service = (ServiceModel)sender;
+            Response response = await _httpRequestService.SendUpdate(OrderPaths.UpdateServiceStatus(OrderModel.Id, service.Id, service.Finished));
+            await NotifyItemChangedResult(response);
+        }
+
+        private Task NotifyItemChangedResult(Response response)
+        {
+            switch (response.ResponseType)
+            {
+                case ResponseType.Successful:
+                    return _messageDialogService.ShowMessageDialog(response?.ErrorMessages?.FirstOrDefault(), MessageDialogType.Success, "Zapisano pomyślnie");
+                case ResponseType.Failure:
+                    return _messageDialogService.ShowMessageDialog(response?.ErrorMessages?.FirstOrDefault(), MessageDialogType.Error, "Błąd aktualizacji zlecenia");
+                default: return Task.CompletedTask;
+            }
         }
 
         private void NavigationService_AfterClose(object sender, bool isOpen)
@@ -57,15 +90,25 @@ namespace NotatnikMechanika.Core.PageModels
 
         public override async Task Initialize()
         {
-            if (IsLoading) return;
+            if (IsLoading || Parameter == null)
+            {
+                return;
+            }
 
             IsLoading = true;
 
-            OrderModel = await InitHelper<OrderExtendedModel>(OrderPaths.Extended(Parameter));
-            if (OrderModel == null) return;
-            Services = await InitHelper<List<ServiceModel>>(ServicePaths.ByOrder(OrderModel.Id));
-            Commodities = await InitHelper<List<CommodityModel>>(CommodityPaths.ByOrder(OrderModel.Id));
-            
+            OrderModel = await InitHelper<OrderExtendedModel>(OrderPaths.Extended(Parameter ?? 0));
+            if (OrderModel == null)
+            {
+                return;
+            }
+
+            Services.Clear();
+            Commodities.Clear();
+            List<ServiceModel> services = await InitHelper<List<ServiceModel>>(ServicePaths.ByOrder(OrderModel.Id));
+            List<CommodityModel> commodities = await InitHelper<List<CommodityModel>>(CommodityPaths.ByOrder(OrderModel.Id));
+            Services.Add(services);
+            Commodities.Add(commodities);   
             IsLoading = false;
         }
 
@@ -76,7 +119,7 @@ namespace NotatnikMechanika.Core.PageModels
         
         private async Task<TResponseContent> InitHelper<TResponseContent>(string path) where TResponseContent : class, new()
         {
-            var response = await _httpRequestService.SendGet<TResponseContent>(path);
+            Response<TResponseContent> response = await _httpRequestService.SendGet<TResponseContent>(path);
 
             switch (response.ResponseType)
             {

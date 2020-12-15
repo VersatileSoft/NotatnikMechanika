@@ -8,7 +8,7 @@ namespace MvvmPackage.Core
     public class PageModelBase : INotifyPropertyChanged
     {
         public bool IsLoading { get; protected set; } 
-        public int Parameter { get; set; }
+        public int? Parameter { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

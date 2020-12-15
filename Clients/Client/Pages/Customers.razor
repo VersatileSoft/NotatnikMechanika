@@ -1,35 +1,40 @@
 ﻿@page "/customers"
 @using NotatnikMechanika.Core.PageModels
 @using MVVMPackage.Blazor
-@using NotatnikMechanika.Shared.Models.Customer
 @inherits PageBase<CustomersPageModel>
 
 @if (PageModel.IsLoading)
 {
-    <MatProgressBar Indeterminate="true" />
+    <MBCircularProgress class="circular-progress" CircularProgressType="@MBCircularProgressType.Indeterminate" />
 }
 else
 {
-    <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" OnClick="(_ => PageModel.AddCustomerCommand.Execute(null))" />
-    <ExpansionPanelList Items="@PageModel.Customers">
-        <HeaderTemplate Context="customer">
-            <p class="expansion-panel-header-text">
-                @customer.Name @customer.Surname
-            </p>
-        </HeaderTemplate>
-        
-        <BodyTemplate Context="customer">
-            <MatDivider /> 
-            <p>Samochody: 3</p>
-            <p>Ostatnia naprawa: 28.10.2020</p>
-            <p>@customer.Phone @customer.Address</p>
-            <p>@customer.CompanyName @customer.CompanyIdentyficator</p>
-            <MatDivider />
-            <div class="panel-buttons">
-                <MatIconButton Icon="info" Raised="true" Command="PageModel.CustomerSelectedCommand" CommandParameter="customer.Id"/>
-                <MatIconButton Icon="info" Raised="true" Command="PageModel.CustomerSelectedCommand" CommandParameter="customer.Id"/>
-                <MatIconButton Style="color: red;" Icon="delete" Raised="true" Command="PageModel.RemoveCustomerCommand" CommandParameter="customer.Id"/>
-            </div>
-        </BodyTemplate>
-    </ExpansionPanelList>
+    <MBFloatingActionButton class="app-fab--absolute" Icon="add" @onclick="@(e => PageModel.AddCustomerCommand.Execute(null))" />
+
+
+    <Virtualize Context="customer" Items="@PageModel.Customers">
+        <div class="mdc-layout-grid__cell">
+            <MBCard AutoStyled="true">
+                <Primary>
+                    <p>
+                        @customer.Name 
+                        @customer.Surname
+                    </p>
+
+                    <p><MBDivider/></p>
+                    <p>Samochody: 3</p>
+                    <p>Ostatnia naprawa: 28.10.2020</p>
+                    <p>@customer.Phone @customer.Address</p>
+                    <p>@customer.CompanyName @customer.CompanyIdentyficator</p>
+                    <p><MBDivider/></p>
+                    <p>
+                        <MBIconButton Icon="info" @onclick="_ => PageModel.CustomerSelectedCommand.Execute(customer.Id)" />
+                        <MBIconButton Icon="info" @onclick="_ => PageModel.CustomerSelectedCommand.Execute(customer.Id)" />
+                        <MBIconButton Icon="delete" @onclick="_ => PageModel.RemoveCustomerCommand.Execute(customer.Id)" />
+                    </p>
+                </Primary>
+            </MBCard>       
+        </div>
+    </Virtualize>
 }
+

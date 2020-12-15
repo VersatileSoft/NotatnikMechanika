@@ -19,7 +19,7 @@ namespace NotatnikMechanika.Core.PageModels
 
         public override Task Initialize()
         {
-            Model.CustomerId = Parameter;
+            Model.CustomerId = Parameter ?? 0;
             return Task.CompletedTask;
         }
     }

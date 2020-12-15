@@ -19,6 +19,8 @@ namespace NotatnikMechanika.Shared
         public class Response
         {
             internal Response() { }
+
+            public int? ResourceId { get; set; }
             public ResponseType ResponseType { get; set; }
             public List<string> ErrorMessages { get; set; }
         }
@@ -41,9 +43,13 @@ namespace NotatnikMechanika.Shared
 
         #region Api
 
-        public static Response SuccessResponse()
+        public static Response SuccessResponse(int? resourceId = null)
         {
-            return new Response { ResponseType = ResponseType.Successful };
+            return new Response
+            {
+                ResponseType = ResponseType.Successful, 
+                ResourceId = resourceId 
+            };
         }
 
         public static Response<ResponseModel> SuccessResponse<ResponseModel>(ResponseModel model)

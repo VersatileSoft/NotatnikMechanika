@@ -1,6 +1,7 @@
 ﻿using Blazor.Extensions.Logging;
 using Blazored.LocalStorage;
-using MatBlazor;
+using Material.Blazor;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -25,21 +26,39 @@ namespace NotatnikMechanika.Client
                 .AddBrowserConsole()
                 .SetMinimumLevel(LogLevel.Warning)
             );
-            services.AddMatToaster(config =>
-            {
-                config.Position = MatToastPosition.TopRight;
-                config.PreventDuplicates = true;
-                config.NewestOnTop = true;
-                config.ShowCloseButton = true;
-                config.MaximumOpacity = 95;
-                config.VisibleStateDuration = 3000;
-            });
+            
+            services.AddMBServices(
+               animatedNavigationManagerServiceConfiguration: Utilities.GetDefaultAnimatedNavigationServiceConfiguration(),
+               toastServiceConfiguration: Utilities.GetDefaultToastServiceConfiguration()
+           );
         }
 
         protected override void AppStart()
         {
             IAuthService authService = Services.GetService<IAuthService>();
             authService.AuthChanged += (s, e) => ((ApiAuthenticationStateProvider)Services.GetService<AuthenticationStateProvider>()).StateChanged();
+        }
+    }
+
+    public static class Utilities
+    {
+        public static MBAnimatedNavigationManagerServiceConfiguration GetDefaultAnimatedNavigationServiceConfiguration()
+        {
+            return new MBAnimatedNavigationManagerServiceConfiguration()
+            {
+                ApplyAnimation = true,
+                AnimationTime = 300
+            };
+        }
+
+
+        public static MBToastServiceConfiguration GetDefaultToastServiceConfiguration()
+        {
+            return new MBToastServiceConfiguration()
+            {
+                Position = MBToastPosition.TopRight,
+                CloseMethod = MBToastCloseMethod.Timeout,
+            };
         }
     }
 }

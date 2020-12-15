@@ -4,29 +4,30 @@
 @using NotatnikMechanika.Shared.Models.Commodity
 @inherits PageBase<CommoditiesPageModel>
 
-<div class="commodities">
-    @if (PageModel.IsLoading)
-    {
-        <MatProgressBar Indeterminate="true" />
-    }
-    else
-    {
-        <MatFAB Class="app-fab--absolute" Icon="@MatIconNames.Add" OnClick="(_ => PageModel.AddCommodityCommand.Execute(null))" />
-        <ExpansionPanelList Items="@PageModel.Commodities">
-                <HeaderTemplate Context="commodity">
-                    <p class="expansion-panel-header-text">
-                        @commodity.Name @commodity.Price
-                    </p>
-                </HeaderTemplate>
-                
-                <BodyTemplate Context="service">
-                    <div class="panel-buttons">
-                        <MatIconButton Icon="info" Raised="true" Command="PageModel.CommoditySelectedCommand" CommandParameter="@service.Id"/>
-                        <MatIconButton Icon="info" Raised="true" Command="PageModel.CommoditySelectedCommand" CommandParameter="service.Id"/>
-                        <MatIconButton Style="color: red;" Icon="delete" Raised="true" Command="PageModel.RemoveCommodityCommand" CommandParameter="service.Id"/>
-                    </div>
-                </BodyTemplate>
-            </ExpansionPanelList>
-    }
-</div>
+@if (PageModel.IsLoading)
+{
+    <MBCircularProgress class="circular-progress" CircularProgressType="@MBCircularProgressType.Indeterminate" />
+}
+else
+{
+    <MBFloatingActionButton class="app-fab--absolute" Icon="add" @onclick="@(e => PageModel.AddCommodityCommand.Execute(null))" />
 
+    <Virtualize Context="commodity" Items="@PageModel.Commodities">
+        <div class="mdc-layout-grid__cell">
+            <MBCard AutoStyled="true">
+                <Primary>             
+                    <p>
+                        @commodity.Name 
+                        @commodity.Price
+                    </p>
+
+                    <p>
+                        <MBIconButton Icon="info" @onclick="_ => PageModel.CommoditySelectedCommand.Execute(commodity.Id)" />
+                        <MBIconButton Icon="info" @onclick="_ => PageModel.CommoditySelectedCommand.Execute(commodity.Id)" />
+                        <MBIconButton Icon="delete" @onclick="_ => PageModel.CommoditySelectedCommand.Execute(commodity.Id)" />
+                    </p>              
+                </Primary>
+            </MBCard>
+         </div>
+    </Virtualize>
+}

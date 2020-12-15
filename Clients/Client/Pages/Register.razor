@@ -1,0 +1,55 @@
+﻿@page "/registration"
+@layout AuthLayout
+@using NotatnikMechanika.Core.PageModels
+@using MVVMPackage.Blazor
+@inherits PageBase<RegistrationPageModel>
+
+<div class="mdc-layout-grid__cell">
+    <MBCard AutoStyled="true">
+        <Primary>
+            <EditForm Model="PageModel.RegisterModel" OnValidSubmit="PageModel.RegisterAction">
+                <DataAnnotationsValidator />
+
+                    <MBTextField 
+                        @bind-Value="PageModel.RegisterModel.Name" 
+                        LeadingIcon="person" 
+                        Label="Imię" 
+                        TextInputStyle="MBTextInputStyle.Outlined" 
+                        ValidationMessageFor="@(() => @PageModel.RegisterModel.Name)" />
+
+                    <MBTextField 
+                        @bind-Value="PageModel.RegisterModel.Surname" 
+                        LeadingIcon="person" 
+                        Label="Nazwisko" 
+                        TextInputStyle="MBTextInputStyle.Outlined" 
+                        ValidationMessageFor="@(() => @PageModel.RegisterModel.Surname)" />
+
+                    <MBTextField 
+                        @bind-Value="PageModel.RegisterModel.Email" 
+                        LeadingIcon="email"
+                        Label="E-mali"
+                        TextInputStyle="MBTextInputStyle.Outlined" 
+                        ValidationMessageFor="@(() => @PageModel.RegisterModel.Email)" />
+
+                    <MBTextField 
+                        @bind-Value="PageModel.RegisterModel.Password" 
+                        LeadingIcon="lock" 
+                        Label="Hasło" 
+                        type="password" 
+                        TextInputStyle="MBTextInputStyle.Outlined" 
+                        ValidationMessageFor="@(() => @PageModel.RegisterModel.Password)" />
+
+                    <MBTextField 
+                        @bind-Value="PageModel.RegisterModel.ConfirmPassword" 
+                        LeadingIcon="lock" 
+                        Label="Powtórz hasło" 
+                        type="password" 
+                        TextInputStyle="MBTextInputStyle.Outlined" 
+                        ValidationMessageFor="@(() => @PageModel.RegisterModel.ConfirmPassword)"/>
+
+                    <MBButton Label="Mam już konto" ButtonStyle="@MBButtonStyle.ContainedRaised" @onclick="() => PageModel.LoginCommand.Execute(null)"  />
+                    <MBButton Label="Zarejestruj się" ButtonStyle="@MBButtonStyle.ContainedRaised" Disabled="@PageModel.IsLoading" type="Submit" />
+            </EditForm>
+        </Primary>
+    </MBCard>
+</div>

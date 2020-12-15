@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using static NotatnikMechanika.Shared.ResponseBuilder;
+using System.Collections.ObjectModel;
 
 namespace NotatnikMechanika.Core.PageModels
 {
@@ -19,7 +20,7 @@ namespace NotatnikMechanika.Core.PageModels
     public class CustomerPageModel : PageModelBase
     {
         public CustomerModel CustomerModel { get; private set; }
-        public IEnumerable<CarModel> Cars { get; private set; }
+        public ObservableCollection<CarModel> Cars { get; private set; }
         public string ErrorMessage { get; set; }
         public ICommand GoBackCommand { get; }
         public ICommand AddCarCommand { get; }
@@ -64,7 +65,7 @@ namespace NotatnikMechanika.Core.PageModels
         public override async Task Initialize()
         {
             IsLoading = true;
-            CustomerModel.Id = Parameter;
+            CustomerModel.Id = Parameter ?? 0;
 
             var responseCustomer = await _httpRequestService.ById<CustomerModel>(CustomerModel.Id);
 
@@ -91,7 +92,7 @@ namespace NotatnikMechanika.Core.PageModels
             switch (responseCars.ResponseType)
             {
                 case ResponseType.Successful:
-                    Cars = responseCars.Content;
+                    Cars = new ObservableCollection<CarModel>(responseCars.Content);
                     break;
 
                 case ResponseType.Failure:

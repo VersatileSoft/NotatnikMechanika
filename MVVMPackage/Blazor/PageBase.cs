@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.Extensions.DependencyInjection;
 using MvvmPackage.Core;
 using System;
@@ -19,7 +20,15 @@ namespace MVVMPackage.Blazor
         {
             PageModel.PropertyChanged += (s, e) => StateHasChanged();
 
-            PageModel.Parameter = int.TryParse(Parameter, out var param) ? param : 0;
+            if(Parameter == null)
+            {
+                PageModel.Parameter = null;
+            }
+            else
+            {
+                PageModel.Parameter = int.TryParse(Parameter, out var param) ? param : 1;
+            }
+
             await PageModel.Initialize();
             await base.OnParametersSetAsync();
         }

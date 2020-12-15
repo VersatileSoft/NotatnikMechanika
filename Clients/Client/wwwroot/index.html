@@ -1,19 +1,42 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <title>Notatnik Mechanika</title>
-        <base href="/" />
-        <link href="css/AppStyle.css" rel="stylesheet" />
-        <link href="_content/MatBlazor/dist/matBlazor.css" rel="stylesheet" />
-        <link href="NotatnikMechanika.Client.styles.css" rel="stylesheet" />
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Notatnik Mechanika</title>
+    <base href="/" />
+    <link id="app-style" href="css/dark-square-theme.min.css" rel="stylesheet">
+    <link href="_content/Material.Blazor/unbundled.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500" rel="stylesheet">
+    <!--<link href="NotatnikMechanika.Client.styles.css" rel="stylesheet" />-->
+</head>
 
-    <body>
-        <app>Loading...</app>
-        <script src="_content/MatBlazor/dist/matBlazor.js"></script>  
-        <script src="_content/Blazor.Extensions.Logging/blazor.extensions.logging.js" defer></script>
-        <script src="_framework/blazor.webassembly.js"></script>
-    </body>
+<body class="mdc-typography mb-custom-scrollbars">
+    <app>
+        <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate splash-linear-progress" aria-label="Example Progress Bar" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
+            <div class="mdc-linear-progress__buffer">
+                <div class="mdc-linear-progress__buffer-bar"></div>
+                <div class="mdc-linear-progress__buffer-dots"></div>
+            </div>
+            <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+                <span class="mdc-linear-progress__bar-inner"></span>
+            </div>
+            <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                <span class="mdc-linear-progress__bar-inner"></span>
+            </div>
+        </div>
+
+        <div class="splash-screen">
+            <div class="splash-content">
+                <img src="/images/app_icon.png" />
+                <h1 class="mdc-typography-headline1">
+                    Notatnik Mechanika
+                </h1>
+            </div>
+        </div>
+    </app>
+    <script src="_content/Blazor.Extensions.Logging/blazor.extensions.logging.js" defer></script>
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="_content/Material.Blazor/bundled.min.js"></script>
+</body>
 </html>

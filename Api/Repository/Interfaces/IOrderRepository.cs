@@ -3,7 +3,6 @@ using NotatnikMechanika.Shared.Models.Order;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using NotatnikMechanika.Data.Models;
-using NotatnikMechanika.Shared.Models.Commodity;
 
 namespace NotatnikMechanika.Repository.Interfaces
 {
@@ -17,5 +16,7 @@ namespace NotatnikMechanika.Repository.Interfaces
         Task<bool> IsCommodityInOrder(int orderId, int commodityId);
         Task<bool> IsServiceInOrder(int orderId, int serviceId);
         Task<OrderExtendedModel> ExtendedAsync(int id, bool archived);
+        Task UpdateCommodityStatusAsync(int orderId, int commodityId, bool finished);
+        Task UpdateServiceStatusAsync(int orderId, int serviceId, bool finished);
     }
 }

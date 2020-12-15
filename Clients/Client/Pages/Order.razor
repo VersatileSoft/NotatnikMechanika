@@ -5,80 +5,91 @@
 @using NotatnikMechanika.Shared.Models.Commodity
 @inherits PageBase<OrderPageModel>
 
-@if (!PageModel.IsLoading)
+@if (PageModel.IsLoading)
 {
-
-    <WrapPanel>
-        <WrapPanelCard>
-            <CardHeader>
-                <MatIconButton Icon="@MatIconNames.Person" />
-                <p>Informacje</p>
-                <MatIconButton Icon="@MatIconNames.Edit" />
-            </CardHeader>
-
-            <CardContent>
+    <MBCircularProgress class="circular-progress" CircularProgressType="@MBCircularProgressType.Indeterminate" />
+}
+else
+{
+    <div class="mdc-layout-grid__cell">
+         <MBCard AutoStyled="true">
+            <Primary>
                 <p>@PageModel.OrderModel.CustomerModel.Name</p>
                 <p>@PageModel.OrderModel.CustomerModel.Surname</p>
                 <p>@PageModel.OrderModel.CustomerModel.Phone</p>
                 <p>@PageModel.OrderModel.CustomerModel.Address</p>
                 <p>@PageModel.OrderModel.CustomerModel.CompanyName</p>
                 <p>@PageModel.OrderModel.CustomerModel.CompanyIdentyficator</p>
-            </CardContent>
-        </WrapPanelCard>
+            </Primary>
+        </MBCard>
+    </div>
 
-        <WrapPanelCard>
-            <CardHeader>
-                <p>Samochód</p>
-            </CardHeader>
-
-            <CardContent>
+    <div class="mdc-layout-grid__cell">
+         <MBCard AutoStyled="true">
+            <Primary>
                 <p>@PageModel.OrderModel.CarModel.Brand</p>
                 <p>@PageModel.OrderModel.CarModel.Model</p>
                 <p>@PageModel.OrderModel.CarModel.Engine</p>
                 <p>@PageModel.OrderModel.CarModel.Power</p>
                 <p>@PageModel.OrderModel.CarModel.Plate</p>
                 <p>@PageModel.OrderModel.CarModel.Vin</p>
-            </CardContent>
-        </WrapPanelCard>
+            </Primary>
+        </MBCard>
+    </div>
 
-        <WrapPanelCard>
-            <CardHeader>
-                <p>Usługi</p>
-                <MatIconButton Icon="@MatIconNames.Edit" Command="PageModel.AddServiceCommand"/>
-            </CardHeader>
+    <div class="mdc-layout-grid__cell">
+        <MBCard AutoStyled="true">
+            <Primary>
+                 @if (PageModel.Services != null)
+                {
+                    <MBList Items="@PageModel.Services"
+                            Context="service"
+                            ShowSeparators="true"
+                            ListStyle="MBListStyle.Outlined">
 
-            <CardContent>
+                        <Icon><MBIcon IconName="local_grocery_store" /></Icon>
+                        <Title>@service.Name</Title>
+                        <LineTwo>@service.Price</LineTwo>
+                        <Actions>
+                            <div style="width: 10rem">
+                                    <MBCheckbox @bind-Value="@service.Finished" />
+                            </div>
+                        </Actions>
+                    </MBList>
+                }
+                else
+                {
+                    <p>Lista usług jest pusta</p>
+                }
+            </Primary>
+        </MBCard>
+    </div>
+
+    <div class="mdc-layout-grid__cell">
+        <MBCard AutoStyled="true">
+            <Primary>
                 @if (PageModel.Services != null)
                 {
-                    @foreach (var service in PageModel.Services)
-                    {
-                        <MatCheckbox Value="@service.Finished" Label="@service.Name"></MatCheckbox>
-                    }
+                    <MBList Items="@PageModel.Commodities"
+                            Context="commodity"
+                            ShowSeparators="true"
+                            ListStyle="MBListStyle.Outlined">
+
+                        <Icon><MBIcon IconName="local_grocery_store" /></Icon>
+                        <Title>@commodity.Name</Title>
+                        <LineTwo>@commodity.Price</LineTwo>
+                        <Actions>
+                            <div style="width: 10rem">
+                                    <MBCheckbox @bind-Value="@commodity.Finished" />
+                            </div>
+                        </Actions>
+                    </MBList>
                 }
-            </CardContent>
-        </WrapPanelCard>
-
-        <WrapPanelCard>
-            <CardHeader>
-                <p>Towary</p>
-                <MatIconButton Icon="@MatIconNames.Edit" Command="PageModel.AddCommodityCommand"/>
-            </CardHeader>
-
-            <CardContent>
-                @if (PageModel.Commodities != null)
+                else
                 {
-                    @foreach (var commodity in PageModel.Commodities)
-                    {
-                        <MatCheckbox Value="@commodity.Finished" Label="@commodity.Name"></MatCheckbox>
-                    }
+                    <p>Lista towarów jest pusta</p>
                 }
-            </CardContent>
-        </WrapPanelCard>
-    </WrapPanel>
+            </Primary>
+        </MBCard>
+    </div>
 }
-else
-{
-    <MatProgressBar Indeterminate="true" />
-}
-
-

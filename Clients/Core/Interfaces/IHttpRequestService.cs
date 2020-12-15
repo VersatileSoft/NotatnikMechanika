@@ -14,6 +14,7 @@ namespace NotatnikMechanika.Core.Interfaces
         Task<Response> SendPost<SendModel>(SendModel model, string path) where SendModel : ValidateModelBase;
         Task<Response> SendPost(string path);
         Task<Response> SendUpdate<SendModel>(SendModel model, string path) where SendModel : ValidateModelBase;
+        Task<Response> SendUpdate(string path);
         Task<Response> SendDelete(string path);
         
         // CRUD shortcut

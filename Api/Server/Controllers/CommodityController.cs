@@ -29,10 +29,7 @@ namespace NotatnikMechanika.Server.Controllers
         
         [HttpGet(CommodityPaths.ByOrderPath)]
         public async Task<ActionResult<Response<IEnumerable<CommodityModel>>>> ByOrderAsync(int orderId)
-        {
-            if (User.Identity == null)
-                return Unauthorized();
-            
+        {  
             return Ok(await _commodityService.ByOrderAsync(orderId));
         }
     }

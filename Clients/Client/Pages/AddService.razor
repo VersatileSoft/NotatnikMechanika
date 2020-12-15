@@ -3,19 +3,20 @@
 @using MVVMPackage.Blazor
 @inherits PageBase<AddServicePageModel>
 
-
-<EditForm Model="PageModel.Model" OnValidSubmit="_ => PageModel.AddCommand.Execute(null)">
-    <Card>
-        <CardHeader>
-            <p>Dodaj Usługę</p>
-        </CardHeader>
-
-        <CardContent>
-            <MatTextField @bind-Value="@PageModel.Model.Name" Class="text-field" Label="Nazwa" Outlined="true"></MatTextField>
-            <MatTextField @bind-Value="@PageModel.Model.Price" Class="text-field" Label="Cena" Outlined="true"></MatTextField>
-        </CardContent>
-    </Card>
-    <MatButton Label="Zapisz" Type="Submit" Raised="true" />
-</EditForm>
-
-    
+<div class="mdc-layout-grid__cell">
+    <MBCard AutoStyled="true">
+        <Primary>
+            <EditForm Model="PageModel.Model" OnValidSubmit="_ => PageModel.AddCommand.Execute(null)">           
+                <MBTextField @bind-Value="@PageModel.Model.Name"  Label="Nazwa" TextInputStyle="MBTextInputStyle.Outlined" ValidationMessageFor="@(() => PageModel.Model.Name)"/>
+                <MBNumericDoubleField
+                    @bind-Value="@PageModel.Model.Price"
+                    Label="Cena" 
+                    NumericFormat="C2"
+                    DecimalPlaces="2"
+                    TextInputStyle="MBTextInputStyle.Outlined" 
+                    ValidationMessageFor="@(() => PageModel.Model.Price)" />                
+                    <MBButton  Label="Zapisz" Type="Submit" ButtonStyle="@MBButtonStyle.ContainedRaised" />
+            </EditForm>
+        </Primary>
+    </MBCard> 
+</div>

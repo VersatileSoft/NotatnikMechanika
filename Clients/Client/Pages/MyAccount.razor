@@ -3,7 +3,8 @@
 @using MVVMPackage.Blazor
 @inherits PageBase<MyAccountPageModel>
 
+<MBButton 
+    Label="Wyloguj się" 
+    ButtonStyle="@MBButtonStyle.ContainedRaised" 
+    @onclick="() => PageModel.LogoutCommand.Execute(null)" />
 
-<div class="my-account">
-    <MatButton Command="PageModel.LogoutCommand" Raised="true" Label="Wyloguj się"/>
-</div>

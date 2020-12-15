@@ -4,36 +4,18 @@
 @inherits PageBase<AddCustomerPageModel>
 
 
-<div class="add-customer">
+<div class="mdc-layout-grid__cell">
     <EditForm Model="PageModel.Model" OnValidSubmit="_ => PageModel.AddCommand.Execute(null)">
-        <WrapPanel>
-            <WrapPanelCard>
-                <CardHeader>
-                    <p>Dane Klienta</p>
-                </CardHeader>
-                <CardContent>
-                    <MatTextField @bind-Value="@PageModel.Model.Name" Class="text-field" Label="Imię" Outlined="true"></MatTextField>
-                    <ValidationMessage For="@(() => @PageModel.Model.Name)" />
-                    <MatTextField @bind-Value="@PageModel.Model.Surname" Class="text-field" Label="Nazwisko" Outlined="true"></MatTextField>
-                    <ValidationMessage For="@(() => @PageModel.Model.Surname)" />
-                    <MatTextField @bind-Value="@PageModel.Model.Phone" Class="text-field" Label="Telefon" Outlined="true"></MatTextField>
-                    <ValidationMessage For="@(() => @PageModel.Model.Phone)" />
-                    <MatTextField @bind-Value="@PageModel.Model.Address" Class="text-field" Label="Adres" Outlined="true"></MatTextField>
-                    <ValidationMessage For="@(() => @PageModel.Model.Address)" />
-                </CardContent>
-            </WrapPanelCard>
-            <WrapPanelCard>
-                <CardHeader>
-                    <p>Dane Firmy</p>
-                </CardHeader>
-                <CardContent>
-                    <MatTextField @bind-Value="@PageModel.Model.CompanyName" Class="text-field" Label="Nazwa firmy" Outlined="true"></MatTextField>
-                    <ValidationMessage For="@(() => @PageModel.Model.CompanyName)" />
-                    <MatTextField @bind-Value="@PageModel.Model.CompanyIdentyficator" Class="text-field" Label="NIP" Outlined="true"></MatTextField>
-                    <ValidationMessage For="@(() => @PageModel.Model.CompanyIdentyficator)" />
-                </CardContent>
-            </WrapPanelCard>
-        </WrapPanel>
-        <MatButton Raised="true" Label="Dodaj klienta" Type="Submit" />
+        <MBCard AutoStyled="true">
+            <Primary>
+                <MBTextField @bind-Value="@PageModel.Model.Name" Label="Imię" TextInputStyle="MBTextInputStyle.Outlined" ValidationMessageFor="@(() => @PageModel.Model.Name)" />
+                <MBTextField @bind-Value="@PageModel.Model.Surname" Label="Nazwisko" TextInputStyle="MBTextInputStyle.Outlined" ValidationMessageFor="@(() => @PageModel.Model.Surname)" />
+                <MBTextField @bind-Value="@PageModel.Model.Phone" Label="Telefon" TextInputStyle="MBTextInputStyle.Outlined" ValidationMessageFor="@(() => @PageModel.Model.Phone)" />
+                <MBTextField @bind-Value="@PageModel.Model.Address" Label="Adres" TextInputStyle="MBTextInputStyle.Outlined" ValidationMessageFor="@(() => @PageModel.Model.Address)" />
+                <MBTextField @bind-Value="@PageModel.Model.CompanyName" Label="Nazwa firmy" TextInputStyle="MBTextInputStyle.Outlined" ValidationMessageFor="@(() => @PageModel.Model.CompanyName)" />
+                <MBTextField @bind-Value="@PageModel.Model.CompanyIdentyficator" Label="NIP" TextInputStyle="MBTextInputStyle.Outlined" ValidationMessageFor="@(() => @PageModel.Model.CompanyIdentyficator)" />
+                <MBButton ButtonStyle="@MBButtonStyle.ContainedRaised" Label="Dodaj klienta" Type="Submit" />
+            </Primary>
+        </MBCard>
     </EditForm>
 </div>

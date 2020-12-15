@@ -3,27 +3,19 @@
 @using MVVMPackage.Blazor
 @inherits PageBase<AddCarPageModel>
 
-<div class="card">
-    <div class="card-header">
-        <p>Dodaj samochód</p>
-    </div>
 
-    <div class="card-content mat-elevation-z13">
-        <EditForm Model="@PageModel.Model" OnValidSubmit="_ => PageModel.AddCommand.Execute(null)">
-            <MatTextField @bind-Value="@PageModel.Model.Brand" Class="text-field" Label="Marka" Outlined="true"></MatTextField>
-            <ValidationMessage For="@(() => @PageModel.Model.Brand)" />
-            <MatTextField @bind-Value="@PageModel.Model.Model" Class="text-field" Label="Model" Outlined="true"></MatTextField>
-            <ValidationMessage For="@(() => @PageModel.Model.Model)" />
-            <MatTextField @bind-Value="@PageModel.Model.Plate" Class="text-field" Label="Rejestracja" Outlined="true"></MatTextField>
-            <ValidationMessage For="@(() => @PageModel.Model.Plate)" />
-            <MatTextField @bind-Value="@PageModel.Model.Engine" Class="text-field" Label="Silnik" Outlined="true"></MatTextField>
-            <ValidationMessage For="@(() => @PageModel.Model.Engine)" />
-            <MatTextField @bind-Value="@PageModel.Model.Power" Class="text-field" Label="Moc" Outlined="true"></MatTextField>
-            <ValidationMessage For="@(() => @PageModel.Model.Power)" />
-            <MatTextField @bind-Value="@PageModel.Model.Vin" Class="text-field" Label="Vin" Outlined="true"></MatTextField>
-            <ValidationMessage For="@(() => @PageModel.Model.Vin)" />
-            <MatButton Label="Zapisz" Type="Submit" Raised="true" />
-        </EditForm>
-    </div>
+<div class="mdc-layout-grid__cell">
+    <MBCard AutoStyled="true">
+        <Primary>
+            <EditForm Model="@PageModel.Model" OnValidSubmit="_ => PageModel.AddCommand.Execute(null)">
+               <p><MBTextField @bind-Value="@PageModel.Model.Brand" Label="Marka" TextInputStyle="MBTextInputStyle.Outlined" ValidationMessageFor="@(() => @PageModel.Model.Brand)"/></p>
+               <p><MBTextField @bind-Value="@PageModel.Model.Model" Label="Model" TextInputStyle="MBTextInputStyle.Outlined" ValidationMessageFor="@(() => @PageModel.Model.Model)"/></p>
+               <p><MBTextField @bind-Value="@PageModel.Model.Plate" Label="Rejestracja" TextInputStyle="MBTextInputStyle.Outlined" ValidationMessageFor="@(() => @PageModel.Model.Plate)"/></p>
+               <p><MBTextField @bind-Value="@PageModel.Model.Engine" Label="Silnik" TextInputStyle="MBTextInputStyle.Outlined" ValidationMessageFor="@(() => @PageModel.Model.Engine)"/></p>
+               <p><MBTextField @bind-Value="@PageModel.Model.Power" Label="Moc" TextInputStyle="MBTextInputStyle.Outlined" ValidationMessageFor="@(() => @PageModel.Model.Power)"/></p>
+               <p><MBTextField @bind-Value="@PageModel.Model.Vin" Label="Vin" TextInputStyle="MBTextInputStyle.Outlined" ValidationMessageFor="@(() => @PageModel.Model.Vin)"/></p>
+               <p><MBButton Label="Zapisz" Type="Submit" ButtonStyle="@MBButtonStyle.ContainedRaised" /></p>
+            </EditForm>
+        </Primary>
+    </MBCard>
 </div>
-

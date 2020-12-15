@@ -1,18 +1,15 @@
 ﻿@page "/"
 @layout WelcomeLayout
 
-<div class="container">
-    <h3>Witaj w notatniku mechanika</h3>
+<h3>Witaj w notatniku mechanika</h3>
 
-    <AuthorizeView>
-        <Authorized>
-            <MatButton Label="Mój panel" Link="/orders" />
-        </Authorized>
+<AuthorizeView>
+    <Authorized>
+        <a href="/orders">Mój panel</a>
+    </Authorized>
 
-        <NotAuthorized>
-            <MatButton Label="Nie mam konta" Link="/registration" />
-            <MatButton Label="Zaloguj się" Link="/login" />
-        </NotAuthorized>
-    </AuthorizeView>
-
-</div>
+    <NotAuthorized>
+        <a href="/registration">Nie mam konta</a>
+        <a href="/login">Zaloguj się</a>
+    </NotAuthorized>
+</AuthorizeView>

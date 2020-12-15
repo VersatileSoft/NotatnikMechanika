@@ -74,7 +74,7 @@ namespace NotatnikMechanika.Core.PageModels
         public override async Task Initialize()
         {
             IsLoading = true;
-            _orderId = Parameter;
+            _orderId = Parameter ?? 0;
 
             var path = ServicePaths.All(_orderId);
             var response = await _httpRequestService.SendGet<List<ServiceModel>>(path);

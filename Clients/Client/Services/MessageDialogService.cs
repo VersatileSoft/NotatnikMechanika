@@ -1,20 +1,22 @@
-﻿using MatBlazor;
+﻿using Material.Blazor;
 using NotatnikMechanika.Core.Interfaces;
+using System;
 using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Client.Services
 {
     public class MessageDialogService : IMessageDialogService
     {
-        private readonly IMatToaster _toaster;
-        public MessageDialogService(IMatToaster toaster)
+        private readonly IMBToastService _toastService;
+
+        public MessageDialogService(IMBToastService toastService)
         {
-            _toaster = toaster;
+            _toastService = toastService;
         }
 
         public Task ShowMessageDialog(string message, MessageDialogType type, string title = null)
         {
-            _toaster.Add(message, MatToastType.Success, title);
+            _toastService.ShowToast(type.ConvertTo<MBToastLevel>(), message, title);
             return Task.CompletedTask;
         }
     }
