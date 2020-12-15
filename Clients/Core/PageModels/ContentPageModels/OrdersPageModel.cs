@@ -35,7 +35,7 @@ namespace NotatnikMechanika.Core.PageModels
             _authService = authService;
             Orders = new ObservableCollection<OrderExtendedModel>();
             AddOrderCommand = new AsyncCommand(navigationService.NavigateToAsync<AddOrderPageModel>);
-            OrderSelectedCommand = new AsyncCommand<int>(navigationService.NavigateToAsync<OrderPageModel>);
+            OrderSelectedCommand = new AsyncCommand<int>(async (int _) => await navigationService.NavigateToAsync<OrderPageModel>().ConfigureAwait(false));
             RemoveOrderCommand = new AsyncCommand<int>(RemoveOrderAction);
             RefreshOrdersCommand = new AsyncCommand(Initialize);
         }
@@ -47,11 +47,11 @@ namespace NotatnikMechanika.Core.PageModels
             switch (response.ResponseType)
             {
                 case ResponseType.Successful:
-                    await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto zlecenie", MessageDialogType.Success);
+                    await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto zlecenie", MessageDialogType.Success).ConfigureAwait(false);
                     break;
 
                 case ResponseType.Failure:
-                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas usuwania zlecenia");
+                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas usuwania zlecenia").ConfigureAwait(false);
                     break;
                 case ResponseType.Unauthorized:
                     break;
@@ -77,11 +77,11 @@ namespace NotatnikMechanika.Core.PageModels
                     break;
 
                 case ResponseType.Failure:
-                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania zleceń");
+                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania zleceń").ConfigureAwait(false);
                     break;
 
                 case ResponseType.Unauthorized:
-                    await _authService.LogoutAsync();
+                    await _authService.LogoutAsync().ConfigureAwait(false);
                     break;
                 case ResponseType.BadModelState:
                     break;

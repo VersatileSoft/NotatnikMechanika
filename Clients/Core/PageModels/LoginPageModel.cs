@@ -22,15 +22,18 @@ namespace NotatnikMechanika.Core.PageModels
 
         private readonly IAuthService _authService;
         private readonly IMessageDialogService _messageDialogService;
+        private readonly IMvNavigationService _navigationService;
 
-        public LoginPageModel(IAuthService authService, IMvNavigationService navigationService, IMessageDialogService messageDialogService)
+        public LoginPageModel(IAuthService authService, IMessageDialogService messageDialogService, IMvNavigationService navigationService)
         {
             _authService = authService;
             _messageDialogService = messageDialogService;
+            _navigationService = navigationService;
 
             LoginModel = new LoginModel();
             LoginCommand = new AsyncCommand(LoginAction);
-            RegisterCommand = new AsyncCommand(navigationService.NavigateToAsync<RegistrationPageModel>);
+            RegisterCommand = new AsyncCommand(async () => await navigationService.NavigateToAsync<RegistrationPageModel>(false).ConfigureAwait(false));
+
             IsLoading = false;
         }
 

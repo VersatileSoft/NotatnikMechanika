@@ -1,31 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentView
-    x:Class="NotatnikMechanika.Forms.DataTemplates.CustomerItemTemplate"
-    x:DataType="customer:CustomerModel"
+<ContentView x:Class="NotatnikMechanika.Forms.DataTemplates.CustomerItemTemplate"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:customer="clr-namespace:NotatnikMechanika.Shared.Models.Customer;assembly=NotatnikMechanika.Shared"
     xmlns:dataTemplates="clr-namespace:NotatnikMechanika.Forms.DataTemplates;assembly=NotatnikMechanika.Forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    x:DataType="customer:CustomerModel">
 
     <dataTemplates:DropdownFrame>
         <dataTemplates:DropdownFrame.Title>
             <MultiBinding StringFormat="{}{0} {1}">
-                <Binding Path="Name" />
-                <Binding Path="Surname" />
+                <Binding Path="Name"/>
+                <Binding Path="Surname"/>
             </MultiBinding>
         </dataTemplates:DropdownFrame.Title>
         <dataTemplates:DropdownFrame.FrameBody>
             <StackLayout>
-                <BoxView Style="{StaticResource LineDevider}" />
-                <Label FontSize="20" Text="Samochody: 3" />
-                <Label FontSize="20" Text="Ostatnia naprawa: 28.10.2020" />
-                <Label FontSize="20" Text="Lorem Ipsum" />
-                <Label FontSize="20" Text="Inne dane" />
-                <BoxView Style="{StaticResource LineDevider}" />
+                <BoxView Style="{StaticResource LineDevider}"/>
+                <Label FontSize="20" Text="Samochody: 3"/>
+                <Label FontSize="20" Text="Ostatnia naprawa: 28.10.2020"/>
+                <Label FontSize="20" Text="Lorem Ipsum"/>
+                <Label FontSize="20" Text="Inne dane"/>
+                <BoxView Style="{StaticResource LineDevider}"/>
                 <Label
                     FontFamily="MD"
                     FontSize="20"
-                    Text="Info" />
+                    Text="Info"/>
             </StackLayout>
         </dataTemplates:DropdownFrame.FrameBody>
     </dataTemplates:DropdownFrame>

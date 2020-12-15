@@ -31,7 +31,7 @@ namespace NotatnikMechanika.Core.PageModels
             _messageDialogService = messageDialogService;
             RegisterModel = new RegisterModel();
             RegisterCommand = new AsyncCommand(RegisterAction);
-            LoginCommand = new AsyncCommand(async () => await navigationService.NavigateToAsync<LoginPageModel>());
+            LoginCommand = new AsyncCommand(async () => await navigationService.NavigateToAsync<LoginPageModel>(false));
             IsLoading = false;
         }
 
