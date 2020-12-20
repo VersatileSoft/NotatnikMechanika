@@ -1,188 +1,185 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<pages:MvContentPage
-    BackgroundColor="{StaticResource PageBackgroundColor}"
-    Title="Zlecenie"
-    x:Class="NotatnikMechanika.Forms.Pages.OrderPage"
-    x:DataType="pageModels:OrderPageModel"
-    x:TypeArguments="pageModels:OrderPageModel"
+<pages:MvContentPage x:Class="NotatnikMechanika.Forms.Pages.OrderPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:commodity="clr-namespace:NotatnikMechanika.Shared.Models.Commodity;assembly=NotatnikMechanika.Shared"
     xmlns:dataTemplates="clr-namespace:NotatnikMechanika.Forms.DataTemplates;assembly=NotatnikMechanika.Forms"
     xmlns:pageModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
     xmlns:pages="clr-namespace:MvvmPackage.Xamarin.Pages;assembly=MvvmPackage.Xamarin"
     xmlns:service="clr-namespace:NotatnikMechanika.Shared.Models.Service;assembly=NotatnikMechanika.Shared"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    Title="Zlecenie"
+    x:DataType="pageModels:OrderPageModel"
+    x:TypeArguments="pageModels:OrderPageModel"
+    BackgroundColor="{StaticResource PageBackgroundColor}">
 
-    <RefreshView Command="{Binding RefreshOrderCommand}" IsRefreshing="{Binding IsLoading, Mode=OneWay}">
-        <ScrollView>
-            <StackLayout Padding="0,10,0,10" Spacing="10">
+    <ScrollView>
+        <StackLayout Padding="0,10,0,10" Spacing="10">
 
-                <dataTemplates:DropdownFrame>
-                    <dataTemplates:DropdownFrame.Title>
-                        <MultiBinding StringFormat="{}{0} {1}">
-                            <Binding Path="OrderModel.CustomerModel.Name" />
-                            <Binding Path="OrderModel.CustomerModel.Surname" />
-                        </MultiBinding>
-                    </dataTemplates:DropdownFrame.Title>
+            <dataTemplates:DropdownFrame>
+                <dataTemplates:DropdownFrame.Title>
+                    <MultiBinding StringFormat="{}{0} {1}">
+                        <Binding Path="OrderModel.CustomerModel.Name"/>
+                        <Binding Path="OrderModel.CustomerModel.Surname"/>
+                    </MultiBinding>
+                </dataTemplates:DropdownFrame.Title>
 
-                    <dataTemplates:DropdownFrame.FrameBody>
-                        <StackLayout Spacing="0">
+                <dataTemplates:DropdownFrame.FrameBody>
+                    <StackLayout Spacing="0">
 
-                            <Label
-                                FontSize="20"
-                                Text="{Binding OrderModel.CustomerModel.Phone}"
-                                VerticalOptions="CenterAndExpand" />
-                            <Label
-                                FontSize="20"
-                                Text="{Binding OrderModel.CustomerModel.Address}"
-                                VerticalOptions="CenterAndExpand" />
+                        <Label
+                            VerticalOptions="CenterAndExpand"
+                            FontSize="20"
+                            Text="{Binding OrderModel.CustomerModel.Phone}"/>
+                        <Label
+                            VerticalOptions="CenterAndExpand"
+                            FontSize="20"
+                            Text="{Binding OrderModel.CustomerModel.Address}"/>
 
-                            <BoxView
-                                BackgroundColor="{StaticResource PageBackgroundColor}"
-                                HeightRequest="2"
-                                HorizontalOptions="FillAndExpand"
-                                Margin="10" />
+                        <BoxView
+                            HeightRequest="2"
+                            Margin="10"
+                            HorizontalOptions="FillAndExpand"
+                            BackgroundColor="{StaticResource PageBackgroundColor}"/>
 
-                            <Label
-                                FontSize="20"
-                                Text="{Binding OrderModel.AcceptDate, StringFormat='Data rozpoczęcia: {0:dd/MM/yyyy}'}"
-                                VerticalOptions="CenterAndExpand" />
-                            <Label
-                                FontSize="20"
-                                Text="{Binding OrderModel.FinishDate, StringFormat='Data zakończenia: {0:dd/MM/yyyy}'}"
-                                VerticalOptions="CenterAndExpand" />
-                            <Label
-                                FontSize="20"
-                                Text="Do końca: 5 dni"
-                                VerticalOptions="CenterAndExpand" />
+                        <Label
+                            VerticalOptions="CenterAndExpand"
+                            FontSize="20"
+                            Text="{Binding OrderModel.AcceptDate, StringFormat='Data rozpoczęcia: {0:dd/MM/yyyy}'}"/>
+                        <Label
+                            VerticalOptions="CenterAndExpand"
+                            FontSize="20"
+                            Text="{Binding OrderModel.FinishDate, StringFormat='Data zakończenia: {0:dd/MM/yyyy}'}"/>
+                        <Label
+                            VerticalOptions="CenterAndExpand"
+                            FontSize="20"
+                            Text="Do końca: 5 dni"/>
 
-                            <BoxView Style="{StaticResource LineDevider}" />
-                        </StackLayout>
-                    </dataTemplates:DropdownFrame.FrameBody>
-                </dataTemplates:DropdownFrame>
+                        <BoxView Style="{StaticResource LineDevider}"/>
+                    </StackLayout>
+                </dataTemplates:DropdownFrame.FrameBody>
+            </dataTemplates:DropdownFrame>
 
-                <dataTemplates:DropdownFrame ShowProgress="True">
-                    <dataTemplates:DropdownFrame.Title>
-                        <MultiBinding StringFormat="{}{0} {1}">
-                            <Binding Path="OrderModel.CarModel.Brand" />
-                            <Binding Path="OrderModel.CarModel.Model" />
-                        </MultiBinding>
-                    </dataTemplates:DropdownFrame.Title>
+            <dataTemplates:DropdownFrame ShowProgress="True">
+                <dataTemplates:DropdownFrame.Title>
+                    <MultiBinding StringFormat="{}{0} {1}">
+                        <Binding Path="OrderModel.CarModel.Brand"/>
+                        <Binding Path="OrderModel.CarModel.Model"/>
+                    </MultiBinding>
+                </dataTemplates:DropdownFrame.Title>
 
-                    <dataTemplates:DropdownFrame.FrameBody>
-                        <StackLayout Spacing="0">
-                            <Label
-                                FontSize="20"
-                                Text="{Binding OrderModel.CarModel.Engine}"
-                                VerticalOptions="CenterAndExpand" />
-                            <Label
-                                FontSize="20"
-                                Text="{Binding OrderModel.CarModel.Power}"
-                                VerticalOptions="CenterAndExpand" />
+                <dataTemplates:DropdownFrame.FrameBody>
+                    <StackLayout Spacing="0">
+                        <Label
+                            VerticalOptions="CenterAndExpand"
+                            FontSize="20"
+                            Text="{Binding OrderModel.CarModel.Engine}"/>
+                        <Label
+                            VerticalOptions="CenterAndExpand"
+                            FontSize="20"
+                            Text="{Binding OrderModel.CarModel.Power}"/>
 
-                            <BoxView Style="{StaticResource LineDevider}" />
+                        <BoxView Style="{StaticResource LineDevider}"/>
 
-                            <Label
-                                FontSize="20"
-                                Text="{Binding OrderModel.AcceptDate, StringFormat='Data rozpoczęcia: {0:dd/MM/yyyy}'}"
-                                VerticalOptions="CenterAndExpand" />
-                            <Label
-                                FontSize="20"
-                                Text="{Binding OrderModel.FinishDate, StringFormat='Data zakończenia: {0:dd/MM/yyyy}'}"
-                                VerticalOptions="CenterAndExpand" />
-                            <Label
-                                FontSize="20"
-                                Text="Do końca: 5 dni"
-                                VerticalOptions="CenterAndExpand" />
+                        <Label
+                            VerticalOptions="CenterAndExpand"
+                            FontSize="20"
+                            Text="{Binding OrderModel.AcceptDate, StringFormat='Data rozpoczęcia: {0:dd/MM/yyyy}'}"/>
+                        <Label
+                            VerticalOptions="CenterAndExpand"
+                            FontSize="20"
+                            Text="{Binding OrderModel.FinishDate, StringFormat='Data zakończenia: {0:dd/MM/yyyy}'}"/>
+                        <Label
+                            VerticalOptions="CenterAndExpand"
+                            FontSize="20"
+                            Text="Do końca: 5 dni"/>
 
-                            <BoxView Style="{StaticResource LineDevider}" />
+                        <BoxView Style="{StaticResource LineDevider}"/>
 
-                            <Label FontSize="20" Text="Postęp: 75%" />
+                        <Label FontSize="20" Text="Postęp: 75%"/>
 
-                            <Frame
-                                CornerRadius="4"
-                                HeightRequest="10"
-                                Margin="20,10,20,10"
-                                Padding="0">
-                                <ProgressBar
-                                    BackgroundColor="{StaticResource GradientStop}"
-                                    Progress="0.75"
-                                    ProgressColor="{StaticResource GradientStart}" />
-                            </Frame>
+                        <Frame
+                            HeightRequest="10"
+                            Margin="20,10,20,10"
+                            Padding="0"
+                            CornerRadius="4">
+                            <ProgressBar
+                                BackgroundColor="{StaticResource GradientStop}"
+                                Progress="0.75"
+                                ProgressColor="{StaticResource GradientStart}"/>
+                        </Frame>
 
-                            <Label FontSize="20">
-                                <Label.Text>
-                                    <MultiBinding StringFormat="Usługi: 2/{0}">
-                                        <!-- <Binding Path="FinishedServices" /> TODO: Implement Services and commodities state-->
-                                        <Binding Path="Services.Count" />
-                                    </MultiBinding>
-                                </Label.Text>
-                            </Label>
+                        <Label FontSize="20">
+                            <Label.Text>
+                                <MultiBinding StringFormat="Usługi: 2/{0}">
+                                    <!-- <Binding Path="FinishedServices" /> TODO: Implement Services and commodities state-->
+                                    <Binding Path="Services.Count"/>
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
 
-                            <Label FontSize="20">
-                                <Label.Text>
-                                    <MultiBinding StringFormat="Towary: 1/{0}">
-                                        <!-- <Binding Path="FinishedCommodities" /> TODO: Implement Services and commodities state-->
-                                        <Binding Path="Commodities.Count" />
-                                    </MultiBinding>
-                                </Label.Text>
-                            </Label>
+                        <Label FontSize="20">
+                            <Label.Text>
+                                <MultiBinding StringFormat="Towary: 1/{0}">
+                                    <!-- <Binding Path="FinishedCommodities" /> TODO: Implement Services and commodities state-->
+                                    <Binding Path="Commodities.Count"/>
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
 
-                            <BoxView Style="{StaticResource LineDevider}" />
+                        <BoxView Style="{StaticResource LineDevider}"/>
 
-                            <Label FontSize="20" Text="Kiedyś będą ikony" />
-                        </StackLayout>
-                    </dataTemplates:DropdownFrame.FrameBody>
-                </dataTemplates:DropdownFrame>
+                        <Label FontSize="20" Text="Kiedyś będą ikony"/>
+                    </StackLayout>
+                </dataTemplates:DropdownFrame.FrameBody>
+            </dataTemplates:DropdownFrame>
 
-                <dataTemplates:DropdownFrame Title="Usługi">
-                    <dataTemplates:DropdownFrame.FrameBody>
-                        <StackLayout>
-                            <BoxView Style="{StaticResource LineDevider}" />
-                            <CollectionView ItemsSource="{Binding Services}" x:Name="CollectionView1">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackLayout
-                                            Orientation="Horizontal"
-                                            Spacing="0"
-                                            x:DataType="service:ServiceModel">
-                                            <CheckBox Color="{StaticResource NavigationBarColor}" VerticalOptions="CenterAndExpand" />
-                                            <Label
-                                                FontSize="20"
-                                                Text="{Binding Name}"
-                                                VerticalOptions="CenterAndExpand" />
-                                        </StackLayout>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </StackLayout>
-                    </dataTemplates:DropdownFrame.FrameBody>
-                </dataTemplates:DropdownFrame>
+            <dataTemplates:DropdownFrame Title="Usługi">
+                <dataTemplates:DropdownFrame.FrameBody>
+                    <StackLayout>
+                        <BoxView Style="{StaticResource LineDevider}"/>
+                        <CollectionView x:Name="CollectionView1" ItemsSource="{Binding Services}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout
+                                        x:DataType="service:ServiceModel"
+                                        Orientation="Horizontal"
+                                        Spacing="0">
+                                        <CheckBox VerticalOptions="CenterAndExpand" Color="{StaticResource NavigationBarColor}"/>
+                                        <Label
+                                            VerticalOptions="CenterAndExpand"
+                                            FontSize="20"
+                                            Text="{Binding Name}"/>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </dataTemplates:DropdownFrame.FrameBody>
+            </dataTemplates:DropdownFrame>
 
-                <dataTemplates:DropdownFrame Title="Towary">
-                    <dataTemplates:DropdownFrame.FrameBody>
-                        <StackLayout>
-                            <BoxView Style="{StaticResource LineDevider}" />
-                            <CollectionView ItemsSource="{Binding Commodities}" x:Name="CollectionView2">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackLayout
-                                            Orientation="Horizontal"
-                                            Spacing="0"
-                                            x:DataType="commodity:CommodityModel">
-                                            <CheckBox Color="{StaticResource NavigationBarColor}" VerticalOptions="CenterAndExpand" />
-                                            <Label
-                                                FontSize="20"
-                                                Text="{Binding Name}"
-                                                VerticalOptions="CenterAndExpand" />
-                                        </StackLayout>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </StackLayout>
-                    </dataTemplates:DropdownFrame.FrameBody>
-                </dataTemplates:DropdownFrame>
-            </StackLayout>
-        </ScrollView>
-    </RefreshView>
+            <dataTemplates:DropdownFrame Title="Towary">
+                <dataTemplates:DropdownFrame.FrameBody>
+                    <StackLayout>
+                        <BoxView Style="{StaticResource LineDevider}"/>
+                        <CollectionView x:Name="CollectionView2" ItemsSource="{Binding Commodities}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout
+                                        x:DataType="commodity:CommodityModel"
+                                        Orientation="Horizontal"
+                                        Spacing="0">
+                                        <CheckBox VerticalOptions="CenterAndExpand" Color="{StaticResource NavigationBarColor}"/>
+                                        <Label
+                                            VerticalOptions="CenterAndExpand"
+                                            FontSize="20"
+                                            Text="{Binding Name}"/>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </dataTemplates:DropdownFrame.FrameBody>
+            </dataTemplates:DropdownFrame>
+        </StackLayout>
+    </ScrollView>
 </pages:MvContentPage>

@@ -6,7 +6,7 @@ using System;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace MVVMPackage.Blazor.Services
+namespace MvvmPackage.Blazor.Services
 {
     [SingleInstance]
     public class NavigationService : IMvNavigationService

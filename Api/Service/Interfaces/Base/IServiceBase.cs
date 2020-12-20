@@ -1,18 +1,15 @@
-﻿using NotatnikMechanika.Shared;
-using NotatnikMechanika.Shared.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using NotatnikMechanika.Data.Models;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Service.Interfaces.Base
 {
-    public interface IServiceBase<TModel> 
+    public interface IServiceBase<TModel>
     {
-        Task<Response<IEnumerable<TModel>>> AllAsync();
-        Task<Response<TModel>> ByIdAsync(int id);
-        Task<Response> CreateAsync(TModel value);
-        Task<Response> UpdateAsync(int id, TModel value);
-        Task<Response> DeleteAsync(int id);
+        Task<ActionResult<IEnumerable<TModel>>> AllAsync();
+        Task<ActionResult<TModel>> ByIdAsync(int id);
+        Task<ActionResult> CreateAsync(TModel value);
+        Task<ActionResult> UpdateAsync(int id, TModel value);
+        Task<ActionResult> DeleteAsync(int id);
     }
 }

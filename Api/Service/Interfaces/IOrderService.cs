@@ -1,21 +1,17 @@
-﻿using NotatnikMechanika.Service.Interfaces.Base;
+﻿using Microsoft.AspNetCore.Mvc;
+using NotatnikMechanika.Service.Interfaces.Base;
 using NotatnikMechanika.Shared.Models.Order;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Service.Interfaces
 {
     public interface IOrderService : IServiceBase<OrderModel>
     {
-        Task<Response<IEnumerable<OrderExtendedModel>>> AllExtendedAsync(bool archived);
-        Task<Response> AddServiceToOrder(int orderId, int serviceId);
-        Task<Response> AddCommodityToOrder(int orderId, int commodityId);
-        Task<Response> DeleteServiceFromOrder(int orderId, int serviceId);
-        Task<Response> DeleteCommodityFromOrder(int orderId, int commodityId);
-        Task<Response<OrderExtendedModel>> ExtendedAsync(int orderId, bool archived);
-        Task<Response> AddExtendedAsync(AddOrderModel addOrderModel);
-        Task<Response> UpdateServiceStatusAsync(int orderId, int serviceId, bool finished);
-        Task<Response> UpdateCommodityStatusAsync(int orderId, int commodityId, bool finished);
+        Task<ActionResult<IEnumerable<OrderExtendedModel>>> AllExtendedAsync(bool archived);
+        Task<ActionResult<OrderExtendedModel>> ExtendedAsync(int orderId, bool archived);
+        Task<ActionResult> AddExtendedAsync(AddOrderModel addOrderModel);
+        Task<ActionResult> UpdateServiceStatusAsync(int orderId, int serviceId, bool finished);
+        Task<ActionResult> UpdateCommodityStatusAsync(int orderId, int commodityId, bool finished);
     }
 }

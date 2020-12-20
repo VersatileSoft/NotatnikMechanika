@@ -17,35 +17,18 @@ namespace NotatnikMechanika.Repository.Repositories
         {
         }
 
-        public async Task<IEnumerable<ServiceModel>> AllAsync(int orderId)
-        {
-            return await DbContext.Services
-                .OwnedByUser(CurrentUserId)
-                .Select(a => 
-                    new ServiceModel
-                    {
-                        Id = a.Id,
-                        Name = a.Name,
-                        Price = a.Price,
-                        IsInOrder = a.Orders.Any(o => o.Id == orderId),
-                    }
-                ).ToListAsync();
-        }
-
         public async Task<IEnumerable<ServiceModel>> ByOrderAsync(int orderId)
         {
-            return await DbContext.Services
-                .Where(c => c.Orders.Any(o => o.Id == orderId))
-                .Select(c => 
-                    new ServiceModel
-                    {
-                        Id = c.Id,
-                        Name = c.Name,
-                        Price = c.Price,
-                        IsInOrder = true,
-                        Finished = c.OrderToServices.FirstOrDefault(o => o.Order.Id == orderId).Finished
-                    }).
-                ToListAsync();
+            Order order = await DbContext.Orders.Include(o => o.Services).SingleAsync(o => o.Id == orderId);
+
+            return order.Services
+                .Select(c => new ServiceModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Price = c.Price,
+                    Finished = c.OrderToServices.Single(o => o.Order.Id == orderId).Finished
+                }).ToList();
         }
     }
 }

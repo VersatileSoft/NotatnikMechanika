@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.Extensions.DependencyInjection;
 using MvvmPackage.Core;
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 
-namespace MVVMPackage.Blazor
+namespace MvvmPackage.Blazor
 {
     public class PageBase<TPageModel> : ComponentBase where TPageModel : PageModelBase
     {
@@ -18,15 +18,16 @@ namespace MVVMPackage.Blazor
 
         protected override async Task OnParametersSetAsync()
         {
-            PageModel.PropertyChanged += (s, e) => StateHasChanged();
 
-            if(Parameter == null)
+            ((INotifyPropertyChanged)PageModel).PropertyChanged += (o, s) => StateHasChanged();
+
+            if (Parameter == null)
             {
                 PageModel.Parameter = null;
             }
             else
             {
-                PageModel.Parameter = int.TryParse(Parameter, out var param) ? param : 1;
+                PageModel.Parameter = int.TryParse(Parameter, out int param) ? param : 1;
             }
 
             await PageModel.Initialize();

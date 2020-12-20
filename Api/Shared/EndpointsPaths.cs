@@ -88,15 +88,11 @@
     public static class OrderPaths
     {
         public const string Name = "api/order";
-        public const string ExtendedOrdersPath = "extendedOrders/{archived}";
         public const string ExtendedOrderPath = "extendedOrder/{orderId}";
+        public const string ExtendedOrdersPath = "extendedOrders/{archived}";
         public const string AddExtendedOrderPath = "addExtendedOrder";
-        public const string AddServiceToOrderPath = "addService/{orderId}/{serviceId}";
-        public const string AddCommodityToOrderPath = "addCommodity/{orderId}/{commodityId}";
         public const string UpdateServiceStatusPath = "updateServiceStatus/{orderId}/{serviceId}/{finished}";
         public const string UpdateCommodityStatusPath = "updateCommodityStatus/{orderId}/{commodityId}/{finished}";
-        public const string DeleteServiceFromOrderPath = "deleteService/{orderId}/{serviceId}";
-        public const string DeleteCommodityFromOrderPath = "deleteCommodity/{orderId}/{commodityId}";
 
         public static string Extended(bool archived = false)
         {
@@ -111,20 +107,6 @@
         public static string AddExtended()
         {
             return Name + "/" + AddExtendedOrderPath;
-        }
-
-        public static string AddService(int orderId, int serviceId)
-        {
-            return Name + "/" + AddServiceToOrderPath
-                .Replace("{orderId}", orderId.ToString())
-                .Replace("{serviceId}", serviceId.ToString());
-        }
-
-        public static string AddCommodity(int orderId, int commodityId)
-        {
-            return Name + "/" + AddCommodityToOrderPath
-                .Replace("{orderId}", orderId.ToString())
-                .Replace("{commodityId}", commodityId.ToString());
         }
 
         public static string UpdateServiceStatus(int orderId, int serviceId, bool finished)
@@ -142,32 +124,12 @@
                 .Replace("{commodityId}", commodityId.ToString())
                 .Replace("{finished}", finished.ToString());
         }
-
-        public static string DeleteService(int orderId, int serviceId)
-        {
-            return Name + "/" + DeleteServiceFromOrderPath
-                .Replace("{orderId}", orderId.ToString())
-                .Replace("{serviceId}", serviceId.ToString());
-        }
-
-        public static string DeleteCommodity(int orderId, int commodityId)
-        {
-            return Name + "/" + DeleteCommodityFromOrderPath
-                .Replace("{orderId}", orderId.ToString())
-                .Replace("{commodityId}", commodityId.ToString());
-        }
     }
 
     public static class ServicePaths
     {   
         public const string Name = "api/service";
-        public const string AllPath = "all/{orderId}";
         public const string ByOrderPath = "byOrder/{orderId}";
-
-        public static string All(int orderId)
-        {
-            return Name + "/" + AllPath.Replace("{orderId}", orderId.ToString());
-        }
 
         public static string ByOrder(int orderId)
         {
@@ -178,13 +140,7 @@
     public static class CommodityPaths
     {
         public const string Name = "api/commodity";
-        public const string AllPath = "all/{orderId}";
         public const string ByOrderPath = "byOrder/{orderId}";
-
-        public static string All(int orderId)
-        {
-            return Name + "/" + AllPath.Replace("{orderId}", orderId.ToString());
-        }
 
         public static string ByOrder(int orderId)
         {

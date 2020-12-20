@@ -1,9 +1,7 @@
-﻿using System;
-using MvvmPackage.Core;
+﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using MVVMPackage.Core.Commands;
+using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Customer;
 using PropertyChanged;
 using System.Collections.Generic;
@@ -11,7 +9,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Core.PageModels
 {
@@ -38,48 +35,23 @@ namespace NotatnikMechanika.Core.PageModels
 
         private async Task RemoveCustomerAction(int id)
         {
-            var response = await _httpRequestService.Delete<CustomerModel>(id);
-
-            switch (response.ResponseType)
+            if(await _httpRequestService.Delete<CustomerModel>(id, "Błąd podczas usuwania klienta"))
             {
-                case ResponseType.Successful:
-                    await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto klienta", MessageDialogType.Success);
-                    break;
-
-                case ResponseType.Failure:
-                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Success, "Błąd podczas usuwania klienta");
-                    break;
-                case ResponseType.Unauthorized:
-                    break;
-                case ResponseType.BadModelState:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Customers.Remove(Customers.Single(c => c.Id == id));
+                _messageDialogService.ShowMessageDialog("Pomyślnie usunięto klienta", MessageDialogType.Success);
             }
-            await Initialize();
         }
 
         public override async Task Initialize()
         {
             IsLoading = true;
-            var response = await _httpRequestService.All<CustomerModel>();
-            switch (response.ResponseType)
+            var customers = await _httpRequestService.All<CustomerModel>("Błąd podczas ładowania klientów");
+            if (customers != null)
             {
-                case ResponseType.Successful:
-                    Customers.Clear();
-                    response.Content.ForEach(item=>Customers.Add(item));
-                    break;
-
-                case ResponseType.Failure:
-                    await _messageDialogService.ShowMessageDialog("Błąd podczas ładowania klientów", MessageDialogType.Error);
-                    break;
-                case ResponseType.Unauthorized:
-                    break;
-                case ResponseType.BadModelState:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Customers.Clear();
+                customers.ForEach(c => Customers.Add(c));
             }
+
             IsLoading = false;
         }
     }

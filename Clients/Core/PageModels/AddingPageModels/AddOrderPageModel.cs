@@ -10,26 +10,14 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 // ReSharper disable once CheckNamespace
 namespace NotatnikMechanika.Core.PageModels
 {
     public class AddOrderPageModel : AddingPageModelBase<OrderModel>
     {
-        public AddOrderPageModel(IMvNavigationService navigationService, IHttpRequestService httpRequestService, IMessageDialogService messageDialogService) :
-            base(navigationService, httpRequestService, messageDialogService)
-        {
-            Model = new AddOrderModel
-            {
-                AcceptDate = DateTime.Now,
-                FinishDate = DateTime.Now,
-                Services = new List<int>(),
-                Commodities = new List<int>()
-            };
-        }
-
         public override string SuccesMessage { get; set; } = "Zlecenie zostało dodane pomyślnie.";
 
         public new AddOrderModel Model { get; set; }
@@ -37,6 +25,7 @@ namespace NotatnikMechanika.Core.PageModels
         public ObservableCollection<CarModel> Cars { get; set; }
         public ObservableCollection<ServiceModel> Services { get; set; }
         public ObservableCollection<CommodityModel> Commodities { get; set; }
+        public bool CarsLoading { get; set; }
 
         private CustomerModel _selectedCustomer;
 
@@ -58,135 +47,92 @@ namespace NotatnikMechanika.Core.PageModels
             set
             {
                 _selectedCar = value;
-                Model.CarId = _selectedCar.Id;
+                Model.CarId = _selectedCar?.Id ?? 0;
             }
+        }
+
+        public AddOrderPageModel(IMvNavigationService navigationService, IHttpRequestService httpRequestService, IMessageDialogService messageDialogService) :
+            base(navigationService, httpRequestService, messageDialogService)
+        {
+            Model = new AddOrderModel
+            {
+                AcceptDate = DateTime.Now,
+                FinishDate = DateTime.Now,
+                Services = new List<int>(),
+                Commodities = new List<int>()
+            };
+
+            Services = new ObservableCollection<ServiceModel>();
+            Commodities = new ObservableCollection<CommodityModel>();
+            Customers = new ObservableCollection<CustomerModel>();
+            Cars = new ObservableCollection<CarModel>();
         }
 
         protected override async Task AddAction()
         {
             IsLoading = true;
-            if (!Model.Commodities.Any() && !Model.Services.Any())
+            if (!Commodities.Any(c => c.Finished) && !Services.Any(s => s.Finished))
             {
                 base.Model = Model;
                 await base.AddAction();
                 return;
             }
 
-            var response = await HttpRequestService.SendPost(Model, OrderPaths.AddExtended());
+            Model.Services = Services.Where(s => s.Finished).Select(s => s.Id).ToList();
+            Model.Commodities = Commodities.Where(c => c.Finished).Select(c => c.Id).ToList();
 
-            switch (response.ResponseType)
+            if (await HttpRequestService.SendPost(Model, OrderPaths.AddExtended()))
             {
-                case ResponseType.Successful:
-                    await MessageDialogService.ShowMessageDialog(SuccesMessage, MessageDialogType.Success, "Operacja powiodła się");
-                    await NavigationService.NavigateToAsync<MainPageModel>();
-                    break;
-
-                case ResponseType.Failure:
-                    ErrorMessage = response.ErrorMessages?.FirstOrDefault();
-                    await MessageDialogService.ShowMessageDialog(ErrorMessage, MessageDialogType.Error, "Wystąpił błąd");
-                    break;
-
-                case ResponseType.BadModelState:
-                    await MessageDialogService.ShowMessageDialog("Wypełnij formularz poprawnie", MessageDialogType.Error);
-                    break;
-                case ResponseType.Unauthorized:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                MessageDialogService.ShowMessageDialog(SuccesMessage, MessageDialogType.Success, "Pomyślnie dodano zlecnie");
+                await NavigationService.NavigateToAsync<MainPageModel>();
             }
             IsLoading = false;
         }
 
         private async Task SelectedCustomerChanged()
         {
-            IsLoading = true;
-            
-            var path = CarPaths.ByCustomer(SelectedCustomer.Id);
-            var carsResponse = await HttpRequestService.SendGet<List<CarModel>>(path);
-
-            switch (carsResponse.ResponseType)
+            CarsLoading = true;
+            string path = CarPaths.ByCustomer(SelectedCustomer.Id);
+            List<CarModel> cars = await HttpRequestService.SendGet<List<CarModel>>(path);
+            if (cars != null)
             {
-                case ResponseType.Successful:
-                    Cars = new ObservableCollection<CarModel>(carsResponse.Content);
-                    break;
-
-                case ResponseType.Failure:
-                    await MessageDialogService.ShowMessageDialog(carsResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania samochodów klienta");
-                    break;
-                case ResponseType.Unauthorized:
-                case ResponseType.BadModelState:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Cars.Clear();
+                cars.ForEach(c => Cars.Add(c));
             }
 
-            if (Cars?.Any() ?? false)
-            {
-                SelectedCar = Cars?.FirstOrDefault();
-            }
-            IsLoading = false;
+            SelectedCar = Cars.FirstOrDefault();
+
+            CarsLoading = false;
         }
 
         public override async Task Initialize()
         {
             IsLoading = true;
-            var customersResponse = await HttpRequestService.All<CustomerModel>();
 
-            switch (customersResponse.ResponseType)
+            var customers = await HttpRequestService.All<CustomerModel>();
+            if (customers != null)
             {
-                case ResponseType.Successful:
-                    Customers = new ObservableCollection<CustomerModel>(customersResponse.Content);
-                    break;
-
-                case ResponseType.Failure:
-                    await MessageDialogService.ShowMessageDialog(customersResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania klientów");
-                    break;
-                case ResponseType.Unauthorized:
-                case ResponseType.BadModelState:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Customers.Clear();
+                customers.ForEach(c => Customers.Add(c));
             }
 
-            if (Customers?.Any() ?? false)
+            var services = await HttpRequestService.All<ServiceModel>();
+            if (services != null)
             {
-                SelectedCustomer = Customers?.FirstOrDefault();
+                Services.Clear();
+                services.ForEach(s => Services.Add(s));
             }
 
-            var servicesResponse = await HttpRequestService.All<ServiceModel>();
-
-            switch (servicesResponse.ResponseType)
+            var commodities = await HttpRequestService.All<CommodityModel>();
+            if (commodities != null)
             {
-                case ResponseType.Successful:
-                    Services = new ObservableCollection<ServiceModel>(servicesResponse.Content);
-                    break;
-
-                case ResponseType.Failure:
-                    await MessageDialogService.ShowMessageDialog(servicesResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania klientów");
-                    break;
-                case ResponseType.Unauthorized:
-                case ResponseType.BadModelState:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Commodities.Clear();
+                commodities.ForEach(c => Commodities.Add(c));
             }
 
-            var commoditiesResponse = await HttpRequestService.All<CommodityModel>();
-
-            switch (commoditiesResponse.ResponseType)
+            if (Customers.Any())
             {
-                case ResponseType.Successful:
-                    Commodities = new ObservableCollection<CommodityModel>(commoditiesResponse.Content);
-                    break;
-
-                case ResponseType.Failure:
-                    await MessageDialogService.ShowMessageDialog(commoditiesResponse.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania klientów");
-                    break;
-                case ResponseType.Unauthorized:
-                case ResponseType.BadModelState:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                SelectedCustomer = Customers.FirstOrDefault();
             }
 
             IsLoading = false;

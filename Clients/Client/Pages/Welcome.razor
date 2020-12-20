@@ -1,15 +1,15 @@
 ﻿@page "/"
 @layout WelcomeLayout
-
-<h3>Witaj w notatniku mechanika</h3>
+@inject NavigationManager NavigationManager
 
 <AuthorizeView>
     <Authorized>
-        <a href="/orders">Mój panel</a>
+        <p>Jesteś zalogowany jako @context.User.Identity.Name </p>
+        <p><MBButton Label="Przejdź do swojego panelu" @onclick="@(e => NavigationManager.NavigateTo("orders"))" /></p>
     </Authorized>
 
     <NotAuthorized>
-        <a href="/registration">Nie mam konta</a>
-        <a href="/login">Zaloguj się</a>
+         <MBButton Label="Zaloguj się" @onclick="@(e => NavigationManager.NavigateTo("login"))" />
+         <MBButton Label="Nie mam konta" @onclick="@(e => NavigationManager.NavigateTo("registration"))" />
     </NotAuthorized>
 </AuthorizeView>

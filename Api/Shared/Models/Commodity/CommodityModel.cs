@@ -11,7 +11,6 @@ namespace NotatnikMechanika.Shared.Models.Commodity
         public string Name { get; set; }
         [Required]
         public double Price { get; set; }
-        public bool IsInOrder { get; set; }
         public bool Finished { get; set; }
     }
 }

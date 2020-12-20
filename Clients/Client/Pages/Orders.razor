@@ -1,8 +1,6 @@
 ﻿@page "/orders/"
 @page "/orders/{parameter}"
-@using NotatnikMechanika.Core.PageModels
-@using MVVMPackage.Blazor
-@using NotatnikMechanika.Shared.Models.Order
+@using System.Collections.Specialized
 @inherits PageBase<OrdersPageModel>
 
 
@@ -27,7 +25,7 @@ else
                     <p><MBDivider/></p>
                     <p>Postęp: @((int)(order.Proggress * 100))%</p>                      
                     <p><MBLinearProgress LinearProgressType="MBLinearProgressType.Determinate" Value="@order.Proggress" /></p>                         
-                    <p>@( DateTime.Now < order.FinishDate ? $"Do końca: {(order.FinishDate - DateTime.Now).TotalDays} dni" : "Czas się skończył!!")</p>                           
+                    <p>@( DateTime.Now < order.FinishDate ? $"Do końca: {(order.FinishDate - DateTime.Now).Days} dni" : "Czas się skończył!")</p>                           
                     <p><MBDivider/></p>
                     <p>
                         <MBIconButton Icon="info" @onclick="_ => PageModel.OrderSelectedCommand.Execute(order.Id)" />
@@ -40,4 +38,10 @@ else
     </Virtualize>
 }
 
-
+@code{
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+        PageModel.Orders.CollectionChanged += (s, e) => StateHasChanged();
+    }
+}

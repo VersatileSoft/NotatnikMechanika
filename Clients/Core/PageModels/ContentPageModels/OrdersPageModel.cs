@@ -1,7 +1,6 @@
-﻿using System;
-using MvvmPackage.Core;
+﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using MVVMPackage.Core.Commands;
+using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Order;
@@ -9,9 +8,9 @@ using PropertyChanged;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Core.PageModels
 {
@@ -26,69 +25,36 @@ namespace NotatnikMechanika.Core.PageModels
 
         private readonly IHttpRequestService _httpRequestService;
         private readonly IMessageDialogService _messageDialogService;
-        private readonly IAuthService _authService;
 
-        public OrdersPageModel(IMvNavigationService navigationService, IHttpRequestService httpRequestService, IMessageDialogService messageDialogService, IAuthService authService)
+        public OrdersPageModel(IMvNavigationService navigationService, IHttpRequestService httpRequestService, IMessageDialogService messageDialogService)
         {
             _httpRequestService = httpRequestService;
             _messageDialogService = messageDialogService;
-            _authService = authService;
             Orders = new ObservableCollection<OrderExtendedModel>();
             AddOrderCommand = new AsyncCommand(navigationService.NavigateToAsync<AddOrderPageModel>);
-            OrderSelectedCommand = new AsyncCommand<int>(async (int _) => await navigationService.NavigateToAsync<OrderPageModel>().ConfigureAwait(false));
+            OrderSelectedCommand = new AsyncCommand<int>(navigationService.NavigateToAsync<OrderPageModel>);
             RemoveOrderCommand = new AsyncCommand<int>(RemoveOrderAction);
             RefreshOrdersCommand = new AsyncCommand(Initialize);
         }
 
         private async Task RemoveOrderAction(int id)
         {
-            var response = await _httpRequestService.Delete<OrderModel>(id);
-
-            switch (response.ResponseType)
+            if (await _httpRequestService.Delete<OrderModel>(id, "Błąd podczas usuwania zlecenia"))
             {
-                case ResponseType.Successful:
-                    await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto zlecenie", MessageDialogType.Success).ConfigureAwait(false);
-                    break;
-
-                case ResponseType.Failure:
-                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas usuwania zlecenia").ConfigureAwait(false);
-                    break;
-                case ResponseType.Unauthorized:
-                    break;
-                case ResponseType.BadModelState:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Orders.Remove(Orders.Single(o => o.Id == id));
+                _messageDialogService.ShowMessageDialog("Pomyślnie usunięto zlecenie", MessageDialogType.Success);
             }
-
-            await Initialize();
         }
 
         public override async Task Initialize()
         {
             IsLoading = true;
-            var response = await _httpRequestService.SendGet<List<OrderExtendedModel>>(OrderPaths.Extended(Parameter.HasValue));
-
-            switch (response.ResponseType)
+            var orders = await _httpRequestService.SendGet<List<OrderExtendedModel>>(OrderPaths.Extended(Parameter.HasValue), "Błąd ładowania zleceń");
+            if (orders != null)
             {
-                case ResponseType.Successful:
-                    Orders.Clear();
-                    response.Content.ForEach(i => Orders.Add(i));
-                    break;
-
-                case ResponseType.Failure:
-                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania zleceń").ConfigureAwait(false);
-                    break;
-
-                case ResponseType.Unauthorized:
-                    await _authService.LogoutAsync().ConfigureAwait(false);
-                    break;
-                case ResponseType.BadModelState:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Orders.Clear();
+                orders.ForEach(i => Orders.Add(i));
             }
-
             IsLoading = false;
         }
     }

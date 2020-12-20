@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MVVMPackage.Core.Commands
+namespace MvvmPackage.Core.Commands
 {
     /// <summary>
     /// Implementation of an Async Command

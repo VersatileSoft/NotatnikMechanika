@@ -16,37 +16,18 @@ namespace NotatnikMechanika.Repository.Repositories
         public CommodityRepository(NotatnikMechanikaDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor) : base(dbContext, mapper, httpContextAccessor)
         {
         }
-        
-        public async Task<IEnumerable<CommodityModel>> AllAsync(int orderId)
-        {
-            return await DbContext.Commodities
-                .OwnedByUser(CurrentUserId)
-                .Select(a => 
-                    new CommodityModel
-                    {
-                        Id = a.Id,
-                        Name = a.Name,
-                        Price = a.Price,
-                        IsInOrder = a.Orders.Any(o => o.Id == orderId),
-                    }
-                ).ToListAsync();
-        }
 
         public async Task<IEnumerable<CommodityModel>> ByOrderAsync(int orderId)
         {
-            return await DbContext.Commodities
-                .OwnedByUser(CurrentUserId)
-                .Where(c => c.Orders.Any(o => o.Id == orderId))
-                .Select(c => 
-                    new CommodityModel
-                    {
-                        Id = c.Id,
-                        Name = c.Name,
-                        Price = c.Price,
-                        IsInOrder = true,
-                        Finished = c.OrderToCommodities.FirstOrDefault(o => o.Order.Id == orderId).Finished
-                    }).
-                ToListAsync();
+            Order order = await DbContext.Orders.Include(o => o.Commodities).SingleAsync(o => o.Id == orderId);
+
+            return order.Commodities
+                .Select(c => new CommodityModel {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Price = c.Price,
+                    Finished = c.OrderToCommodities.Single(o => o.Order.Id == orderId).Finished
+                }).ToList();
         }
     }
 }

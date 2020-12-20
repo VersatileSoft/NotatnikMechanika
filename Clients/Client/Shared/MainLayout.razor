@@ -7,6 +7,8 @@
 @inject ILogger<MainLayout> logger;
 @inject IMBAnimatedNavigationManager AnimatedNavigationService
 
+
+
 <AuthorizeView>
     <Authorized>     
         <NavMenu @ref="@NavBar" />
@@ -21,7 +23,7 @@
                          class="mdc-top-app-bar--short-has-action-item mdc-elevation--z5">
 
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-                    <MBIconButton Icon="account_box" @onclick="@(e => AnimatedNavigationService.NavigateTo("account"))" />
+                    <MBIconButton Icon="account_box" @onclick="@(e => AnimatedNavigationService.NavigateTo("myaccount"))" />
                 </section>
             </MBTopAppBar>
 

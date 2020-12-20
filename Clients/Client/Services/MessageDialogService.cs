@@ -14,10 +14,9 @@ namespace NotatnikMechanika.Client.Services
             _toastService = toastService;
         }
 
-        public Task ShowMessageDialog(string message, MessageDialogType type, string title = null)
+        public void ShowMessageDialog(string message, MessageDialogType type, string title = null)
         {
             _toastService.ShowToast(type.ConvertTo<MBToastLevel>(), message, title);
-            return Task.CompletedTask;
         }
     }
 }

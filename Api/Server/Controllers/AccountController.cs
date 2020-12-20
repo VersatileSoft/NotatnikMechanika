@@ -4,7 +4,6 @@ using NotatnikMechanika.Service.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.User;
 using System.Threading.Tasks;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Server.Controllers
 {
@@ -18,9 +17,9 @@ namespace NotatnikMechanika.Server.Controllers
         }
 
         [HttpPost(AccountPaths.LoginPath)]
-        public async Task<ActionResult<Response<TokenModel>>> LoginAsync([FromBody] LoginModel loginModel)
+        public Task<ActionResult<TokenModel>> LoginAsync([FromBody] LoginModel loginModel)
         {
-            return Ok(await _accountService.AuthenticateAsync(loginModel.Email, loginModel.Password));
+            return _accountService.AuthenticateAsync(loginModel.Email, loginModel.Password);
         }
 
         [HttpGet("verify/email")]
@@ -31,23 +30,23 @@ namespace NotatnikMechanika.Server.Controllers
         }
 
         [HttpPost(AccountPaths.RegisterPath)]
-        public async Task<ActionResult<Response>> RegisterAsync([FromBody] RegisterModel value)
+        public Task<ActionResult> RegisterAsync([FromBody] RegisterModel value)
         {
-            return Ok(await _accountService.RegisterAsync(value));
+            return _accountService.RegisterAsync(value);
         }
 
         [Authorize]
         [HttpPut(AccountPaths.UpdatePath)]
-        public async Task<ActionResult<Response>> UpdateUserAsync([FromBody] EditUserModel value)
+        public Task<ActionResult> UpdateUserAsync([FromBody] EditUserModel value)
         {
-            return Ok(await _accountService.UpdateAsync(value));
+            return _accountService.UpdateAsync(value);
         }
 
         [Authorize]
         [HttpDelete(AccountPaths.DeletePath)]
-        public async Task<ActionResult<Response>> DeleteAsync()
+        public Task<ActionResult> DeleteAsync()
         {
-            return Ok(await _accountService.DeleteAsync());
+            return _accountService.DeleteAsync();
         }
     }
 }

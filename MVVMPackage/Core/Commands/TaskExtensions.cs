@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace MVVMPackage.Core.Commands
+namespace MvvmPackage.Core.Commands
 {
     public static class TaskExtensions
     {

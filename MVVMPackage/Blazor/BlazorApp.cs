@@ -8,7 +8,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace MVVMPackage.Blazor
+namespace MvvmPackage.Blazor
 {
     public abstract class BlazorApp<TMainPageService, TComponent> where TMainPageService : IMainPageService where TComponent : IComponent
     {

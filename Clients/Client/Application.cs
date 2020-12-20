@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MVVMPackage.Blazor;
+using MvvmPackage.Blazor;
 using NotatnikMechanika.Client.Services;
 using NotatnikMechanika.Core;
 using NotatnikMechanika.Core.Interfaces;
@@ -26,7 +26,7 @@ namespace NotatnikMechanika.Client
                 .AddBrowserConsole()
                 .SetMinimumLevel(LogLevel.Warning)
             );
-            
+
             services.AddMBServices(
                animatedNavigationManagerServiceConfiguration: Utilities.GetDefaultAnimatedNavigationServiceConfiguration(),
                toastServiceConfiguration: Utilities.GetDefaultToastServiceConfiguration()

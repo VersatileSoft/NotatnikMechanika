@@ -75,38 +75,31 @@
         Splash screen
     */
     .splash-screen {
-        display: grid;
-        --mdc-theme-primary: #fff;
-        text-shadow: 0 0 4px black;
-        width: 100vw;
-        height: 100vh;
-    }
-
-    .splash-content {
+        margin: 0 auto;
         display: flex;
         flex-flow: column nowrap;
-        align-self: center;
-        justify-self: center;
         align-items: center;
-        color: var(--mdc-theme-primary);
-        font-weight: bold;
+        padding-top: 20px;
     }
 
-    .splash-background-video {
-        object-fit: cover;
-        position: fixed;
-        width: 100vw;
-        height: 100vh;
-        z-index: -1;
-        filter: brightness(80%);
-        -webkit-filter: brightness(80%);
-        -moz-filter: brightness(50%);
+    .loader {
+        border: 5px solid #505a87;
+        -webkit-animation: spin 1s linear infinite;
+        animation: spin 1s linear infinite;
+        border-top: 5px solid #19234d;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
     }
 
-    .splash-linear-progress {
-        position: fixed;
-        width: 100vw;
-        --mdc-theme-primary: var(--mb-color-blue-600);
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
     }
     /*
         General styling

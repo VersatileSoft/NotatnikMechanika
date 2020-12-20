@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MVVMPackage.Core.Commands
+namespace MvvmPackage.Core.Commands
 {
     /// <summary>
     /// Represents errors that occur during IAsyncCommand execution.

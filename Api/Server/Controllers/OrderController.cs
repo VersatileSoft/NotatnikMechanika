@@ -6,7 +6,6 @@ using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Order;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Server.Controllers
 {
@@ -21,58 +20,33 @@ namespace NotatnikMechanika.Server.Controllers
         }
 
         [HttpGet(OrderPaths.ExtendedOrdersPath)]
-        public async Task<ActionResult<Response<IEnumerable<OrderExtendedModel>>>> AllExtendedAsync(bool archived = false)
+        public Task<ActionResult<IEnumerable<OrderExtendedModel>>> AllExtendedAsync(bool archived = false)
         {
-            return Ok(await _orderService.AllExtendedAsync(archived));
+            return _orderService.AllExtendedAsync(archived);
         }
 
         [HttpGet(OrderPaths.ExtendedOrderPath)]
-        public async Task<ActionResult<Response<OrderExtendedModel>>> ExtendedAsync(int orderId)
-        {           
-            return Ok(await _orderService.ExtendedAsync(orderId, false));
+        public Task<ActionResult<OrderExtendedModel>> ExtendedAsync(int orderId)
+        {
+            return _orderService.ExtendedAsync(orderId, false);
         }
 
         [HttpPost(OrderPaths.AddExtendedOrderPath)]
-        public async Task<ActionResult<Response<OrderExtendedModel>>> AddExtendedAsync([FromBody] AddOrderModel addOrderModel)
+        public Task<ActionResult> AddExtendedAsync([FromBody] AddOrderModel addOrderModel)
         {
-            return Ok(await _orderService.AddExtendedAsync(addOrderModel));
-        }
-
-        [HttpPost(OrderPaths.AddServiceToOrderPath)]
-        public async Task<ActionResult<Response>> AddServiceToOrder(int orderId, int serviceId)
-        {
-            return Ok(await _orderService.AddServiceToOrder(orderId, serviceId));
-        }
-
-        [HttpPost(OrderPaths.AddCommodityToOrderPath)]
-        public async Task<ActionResult<Response>> AddCommodityToOrder(int orderId, int commodityId)
-        {
-            return Ok(await _orderService.AddCommodityToOrder(orderId, commodityId));
+            return _orderService.AddExtendedAsync(addOrderModel);
         }
 
         [HttpPut(OrderPaths.UpdateServiceStatusPath)]
-        public async Task<ActionResult<Response>> UpdateServiceStatusAsync(int orderId, int serviceId, bool finished)
+        public Task<ActionResult> UpdateServiceStatusAsync(int orderId, int serviceId, bool finished)
         {
-            return Ok(await _orderService.UpdateServiceStatusAsync(orderId, serviceId, finished));
+            return _orderService.UpdateServiceStatusAsync(orderId, serviceId, finished);
         }
 
         [HttpPut(OrderPaths.UpdateCommodityStatusPath)]
-        public async Task<ActionResult<Response>> UpdateCommodityStatusAsync(int orderId, int commodityId, bool finished)
+        public Task<ActionResult> UpdateCommodityStatusAsync(int orderId, int commodityId, bool finished)
         {
-            return Ok(await _orderService.UpdateCommodityStatusAsync(orderId, commodityId, finished));
-        }
-
-
-        [HttpDelete(OrderPaths.DeleteServiceFromOrderPath)]
-        public async Task<ActionResult<Response>> DeleteServiceFromOrder(int orderId, int serviceId)
-        {
-            return Ok(await _orderService.DeleteServiceFromOrder(orderId, serviceId));
-        }
-
-        [HttpDelete(OrderPaths.DeleteCommodityFromOrderPath)]
-        public async Task<ActionResult<Response>> DeleteCommodityFromOrder(int orderId, int commodityId)
-        {
-            return Ok(await _orderService.DeleteCommodityFromOrder(orderId, commodityId));
+            return _orderService.UpdateCommodityStatusAsync(orderId, commodityId, finished);
         }
     }
 }

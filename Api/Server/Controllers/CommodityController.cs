@@ -6,7 +6,6 @@ using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Commodity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Server.Controllers
 {
@@ -21,16 +20,10 @@ namespace NotatnikMechanika.Server.Controllers
             _commodityService = commodityService;
         }
 
-        [HttpGet(CommodityPaths.AllPath)]
-        public async Task<ActionResult<Response<IEnumerable<CommodityModel>>>> AllAsync(int orderId)
-        {
-            return Ok(await _commodityService.AllAsync(orderId));
-        }
-        
         [HttpGet(CommodityPaths.ByOrderPath)]
-        public async Task<ActionResult<Response<IEnumerable<CommodityModel>>>> ByOrderAsync(int orderId)
-        {  
-            return Ok(await _commodityService.ByOrderAsync(orderId));
+        public Task<ActionResult<IEnumerable<CommodityModel>>> ByOrderAsync(int orderId)
+        {
+            return _commodityService.ByOrderAsync(orderId);
         }
     }
 }

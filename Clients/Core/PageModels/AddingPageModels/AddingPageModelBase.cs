@@ -1,14 +1,11 @@
-﻿using System;
-using MvvmPackage.Core;
+﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using MVVMPackage.Core.Commands;
+using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
 using PropertyChanged;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 // ReSharper disable once CheckNamespace
 namespace NotatnikMechanika.Core.PageModels
@@ -40,28 +37,13 @@ namespace NotatnikMechanika.Core.PageModels
         protected virtual async Task AddAction()
         {
             IsLoading = true;
-            var response = await HttpRequestService.Create(Model);
 
-            switch (response.ResponseType)
+            if (await HttpRequestService.Create(Model, ErrorMessage))
             {
-                case ResponseType.Successful:
-                    await MessageDialogService.ShowMessageDialog(SuccesMessage, MessageDialogType.Success, "Operacja powiodła się");
-                    await NavigationService.NavigateToAsync<MainPageModel>();
-                    break;
-
-                case ResponseType.Failure:
-                    ErrorMessage = response.ErrorMessages?.FirstOrDefault();
-                    await MessageDialogService.ShowMessageDialog(ErrorMessage, MessageDialogType.Error, "Wystąpił błąd");
-                    break;
-
-                case ResponseType.BadModelState:
-                    await MessageDialogService.ShowMessageDialog("Wypełnij formularz poprawnie", MessageDialogType.Error);
-                    break;
-                case ResponseType.Unauthorized:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                MessageDialogService.ShowMessageDialog(SuccesMessage, MessageDialogType.Success, "Operacja powiodła się");
+                await NavigationService.NavigateToAsync<MainPageModel>();
             }
+
             IsLoading = false;
         }
     }

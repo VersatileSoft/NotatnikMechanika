@@ -7,6 +7,7 @@ namespace NotatnikMechanika.Shared.Models.Order
     {
         public int Id { get; set; }
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Wybierz samochód")]
         public int CarId { get; set; }
         public string Details { get; set; }
         public DateTime AcceptDate { get; set; }

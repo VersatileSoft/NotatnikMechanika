@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace MVVMPackage.Core.Commands
+namespace MvvmPackage.Core.Commands
 {
     internal static class CommandUtils
     {

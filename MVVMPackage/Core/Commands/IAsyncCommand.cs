@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MVVMPackage.Core.Commands
+namespace MvvmPackage.Core.Commands
 {
     public interface IAsyncCommand : ICommand
     {

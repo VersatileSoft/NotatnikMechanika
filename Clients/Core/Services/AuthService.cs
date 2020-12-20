@@ -6,7 +6,6 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Core.Services
 {
@@ -24,19 +23,17 @@ namespace NotatnikMechanika.Core.Services
             _httpClient = httpClient;
             _settingsService = settingsService;
             _httpRequestService = httpRequestService;
-            _httpRequestService.Authorize += AuthorizeResponse;
         }
 
-        public async Task<Response<TokenModel>> LoginAsync(LoginModel loginModel)
+        public async Task LoginAsync(LoginModel loginModel)
         {
-            var loginResponse = await _httpRequestService.SendPost<LoginModel, TokenModel>(loginModel, AccountPaths.Login());
-
-            if (loginResponse.ResponseType != ResponseType.Successful) return loginResponse;
-           
-            await _settingsService.SetToken(loginResponse.Content.Token);
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResponse.Content.Token);
-            AuthChanged?.Invoke(this, EventArgs.Empty);
-            return loginResponse;
+            var token = await _httpRequestService.SendPost<TokenModel>(loginModel, AccountPaths.Login());
+            if (token != null)
+            {
+                await _settingsService.SetToken(token.Token);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.Token);
+                AuthChanged?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         public async Task LogoutAsync()
@@ -44,14 +41,6 @@ namespace NotatnikMechanika.Core.Services
             await _settingsService.SetToken("");
             _httpClient.DefaultRequestHeaders.Authorization = null;
             AuthChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        private async void AuthorizeResponse(object sender, Response response)
-        {
-            if (response.ResponseType == ResponseType.Unauthorized)
-            {
-                await LogoutAsync();
-            }
         }
     }
 }

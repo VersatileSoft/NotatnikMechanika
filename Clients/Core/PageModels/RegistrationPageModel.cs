@@ -1,14 +1,11 @@
-﻿using System;
-using MvvmPackage.Core;
+﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using MVVMPackage.Core.Commands;
+using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.User;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Core.PageModels
 {
@@ -18,7 +15,6 @@ namespace NotatnikMechanika.Core.PageModels
         public string ConfirmPassword { get; set; }
         public ICommand RegisterCommand { get; }
         public ICommand LoginCommand { get; }
-        public string ErrorMessage { get; set; }
 
         private readonly IMvNavigationService _navigationService;
         private readonly IHttpRequestService _httpRequestService;
@@ -31,7 +27,7 @@ namespace NotatnikMechanika.Core.PageModels
             _messageDialogService = messageDialogService;
             RegisterModel = new RegisterModel();
             RegisterCommand = new AsyncCommand(RegisterAction);
-            LoginCommand = new AsyncCommand(async () => await navigationService.NavigateToAsync<LoginPageModel>(false));
+            LoginCommand = new AsyncCommand(navigationService.NavigateToAsync<LoginPageModel>);
             IsLoading = false;
         }
 
@@ -39,27 +35,10 @@ namespace NotatnikMechanika.Core.PageModels
         {
             IsLoading = true;
 
-            var response = await _httpRequestService.SendPost(RegisterModel, AccountPaths.Register());
-
-            switch (response.ResponseType)
+            if(await _httpRequestService.SendPost(RegisterModel, AccountPaths.Register(), "Błąd podczas rejestracji"))
             {
-                case ResponseType.Successful:
-                    await _messageDialogService.ShowMessageDialog("Konto zostało utworzone. Teraz możesz się zalogować.", MessageDialogType.Success, "Rejestracja");
-                    await _navigationService.NavigateToAsync<LoginPageModel>();
-                    break;
-
-                case ResponseType.Failure:
-                    ErrorMessage = response.ErrorMessages?[0];
-                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas rejestracji");
-                    break;
-
-                case ResponseType.BadModelState:
-                    await _messageDialogService.ShowMessageDialog("Wypełnij dane poprawnie", MessageDialogType.Error);
-                    break;
-                case ResponseType.Unauthorized:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                _messageDialogService.ShowMessageDialog("Konto zostało utworzone. Teraz możesz się zalogować.", MessageDialogType.Success, "Rejestracja");
+                await _navigationService.NavigateToAsync<LoginPageModel>();
             }
 
             IsLoading = false;

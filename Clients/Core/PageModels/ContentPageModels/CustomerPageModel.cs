@@ -1,18 +1,15 @@
-﻿using System;
-using MvvmPackage.Core;
+﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using MVVMPackage.Core.Commands;
+using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Car;
 using NotatnikMechanika.Shared.Models.Customer;
 using PropertyChanged;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using static NotatnikMechanika.Shared.ResponseBuilder;
-using System.Collections.ObjectModel;
 
 namespace NotatnikMechanika.Core.PageModels
 {
@@ -20,8 +17,7 @@ namespace NotatnikMechanika.Core.PageModels
     public class CustomerPageModel : PageModelBase
     {
         public CustomerModel CustomerModel { get; private set; }
-        public ObservableCollection<CarModel> Cars { get; private set; }
-        public string ErrorMessage { get; set; }
+        public ObservableCollection<CarModel> Cars { get; }
         public ICommand GoBackCommand { get; }
         public ICommand AddCarCommand { get; }
         public ICommand RemoveCarCommand { get; }
@@ -37,29 +33,16 @@ namespace NotatnikMechanika.Core.PageModels
             GoBackCommand = new AsyncCommand(navigationService.NavigateToAsync<MainPageModel>);
             AddCarCommand = new AsyncCommand(() => navigationService.NavigateToAsync<AddCarPageModel>(CustomerModel.Id));
             RemoveCarCommand = new AsyncCommand<int>(RemoveCarAction);
+            Cars = new ObservableCollection<CarModel>();
         }
 
         private async Task RemoveCarAction(int id)
         {
-            var response = await _httpRequestService.Delete<CarModel>(id);
-
-            switch (response.ResponseType)
+            if (await _httpRequestService.Delete<CarModel>(id, "Błąd podczasu usuwania samochodu"))
             {
-                case ResponseType.Successful:
-                    await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto klienta", MessageDialogType.Success);
-                    break;
-
-                case ResponseType.Failure:
-                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczasu usuwania klienta");
-                    break;
-                case ResponseType.Unauthorized:
-                    break;
-                case ResponseType.BadModelState:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Cars.Remove(Cars.Single(c => c.Id == id));
+                _messageDialogService.ShowMessageDialog("Pomyślnie usunięto samochód", MessageDialogType.Success);
             }
-            await Initialize();
         }
 
         public override async Task Initialize()
@@ -67,44 +50,17 @@ namespace NotatnikMechanika.Core.PageModels
             IsLoading = true;
             CustomerModel.Id = Parameter ?? 0;
 
-            var responseCustomer = await _httpRequestService.ById<CustomerModel>(CustomerModel.Id);
-
-            switch (responseCustomer.ResponseType)
+            var customer = await _httpRequestService.ById<CustomerModel>(CustomerModel.Id, "Błąd ładowania klienta");
+            if (customer != null)
             {
-                case ResponseType.Successful:
-                    CustomerModel = responseCustomer.Content;
-                    break;
-
-                case ResponseType.Failure:
-                    ErrorMessage = responseCustomer.ErrorMessages?.FirstOrDefault();
-                    await _messageDialogService.ShowMessageDialog(responseCustomer.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania klienta");
-                    return;
-                case ResponseType.Unauthorized:
-                    break;
-                case ResponseType.BadModelState:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                CustomerModel = customer;
             }
 
-            var responseCars = await _httpRequestService.All<CarModel>();
-
-            switch (responseCars.ResponseType)
+            var cars = await _httpRequestService.All<CarModel>("Błąd ładowania samochodów klienta");
+            if (cars != null)
             {
-                case ResponseType.Successful:
-                    Cars = new ObservableCollection<CarModel>(responseCars.Content);
-                    break;
-
-                case ResponseType.Failure:
-                    ErrorMessage = responseCars.ErrorMessages?.FirstOrDefault();
-                    await _messageDialogService.ShowMessageDialog(responseCars.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania samochodów klienta");
-                    break;
-                case ResponseType.Unauthorized:
-                    break;
-                case ResponseType.BadModelState:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Cars.Clear();
+                cars.ForEach(c => Cars.Add(c));
             }
 
             IsLoading = false;

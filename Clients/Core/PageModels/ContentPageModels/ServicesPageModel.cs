@@ -1,9 +1,7 @@
-﻿using System;
-using MvvmPackage.Core;
+﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using MVVMPackage.Core.Commands;
+using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Service;
 using PropertyChanged;
 using System.Collections.Generic;
@@ -11,7 +9,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Core.PageModels
 {
@@ -36,49 +33,21 @@ namespace NotatnikMechanika.Core.PageModels
         }
         private async Task RemoveServiceAction(int id)
         {
-            var response = await _httpRequestService.Delete<ServiceModel>(id);
-
-            switch (response.ResponseType)
+            if(await _httpRequestService.Delete<ServiceModel>(id, "Błąd podczas usuwania ułsugi"))
             {
-                case ResponseType.Successful:
-                    await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto usługę", MessageDialogType.Success);
-                    break;
-
-                case ResponseType.Failure:
-                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas usuwania ułsugi");
-                    break;
-                case ResponseType.Unauthorized:
-                    break;
-                case ResponseType.BadModelState:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Services.Remove(Services.Single(s => s.Id == id));
+                _messageDialogService.ShowMessageDialog("Pomyślnie usunięto usługę", MessageDialogType.Success);
             }
-
-            await Initialize();
         }
 
         public override async Task Initialize()
         {
             IsLoading = true;
-            var response = await _httpRequestService.All<ServiceModel>();
-
-            switch (response.ResponseType)
+            var services = await _httpRequestService.All<ServiceModel>("Błąd ładowania usług");
+            if (services != null)
             {
-                case ResponseType.Successful:
-                    Services.Clear();
-                    response.Content.ForEach(m => Services.Add(m));
-                    break;
-
-                case ResponseType.Failure:
-                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania usługi");
-                    break;
-                case ResponseType.Unauthorized:
-                    break;
-                case ResponseType.BadModelState:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Services.Clear();
+                services.ForEach(s => Services.Add(s));
             }
             IsLoading = false;
         }

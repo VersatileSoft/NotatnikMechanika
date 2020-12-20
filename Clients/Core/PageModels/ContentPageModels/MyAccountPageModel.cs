@@ -1,6 +1,6 @@
 ﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using MVVMPackage.Core.Commands;
+using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
 using PropertyChanged;
 using System.Threading.Tasks;

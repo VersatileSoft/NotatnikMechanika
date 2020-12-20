@@ -1,10 +1,10 @@
-﻿using NotatnikMechanika.Repository.Interfaces.Base;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using NotatnikMechanika.Data.Models;
+using NotatnikMechanika.Repository.Interfaces.Base;
 using NotatnikMechanika.Service.Interfaces.Base;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
-using NotatnikMechanika.Data.Models;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Service.Services.Base
 {
@@ -23,51 +23,73 @@ namespace NotatnikMechanika.Service.Services.Base
             _mapper = mapper;
         }
 
-        public async Task<Response> CreateAsync(TModel value)
+        public async Task<ActionResult> CreateAsync(TModel value)
         {
-            var entity = _mapper.Map<TEntity>(value);
+            TEntity entity = _mapper.Map<TEntity>(value);
             entity.UserId = CurrentUserId;
-            
+
             await _repositoryBase.CreateAsync(entity);
-            return SuccessResponse(resourceId: entity.Id);
+            return new CreatedResult(string.Empty, entity);
         }
 
-        public async Task<Response> DeleteAsync(int id)
+        public async Task<ActionResult> DeleteAsync(int id)
         {
-            if (!await _repositoryBase.CheckIfUserMatch(id))
-                return FailureResponse(ResponseType.Failure, new List<string> {NotAllowedError});
-            
-            var entity = await _repositoryBase.ByIdAsync(id);
+            TEntity entity = await _repositoryBase.ByIdAsync(id);
+
+            if (!AuthorizeResources(out ActionResult res, entity))
+                return res;
+
             await _repositoryBase.DeleteAsync(entity);
-            return SuccessResponse();
+            return new OkResult();
         }
 
-        public async Task<Response<TModel>> ByIdAsync(int id)
+        public async Task<ActionResult<TModel>> ByIdAsync(int id)
         {
-            if (!await _repositoryBase.CheckIfUserMatch(id))
-                return FailureResponse<TModel>(ResponseType.Failure, new List<string> { NotAllowedError });
-            
-            var model = _mapper.Map<TModel>(await _repositoryBase.ByIdAsync(id));
-            return SuccessResponse(model);
+            TEntity entity = await _repositoryBase.ByIdAsync(id);
+
+            if (!AuthorizeResources(out ActionResult res, entity))
+                return res;
+
+            return _mapper.Map<TModel>(entity);
         }
 
-        public async Task<Response<IEnumerable<TModel>>> AllAsync()
+        public async Task<ActionResult<IEnumerable<TModel>>> AllAsync()
         {
-            var result = _mapper.Map<IEnumerable<TEntity>, IEnumerable<TModel>>(await _repositoryBase.AllAsync());
-            return SuccessResponse(result);
+            return new OkObjectResult(_mapper.Map<IEnumerable<TEntity>, IEnumerable<TModel>>(await _repositoryBase.AllAsync()));
         }
 
-        public async Task<Response> UpdateAsync(int id, TModel value)
+        public async Task<ActionResult> UpdateAsync(int id, TModel value)
         {
-            if (!await _repositoryBase.CheckIfUserMatch(id))
-                return FailureResponse(ResponseType.Failure, new List<string> {NotAllowedError});
+            TEntity entity = await _repositoryBase.ByIdAsync(id);
 
-            var entity = await _repositoryBase.ByIdAsync(id);
+            if (!AuthorizeResources(out ActionResult res, entity))
+                return res;
+
             _mapper.Map(value, entity);
             entity.Id = id;
-            
+
             await _repositoryBase.UpdateAsync(entity);
-            return SuccessResponse();
+            return new OkResult();
+        }
+
+        protected bool AuthorizeResources(out ActionResult result, params EntityBase[] resources)
+        {
+            result = null;
+            foreach (EntityBase resource in resources)
+            {
+                if (resource == null)
+                {
+                    result = new NotFoundResult();
+                    return false;
+                }
+
+                if (resource.UserId != CurrentUserId)
+                {
+                    result = new UnauthorizedResult();
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

@@ -1,32 +1,33 @@
-﻿using NotatnikMechanika.Repository.Interfaces;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using NotatnikMechanika.Data.Models;
+using NotatnikMechanika.Repository.Interfaces;
 using NotatnikMechanika.Service.Interfaces;
 using NotatnikMechanika.Service.Services.Base;
 using NotatnikMechanika.Shared.Models.Commodity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
-using NotatnikMechanika.Data.Models;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Service.Services
 {
     public class CommodityService : ServiceBase<CommodityModel, Commodity>, ICommodityService
     {
+        private readonly IOrderRepository _orderRepository;
         private readonly ICommodityRepository _commodityRepository;
 
-        public CommodityService(ICommodityRepository commodityRepository, IMapper mapper) : base(commodityRepository, mapper)
+        public CommodityService(ICommodityRepository commodityRepository, IOrderRepository orderRepository, IMapper mapper) : base(commodityRepository, mapper)
         {
+            _orderRepository = orderRepository;
             _commodityRepository = commodityRepository;
         }
-
-        public async Task<Response<IEnumerable<CommodityModel>>> AllAsync(int orderId)
+        public async Task<ActionResult<IEnumerable<CommodityModel>>> ByOrderAsync(int orderId)
         {
-            return SuccessResponse(await _commodityRepository.AllAsync(orderId));
-        }
+            Order order = await _orderRepository.ByIdAsync(orderId);
 
-        public async Task<Response<IEnumerable<CommodityModel>>> ByOrderAsync(int orderId)
-        {
-            return SuccessResponse(await _commodityRepository.ByOrderAsync(orderId));
+            if (!AuthorizeResources(out ActionResult res, order))
+                return res;
+
+            return new OkObjectResult(await _commodityRepository.ByOrderAsync(orderId));
         }
     }
 }

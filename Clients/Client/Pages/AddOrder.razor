@@ -1,6 +1,4 @@
 ﻿@page "/addorder"
-@using NotatnikMechanika.Core.PageModels
-@using MVVMPackage.Blazor
 @using NotatnikMechanika.Shared.Models.Customer;
 @using NotatnikMechanika.Shared.Models.Car;
 @inherits PageBase<AddOrderPageModel>
@@ -19,25 +17,29 @@ else
                 <EditForm Model="PageModel.Model" OnValidSubmit="_ => PageModel.AddCommand.Execute(null)">
                     <DataAnnotationsValidator />
 
-                    @if (PageModel.Customers != null)
-                    {
-                        <p><MBSelect 
-                                Label="Klient" 
-                                @bind-Value="PageModel.SelectedCustomer" 
-                                Items="Customers" 
-                                SelectInputStyle="MBSelectInputStyle.Outlined" 
-                                ItemValidation="@MBItemValidation.NoSelection" /></p>
-                    }
-
-                    @if (PageModel.Cars != null)
-                    {
-                        <p><MBSelect 
-                                Label="Samochód" 
-                                @bind-Value="PageModel.SelectedCar" 
-                                Items="Cars" 
-                                SelectInputStyle="MBSelectInputStyle.Outlined" 
-                                ItemValidation="@MBItemValidation.NoSelection" /></p>
-                    }         
+                    <p><MBSelect 
+                            Label="Klient" 
+                            @bind-Value="PageModel.SelectedCustomer" 
+                            Items="Customers"
+                            Disabled="@(!PageModel.Customers.Any())"
+                            SelectInputStyle="MBSelectInputStyle.Outlined" 
+                            ItemValidation="@MBItemValidation.NoSelection"
+                            TextAlignStyle ="MBTextAlignStyle.Center"/></p>
+                    <p>
+                        @if(PageModel.CarsLoading)
+                        {
+                             <MBCircularProgress CircularProgressType="@MBCircularProgressType.Indeterminate" />
+                        }
+                        else
+                        {
+                            <p><MBSelect Label="Samochód" 
+                                    @bind-Value="PageModel.SelectedCar" 
+                                    Items="Cars" 
+                                    Disabled="@(!PageModel.Cars.Any())"
+                                    SelectInputStyle="MBSelectInputStyle.Outlined" 
+                                    ItemValidation="@MBItemValidation.NoSelection" /></p>
+                        }  
+                    </p>
 
                     <p><MBDatePicker Label="Data przyjęcia"
                                     @bind-Value="PageModel.Model.AcceptDate"
@@ -62,7 +64,7 @@ else
         <MBCard AutoStyled="true">
             <Primary>
                 
-                @if (PageModel.Services != null)
+                @if (PageModel.Services.Any())
                 {
                     <MBList Items="@PageModel.Services"
                             Context="service"
@@ -74,7 +76,7 @@ else
                         <LineTwo>@service.Price</LineTwo>
                         <Actions>
                             <div style="width: 10rem">
-                                    <MBCheckbox @onclick="@(() => ToggleItem(service.Id, true))"/>
+                                    <MBCheckbox @bind-Value="@service.Finished"/>
                             </div>
                         </Actions>
                     </MBList>
@@ -90,7 +92,7 @@ else
     <div class="mdc-layout-grid__cell">
         <MBCard AutoStyled="true">
             <Primary>           
-                @if (PageModel.Commodities != null)
+                @if (PageModel.Commodities.Any())
                 {
                     <MBList Items="@PageModel.Commodities"
                             Context="commodity"
@@ -102,7 +104,7 @@ else
                         <LineTwo>@commodity.Price</LineTwo>
                         <Actions>
                             <div style="width: 10rem">
-                                <MBCheckbox @onclick="@(() => ToggleItem(commodity.Id, false))"/>
+                                <MBCheckbox @bind-Value="@commodity.Finished"/>
                             </div>
                         </Actions>
                     </MBList>
@@ -114,7 +116,6 @@ else
             </Primary>
         </MBCard>
     </div>  
-
 }
 
 @code{
@@ -124,36 +125,10 @@ else
     }
 
     IEnumerable<MBListElement<CarModel>> Cars {
-        get => PageModel.Cars.Select(c => new MBListElement<CarModel> { Label = $"{c.Brand} {c.Model}", SelectedValue = c });      
-    }
-
-
-    private void ToggleItem(int id, bool service){
-
-        // TODO Optimize somehow this code
-
-        if(service)
-        {
-            if(PageModel.Model.Services.Any(i => i == id))
-            {
-                ((List<int>)PageModel.Model.Services).Remove(id);
-            }
-            else
-            {
-                ((List<int>)PageModel.Model.Services).Add(id);
-            }
-
-        }
-        else
-        {
-            if(PageModel.Model.Commodities.Any(i => i == id))
-             {
-                ((List<int>)PageModel.Model.Commodities).Remove(id);
-            }
-            else
-            {
-                ((List<int>)PageModel.Model.Commodities).Add(id);
-            }
+        get {
+            return  PageModel.Cars.Any() ?
+            PageModel.Cars.Select(c => new MBListElement<CarModel> { Label = $"{c.Brand} {c.Model}", SelectedValue = c }) :
+            new List<MBListElement<CarModel>> { new MBListElement<CarModel> { Label = "Brak samochodów", SelectedValue = new CarModel() } };
         }
     }
 }

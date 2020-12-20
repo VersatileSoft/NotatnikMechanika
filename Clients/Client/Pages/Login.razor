@@ -1,33 +1,30 @@
 ﻿@page "/login"
-@layout AuthLayout
-@using NotatnikMechanika.Core.PageModels
-@using MVVMPackage.Blazor
-@using Material.Blazor
+@layout WelcomeLayout
 @inherits PageBase<LoginPageModel>
 
-<div class="mdc-layout-grid__cell">
-    <MBCard AutoStyled="true">
-        <Primary>
-            <EditForm Model="PageModel.LoginModel" OnValidSubmit="PageModel.LoginAction">
-                <DataAnnotationsValidator />
-                <p><MBTextField 
-                    @bind-Value="PageModel.LoginModel.Email" 
-                    LeadingIcon="email" 
-                    Label="E-mali" 
-                    TextInputStyle="MBTextInputStyle.Outlined" 
-                    ValidationMessageFor="@(() => @PageModel.LoginModel.Email)"/></p>
+<MBCard AutoStyled="true">
+    <Primary>
+        <EditForm Model="PageModel.LoginModel" OnValidSubmit="PageModel.LoginAction">
+            <DataAnnotationsValidator />
+            <MBTextField 
+                @bind-Value="PageModel.LoginModel.Email" 
+                LeadingIcon="email" 
+                Label="E-mali" 
+                style = "width: 100%;"
+                TextInputStyle="MBTextInputStyle.Outlined" 
+                ValidationMessageFor="@(() => @PageModel.LoginModel.Email)"/>
 
-                <p><MBTextField 
-                    @bind-Value="PageModel.LoginModel.Password" 
-                    LeadingIcon="lock_outline" 
-                    Label="Hasło" 
-                    type="password"
-                    TextInputStyle="MBTextInputStyle.Outlined"
-                    ValidationMessageFor="@(() => @PageModel.LoginModel.Password)"/></p>
+            <MBTextField 
+                @bind-Value="PageModel.LoginModel.Password" 
+                LeadingIcon="lock_outline" 
+                Label="Hasło" 
+                type="password"
+                style = "width: 100%;"
+                TextInputStyle="MBTextInputStyle.Outlined"
+                ValidationMessageFor="@(() => @PageModel.LoginModel.Password)"/>
 
-                <p><MBButton Label="Nie mam konta" ButtonStyle="@MBButtonStyle.ContainedRaised" @onclick="() => PageModel.RegisterCommand.Execute(null)" />
-                <MBButton Label="Zaloguj się" ButtonStyle="@MBButtonStyle.ContainedRaised" Type="Submit" Disabled="PageModel.IsLoading" /></p>      
-            </EditForm>
-        </Primary>
-    </MBCard>
-</div>
+            <MBButton Label="Zaloguj się" ButtonStyle="@MBButtonStyle.ContainedRaised" Type="Submit" styl="width:100%" Disabled="PageModel.IsLoading" />      
+            <MBButton Label="Nie mam konta" ButtonStyle="@MBButtonStyle.ContainedRaised" @onclick="() => PageModel.RegisterCommand.Execute(null)" />
+        </EditForm>
+    </Primary>
+</MBCard>

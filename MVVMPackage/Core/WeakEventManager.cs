@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using static System.String;
 
-namespace MVVMPackage.Core
+namespace MvvmPackage.Core
 {
     /// <summary>
     /// Weak event manager to subscribe and unsubscribe from events.

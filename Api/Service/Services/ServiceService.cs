@@ -1,11 +1,11 @@
-﻿using NotatnikMechanika.Repository.Interfaces;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using NotatnikMechanika.Repository.Interfaces;
 using NotatnikMechanika.Service.Interfaces;
 using NotatnikMechanika.Service.Services.Base;
 using NotatnikMechanika.Shared.Models.Service;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Service.Services
 {
@@ -20,17 +20,14 @@ namespace NotatnikMechanika.Service.Services
             _orderRepository = orderRepository;
         }
 
-        public async Task<Response<IEnumerable<ServiceModel>>> AllAsync(int orderId)
+        public async Task<ActionResult<IEnumerable<ServiceModel>>> ByOrderAsync(int orderId)
         {
-            return SuccessResponse(await _serviceRepository.AllAsync(orderId));
-        }
+            Data.Models.Order order = await _orderRepository.ByIdAsync(orderId);
 
-        public async Task<Response<IEnumerable<ServiceModel>>> ByOrderAsync(int orderId)
-        {
-            if (!await _orderRepository.CheckIfUserMatch(orderId))
-                return FailureResponse<IEnumerable<ServiceModel>>(ResponseType.Failure, new List<string> {NotAllowedError});
-            
-            return SuccessResponse(await _serviceRepository.ByOrderAsync(orderId));
+            if (!AuthorizeResources(out ActionResult res, order))
+                return res;
+
+            return new OkObjectResult(await _serviceRepository.ByOrderAsync(orderId));
         }
     }
 }

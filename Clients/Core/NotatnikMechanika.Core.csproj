@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Api\Shared\NotatnikMechanika.Shared.csproj" />
-    <ProjectReference Include="..\..\MVVMPackage\Core\MvvmPackage.Core.csproj" />
+    <ProjectReference Include="..\..\MvvmPackage\Core\MvvmPackage.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

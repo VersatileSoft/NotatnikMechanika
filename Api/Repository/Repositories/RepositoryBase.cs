@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using NotatnikMechanika.Data;
 using NotatnikMechanika.Data.Models;
 using NotatnikMechanika.Repository.Interfaces.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -16,7 +18,7 @@ namespace NotatnikMechanika.Repository.Repositories
         protected readonly NotatnikMechanikaDbContext DbContext;
         protected readonly IMapper Mapper;
 
-        public string CurrentUserId => 
+        public string CurrentUserId =>
             _httpContextAccessor.HttpContext.User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
         protected readonly IHttpContextAccessor _httpContextAccessor;
@@ -26,11 +28,6 @@ namespace NotatnikMechanika.Repository.Repositories
             DbContext = dbContext;
             Mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
-        }
-
-        public Task<bool> CheckIfUserMatch(int id)
-        {
-            return DbContext.Set<EntityType>().OwnedByUser(CurrentUserId).Where(a => a.Id == id).AnyAsync();
         }
 
         public async Task CreateAsync(EntityType value)
@@ -62,6 +59,26 @@ namespace NotatnikMechanika.Repository.Repositories
         {
             DbContext.Set<EntityType>().Update(value);
             await DbContext.SaveChangesAsync();
+        }
+
+        public Task<bool> Transaction(Func<Task> action)
+        {
+            IExecutionStrategy executionStrategy = DbContext.Database.CreateExecutionStrategy();
+            return executionStrategy.Execute(async () =>
+                {
+                    using IDbContextTransaction transaction = DbContext.Database.BeginTransaction();
+                    try
+                    {
+                        await action();
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                    }
+                    return false;
+                });
         }
     }
 }

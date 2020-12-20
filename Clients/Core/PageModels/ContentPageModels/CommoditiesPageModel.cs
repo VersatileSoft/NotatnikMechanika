@@ -1,9 +1,7 @@
-﻿using System;
-using MvvmPackage.Core;
+﻿using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
-using MVVMPackage.Core.Commands;
+using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
-using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Commodity;
 using PropertyChanged;
 using System.Collections.Generic;
@@ -11,7 +9,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Core.PageModels
 {
@@ -37,48 +34,18 @@ namespace NotatnikMechanika.Core.PageModels
 
         private async Task RemoveCommodityAction(int id)
         {
-            var response = await _httpRequestService.Delete<CommodityModel>(id);
-
-            switch (response.ResponseType)
+            if (await _httpRequestService.Delete<CommodityModel>(id, "Błąd podczas usuwania towaru"))
             {
-                case ResponseType.Successful:
-                    await _messageDialogService.ShowMessageDialog("Pomyślnie usunięto towar", MessageDialogType.Success);
-                    break;
-
-                case ResponseType.Failure:
-                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd podczas usuwania towaru");
-                    break;
-                case ResponseType.Unauthorized:
-                    break;
-                case ResponseType.BadModelState:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Commodities.Remove(Commodities.Single(c => c.Id == id));
+                _messageDialogService.ShowMessageDialog("Pomyślnie usunięto towar", MessageDialogType.Success);
             }
-            await Initialize();
         }
 
         public override async Task Initialize()
         {
             IsLoading = true;
-            var response = await _httpRequestService.All<CommodityModel>();
-
-            switch (response.ResponseType)
-            {
-                case ResponseType.Successful:
-                    response.Content.ForEach(c => Commodities.Add(c));
-                    break;
-
-                case ResponseType.Failure:
-                    await _messageDialogService.ShowMessageDialog(response.ErrorMessages.FirstOrDefault(), MessageDialogType.Error, "Błąd ładowania towarów");
-                    break;
-                case ResponseType.Unauthorized:
-                    break;
-                case ResponseType.BadModelState:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            var commodities = await _httpRequestService.All<CommodityModel>();
+            commodities?.ForEach(c => Commodities.Add(c));
 
             IsLoading = false;
         }

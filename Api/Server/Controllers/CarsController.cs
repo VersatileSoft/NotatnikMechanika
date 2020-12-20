@@ -6,7 +6,6 @@ using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Car;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using static NotatnikMechanika.Shared.ResponseBuilder;
 
 namespace NotatnikMechanika.Server.Controllers
 {
@@ -22,9 +21,9 @@ namespace NotatnikMechanika.Server.Controllers
         }
 
         [HttpGet(CarPaths.ByCustomerPath)]
-        public async Task<ActionResult<Response<IEnumerable<CarModel>>>> ByCustomerAsync(int customerId)
-        {            
-            return Ok(await _carService.ByCustomerAsync(customerId).ConfigureAwait(false));
+        public Task<ActionResult<IEnumerable<CarModel>>> ByCustomerAsync(int customerId)
+        {
+            return _carService.ByCustomerAsync(customerId);
         }
     }
 }
