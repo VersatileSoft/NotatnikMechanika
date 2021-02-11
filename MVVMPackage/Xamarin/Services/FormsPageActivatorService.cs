@@ -8,29 +8,17 @@ namespace MvvmPackage.Xamarin.Services
 {
     public class FormsPageActivatorService : IFormsPageActivatorService
     {
-        public Page CreatePageFromPageModel<TPageModel>() where TPageModel : PageModelBase
+        public Page CreatePageFromPageModel<TPageModel>(int? parameter) where TPageModel : PageModelBase
         {
-            return CreatePageFromPageModel(typeof(TPageModel));
+            return CreatePageFromPageModel(typeof(TPageModel), parameter);
         }
 
-        public Page CreatePageFromPageModel(Type pageModelType)
+        public Page CreatePageFromPageModel(Type pageModelType, int? parameter)
         {
-            var pageName = pageModelType.Name.Replace("Model", "");
-            return (Page)Activator.CreateInstance(Array.Find(IoC.PlatformProjectAssembly.GetTypes(), t => t.Name == pageName));
-        }
-
-        public Page CreatePageFromPageModel<TPageModel>(int parameter) where TPageModel : PageModelBase
-        {
-            if (!(CreatePageFromPageModel<TPageModel>() is MvContentPage<TPageModel> page)) return new Page();
+            string pageName = pageModelType.Name.Replace("Model", "");
+            MvContentPage page = (MvContentPage)Activator.CreateInstance(Array.Find(IoC.PlatformProjectAssembly.GetTypes(), t => t.Name == pageName));
             page.PageModel.Parameter = parameter;
             return page;
-        }
-
-        public Page CreatePageFromPageModel<TPageModel, TTargetPage>()
-            where TPageModel : PageModelBase
-            where TTargetPage : Page
-        {
-            throw new NotImplementedException();
         }
     }
 }

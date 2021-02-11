@@ -10,6 +10,7 @@ namespace NotatnikMechanika.WPF.Pages.Utils
     public partial class MenuButton : Button
     {
         public Type DetailPageModelType { get; set; }
+        public int? Parameter { get; set; }
 
         public MenuButton()
         {

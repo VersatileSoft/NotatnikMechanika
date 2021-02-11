@@ -1,21 +1,20 @@
-﻿<views:MvContentPage
-    BackgroundColor="{StaticResource PageBackgroundColor}"
-    Title="Zlecenia"
-    Visual="Material"
-    mc:Ignorable="d"
-    x:Class="NotatnikMechanika.Forms.Pages.OrdersPage"
-    x:DataType="viewModels:OrdersPageModel"
-    x:TypeArguments="viewModels:OrdersPageModel"
+﻿<views:MvContentPage x:Class="NotatnikMechanika.Forms.Pages.OrdersPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:dataTemplates="clr-namespace:NotatnikMechanika.Forms.DataTemplates;assembly=NotatnikMechanika.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
     xmlns:views="clr-namespace:MvvmPackage.Xamarin.Pages;assembly=MvvmPackage.Xamarin"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    Title="Zlecenia"
+    x:DataType="viewModels:OrdersPageModel"
+    x:TypeArguments="viewModels:OrdersPageModel"
+    BackgroundColor="{StaticResource PageBackgroundColor}"
+    Visual="Material"
+    mc:Ignorable="d">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="ToolbarItem_Clicked" Text="Konto" />
+        <ToolbarItem Clicked="ToolbarItem_Clicked" Text="Konto"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -24,16 +23,16 @@
                 <CollectionView ItemsSource="{Binding Orders}">
 
                     <CollectionView.Header>
-                        <BoxView HeightRequest="0" />
+                        <BoxView HeightRequest="0"/>
                     </CollectionView.Header>
 
                     <CollectionView.Footer>
-                        <BoxView HeightRequest="0" />
+                        <BoxView HeightRequest="0"/>
                     </CollectionView.Footer>
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <dataTemplates:OrderItemTemplate />
+                            <dataTemplates:OrderItemTemplate/>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

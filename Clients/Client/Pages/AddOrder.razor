@@ -16,7 +16,6 @@ else
             <Primary>
                 <EditForm Model="PageModel.Model" OnValidSubmit="_ => PageModel.AddCommand.Execute(null)">
                     <DataAnnotationsValidator />
-
                     <p><MBSelect 
                             Label="Klient" 
                             @bind-Value="PageModel.SelectedCustomer" 

@@ -9,34 +9,18 @@ namespace MvvmPackage.Wpf.Services
 {
     internal class WpfPageActivatorService : IWpfPageActivatorService
     {
-        public UserControl CreatePageFromPageModel<TPageModel>() where TPageModel : PageModelBase
+        public UserControl CreatePageFromPageModel<TPageModel>(int? parameter) where TPageModel : PageModelBase
         {
-            return CreatePageFromPageModel(typeof(TPageModel));
+            return CreatePageFromPageModel(typeof(TPageModel), parameter);
         }
 
-        public UserControl CreatePageFromPageModel<TPageModel>(int parameter) where TPageModel : PageModelBase
+        public UserControl CreatePageFromPageModel(Type pageModelType, int? parameter)
         {
-            var page = (MvWpfPage<TPageModel>)CreatePageFromPageModel<TPageModel>();
-            if (page == null)
-            {
-                throw new NullReferenceException("Could not cast page");
-            }
+            string pageName = pageModelType.Name.Replace("Model", "");
+            Type type = PlatformProjectAssembly.GetTypes().AsEnumerable().FirstOrDefault(t => t.Name == pageName);
+            MvWpfPage page = (MvWpfPage)Activator.CreateInstance(type ?? typeof(UserControl));
             page.PageModel.Parameter = parameter;
             return page;
-        }
-
-        public UserControl CreatePageFromPageModel(Type pageModelType)
-        {
-            var pageName = pageModelType.Name.Replace("Model", "");
-            var type = PlatformProjectAssembly.GetTypes().AsEnumerable().FirstOrDefault(t => t.Name == pageName);
-            return (UserControl)Activator.CreateInstance(type ?? typeof(UserControl));
-        }
-
-        public UserControl CreatePageFromPageModel<TPageModel, TTargetPage>()
-            where TPageModel : PageModelBase
-            where TTargetPage : UserControl
-        {
-            throw new NotImplementedException();
         }
     }
 }

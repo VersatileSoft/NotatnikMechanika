@@ -1,4 +1,8 @@
-﻿using System.Windows;
+﻿using Autofac;
+using MvvmPackage.Core;
+using MvvmPackage.Core.Services.Interfaces;
+using NotatnikMechanika.Core.PageModels;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -86,6 +90,11 @@ namespace NotatnikMechanika.WPF.Pages.Utils
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.Close();
+        }
+
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            IoC.Container.Resolve<IMvNavigationService>().NavigateToAsync<MainPageModel>();
         }
     }
 }

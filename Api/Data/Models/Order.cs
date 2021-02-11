@@ -7,7 +7,7 @@ namespace NotatnikMechanika.Data.Models
     {
         public int CarId { get; set; }
         public string Details { get; set; }
-        public bool Archived { get; set; } = false;
+        public bool Archived { get; set; }
         public DateTime AcceptDate { get; set; }
         public DateTime FinishDate { get; set; }
 

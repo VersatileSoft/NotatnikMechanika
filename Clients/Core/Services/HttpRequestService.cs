@@ -67,9 +67,9 @@ namespace NotatnikMechanika.Core.Services
                 {
                     return JsonConvert.DeserializeObject<TContent>(responseString);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    throw new Exception("Validation error");
+                    throw new Exception("Validation error", e);
                 }
             }
 

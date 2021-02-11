@@ -10,10 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 
-// ReSharper disable once CheckNamespace
 namespace NotatnikMechanika.Core.PageModels
 {
     public class AddOrderPageModel : AddingPageModelBase<OrderModel>
@@ -35,7 +33,7 @@ namespace NotatnikMechanika.Core.PageModels
             set
             {
                 _selectedCustomer = value;
-                Task.Run(SelectedCustomerChanged);
+                _ = SelectedCustomerChanged();
             }
         }
 
@@ -92,8 +90,7 @@ namespace NotatnikMechanika.Core.PageModels
         private async Task SelectedCustomerChanged()
         {
             CarsLoading = true;
-            string path = CarPaths.ByCustomer(SelectedCustomer.Id);
-            List<CarModel> cars = await HttpRequestService.SendGet<List<CarModel>>(path);
+            List<CarModel> cars = await GetCars();
             if (cars != null)
             {
                 Cars.Clear();
@@ -105,25 +102,31 @@ namespace NotatnikMechanika.Core.PageModels
             CarsLoading = false;
         }
 
+        private Task<List<CarModel>> GetCars()
+        {
+            string path = CarPaths.ByCustomer(SelectedCustomer.Id);
+            return HttpRequestService.SendGet<List<CarModel>>(path);
+        }
+
         public override async Task Initialize()
         {
             IsLoading = true;
 
-            var customers = await HttpRequestService.All<CustomerModel>();
+            List<CustomerModel> customers = await HttpRequestService.All<CustomerModel>();
             if (customers != null)
             {
                 Customers.Clear();
                 customers.ForEach(c => Customers.Add(c));
             }
 
-            var services = await HttpRequestService.All<ServiceModel>();
+            List<ServiceModel> services = await HttpRequestService.All<ServiceModel>();
             if (services != null)
             {
                 Services.Clear();
                 services.ForEach(s => Services.Add(s));
             }
 
-            var commodities = await HttpRequestService.All<CommodityModel>();
+            List<CommodityModel> commodities = await HttpRequestService.All<CommodityModel>();
             if (commodities != null)
             {
                 Commodities.Clear();

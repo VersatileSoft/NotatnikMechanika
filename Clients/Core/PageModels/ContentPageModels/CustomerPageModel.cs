@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using NotatnikMechanika.Shared;
 
 namespace NotatnikMechanika.Core.PageModels
 {
@@ -56,7 +57,7 @@ namespace NotatnikMechanika.Core.PageModels
                 CustomerModel = customer;
             }
 
-            var cars = await _httpRequestService.All<CarModel>("Błąd ładowania samochodów klienta");
+            var cars = await _httpRequestService.SendGet<List<CarModel>>(CarPaths.ByCustomer(CustomerModel.Id), "Błąd ładowania samochodów klienta");
             if (cars != null)
             {
                 Cars.Clear();

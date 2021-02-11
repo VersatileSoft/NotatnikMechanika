@@ -6,7 +6,6 @@
     <UserSecretsId>22098061-cdb5-41d7-a981-80d27bb1b2b6</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
-    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,6 +26,4 @@
     <ProjectReference Include="..\Service\NotatnikMechanika.Service.csproj" />
     <ProjectReference Include="..\Shared\NotatnikMechanika.Shared.csproj" />
   </ItemGroup>
-
-
 </Project>

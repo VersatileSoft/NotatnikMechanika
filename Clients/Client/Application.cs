@@ -9,6 +9,7 @@ using MvvmPackage.Blazor;
 using NotatnikMechanika.Client.Services;
 using NotatnikMechanika.Core;
 using NotatnikMechanika.Core.Interfaces;
+using System;
 using System.Net.Http;
 
 namespace NotatnikMechanika.Client

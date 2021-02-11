@@ -16,6 +16,7 @@ namespace NotatnikMechanika.Server
                 .ForMember(dest => dest.CarModel, opt => opt.MapFrom(src => src.Car))
                 .ForMember(dest => dest.CustomerModel, opt => opt.MapFrom(src => src.Car.Customer));
             CreateMap<OrderModel, Order>();
+            CreateMap<Order, OrderModel>();
             CreateMap<Customer, CustomerModel>();
             CreateMap<CustomerModel, Customer>();
             CreateMap<Car, CarModel>();

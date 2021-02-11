@@ -29,7 +29,7 @@ else
                     <p><MBDivider/></p>
                     <p>
                         <MBIconButton Icon="info" @onclick="_ => PageModel.OrderSelectedCommand.Execute(order.Id)" />
-                        <MBIconButton Icon="info" @onclick="_ => PageModel.OrderSelectedCommand.Execute(order.Id)" />
+                        <MBIconButton Icon="archive" @onclick="_ => PageModel.ArchiveOrderCommand.Execute(order.Id)" />
                         <MBIconButton Icon="delete" @onclick="_ => PageModel.RemoveOrderCommand.Execute(order.Id)" />
                     </p>
                 </Primary>

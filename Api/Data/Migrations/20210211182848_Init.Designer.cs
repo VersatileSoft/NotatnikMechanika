@@ -10,8 +10,8 @@ using NotatnikMechanika.Data;
 namespace NotatnikMechanika.Data.Migrations
 {
     [DbContext(typeof(NotatnikMechanikaDbContext))]
-    [Migration("20201128193017_A")]
-    partial class A
+    [Migration("20210211182848_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -15,6 +15,7 @@ namespace NotatnikMechanika.WPF.Pages.Utils
             double curX = 0, curY = 0;  // The top left (x,y) coordiantes of each child
             double curLineHeight = 0;   // The current height of the Panel
 
+
             foreach (UIElement child in Children)
             {
                 // Give the child maximum space to expand to. This will set its DesiredSize

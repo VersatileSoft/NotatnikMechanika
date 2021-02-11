@@ -1,6 +1,6 @@
 ﻿using MvvmPackage.Core;
-using MvvmPackage.Core.Services.Interfaces;
 using MvvmPackage.Core.Commands;
+using MvvmPackage.Core.Services.Interfaces;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.Order;
@@ -8,7 +8,6 @@ using PropertyChanged;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -21,6 +20,7 @@ namespace NotatnikMechanika.Core.PageModels
         public ICommand AddOrderCommand { get; }
         public ICommand OrderSelectedCommand { get; set; }
         public ICommand RemoveOrderCommand { get; }
+        public ICommand ArchiveOrderCommand { get; }
         public ICommand RefreshOrdersCommand { get; set; }
 
         private readonly IHttpRequestService _httpRequestService;
@@ -34,6 +34,7 @@ namespace NotatnikMechanika.Core.PageModels
             AddOrderCommand = new AsyncCommand(navigationService.NavigateToAsync<AddOrderPageModel>);
             OrderSelectedCommand = new AsyncCommand<int>(navigationService.NavigateToAsync<OrderPageModel>);
             RemoveOrderCommand = new AsyncCommand<int>(RemoveOrderAction);
+            ArchiveOrderCommand = new AsyncCommand<int>(ArchiveOrderAction);
             RefreshOrdersCommand = new AsyncCommand(Initialize);
         }
 
@@ -46,10 +47,24 @@ namespace NotatnikMechanika.Core.PageModels
             }
         }
 
+        private async Task ArchiveOrderAction(int id)
+        {
+            OrderModel model = await _httpRequestService.ById<OrderModel>(id, "Błąd podczas archiwizacji zlecenia");
+            if(model != null)
+            {
+                model.Archived = true;
+                if (await _httpRequestService.Update(model, model.Id, "Błąd podczas archiwizacji zlecenia"))
+                {
+                    Orders.Remove(Orders.Single(o => o.Id == id));
+                    _messageDialogService.ShowMessageDialog("Pomyślnie zarchiwizowano zlecenie", MessageDialogType.Success);
+                }
+            }
+        }
+
         public override async Task Initialize()
         {
             IsLoading = true;
-            var orders = await _httpRequestService.SendGet<List<OrderExtendedModel>>(OrderPaths.Extended(Parameter.HasValue), "Błąd ładowania zleceń");
+            List<OrderExtendedModel> orders = await _httpRequestService.SendGet<List<OrderExtendedModel>>(OrderPaths.Extended(Parameter.HasValue), "Błąd ładowania zleceń");
             if (orders != null)
             {
                 Orders.Clear();

@@ -25,9 +25,9 @@ namespace MvvmPackage.Wpf.Pages
             DetailContent = _wpfPageActivatorService.CreatePageFromPageModel<TDetailPageModel>();
         }
 
-        private void MainPage_MenuButtonClick(object sender, Type e)
+        private void MainPage_MenuButtonClick(object sender, MenuButtonClickArgs e)
         {
-            DetailContent = _wpfPageActivatorService.CreatePageFromPageModel(e);
+            DetailContent = _wpfPageActivatorService.CreatePageFromPageModel(e.PageModelType, e.Parameter);
         }
     }
 }

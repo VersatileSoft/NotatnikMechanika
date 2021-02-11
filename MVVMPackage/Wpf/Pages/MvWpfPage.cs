@@ -4,9 +4,18 @@ using System.Windows.Controls;
 
 namespace MvvmPackage.Wpf.Pages
 {
-    public abstract class MvWpfPage<TPageModel> : UserControl where TPageModel : PageModelBase
+    public abstract class MvWpfPage : UserControl
     {
-        public readonly TPageModel PageModel;
+        public PageModelBase PageModel;
+    }
+
+    public abstract class MvWpfPage<TPageModel> : MvWpfPage where TPageModel : PageModelBase
+    {
+        new public TPageModel PageModel
+        {
+            get => (TPageModel)base.PageModel;
+            set => base.PageModel = value;
+        }
 
         protected MvWpfPage()
         {

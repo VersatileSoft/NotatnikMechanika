@@ -18,29 +18,23 @@ namespace NotatnikMechanika.Server
 
             using var scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;
-
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
             try
             {
                 var dbContext = services.GetRequiredService<NotatnikMechanikaDbContext>();
+                logger.Log(LogLevel.Information,"Connection string is: " + dbContext.Database.GetConnectionString());
                 if (dbContext.Database.IsSqlServer())
                 {
-                    dbContext.Database.Migrate();
-
-                    
-
+                    dbContext.Database.Migrate();              
                 }
             }
             catch (Exception ex)
             {
-                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-
                 logger.LogError(ex, "An error occurred while migrating or seeding the database.");
-
                 throw;
             }
 
             await host.RunAsync();
-
         }
 
         private static IHostBuilder CreateHostBuilder(string[] args)

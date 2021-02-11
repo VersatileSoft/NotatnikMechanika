@@ -2,11 +2,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:NotatnikMechanika.WPF.Converters"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:utils="clr-namespace:NotatnikMechanika.WPF.Pages.Utils"
-    xmlns:pages="clr-namespace:MvvmPackage.Wpf.Pages;assembly=MvvmPackage.Wpf"
     xmlns:core="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:MvvmPackage.Wpf.Pages;assembly=MvvmPackage.Wpf"
+    xmlns:utils="clr-namespace:NotatnikMechanika.WPF.Pages.Utils"
     x:TypeArguments="core:CustomersPageModel"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
@@ -16,50 +17,95 @@
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
     mc:Ignorable="d">
+
     <UserControl.Resources>
+        <converters:FloatToPercentConverter x:Key="FloatToPercentConverter"/>
+        <converters:StringFormatConverter x:Key="StringFormatConverter"/>
+        <converters:DateOffsetConverter x:Key="DateOffsetConverter"/>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </UserControl.Resources>
+
     <Grid>
-        <StackPanel>
-            <TextBlock
-                Margin="0,20,0,20"
-                HorizontalAlignment="Center"
-                Text="Klienci"/>
-
-            <ProgressBar x:Name="Progress"
-                Width="50"
-                Height="50"
-                IsIndeterminate="True"
-                Style="{StaticResource MaterialDesignCircularProgressBar}"
-                Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=false}"
-                Value="50"/>
-
-            <ListView
-                ItemsSource="{Binding Customers}"
-                SelectionChanged="ListPage_Selected"
-                Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Imię"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Surname}" Header="Nazwisko"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding CompanyName}" Header="Firma"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding CompanyIdentyficator}" Header="Nip"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Telefon"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Address}" Header="Adres"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </StackPanel>
-        <Grid
+        <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Customers}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <utils:AnimatedWrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <GroupBox
+                            Width="300"
+                            Margin="16"
+                            Header="Klient"
+                            Style="{DynamicResource MaterialDesignCardGroupBox}">
+                            <GroupBox.HeaderTemplate>
+                                <DataTemplate>
+                                    <utils:GroupBoxHeaderTemplate IconKind="User"/>
+                                </DataTemplate>
+                            </GroupBox.HeaderTemplate>
+                            <StackPanel>
+                                <Label FontSize="20">
+                                    <Label.Content>
+                                        <MultiBinding Converter="{StaticResource StringFormatConverter}" ConverterParameter="{}{0} {1}">
+                                            <Binding Path="Name"/>
+                                            <Binding Path="Surname"/>
+                                        </MultiBinding>
+                                    </Label.Content>
+                                </Label>
+                                <GroupBox Height="1" Margin="10"/>
+                                <Label Content="Samochody: 3" FontSize="20"/>
+                                <Label Content="Ostatnia naprawa 28.10.2020" FontSize="20"/>
+                                <Label Content="{Binding Phone}" FontSize="20"/>
+                                <Label Content="{Binding Address}" FontSize="20"/>
+                                <Label Content="{Binding CompanyName}" FontSize="20"/>
+                                <Label Content="{Binding CompanyIdentyficator}" FontSize="20"/>
+                                <GroupBox Height="1" Margin="10"/>
+                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <utils:IconButton
+                                        Margin="10"
+                                        Command="{Binding DataContext.CustomerSelectedCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding Id}"
+                                        IconKind="InfoCircle"/>
+                                    <utils:IconButton
+                                        Margin="10"
+                                        Command="{Binding DataContext.CustomerSelectedCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding Id}"
+                                        IconKind="InfoCircle"/>
+                                    <utils:IconButton
+                                        Margin="10"
+                                        Command="{Binding DataContext.RemoveCustomerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding Id}"
+                                        IconKind="Trash"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Button
             Margin="0,0,20,20"
+            Command="{Binding AddCustomerCommand}"
             HorizontalAlignment="Right"
+            Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+            ToolTip="Dodaj zlecenie"
             VerticalAlignment="Bottom">
-            <utils:IconButton
-                Width="50"
-                Height="50"
-                Command="{Binding AddCustomerCommand}"
-                Foreground="{StaticResource SecondaryAccentBrush}"
-                IconKind="Add"/>
-        </Grid>
+            <materialDesign:PackIcon
+                Width="24"
+                Height="24"
+                Kind="Add"/>
+        </Button>
+
+        <ProgressBar
+            Width="50"
+            Height="50"
+            HorizontalAlignment="Center"
+            IsIndeterminate="True"
+            Style="{StaticResource MaterialDesignCircularProgressBar}"
+            VerticalAlignment="Center"
+            Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=false}"
+            Value="0"/>
     </Grid>
 </pages:MvWpfPage>

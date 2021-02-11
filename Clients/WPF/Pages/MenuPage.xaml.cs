@@ -7,7 +7,8 @@ namespace NotatnikMechanika.WPF.Pages
 {
     public partial class MenuPage : MvWpfPage<MenuPageModel>, IMasterUserControl
     {
-        public event EventHandler<Type> MenuButtonClick;
+        public event EventHandler<MenuButtonClickArgs> MenuButtonClick;
+
         public MenuPage()
         {
             InitializeComponent();
@@ -16,7 +17,11 @@ namespace NotatnikMechanika.WPF.Pages
         private void MenuButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             MenuButton menuButton = (MenuButton)sender;
-            MenuButtonClick?.Invoke(this, menuButton.DetailPageModelType);
+            MenuButtonClick?.Invoke(this, new MenuButtonClickArgs
+            {
+                PageModelType = menuButton.DetailPageModelType,
+                Parameter = menuButton.Parameter
+            });
         }
     }
 }

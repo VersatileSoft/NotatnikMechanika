@@ -4,9 +4,18 @@ using Xamarin.Forms;
 
 namespace MvvmPackage.Xamarin.Pages
 {
-    public abstract class MvContentPage<TPageModel> : ContentPage where TPageModel : PageModelBase
+    public abstract class MvContentPage : ContentPage
     {
-        public TPageModel PageModel { get; }
+        public PageModelBase PageModel;
+    }
+
+    public abstract class MvContentPage<TPageModel> : MvContentPage where TPageModel : PageModelBase
+    {
+        public new TPageModel PageModel 
+        {
+            get => (TPageModel)base.PageModel;
+            set => base.PageModel = value;
+        }
 
         protected MvContentPage()
         {

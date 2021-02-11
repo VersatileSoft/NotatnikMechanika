@@ -16,7 +16,7 @@ namespace NotatnikMechanika.Server
         public static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<NotatnikMechanikaDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DockerConnection"), // PublishConnection, DefaultConnection, DockerConnection
+                options.UseSqlServer(configuration.GetConnectionString("DockerConnection"), // LocalTestDatabaseConnection, DockerConnection
                     b => b.EnableRetryOnFailure()
                 )
             );
