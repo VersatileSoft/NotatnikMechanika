@@ -3,10 +3,10 @@ using MvvmPackage.Core;
 using MvvmPackage.Xamarin;
 using NotatnikMechanika.Core;
 using NotatnikMechanika.Core.Interfaces;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using System;
 using System.Net.Http;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 [assembly: ExportFont("Resources/Fonts/GoogleSans-Bold.ttf")]
 [assembly: ExportFont("Resources/Fonts/GoogleSans-BoldItalic.ttf")]
@@ -34,7 +34,7 @@ namespace NotatnikMechanika.Forms
 
         protected override void OnStart()
         {
-            IAuthService authService = IoC.Container.Resolve<IAuthService>();
+            var authService = IoC.Container.Resolve<IAuthService>();
             authService.AuthChanged += (s, e) => LoadMainPage();
         }
 

@@ -22,10 +22,12 @@ namespace NotatnikMechanika.Service.Services
         }
         public async Task<ActionResult<IEnumerable<CommodityModel>>> ByOrderAsync(int orderId)
         {
-            Order order = await _orderRepository.ByIdAsync(orderId);
+            var order = await _orderRepository.ByIdAsync(orderId);
 
-            if (!AuthorizeResources(out ActionResult res, order))
+            if (!AuthorizeResources(out var res, order))
+            {
                 return res;
+            }
 
             return new OkObjectResult(await _commodityRepository.ByOrderAsync(orderId));
         }

@@ -7,7 +7,6 @@ using NotatnikMechanika.Service.Services.Base;
 using NotatnikMechanika.Shared.Models.Order;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NotatnikMechanika.Service.Services
@@ -32,10 +31,12 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<ActionResult<OrderExtendedModel>> ExtendedAsync(int id, bool archived)
         {
-            Order order = await _orderRepository.ByIdAsync(id);
+            var order = await _orderRepository.ByIdAsync(id);
 
-            if (!AuthorizeResources(out ActionResult res, order))
+            if (!AuthorizeResources(out var res, order))
+            {
                 return res;
+            }
 
             return await _orderRepository.ExtendedAsync(id, archived);
         }
@@ -44,7 +45,7 @@ namespace NotatnikMechanika.Service.Services
         {
             return (await _orderRepository.Transaction(async () =>
             {
-                ActionResult orderResponse = await CreateAsync(addOrderModel).ConfigureAwait(false);
+                var orderResponse = await CreateAsync(addOrderModel).ConfigureAwait(false);
 
                 if (orderResponse is CreatedResult r && r.Value is Order order)
                 {
@@ -52,20 +53,24 @@ namespace NotatnikMechanika.Service.Services
                     order.Commodities = new List<Commodity>();
                     foreach (int serviceId in addOrderModel.Services)
                     {
-                        Data.Models.Service service = await _serviceRepository.ByIdAsync(serviceId);
+                        var service = await _serviceRepository.ByIdAsync(serviceId);
 
-                        if (!AuthorizeResources(out ActionResult res, service))
+                        if (!AuthorizeResources(out var res, service))
+                        {
                             throw new Exception(res.ToString());
+                        }
 
                         order.Services.Add(service);
                     }
 
                     foreach (int commodityId in addOrderModel.Commodities)
                     {
-                        Commodity commodity = await _commodityRepository.ByIdAsync(commodityId);
+                        var commodity = await _commodityRepository.ByIdAsync(commodityId);
 
-                        if (!AuthorizeResources(out ActionResult res, commodity))
+                        if (!AuthorizeResources(out var res, commodity))
+                        {
                             throw new Exception(res.ToString());
+                        }
 
                         order.Commodities.Add(commodity);
                     }
@@ -77,13 +82,15 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<ActionResult> UpdateServiceStatusAsync(int orderId, int serviceId, bool finished)
         {
-            Data.Models.Service service = await _serviceRepository.ByIdAsync(serviceId);
-            Order order = await _orderRepository.ByIdAsync(orderId);
+            var service = await _serviceRepository.ByIdAsync(serviceId);
+            var order = await _orderRepository.ByIdAsync(orderId);
 
-            if (!AuthorizeResources(out ActionResult res, service, order))
+            if (!AuthorizeResources(out var res, service, order))
+            {
                 return res;
-           /* if (!order.Services.Any(s => s.Id == service.Id))
-                return new BadRequestObjectResult("Usługa nie jest dodana do zlecenia");*/
+            }
+            /* if (!order.Services.Any(s => s.Id == service.Id))
+    return new BadRequestObjectResult("Usługa nie jest dodana do zlecenia");*/
 
             await _orderRepository.UpdateServiceStatusAsync(order, service, finished);
             return new OkResult();
@@ -91,13 +98,15 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<ActionResult> UpdateCommodityStatusAsync(int orderId, int commodityId, bool finished)
         {
-            Commodity commodity = await _commodityRepository.ByIdAsync(commodityId);
-            Order order = await _orderRepository.ByIdAsync(orderId);
+            var commodity = await _commodityRepository.ByIdAsync(commodityId);
+            var order = await _orderRepository.ByIdAsync(orderId);
 
-            if (!AuthorizeResources(out ActionResult res, commodity, order))
+            if (!AuthorizeResources(out var res, commodity, order))
+            {
                 return res;
-           /* if (!order.Commodities.Any(s => s.Id == commodity.Id))
-                return new BadRequestObjectResult("Towar nie jest dodany do zlecenia");*/
+            }
+            /* if (!order.Commodities.Any(s => s.Id == commodity.Id))
+    return new BadRequestObjectResult("Towar nie jest dodany do zlecenia");*/
 
             await _orderRepository.UpdateCommodityStatusAsync(order, commodity, finished);
             return new OkResult();

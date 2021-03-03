@@ -18,17 +18,9 @@ namespace MvvmPackage.Blazor
 
         protected override async Task OnParametersSetAsync()
         {
-
             ((INotifyPropertyChanged)PageModel).PropertyChanged += (o, s) => StateHasChanged();
 
-            if (Parameter == null)
-            {
-                PageModel.Parameter = null;
-            }
-            else
-            {
-                PageModel.Parameter = int.TryParse(Parameter, out int param) ? param : 1;
-            }
+            PageModel.Parameter = Parameter == null ? null : int.TryParse(Parameter, out int param) ? param : 1;
 
             await PageModel.Initialize();
             await base.OnParametersSetAsync();

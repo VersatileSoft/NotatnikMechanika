@@ -99,7 +99,7 @@
                             Grid.Row="2"
                             Margin="40,20"
                             materialDesign:HintAssist.Hint="Dodatkowe informacje"
-                            Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
                             Text="{Binding Model.Details}"
                             TextWrapping="Wrap"
                             VerticalScrollBarVisibility="Auto"/>
@@ -181,7 +181,7 @@
                 </Button.Effect>
             </Button>
         </StackPanel>
-        
+
         <ProgressBar
             Width="50"
             Height="50"

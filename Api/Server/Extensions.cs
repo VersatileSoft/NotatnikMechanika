@@ -36,10 +36,10 @@ namespace NotatnikMechanika.Server
 
         public static void AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
-            IConfigurationSection appSettingsSection = configuration.GetSection("AppSettings");
+            var appSettingsSection = configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
 
-            AppSettings appSettings = appSettingsSection.Get<AppSettings>();
+            var appSettings = appSettingsSection.Get<AppSettings>();
             byte[] key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
             services.AddAuthentication(x =>

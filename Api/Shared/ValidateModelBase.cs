@@ -16,7 +16,7 @@ namespace NotatnikMechanika.Shared
         {
             get
             {
-                List<ValidationResult> validationResults = new List<ValidationResult>();
+                var validationResults = new List<ValidationResult>();
                 object value = GetType().GetProperty(columnName).GetValue(this);
                 if (Validator.TryValidateProperty(
                         value,

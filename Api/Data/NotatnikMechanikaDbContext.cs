@@ -61,7 +61,7 @@ namespace NotatnikMechanika.Data
                     j => j.HasOne(o => o.Commodity).WithMany(c => c.OrderToCommodities),
                     j => j.HasOne(o => o.Order).WithMany(o => o.OrderToCommodities)
                     );
-            
+
             modelBuilder.Entity<Order>()
                 .HasMany(o => o.Services)
                 .WithMany(c => c.Orders)

@@ -5,9 +5,7 @@
     Style="{StaticResource ShellStyle}"
     Visual="Material">
 
-    <!--  ReSharper disable Xaml.InvalidType  -->
     <Tab Title="Zlecenia">
-
         <ShellContent Title="Aktualne zlecenia">
             <pages:OrdersPage/>
         </ShellContent>
@@ -15,7 +13,6 @@
         <ShellContent Title="Archiwum">
             <pages:OrdersPage/>
         </ShellContent>
-
     </Tab>
 
     <Tab Title="Usługi/Towary">

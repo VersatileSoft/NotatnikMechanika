@@ -19,7 +19,7 @@ namespace NotatnikMechanika.Repository.Repositories
 
         public async Task<IEnumerable<ServiceModel>> ByOrderAsync(int orderId)
         {
-            Order order = await DbContext.Orders.Include(o => o.Services).SingleAsync(o => o.Id == orderId);
+            var order = await DbContext.Orders.Include(o => o.Services).SingleAsync(o => o.Id == orderId);
 
             return order.Services
                 .Select(c => new ServiceModel

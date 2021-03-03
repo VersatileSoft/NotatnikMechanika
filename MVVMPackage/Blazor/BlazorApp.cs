@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using MvvmPackage.Core;
 using MvvmPackage.Core.Services.Interfaces;
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace MvvmPackage.Blazor

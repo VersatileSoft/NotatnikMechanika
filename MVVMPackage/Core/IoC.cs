@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using MvvmPackage.Core.Attributes;
 using System;
-using System.Net.Http;
 using System.Reflection;
 
 namespace MvvmPackage.Core

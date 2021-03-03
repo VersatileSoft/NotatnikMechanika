@@ -27,7 +27,7 @@ namespace NotatnikMechanika.WPF.Pages.Utils
 
         private static void OnIsWaitingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ButtonIndicator UserControl1Control = d as ButtonIndicator;
+            var UserControl1Control = d as ButtonIndicator;
             UserControl1Control.OnIsWaitingChanged(e);
         }
 

@@ -90,7 +90,7 @@ namespace NotatnikMechanika.Core.PageModels
         private async Task SelectedCustomerChanged()
         {
             CarsLoading = true;
-            List<CarModel> cars = await GetCars();
+            var cars = await GetCars();
             if (cars != null)
             {
                 Cars.Clear();
@@ -112,21 +112,21 @@ namespace NotatnikMechanika.Core.PageModels
         {
             IsLoading = true;
 
-            List<CustomerModel> customers = await HttpRequestService.All<CustomerModel>();
+            var customers = await HttpRequestService.All<CustomerModel>();
             if (customers != null)
             {
                 Customers.Clear();
                 customers.ForEach(c => Customers.Add(c));
             }
 
-            List<ServiceModel> services = await HttpRequestService.All<ServiceModel>();
+            var services = await HttpRequestService.All<ServiceModel>();
             if (services != null)
             {
                 Services.Clear();
                 services.ForEach(s => Services.Add(s));
             }
 
-            List<CommodityModel> commodities = await HttpRequestService.All<CommodityModel>();
+            var commodities = await HttpRequestService.All<CommodityModel>();
             if (commodities != null)
             {
                 Commodities.Clear();

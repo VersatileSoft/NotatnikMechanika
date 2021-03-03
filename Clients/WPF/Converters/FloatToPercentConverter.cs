@@ -8,9 +8,7 @@ namespace NotatnikMechanika.WPF.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is float f)
-                return (int)(f * 100);
-            return value;
+            return value is float f ? f * 100 : value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

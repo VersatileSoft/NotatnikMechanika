@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using MvvmPackage.Core;
 using MvvmPackage.Wpf.Services;
-using System;
 using System.Windows.Controls;
 
 namespace MvvmPackage.Wpf.Pages

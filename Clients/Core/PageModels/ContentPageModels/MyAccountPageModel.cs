@@ -1,9 +1,7 @@
 ﻿using MvvmPackage.Core;
-using MvvmPackage.Core.Services.Interfaces;
 using MvvmPackage.Core.Commands;
 using NotatnikMechanika.Core.Interfaces;
 using PropertyChanged;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace NotatnikMechanika.Core.PageModels

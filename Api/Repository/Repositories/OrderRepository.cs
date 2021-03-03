@@ -40,7 +40,7 @@ namespace NotatnikMechanika.Repository.Repositories
 
         public async Task<OrderExtendedModel> ExtendedAsync(int id, bool archived)
         {
-            Order queryResult = await DbContext.Orders
+            var queryResult = await DbContext.Orders
                 .Include(o => o.Car)
                 .ThenInclude(c => c.Customer)
                 .SingleAsync(o => o.Archived == archived && o.Id == id);
@@ -50,7 +50,7 @@ namespace NotatnikMechanika.Repository.Repositories
 
         public async Task UpdateServiceStatusAsync(Order order, Service service, bool finished)
         {
-            OrderToService orderToService = await DbContext.OrderToServices.SingleAsync(o => o.Order.Id == order.Id && o.Service.Id == service.Id);
+            var orderToService = await DbContext.OrderToServices.SingleAsync(o => o.Order.Id == order.Id && o.Service.Id == service.Id);
             orderToService.Finished = finished;
             DbContext.OrderToServices.Update(orderToService);
             await DbContext.SaveChangesAsync();
@@ -58,7 +58,7 @@ namespace NotatnikMechanika.Repository.Repositories
 
         public async Task UpdateCommodityStatusAsync(Order order, Commodity commodity, bool finished)
         {
-            OrderToCommodity orderToCommodity = await DbContext.OrderToCommodities.SingleAsync(o => o.Order.Id == order.Id && o.Commodity.Id == commodity.Id);
+            var orderToCommodity = await DbContext.OrderToCommodities.SingleAsync(o => o.Order.Id == order.Id && o.Commodity.Id == commodity.Id);
             orderToCommodity.Finished = finished;
             DbContext.OrderToCommodities.Update(orderToCommodity);
             await DbContext.SaveChangesAsync();

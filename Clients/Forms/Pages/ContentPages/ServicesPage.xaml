@@ -3,10 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Usługi"
-    xmlns:views="clr-namespace:MvvmPackage.Xamarin.Pages;assembly=MvvmPackage.Xamarin"
     xmlns:pageModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
-                     x:TypeArguments="pageModels:ServicesPageModel"
+    xmlns:views="clr-namespace:MvvmPackage.Xamarin.Pages;assembly=MvvmPackage.Xamarin"
+    Title="Usługi"
+    x:TypeArguments="pageModels:ServicesPageModel"
     Visual="Material"
     mc:Ignorable="d">
     <ContentPage.Content>

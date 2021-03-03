@@ -21,7 +21,7 @@ namespace NotatnikMechanika.WPF.Pages.Utils
         private static void OnOnIconKindChanged(DependencyObject d,
            DependencyPropertyChangedEventArgs e)
         {
-            IconButton UserControl1Control = d as IconButton;
+            var UserControl1Control = d as IconButton;
             UserControl1Control.OnOnIconKindChanged(e);
         }
 

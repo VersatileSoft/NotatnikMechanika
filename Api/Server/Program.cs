@@ -22,10 +22,10 @@ namespace NotatnikMechanika.Server
             try
             {
                 var dbContext = services.GetRequiredService<NotatnikMechanikaDbContext>();
-                logger.Log(LogLevel.Information,"Connection string is: " + dbContext.Database.GetConnectionString());
+                logger.Log(LogLevel.Information, "Connection string is: " + dbContext.Database.GetConnectionString());
                 if (dbContext.Database.IsSqlServer())
                 {
-                    dbContext.Database.Migrate();              
+                    dbContext.Database.Migrate();
                 }
             }
             catch (Exception ex)

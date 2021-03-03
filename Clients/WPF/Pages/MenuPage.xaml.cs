@@ -16,7 +16,7 @@ namespace NotatnikMechanika.WPF.Pages
 
         private void MenuButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            MenuButton menuButton = (MenuButton)sender;
+            var menuButton = (MenuButton)sender;
             MenuButtonClick?.Invoke(this, new MenuButtonClickArgs
             {
                 PageModelType = menuButton.DetailPageModelType,

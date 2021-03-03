@@ -20,7 +20,7 @@ namespace NotatnikMechanika.Core
 
         public Type MainPageModelType()
         {
-            var token = _settingsService.GetToken().Result;
+            string token = _settingsService.GetToken().Result;
 
             if (!string.IsNullOrEmpty(token))
             {

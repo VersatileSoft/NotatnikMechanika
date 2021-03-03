@@ -10,7 +10,7 @@ namespace NotatnikMechanika.WPF.Pages.Utils
     {
         protected override Size MeasureOverride(Size availableSize)
         {
-            Size infiniteSize = new Size(double.PositiveInfinity, double.PositiveInfinity);
+            var infiniteSize = new Size(double.PositiveInfinity, double.PositiveInfinity);
 
             double curX = 0, curY = 0;  // The top left (x,y) coordiantes of each child
             double curLineHeight = 0;   // The current height of the Panel
@@ -42,7 +42,7 @@ namespace NotatnikMechanika.WPF.Pages.Utils
             // The final height the Panel will require
             curY += curLineHeight;
 
-            Size resultSize = new Size
+            var resultSize = new Size
             {
 
                 // Should not return infinity as DesiredSize of the Panel
@@ -60,13 +60,11 @@ namespace NotatnikMechanika.WPF.Pages.Utils
                 return finalSize;
             }
 
-            TranslateTransform trans = null;
             double curX = 0, curY = 0, curLineHeight = 0;
 
             foreach (UIElement child in Children)
             {
-                trans = child.RenderTransform as TranslateTransform;
-                if (trans == null)
+                if (child.RenderTransform is not TranslateTransform trans)
                 {
                     child.RenderTransformOrigin = new Point(0, 0);
                     trans = new TranslateTransform();
@@ -83,7 +81,7 @@ namespace NotatnikMechanika.WPF.Pages.Utils
                 child.Arrange(new Rect(0, 0, child.DesiredSize.Width,
                               child.DesiredSize.Height));
 
-                DoubleAnimation animation = new DoubleAnimation(0, TimeSpan.FromMilliseconds(1000))
+                var animation = new DoubleAnimation(0, TimeSpan.FromMilliseconds(1000))
                 {
                     EasingFunction = new CubicEase() { EasingMode = EasingMode.EaseOut },
 

@@ -1,10 +1,9 @@
 ﻿using MvvmPackage.Core;
-using MvvmPackage.Core.Services.Interfaces;
 using MvvmPackage.Core.Commands;
+using MvvmPackage.Core.Services.Interfaces;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared.Models.Service;
 using PropertyChanged;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,7 +32,7 @@ namespace NotatnikMechanika.Core.PageModels
         }
         private async Task RemoveServiceAction(int id)
         {
-            if(await _httpRequestService.Delete<ServiceModel>(id, "Błąd podczas usuwania ułsugi"))
+            if (await _httpRequestService.Delete<ServiceModel>(id, "Błąd podczas usuwania ułsugi"))
             {
                 Services.Remove(Services.Single(s => s.Id == id));
                 _messageDialogService.ShowMessageDialog("Pomyślnie usunięto usługę", MessageDialogType.Success);

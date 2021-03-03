@@ -1,16 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<views:MvContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             xmlns:views="clr-namespace:MvvmPackage.Xamarin.Pages;assembly=MvvmPackage.Xamarin"
-             xmlns:core="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
-             x:Class="NotatnikMechanika.Forms.Pages.ContentViews.MyAccountPage"
-             x:TypeArguments="core:MyAccountPageModel">
+﻿<views:MvContentPage x:Class="NotatnikMechanika.Forms.Pages.ContentViews.MyAccountPage" x:DataType="pageModels:MyAccountPageModel"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:core="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pageModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
+    xmlns:views="clr-namespace:MvvmPackage.Xamarin.Pages;assembly=MvvmPackage.Xamarin"
+    x:TypeArguments="core:MyAccountPageModel"
+    mc:Ignorable="d">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Wyloguj" Command="{Binding LogoutCommand}"/>
+            <Button Command="{Binding LogoutCommand}" Text="Wyloguj"/>
         </StackLayout>
     </ContentPage.Content>
 </views:MvContentPage>

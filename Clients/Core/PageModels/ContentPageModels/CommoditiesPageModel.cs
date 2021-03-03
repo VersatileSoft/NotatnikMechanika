@@ -1,10 +1,9 @@
 ﻿using MvvmPackage.Core;
-using MvvmPackage.Core.Services.Interfaces;
 using MvvmPackage.Core.Commands;
+using MvvmPackage.Core.Services.Interfaces;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared.Models.Commodity;
 using PropertyChanged;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;

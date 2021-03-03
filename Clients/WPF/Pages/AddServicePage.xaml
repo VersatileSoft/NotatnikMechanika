@@ -1,12 +1,12 @@
 ﻿<pages:MvWpfPage x:Class="NotatnikMechanika.WPF.Pages.AddServicePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:core="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:utils="clr-namespace:NotatnikMechanika.WPF.Pages.Utils"
     xmlns:pages="clr-namespace:MvvmPackage.Wpf.Pages;assembly=MvvmPackage.Wpf"
-    xmlns:core="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
+    xmlns:utils="clr-namespace:NotatnikMechanika.WPF.Pages.Utils"
     x:TypeArguments="core:AddServicePageModel"
     Background="{DynamicResource MaterialDesignPaper}"
     TextElement.FontSize="13"
@@ -79,7 +79,7 @@
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Nazwa usługi"
                         AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
                         Text="{Binding Model.Name}"
                         VerticalScrollBarVisibility="Disabled"/>
 
@@ -89,7 +89,7 @@
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Koszt usługi"
                         AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
                         Text="{Binding Model.Price}"
                         VerticalScrollBarVisibility="Disabled"/>
                 </Grid>

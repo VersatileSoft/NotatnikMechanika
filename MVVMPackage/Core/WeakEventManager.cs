@@ -70,7 +70,7 @@ namespace MvvmPackage.Core
             {
                 foreach (var subscription in target)
                 {
-                    var isStatic = subscription.Subscriber == null;
+                    bool isStatic = subscription.Subscriber == null;
                     if (isStatic)
                     {
                         // For a static method, we'll just pass null as the first parameter of MethodInfo.Invoke
@@ -78,7 +78,7 @@ namespace MvvmPackage.Core
                         continue;
                     }
 
-                    var subscriber = subscription.Subscriber?.Target;
+                    object subscriber = subscription.Subscriber?.Target;
 
                     if (subscriber is null)
                     {
@@ -171,7 +171,7 @@ namespace MvvmPackage.Core
                 return;
             }
 
-            for (var n = subscriptions.Count; n > 0; n--)
+            for (int n = subscriptions.Count; n > 0; n--)
             {
                 var current = subscriptions[n - 1];
 

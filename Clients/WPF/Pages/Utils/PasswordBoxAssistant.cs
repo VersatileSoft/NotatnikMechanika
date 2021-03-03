@@ -27,7 +27,7 @@ namespace NotatnikMechanika.WPF.Pages.Utils
             DependencyObject d,
             DependencyPropertyChangedEventArgs e)
         {
-            PasswordBox password = d as PasswordBox;
+            var password = d as PasswordBox;
             if (password != null)
             {
                 password.PasswordChanged -= PasswordChanged;
@@ -49,7 +49,7 @@ namespace NotatnikMechanika.WPF.Pages.Utils
 
         private static void PasswordChanged(object sender, RoutedEventArgs e)
         {
-            PasswordBox password = sender as PasswordBox;
+            var password = sender as PasswordBox;
             _updating = true;
             SetPassword(password, password.Password);
             _updating = false;

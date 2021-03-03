@@ -1,9 +1,5 @@
 ﻿using MvvmPackage.Wpf.Pages;
 using NotatnikMechanika.Core.PageModels;
-using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Animation;
 
 namespace NotatnikMechanika.WPF.Pages
 {
@@ -12,35 +8,35 @@ namespace NotatnikMechanika.WPF.Pages
     /// </summary>
     public partial class LoginPage : MvWpfPage<LoginPageModel>
     {
-       // private Storyboard _storyboard;
+        // private Storyboard _storyboard;
         public LoginPage()
         {
             InitializeComponent();
-            InitAnimations();
+            //InitAnimations();
         }
 
-        private void InitAnimations()
-        {
-            //DoubleAnimation WithAnimation = new DoubleAnimation
-            //{
-            //    From = 80,
-            //    To = 150,
-            //    Duration = new Duration(TimeSpan.FromMilliseconds(300))
-            //};
+        //private void InitAnimations()
+        //{
+        //DoubleAnimation WithAnimation = new DoubleAnimation
+        //{
+        //    From = 80,
+        //    To = 150,
+        //    Duration = new Duration(TimeSpan.FromMilliseconds(300))
+        //};
 
-            //DoubleAnimation HeightAnimation = new DoubleAnimation
-            //{
-            //    From = 80,
-            //    To = 150,
-            //    Duration = new Duration(TimeSpan.FromMilliseconds(300))
-            //};
+        //DoubleAnimation HeightAnimation = new DoubleAnimation
+        //{
+        //    From = 80,
+        //    To = 150,
+        //    Duration = new Duration(TimeSpan.FromMilliseconds(300))
+        //};
 
-            //DoubleAnimation OpacityAnimation = new DoubleAnimation
-            //{
-            //    From = 0,
-            //    To = 1,
-            //    Duration = new Duration(TimeSpan.FromMilliseconds(300))
-            //};
+        //DoubleAnimation OpacityAnimation = new DoubleAnimation
+        //{
+        //    From = 0,
+        //    To = 1,
+        //    Duration = new Duration(TimeSpan.FromMilliseconds(300))
+        //};
 
 
 
@@ -59,6 +55,6 @@ namespace NotatnikMechanika.WPF.Pages
             _storyboard.Children.Add(OpacityAnimation);
 
            // _storyboard.Begin(Logo);*/
-        }
+        //}
     }
 }

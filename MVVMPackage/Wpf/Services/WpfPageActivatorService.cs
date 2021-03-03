@@ -17,8 +17,8 @@ namespace MvvmPackage.Wpf.Services
         public UserControl CreatePageFromPageModel(Type pageModelType, int? parameter)
         {
             string pageName = pageModelType.Name.Replace("Model", "");
-            Type type = PlatformProjectAssembly.GetTypes().AsEnumerable().FirstOrDefault(t => t.Name == pageName);
-            MvWpfPage page = (MvWpfPage)Activator.CreateInstance(type ?? typeof(UserControl));
+            var type = PlatformProjectAssembly.GetTypes().AsEnumerable().FirstOrDefault(t => t.Name == pageName);
+            var page = (MvWpfPage)Activator.CreateInstance(type ?? typeof(UserControl));
             page.PageModel.Parameter = parameter;
             return page;
         }

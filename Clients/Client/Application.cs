@@ -1,7 +1,6 @@
 ﻿using Blazor.Extensions.Logging;
 using Blazored.LocalStorage;
 using Material.Blazor;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -9,7 +8,6 @@ using MvvmPackage.Blazor;
 using NotatnikMechanika.Client.Services;
 using NotatnikMechanika.Core;
 using NotatnikMechanika.Core.Interfaces;
-using System;
 using System.Net.Http;
 
 namespace NotatnikMechanika.Client
@@ -36,7 +34,7 @@ namespace NotatnikMechanika.Client
 
         protected override void AppStart()
         {
-            IAuthService authService = Services.GetService<IAuthService>();
+            var authService = Services.GetService<IAuthService>();
             authService.AuthChanged += (s, e) => ((ApiAuthenticationStateProvider)Services.GetService<AuthenticationStateProvider>()).StateChanged();
         }
     }
@@ -58,7 +56,7 @@ namespace NotatnikMechanika.Client
             return new MBToastServiceConfiguration()
             {
                 Position = MBToastPosition.TopRight,
-                CloseMethod = MBToastCloseMethod.Timeout,
+                CloseMethod = MBNotifierCloseMethod.Timeout
             };
         }
     }

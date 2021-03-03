@@ -29,21 +29,21 @@ namespace NotatnikMechanika.Core.Services
         public async Task<bool> SendPost(object model, string path, string onErrorTitle)
         {
             string myContent = JsonConvert.SerializeObject(model);
-            StringContent content = new StringContent(myContent, Encoding.UTF8, "application/json");
+            var content = new StringContent(myContent, Encoding.UTF8, "application/json");
             return await HandleResponse(await _client.PostAsync(path, content), onErrorTitle);
         }
 
         public async Task<TContent> SendPost<TContent>(object model, string path, string onErrorTitle = null) where TContent : class
         {
             string myContent = JsonConvert.SerializeObject(model);
-            StringContent content = new StringContent(myContent, Encoding.UTF8, "application/json");
+            var content = new StringContent(myContent, Encoding.UTF8, "application/json");
             return await HandleResponse<TContent>(await _client.PostAsync(path, content), onErrorTitle);
         }
 
         public async Task<bool> SendUpdate(object model, string path, string onErrorTitle)
         {
             string myContent = JsonConvert.SerializeObject(model);
-            StringContent content = new StringContent(myContent, Encoding.UTF8, "application/json");
+            var content = new StringContent(myContent, Encoding.UTF8, "application/json");
             return await HandleResponse(await _client.PutAsync(path, content), onErrorTitle);
         }
 
@@ -81,7 +81,9 @@ namespace NotatnikMechanika.Core.Services
         private async Task<bool> HandleResponse(HttpResponseMessage response, string onErrorTitle)
         {
             if (response.IsSuccessStatusCode)
+            {
                 return true;
+            }
 
             await HandleError(response, await response.Content.ReadAsStringAsync(), onErrorTitle);
 

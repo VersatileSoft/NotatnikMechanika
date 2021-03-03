@@ -37,10 +37,10 @@ namespace MvvmPackage.Xamarin.Services
         {
             await Device.InvokeOnMainThreadAsync(() =>
             {
-                INavigation x = Application.Current.MainPage.Navigation;
-                if (x != null)
+                var navigation = Application.Current.MainPage.Navigation;
+                if (navigation != null)
                 {
-                    return x.PushAsync(page, animated);
+                    return navigation.PushAsync(page, animated);
                 }
                 else
                 {
@@ -57,6 +57,11 @@ namespace MvvmPackage.Xamarin.Services
         }
 
         public Task CloseDialog()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task NavigateToAsync<TPageModel>(int parameter) where TPageModel : PageModelBase
         {
             throw new NotImplementedException();
         }

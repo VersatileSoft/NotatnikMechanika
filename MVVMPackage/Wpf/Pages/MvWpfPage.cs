@@ -11,7 +11,7 @@ namespace MvvmPackage.Wpf.Pages
 
     public abstract class MvWpfPage<TPageModel> : MvWpfPage where TPageModel : PageModelBase
     {
-        new public TPageModel PageModel
+        public new TPageModel PageModel
         {
             get => (TPageModel)base.PageModel;
             set => base.PageModel = value;

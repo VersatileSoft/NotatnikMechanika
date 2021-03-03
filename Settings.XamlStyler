@@ -17,7 +17,7 @@
   "AttributesTolerance": 2,
   "CommentPadding": 2,
   "EnableAttributeReordering": true,
-  "FirstLineAttributes": "x:Class, x:Key, x:Name",
+  "FirstLineAttributes": "x:Class, x:Key, x:Name, x:DataType",
   "FormatMarkupExtension": true,
   "FormatOnSave": true,
   "KeepFirstAttributeOnSameLine": false,

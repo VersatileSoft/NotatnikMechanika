@@ -1,6 +1,6 @@
 ﻿using MvvmPackage.Core;
-using MvvmPackage.Core.Services.Interfaces;
 using MvvmPackage.Core.Commands;
+using MvvmPackage.Core.Services.Interfaces;
 using NotatnikMechanika.Core.Interfaces;
 using NotatnikMechanika.Shared;
 using NotatnikMechanika.Shared.Models.User;
@@ -35,7 +35,7 @@ namespace NotatnikMechanika.Core.PageModels
         {
             IsLoading = true;
 
-            if(await _httpRequestService.SendPost(RegisterModel, AccountPaths.Register(), "Błąd podczas rejestracji"))
+            if (await _httpRequestService.SendPost(RegisterModel, AccountPaths.Register(), "Błąd podczas rejestracji"))
             {
                 _messageDialogService.ShowMessageDialog("Konto zostało utworzone. Teraz możesz się zalogować.", MessageDialogType.Success, "Rejestracja");
                 await _navigationService.NavigateToAsync<LoginPageModel>();

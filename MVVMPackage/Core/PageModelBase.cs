@@ -1,5 +1,4 @@
 ﻿using PropertyChanged;
-using System.ComponentModel;
 using System.Threading.Tasks;
 
 namespace MvvmPackage.Core
@@ -7,7 +6,7 @@ namespace MvvmPackage.Core
     [AddINotifyPropertyChangedInterface]
     public class PageModelBase
     {
-        public bool IsLoading { get; protected set; } 
+        public bool IsLoading { get; protected set; }
         public int? Parameter { get; set; }
 
         /// <summary>
