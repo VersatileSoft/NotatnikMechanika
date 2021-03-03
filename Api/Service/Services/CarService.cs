@@ -22,10 +22,12 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<ActionResult<IEnumerable<CarModel>>> ByCustomerAsync(int customerId)
         {
-            Customer customer = await _customerRepository.ByIdAsync(customerId);
+            var customer = await _customerRepository.ByIdAsync(customerId);
 
-            if (!AuthorizeResources(out ActionResult res, customer))
+            if (!AuthorizeResources(out var res, customer))
+            {
                 return res;
+            }
 
             return new OkObjectResult(await _carRepository.ByCustomerAsync(customerId));
         }

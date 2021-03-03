@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using NotatnikMechanika.Data;
 using NotatnikMechanika.Data.Models;
 using NotatnikMechanika.Repository.Interfaces.Base;
@@ -32,7 +31,7 @@ namespace NotatnikMechanika.Repository.Repositories
 
         public async Task CreateAsync(EntityType value)
         {
-            EntityType entity = Mapper.Map<EntityType>(value);
+            var entity = Mapper.Map<EntityType>(value);
             entity.UserId = CurrentUserId;
 
             await DbContext.Set<EntityType>().AddAsync(entity);
@@ -63,10 +62,10 @@ namespace NotatnikMechanika.Repository.Repositories
 
         public Task<bool> Transaction(Func<Task> action)
         {
-            IExecutionStrategy executionStrategy = DbContext.Database.CreateExecutionStrategy();
+            var executionStrategy = DbContext.Database.CreateExecutionStrategy();
             return executionStrategy.Execute(async () =>
                 {
-                    using IDbContextTransaction transaction = DbContext.Database.BeginTransaction();
+                    using var transaction = DbContext.Database.BeginTransaction();
                     try
                     {
                         await action();

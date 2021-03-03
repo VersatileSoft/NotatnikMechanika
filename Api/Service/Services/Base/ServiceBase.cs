@@ -13,7 +13,7 @@ namespace NotatnikMechanika.Service.Services.Base
         private readonly IRepositoryBase<TEntity> _repositoryBase;
         private readonly IMapper _mapper;
 
-        protected string CurrentUserId { get => _repositoryBase.CurrentUserId; }
+        protected string CurrentUserId => _repositoryBase.CurrentUserId;
 
         protected const string NotAllowedError = "This item is not yours or not exsists";
 
@@ -25,7 +25,7 @@ namespace NotatnikMechanika.Service.Services.Base
 
         public async Task<ActionResult> CreateAsync(TModel value)
         {
-            TEntity entity = _mapper.Map<TEntity>(value);
+            var entity = _mapper.Map<TEntity>(value);
             entity.UserId = CurrentUserId;
 
             await _repositoryBase.CreateAsync(entity);
@@ -34,10 +34,12 @@ namespace NotatnikMechanika.Service.Services.Base
 
         public async Task<ActionResult> DeleteAsync(int id)
         {
-            TEntity entity = await _repositoryBase.ByIdAsync(id);
+            var entity = await _repositoryBase.ByIdAsync(id);
 
-            if (!AuthorizeResources(out ActionResult res, entity))
+            if (!AuthorizeResources(out var res, entity))
+            {
                 return res;
+            }
 
             await _repositoryBase.DeleteAsync(entity);
             return new OkResult();
@@ -45,10 +47,12 @@ namespace NotatnikMechanika.Service.Services.Base
 
         public async Task<ActionResult<TModel>> ByIdAsync(int id)
         {
-            TEntity entity = await _repositoryBase.ByIdAsync(id);
+            var entity = await _repositoryBase.ByIdAsync(id);
 
-            if (!AuthorizeResources(out ActionResult res, entity))
+            if (!AuthorizeResources(out var res, entity))
+            {
                 return res;
+            }
 
             return _mapper.Map<TModel>(entity);
         }
@@ -60,10 +64,12 @@ namespace NotatnikMechanika.Service.Services.Base
 
         public async Task<ActionResult> UpdateAsync(int id, TModel value)
         {
-            TEntity entity = await _repositoryBase.ByIdAsync(id);
+            var entity = await _repositoryBase.ByIdAsync(id);
 
-            if (!AuthorizeResources(out ActionResult res, entity))
+            if (!AuthorizeResources(out var res, entity))
+            {
                 return res;
+            }
 
             _mapper.Map(value, entity);
             entity.Id = id;
@@ -75,7 +81,7 @@ namespace NotatnikMechanika.Service.Services.Base
         protected bool AuthorizeResources(out ActionResult result, params EntityBase[] resources)
         {
             result = null;
-            foreach (EntityBase resource in resources)
+            foreach (var resource in resources)
             {
                 if (resource == null)
                 {

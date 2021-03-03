@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http;
 using NotatnikMechanika.Data;
 using NotatnikMechanika.Data.Models;
 using NotatnikMechanika.Repository.Interfaces;
-using NotatnikMechanika.Shared.Models.Customer;
 
 namespace NotatnikMechanika.Repository.Repositories
 {

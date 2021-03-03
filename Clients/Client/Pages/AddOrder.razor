@@ -119,15 +119,15 @@ else
 
 @code{
 
-    IEnumerable<MBListElement<CustomerModel>> Customers {
-        get => PageModel.Customers.Select(c => new MBListElement<CustomerModel> { Label = $"{c.Name} {c.Surname}", SelectedValue = c });      
+    IEnumerable<MBSelectElement<CustomerModel>> Customers {
+        get => PageModel.Customers.Select(c => new MBSelectElement<CustomerModel> { Label = $"{c.Name} {c.Surname}", SelectedValue = c });      
     }
 
-    IEnumerable<MBListElement<CarModel>> Cars {
+    IEnumerable<MBSelectElement<CarModel>> Cars {
         get {
             return  PageModel.Cars.Any() ?
-            PageModel.Cars.Select(c => new MBListElement<CarModel> { Label = $"{c.Brand} {c.Model}", SelectedValue = c }) :
-            new List<MBListElement<CarModel>> { new MBListElement<CarModel> { Label = "Brak samochodów", SelectedValue = new CarModel() } };
+            PageModel.Cars.Select(c => new MBSelectElement<CarModel> { Label = $"{c.Brand} {c.Model}", SelectedValue = c }) :
+            new List<MBSelectElement<CarModel>> { new MBSelectElement<CarModel> { Label = "Brak samochodów", SelectedValue = new CarModel() } };
         }
     }
 }

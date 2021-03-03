@@ -11,7 +11,7 @@ namespace MvvmPackage.Xamarin.Pages
 
     public abstract class MvContentPage<TPageModel> : MvContentPage where TPageModel : PageModelBase
     {
-        public new TPageModel PageModel 
+        public new TPageModel PageModel
         {
             get => (TPageModel)base.PageModel;
             set => base.PageModel = value;

@@ -2,7 +2,7 @@
 {
     public static class CrudPaths
     {
-        
+
         public const string ByIdPath = "{id}";
         public const string AllPath = "all";
         public const string CreatePath = "";
@@ -127,7 +127,7 @@
     }
 
     public static class ServicePaths
-    {   
+    {
         public const string Name = "api/service";
         public const string ByOrderPath = "byOrder/{orderId}";
 

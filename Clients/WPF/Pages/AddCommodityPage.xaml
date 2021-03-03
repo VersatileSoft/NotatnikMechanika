@@ -79,7 +79,7 @@
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Nazwa towaru"
                         AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
                         Text="{Binding Model.Name}"
                         VerticalScrollBarVisibility="Disabled"/>
 
@@ -89,7 +89,7 @@
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Koszt towaru"
                         AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
                         Text="{Binding Model.Price}"
                         VerticalScrollBarVisibility="Disabled"/>
                 </Grid>

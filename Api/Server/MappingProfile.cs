@@ -25,15 +25,15 @@ namespace NotatnikMechanika.Server
             CreateMap<ServiceModel, Data.Models.Service>();
             CreateMap<Commodity, CommodityModel>();
             CreateMap<CommodityModel, Commodity>();
-            
+
             //TODO Maping not working as expected, Finished property always false
             CreateMap<OrderToCommodity, CommodityModel>()
-                .ForMember(model => model.Finished, 
+                .ForMember(model => model.Finished,
                     opt => opt.MapFrom(otc => otc.Finished))
                 .IncludeMembers(a => a.Commodity);
-            
+
             CreateMap<OrderToService, ServiceModel>()
-                .ForMember(model => model.Finished, 
+                .ForMember(model => model.Finished,
                     opt => opt.MapFrom(otc => otc.Finished))
                 .IncludeMembers(a => a.Service);
         }

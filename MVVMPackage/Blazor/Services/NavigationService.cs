@@ -24,7 +24,11 @@ namespace MvvmPackage.Blazor.Services
             get => _dialogIsOpen;
             set
             {
-                if (value == _dialogIsOpen) return;
+                if (value == _dialogIsOpen)
+                {
+                    return;
+                }
+
                 _dialogIsOpen = value;
                 DialogStateChanged?.Invoke(this, value);
             }
@@ -64,7 +68,11 @@ namespace MvvmPackage.Blazor.Services
 
         private async Task OpenDialog<TPageModel>(Type dialogType, int parameter = 0) where TPageModel : PageModelBase
         {
-            if(!(Activator.CreateInstance(dialogType) is PageBase<TPageModel> dialog)) return;
+            if (Activator.CreateInstance(dialogType) is not PageBase<TPageModel> dialog)
+            {
+                return;
+            }
+
             await dialog.DialogInitialize(_services, parameter);
             dialog.PageModel.PropertyChanged += (s, e) => DialogStateChanged?.Invoke(this, DialogIsOpen);
             DialogContent = dialog.RenderFragment;
@@ -74,14 +82,14 @@ namespace MvvmPackage.Blazor.Services
         private static bool IsDialog<TPageModel>(out Type pageType)
         {
             var types = IoC.PlatformProjectAssembly.GetTypes();
-            var pageName = PageName<TPageModel>();
+            string pageName = PageName<TPageModel>();
             pageType = Array.Find(types, t => t.Name == pageName);
             return pageType?.GetCustomAttribute<DisplayDialogAttribute>() != null;
         }
 
         private static string PageName<TPageModel>()
         {
-            var vmName = typeof(TPageModel).Name;
+            string vmName = typeof(TPageModel).Name;
             return vmName.EndsWith("PageModel")
                 ? vmName.Replace("PageModel", "")
                 : vmName;

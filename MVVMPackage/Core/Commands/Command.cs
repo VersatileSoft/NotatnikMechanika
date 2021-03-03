@@ -70,7 +70,7 @@ namespace MvvmPackage.Core.Commands
         /// <param name="execute">Action to execute.</param>
         protected Command(Action<object> execute)
         {
-            this._execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace MvvmPackage.Core.Commands
         /// <param name="canExecute">Function to determine if can execute.</param>
         protected Command(Action<object> execute, Func<object, bool> canExecute) : this(execute)
         {
-            this._canExecute = canExecute;
+            _canExecute = canExecute;
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace MvvmPackage.Core.Commands
 
             if (canExecute != null)
             {
-                this._canExecute = o => canExecute();
+                _canExecute = o => canExecute();
             }
         }
 

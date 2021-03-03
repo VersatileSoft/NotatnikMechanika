@@ -25,10 +25,7 @@ namespace NotatnikMechanika.Service.Services
         private readonly IEmailSenderService _emailSenderService;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        private string CurrentUserId
-        {
-            get => _httpContextAccessor.HttpContext.User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value;
-        }
+        private string CurrentUserId => _httpContextAccessor.HttpContext.User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
         public AccountService(
             IOptions<AppSettings> appSettings,
@@ -46,7 +43,7 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<ActionResult<TokenModel>> AuthenticateAsync(string email, string password)
         {
-            Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(email, password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(email, password, false, false);
 
             if (!result.Succeeded)
             {
@@ -55,7 +52,7 @@ namespace NotatnikMechanika.Service.Services
                         : new List<string> { "Nieprawidłowy login lub hasło" });
             }
 
-            User user = await _userManager.Users.SingleOrDefaultAsync(r => r.Email == email);
+            var user = await _userManager.Users.SingleOrDefaultAsync(r => r.Email == email);
 
             return new OkObjectResult(new TokenModel
             {
@@ -67,22 +64,22 @@ namespace NotatnikMechanika.Service.Services
         {
             /*User user = await _userManager.FindByIdAsync(CurrentUserId);
 
-            if (user == null)
-            {
-                return FailureResponse(ResponseType.Failure, new List<string> { "Nie znaleziono użytkownika" });
-            }
+if (user == null)
+{
+return FailureResponse(ResponseType.Failure, new List<string> { "Nie znaleziono użytkownika" });
+}
 
-            IdentityResult result = await _userManager.ConfirmEmailAsync(user, emailToken);
+IdentityResult result = await _userManager.ConfirmEmailAsync(user, emailToken);
 
-            return !result.Succeeded ?
-                FailureResponse(ResponseType.Failure, new List<string> { "Link nieprawidłowy." }) :
-                SuccessResponse();*/
+return !result.Succeeded ?
+FailureResponse(ResponseType.Failure, new List<string> { "Link nieprawidłowy." }) :
+SuccessResponse();*/
             throw new NotImplementedException();
         }
 
         public async Task<ActionResult> RegisterAsync(RegisterModel registerModel)
         {
-            User user = new User
+            var user = new User
             {
                 UserName = registerModel.Email,
                 Email = registerModel.Email,
@@ -90,7 +87,7 @@ namespace NotatnikMechanika.Service.Services
                 Surname = registerModel.Surname
             };
 
-            IdentityResult result = await _userManager.CreateAsync(user, registerModel.Password);
+            var result = await _userManager.CreateAsync(user, registerModel.Password);
 
             return result.Succeeded ?
                 new OkResult() :
@@ -99,7 +96,7 @@ namespace NotatnikMechanika.Service.Services
 
         public async Task<ActionResult> DeleteAsync()
         {
-            User user = await _userManager.FindByIdAsync(CurrentUserId);
+            var user = await _userManager.FindByIdAsync(CurrentUserId);
             await _userManager.DeleteAsync(user);
             return new OkResult();
         }
@@ -111,9 +108,9 @@ namespace NotatnikMechanika.Service.Services
 
         private string GenerateToken(User user)
         {
-            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            var tokenHandler = new JwtSecurityTokenHandler();
             byte[] key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] {
                     new Claim(ClaimTypes.NameIdentifier, user.Id),
@@ -122,7 +119,7 @@ namespace NotatnikMechanika.Service.Services
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
-            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
+            var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
     }

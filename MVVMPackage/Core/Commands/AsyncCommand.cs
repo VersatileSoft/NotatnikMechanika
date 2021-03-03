@@ -27,10 +27,10 @@ namespace MvvmPackage.Core.Commands
                             Action<Exception> onException = null,
                             bool continueOnCapturedContext = false)
         {
-            this._execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            this._canExecute = canExecute;
-            this._onException = onException;
-            this._continueOnCapturedContext = continueOnCapturedContext;
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+            _onException = onException;
+            _continueOnCapturedContext = continueOnCapturedContext;
         }
 
         /// <summary>
@@ -99,10 +99,10 @@ namespace MvvmPackage.Core.Commands
                             Action<Exception> onException = null,
                             bool continueOnCapturedContext = false)
         {
-            this._execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            this._canExecute = canExecute;
-            this._onException = onException;
-            this._continueOnCapturedContext = continueOnCapturedContext;
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+            _onException = onException;
+            _continueOnCapturedContext = continueOnCapturedContext;
         }
 
         /// <summary>

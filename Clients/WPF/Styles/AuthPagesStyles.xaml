@@ -27,7 +27,7 @@
     </Style>
 
     <Style x:Key="TextBoxStyle"
-        BasedOn="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+        BasedOn="{StaticResource MaterialDesignFilledTextBox}"
         TargetType="TextBox">
         <Setter Property="materialDesign:HintAssist.Foreground" Value="White"/>
         <Setter Property="materialDesign:ValidationAssist.Background" Value="Transparent"/>
@@ -38,7 +38,7 @@
     </Style>
 
     <Style x:Key="PasswordBoxStyle"
-        BasedOn="{StaticResource MaterialDesignFilledPasswordFieldPasswordBox}"
+        BasedOn="{StaticResource MaterialDesignFilledPasswordBox}"
         TargetType="PasswordBox">
         <Setter Property="materialDesign:HintAssist.Foreground" Value="White"/>
         <Setter Property="materialDesign:ValidationAssist.Background" Value="Transparent"/>

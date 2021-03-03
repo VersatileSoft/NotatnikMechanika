@@ -49,8 +49,8 @@ namespace NotatnikMechanika.Core.PageModels
 
         private async Task ArchiveOrderAction(int id)
         {
-            OrderModel model = await _httpRequestService.ById<OrderModel>(id, "Błąd podczas archiwizacji zlecenia");
-            if(model != null)
+            var model = await _httpRequestService.ById<OrderModel>(id, "Błąd podczas archiwizacji zlecenia");
+            if (model != null)
             {
                 model.Archived = true;
                 if (await _httpRequestService.Update(model, model.Id, "Błąd podczas archiwizacji zlecenia"))
@@ -64,7 +64,7 @@ namespace NotatnikMechanika.Core.PageModels
         public override async Task Initialize()
         {
             IsLoading = true;
-            List<OrderExtendedModel> orders = await _httpRequestService.SendGet<List<OrderExtendedModel>>(OrderPaths.Extended(Parameter.HasValue), "Błąd ładowania zleceń");
+            var orders = await _httpRequestService.SendGet<List<OrderExtendedModel>>(OrderPaths.Extended(Parameter.HasValue), "Błąd ładowania zleceń");
             if (orders != null)
             {
                 Orders.Clear();

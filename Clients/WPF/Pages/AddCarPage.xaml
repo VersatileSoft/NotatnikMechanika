@@ -40,7 +40,7 @@
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Marka"
                         AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
                         Text="{Binding Model.Brand}"/>
 
                     <TextBox
@@ -48,7 +48,7 @@
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Model"
                         AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
                         Text="{Binding Model.Model}"/>
 
                     <TextBox
@@ -56,7 +56,7 @@
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Numer rejestracyjny"
                         AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
                         Text="{Binding Model.Plate}"/>
 
                     <TextBox
@@ -64,7 +64,7 @@
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Silnik"
                         AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
                         Text="{Binding Model.Engine}"/>
 
                     <TextBox
@@ -72,7 +72,7 @@
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="Moc"
                         AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
                         Text="{Binding Model.Power}"/>
 
                     <TextBox
@@ -80,7 +80,7 @@
                         materialDesign:HintAssist.Foreground="White"
                         materialDesign:HintAssist.Hint="VIN"
                         AcceptsReturn="True"
-                        Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
                         Text="{Binding Model.Vin}"/>
                 </StackPanel>
             </ScrollViewer>

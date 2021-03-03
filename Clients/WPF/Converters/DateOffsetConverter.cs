@@ -8,8 +8,8 @@ namespace NotatnikMechanika.WPF.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            DateTime startDate = (DateTime)values[0];
-            DateTime endDate = (DateTime)values[1];
+            var startDate = (DateTime)values[0];
+            var endDate = (DateTime)values[1];
             return (endDate - startDate).ToString(parameter.ToString());
         }
 

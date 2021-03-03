@@ -20,6 +20,7 @@ namespace NotatnikMechanika.WPF.Pages.Utils
         {
             InitializeComponent();
         }
+
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
@@ -54,7 +55,7 @@ namespace NotatnikMechanika.WPF.Pages.Utils
             {
                 _restoreForDragMove = false;
 
-                Point point = PointToScreen(e.MouseDevice.GetPosition(this));
+                var point = PointToScreen(e.MouseDevice.GetPosition(this));
 
                 _mainWindow.Left = point.X - (_mainWindow.RestoreBounds.Width * 0.5);
                 _mainWindow.Top = point.Y;
@@ -75,16 +76,11 @@ namespace NotatnikMechanika.WPF.Pages.Utils
         {
             Application.Current.MainWindow.WindowState = WindowState.Minimized;
         }
+
         private void Maximize_Click(object sender, RoutedEventArgs e)
         {
-            if (Application.Current.MainWindow.WindowState == WindowState.Normal)
-            {
-                Application.Current.MainWindow.WindowState = WindowState.Maximized;
-            }
-            else
-            {
-                Application.Current.MainWindow.WindowState = WindowState.Normal;
-            }
+            Application.Current.MainWindow.WindowState = Application.Current.MainWindow.WindowState == WindowState.Normal
+                ? WindowState.Maximized : WindowState.Normal;
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)

@@ -1,4 +1,4 @@
-﻿<views:MvContentPage x:Class="NotatnikMechanika.Forms.Pages.RegistrationPage"
+﻿<views:MvContentPage x:Class="NotatnikMechanika.Forms.Pages.RegistrationPage" x:DataType="viewModels:RegistrationPageModel"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -32,7 +32,7 @@
                     Margin="0,0,0,150"
                     Padding="20"
                     VerticalOptions="End">
-                    <Label Style="{StaticResource LoginMessageLabel}">
+                    <Label x:DataType="{x:Null}" Style="{StaticResource LoginMessageLabel}">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="{Binding ErrorMessage}" TextColor="#FF7A7A"/>
@@ -51,24 +51,24 @@
                             Grid.Column="0"
                             Placeholder="Imię"
                             Style="{StaticResource LoginEntry}"
-                            Text="{Binding CreateUserModel.Name}"/>
+                            Text="{Binding RegisterModel.Name}"/>
                         <Entry
                             Grid.Column="1"
                             Placeholder="Nazwisko"
                             Style="{StaticResource LoginEntry}"
-                            Text="{Binding CreateUserModel.Surname}"/>
+                            Text="{Binding RegisterModel.Surname}"/>
                     </Grid>
 
                     <Entry
                         Keyboard="Email"
                         Placeholder="E-mail"
                         Style="{StaticResource LoginEntry}"
-                        Text="{Binding CreateUserModel.Email}"/>
+                        Text="{Binding RegisterModel.Email}"/>
                     <Entry
                         IsPassword="True"
                         Placeholder="Hasło"
                         Style="{StaticResource LoginEntry}"
-                        Text="{Binding CreateUserModel.Password}"/>
+                        Text="{Binding RegisterModel.Password}"/>
                     <Entry
                         IsPassword="True"
                         Placeholder="Powtórz hasło"

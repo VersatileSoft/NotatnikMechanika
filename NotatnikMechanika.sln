@@ -41,7 +41,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotatnikMechanika.Data", "A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{78BFE887-2F9A-459C-9001-9CA9F41AD3A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotatnikMechanika.Core.Tests", "NotatnikMechanika.Core.Tests\NotatnikMechanika.Core.Tests.csproj", "{B69F5F0E-6EAB-48DF-BD58-D1F9457C1F2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotatnikMechanika.Core.Tests", "NotatnikMechanika.Core.Tests\NotatnikMechanika.Core.Tests.csproj", "{B69F5F0E-6EAB-48DF-BD58-D1F9457C1F2E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{78751F94-BBF8-48F0-9658-1A436727B2B1}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Settings.XamlStyler = Settings.XamlStyler
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -19,10 +19,11 @@ namespace NotatnikMechanika.Repository.Repositories
 
         public async Task<IEnumerable<CommodityModel>> ByOrderAsync(int orderId)
         {
-            Order order = await DbContext.Orders.Include(o => o.Commodities).SingleAsync(o => o.Id == orderId);
+            var order = await DbContext.Orders.Include(o => o.Commodities).SingleAsync(o => o.Id == orderId);
 
             return order.Commodities
-                .Select(c => new CommodityModel {
+                .Select(c => new CommodityModel
+                {
                     Id = c.Id,
                     Name = c.Name,
                     Price = c.Price,

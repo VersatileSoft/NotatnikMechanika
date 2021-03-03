@@ -11,10 +11,7 @@ namespace NotatnikMechanika.WPF.Pages.Utils
 
         public PackIconKind IconKind
         {
-            set
-            {
-                Icon.Kind = value;
-            }
+            set => Icon.Kind = value;
         }
 
         public GroupBoxHeaderTemplate()

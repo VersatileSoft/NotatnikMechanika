@@ -1,37 +1,35 @@
-﻿<views:MvContentPage
-    BackgroundColor="{StaticResource PageBackgroundColor}"
-    Title="Stali klienci"
-    Visual="Material"
-    mc:Ignorable="d"
-    x:Class="NotatnikMechanika.Forms.Pages.CustomersPage"
-    x:DataType="viewModels:CustomersPageModel"
-    x:TypeArguments="viewModels:CustomersPageModel"
+﻿<views:MvContentPage x:Class="NotatnikMechanika.Forms.Pages.CustomersPage" x:DataType="viewModels:CustomersPageModel"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:dataTemplates="clr-namespace:NotatnikMechanika.Forms.DataTemplates;assembly=NotatnikMechanika.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
     xmlns:views="clr-namespace:MvvmPackage.Xamarin.Pages;assembly=MvvmPackage.Xamarin"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    Title="Stali klienci"
+    x:TypeArguments="viewModels:CustomersPageModel"
+    BackgroundColor="{StaticResource PageBackgroundColor}"
+    Visual="Material"
+    mc:Ignorable="d">
 
     <ContentPage.Content>
         <CollectionView ItemsSource="{Binding Customers}">
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout ItemSpacing="20" Orientation="Vertical" />
+                <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
             </CollectionView.ItemsLayout>
 
             <CollectionView.Header>
-                <BoxView HeightRequest="0" />
+                <BoxView HeightRequest="0"/>
             </CollectionView.Header>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <dataTemplates:CustomerItemTemplate />
+                    <dataTemplates:CustomerItemTemplate/>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 
             <CollectionView.Footer>
-                <BoxView HeightRequest="0" />
+                <BoxView HeightRequest="0"/>
             </CollectionView.Footer>
         </CollectionView>
     </ContentPage.Content>

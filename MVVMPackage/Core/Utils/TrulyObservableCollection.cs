@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Text;
 
 namespace MvvmPackage.Core.Utils
 {
@@ -21,7 +19,7 @@ namespace MvvmPackage.Core.Utils
         {
             foreach (var item in pItems)
             {
-                this.Add(item);
+                Add(item);
             }
         }
 
@@ -45,7 +43,7 @@ namespace MvvmPackage.Core.Utils
 
         public void Add(List<T> items)
         {
-            foreach(T item in items)
+            foreach (var item in items)
             {
                 Add(item);
             }
