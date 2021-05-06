@@ -1,11 +1,11 @@
-﻿<views:MvContentPage x:Class="NotatnikMechanika.Forms.Pages.CustomersPage" x:DataType="viewModels:CustomersPageModel"
+﻿<mvvm:MvContentPage x:Class="NotatnikMechanika.Forms.Pages.CustomersPage" x:DataType="viewModels:CustomersPageModel"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:dataTemplates="clr-namespace:NotatnikMechanika.Forms.DataTemplates;assembly=NotatnikMechanika.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mvvm="clr-namespace:MvvmPackage.Xamarin.Pages;assembly=MvvmPackage.Xamarin"
     xmlns:viewModels="clr-namespace:NotatnikMechanika.Core.PageModels;assembly=NotatnikMechanika.Core"
-    xmlns:views="clr-namespace:MvvmPackage.Xamarin.Pages;assembly=MvvmPackage.Xamarin"
     Title="Stali klienci"
     x:TypeArguments="viewModels:CustomersPageModel"
     BackgroundColor="{StaticResource PageBackgroundColor}"
@@ -33,4 +33,4 @@
             </CollectionView.Footer>
         </CollectionView>
     </ContentPage.Content>
-</views:MvContentPage>
+</mvvm:MvContentPage>

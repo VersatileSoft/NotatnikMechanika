@@ -16,7 +16,7 @@ namespace NotatnikMechanika.Core.PageModels
 {
     public class AddOrderPageModel : AddingPageModelBase<OrderModel>
     {
-        public override string SuccesMessage { get; set; } = "Zlecenie zostało dodane pomyślnie.";
+        public override string? SuccessMessage { get; set; } = "Zlecenie zostało dodane pomyślnie.";
 
         public new AddOrderModel Model { get; set; }
         public ObservableCollection<CustomerModel> Customers { get; set; }
@@ -25,9 +25,9 @@ namespace NotatnikMechanika.Core.PageModels
         public ObservableCollection<CommodityModel> Commodities { get; set; }
         public bool CarsLoading { get; set; }
 
-        private CustomerModel _selectedCustomer;
+        private CustomerModel? _selectedCustomer;
 
-        public CustomerModel SelectedCustomer
+        public CustomerModel? SelectedCustomer
         {
             get => _selectedCustomer;
             set
@@ -37,9 +37,9 @@ namespace NotatnikMechanika.Core.PageModels
             }
         }
 
-        private CarModel _selectedCar;
+        private CarModel? _selectedCar;
 
-        public CarModel SelectedCar
+        public CarModel? SelectedCar
         {
             get => _selectedCar;
             set
@@ -79,9 +79,9 @@ namespace NotatnikMechanika.Core.PageModels
             Model.Services = Services.Where(s => s.Finished).Select(s => s.Id).ToList();
             Model.Commodities = Commodities.Where(c => c.Finished).Select(c => c.Id).ToList();
 
-            if (await HttpRequestService.SendPost(Model, OrderPaths.AddExtended()))
+            if (await HttpRequestService.SendPost(Model, OrderPaths.AddExtended()) && SuccessMessage != null)
             {
-                MessageDialogService.ShowMessageDialog(SuccesMessage, MessageDialogType.Success, "Pomyślnie dodano zlecnie");
+                MessageDialogService.ShowMessageDialog(SuccessMessage, MessageDialogType.Success, "Pomyślnie dodano zlecnie");
                 await NavigationService.NavigateToAsync<MainPageModel>();
             }
             IsLoading = false;

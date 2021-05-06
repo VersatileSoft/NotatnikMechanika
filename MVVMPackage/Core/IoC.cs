@@ -7,14 +7,14 @@ namespace MvvmPackage.Core
 {
     public static class IoC
     {
-        public static IContainer Container;
-        private static readonly ContainerBuilder Builder = new ContainerBuilder();
+        public static IContainer? Container;
+        private static readonly ContainerBuilder Builder = new();
 
-        public static Assembly CoreProjectAssembly { get; set; }
-        public static Assembly PlatformProjectAssembly { get; set; }
-        public static Assembly PlatformPackageProjectAssembly { get; set; }
+        public static Assembly? CoreProjectAssembly { get; set; }
+        public static Assembly? PlatformProjectAssembly { get; set; }
+        public static Assembly? PlatformPackageProjectAssembly { get; set; }
 
-        public static void RegisterTypes(Action<ContainerBuilder> registerCustomTypes = null)
+        public static void RegisterTypes(Action<ContainerBuilder>? registerCustomTypes = null)
         {
             ConfigureServices(Builder);
             registerCustomTypes?.Invoke(Builder);
@@ -23,6 +23,11 @@ namespace MvvmPackage.Core
 
         public static void ConfigureServices(ContainerBuilder builder)
         {
+            if (CoreProjectAssembly is null || PlatformProjectAssembly is null || PlatformPackageProjectAssembly is null)
+            {
+                return;
+            }
+
             // Register services
             builder.RegisterAssemblyTypes(CoreProjectAssembly, PlatformProjectAssembly, PlatformPackageProjectAssembly)
                 .Where(t => t.GetCustomAttribute<SingleInstanceAttribute>() == null)

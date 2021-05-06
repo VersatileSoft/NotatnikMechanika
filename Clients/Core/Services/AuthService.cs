@@ -16,7 +16,7 @@ namespace NotatnikMechanika.Core.Services
         private readonly ISettingsService _settingsService;
         private readonly IHttpRequestService _httpRequestService;
 
-        public event EventHandler AuthChanged;
+        public event EventHandler? AuthChanged;
 
         public AuthService(ISettingsService settingsService, HttpClient httpClient, IHttpRequestService httpRequestService)
         {
@@ -28,7 +28,7 @@ namespace NotatnikMechanika.Core.Services
         public async Task LoginAsync(LoginModel loginModel)
         {
             var token = await _httpRequestService.SendPost<TokenModel>(loginModel, AccountPaths.Login());
-            if (token != null)
+            if (token.Token != null)
             {
                 await _settingsService.SetToken(token.Token);
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.Token);
@@ -38,7 +38,7 @@ namespace NotatnikMechanika.Core.Services
 
         public async Task LogoutAsync()
         {
-            await _settingsService.SetToken("");
+            await _settingsService.SetToken(string.Empty);
             _httpClient.DefaultRequestHeaders.Authorization = null;
             AuthChanged?.Invoke(this, EventArgs.Empty);
         }

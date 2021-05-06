@@ -13,7 +13,7 @@ namespace MvvmPackage.Core.Commands
         private readonly Func<object, bool> _canExecute;
         private readonly Action<Exception> _onException;
         private readonly bool _continueOnCapturedContext;
-        private readonly WeakEventManager _weakEventManager = new WeakEventManager();
+        private readonly WeakEventManager _weakEventManager = new();
 
         /// <summary>
         /// Create a new AsyncCommand
@@ -85,7 +85,7 @@ namespace MvvmPackage.Core.Commands
         private readonly Func<object, bool> _canExecute;
         private readonly Action<Exception> _onException;
         private readonly bool _continueOnCapturedContext;
-        private readonly WeakEventManager _weakEventManager = new WeakEventManager();
+        private readonly WeakEventManager _weakEventManager = new();
 
         /// <summary>
         /// Create a new AsyncCommand

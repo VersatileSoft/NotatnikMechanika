@@ -8,7 +8,7 @@ namespace MvvmPackage.Core.Utils
     public sealed class TrulyObservableCollection<T> : ObservableCollection<T>
     {
 
-        public event PropertyChangedEventHandler ItemChanged;
+        public event PropertyChangedEventHandler? ItemChanged;
 
         public TrulyObservableCollection()
         {

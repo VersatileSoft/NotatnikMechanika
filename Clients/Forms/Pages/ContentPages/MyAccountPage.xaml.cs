@@ -1,9 +1,6 @@
-﻿using MvvmPackage.Xamarin.Pages;
-using NotatnikMechanika.Core.PageModels;
-
-namespace NotatnikMechanika.Forms.Pages.ContentViews
+﻿namespace NotatnikMechanika.Forms.Pages.ContentViews
 {
-    public partial class MyAccountPage : MvContentPage<MyAccountPageModel>
+    public partial class MyAccountPage
     {
         public MyAccountPage()
         {

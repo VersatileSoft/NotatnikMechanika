@@ -1,7 +1,5 @@
 ﻿using Autofac;
 using MvvmPackage.Core;
-using MvvmPackage.Xamarin;
-using NotatnikMechanika.Core;
 using NotatnikMechanika.Core.Interfaces;
 using System;
 using System.Net.Http;
@@ -17,7 +15,7 @@ using Xamarin.Forms.Xaml;
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace NotatnikMechanika.Forms
 {
-    public partial class App : MvFormsApplication<MainPageService>
+    public partial class App
     {
         public App()
         {
@@ -34,6 +32,11 @@ namespace NotatnikMechanika.Forms
 
         protected override void OnStart()
         {
+            if (IoC.Container is null)
+            {
+                return;
+            }
+
             var authService = IoC.Container.Resolve<IAuthService>();
             authService.AuthChanged += (s, e) => LoadMainPage();
         }

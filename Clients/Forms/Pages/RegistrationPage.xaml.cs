@@ -1,11 +1,9 @@
-﻿using MvvmPackage.Xamarin.Pages;
-using NotatnikMechanika.Core.PageModels;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace NotatnikMechanika.Forms.Pages
 {
-    public partial class RegistrationPage : MvContentPage<RegistrationPageModel>
+    public partial class RegistrationPage
     {
         public RegistrationPage()
         {

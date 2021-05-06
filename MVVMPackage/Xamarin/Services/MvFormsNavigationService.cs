@@ -11,7 +11,7 @@ namespace MvvmPackage.Xamarin.Services
     {
         private readonly IFormsPageActivatorService _pageActivatorService;
 
-        public event EventHandler<bool> DialogStateChanged;
+        public event EventHandler<bool>? DialogStateChanged;
 
         public MvFormsNavigationService(IFormsPageActivatorService pageActivatorService)
         {

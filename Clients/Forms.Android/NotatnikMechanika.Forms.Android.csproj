@@ -52,17 +52,19 @@
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <AotAssemblies>true</AotAssemblies>
-    <EnableLLVM>true</EnableLLVM>
-    <BundleAssemblies>true</BundleAssemblies>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <BundleAssemblies>false</BundleAssemblies>
     <AndroidDexTool>d8</AndroidDexTool>
     <AndroidLinkTool>r8</AndroidLinkTool>
-    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <LangVersion>8.0</LangVersion>
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
     <AndroidPackageFormat>aab</AndroidPackageFormat>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -151,10 +153,6 @@
     <AndroidResource Include="Resources\drawable\DashboardIcon.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MVVMPackage\Xamarin\MvvmPackage.Xamarin.csproj">
-      <Project>{e0f158da-4777-4742-a123-f469cdb3427c}</Project>
-      <Name>MvvmPackage.Xamarin</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Forms\NotatnikMechanika.Forms.csproj">
       <Project>{5ffed678-5e44-4bfb-9b4b-4da84e156864}</Project>
       <Name>NotatnikMechanika.Forms</Name>

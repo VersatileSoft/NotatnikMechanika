@@ -62,7 +62,7 @@ namespace MvvmPackage.Core.Commands
     {
         private readonly Func<object, bool> _canExecute;
         private readonly Action<object> _execute;
-        private readonly WeakEventManager _weakEventManager = new WeakEventManager();
+        private readonly WeakEventManager _weakEventManager = new();
 
         /// <summary>
         /// Command that takes an action to execute.

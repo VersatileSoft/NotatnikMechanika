@@ -6,7 +6,7 @@ namespace MvvmPackage.Xamarin.Pages
 {
     public abstract class MvContentPage : ContentPage
     {
-        public PageModelBase PageModel;
+        public PageModelBase? PageModel;
     }
 
     public abstract class MvContentPage<TPageModel> : MvContentPage where TPageModel : PageModelBase
@@ -19,6 +19,11 @@ namespace MvvmPackage.Xamarin.Pages
 
         protected MvContentPage()
         {
+            if (IoC.Container is null)
+            {
+                return;
+            }
+
             PageModel = IoC.Container.Resolve<TPageModel>();
             BindingContext = PageModel;
             Appearing += async (s, e) => await PageModel.Initialize().ConfigureAwait(false);

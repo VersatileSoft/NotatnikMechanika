@@ -7,7 +7,7 @@ namespace NotatnikMechanika.Shared
     public abstract class ValidateModelBase : IDataErrorInfo
     {
         // check for general model error    
-        public string Error => null;
+        public string? Error => null;
 
         public bool IsValid => Validator.TryValidateObject(this, new ValidationContext(this), new List<ValidationResult>());
 
@@ -28,7 +28,7 @@ namespace NotatnikMechanika.Shared
                 {
                     return null;
                 }
-                return validationResults[0].ErrorMessage;
+                return validationResults[0]?.ErrorMessage;
             }
         }
     }

@@ -3,6 +3,7 @@ using MvvmPackage.Core;
 using MvvmPackage.Core.Attributes;
 using MvvmPackage.Core.Services.Interfaces;
 using System;
+using System.Globalization;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -50,7 +51,7 @@ namespace MvvmPackage.Blazor.Services
             }
             else
             {
-                _navigationManager.NavigateTo(PageName<TPageModel>().ToLower());
+                _navigationManager.NavigateTo(PageName<TPageModel>().ToLower(CultureInfo.CurrentCulture));
             }
         }
 
@@ -62,7 +63,7 @@ namespace MvvmPackage.Blazor.Services
             }
             else
             {
-                _navigationManager.NavigateTo($"{PageName<TPageModel>().ToLower()}/{parameter}");
+                _navigationManager.NavigateTo($"{PageName<TPageModel>().ToLower(CultureInfo.CurrentCulture)}/{parameter}");
             }
         }
 
@@ -90,7 +91,7 @@ namespace MvvmPackage.Blazor.Services
         private static string PageName<TPageModel>()
         {
             string vmName = typeof(TPageModel).Name;
-            return vmName.EndsWith("PageModel")
+            return vmName.EndsWith("PageModel", StringComparison.CurrentCulture)
                 ? vmName.Replace("PageModel", "")
                 : vmName;
         }
