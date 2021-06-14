@@ -14,7 +14,7 @@ namespace NotatnikMechanika.Core.PageModels
     public class LoginPageModel : PageModelBase
     {
         public LoginModel LoginModel { get; set; }
-        public string ErrorMessage { get; set; }
+        public string? ErrorMessage { get; set; }
 
         public ICommand LoginCommand { get; set; }
         public ICommand RegisterCommand { get; set; }

@@ -12,7 +12,7 @@ namespace NotatnikMechanika.Core.PageModels
     public class RegistrationPageModel : PageModelBase
     {
         public RegisterModel RegisterModel { get; }
-        public string ConfirmPassword { get; set; }
+        public string? ConfirmPassword { get; set; }
         public ICommand RegisterCommand { get; }
         public ICommand LoginCommand { get; }
 

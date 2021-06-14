@@ -13,7 +13,7 @@ namespace MvvmPackage.Core.Commands
         /// <param name="continueOnCapturedContext">If the context should be captured.</param>
         public static async void SafeFireAndForget(
             this Task task,
-            Action<Exception> onException = null,
+            Action<Exception>? onException = null,
             bool continueOnCapturedContext = false)
         {
             try

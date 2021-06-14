@@ -6,7 +6,7 @@ namespace NotatnikMechanika.Core.PageModels
 {
     public class AddCustomerPageModel : AddingPageModelBase<CustomerModel>
     {
-        public override string SuccesMessage { get; set; } = "Klient został dodany pomyślnie.";
+        public override string? SuccessMessage { get; set; } = "Klient został dodany pomyślnie.";
 
         public AddCustomerPageModel(
             IHttpRequestService httpRequestService,

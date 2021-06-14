@@ -4,7 +4,7 @@ namespace NotatnikMechanika.Core.Interfaces
 {
     public interface IMessageDialogService
     {
-        void ShowMessageDialog(string message, MessageDialogType type, string title = null);
+        void ShowMessageDialog(string message, MessageDialogType type, string? title = null);
     }
 
     public enum MessageDialogType

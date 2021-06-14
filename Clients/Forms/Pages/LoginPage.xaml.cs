@@ -1,11 +1,9 @@
-using MvvmPackage.Xamarin.Pages;
-using NotatnikMechanika.Core.PageModels;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace NotatnikMechanika.Forms.Pages
 {
-    public partial class LoginPage : MvContentPage<LoginPageModel>
+    public partial class LoginPage
     {
         public LoginPage()
         {

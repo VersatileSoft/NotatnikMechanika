@@ -2,6 +2,6 @@
 {
     public class TokenModel : ValidateModelBase
     {
-        public string Token { get; set; }
+        public string? Token { get; set; }
     }
 }

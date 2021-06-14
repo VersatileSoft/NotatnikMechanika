@@ -1,13 +1,16 @@
 ﻿using PropertyChanged;
+using System.ComponentModel;
 using System.Threading.Tasks;
 
 namespace MvvmPackage.Core
 {
     [AddINotifyPropertyChangedInterface]
-    public class PageModelBase
+    public class PageModelBase : INotifyPropertyChanged
     {
         public bool IsLoading { get; protected set; }
         public int? Parameter { get; set; }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// Called when page is disappearing

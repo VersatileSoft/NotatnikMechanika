@@ -1,10 +1,8 @@
-﻿using MvvmPackage.Xamarin.Pages;
-using NotatnikMechanika.Core.PageModels;
-using NotatnikMechanika.Forms.Pages.ContentViews;
+﻿using NotatnikMechanika.Forms.Pages.ContentViews;
 
 namespace NotatnikMechanika.Forms.Pages
 {
-    public partial class OrdersPage : MvContentPage<OrdersPageModel>
+    public partial class OrdersPage
     {
         public OrdersPage()
         {

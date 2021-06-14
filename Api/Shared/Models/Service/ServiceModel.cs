@@ -8,7 +8,7 @@ namespace NotatnikMechanika.Shared.Models.Service
     {
         public int Id { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
         [Required]
         public double Price { get; set; }
         public bool Finished { get; set; }

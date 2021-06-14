@@ -22,8 +22,8 @@ namespace NotatnikMechanika.Core.PageModels
         private readonly IMessageDialogService _messageDialogService;
 
         public ICommand GoBackCommand { get; }
-        public ICommand AddServiceCommand { get; }
-        public ICommand AddCommodityCommand { get; }
+        public ICommand? AddServiceCommand { get; }
+        public ICommand? AddCommodityCommand { get; }
 
         public OrderExtendedModel OrderModel { get; set; }
         public TrulyObservableCollection<CommodityModel> Commodities { get; set; }

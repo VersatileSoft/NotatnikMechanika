@@ -21,8 +21,8 @@ namespace NotatnikMechanika.Core.PageModels
         protected readonly IMvNavigationService NavigationService;
         protected readonly IMessageDialogService MessageDialogService;
 
-        public virtual string ErrorMessage { get; set; }
-        public virtual string SuccesMessage { get; set; }
+        public virtual string? ErrorMessage { get; set; }
+        public virtual string? SuccessMessage { get; set; }
 
         protected AddingPageModelBase(IMvNavigationService navigationService, IHttpRequestService httpRequestService, IMessageDialogService messageDialogService)
         {
@@ -38,9 +38,9 @@ namespace NotatnikMechanika.Core.PageModels
         {
             IsLoading = true;
 
-            if (await HttpRequestService.Create(Model, ErrorMessage))
+            if (await HttpRequestService.Create(Model, ErrorMessage) && SuccessMessage != null)
             {
-                MessageDialogService.ShowMessageDialog(SuccesMessage, MessageDialogType.Success, "Operacja powiodła się");
+                MessageDialogService.ShowMessageDialog(SuccessMessage, MessageDialogType.Success, "Operacja powiodła się");
                 await NavigationService.NavigateToAsync<MainPageModel>();
             }
 
