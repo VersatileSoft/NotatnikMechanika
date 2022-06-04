@@ -27,7 +27,7 @@ namespace NotatnikMechanika.Client
             );
 
             services.AddMBServices(
-               animatedNavigationManagerServiceConfiguration: Utilities.GetDefaultAnimatedNavigationServiceConfiguration(),
+              // animatedNavigationManagerServiceConfiguration: Utilities.GetDefaultAnimatedNavigationServiceConfiguration(),
                toastServiceConfiguration: Utilities.GetDefaultToastServiceConfiguration()
            );
         }
@@ -41,14 +41,14 @@ namespace NotatnikMechanika.Client
 
     public static class Utilities
     {
-        public static MBAnimatedNavigationManagerServiceConfiguration GetDefaultAnimatedNavigationServiceConfiguration()
-        {
-            return new MBAnimatedNavigationManagerServiceConfiguration()
-            {
-                ApplyAnimation = true,
-                AnimationTime = 300
-            };
-        }
+        //public static MBAnimatedNavigationManagerServiceConfiguration GetDefaultAnimatedNavigationServiceConfiguration()
+        //{
+        //    return new MBAnimatedNavigationManagerServiceConfiguration()
+        //    {
+        //        ApplyAnimation = true,
+        //        AnimationTime = 300
+        //    };
+        //}
 
 
         public static MBToastServiceConfiguration GetDefaultToastServiceConfiguration()

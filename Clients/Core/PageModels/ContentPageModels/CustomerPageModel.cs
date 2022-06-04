@@ -32,7 +32,7 @@ namespace NotatnikMechanika.Core.PageModels
             _messageDialogService = messageDialogService;
             CustomerModel = new CustomerModel();
             GoBackCommand = new AsyncCommand(navigationService.NavigateToAsync<MainPageModel>);
-            AddCarCommand = new AsyncCommand(() => navigationService.NavigateToAsync<AddCarPageModel>(CustomerModel.Id));
+            AddCarCommand = new AsyncCommand(() => navigationService.NavigateToAsync<AddCarPageModel>(CustomerModel.Id ?? 0));
             RemoveCarCommand = new AsyncCommand<int>(RemoveCarAction);
             Cars = new ObservableCollection<CarModel>();
         }
@@ -51,7 +51,7 @@ namespace NotatnikMechanika.Core.PageModels
             IsLoading = true;
             CustomerModel.Id = Parameter ?? 0;
 
-            var customer = await _httpRequestService.ById<CustomerModel>(CustomerModel.Id, "Błąd ładowania klienta");
+            var customer = await _httpRequestService.ById<CustomerModel>(CustomerModel.Id.Value, "Błąd ładowania klienta");
             if (customer != null)
             {
                 CustomerModel = customer;

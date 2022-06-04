@@ -2,10 +2,10 @@
   <Import Project="../../Targets/NotatnikMechanika.Standard.targets" />
 
   <ItemGroup>
-    <PackageReference Include="PropertyChanged.Fody" Version="3.3.3">
+    <PackageReference Include="PropertyChanged.Fody" Version="3.4.1">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="6.0.0-preview.4.21253.7" />
   </ItemGroup>
 
 </Project>

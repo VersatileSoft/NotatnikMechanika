@@ -1,8 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latest</LangVersion>
+
+    <PublishTrimmed>false</PublishTrimmed>
+
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <RunAOTCompilation>True</RunAOTCompilation>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <RunAOTCompilation>True</RunAOTCompilation>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,18 +22,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="package.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Blazor.Extensions.Logging" Version="2.0.4" />
-    <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />  
-    <PackageReference Include="Material.Blazor" Version="2.0.0-preview.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.5" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.10.2" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />  
+    <PackageReference Include="Material.Blazor" Version="2.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.5" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.18.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,35 +46,4 @@
     <InputStaticAssetsStyles Include="styles\*.scss;" />
     <OutputStaticAssetsStyles Include="wwwroot\css\asymmetric-theme.min.css;wwwroot\css\dark-square-theme.min.css;wwwroot\css\light-square-theme.min.css;wwwroot\css\material-default-theme.min.css;wwwroot\css\rounded-theme.min.css;" />
   </ItemGroup>
-
-  <Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent">
-    <Exec Command="echo ***** npm install" />
-    <Exec Command="npm install" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
-      <Output TaskParameter="ExitCode" PropertyName="NpmReturnCode" />
-    </Exec>
-    <Exec Command="echo ***** 'npm install' return code was $(NpmReturnCode) (0 indicates npm is available)" />
-  </Target>
-
-  <Target Name="BuildStyles" Inputs="@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
-    <Exec Command="echo ***** mkdir wwwroot and wwwroot\css" />
-    <Exec Command="mkdir wwwroot" IgnoreExitCode="true" />
-    <Exec Command="mkdir wwwroot\css" IgnoreExitCode="true" />
-
-    <!-- Don't build unminified themes -->
-    <!--<Exec Command="echo ***** build material default theme" />
-    <Exec Command="npm run build-min-material-default" />
-
-    <Exec Command="echo ***** build light square theme" />
-    <Exec Command="npm run build-min-light-square" />-->
-
-    <Exec Command="echo ***** build dark square theme" />
-    <Exec Command="npm run build-min-dark-square" />
-
-    <!--<Exec Command="echo ***** build rounded theme" />
-    <Exec Command="npm run build-min-rounded" />
-
-    <Exec Command="echo ***** build asymmetric theme" />
-    <Exec Command="npm run build-min-asymmetric" />-->
-
-  </Target>
 </Project>
