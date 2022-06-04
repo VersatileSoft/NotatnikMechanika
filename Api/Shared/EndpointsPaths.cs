@@ -1,8 +1,9 @@
-﻿namespace NotatnikMechanika.Shared
+﻿using System.Reflection;
+
+namespace NotatnikMechanika.Shared
 {
     public static class CrudPaths
     {
-
         public const string ByIdPath = "{id}";
         public const string AllPath = "all";
         public const string CreatePath = "";
@@ -56,7 +57,7 @@
 
         public static string Register()
         {
-            return Name + "/" + RegisterPath;
+            return Name + "/" + MethodBase.GetCurrentMethod().Name;
         }
 
         public static string Update()
@@ -74,7 +75,7 @@
         public const string Name = "api/car";
         public const string ByCustomerPath = "byCustomer/{customerId}";
 
-        public static string ByCustomer(int customerId)
+        public static string ByCustomer(int? customerId)
         {
             return Name + "/" + ByCustomerPath.Replace("{customerId}", customerId.ToString());
         }

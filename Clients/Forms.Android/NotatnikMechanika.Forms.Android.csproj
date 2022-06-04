@@ -152,12 +152,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\DashboardIcon.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Forms\NotatnikMechanika.Forms.csproj">
-      <Project>{5ffed678-5e44-4bfb-9b4b-4da84e156864}</Project>
-      <Name>NotatnikMechanika.Forms</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

@@ -10,8 +10,8 @@ namespace MvvmPackage.Core.Commands
     public class AsyncCommand : IAsyncCommand
     {
         private readonly Func<Task> _execute;
-        private readonly Func<object, bool> _canExecute;
-        private readonly Action<Exception> _onException;
+        private readonly Func<object, bool>? _canExecute;
+        private readonly Action<Exception>? _onException;
         private readonly bool _continueOnCapturedContext;
         private readonly WeakEventManager _weakEventManager = new();
 
@@ -23,8 +23,8 @@ namespace MvvmPackage.Core.Commands
         /// <param name="onException">Action callback when an exception occurs</param>
         /// <param name="continueOnCapturedContext">If the context should be captured on exception</param>
         public AsyncCommand(Func<Task> execute,
-                            Func<object, bool> canExecute = null,
-                            Action<Exception> onException = null,
+                            Func<object, bool>? canExecute = null,
+                            Action<Exception>? onException = null,
                             bool continueOnCapturedContext = false)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
@@ -82,8 +82,8 @@ namespace MvvmPackage.Core.Commands
     public class AsyncCommand<T> : IAsyncCommand<T>
     {
         private readonly Func<T, Task> _execute;
-        private readonly Func<object, bool> _canExecute;
-        private readonly Action<Exception> _onException;
+        private readonly Func<object, bool>? _canExecute;
+        private readonly Action<Exception>? _onException;
         private readonly bool _continueOnCapturedContext;
         private readonly WeakEventManager _weakEventManager = new();
 
@@ -95,8 +95,8 @@ namespace MvvmPackage.Core.Commands
         /// <param name="onException">Action callback when an exception occurs</param>
         /// <param name="continueOnCapturedContext">If the context should be captured on exception</param>
         public AsyncCommand(Func<T, Task> execute,
-                            Func<object, bool> canExecute = null,
-                            Action<Exception> onException = null,
+                            Func<object, bool>? canExecute = null,
+                            Action<Exception>? onException = null,
                             bool continueOnCapturedContext = false)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));

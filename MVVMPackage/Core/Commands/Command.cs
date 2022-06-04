@@ -60,7 +60,7 @@ namespace MvvmPackage.Core.Commands
     /// </summary>
     public class Command : ICommand
     {
-        private readonly Func<object, bool> _canExecute;
+        private readonly Func<object, bool>? _canExecute;
         private readonly Action<object> _execute;
         private readonly WeakEventManager _weakEventManager = new();
 

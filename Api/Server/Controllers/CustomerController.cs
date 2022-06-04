@@ -11,7 +11,6 @@ namespace NotatnikMechanika.Server.Controllers
     [Route(CustomerPaths.Name)]
     public class CustomerController : AbstractControllerBase<CustomerModel>
     {
-
         private readonly ICustomerService _customerService;
         public CustomerController(ICustomerService customerService) : base(customerService)
         {

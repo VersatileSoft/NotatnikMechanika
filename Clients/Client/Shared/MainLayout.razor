@@ -5,14 +5,11 @@
 @inject IMvNavigationService NavigationService
 @inject NavigationManager NavigationManager
 @inject ILogger<MainLayout> logger;
-@inject IMBAnimatedNavigationManager AnimatedNavigationService
-
-
+@inject NavigationManager  NavigationManager
 
 <AuthorizeView>
     <Authorized>     
         <NavMenu @ref="@NavBar" />
-
 
         <div class="mdc-drawer-app-content">
             <MBTopAppBar Title="Notatnik Mechanika"
@@ -23,25 +20,29 @@
                          class="mdc-top-app-bar--short-has-action-item mdc-elevation--z5">
 
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-                    <MBIconButton Icon="account_box" @onclick="@(e => AnimatedNavigationService.NavigateTo("myaccount"))" />
+                    <MBIconButton Icon="account_box" @onclick="@(e => NavigationManager.NavigateTo("myaccount"))" />
                 </section>
             </MBTopAppBar>
 
-            <main class="main-content" id="main-content">
-                <div class="max-width-content">
-                    <MBAnimatedNavigation>
-                        <div class="mdc-top-app-bar--dense-fixed-adjust">
-                            <div class="main-content">
-                                <div class="mdc-layout-grid">
-                                    <div class="mdc-layout-grid__inner">
-                                        @Body
+            <MBBladeSet MainContentAdditionalCss="demo-blade-main-content"
+                BladesAdditionalCss="mdc-elevation--z3">            
+                <PageContent>
+          
+                    <main class="main-content" id="main-content">
+                        <div class="max-width-content">
+                            <div class="mdc-top-app-bar--dense-fixed-adjust">
+                                <div class="main-content">
+                                    <div class="mdc-layout-grid">
+                                        <div class="mdc-layout-grid__inner">
+                                            @Body
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </MBAnimatedNavigation>
-                </div>
-            </main>
+                    </main>
+                </PageContent>
+            </MBBladeSet>
         </div>
 
 
@@ -52,6 +53,5 @@
 </AuthorizeView>
 
 @code{
-
     private NavMenu NavBar { get; set; }    
 }

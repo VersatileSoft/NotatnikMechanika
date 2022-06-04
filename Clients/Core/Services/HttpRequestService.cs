@@ -21,43 +21,43 @@ namespace NotatnikMechanika.Core.Services
             _messageDialogService = messageDialogService;
         }
 
-        public async Task<TContent> SendGet<TContent>(string path, string onErrorTitle) where TContent : class
+        public async Task<TContent> SendGet<TContent>(string? path, string? onErrorTitle) where TContent : class
         {
             return await HandleResponse<TContent>(await _client.GetAsync(path), onErrorTitle);
         }
 
-        public async Task<bool> SendPost(object model, string path, string onErrorTitle)
+        public async Task<bool> SendPost(object? model, string? path, string? onErrorTitle)
         {
             string myContent = JsonConvert.SerializeObject(model);
             var content = new StringContent(myContent, Encoding.UTF8, "application/json");
             return await HandleResponse(await _client.PostAsync(path, content), onErrorTitle);
         }
 
-        public async Task<TContent> SendPost<TContent>(object model, string path, string onErrorTitle = null) where TContent : class
+        public async Task<TContent> SendPost<TContent>(object? model, string? path, string? onErrorTitle = null) where TContent : class
         {
             string myContent = JsonConvert.SerializeObject(model);
             var content = new StringContent(myContent, Encoding.UTF8, "application/json");
             return await HandleResponse<TContent>(await _client.PostAsync(path, content), onErrorTitle);
         }
 
-        public async Task<bool> SendUpdate(object model, string path, string onErrorTitle)
+        public async Task<bool> SendUpdate(object? model, string? path, string? onErrorTitle)
         {
             string myContent = JsonConvert.SerializeObject(model);
             var content = new StringContent(myContent, Encoding.UTF8, "application/json");
             return await HandleResponse(await _client.PutAsync(path, content), onErrorTitle);
         }
 
-        public async Task<bool> SendUpdate(string path, string onErrorTitle)
+        public async Task<bool> SendUpdate(string? path, string? onErrorTitle)
         {
             return await HandleResponse(await _client.PutAsync(path, null), onErrorTitle);
         }
 
-        public async Task<bool> SendDelete(string path, string onErrorTitle)
+        public async Task<bool> SendDelete(string? path, string? onErrorTitle)
         {
             return await HandleResponse(await _client.DeleteAsync(path), onErrorTitle);
         }
 
-        private async Task<TContent> HandleResponse<TContent>(HttpResponseMessage response, string onErrorTitle) where TContent : class
+        private async Task<TContent>? HandleResponse<TContent>(HttpResponseMessage? response, string? onErrorTitle) where TContent : class
         {
             string responseString = await response.Content.ReadAsStringAsync();
 

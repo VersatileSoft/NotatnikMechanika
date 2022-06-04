@@ -48,11 +48,11 @@ else
                         <Icon><MBIcon IconName="local_grocery_store" /></Icon>
                         <Title>@service.Name</Title>
                         <LineTwo>@service.Price</LineTwo>
-                        <Actions>
+                        <PrimaryActions>
                             <div style="width: 10rem">
                                     <MBCheckbox @bind-Value="@service.Finished" />
                             </div>
-                        </Actions>
+                        </PrimaryActions>
                     </MBList>
                 }
                 else
@@ -76,11 +76,11 @@ else
                         <Icon><MBIcon IconName="local_grocery_store" /></Icon>
                         <Title>@commodity.Name</Title>
                         <LineTwo>@commodity.Price</LineTwo>
-                        <Actions>
+                        <PrimaryActions>
                             <div style="width: 10rem">
                                     <MBCheckbox @bind-Value="@commodity.Finished" />
                             </div>
-                        </Actions>
+                        </PrimaryActions>
                     </MBList>
                 }
                 else
